@@ -62,6 +62,6 @@ import gzip
 print(len(json.dumps(hospital_lookup)))
 print(len(gzip.compress(bytes(json.dumps(hospital_lookup), 'utf-8'))))
 
-with open('../hospital_index.js', 'w') as f:
+with open('../public/hospital_index.js', 'w') as f:
     f.write('window.hospital_index = ' + json.dumps(hospital_lookup) + '\n')
 
