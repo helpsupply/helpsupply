@@ -104,9 +104,12 @@
 	};
 	firebase.initializeApp(firebaseConfig);
 	firebase.analytics();
+
+	var resolveIndexLoaded = null;
+	var indexLoaded = new Promise((resolve, reject) => resolveIndexLoaded = resolve);
 	</script>
 
-    <script src="mock_hospital.js"></script>
-    <script src="hospital.js"></script>
+    <script src="main.js"></script>
+    <script defer onload="resolveIndexLoaded()" src="hospital_index.js"></script>
   </body>
 </html>

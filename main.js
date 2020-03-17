@@ -121,8 +121,35 @@ function renderOffer(offer) {
 }
 
 function renderHospitalPage(parameters) {
+	data = {info: {name:''}, needs: [], offers: []}
+	document.body.appendChild(
+		div({'class': ''},
+			tag('nav', {'class': "navbar navbar-light bg-light"},
+				span({'class': "navbar-brand mb-0 h1", 'id': 'hospitalname'}),
+				a({'href': '#', 'class': "navbar-brand mb-0 h1 logored"}, "hospital.community")
+			),
+			div({'class': 'content'},
+				div({ 'class': 'panel' },
+					h3({}, "Needs"),
+					span({ 'class': 'group', 'id': 'needslist' })),
+				div({ 'class': 'panel' },
+					h3({}, "Offers for Help"),
+					span({ 'class': 'group' },
+						offers.map(o => {
+							return div({},
+								h3({ class: 'group-label' }, descriptions[o].get('title')),
+								ul({ class: 'list-group' },
+									data.offers.filter(x => x.kind === o).map(renderOffer)),
+								button({'class':'addbutton btn btn-secondary'}, 'Add'))
+						}))))
+	));
 
-	db.collection('need').where('location_id', '==', 1).get().then(
+	indexLoaded.then(() => {
+		var h = hospital_index.id_index[parameters.get('id')];
+		document.getElementById('hospitalname').innerHTML = '<b>' + h.name + "</b> in " + h.city + ", " + h.state;
+	});
+
+	db.collection('need').where('location_id', '==', parameters.get('id')).get().then(
 		snapshot => {
 			let data = snapshot.docs.map(d => {
 				var dict = d.data();
@@ -138,7 +165,7 @@ function renderHospitalPage(parameters) {
 						data.filter(x => x.kind === n).map(renderNeed)),
 					button({
 						'class': 'addbutton btn btn-secondary',
-						onclick: () => { navigateTo('add_need?location_id=1&kind=' + n) }
+						onclick: () => { navigateTo('add_need?location_id='+parameters.get('id')+'&kind=' + n) }
 					}, 'Add'))
 			})
 
@@ -147,37 +174,6 @@ function renderHospitalPage(parameters) {
 			needslist.map(x => container.appendChild(x));
 		}
 	).catch(console.log)
-
-	data = mock_hospital;
-	document.body.appendChild(
-		div({'class': ''},
-			tag('nav', {'class': "navbar navbar-light bg-light"},
-				span({'class': "navbar-brand mb-0 h1"}, data.info.name),
-				a({'href': '#', 'class': "navbar-brand mb-0 h1 logored"}, "hospital.community")
-			),
-			div({'class': 'content'},
-				div({ 'class': 'panel' },
-					h3({}, "Needs"),
-					span({ 'class': 'group', 'id': 'needslist' },
-						needs.map(n => {
-							return div({},
-								h3({ class: 'group-label' }, descriptions[n].get('title')),
-								ul({ class: 'list-group' },
-									data.needs.filter(x => x.kind === n).map(renderNeed)),
-								button({'class':'addbutton btn btn-secondary', 
-										onclick: () => { navigateTo('add_need?location_id=1&kind=' + n) }}, 'Add'))
-						}))),
-				div({ 'class': 'panel' },
-					h3({}, "Offers for Help"),
-					span({ 'class': 'group' },
-						offers.map(o => {
-							return div({},
-								h3({ class: 'group-label' }, descriptions[o].get('title')),
-								ul({ class: 'list-group' },
-									data.offers.filter(x => x.kind === o).map(renderOffer)),
-								button({'class':'addbutton btn btn-secondary'}, 'Add'))
-						}))))
-	))
 }
 
 /*
@@ -235,23 +231,46 @@ function renderHomePage(parameters) {
 			p({}, 'Hospitals and the people who staff them need our help with ', b({},'supplies, childcare and moral support'),'. Search below to find your local hospital and find out how to seek or provide help.'),
 			form({},
 				div({'class': 'form-group'},
-					label({'for': 'searchterm', 'style': 'font-weight: bold'}, "Enter your Zip Code or Hospital Name"),
-					input({'class': 'form-control', 'id':'searchterm', 'placeholder': 'i.e. 10026 or Guthrie'})),
+					label({'for': 'searchterm', 'style': 'font-weight: bold'}, "Enter your City or Hospital Name"),
+					input({'class': 'form-control', 'id':'searchterm', 'placeholder': 'i.e. New York or Zuckerberg'})),
 				ul({'id': 'searchresults', 'class': 'list-group'})),
 			center({}, span({'class': 'logored'}, 'hospital.community'), ' is a volunteer project put together by a global team of volunteers.')));
 
 	function updateSearch() {
-		var term = document.getElementById('searchterm').value;
+		var term = document.getElementById('searchterm').value.toUpperCase();
 		var results = document.getElementById('searchresults');
-		results.innerHTML = '';
-		for (var i = 0; i < 5; i++) {
-			var result = document.createElement('li');
-			result.className = 'list-group-item result';
-			result.innerHTML = '<b>' + term + ' Hospital ' + (i + 1) + '</b> in City, State';
-			result.addEventListener('click', () => {
-				navigateTo('#hospital?id=1')
-			})
-			results.appendChild(result);
+		if (window.hospital_index) {
+			results.innerHTML = '';
+			city_hits = hospital_index.city_index[term] || [];
+
+			for (var i = 0; i < city_hits.length; i++) {
+				var h = hospital_index.id_index[city_hits[i]];
+				var id = city_hits[i];
+				results.appendChild(li(
+					{'class': 'list-group-item result', onclick: ((id) => (() => navigateTo('hospital?id=' + id)))(id)},
+					b({}, h.name), " in ", h.city, ", ", h.state));
+			}
+
+			words = term.split(' ');
+			let hits = [];
+			for (var i = 0; i < words.length; i++) {
+				let new_hits = hospital_index.term_index[words[i]] || [];
+				if (new_hits.length > 0) {
+					if (i == 0) {
+						hits = new_hits;
+					} else {
+						hits = hits.filter(x => new_hits.includes(x));
+					}
+				}
+			}
+
+			for (var i = 0; i < hits.length; i++) {
+				var h = hospital_index.id_index[hits[i]]
+				var id = hits[i];
+				results.appendChild(li(
+					{'class': 'list-group-item result', onclick: ((id) => (() => navigateTo('hospital?id=' + id)))(id)},
+					b({}, h.name), " in ", h.city, ", ", h.state));
+			}
 		}
 	}
 
@@ -266,16 +285,14 @@ function renderHomePage(parameters) {
 
 var db = firebase.firestore();
 
-
-
 function renderNeedSubmissionPage(parameters) {
 	let kind = parameters.get('kind');
-	let location_id = 1;//parameters.get('location');
+	let location_id = parameters.get('location_id');
 
 	document.body.appendChild(
 		div({'class': ''},
 			div({'class': 'form'},
-				p({}, "TODO: FETCH Name"),
+				p({id:'hospitalname'}),
 				Array.from(descriptions[kind].keys()).map(prop => {
 					if (prop !== 'title') {
 						var p = descriptions[kind].get(prop)
@@ -303,6 +320,12 @@ function renderNeedSubmissionPage(parameters) {
 						.catch(error => console.log("Error", error));
 				}}, "Submit")
 			)));
+
+	indexLoaded.then(() => {
+		var h = hospital_index.id_index[parameters.get('location_id')];
+		document.getElementById('hospitalname').innerHTML = h.name;
+	});
+
 }
 
 // renderNeedSubmissionPage(mock_hospital.info, 'care_need')
@@ -321,7 +344,7 @@ let pageIndex = {
 function loadPage(hash) {
 	if (hash[0] == '#') hash = hash.slice(1);
 	var page_name = hash.split('?', 1);
-	var params = new URLSearchParams(hash.slice(page_name.length + 1))
+	var params = new URLSearchParams(hash.slice(page_name[0].length + 1))
 	document.body.innerHTML = '';
 	pageIndex[page_name](params);
 }
