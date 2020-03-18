@@ -1,19 +1,17 @@
 import React from "react";
 import * as hospital_index from "../data/hospital_index";
-import Firebase from "firebase";
-import config from "./Firebase/config";
+import { withRouter } from "react-router-dom";
 
 class Hospital extends React.Component {
   constructor(props) {
     super(props);
-    Firebase.initializeApp(config);
     this.state = {
       needs: []
     };
   }
 
   getUserData = () => {
-    let db = Firebase.firestore();
+    let db = this.props.db;
     db.collection("need")
       .where("location_id", "==", this.props.match.params.id)
       .get()
@@ -119,4 +117,4 @@ class Hospital extends React.Component {
   }
 }
 
-export default Hospital;
+export default withRouter(Hospital);

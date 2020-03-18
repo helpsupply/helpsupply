@@ -4,19 +4,26 @@ import "./App.css";
 import EntryPortal from "./components/EntryPortal";
 import Hospital from "./components/Hospital";
 import NoMatch from "./components/NoMatch";
+import Firebase from "firebase";
+import config from "./components/Firebase/config";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    Firebase.initializeApp(config);
     this.state = {};
   }
 
   render() {
+    let db = Firebase.firestore();
+
     return (
       <Router>
         <div className="App">
           <Switch>
-            <Route path="/hospital/:id" component={Hospital}></Route>
+            <Route path="/hospital/:id">
+              <Hospital db={db} />
+            </Route>
             <Route path="/hospital">
               <EntryPortal />
             </Route>
