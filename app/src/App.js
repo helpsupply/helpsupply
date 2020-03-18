@@ -5,25 +5,32 @@ import EntryPortal from "./components/EntryPortal";
 import Hospital from "./components/Hospital";
 import NoMatch from "./components/NoMatch";
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route path="/hospital/:id" component={Hospital}></Route>
-          <Route path="/hospital">
-            <EntryPortal />
-          </Route>
-          <Route exact path="/">
-            <EntryPortal />
-          </Route>
-          <Route path="*">
-            <NoMatch />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/hospital/:id" component={Hospital}></Route>
+            <Route path="/hospital">
+              <EntryPortal />
+            </Route>
+            <Route exact path="/">
+              <EntryPortal />
+            </Route>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
