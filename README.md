@@ -1,49 +1,68 @@
-This is the React fork.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-1. navigate to /app
-2. yarn install
-3. yarn start
+## Available Scripts
 
+In the project directory, you can run:
 
-# hospital.community
+### `yarn start`
 
-Amidst COVID-19 our hospitals and the people who staff them face unbelievable pressure. Equipments such as masks and gowns are in short supply and healthcare workers need people to shop for them and provide healthcare.
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Currently, both the needs and availability of these items and services are spread across thousands of disparate spreadsheets and Facebook Groups.
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-This project aims to collect and map this data to hospitals and geographies. As we progress, it can faciliate the actual exchange of goods and services.
+### `yarn test`
 
-## Initial Milestones
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-# Milestone 1: Index to Existing Docs & Groups
+### `yarn build`
 
-In this milestone, users can submit links to existing asks and needs from a particular hospital. To prevent abuse, edits are approved (quickly) by moderators.
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-# Milestone 2: A database of goods and services
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-In this milestone, healthcare workers can request goods or services and the public can pro-offer services. Healthcare workers are verified through a photo of their badge or e-mail address.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-# Milestone 3: Bringing supply to demand.
+### `yarn eject`
 
-In this milestone, we begin to coordinate the exchange of goods or services across hospital boundaries. If a hospital is in particularly bad shape, we can surface this information and invite other not immediately nearby to help.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-## Contributing
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Contributions are extremely welcome. We maintain the following principles for contributors:
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-### Keep it Simple.
-- We need to build a codebase that is highly predictable and quickly modifiable.
-- We'd rather have Craigslist in 1 day than Airbnb in 10.
-- Only static web pages and APIs.
-- We are extremely reluctant to adopt new dependencies.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### This isn't about us.
-- We don't want people to use this if it isn't useful.
-- We need to be extremely mindful of the cognitive cost of using this and ensure that it is less than the benefit.
+## Learn More
 
-### Minimize personal data
-- Only need information to validate a user is (or isn't) a healthcare worker.
-- Rely on publicly available datasets to cross-check authenticity.
-- No passwords needed, just use email and text links to log people in.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-In order to find an issue to work on, click on the issues tab or the projects board for the larger context.
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `yarn build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
