@@ -21,7 +21,7 @@ h3 {
 .result {
   cursor: pointer;
 }
-.result:hover {
+.selected {
   background-color: #dee9fa;
 }
 .content {

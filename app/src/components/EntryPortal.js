@@ -1,18 +1,25 @@
 import React from "react";
 import * as tools from "../functions";
 import * as hospital_index from "../data/hospital_index";
+import HospitalResult from "./HospitalResult";
+import { withRouter } from "react-router-dom";
 
 class EntryPortal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userInput: "",
-      results: []
+      results: [],
+      selectedResult: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelectHospital = this.handleSelectHospital.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
   }
 
+  // for user input
   handleChange(event) {
     this.setState({ userInput: event.target.value });
     if (event.target.value.length > 1) {
@@ -22,9 +29,57 @@ class EntryPortal extends React.Component {
     }
   }
 
+  // for mouse overs and keyboard
+  handleKeyPress(event) {
+    if (event.key === "ArrowDown") {
+      if (this.state.results.length > 0) {
+        event.preventDefault();
+        var index = this.state.results
+          .map(function(e) {
+            return e.id;
+          })
+          .indexOf(this.state.selectedResult);
+        if (index < this.state.results.length - 1) {
+          this.setState({
+            selectedResult: this.state.results[index + 1].id
+          });
+        }
+      }
+    }
+    if (event.key === "ArrowUp") {
+      if (this.state.results.length > 0) {
+        event.preventDefault();
+        var index = this.state.results
+          .map(function(e) {
+            return e.id;
+          })
+          .indexOf(this.state.selectedResult);
+        if (index > 0) {
+          this.setState({
+            selectedResult: this.state.results[index - 1].id
+          });
+        }
+      }
+    }
+  }
+
+  handleSelectHospital(id) {
+    this.setState({ selectedResult: id });
+  }
+
+  // for going to hospital page
   handleSubmit(event) {
     // this prevents the page from reloading when form is submitted
     event.preventDefault();
+    if (this.state.selectedResult !== "") {
+      this.handleRedirect();
+    }
+  }
+  handleRedirect() {
+    if (this.state.selectedResult !== "") {
+      let url = "/hospital/" + this.state.selectedResult;
+      this.props.history.push(url);
+    }
   }
 
   componentDidUpdate() {}
@@ -41,7 +96,7 @@ class EntryPortal extends React.Component {
           <b>supplies, childcare and moral support</b>. Search below to find
           your local hospital and find out how to seek or provide help.
         </p>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} autoComplete="off">
           <div className="form-group">
             <label htmlFor="searchterm" style={{ fontWeight: "bold" }}>
               Enter your City or Hospital Name
@@ -52,14 +107,23 @@ class EntryPortal extends React.Component {
               placeholder="i.e. New York or Zuckerberg"
               value={this.state.value}
               onChange={this.handleChange}
+              onKeyDown={this.handleKeyPress}
             />
           </div>
           <ul id="searchresults" className="list-group">
-            {this.state.results.map(result => (
-              <li key={result.id} className="list-group-item result">
-                <b>{result.hospital.name}</b> in {result.hospital.city}
-              </li>
-            ))}
+            {this.state.results.map(result => {
+              let selected = this.state.selectedResult === result.id;
+              return (
+                <HospitalResult
+                  key={result.id}
+                  hospital={result.hospital}
+                  id={result.id}
+                  selectedResult={selected}
+                  handleSelectHospital={this.handleSelectHospital}
+                  handleRedirect={this.handleRedirect}
+                />
+              );
+            })}
           </ul>
         </form>
         <center>
@@ -71,4 +135,4 @@ class EntryPortal extends React.Component {
   }
 }
 
-export default EntryPortal;
+export default withRouter(EntryPortal);
