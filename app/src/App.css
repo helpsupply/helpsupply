@@ -153,3 +153,33 @@ input#linkTitle {
   text-align: center;
   margin-top: 50px;
 }
+
+.linksListLink {
+  float: left;
+}
+
+.status {
+  float: left;
+  font-size: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.statusPublished {
+  color: #006400;
+  float: left;
+}
+
+.statusPending {
+  color: red;
+  float: left;
+}
+
+.modActions {
+  float: left;
+  margin-left: 20px;
+}
+
+.modActionBtn {
+  margin-right: 5px;
+}
