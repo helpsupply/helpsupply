@@ -1,4 +1,4 @@
-const hospital_index = {
+const index = {
   term_index: {
     GEORGETOWN: [454129, 180101, 90004, 420020, 454129],
     BEHAVIORAL: [
@@ -48469,3 +48469,5 @@ const hospital_index = {
     }
   }
 };
+
+export { index };
