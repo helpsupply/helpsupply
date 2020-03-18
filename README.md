@@ -28,6 +28,7 @@ Contributions are extremely welcome. We maintain the following principles for co
 - We need to build a codebase that is highly predictable and quickly modifiable.
 - We'd rather have Craigslist in 1 day than Airbnb in 10.
 - Only static web pages and APIs.
+- We are extremely reluctant to adopt new dependencies.
 
 ### This isn't about us.
 - We don't want people to use this if it isn't useful.
