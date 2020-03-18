@@ -284,6 +284,12 @@ function renderHomePage(parameters) {
 }
 
 var db = firebase.firestore();
+if (location.hostname === "localhost") {
+  db.settings({
+    host: "localhost:8080",
+    ssl: false
+  });
+}
 
 function renderNeedSubmissionPage(parameters) {
 	let kind = parameters.get('kind');
