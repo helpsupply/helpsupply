@@ -4,6 +4,7 @@ let TIMESPANS = "TIMESPANS";
 let ZIPCODE = "ZIPCODE";
 let AGES = "AGES";
 let AGE_RANGE = "AGE_RANGE";
+let URL = "URL";
 
 const needTypes = [
   {
@@ -206,5 +207,29 @@ const offerTypes = [
   }
 ];
 
+const documentTypes = [
+  {
+    name: "Call for Help / Organizing Documents",
+    id: "link",
+    fields: [
+      {
+        name: "Link Title",
+        type: TEXT_INPUT,
+        id: "text",
+        instructions: "Describe this link",
+        example: "i.e. Google Doc for equipment needs"
+      },
+      {
+        name: "Link URL",
+        type: URL,
+        id: "url",
+        instructions: "What's the URL?",
+        example: "i.e. https://..."
+      }
+    ]
+  }
+];
+
 export { needTypes };
 export { offerTypes };
+export { documentTypes };
