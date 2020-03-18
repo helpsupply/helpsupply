@@ -148,3 +148,8 @@ input#linkTitle {
 .errorText {
   color: red;
 }
+
+.loginContainer {
+  text-align: center;
+  margin-top: 50px;
+}
