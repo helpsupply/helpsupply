@@ -1,3 +1,10 @@
+This is the React fork.
+
+1. navigate to /app
+2. yarn install
+3. yarn start
+
+
 # hospital.community
 
 Amidst COVID-19 our hospitals and the people who staff them face unbelievable pressure. Equipments such as masks and gowns are in short supply and healthcare workers need people to shop for them and provide healthcare.
