@@ -1,115 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="hospital.community" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter:400,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
+    />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Inter:400,700,900&display=swap" rel="stylesheet">
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-    <style>
-	body {
-		background: #fcfcfc;
-		font-family: 'Inter', sans-serif;
-	}
-	.entryportal {
-		background-color: white;
-		margin-top: 100px;
-		width: 560px;
-		border-radius: 5px;
-		padding: 40px;
-      		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-	}
-	h1,h2,h3 {
-		font-family: 'Inter', sans-serif;
-	}
-	.logored {
-		color: #ff584d !important;
-	}
-	.result {
-		cursor: pointer;
-	}
-	.result:hover {
-		background-color: #dee9fa;
-	}
-	.content {
-		margin-left: auto;
-		margin-right: auto;
-	}
-	@media only screen and (min-width: 1200px) {
-		.panel {
-			float: left;
-			width: 530px;
-		}
-		.content {
-			width: 1200px;
-		}
-	}
-	@media only screen and (max-width: 1199px) {
-		.panel {
-			width: 90%;
-		}
-		.content {
-			width: 100%;
-		}
-	}
-	.panel {
-      	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-		padding: 30px;
-		margin: 30px;
-		box-sizing: border-box;
-		background-color: white;
-	}
-
-	.form {
-      	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-		padding: 30px;
-		margin: 30px;
-		margin-left: auto;
-		margin-right: auto;
-		max-width: 500px;
-		background-color: white;
-	}
-
-	.group-label {
-		font-size: 20px;
-		font-weight: 400;
-		margin: 10px;
-		margin-top: 20px;
-		margin-left: 0px;
-	}
-
-	.addbutton {
-		margin-top: 10px;
-	}
-    </style>
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
     <title>hospital.community</title>
   </head>
   <body>
-	<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-firestore.js"></script>
-	<script>
-	var firebaseConfig = {
-		apiKey: "AIzaSyBtHRUSPc0e4rF057rotTeVpeZ3lDWoQTE",
-		authDomain: "hospitalcommunity.firebaseapp.com",
-		databaseURL: "https://hospitalcommunity.firebaseio.com",
-		projectId: "hospitalcommunity",
-		storageBucket: "hospitalcommunity.appspot.com",
-		messagingSenderId: "726825294724",
-		appId: "1:726825294724:web:f3dc998705fbe6c8b09bd1",
-		measurementId: "G-NBTPC1YGF7"
-	};
-	firebase.initializeApp(firebaseConfig);
-	firebase.analytics();
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-	var resolveIndexLoaded = null;
-	var indexLoaded = new Promise((resolve, reject) => resolveIndexLoaded = resolve);
-	</script>
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-    <script src="main.js"></script>
-    <script defer onload="resolveIndexLoaded()" src="hospital_index.js"></script>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
   </body>
 </html>
