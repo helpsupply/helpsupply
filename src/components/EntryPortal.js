@@ -128,7 +128,7 @@ class EntryPortal extends React.Component {
         </form>
         <center>
           <span className="logored">hospital.community</span> is a volunteer
-          project put together by a global team of volunteers.
+          project put together by a global team of <a className="logored" href="https://github.com/newhouseb/hospitalcommunity/">volunteers</a>.
         </center>
       </div>
     );
