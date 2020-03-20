@@ -1,12 +1,26 @@
 import BackendInterface from "./backendInterface";
 import Firebase from "firebase";
+import config from "../components/Firebase/config";
 
-class FirebaseBackend extends BackendInterface {
-  constructor(firebase) {
+class FirebaseBackend {
+  constructor() {
+    Firebase.initializeApp(config);
     this.firebase = Firebase.firestore();
   }
 
   listDropSites(zipcode, radius) {
+    this.firebase
+      .collection("dropSite")
+      .get()
+      .then(snapshot => {
+        let data = snapshot.docs.map(d => {
+          var dict = d.data();
+          dict["id"] = d.id;
+          return dict;
+        });
+        console.log(data);
+      })
+      .catch(console.log);
     // To do
   }
 

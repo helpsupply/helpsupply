@@ -87,6 +87,8 @@ class EntryPortal extends React.Component {
   componentDidMount() {}
 
   render() {
+    this.props.firebase.listDropSites();
+
     return (
       <div className="entryportal container-sm">
         <h3 className="logored">hospital.community</h3>
@@ -128,7 +130,14 @@ class EntryPortal extends React.Component {
         </form>
         <center>
           <span className="logored">hospital.community</span> is a volunteer
-          project put together by a global team of <a className="logored" href="https://github.com/newhouseb/hospitalcommunity/">volunteers</a>.
+          project put together by a global team of{" "}
+          <a
+            className="logored"
+            href="https://github.com/newhouseb/hospitalcommunity/"
+          >
+            volunteers
+          </a>
+          .
         </center>
       </div>
     );
