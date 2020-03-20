@@ -5,6 +5,7 @@ let ZIPCODE = "ZIPCODE";
 let AGES = "AGES";
 let AGE_RANGE = "AGE_RANGE";
 let URL = "URL";
+let DROPDOWN = "DROPDOWN";
 
 const needTypes = [
   {
@@ -17,6 +18,19 @@ const needTypes = [
         id: "subject",
         instructions: "What do you need?",
         example: "i.e. N-95 Masks"
+      },
+      {
+        name: "Qty",
+        type: TEXT_INPUT,
+        id: "qty",
+        instructions: "How many/much do you need?",
+        example: "i.e. As many as possible"
+      },
+      {
+        name: "Category",
+        type: DROPDOWN,
+        id: "category",
+        options: ["PPE (Masks/Gowns/Gloves)", "Sanitizer"]
       },
       {
         name: "Comments",
@@ -61,7 +75,7 @@ const needTypes = [
     ]
   },
   {
-    name: "Personal Care",
+    name: "Babysitting / Caretaking",
     id: "care_need",
     fields: [
       {
@@ -86,9 +100,9 @@ const needTypes = [
         example: ""
       },
       {
-        name: "Child Ages",
+        name: "Ages",
         type: AGES,
-        id: "child_ages",
+        id: "care_ages",
         instructions: "How old are your children?",
         example: "i.e. 1 and 3"
       },
