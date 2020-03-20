@@ -47,9 +47,15 @@ describe("hospital.community", () => {
 		const rules = `
 		service cloud.firestore {
 			match /databases/{database}/documents {
-				match /{document=**} {
-					allow write: if request.resource.data.valid == 'false';
+				match /hcp/{userid} {
+					allow read, write: if true;
+				}
+				match /request/{req} {
+					function isVerified() {
+						return request.auth != null && get(/databases/$(database)/documents/hcp/$(request.auth.uid)).data.valid == 'true';
+					}
 					allow read: if true;
+					allow write: if (request.resource.data.valid == 'false' || isVerified());
 				}
 			}
 		}
@@ -57,11 +63,24 @@ describe("hospital.community", () => {
 		await firebase.loadFirestoreRules({projectId, rules});
 		const db = firebase.initializeTestApp({projectId, auth: null}).firestore();
 
-		const request = db.collection("request").doc("1");
+		// First verify we can add a new request, also long as we specify that valid is false
+		let request = db.collection("request").doc("1");
 		await firebase.assertSucceeds(request.set({ request_description: 'Masks', request_quantity: 0, valid: 'false' }))
-		const result = await request.get();
-		await firebase.assertFails(request.set({ valid: 'true' }))
-	});
-	
 
+		// Next verify we can't make it valid ourselves
+		await firebase.assertFails(request.set({ valid: 'true' }))
+
+		// Create an authorized healthcareprovider and make them valid 
+		// (note there's no permissions on HCP, that will be tested elsewhere)
+		request = db.collection("hcp").doc("1");
+		await firebase.assertSucceeds(request.set({ valid: 'true' }))
+
+		// Log in as that user
+		const test_auth = {'uid': '1' }
+		const db2 = firebase.initializeTestApp({projectId, auth: test_auth}).firestore();
+
+		// Assert that we can successfully set the request as valid
+		request = db2.collection("request").doc("1");
+		await firebase.assertSucceeds(request.set({ valid: 'true' }))
+	});
 });
