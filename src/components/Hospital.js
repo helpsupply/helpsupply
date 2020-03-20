@@ -3,6 +3,9 @@ import * as hospital_index from "../data/hospital_index";
 import * as needTypes from "../data/needTypes";
 import { withRouter } from "react-router-dom";
 import LinksResult from "./LinksResult";
+import HospitalNeedGroup from "./HospitalNeedGroup";
+import StaffNeedTable from "./StaffNeedTable";
+import Axios from "axios";
 
 class Hospital extends React.Component {
   constructor(props) {
@@ -184,7 +187,21 @@ class Hospital extends React.Component {
   componentDidUpdate() {}
 
   componentDidMount() {
-    this.getUserData();
+    /*
+    const data = {
+      name: "Johnson",
+      email: "me@johnsonfung.com",
+      message: "This is the message",
+      phone: "416-123-1234"
+    };
+
+    Axios.post(
+      "https://us-central1-hospitalcommunity.cloudfunctions.net/emailMessage",
+      data
+    ).catch(error => {
+      console.log(error);
+    });
+    */
   }
 
   componentDidUpdate(prevProps) {
@@ -280,48 +297,61 @@ class Hospital extends React.Component {
               })}
             </span>
           </div>
-          <div className="panel">
-            <h3>Needs</h3>
+          <div className="panelFull">
+            <div className="hospitalNeedsTopBar">
+              <div className="hospitalNeedsLeft">
+                <h3 className="mb-3">Hospital Needs</h3>
+                <p>
+                  These are institutional equipment and supply needs for
+                  hospitals. We are looking for companies, organizations, and
+                  individuals who have access to these resources.
+                </p>
+              </div>
+
+              <div className="hospitalNeedNewSubmit">
+                <div className="helperText">Do you work at this hospital?</div>
+                <button className="btn btn-danger hospitalNeedsNewSubmitBtn">
+                  Add Hospital Need
+                </button>
+              </div>
+            </div>
             <span className="group" id="needslist">
-              {needTypes.needTypes.map((needType, i) => {
-                return (
-                  <div key={i}>
-                    <h3 className="group-label">{needType.name}</h3>
-                    <ul className="list-group">
-                      {this.state.needs.map((need, i) => {
-                        if (need.kind === needType.id) {
-                          return (
-                            <li className="list-group-item needoffer" key={i}>
-                              <div>
-                                <b>{need.subject}</b>
-                              </div>
-                              <div>{need.comments}</div>
-                            </li>
-                          );
-                        } else {
-                          return "";
-                        }
-                      })}
-                    </ul>
-                    {/*<button className="addbutton btn btn-secondary" onClick="">
-                      Add
-                    </button>*/}
-                  </div>
-                );
-              })}
+              <HospitalNeedGroup needs={this.state.needs} />
             </span>
           </div>
-          <div className="panel">
-            <h3>Offers for Help</h3>
+          <div className="panelFull">
+            <div className="hospitalNeedsTopBar">
+              <div className="hospitalNeedsLeft">
+                <h3 className="mb-3">Healthcare Staff Needs</h3>
+                <p>
+                  These are needs of individual healthcare workers at this
+                  hospital. We are looking for individuals who might be able to
+                  spend time doing these activities.
+                </p>
+              </div>
+
+              <div className="hospitalNeedNewSubmit">
+                <div className="helperText">Do you work at this hospital?</div>
+                <button className="btn btn-danger hospitalNeedsNewSubmitBtn">
+                  Add Your Need
+                </button>
+              </div>
+            </div>
             <span className="group">
-              {needTypes.offerTypes.map((offerType, i) => {
-                return (
-                  <div key={i}>
-                    <h3 className="group-label">{offerType.name}</h3>
-                    <ul className="list-group"></ul>
-                    {/*<button className="addbutton btn btn-secondary">Add</button>*/}
-                  </div>
-                );
+              {needTypes.needTypes.map((needType, i) => {
+                if (needType.id !== "equipment_need") {
+                  return (
+                    <div key={i} className="staffNeedGroup">
+                      <h3 className="group-label">{needType.name}</h3>
+                      <StaffNeedTable
+                        needs={this.state.needs}
+                        type={needType.id}
+                      />
+                    </div>
+                  );
+                } else {
+                  return "";
+                }
               })}
             </span>
           </div>
