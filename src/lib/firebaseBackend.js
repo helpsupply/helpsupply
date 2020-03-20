@@ -1,4 +1,4 @@
-import BackendInterface from "./backend_interface";
+import BackendInterface from "./backendInterface";
 import Firebase from "firebase";
 
 class FirebaseBackend extends BackendInterface {
