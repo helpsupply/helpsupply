@@ -64,7 +64,6 @@ class DropSiteAdmin extends React.Component {
     
     this.props.backend.isValidHealthcareWorker().then(verified => {
       if (verified) {
-        console.log("verified");
         this.setState({
           verified: true
         });

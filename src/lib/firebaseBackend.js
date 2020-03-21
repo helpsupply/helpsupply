@@ -343,7 +343,7 @@ class FirebaseBackend extends BackendInterface{
   }
 
   // Login State
-  async isLoggedIn() {
+  isLoggedIn() {
     return this.loggedIn;
   }
 
