@@ -2,14 +2,11 @@ import React from "react";
 import * as hospital_index from "../data/hospital_index";
 import * as needTypes from "../data/needTypes";
 import { withRouter } from "react-router-dom";
-import LinksResult from "./LinksResult";
-import DropSiteNeedGroupAdmin from "./DropSiteNeedGroupAdmin";
+import DropSiteNeedGroup from "./DropSiteNeedGroup";
 import NewRequestForm from "./NewRequestForm";
 import EditDropSiteForm from "./EditDropSiteForm";
-import StaffNeedTable from "./StaffNeedTable";
-import Axios from "axios";
 
-class DropSiteAdmin extends React.Component {
+class DropSite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +19,12 @@ class DropSiteAdmin extends React.Component {
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
+    this.handleEditDropSite = this.handleEditDropSite.bind(this);
   }
+
+  handleChange(event) {}
+
+  handleSubmit(event) {}
 
   handleNewRequest(requestObj) {
     let oldList = this.state.needs;
@@ -32,6 +34,12 @@ class DropSiteAdmin extends React.Component {
     this.setState({
       needs: oldList
     });
+  }
+
+  handleEditDropSite() {}
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("component updated");
   }
 
   handleRemoveRequest(requestId) {
@@ -123,41 +131,12 @@ class DropSiteAdmin extends React.Component {
               </div>
             </div>
             <span className="group" id="needslist">
-              <DropSiteNeedGroupAdmin
+              <DropSiteNeedGroup
                 backend={this.props.backend}
                 needs={this.state.needs}
                 handleRemoveRequest={this.handleRemoveRequest}
               />
             </span>
-          </div>
-          <div className="panel">
-            <div className="hospitalNeedsTopBar">
-              <div className="hospitalNeedsLeft">
-                <h3 className="mb-3">Submit New Request</h3>
-              </div>
-            </div>
-            <NewRequestForm
-              dropSiteId={this.props.match.params.id}
-              backend={this.props.backend}
-              handleAddRequest={this.handleAddRequest}
-              handleNewRequest={this.handleNewRequest}
-            />
-          </div>
-          <div className="panel">
-            <div className="hospitalNeedsTopBar">
-              <div className="hospitalNeedsLeft">
-                <h3 className="mb-3">Edit Dropsite Info</h3>
-              </div>
-            </div>
-            <EditDropSiteForm
-              dropSiteId={this.props.match.params.id}
-              dropSiteName={this.state.dropSiteName}
-              dropSiteDescription={this.state.dropSiteDescription}
-              dropSiteAddress={this.state.dropSiteAddress}
-              dropSiteZip={this.state.dropSiteZip}
-              backend={this.props.backend}
-              handleEditDropSite={this.handleEditDropSite}
-            />
           </div>
         </div>
       </div>
@@ -165,4 +144,4 @@ class DropSiteAdmin extends React.Component {
   }
 }
 
-export default withRouter(DropSiteAdmin);
+export default withRouter(DropSite);

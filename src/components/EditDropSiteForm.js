@@ -34,12 +34,6 @@ class EditDropSiteForm extends React.Component {
   };
 
   handleEditDropSite() {
-    let requestObj = {};
-    requestObj.dropSiteZip = this.state.dropSiteZip;
-    requestObj.dropSiteName = this.state.dropSiteName;
-    requestObj.dropSiteDescription = this.state.dropSiteDescription;
-    requestObj.dropSiteAddress = this.state.dropSiteAddress;
-    this.props.handleEditDropSite(requestObj);
     this.props.backend
       .editDropSite(
         this.props.dropSiteId,

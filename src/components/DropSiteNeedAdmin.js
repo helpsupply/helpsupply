@@ -1,6 +1,6 @@
 import React from "react";
 
-class DropSiteNeed extends React.Component {
+class DropSiteNeedAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,17 +45,34 @@ class DropSiteNeed extends React.Component {
           </h6>
           <p className="card-text">{this.props.need.requestDescription}</p>
           <button className="btn btn-primary hospitalNeedsBtn">
-            Contribute
+            See Contributions
           </button>
-          <div className="hospitalNeedsLink">
-            <a href="#" className="card-link ml-3">
-              What kinds are accepted?
-            </a>
+          <div className="deleteRequest">
+            <button
+              className="btn btn-outline-danger"
+              onClick={this.handleDelete}
+            >
+              Delete
+            </button>
           </div>
+          <div className="statusSelectGroup">
+            <select
+              value={this.state.status}
+              onChange={this.handleStatusChange}
+            >
+              <option value="open">Open for contributions</option>
+              <option value="fulfilled">Fulfilled</option>
+            </select>
+          </div>
+          {/*<div className="hospitalNeedsLink">
+                  <a href="#" className="card-link ml-3">
+                    What kinds are accepted?
+                  </a>
+          </div>*/}
         </div>
       </div>
     );
   }
 }
 
-export default DropSiteNeed;
+export default DropSiteNeedAdmin;
