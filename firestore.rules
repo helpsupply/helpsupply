@@ -15,5 +15,12 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAdmin();
     }
+    match /dropSite/{site} {
+      function isHCP() {
+        return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
+      }
+      allow read: if true;
+      allow write: if isHCP();
+    }
   }
 }

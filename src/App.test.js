@@ -75,7 +75,7 @@ test('Test Domain Verification', async () => {
   // Now make our user an admin
   await adminfs.collection('admin').doc(auth.uid).set({'valid': 'true'});
 
-  // Now try again...
+  // Now try again
   await backend.setDomainIsValid('kp.org', true);
 
   // This should now be empty
