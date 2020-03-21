@@ -4,6 +4,12 @@ service cloud.firestore {
     match /{document=**} {
       allow read: if true;
     }
+    match /hcp/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+    match /hcp/{uid}/dropsites/{site} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
     match /admin/{user} {
       // Only edited in the Firebase Console for now
       allow read: if true;
@@ -13,7 +19,8 @@ service cloud.firestore {
         return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/admin/$(request.auth.uid)).data.valid == 'true';
       }
       allow read: if true;
-      allow write: if isAdmin();
+      allow create: if isAdmin() || request.resource.data.valid == 'pending';
+      allow update, delete: if isAdmin();
     }
     match /dropSite/{site} {
       function isHCP() {
@@ -21,6 +28,21 @@ service cloud.firestore {
       }
       allow read: if true;
       allow write: if isHCP();
+    }
+    match /request/{req} {
+      function isHCP() {
+        return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
+      }
+      allow read: if true;
+      allow write: if isHCP();
+    }
+    match /supply/{site} {
+      function isHCP() {
+        return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
+      }
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isHCP();
     }
   }
 }
