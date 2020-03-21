@@ -452,17 +452,28 @@ class FirebaseBackend extends BackendInterface {
 
   // VALIDATED DOMAINS
 
-  async getDomains(pendingOnly) {
+  async getDomains(pendingOnly, callback) {
     let domains = null;
+    let newDomains = [];
+
     if (pendingOnly) {
-      domains = await this.firestore
-        .collection("domain")
-        .where("valid", "==", "pending")
-        .get();
+      domains = await (this.firestore.collection('domain').where("valid", '==', "pending"));
     } else {
-      domains = await this.firestore.collection("domain").get();
+      domains = await (this.firestore.collection('domain'));
     }
-    return domains.docs.map(d => d.id);
+
+    return domains.onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type === "added") {
+          newDomains.push(change.doc.id)
+        }
+
+        if (change.type === "removed") {
+          newDomains = newDomains.filter(doc => doc !== change.doc.id)
+        }
+        callback(newDomains)
+      })
+    })
   }
 
   async setDomainIsValid(domain, isValid) {
@@ -473,14 +484,6 @@ class FirebaseBackend extends BackendInterface {
         .set({ status: isValid ? "approved" : "denied" });
     } catch (e) {
       throw "Validating domains is not allowed";
-    }
-  }
-
-  async setPendingDomain(domain) {
-    try {
-      await this.firestore.collection('domain').doc(domain).set({'valid': "pending"});
-    } catch(e) {
-      throw "Adding domains is not allowed"
     }
   }
 

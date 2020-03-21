@@ -12,6 +12,7 @@ class PendingDomains extends React.Component {
     this.handleApproveDomain = this.handleApproveDomain.bind(this);
     this.handleDenyDomain = this.handleDenyDomain.bind(this);
     this.handleNewDomainChange = this.handleNewDomainChange.bind(this);
+    this.getDomainsCallback = this.getDomainsCallback.bind(this);
   }
 
   handleApproveDomain(domain) {
@@ -24,26 +25,30 @@ class PendingDomains extends React.Component {
 
   addDomain(event) {
     event.preventDefault()
-    this.props.backend.setPendingDomain(this.state.newDomain)
+    this.props.backend.setDomainIsValid(this.state.newDomain, true)
   }
 
   handleNewDomainChange(event) {
     this.setState({ newDomain: event.target.value });
   }
 
+  getDomainsCallback(data) {
+    console.log(data)
+    this.setState(
+      {
+        domains: data
+      },
+    );
+  }
+
   componentDidUpdate() {}
 
   componentDidMount() {
-    this.props.backend.getDomains(true).then(data => {
-      this.setState(
-        {
-          domains: data
-        },
-      );
-    })
+    this.props.backend.getDomains(false, this.getDomainsCallback)
   }
 
   render() {
+    console.log(this.state.domains)
     return (
       <div>
         <div className="panelFull">

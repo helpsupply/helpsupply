@@ -73,10 +73,6 @@ class BackendInterface {
 
   // VALIDATED DOMAINS
 
-  setPendingDomain() {
-    throw "Abstract Interface"
-  }
-
   getPendingDomains() {
     throw "Abstract Interface"
   }
