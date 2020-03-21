@@ -22,5 +22,20 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isHCP();
     }
+    match /request/{req} {
+      function isHCP() {
+        return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
+      }
+      allow read: if true;
+      allow write: if isHCP();
+    }
+    match /supply/{site} {
+      function isHCP() {
+        return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
+      }
+      allow read: if true;
+      allow create: if (true || isHCP());
+      allow update, delete: if isHCP();
+    }
   }
 }
