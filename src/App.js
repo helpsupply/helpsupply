@@ -2,10 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import EntryPortal from "./components/EntryPortal";
-import Hospital from "./components/Hospital";
+import DropSiteAdmin from "./components/DropSiteAdmin";
+import DropSite from "./components/DropSite";
 import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
-import { FirebaseContext } from "./lib/";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,21 +26,17 @@ class App extends React.Component {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/hospital/:id">
-              {/* 
-              <Hospital
-                db={db}
-                user={this.state.user}
-                userData={this.state.userData}
-              />*/}
+            <Route path="/dropsite/:id/admin">
+              <DropSiteAdmin backend={this.props.backend} />
             </Route>
-            <Route path="/hospital">
+            <Route path="/dropsite/:id">
+              <DropSite backend={this.props.backend} />
+            </Route>
+            <Route path="/dropsite">
               <EntryPortal />
             </Route>
             <Route exact path="/">
-              <FirebaseContext.Consumer>
-                {firebase => <EntryPortal firebase={firebase} />}
-              </FirebaseContext.Consumer>
+              <EntryPortal firebase={this.props.backend} />}
             </Route>
             <Route path="*">
               <NoMatch />
