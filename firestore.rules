@@ -30,11 +30,11 @@ service cloud.firestore {
       allow write: if isHCP();
     }
     match /request/{req} {
-      //function isHCP() {
-      //  return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
-     // }
+      function isHCP() {
+        return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
+      }
       allow read: if true;
-      allow write: if true;//isHCP();
+      allow write: if isHCP();
     }
     match /supply/{site} {
       function isHCP() {
