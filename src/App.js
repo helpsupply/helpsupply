@@ -29,7 +29,7 @@ class App extends React.Component {
               <Login />
             </Route>
 
-            <Route path="/signup">
+            <Route path="/signup/:dropsite?">
               <HCPSignup backend={this.props.backend} />
             </Route>
             <Route path="/signupFinish">
@@ -43,22 +43,18 @@ class App extends React.Component {
               <DropSite backend={this.props.backend} />
             </Route>
             <Route path="/dropsite">
-              <EntryPortal />
+              <EntryPortal backend={this.props.backend} />
             </Route>
 
             <Route exact path="/">
-              <EntryPortal firebase={this.props.backend} />}
+              <EntryPortal backend={this.props.backend} />}
             </Route>
 
             <Route path="*">
               <NoMatch />
             </Route>
 
-
-            <Route path="/domainValidation">
-
-            </Route>
-
+            <Route path="/domainValidation"></Route>
           </Switch>
         </div>
       </Router>
