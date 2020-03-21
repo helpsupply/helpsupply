@@ -9,7 +9,7 @@ class FirebaseBackend {
   }
 
   listDropSites(zipcode, radius) {
-    this.firebase
+    return this.firebase
       .collection("dropSite")
       .get()
       .then(snapshot => {
@@ -18,18 +18,41 @@ class FirebaseBackend {
           dict["id"] = d.id;
           return dict;
         });
-        console.log(data);
+        return data;
       })
       .catch(console.log);
     // To do
+    // create zipcode and radius filters
   }
 
   getDropSites(dropSiteId) {
-    // To do
+    return this.firebase
+      .collection("dropSite")
+      .doc(dropSiteId)
+      .get()
+      .then(doc => {
+        return doc.data();
+      })
+      .catch(console.log);
   }
 
   addDropSite(dropSiteName, location_id, dropAddress, arbitraryComments) {
+    return this.firebase
+      .collection("dropSite")
+      .add({
+        dropSiteName: dropSiteName,
+        location_id: location_id,
+        dropAddress: dropAddress,
+        arbitraryComments: arbitraryComments
+      })
+      .then(function(docRef) {
+        return docRef.id;
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
     // To do
+    // add validation for the required variables
   }
 
   // REQUESTS
