@@ -360,7 +360,7 @@ class FirebaseBackend extends BackendInterface{
 
   async signupWithEmail(email, selectedDropSite) {
     var actionCodeSettings = {
-        url: 'https://hospital.community/signupFinish',
+        url: 'https://help.supply/signupFinish',
         handleCodeInApp: true,
     };
 
@@ -382,8 +382,11 @@ class FirebaseBackend extends BackendInterface{
       let uid = this.firebase.auth().currentUser.uid;
       let initialDropsite = '1';//window.localStorage.getItem('intendedDropSite');
 
+      console.log(uid);
+      window.testfs = this.firestore;
+
       // TODO: possibly fill in /dropAdmin/bla if we can't index it
-      await this.firestore.collection('user').doc(uid).collection('dropsites').doc(initialDropsite).set({'active': true});
+      await this.firestore.collection('hcp').doc(uid).collection('dropsites').doc(initialDropsite).set({'active': true});
       // Add to user their domain so we can use that to validate everything
     } else {
       throw "Email Link Invalid"
