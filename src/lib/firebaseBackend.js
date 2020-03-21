@@ -260,6 +260,60 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
+  // SUPPPLY
+
+  addSupply(
+    dropSiteId,
+    requestId,
+    requestTitle,
+    supplyPhone,
+    supplyQuantity,
+    supplyDeliveryTime,
+    supplyComments
+  ) {
+    if (
+      (dropSiteId && requestId && requestTitle,
+      supplyPhone && supplyQuantity && supplyDeliveryTime && supplyComments)
+    ) {
+      return this.firestore
+        .collection("supply")
+        .add({
+          dropSiteId: dropSiteId,
+          requestId: requestId,
+          requestTitle: requestTitle,
+          supplyPhone: supplyPhone,
+          supplyQuantity: supplyQuantity,
+          supplyDeliveryTime: supplyDeliveryTime,
+          supplyComments: supplyComments
+        })
+        .then(function(docRef) {
+          return docRef.id;
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
+        });
+    } else {
+      console.log("Error, one or more required params missing.");
+      return Promise.resolve("Error, one or more required params missing.");
+    }
+  }
+
+  deleteSupply(supplyId) {
+    if (supplyId) {
+      return this.firestore
+        .collection("supply")
+        .doc(supplyId)
+        .delete()
+        .then(() => {
+          return supplyId + " deleted";
+        })
+        .catch(console.log);
+    } else {
+      console.log("Error, one or more required params missing.");
+      return Promise.resolve("Error, one or more required params missing.");
+    }
+  }
+
   // VALIDATED DOMAINS
 
   addValidatedDomain(domain) {
