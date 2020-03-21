@@ -34,8 +34,10 @@ class HCPSignup extends React.Component {
       <div className="">
         <div className="content">
           <div className="panelFull">
+              <h1>Let's get started</h1>
+              <p>In order to ensure the data on Help Supply is trustworthy, we need to first verify that your healthcare affiliation. Please enter the email you use at work, i.e. kate@kp.org:</p>
             {this.state.sent ? (
-              <span>Check your email!</span>
+              <span>Check your email for a login link (you can close this tab/window)</span>
             ) : (
               <form className="linkSubmitGroup" onSubmit={this.submitEmail}>
                 <input

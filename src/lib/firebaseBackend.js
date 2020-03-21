@@ -352,6 +352,7 @@ class FirebaseBackend extends BackendInterface{
 
     var domain = this.firebase.auth().currentUser.email.split('@')[1];
     var verification = await this.firestore.collection('domain').doc(domain).get();
+    console.log("checking validity", verification.data())
     if (verification.data().valid == 'true') return true;
     return false;
   }
