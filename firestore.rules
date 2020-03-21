@@ -10,7 +10,7 @@ service cloud.firestore {
     }
     match /domain/{url} {
       function isAdmin() {
-        return request.auth != null && get(/databases/$(database)/documents/admin/$(request.auth.uid)).data.valid == 'true';
+        return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/admin/$(request.auth.uid)).data.valid == 'true';
       }
       allow read: if true;
       allow write: if isAdmin();

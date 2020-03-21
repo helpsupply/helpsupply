@@ -52,7 +52,7 @@ test('Test Domain Verification', async () => {
   await adminfs.collection('domain').doc('kp.org').set({'valid': 'pending'});
   await adminfs.collection('domain').doc('gmail.com').set({'valid': 'false'});
 
-  let auth = {'uid': '1'};
+  let auth = {'uid': '1', email_verified: true};
   let testApp = firebase.initializeTestApp({projectId, auth});
   testApp.auth = function() {
     return {
@@ -75,7 +75,7 @@ test('Test Domain Verification', async () => {
   // Now make our user an admin
   await adminfs.collection('admin').doc(auth.uid).set({'valid': 'true'});
 
-  // Now try again
+  // Now try again...
   await backend.setDomainIsValid('kp.org', true);
 
   // This should now be empty
