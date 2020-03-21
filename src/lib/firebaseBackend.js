@@ -262,6 +262,24 @@ class FirebaseBackend extends BackendInterface {
 
   // SUPPPLY
 
+  listSupply(dropSiteId) {
+    return this.firestore
+      .collection("supply")
+      .where("dropSiteId", "==", dropSiteId)
+      .get()
+      .then(snapshot => {
+        let data = snapshot.docs.map(d => {
+          var dict = d.data();
+          dict["id"] = d.id;
+          return dict;
+        });
+        return data;
+      })
+      .catch(console.log);
+    // To do
+    // create zipcode and radius filters
+  }
+
   addSupply(
     dropSiteId,
     requestId,

@@ -89,6 +89,19 @@ class NewSupplyForm extends React.Component {
     this.setState({
       success: true
     });
+    this.props.backend
+      .addSupply(
+        this.props.need.dropSiteId,
+        this.props.need.id,
+        this.props.need.requestTitle,
+        this.state.supplyPhone,
+        this.state.supplyQuantity,
+        this.state.supplyDeliveryTime,
+        this.state.supplyComments
+      )
+      .then(data => {
+        console.log(data);
+      });
   }
 
   render() {
