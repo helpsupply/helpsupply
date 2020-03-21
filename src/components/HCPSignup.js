@@ -8,11 +8,10 @@ class HCPSignup extends React.Component {
       email: "",
       sent: false,
       error: "",
-      dropsite: "1"
+      dropsite: this.props.match.params.dropsite,
     };
     this.submitEmail = this.submitEmail.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleDropsiteChange = this.handleDropsiteChange.bind(this);
   }
 
   componentDidMount() {}
@@ -30,10 +29,6 @@ class HCPSignup extends React.Component {
     this.setState({ email: event.target.value });
   }
 
-  handleDropsiteChange(event) {
-    this.setState({ dropsite: event.target.value });
-  }
-
   render() {
     return (
       <div className="">
@@ -43,13 +38,6 @@ class HCPSignup extends React.Component {
               <span>Check your email!</span>
             ) : (
               <form className="linkSubmitGroup" onSubmit={this.submitEmail}>
-                <input
-                  className="linkTitle form-control"
-                  id="linkTitle"
-                  placeholder="Your dropsite ID"
-                  value={this.state.dropsite}
-                  onChange={this.handleDropsiteChange}
-                />
                 <input
                   className="linkTitle form-control"
                   id="linkTitle"

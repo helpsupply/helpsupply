@@ -360,7 +360,7 @@ class FirebaseBackend extends BackendInterface{
 
   async signupWithEmail(email, selectedDropSite) {
     var actionCodeSettings = {
-        url: 'https://help.supply/signupFinish',
+        url: 'https://help.supply/signupFinish/' + selectedDropSite,
         handleCodeInApp: true,
     };
 
@@ -373,21 +373,21 @@ class FirebaseBackend extends BackendInterface{
     return window.localStorage.getItem('emailForSignIn') === null;
   }
 
-  async continueSignup(url, email) {
+  async continueSignup(url, email, dropsite) {
     if (this.firebase.auth().isSignInWithEmailLink(url)) {
       var email = window.localStorage.getItem('emailForSignIn') || email;
       await this.firebase.auth().signInWithEmailLink(email, url);
       window.localStorage.removeItem('emailForSignIn')
 
       let uid = this.firebase.auth().currentUser.uid;
-      let initialDropsite = '1';//window.localStorage.getItem('intendedDropSite');
 
       console.log(uid);
       window.testfs = this.firestore;
 
-      // TODO: possibly fill in /dropAdmin/bla if we can't index it
-      await this.firestore.collection('hcp').doc(uid).collection('dropsites').doc(initialDropsite).set({'active': true});
-      // Add to user their domain so we can use that to validate everything
+      var existing = await this.firestore.collection('domain').doc(email.split('@')[1]).get();
+      if (!existing) {
+        await this.firestore.collection('domain').doc(email.split('@')[1]).set({'valid': 'pending'});
+      }
     } else {
       throw "Email Link Invalid"
     }

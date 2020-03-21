@@ -1,6 +1,7 @@
 import React from "react";
 import Firebase from "firebase";
 import * as firebaseui from "firebaseui";
+import { withRouter } from "react-router-dom";
 
 class HCPSignupFinish extends React.Component {
 
@@ -9,6 +10,7 @@ class HCPSignupFinish extends React.Component {
     this.state = {
         email: '',
         confirmEmail: false,
+        dropsite: this.props.match.params.dropsite,
     };
     this.ui = new firebaseui.auth.AuthUI(Firebase.auth());
 
@@ -28,7 +30,10 @@ class HCPSignupFinish extends React.Component {
     if (event) event.preventDefault();
     let url = window.location.href;
     this.props.backend.continueSignup(url, this.state.confirmEmail ? this.state.email : null)
-        .then(() => alert('done'))
+        .then(() =>  {
+            let url = "/dropsite/" + this.state.dropsite + "/admin";
+            this.props.history.push(url);
+        })
   }
 
   handleEmailChange(event) {
@@ -69,4 +74,4 @@ class HCPSignupFinish extends React.Component {
 
 }
 
-export default HCPSignupFinish;
+export default withRouter(HCPSignupFinish);

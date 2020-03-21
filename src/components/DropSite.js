@@ -93,7 +93,7 @@ class DropSite extends React.Component {
             {hospitalText}
           </span>
           <a href="#" className="navbar-brand mb-0 h1 logored">
-            hospital.community
+            help.supply
           </a>
         </nav>
         <div className="content">
