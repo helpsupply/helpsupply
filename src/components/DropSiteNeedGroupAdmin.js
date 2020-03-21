@@ -13,6 +13,7 @@ class DropSiteNeedGroupAdmin extends React.Component {
         {this.props.needs.map((need, i) => {
           return (
             <DropSiteNeedAdmin
+              verified={this.props.verified}
               key={i}
               backend={this.props.backend}
               need={need}

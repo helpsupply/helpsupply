@@ -24,6 +24,7 @@ class DropSiteAdmin extends React.Component {
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
+    this.checkVerification = this.checkVerification.bind(this);
   }
 
   handleNewRequest(requestObj) {
@@ -64,9 +65,7 @@ class DropSiteAdmin extends React.Component {
         });
       } else {
         console.log("not verified, will try again in 30 seconds");
-        setTimeout(function() {
-          this.checkVerification();
-        }, 30000);
+        setTimeout(this.checkVerification, 10000);
       }
     });
   }
@@ -172,6 +171,7 @@ class DropSiteAdmin extends React.Component {
             </div>
             <span className="group" id="needslist">
               <DropSiteNeedGroupAdmin
+                verified={this.state.verified}
                 backend={this.props.backend}
                 needs={this.state.needs}
                 handleRemoveRequest={this.handleRemoveRequest}
@@ -207,14 +207,16 @@ class DropSiteAdmin extends React.Component {
                       <th>{supply.supplyComments}</th>
                       <th>{supply.supplyPhone}</th>
                       <th>
-                        <button
-                          className="btn btn-outline-danger"
-                          onClick={() => {
-                            this.handleDeleteSupply(supply.id);
-                          }}
-                        >
-                          Remove
-                        </button>
+                        {this.state.verified === true && (
+                          <button
+                            className="btn btn-outline-danger"
+                            onClick={() => {
+                              this.handleDeleteSupply(supply.id);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )}
                       </th>
                     </tr>
                   );
@@ -229,6 +231,7 @@ class DropSiteAdmin extends React.Component {
               </div>
             </div>
             <NewRequestForm
+              verified={this.state.verified}
               dropSiteId={this.props.match.params.id}
               backend={this.props.backend}
               handleAddRequest={this.handleAddRequest}
@@ -242,6 +245,7 @@ class DropSiteAdmin extends React.Component {
               </div>
             </div>
             <EditDropSiteForm
+              verified={this.state.verified}
               dropSiteId={this.props.match.params.id}
               dropSiteName={this.state.dropSiteName}
               dropSiteDescription={this.state.dropSiteDescription}

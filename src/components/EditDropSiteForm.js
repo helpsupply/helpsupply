@@ -52,10 +52,11 @@ class EditDropSiteForm extends React.Component {
   render() {
     let newRequestSubmitButton;
     if (
-      this.state.dropSiteName !== "" ||
-      this.state.dropSiteDescription !== "" ||
-      this.state.dropSiteAddress !== "" ||
-      this.state.dropSiteZip !== ""
+      (this.state.dropSiteName !== "" ||
+        this.state.dropSiteDescription !== "" ||
+        this.state.dropSiteAddress !== "" ||
+        this.state.dropSiteZip !== "") &&
+      this.props.verified
     ) {
       newRequestSubmitButton = (
         <button
