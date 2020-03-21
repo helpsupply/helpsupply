@@ -19,7 +19,8 @@ class DropSiteAdmin extends React.Component {
       dropSiteZip: "",
       dropSiteDescription: "",
       needs: [],
-      supply: []
+      supply: [],
+      verified: false
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
@@ -51,6 +52,22 @@ class DropSiteAdmin extends React.Component {
     });
     this.setState({
       supply: newList
+    });
+  }
+
+  checkVerification() {
+    this.props.backend.isValidHealthcareWorker().then(verified => {
+      if (verified) {
+        console.log("verified");
+        this.setState({
+          verified: true
+        });
+      } else {
+        console.log("not verified, will try again in 30 seconds");
+        setTimeout(function() {
+          this.checkVerification();
+        }, 30000);
+      }
     });
   }
 
@@ -87,6 +104,8 @@ class DropSiteAdmin extends React.Component {
         }
       );
     });
+
+    this.checkVerification();
   }
 
   componentDidUpdate() {}
@@ -104,6 +123,17 @@ class DropSiteAdmin extends React.Component {
 
     return (
       <div className="">
+        {this.state.verified === false && (
+          <div className="alert alert-warning alertFixed" role="alert">
+            <div className="spinner-border alertSpinner" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+            <div className="alertText">
+              Verifying your credentials (should be a few minutes). You'll be
+              able to edit/add once verified.
+            </div>
+          </div>
+        )}
         <nav className="navbar navbar-light bg-light">
           <span className="navbar-brand mb-0 h1" id="hospitalname">
             <div className="dropSiteIdText">
