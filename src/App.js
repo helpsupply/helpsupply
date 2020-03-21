@@ -5,7 +5,7 @@ import EntryPortal from "./components/EntryPortal";
 import Hospital from "./components/Hospital";
 import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
-import { FirebaseContext } from "./lib/";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -38,9 +38,7 @@ class App extends React.Component {
               <EntryPortal />
             </Route>
             <Route exact path="/">
-              <FirebaseContext.Consumer>
-                {firebase => <EntryPortal firebase={firebase} />}
-              </FirebaseContext.Consumer>
+              <EntryPortal firebase={this.props.backend} />}
             </Route>
             <Route path="*">
               <NoMatch />

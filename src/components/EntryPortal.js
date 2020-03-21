@@ -87,10 +87,6 @@ class EntryPortal extends React.Component {
   componentDidMount() {}
 
   render() {
-    this.props.firebase.listDropSites().then(data => {
-      console.log(data);
-    });
-
     return (
       <div className="entryportal container-sm">
         <h3 className="logored">hospital.community</h3>

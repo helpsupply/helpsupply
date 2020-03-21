@@ -18,7 +18,7 @@ class BackendInterface {
 
   // REQUESTS
 
-  getRequests(dropSiteId, requestType, openEnded, status) {
+  getRequests(dropSiteId, requestType, status) {
     // Abstract
     throw "Abstract Interface";
   }
@@ -26,6 +26,7 @@ class BackendInterface {
   addRequest(
     dropSiteId,
     requestType,
+    requestTitle,
     requestDescription,
     requestQuantity,
     status
@@ -37,6 +38,7 @@ class BackendInterface {
   editRequest(
     requestId,
     requestType,
+    requestTitle,
     requestDescription,
     requestQuantity,
     status
