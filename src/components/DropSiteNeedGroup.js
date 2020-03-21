@@ -18,8 +18,8 @@ class DropSiteNeedGroup extends React.Component {
               dropSiteZip={this.props.dropSiteZip}
               backend={this.props.backend}
               need={need}
-              handleRemoveRequest={this.props.handleRemoveRequest}
               handleNewSupply={this.props.handleNewSupply}
+              handleAddToCart={this.props.handleAddToCart}
             />
           );
         })}

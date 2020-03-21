@@ -7,35 +7,30 @@ class DropSiteNeed extends React.Component {
     super(props);
     this.state = {
       status: this.props.need.status,
-      modal: false
+      qty: 0
     };
-    this.handleStatusChange = this.handleStatusChange.bind(this);
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleQtyChange = this.handleQtyChange.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
-  handleShow() {
-    this.setState({
-      modal: true
-    });
+  handleQtyChange(event) {
+    let qty = 0;
+    if (event.target.value > 0) {
+      this.setState({
+        qty: event.target.value
+      });
+    }
   }
 
-  handleClose() {
-    this.setState({
-      modal: false
-    });
-  }
-
-  handleStatusChange(event) {
-    this.setState({ status: event.target.value });
-    this.props.backend.editRequest(
-      this.props.need.id,
-      null,
-      null,
-      null,
-      null,
-      event.target.value
-    );
+  handleAddToCart() {
+    let item = {
+      requestId: this.props.need.id
+        .substr(this.props.need.id.length - 5)
+        .toUpperCase(),
+      requestTitle: this.props.need.requestTitle,
+      requestQuantity: this.state.qty
+    };
+    this.props.handleAddToCart(item);
   }
 
   render() {
@@ -55,33 +50,29 @@ class DropSiteNeed extends React.Component {
             {this.props.need.requestQuantity}
           </h6>
           <p className="card-text">{this.props.need.requestDescription}</p>
-          <button
-            className="btn btn-primary hospitalNeedsBtn"
-            onClick={this.handleShow}
-          >
-            Contribute
-          </button>
-
-          <Modal show={this.state.modal} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>{this.props.need.requestTitle}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <NewSupplyForm
-                backend={this.props.backend}
-                dropSiteAddress={this.props.dropSiteAddress}
-                dropSiteZip={this.props.dropSiteZip}
-                need={this.props.need}
-                handleSubmitSuccess={this.handleSubmitSuccess}
-                handleNewSupply={this.props.handleNewSupply}
-              />
-            </Modal.Body>
-          </Modal>
-          {/*   <div className="hospitalNeedsLink">
-            <a href="#" className="card-link ml-3">
-              What kinds are accepted?
-            </a>
-          </div> */}
+          <input
+            type="number"
+            className="form-control qtyInput"
+            id="qty"
+            placeholder="i.e. 50"
+            onChange={this.handleQtyChange}
+          ></input>
+          {this.state.qty > 0 ? (
+            <button
+              className="btn btn-primary hospitalNeedsBtn"
+              onClick={this.handleAddToCart}
+            >
+              Add to donation
+            </button>
+          ) : (
+            <button
+              disabled
+              className="btn btn-primary hospitalNeedsBtn"
+              onClick={this.handleAddToCart}
+            >
+              Add to donation
+            </button>
+          )}
         </div>
       </div>
     );

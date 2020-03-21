@@ -1,10 +1,8 @@
 import React from "react";
 import * as hospital_index from "../data/hospital_index";
-import * as needTypes from "../data/needTypes";
 import { withRouter } from "react-router-dom";
 import DropSiteNeedGroup from "./DropSiteNeedGroup";
-import NewRequestForm from "./NewRequestForm";
-import EditDropSiteForm from "./EditDropSiteForm";
+import NewSupplyForm from "./NewSupplyForm";
 
 class DropSite extends React.Component {
   constructor(props) {
@@ -16,9 +14,12 @@ class DropSite extends React.Component {
       dropSiteZip: "",
       dropSiteDescription: "",
       needs: [],
-      supply: []
+      supply: [],
+      cart: []
     };
     this.handleNewSupply = this.handleNewSupply.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
   }
 
   handleNewSupply(supplyObj) {
@@ -26,6 +27,22 @@ class DropSite extends React.Component {
     oldList.push(supplyObj);
     this.setState({
       supply: oldList
+    });
+  }
+
+  handleAddToCart(itemToAdd) {
+    let oldList = this.state.cart;
+    oldList.push(itemToAdd);
+    this.setState({
+      cart: oldList
+    });
+  }
+
+  handleRemoveFromCart(i) {
+    let oldList = this.state.cart;
+    oldList.splice(i, 1);
+    this.setState({
+      cart: oldList
     });
   }
 
@@ -73,6 +90,7 @@ class DropSite extends React.Component {
   componentDidUpdate() {}
 
   render() {
+    console.log(this.state.cart);
     let hospital = hospital_index.index.id_index[this.props.match.params.id];
     let hospitalText = "";
     if (typeof hospital === "undefined") {
@@ -128,35 +146,40 @@ class DropSite extends React.Component {
                 dropSiteZip={this.state.dropSiteZip}
                 backend={this.props.backend}
                 needs={this.state.needs}
-                handleRemoveRequest={this.handleRemoveRequest}
+                handleAddToCart={this.handleAddToCart}
               />
             </span>
           </div>
+          {this.state.cart.length > 0 && (
+            <div className="panelFull">
+              <div className="dropSiteTitle">
+                <h4 className="mb-3 dropSiteName">Your Donation</h4>
+              </div>
+              <NewSupplyForm
+                backend={this.props.backend}
+                cart={this.state.cart}
+                dropSiteId={this.state.dropSiteId}
+                dropSiteAddress={this.state.dropSiteAddress}
+                dropSiteZip={this.state.dropSiteZip}
+                handleRemoveFromCart={this.handleRemoveFromCart}
+              />
+            </div>
+          )}
           <div className="panelFull">
             <h4 className="mb-3 dropSiteName">Current contributions</h4>
             <table className="table table-striped staffTable table-bordered">
               <thead>
                 <tr>
-                  <th>Request ID</th>
                   <th>Item</th>
                   <th>Qty</th>
-                  <th>Delivery Time</th>
-                  <th>Comments</th>
                 </tr>
               </thead>
               <tbody>
                 {this.state.supply.map((supply, i) => {
                   return (
                     <tr key={i}>
-                      <th>
-                        {supply.requestId
-                          .substr(supply.requestId.length - 5)
-                          .toUpperCase()}
-                      </th>
                       <th>{supply.requestTitle}</th>
                       <th>{supply.supplyQuantity}</th>
-                      <th>{supply.supplyDeliveryTime}</th>
-                      <th>{supply.supplyComments}</th>
                     </tr>
                   );
                 })}

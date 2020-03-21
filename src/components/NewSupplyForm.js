@@ -13,9 +13,16 @@ class NewSupplyForm extends React.Component {
       supplyQuantityError: "",
       supplyDeliveryTimeError: "",
       formActivated: false,
-      success: false
+      stage: 1
     };
     this.handleSupplySubmit = this.handleSupplySubmit.bind(this);
+    this.handleNextStep = this.handleNextStep.bind(this);
+  }
+
+  handleNextStep() {
+    this.setState({
+      stage: 2
+    });
   }
 
   handleChange = field => e => {
@@ -62,16 +69,6 @@ class NewSupplyForm extends React.Component {
           supplyCommentsError: ""
         });
       }
-    } else if (field === "supplyQuantity") {
-      if (!e.target.value) {
-        this.setState({
-          supplyQuantityError: "This field is necessary."
-        });
-      } else {
-        this.setState({
-          supplyQuantityError: ""
-        });
-      }
     } else if (field === "supplyDeliveryTime") {
       if (!e.target.value) {
         this.setState({
@@ -87,31 +84,24 @@ class NewSupplyForm extends React.Component {
 
   handleSupplySubmit() {
     this.setState({
-      success: true
+      stage: 3
     });
-    this.props.backend
-      .addSupply(
-        this.props.need.dropSiteId,
-        this.props.need.id,
-        this.props.need.requestTitle,
-        this.state.supplyPhone,
-        this.state.supplyQuantity,
-        this.state.supplyDeliveryTime,
-        this.state.supplyComments
-      )
-      .then(data => {
-        console.log(data);
-      });
-    let newSupplyObject = {
-      dropSiteId: this.props.need.dropSiteId,
-      requestId: this.props.need.id,
-      requestTitle: this.props.need.requestTitle,
-      supplyPhone: this.state.supplyPhone,
-      supplyQuantity: this.state.supplyQuantity,
-      supplyDeliveryTime: this.state.supplyDeliveryTime,
-      supplyComments: this.state.supplyComments
-    };
-    this.props.handleNewSupply(newSupplyObject);
+
+    for (var i = 0; i < this.props.cart.length; i++) {
+      this.props.backend
+        .addSupply(
+          this.props.dropSiteId,
+          this.props.cart[i].requestId,
+          this.props.cart[i].requestTitle,
+          this.state.supplyPhone,
+          this.props.cart[i].requestQuantity,
+          this.state.supplyDeliveryTime,
+          this.state.supplyComments
+        )
+        .then(data => {
+          console.log(data);
+        });
+    }
   }
 
   render() {
@@ -119,7 +109,6 @@ class NewSupplyForm extends React.Component {
     if (
       this.state.supplyPhone &&
       this.state.supplyComments &&
-      this.state.supplyQuantity &&
       this.state.formActivated
     ) {
       newSupplySubmitButton = (
@@ -138,31 +127,61 @@ class NewSupplyForm extends React.Component {
       );
     }
 
+    const cart = (
+      <div className="submitSupplyFormContainer">
+        <div className="cart">
+          <table className="table table-striped staffTable table-bordered">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.cart.map((supply, i) => {
+                return (
+                  <tr key={i}>
+                    <th>{supply.requestTitle}</th>
+                    <th>{supply.requestQuantity}</th>
+                    <th>
+                      <button
+                        className="btn btn-outline-danger"
+                        onClick={() => {
+                          this.props.handleRemoveFromCart(i);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </th>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <button
+          className="btn btn-primary linkSubmitBtn"
+          onClick={this.handleNextStep}
+        >
+          Next
+        </button>
+      </div>
+    );
+
     const submitForm = (
       <div className="submitSupplyFormContainer">
         <div className="supplyFormField">
-          <div className="formLabel">Your cell number</div>
+          <div className="formLabel">Your cell number / email</div>
           <input
             className="form-control newSupplyFormField"
             id="supplyPhone"
-            placeholder="i.e. 555-555-5555"
+            placeholder="i.e. 555-555-5555 / juan@gmail.com"
             value={this.state.supplyPhone}
             onChange={this.handleChange("supplyPhone")}
             onBlur={this.handleValidate("supplyPhone")}
           />
           <div className="formError">{this.state.supplyPhoneError}</div>
-        </div>
-        <div className="supplyFormField">
-          <div className="formLabel">How many can you provide?</div>
-          <input
-            className="form-control newSupplyFormField"
-            id="supplyQuantity"
-            placeholder="i.e. 3 boxes of 200 each. 600 total"
-            value={this.state.supplyQuantity}
-            onChange={this.handleChange("supplyQuantity")}
-            onBlur={this.handleValidate("supplyQuantity")}
-          />
-          <div className="formError">{this.state.supplyQuantityError}</div>
         </div>
         <div className="supplyFormField">
           <div className="formLabel">When can you deliver it?</div>
@@ -194,7 +213,7 @@ class NewSupplyForm extends React.Component {
 
     const successMessage = (
       <div>
-        <div className="supplyInsturctionsAddress">
+        <div className="supplyInstructionsAddressForm">
           <div className="helperText">Deliver supplies here:</div>
           <div className="addressText">
             {this.props.dropSiteAddress}
@@ -203,20 +222,34 @@ class NewSupplyForm extends React.Component {
           </div>
         </div>
         <div className="deliveryInstructions">
-          <h6>Write the following on the package:</h6>
-          <h4>
-            Med Drop:
-            {this.props.need.id
-              .substr(this.props.need.id.length - 5)
-              .toUpperCase()}
-          </h4>
-          <h4>{this.props.need.requestTitle}</h4>
-          <h4>From: {this.state.supplyPhone}</h4>
+          <h6>
+            <b>Separate each package</b> and write on these labels:
+          </h6>
+          {this.props.cart.map((supply, i) => {
+            return (
+              <div key={i} className="deliveryLabels">
+                <h4>help.supply</h4>
+                <h6>
+                  {supply.requestId
+                    .substr(supply.requestId.length - 5)
+                    .toUpperCase()}
+                </h6>
+                <h3>{supply.requestTitle}</h3>
+                <h4>From: {this.state.supplyPhone}</h4>
+              </div>
+            );
+          })}
         </div>
       </div>
     );
 
-    return <div>{this.state.success ? successMessage : submitForm}</div>;
+    return (
+      <div>
+        {this.state.stage === 1 && cart}
+        {this.state.stage === 2 && submitForm}
+        {this.state.stage === 3 && successMessage}
+      </div>
+    );
   }
 }
 
