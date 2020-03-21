@@ -403,7 +403,11 @@ class FirebaseBackend extends BackendInterface{
   }
 
   async setDomainIsValid(domain, isValid) {
-    await this.firestore.collection('domain').doc(domain).set({'status': isValid ? "approved" : "denied"});
+    try {
+      await this.firestore.collection('domain').doc(domain).set({'status': isValid ? "approved" : "denied"});
+    } catch(e) {
+      throw "Validating domains is not allowed"
+    }
   }
 
   // HEALTH CARE PROFESSIONALS AND ADMINS

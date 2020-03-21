@@ -3,7 +3,6 @@ import { render } from '@testing-library/react';
 import App from './App';
 const fs = require('fs')
 
-//import FirebaseBackend from "./lib";
 import FirebaseBackend from "./lib/firebaseBackend";
 import expectExport from 'expect';
 
@@ -18,6 +17,9 @@ test('renders learn react link', () => {
   expect(linkElement).toBeInTheDocument();
 });
 */
+
+// Note:
+// You need to have `firebase emulators:start --only firestore` running for these to pass
 
 test('hello world', async () => {
   await firebase.clearFirestoreData({ projectId });
@@ -50,7 +52,7 @@ test('Test Domain Verification', async () => {
   await adminfs.collection('domain').doc('kp.org').set({'valid': 'pending'});
   await adminfs.collection('domain').doc('gmail.com').set({'valid': 'false'});
 
-  let auth = null;
+  let auth = {'uid': '1'};
   let testApp = firebase.initializeTestApp({projectId, auth});
   testApp.auth = function() {
     return {
@@ -64,6 +66,18 @@ test('Test Domain Verification', async () => {
   expect((await backend.getDomains()).sort()).toStrictEqual(['kp.org','gmail.com'].sort())
   expect((await backend.getDomains(true)).sort()).toStrictEqual(['kp.org'].sort())
 
-  backend.setDomainIsValid('kp.org', true)
+  // We shouldn't be able to do this yet
+  await expect(backend.setDomainIsValid('kp.org', true)).rejects.toBe('Validating domains is not allowed');
+
+  // This should be the same as before
+  expect((await backend.getDomains(true)).sort()).toStrictEqual(['kp.org'].sort())
+
+  // Now make our user an admin
+  await adminfs.collection('admin').doc(auth.uid).set({'valid': 'true'});
+
+  // Now try again
+  await backend.setDomainIsValid('kp.org', true);
+
+  // This should now be empty
   expect((await backend.getDomains(true)).sort()).toStrictEqual([].sort())
 })
