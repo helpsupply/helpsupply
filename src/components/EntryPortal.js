@@ -32,7 +32,6 @@ class EntryPortal extends React.Component {
   componentDidMount() {
     this.props.backend.listDropSites().then(data => {
       this.setState({ facilities: data });
-      console.log(data);
     });
   }
 

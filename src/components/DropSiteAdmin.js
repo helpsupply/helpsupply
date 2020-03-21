@@ -27,9 +27,7 @@ class DropSiteAdmin extends React.Component {
 
   handleNewRequest(requestObj) {
     let oldList = this.state.needs;
-    console.log(oldList);
     oldList.push(requestObj);
-    console.log(oldList);
     this.setState({
       needs: oldList
     });
@@ -62,9 +60,7 @@ class DropSiteAdmin extends React.Component {
         {
           needs: data
         },
-        () => {
-          console.log(this.state);
-        }
+        () => {}
       );
     });
     this.props.backend.listSupply(this.props.match.params.id).then(data => {

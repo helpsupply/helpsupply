@@ -239,7 +239,8 @@ input#linkTitle {
 }
 
 .hospitalNeedNewSubmit,
-.supplyInsturctionsAddress {
+.supplyInstructionsAddress,
+.supplyInstructionsAddressForm {
   text-align: center;
   border: solid 1px #ccc;
   padding: 20px;
@@ -248,8 +249,18 @@ input#linkTitle {
   background-color: #333;
 }
 
+.supplyInstructionsAddressForm {
+  float: left;
+  width: 100%;
+}
+
+.supplyInstructionsAddressForm .addressText {
+  font-size: 30px;
+}
+
 .hospitalNeedNewSubmit .helperText,
-.supplyInsturctionsAddress .helperText {
+.supplyInstructionsAddress .helperText,
+.supplyInstructionsAddressForm .helperText {
   font-size: 12px;
   margin-bottom: 5px;
 }
@@ -337,4 +348,26 @@ button:disabled {
   float: left;
   margin-top: 20px;
   text-align: center;
+}
+
+.qtyInput {
+  margin-bottom: 15px;
+}
+
+.deliveryLabels {
+  background-color: #333;
+  width: 300px;
+  color: #fff;
+  padding: 20px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.deliveryLabels h4 {
+  font-size: 16px;
+}
+
+.deliveryLabels h6 {
+  font-size: 12px;
 }

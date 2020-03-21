@@ -50,8 +50,6 @@ class EditDropSiteForm extends React.Component {
   componentDidMount() {}
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
     let newRequestSubmitButton;
     if (
       this.state.dropSiteName !== "" ||
