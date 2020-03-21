@@ -158,7 +158,7 @@ class DropSiteAdmin extends React.Component {
                   <th>Qty</th>
                   <th>Delivery Time</th>
                   <th>Comments</th>
-                  <th>Cell Phone</th>
+                  <th>Cell Phone / Email</th>
                   <th>Action</th>
                 </tr>
               </thead>
