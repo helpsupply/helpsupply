@@ -20,7 +20,7 @@ class DropSiteAdmin extends React.Component {
       dropSiteDescription: "",
       needs: [],
       supply: [],
-      verified: false
+      verified: true,
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
@@ -57,6 +57,11 @@ class DropSiteAdmin extends React.Component {
   }
 
   checkVerification() {
+    if (!this.props.backend.isLoggedIn()) {
+      setTimeout(this.checkVerification, 100);
+      return;
+    } 
+    
     this.props.backend.isValidHealthcareWorker().then(verified => {
       if (verified) {
         console.log("verified");
@@ -64,6 +69,9 @@ class DropSiteAdmin extends React.Component {
           verified: true
         });
       } else {
+        this.setState({
+          verified: false 
+        });
         console.log("not verified, will try again in 30 seconds");
         setTimeout(this.checkVerification, 10000);
       }
