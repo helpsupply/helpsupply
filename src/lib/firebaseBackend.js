@@ -42,15 +42,22 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
-  addDropSite(dropSiteName, location_id, dropAddress, arbitraryComments) {
-    if (dropSiteName && location_id && dropAddress) {
+  addDropSite(
+    location_id,
+    dropSiteName,
+    dropSiteDescription,
+    dropSiteAddress,
+    dropSiteZip
+  ) {
+    if (dropSiteName && location_id && dropSiteAddress && dropSiteZip) {
       let newSiteObj = {
         dropSiteName: dropSiteName,
         location_id: location_id,
-        dropAddress: dropAddress
+        dropSiteAddress: dropSiteAddress,
+        dropSiteZip: dropSiteZip
       };
-      if (arbitraryComments) {
-        newSiteObj.arbitraryComments = arbitraryComments;
+      if (dropSiteDescription) {
+        newSiteObj.dropSiteDescription = dropSiteDescription;
       }
       return this.firestore
         .collection("dropSite")
@@ -58,6 +65,46 @@ class FirebaseBackend extends BackendInterface {
         .set(newSiteObj)
         .then(function(docRef) {
           return "Drop site added";
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
+        });
+    } else {
+      console.log("Error, one or more required params missing.");
+      return Promise.resolve("Error, one or more required params missing.");
+    }
+  }
+
+  editDropSite(
+    location_id,
+    dropSiteName,
+    dropSiteDescription,
+    dropSiteAddress,
+    dropSiteZip
+  ) {
+    if (
+      location_id &&
+      (dropSiteName || dropSiteDescription || dropSiteAddress || dropSiteZip)
+    ) {
+      let newSiteObj = {};
+      if (dropSiteName) {
+        newSiteObj.dropSiteName = dropSiteName;
+      }
+      if (dropSiteDescription) {
+        newSiteObj.dropSiteDescription = dropSiteDescription;
+      }
+      if (dropSiteAddress) {
+        newSiteObj.dropSiteAddress = dropSiteAddress;
+      }
+      if (dropSiteZip) {
+        newSiteObj.dropSiteZip = dropSiteZip;
+      }
+      return this.firestore
+        .collection("dropSite")
+        .doc(location_id)
+        .set(newSiteObj, { merge: true })
+        .then(function() {
+          return "Drop site updated";
         })
         .catch(function(error) {
           console.error("Error writing document: ", error);

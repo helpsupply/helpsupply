@@ -11,7 +11,23 @@ class BackendInterface {
     throw "Abstract Interface";
   }
 
-  addDropSite(dropSiteName, location_id, dropAddress, arbitraryComments) {
+  addDropSite(
+    location_id,
+    dropSiteName,
+    dropSiteDescription,
+    dropSiteAddress,
+    dropSiteZip
+  ) {
+    // Abstract
+    throw "Abstract Interface";
+  }
+
+  editDropSite(
+    dropSiteName,
+    dropSiteDescription,
+    dropSiteAddress,
+    dropSiteZip
+  ) {
     // Abstract
     throw "Abstract Interface";
   }

@@ -2,10 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import EntryPortal from "./components/EntryPortal";
-import Hospital from "./components/Hospital";
+import DropSiteAdmin from "./components/DropSiteAdmin";
 import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
-
 
 class App extends React.Component {
   constructor(props) {
@@ -26,15 +25,14 @@ class App extends React.Component {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/hospital/:id">
-              {/* 
-              <Hospital
-                db={db}
+            <Route path="/dropsite/:id">
+              <DropSiteAdmin
+                backend={this.props.backend}
                 user={this.state.user}
                 userData={this.state.userData}
-              />*/}
+              />
             </Route>
-            <Route path="/hospital">
+            <Route path="/dropsite">
               <EntryPortal />
             </Route>
             <Route exact path="/">

@@ -35,7 +35,8 @@ h3 {
   }
   .panel {
     float: left;
-    width: 530px;
+    width: 540px;
+    margin-right: 50px !important;
   }
   .content {
     width: 1200px;
@@ -60,16 +61,19 @@ h3 {
   }
 
   .hospitalNeedsLeft {
-    width: 80%;
+    width: 70%;
     float: left;
   }
   .hospitalNeedNewSubmit {
-    margin-top: 30px;
+    margin-top: 5px;
+    float: right;
   }
 }
 @media only screen and (max-width: 1199px) {
   .panel {
-    width: 90%;
+    width: 100%;
+    margin: 20px;
+    margin-bottom: 50px !important;
   }
   .content {
     width: 100%;
@@ -85,6 +89,12 @@ h3 {
 
   .hospitalNeedCard {
     width: 100%;
+  }
+
+  .hospitalNeedNewSubmit {
+    margin-top: 20px;
+    width: 100%;
+    float: left;
   }
 }
 .panel,
@@ -229,8 +239,12 @@ input#linkTitle {
 }
 
 .hospitalNeedNewSubmit {
-  float: right;
   text-align: center;
+  border: solid 1px #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #333;
 }
 
 .hospitalNeedNewSubmit .helperText {
@@ -249,4 +263,68 @@ input#linkTitle {
 
 button:disabled {
   cursor: default;
+}
+
+.need-id {
+  font-size: 12px;
+  color: #888;
+  float: right;
+}
+
+.statusSelectGroup {
+  margin-left: 30px;
+  float: left;
+}
+
+.statusSelectGroup select {
+  font-size: 12px;
+}
+
+.formLabel {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.requestFormField {
+  margin-bottom: 30px;
+}
+
+.requestSelectType {
+  margin-bottom: 30px;
+}
+
+.formError {
+  padding-top: 10px;
+  font-size: 12px;
+  color: red;
+}
+
+.deleteRequest {
+  margin-left: 10px;
+  float: left;
+}
+
+.dropSiteIdText {
+  float: left;
+}
+
+.servingText {
+  margin-top: 8px;
+  margin-left: 10px;
+  font-size: 12px;
+  float: left;
+}
+
+.dropSiteTitle {
+  float: left;
+  width: 100%;
+}
+
+.dropSiteDescription {
+  float: left;
+}
+.dropSiteName {
+  float: left;
 }
