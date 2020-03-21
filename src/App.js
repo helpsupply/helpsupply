@@ -66,8 +66,6 @@ class App extends React.Component {
             <Route path="*">
               <NoMatch />
             </Route>
-
-            {/* <Route path="/domainValidation"></Route> */}
           </Switch>
         </div>
       </Router>
