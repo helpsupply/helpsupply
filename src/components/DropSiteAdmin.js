@@ -19,10 +19,12 @@ class DropSiteAdmin extends React.Component {
       dropSiteZip: "",
       dropSiteDescription: "",
       needs: [],
-      supply: []
+      supply: [],
+      verified: false
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
+    this.checkVerification = this.checkVerification.bind(this);
   }
 
   handleNewRequest(requestObj) {
@@ -51,6 +53,20 @@ class DropSiteAdmin extends React.Component {
     });
     this.setState({
       supply: newList
+    });
+  }
+
+  checkVerification() {
+    this.props.backend.isValidHealthcareWorker().then(verified => {
+      if (verified) {
+        console.log("verified");
+        this.setState({
+          verified: true
+        });
+      } else {
+        console.log("not verified, will try again in 30 seconds");
+        setTimeout(this.checkVerification, 10000);
+      }
     });
   }
 
@@ -87,6 +103,8 @@ class DropSiteAdmin extends React.Component {
         }
       );
     });
+
+    this.checkVerification();
   }
 
   componentDidUpdate() {}
@@ -104,6 +122,17 @@ class DropSiteAdmin extends React.Component {
 
     return (
       <div className="">
+        {this.state.verified === false && (
+          <div className="alert alert-warning alertFixed" role="alert">
+            <div className="spinner-border alertSpinner" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+            <div className="alertText">
+              Verifying your credentials (should be a few minutes). You'll be
+              able to edit/add once verified.
+            </div>
+          </div>
+        )}
         <nav className="navbar navbar-light bg-light">
           <span className="navbar-brand mb-0 h1" id="hospitalname">
             <div className="dropSiteIdText">
@@ -142,6 +171,7 @@ class DropSiteAdmin extends React.Component {
             </div>
             <span className="group" id="needslist">
               <DropSiteNeedGroupAdmin
+                verified={this.state.verified}
                 backend={this.props.backend}
                 needs={this.state.needs}
                 handleRemoveRequest={this.handleRemoveRequest}
@@ -177,14 +207,16 @@ class DropSiteAdmin extends React.Component {
                       <th>{supply.supplyComments}</th>
                       <th>{supply.supplyPhone}</th>
                       <th>
-                        <button
-                          className="btn btn-outline-danger"
-                          onClick={() => {
-                            this.handleDeleteSupply(supply.id);
-                          }}
-                        >
-                          Remove
-                        </button>
+                        {this.state.verified === true && (
+                          <button
+                            className="btn btn-outline-danger"
+                            onClick={() => {
+                              this.handleDeleteSupply(supply.id);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )}
                       </th>
                     </tr>
                   );
@@ -199,6 +231,7 @@ class DropSiteAdmin extends React.Component {
               </div>
             </div>
             <NewRequestForm
+              verified={this.state.verified}
               dropSiteId={this.props.match.params.id}
               backend={this.props.backend}
               handleAddRequest={this.handleAddRequest}
@@ -212,6 +245,7 @@ class DropSiteAdmin extends React.Component {
               </div>
             </div>
             <EditDropSiteForm
+              verified={this.state.verified}
               dropSiteId={this.props.match.params.id}
               dropSiteName={this.state.dropSiteName}
               dropSiteDescription={this.state.dropSiteDescription}

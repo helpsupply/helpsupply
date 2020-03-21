@@ -111,7 +111,8 @@ class NewRequestForm extends React.Component {
       this.state.requestTitle &&
       this.state.requestDescription &&
       this.state.requestQuantity &&
-      this.state.formActivated
+      this.state.formActivated &&
+      this.props.verified
     ) {
       newRequestSubmitButton = (
         <button

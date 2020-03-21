@@ -44,23 +44,28 @@ class DropSiteNeedAdmin extends React.Component {
             {this.props.need.requestQuantity}
           </h6>
           <p className="card-text">{this.props.need.requestDescription}</p>
-          <div className="deleteRequest">
-            <button
-              className="btn btn-outline-danger"
-              onClick={this.handleDelete}
-            >
-              Delete
-            </button>
-          </div>
-          <div className="statusSelectGroup">
-            <select
-              value={this.state.status}
-              onChange={this.handleStatusChange}
-            >
-              <option value="open">Open for contributions</option>
-              <option value="fulfilled">Fulfilled</option>
-            </select>
-          </div>
+          {this.props.verified && (
+            <div>
+              <div className="deleteRequest">
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={this.handleDelete}
+                >
+                  Delete
+                </button>
+              </div>
+              <div className="statusSelectGroup">
+                <select
+                  value={this.state.status}
+                  onChange={this.handleStatusChange}
+                >
+                  <option value="open">Open for contributions</option>
+                  <option value="fulfilled">Fulfilled</option>
+                </select>
+              </div>
+            </div>
+          )}
+
           {/*<div className="hospitalNeedsLink">
                   <a href="#" className="card-link ml-3">
                     What kinds are accepted?
