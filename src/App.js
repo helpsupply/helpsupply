@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import EntryPortal from "./components/EntryPortal";
-import Hospital from "./components/Hospital";
 import HCPSignup from "./components/HCPSignup";
 import HCPSignupFinish from "./components/HCPSignupFinish";
+import DropSiteAdmin from "./components/DropSiteAdmin";
+import DropSite from "./components/DropSite";
 import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
-import { FirebaseContext } from "./lib/";
 
 class App extends React.Component {
   constructor(props) {
@@ -36,12 +36,18 @@ class App extends React.Component {
               <HCPSignupFinish backend={this.props.backend} />
             </Route>
 
+            <Route path="/dropsite/:id/admin">
+              <DropSiteAdmin backend={this.props.backend} />
+            </Route>
             <Route path="/dropsite/:id">
-
+              <DropSite backend={this.props.backend} />
+            </Route>
+            <Route path="/dropsite">
+              <EntryPortal />
             </Route>
 
             <Route exact path="/">
-              <EntryPortal backend={this.props.backend} />
+              <EntryPortal firebase={this.props.backend} />}
             </Route>
 
             <Route path="*">

@@ -3,12 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import FirebaseBackend, { FirebaseContext } from "./lib";
+import FirebaseBackend from "./lib/firebaseBackend";
 
 ReactDOM.render(
-//  <FirebaseContext.Provider value={new FirebaseBackend()}>
-    <App backend={new FirebaseBackend} />,
-//  </FirebaseContext.Provider>,
+  <App backend={new FirebaseBackend()} />,
   document.getElementById("root")
 );
 

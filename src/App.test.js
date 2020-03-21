@@ -3,7 +3,8 @@ import { render } from '@testing-library/react';
 import App from './App';
 const fs = require('fs')
 
-import FirebaseBackend from "./lib";
+//import FirebaseBackend from "./lib";
+import FirebaseBackend from "./lib/firebaseBackend";
 import expectExport from 'expect';
 
 const firebase = require("@firebase/testing");
