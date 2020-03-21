@@ -15,8 +15,18 @@ class DropSite extends React.Component {
       dropSiteAddress: "",
       dropSiteZip: "",
       dropSiteDescription: "",
-      needs: []
+      needs: [],
+      supply: []
     };
+    this.handleNewSupply = this.handleNewSupply.bind(this);
+  }
+
+  handleNewSupply(supplyObj) {
+    let oldList = this.state.supply;
+    oldList.push(supplyObj);
+    this.setState({
+      supply: oldList
+    });
   }
 
   handleChange(event) {}
@@ -28,6 +38,16 @@ class DropSite extends React.Component {
       this.setState(
         {
           needs: data
+        },
+        () => {
+          // console.log(this.state);
+        }
+      );
+    });
+    this.props.backend.listSupply(this.props.match.params.id).then(data => {
+      this.setState(
+        {
+          supply: data
         },
         () => {
           // console.log(this.state);
@@ -103,6 +123,7 @@ class DropSite extends React.Component {
             </div>
             <span className="group" id="needslist">
               <DropSiteNeedGroup
+                handleNewSupply={this.handleNewSupply}
                 dropSiteAddress={this.state.dropSiteAddress}
                 dropSiteZip={this.state.dropSiteZip}
                 backend={this.props.backend}
@@ -110,6 +131,37 @@ class DropSite extends React.Component {
                 handleRemoveRequest={this.handleRemoveRequest}
               />
             </span>
+          </div>
+          <div className="panelFull">
+            <h4 className="mb-3 dropSiteName">Current contributions</h4>
+            <table className="table table-striped staffTable table-bordered">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Item</th>
+                  <th>Qty</th>
+                  <th>Delivery Time</th>
+                  <th>Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.supply.map((supply, i) => {
+                  return (
+                    <tr key={i}>
+                      <th>
+                        {supply.requestId
+                          .substr(supply.requestId.length - 5)
+                          .toUpperCase()}
+                      </th>
+                      <th>{supply.requestTitle}</th>
+                      <th>{supply.supplyQuantity}</th>
+                      <th>{supply.supplyDeliveryTime}</th>
+                      <th>{supply.supplyComments}</th>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

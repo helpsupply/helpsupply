@@ -18,7 +18,8 @@ class DropSiteAdmin extends React.Component {
       dropSiteAddress: "",
       dropSiteZip: "",
       dropSiteDescription: "",
-      needs: []
+      needs: [],
+      supply: []
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
@@ -44,6 +45,17 @@ class DropSiteAdmin extends React.Component {
     });
   }
 
+  handleDeleteSupply(supplyId) {
+    this.props.backend.deleteSupply(supplyId);
+    let oldList = this.state.supply;
+    let newList = oldList.filter(function(obj) {
+      return obj.id !== supplyId;
+    });
+    this.setState({
+      supply: newList
+    });
+  }
+
   componentDidMount() {
     this.props.backend.getRequests(this.props.match.params.id).then(data => {
       this.setState(
@@ -52,6 +64,16 @@ class DropSiteAdmin extends React.Component {
         },
         () => {
           console.log(this.state);
+        }
+      );
+    });
+    this.props.backend.listSupply(this.props.match.params.id).then(data => {
+      this.setState(
+        {
+          supply: data
+        },
+        () => {
+          // console.log(this.state);
         }
       );
     });
@@ -129,6 +151,50 @@ class DropSiteAdmin extends React.Component {
                 handleRemoveRequest={this.handleRemoveRequest}
               />
             </span>
+          </div>
+          <div className="panelFull">
+            <h4 className="mb-3 dropSiteName">Current contributions</h4>
+            <table className="table table-striped staffTable table-bordered">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Item</th>
+                  <th>Qty</th>
+                  <th>Delivery Time</th>
+                  <th>Comments</th>
+                  <th>Cell Phone</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.supply.map((supply, i) => {
+                  return (
+                    <tr key={i}>
+                      <th>
+                        {supply.requestId
+                          .substr(supply.requestId.length - 5)
+                          .toUpperCase()}
+                      </th>
+                      <th>{supply.requestTitle}</th>
+                      <th>{supply.supplyQuantity}</th>
+                      <th>{supply.supplyDeliveryTime}</th>
+                      <th>{supply.supplyComments}</th>
+                      <th>{supply.supplyPhone}</th>
+                      <th>
+                        <button
+                          className="btn btn-outline-danger"
+                          onClick={() => {
+                            this.handleDeleteSupply(supply.id);
+                          }}
+                        >
+                          Remove
+                        </button>
+                      </th>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
           <div className="panel">
             <div className="hospitalNeedsTopBar">

@@ -102,6 +102,16 @@ class NewSupplyForm extends React.Component {
       .then(data => {
         console.log(data);
       });
+    let newSupplyObject = {
+      dropSiteId: this.props.need.dropSiteId,
+      requestId: this.props.need.id,
+      requestTitle: this.props.need.requestTitle,
+      supplyPhone: this.state.supplyPhone,
+      supplyQuantity: this.state.supplyQuantity,
+      supplyDeliveryTime: this.state.supplyDeliveryTime,
+      supplyComments: this.state.supplyComments
+    };
+    this.props.handleNewSupply(newSupplyObject);
   }
 
   render() {

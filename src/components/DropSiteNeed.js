@@ -73,6 +73,7 @@ class DropSiteNeed extends React.Component {
                 dropSiteZip={this.props.dropSiteZip}
                 need={this.props.need}
                 handleSubmitSuccess={this.handleSubmitSuccess}
+                handleNewSupply={this.props.handleNewSupply}
               />
             </Modal.Body>
           </Modal>

@@ -44,9 +44,6 @@ class DropSiteNeedAdmin extends React.Component {
             {this.props.need.requestQuantity}
           </h6>
           <p className="card-text">{this.props.need.requestDescription}</p>
-          <button className="btn btn-primary hospitalNeedsBtn">
-            See Contributions
-          </button>
           <div className="deleteRequest">
             <button
               className="btn btn-outline-danger"

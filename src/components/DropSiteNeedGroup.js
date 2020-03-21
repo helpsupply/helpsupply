@@ -19,6 +19,7 @@ class DropSiteNeedGroup extends React.Component {
               backend={this.props.backend}
               need={need}
               handleRemoveRequest={this.props.handleRemoveRequest}
+              handleNewSupply={this.props.handleNewSupply}
             />
           );
         })}
