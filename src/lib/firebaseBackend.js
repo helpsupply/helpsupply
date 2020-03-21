@@ -476,6 +476,14 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
+  async setPendingDomain(domain) {
+    try {
+      await this.firestore.collection('domain').doc(domain).set({'valid': "pending"});
+    } catch(e) {
+      throw "Adding domains is not allowed"
+    }
+  }
+
   // HEALTH CARE PROFESSIONALS AND ADMINS
 
   addHealthcareProfessional(userId) {
