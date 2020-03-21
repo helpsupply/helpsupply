@@ -90,7 +90,7 @@ class DropSite extends React.Component {
   componentDidUpdate() {}
 
   render() {
-    console.log(this.state.cart);
+    // this code is for the future when some dropsites may not map to an exisitng hospital in the hospital_index
     let hospital = hospital_index.index.id_index[this.props.match.params.id];
     let hospitalText = "";
     if (typeof hospital === "undefined") {

@@ -2,7 +2,7 @@ import React from "react";
 import * as tools from "../functions";
 import * as hospital_index from "../data/hospital_index";
 import HospitalResult from "./HospitalResult";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Form } from "react-bootstrap";
 
 class EntryPortal extends React.Component {
@@ -21,14 +21,8 @@ class EntryPortal extends React.Component {
     this.handleRedirect = this.handleRedirect.bind(this);
   }
 
-  // for user input
+  // NEED SUPPLIES SEARCH BOX HANDLER
 
-  handleChangeDonate(event) {
-    let url = "/dropsite/" + event.target.value;
-    this.props.history.push(url);
-  }
-
-  // for user input
   handleChange(event) {
     this.setState({ userInput: event.target.value });
     if (event.target.value.length > 1) {
@@ -42,7 +36,6 @@ class EntryPortal extends React.Component {
     }
   }
 
-  // for mouse overs and keyboard
   handleKeyPress(event) {
     if (event.key === "ArrowDown") {
       if (this.state.results.length > 0) {
@@ -80,7 +73,6 @@ class EntryPortal extends React.Component {
     this.setState({ selectedResult: id });
   }
 
-  // for going to hospital page
   handleSubmit(event) {
     // this prevents the page from reloading when form is submitted
     event.preventDefault();
@@ -88,6 +80,7 @@ class EntryPortal extends React.Component {
       this.handleRedirect();
     }
   }
+
   handleRedirect() {
     if (this.state.selectedResult !== "") {
       let url = "/signup/" + this.state.selectedResult;
@@ -101,6 +94,12 @@ class EntryPortal extends React.Component {
     this.props.backend.listDropSites().then(data => {
       this.setState({ facilities: data });
     });
+  }
+
+  // DONATE SUPPLIES DROPDOWN HANDLER
+  handleChangeDonate(event) {
+    let url = "/dropsite/" + event.target.value;
+    this.props.history.push(url);
   }
 
   render() {

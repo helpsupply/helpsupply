@@ -54,7 +54,7 @@ class DropSiteNeedAdmin extends React.Component {
                   Delete
                 </button>
               </div>
-              <div className="statusSelectGroup">
+              {/*<div className="statusSelectGroup">
                 <select
                   value={this.state.status}
                   onChange={this.handleStatusChange}
@@ -62,7 +62,7 @@ class DropSiteNeedAdmin extends React.Component {
                   <option value="open">Open for contributions</option>
                   <option value="fulfilled">Fulfilled</option>
                 </select>
-              </div>
+          </div>*/}
             </div>
           )}
 

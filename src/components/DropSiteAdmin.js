@@ -1,13 +1,9 @@
 import React from "react";
 import * as hospital_index from "../data/hospital_index";
-import * as needTypes from "../data/needTypes";
 import { withRouter } from "react-router-dom";
-import LinksResult from "./LinksResult";
 import DropSiteNeedGroupAdmin from "./DropSiteNeedGroupAdmin";
 import NewRequestForm from "./NewRequestForm";
 import EditDropSiteForm from "./EditDropSiteForm";
-import StaffNeedTable from "./StaffNeedTable";
-import Axios from "axios";
 
 class DropSiteAdmin extends React.Component {
   constructor(props) {
@@ -98,9 +94,7 @@ class DropSiteAdmin extends React.Component {
           dropSiteZip: data.dropSiteZip,
           dropSiteDescription: data.dropSiteDescription
         },
-        () => {
-          console.log(this.state);
-        }
+        () => {}
       );
     });
 
@@ -110,6 +104,7 @@ class DropSiteAdmin extends React.Component {
   componentDidUpdate() {}
 
   render() {
+    // this code is for the future when some dropsites may not map to an exisitng hospital in the hospital_index
     let hospital = hospital_index.index.id_index[this.props.match.params.id];
     let hospitalText = "";
     if (typeof hospital === "undefined") {

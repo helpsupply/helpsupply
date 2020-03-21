@@ -1,6 +1,4 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
-import NewSupplyForm from "./NewSupplyForm";
 
 class DropSiteNeed extends React.Component {
   constructor(props) {
