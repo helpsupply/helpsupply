@@ -1,5 +1,4 @@
 const firebase = require("@firebase/testing");
-
 const projectId = 'test-project';
 
 beforeEach(async () => {
@@ -82,5 +81,39 @@ describe("hospital.community", () => {
 		// Assert that we can successfully set the request as valid
 		request = db2.collection("request").doc("1");
 		await firebase.assertSucceeds(request.set({ valid: 'true' }))
+	});
+
+	it("Test that a user can index their (potentially verified) domain", async () => {
+		const rules = `
+		service cloud.firestore {
+			match /databases/{database}/documents {
+				match /domain/{url} {
+					allow read: if true;
+					allow write: if true; // We'll constrain this to site admins in real life
+				}
+				match /dropsite/{site} {
+					function isVerified() {
+						return request.auth != null && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
+					}
+					allow write: if isVerified();
+					allow read: if true;
+				}
+			}
+		}
+		`
+		await firebase.loadFirestoreRules({projectId, rules});
+
+		const auth = {'uid': '1', 'email': 'bob@kp.org'}
+		const db = firebase.initializeTestApp({projectId, auth}).firestore();
+
+		// Next verify that unless the domain is approved they can't do anything
+		await firebase.assertFails(db.collection('dropsite').doc('1').set({ address: '1 Market St' }))
+		
+		// Validate the domain
+		let request = db.collection("domain").doc("kp.org");
+		await firebase.assertSucceeds(request.set({ 'status': 'valid' }))
+
+		// Next verify they can edit
+		await firebase.assertFails(db.collection('dropsite').doc('1').set({ address: '1 Market St' }))
 	});
 });

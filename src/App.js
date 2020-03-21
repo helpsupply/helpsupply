@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import EntryPortal from "./components/EntryPortal";
 import Hospital from "./components/Hospital";
+import HCPSignup from "./components/HCPSignup";
+import HCPSignupFinish from "./components/HCPSignupFinish";
 import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
 import { FirebaseContext } from "./lib/";
@@ -26,25 +28,31 @@ class App extends React.Component {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/hospital/:id">
-              {/* 
-              <Hospital
-                db={db}
-                user={this.state.user}
-                userData={this.state.userData}
-              />*/}
+
+            <Route path="/signup">
+              <HCPSignup backend={this.props.backend} />
             </Route>
-            <Route path="/hospital">
-              <EntryPortal />
+            <Route path="/signupFinish">
+              <HCPSignupFinish backend={this.props.backend} />
             </Route>
+
+            <Route path="/dropsite/:id">
+
+            </Route>
+
             <Route exact path="/">
-              <FirebaseContext.Consumer>
-                {firebase => <EntryPortal firebase={firebase} />}
-              </FirebaseContext.Consumer>
+              <EntryPortal backend={this.props.backend} />
             </Route>
+
             <Route path="*">
               <NoMatch />
             </Route>
+
+
+            <Route path="/domainValidation">
+
+            </Route>
+
           </Switch>
         </div>
       </Router>

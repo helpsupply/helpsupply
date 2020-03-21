@@ -6,9 +6,9 @@ import * as serviceWorker from "./serviceWorker";
 import FirebaseBackend, { FirebaseContext } from "./lib";
 
 ReactDOM.render(
-  <FirebaseContext.Provider value={new FirebaseBackend()}>
-    <App />
-  </FirebaseContext.Provider>,
+//  <FirebaseContext.Provider value={new FirebaseBackend()}>
+    <App backend={new FirebaseBackend} />,
+//  </FirebaseContext.Provider>,
   document.getElementById("root")
 );
 

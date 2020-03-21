@@ -87,7 +87,7 @@ class EntryPortal extends React.Component {
   componentDidMount() {}
 
   render() {
-    this.props.firebase.listDropSites();
+    this.props.backend.listDropSites();
 
     return (
       <div className="entryportal container-sm">

@@ -45,19 +45,30 @@ class BackendInterface {
     throw "Abstract Interface";
   }
 
-  // VALIDATED DOMAINS
-
-  addValidatedDomain(domain) {
-    // Abstract
-    throw "Abstract Interface";
+  isLoggedIn() {
+    throw "Abstract Interface"
   }
 
-  removeValidatedDomain(domain) {
+  async isValidHealthcareWorker() {
+    throw "Abstract Interface"
+  }
+
+  // VALIDATED DOMAINS
+
+  getPendingDomains() {
+    throw "Abstract Interface"
+  }
+
+  setDomainIsValid(domain, isValid) {
     // Abstract
     throw "Abstract Interface";
   }
 
   // HEALTH CARE PROFESSIONALS AND ADMINS
+
+  signupWithEmail(email) {
+    throw "Abstract Interface";
+  }
 
   addHealthcareProfessional(userId) {
     // Abstract
