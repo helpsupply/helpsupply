@@ -1,13 +1,29 @@
 import React from "react";
+import { Button, Modal } from "react-bootstrap";
+import NewSupplyForm from "./NewSupplyForm";
 
 class DropSiteNeed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: this.props.need.status
+      status: this.props.need.status,
+      modal: false
     };
     this.handleStatusChange = this.handleStatusChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleShow() {
+    this.setState({
+      modal: true
+    });
+  }
+
+  handleClose() {
+    this.setState({
+      modal: false
+    });
   }
 
   handleStatusChange(event) {
@@ -20,11 +36,6 @@ class DropSiteNeed extends React.Component {
       null,
       event.target.value
     );
-  }
-
-  handleDelete() {
-    this.props.backend.deleteRequest(this.props.need.id);
-    this.props.handleRemoveRequest(this.props.need.id);
   }
 
   render() {
@@ -44,14 +55,32 @@ class DropSiteNeed extends React.Component {
             {this.props.need.requestQuantity}
           </h6>
           <p className="card-text">{this.props.need.requestDescription}</p>
-          <button className="btn btn-primary hospitalNeedsBtn">
+          <button
+            className="btn btn-primary hospitalNeedsBtn"
+            onClick={this.handleShow}
+          >
             Contribute
           </button>
-          <div className="hospitalNeedsLink">
+
+          <Modal show={this.state.modal} onHide={this.handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>{this.props.need.requestTitle}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <NewSupplyForm
+                backend={this.props.backend}
+                dropSiteAddress={this.props.dropSiteAddress}
+                dropSiteZip={this.props.dropSiteZip}
+                need={this.props.need}
+                handleSubmitSuccess={this.handleSubmitSuccess}
+              />
+            </Modal.Body>
+          </Modal>
+          {/*   <div className="hospitalNeedsLink">
             <a href="#" className="card-link ml-3">
               What kinds are accepted?
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     );

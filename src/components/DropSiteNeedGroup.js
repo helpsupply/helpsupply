@@ -14,6 +14,8 @@ class DropSiteNeedGroup extends React.Component {
           return (
             <DropSiteNeed
               key={i}
+              dropSiteAddress={this.props.dropSiteAddress}
+              dropSiteZip={this.props.dropSiteZip}
               backend={this.props.backend}
               need={need}
               handleRemoveRequest={this.props.handleRemoveRequest}

@@ -17,40 +17,11 @@ class DropSite extends React.Component {
       dropSiteDescription: "",
       needs: []
     };
-    this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
-    this.handleNewRequest = this.handleNewRequest.bind(this);
-    this.handleEditDropSite = this.handleEditDropSite.bind(this);
   }
 
   handleChange(event) {}
 
   handleSubmit(event) {}
-
-  handleNewRequest(requestObj) {
-    let oldList = this.state.needs;
-    console.log(oldList);
-    oldList.push(requestObj);
-    console.log(oldList);
-    this.setState({
-      needs: oldList
-    });
-  }
-
-  handleEditDropSite() {}
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("component updated");
-  }
-
-  handleRemoveRequest(requestId) {
-    let oldList = this.state.needs;
-    let newList = oldList.filter(function(obj) {
-      return obj.id !== requestId;
-    });
-    this.setState({
-      needs: newList
-    });
-  }
 
   componentDidMount() {
     this.props.backend.getRequests(this.props.match.params.id).then(data => {
@@ -59,7 +30,7 @@ class DropSite extends React.Component {
           needs: data
         },
         () => {
-          console.log(this.state);
+          // console.log(this.state);
         }
       );
     });
@@ -73,7 +44,7 @@ class DropSite extends React.Component {
           dropSiteDescription: data.dropSiteDescription
         },
         () => {
-          console.log(this.state);
+          //console.log(this.state);
         }
       );
     });
@@ -132,6 +103,8 @@ class DropSite extends React.Component {
             </div>
             <span className="group" id="needslist">
               <DropSiteNeedGroup
+                dropSiteAddress={this.state.dropSiteAddress}
+                dropSiteZip={this.state.dropSiteZip}
                 backend={this.props.backend}
                 needs={this.state.needs}
                 handleRemoveRequest={this.handleRemoveRequest}
