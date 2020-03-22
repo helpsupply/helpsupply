@@ -63,13 +63,13 @@ class EditDropSiteForm extends React.Component {
           className="btn btn-primary linkSubmitBtn"
           onClick={this.handleEditDropSite}
         >
-          Update Dropsite
+          Update Drop-off Location
         </button>
       );
     } else {
       newRequestSubmitButton = (
         <button disabled className="btn btn-primary linkSubmitBtn">
-          Update Dropsite
+          Update Drop-off Location
         </button>
       );
     }
@@ -77,7 +77,7 @@ class EditDropSiteForm extends React.Component {
     return (
       <div className="submitRequestFormContainer">
         <div className="requestFormField">
-          <div className="formLabel">Dropsite Name</div>
+          <div className="formLabel">Drop-off Location Name</div>
           <input
             className="form-control newRequestFormField"
             id="dropSiteName"
@@ -88,7 +88,7 @@ class EditDropSiteForm extends React.Component {
           <div className="formError">{this.state.dropSiteNameError}</div>
         </div>
         <div className="requestFormField">
-          <div className="formLabel">Dropsite Description</div>
+          <div className="formLabel">Drop-off Location Description</div>
           <input
             className="form-control newRequestFormField"
             id="dropSiteDescription"

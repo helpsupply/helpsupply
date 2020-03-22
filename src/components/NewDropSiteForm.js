@@ -165,13 +165,13 @@ class NewDropSiteForm extends React.Component {
           className="btn btn-primary linkSubmitBtn"
           onClick={this.handleEditDropSite}
         >
-          Add Dropsite
+          Add Drop-off Location
         </button>
       );
     } else {
       newRequestSubmitButton = (
         <button disabled className="btn btn-primary linkSubmitBtn">
-          Add Dropsite
+          Add Drop-off Location
         </button>
       );
     }
@@ -182,7 +182,7 @@ class NewDropSiteForm extends React.Component {
           {this.state.existingLocation === false && (
             <div className="requestFormField">
               <div className="formLabel">
-                What healthcare facility does this site serve?
+                What hospital/clinic does this drop-off serve?
               </div>
               <input
                 className="form-control newRequestFormField"
@@ -205,7 +205,7 @@ class NewDropSiteForm extends React.Component {
           )}
 
           <div className="requestFormField">
-            <div className="formLabel">Dropsite Name</div>
+            <div className="formLabel">Drop-off Location Name</div>
             <input
               className="form-control newRequestFormField"
               id="dropSiteName"
@@ -217,7 +217,7 @@ class NewDropSiteForm extends React.Component {
             <div className="formError">{this.state.dropSiteNameError}</div>
           </div>
           <div className="requestFormField">
-            <div className="formLabel">Dropsite Description</div>
+            <div className="formLabel">Drop-off Location Description</div>
             <textarea
               className="form-control newRequestFormField"
               id="dropSiteDescription"
