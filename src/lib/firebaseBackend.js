@@ -341,8 +341,12 @@ class FirebaseBackend extends BackendInterface {
     supplyComments
   ) {
     if (
-      (dropSiteId && requestId && requestTitle,
-      supplyPhone && supplyQuantity && supplyDeliveryTime && supplyComments)
+      dropSiteId &&
+      requestId &&
+      requestTitle &&
+      supplyQuantity &&
+      supplyDeliveryTime &&
+      supplyComments
     ) {
       return this.firestore
         .collection("supply")
@@ -391,19 +395,21 @@ class FirebaseBackend extends BackendInterface {
   async isValidHealthcareWorker() {
     if (!this.loggedIn) return false;
 
-    let email= this.firebase.auth().currentUser.email;
-    var existing = (await this.firestore
-      .collection("domain")
-      .doc(email.split("@")[1])
-      .get()).data();
+    let email = this.firebase.auth().currentUser.email;
+    var existing = (
+      await this.firestore
+        .collection("domain")
+        .doc(email.split("@")[1])
+        .get()
+    ).data();
     if (!existing) {
-      console.log("New domain, setting pending!", email)
+      console.log("New domain, setting pending!", email);
       await this.firestore
         .collection("domain")
         .doc(email.split("@")[1])
         .set({ valid: "pending" });
     } else {
-      console.log("pending entry found matching", email)
+      console.log("pending entry found matching", email);
     }
 
     var domain = this.firebase.auth().currentUser.email.split("@")[1];
@@ -417,10 +423,15 @@ class FirebaseBackend extends BackendInterface {
   }
 
   async dropSiteExists(dropsite) {
-    if ((await this.firestore
-      .collection("dropSite")
-      .doc(dropsite)
-      .get()).data()) return true;
+    if (
+      (
+        await this.firestore
+          .collection("dropSite")
+          .doc(dropsite)
+          .get()
+      ).data()
+    )
+      return true;
     return false;
   }
 
