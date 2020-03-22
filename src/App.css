@@ -44,6 +44,43 @@ body {
   margin-bottom: 30px;
 }
 
+.verifyContainer {
+  width: 400px;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  padding: 40px;
+  margin-top: 20px;
+}
+
+.verifyContainer h2 {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.verifyContainer p {
+  font-size: 16px;
+}
+
+.verifyContainer p.small {
+  font-size: 12px;
+}
+
+.verificationSent {
+  background-color: #007e33;
+  padding: 15px 20px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.verificationSent .big {
+  font-size: 13px;
+}
+
+.verificationSent .small {
+  font-size: 12px;
+}
+
 h1,
 h2,
 h3 {

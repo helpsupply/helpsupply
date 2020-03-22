@@ -8,7 +8,7 @@ class HCPSignup extends React.Component {
       email: "",
       sent: false,
       error: "",
-      dropsite: this.props.match.params.dropsite,
+      dropsite: this.props.match.params.dropsite
     };
     this.submitEmail = this.submitEmail.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -31,33 +31,43 @@ class HCPSignup extends React.Component {
 
   render() {
     return (
-      <div>
-          <div className="entryportal container-sm">
-              <h1>Let's get started</h1>
-              <p>In order to ensure the data on Help Supply is trustworthy, we need to first verify that your healthcare affiliation.</p>
-              <p>Please enter the email you use at work (i.e. kate@kp.org) and we'll send you an email to verify you own it:</p>
-            {this.state.sent ? (
-              <div className="outlinedbox">
-                <span>Thanks! Check your email for a login link.<br />(you can close this tab/window and continue from there)</span>
-              </div>
-            ) : (
-              <form className="linkSubmitGroup" onSubmit={this.submitEmail}>
-                <input
-                  className="form-control"
-                  placeholder="Your institional email, i.e. john@kp.org"
-                  value={this.state.email}
-                  onChange={this.handleEmailChange}
-                />
-                <br />
-                <button
-                  className="btn btn-primary linkSubmitBtn"
-                  onClick={this.submitEmail}
-                >
-                  Send Verification 
-                </button>
-              </form>
-            )}
-          </div>
+      <div className="homeBox">
+        <div className="verifyContainer container-sm">
+          <h2>Verify with work email</h2>
+          <p>
+            To keep requests effective Help.Supply, we need to first verify that
+            your healthcare affiliation.
+          </p>
+          <p className="small">
+            Please enter the email you use at work
+            <br />
+            (i.e. kate@kp.org)
+          </p>
+          {this.state.sent ? (
+            <div className="verificationSent">
+              <span className="big">
+                Thanks! Check your email for a login link.
+              </span>
+              <br />
+              <span className="small">(You can close this window now.)</span>
+            </div>
+          ) : (
+            <form className="linkSubmitGroup" onSubmit={this.submitEmail}>
+              <input
+                className="form-control"
+                placeholder="Your institional email, i.e. john@kp.org"
+                value={this.state.email}
+                onChange={this.handleEmailChange}
+              />
+              <button
+                className="btn btn-primary linkSubmitBtn"
+                onClick={this.submitEmail}
+              >
+                Send Verification
+              </button>
+            </form>
+          )}
+        </div>
       </div>
     );
   }
