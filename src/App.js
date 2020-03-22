@@ -55,7 +55,7 @@ class App extends React.Component {
             </Route>
 
             <Route exact path="/">
-              <EntryPortal backend={this.props.backend} />}
+              <EntryPortal backend={this.props.backend} />
             </Route>
 
             <Route path="*">
