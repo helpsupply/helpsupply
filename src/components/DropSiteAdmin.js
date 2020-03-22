@@ -146,7 +146,7 @@ class DropSiteAdmin extends React.Component {
         <nav className="navbar navbar-light bg-light">
           <span className="navbar-brand mb-0 h1" id="hospitalname">
             <div className="dropSiteIdText">
-              <b>Dropsite: {this.state.dropSiteId}</b>
+              <b>Drop-off Location: {this.state.dropSiteId}</b>
             </div>{" "}
             {hospitalText}
           </span>
@@ -163,7 +163,7 @@ class DropSiteAdmin extends React.Component {
                     {this.state.dropSiteName}
                   </h3>
                   <span className="servingText">
-                    Dropsite: {this.state.dropSiteId}
+                    Drop-off Location: {this.state.dropSiteId}
                   </span>
                 </div>
                 <div className="dropSiteDescription">
@@ -205,7 +205,7 @@ class DropSiteAdmin extends React.Component {
           <div className="panel">
             <div className="hospitalNeedsTopBarAdmin">
               <div className="hospitalNeedsLeft">
-                <h3 className="mb-3">Edit Dropsite Info</h3>
+                <h3 className="mb-3">Edit Location Info</h3>
               </div>
             </div>
             <EditDropSiteForm

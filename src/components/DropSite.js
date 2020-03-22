@@ -112,7 +112,7 @@ class DropSite extends React.Component {
         <nav className="navbar navbar-light bg-light">
           <span className="navbar-brand mb-0 h1" id="hospitalname">
             <div className="dropSiteIdText">
-              <b>Dropsite: {this.state.dropSiteId}</b>
+              <b>Drop-Off Location: {this.state.dropSiteId}</b>
             </div>{" "}
             {hospitalText}
           </span>
@@ -126,7 +126,7 @@ class DropSite extends React.Component {
               to={"/signup/" + this.state.dropSiteId}
               className="manageDropSiteLink"
             >
-              Manage This Dropsite
+              Manage This Drop-off Location
             </Link>
             <div className="hospitalNeedsTopBar">
               <div className="hospitalNeedsLeft">
