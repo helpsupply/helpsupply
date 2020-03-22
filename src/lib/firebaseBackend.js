@@ -466,6 +466,10 @@ class FirebaseBackend extends BackendInterface {
       snapshot.docChanges().forEach(change => {
         if (change.type === "added") {
           newDomains.push(change.doc.id)
+          // Gross layer violation here
+          if (Notification.permission === 'granted') {
+            var notification = new Notification("New domain added: " + change.doc.id);
+          }
         }
 
         if (change.type === "removed") {
@@ -481,7 +485,7 @@ class FirebaseBackend extends BackendInterface {
       await this.firestore
         .collection("domain")
         .doc(domain)
-        .set({ status: isValid ? "approved" : "denied" });
+        .set({ valid: isValid ? "true" : "false" });
     } catch (e) {
       throw "Validating domains is not allowed";
     }

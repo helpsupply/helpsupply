@@ -6,13 +6,15 @@ class PendingDomains extends React.Component {
     super(props);
     this.state = {
       newDomain: '',
-      domains: []
+      domains: [],
+      notificationsEnabled: false,
     };
     this.addDomain = this.addDomain.bind(this);
     this.handleApproveDomain = this.handleApproveDomain.bind(this);
     this.handleDenyDomain = this.handleDenyDomain.bind(this);
     this.handleNewDomainChange = this.handleNewDomainChange.bind(this);
     this.getDomainsCallback = this.getDomainsCallback.bind(this);
+    this.enableNotifications = this.enableNotifications.bind(this);
   }
 
   handleApproveDomain(domain) {
@@ -32,6 +34,26 @@ class PendingDomains extends React.Component {
     this.setState({ newDomain: event.target.value });
   }
 
+  enableNotifications(event) {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+  
+    else if (Notification.permission === "granted") {
+      var notification = new Notification("Hi! We'll notify when new domains are added!");
+      this.setState({notificationsEnabled: true});
+    }
+  
+    else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(function (permission) {
+        if (permission === "granted") {
+          var notification = new Notification("Hi! We'll notify when new domains are added!");
+          this.setState({notificationsEnabled: true});
+        }
+      });
+    }
+  }
+
   getDomainsCallback(data) {
     console.log(data)
     this.setState(
@@ -44,11 +66,10 @@ class PendingDomains extends React.Component {
   componentDidUpdate() {}
 
   componentDidMount() {
-    this.props.backend.getDomains(false, this.getDomainsCallback)
+    this.props.backend.getDomains(true, this.getDomainsCallback)
   }
 
   render() {
-    console.log(this.state.domains)
     return (
       <div>
         <div className="panelFull">
@@ -106,8 +127,16 @@ class PendingDomains extends React.Component {
                 className="btn btn-primary linkSubmitBtn"
                 onClick={this.addDomain}
               >
-                Submit
+               Add 
+              </button>&nbsp;
+              {!this.state.notificationsEnabled ?
+              <button
+                className="btn btn-primary linkSubmitBtn"
+                onClick={this.enableNotifications}
+              >
+               Enable Notifications 
               </button>
+              :''}
             </div>
           </form>
         </div>
