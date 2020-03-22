@@ -35,8 +35,8 @@ class HCPSignup extends React.Component {
         <div className="verifyContainer container-sm">
           <h2>Verify with work email</h2>
           <p>
-            To keep requests effective Help.Supply, we need to first verify that
-            your healthcare affiliation.
+            To keep requests effective, we need to verify your healthcare
+            affiliation.
           </p>
           <p className="small">
             Please enter the email you use at work
