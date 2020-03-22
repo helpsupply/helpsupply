@@ -112,107 +112,134 @@ class NewSupplyForm extends React.Component {
       this.state.formActivated
     ) {
       newSupplySubmitButton = (
-        <button
-          className="btn btn-primary linkSubmitBtn"
-          onClick={this.handleSupplySubmit}
-        >
-          Contribute
-        </button>
+        <div className="finalizeDonationBtn">
+          <button
+            className="btn btn-success linkSubmitBtn"
+            onClick={this.handleSupplySubmit}
+          >
+            Submit
+          </button>
+        </div>
       );
     } else {
       newSupplySubmitButton = (
-        <button disabled className="btn btn-primary linkSubmitBtn">
-          Contribute
-        </button>
+        <div className="finalizeDonationBtn">
+          <button disabled className="btn btn-success completeSubmission">
+            Submit
+          </button>
+        </div>
       );
     }
 
     const cart = (
-      <div className="submitSupplyFormContainer">
-        <div className="cart">
-          <table className="table table-striped staffTable table-bordered">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Qty</th>
-                <th>Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.cart.map((supply, i) => {
-                return (
-                  <tr key={i}>
-                    <th>{supply.requestTitle}</th>
-                    <th>{supply.requestQuantity}</th>
-                    <th>
-                      <button
-                        className="btn btn-outline-danger"
-                        onClick={() => {
-                          this.props.handleRemoveFromCart(i);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </th>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+      <div>
+        <div className="dropSiteTitle">
+          <h4 className="mb-3 dropSiteName">Review your list of donations:</h4>
         </div>
-        <button
-          className="btn btn-primary linkSubmitBtn"
-          onClick={this.handleNextStep}
-        >
-          Next
-        </button>
+        <div className="submitSupplyFormContainer">
+          <div className="cart">
+            <table className="table table-striped staffTable table-bordered">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Qty</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.props.cart.map((supply, i) => {
+                  return (
+                    <tr key={i}>
+                      <th>{supply.requestTitle}</th>
+                      <th>{supply.requestQuantity}</th>
+                      <th>
+                        <button
+                          className="btn btn-outline-danger"
+                          onClick={() => {
+                            this.props.handleRemoveFromCart(i);
+                          }}
+                        >
+                          Remove
+                        </button>
+                      </th>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="finalizeDonationContainer">
+            <div className="finalizeDonationLabel">
+              When you've added all the items you can supply, click finalize
+              below:
+            </div>
+            <div className="finalizeDonationBtn">
+              <button
+                className="btn btn-success linkSubmitBtn"
+                onClick={this.handleNextStep}
+              >
+                Finalize my donation
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
 
     const submitForm = (
-      <div className="submitSupplyFormContainer">
-        <div className="supplyFormField">
-          <div className="formLabel">Your cell number / email</div>
-          <input
-            className="form-control newSupplyFormField"
-            id="supplyPhone"
-            placeholder="i.e. 555-555-5555 / juan@gmail.com"
-            value={this.state.supplyPhone}
-            onChange={this.handleChange("supplyPhone")}
-            onBlur={this.handleValidate("supplyPhone")}
-          />
-          <div className="formError">{this.state.supplyPhoneError}</div>
+      <div>
+        <div className="dropSiteTitle">
+          <h4 className="mb-3 dropSiteName">Lastly, add some info:</h4>
         </div>
-        <div className="supplyFormField">
-          <div className="formLabel">When can you deliver it?</div>
-          <input
-            className="form-control newSupplyFormField"
-            id="supplyDeliveryTime"
-            placeholder="i.e. April 2, 9am-10am"
-            value={this.state.supplyDeliveryTime}
-            onChange={this.handleChange("supplyDeliveryTime")}
-            onBlur={this.handleValidate("supplyDeliveryTime")}
-          />
-          <div className="formError">{this.state.supplyDeliveryTimeError}</div>
+        <div className="submitSupplyFormContainer">
+          <div className="supplyFormField">
+            <div className="formLabel">Your email</div>
+            <input
+              className="form-control newSupplyFormField"
+              id="supplyPhone"
+              placeholder="i.e. juan@gmail.com"
+              value={this.state.supplyPhone}
+              onChange={this.handleChange("supplyPhone")}
+              onBlur={this.handleValidate("supplyPhone")}
+            />
+            <div className="formError">{this.state.supplyPhoneError}</div>
+          </div>
+          <div className="supplyFormField">
+            <div className="formLabel">When can you deliver it?</div>
+            <input
+              className="form-control newSupplyFormField"
+              id="supplyDeliveryTime"
+              placeholder="i.e. April 2, 9am-10am"
+              value={this.state.supplyDeliveryTime}
+              onChange={this.handleChange("supplyDeliveryTime")}
+              onBlur={this.handleValidate("supplyDeliveryTime")}
+            />
+            <div className="formError">
+              {this.state.supplyDeliveryTimeError}
+            </div>
+          </div>
+          <div className="supplyFormField">
+            <div className="formLabel">Details about what you're providing</div>
+            <textarea
+              className="form-control newSupplyFormField"
+              id="supplyComments"
+              placeholder="i.e. I work in construction and these are unused and open masks."
+              value={this.state.supplyComments}
+              onChange={this.handleChange("supplyComments")}
+              onBlur={this.handleValidate("supplyComments")}
+            />
+            <div className="formError">{this.state.supplyCommentsError}</div>
+          </div>
+          {newSupplySubmitButton}
         </div>
-        <div className="supplyFormField">
-          <div className="formLabel">Details about what you're providing</div>
-          <textarea
-            className="form-control newSupplyFormField"
-            id="supplyComments"
-            placeholder="i.e. I work in construction and these are unused and open masks."
-            value={this.state.supplyComments}
-            onChange={this.handleChange("supplyComments")}
-            onBlur={this.handleValidate("supplyComments")}
-          />
-          <div className="formError">{this.state.supplyCommentsError}</div>
-        </div>
-        {newSupplySubmitButton}
       </div>
     );
 
     const successMessage = (
       <div>
+        <div className="dropSiteInstructionHeader">
+          Thank you. {this.props.dropSiteName} is waiting for your delivery.
+        </div>
         <div className="supplyInstructionsAddressForm">
           <div className="helperText">Deliver supplies here:</div>
           <div className="addressText">

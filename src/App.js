@@ -30,7 +30,7 @@ class App extends React.Component {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/dropsite/new/admin">
+            <Route path="/dropsite/new/admin/:dropsite?">
               <NewDropSite backend={this.props.backend} />
             </Route>
             <Route path="/signup/:dropsite?">

@@ -14,9 +14,10 @@ class DropSiteAdmin extends React.Component {
       dropSiteAddress: "",
       dropSiteZip: "",
       dropSiteDescription: "",
+      dropSiteHospital: "",
       needs: [],
       supply: [],
-      verified: true,
+      verified: true
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
@@ -29,6 +30,7 @@ class DropSiteAdmin extends React.Component {
     this.setState({
       needs: oldList
     });
+    window.scrollTo(0, 0);
   }
 
   handleRemoveRequest(requestId) {
@@ -56,8 +58,8 @@ class DropSiteAdmin extends React.Component {
     if (!this.props.backend.isLoggedIn()) {
       setTimeout(this.checkVerification, 100);
       return;
-    } 
-    
+    }
+
     this.props.backend.isValidHealthcareWorker().then(verified => {
       if (verified) {
         console.log("verified");
@@ -66,7 +68,7 @@ class DropSiteAdmin extends React.Component {
         });
       } else {
         this.setState({
-          verified: false 
+          verified: false
         });
         console.log("not verified, will try again in 30 seconds");
         setTimeout(this.checkVerification, 10000);
@@ -100,7 +102,8 @@ class DropSiteAdmin extends React.Component {
           dropSiteName: data.dropSiteName,
           dropSiteAddress: data.dropSiteAddress,
           dropSiteZip: data.dropSiteZip,
-          dropSiteDescription: data.dropSiteDescription
+          dropSiteDescription: data.dropSiteDescription,
+          dropSiteHospital: data.dropSiteHospital
         },
         () => {}
       );
@@ -116,7 +119,11 @@ class DropSiteAdmin extends React.Component {
     let hospital = hospital_index.index.id_index[this.props.match.params.id];
     let hospitalText = "";
     if (typeof hospital === "undefined") {
-      hospitalText = "";
+      hospitalText = (
+        <div className="servingText">
+          (serving {this.state.dropSiteHospital})
+        </div>
+      );
     } else {
       hospitalText = (
         <div className="servingText">(serving {hospital.name})</div>
@@ -164,7 +171,7 @@ class DropSiteAdmin extends React.Component {
                 </div>
               </div>
               <div className="hospitalNeedNewSubmit">
-                <div className="helperText">Deliver supplies here:</div>
+                <div className="helperText">Supplies will be delivered to:</div>
                 <div className="addressText">
                   {this.state.dropSiteAddress}
                   <br />
@@ -181,8 +188,39 @@ class DropSiteAdmin extends React.Component {
               />
             </span>
           </div>
+          <div className="panel">
+            <div className="hospitalNeedsTopBarAdmin">
+              <div className="hospitalNeedsLeft">
+                <h3 className="mb-3">Create New Request</h3>
+              </div>
+            </div>
+            <NewRequestForm
+              verified={this.state.verified}
+              dropSiteId={this.props.match.params.id}
+              backend={this.props.backend}
+              handleAddRequest={this.handleAddRequest}
+              handleNewRequest={this.handleNewRequest}
+            />
+          </div>
+          <div className="panel">
+            <div className="hospitalNeedsTopBarAdmin">
+              <div className="hospitalNeedsLeft">
+                <h3 className="mb-3">Edit Dropsite Info</h3>
+              </div>
+            </div>
+            <EditDropSiteForm
+              verified={this.state.verified}
+              dropSiteId={this.props.match.params.id}
+              dropSiteName={this.state.dropSiteName}
+              dropSiteDescription={this.state.dropSiteDescription}
+              dropSiteAddress={this.state.dropSiteAddress}
+              dropSiteZip={this.state.dropSiteZip}
+              backend={this.props.backend}
+              handleEditDropSite={this.handleEditDropSite}
+            />
+          </div>
           <div className="panelFull">
-            <h4 className="mb-3 dropSiteName">Current contributions</h4>
+            <h4 className="mb-3 dropSiteName">Submitted donations</h4>
             <table className="table table-striped staffTable table-bordered">
               <thead>
                 <tr>
@@ -191,7 +229,7 @@ class DropSiteAdmin extends React.Component {
                   <th>Qty</th>
                   <th>Delivery Time</th>
                   <th>Comments</th>
-                  <th>Cell Phone / Email</th>
+                  <th>Email</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -226,37 +264,6 @@ class DropSiteAdmin extends React.Component {
                 })}
               </tbody>
             </table>
-          </div>
-          <div className="panel">
-            <div className="hospitalNeedsTopBar">
-              <div className="hospitalNeedsLeft">
-                <h3 className="mb-3">Submit New Request</h3>
-              </div>
-            </div>
-            <NewRequestForm
-              verified={this.state.verified}
-              dropSiteId={this.props.match.params.id}
-              backend={this.props.backend}
-              handleAddRequest={this.handleAddRequest}
-              handleNewRequest={this.handleNewRequest}
-            />
-          </div>
-          <div className="panel">
-            <div className="hospitalNeedsTopBar">
-              <div className="hospitalNeedsLeft">
-                <h3 className="mb-3">Edit Dropsite Info</h3>
-              </div>
-            </div>
-            <EditDropSiteForm
-              verified={this.state.verified}
-              dropSiteId={this.props.match.params.id}
-              dropSiteName={this.state.dropSiteName}
-              dropSiteDescription={this.state.dropSiteDescription}
-              dropSiteAddress={this.state.dropSiteAddress}
-              dropSiteZip={this.state.dropSiteZip}
-              backend={this.props.backend}
-              handleEditDropSite={this.handleEditDropSite}
-            />
           </div>
         </div>
       </div>

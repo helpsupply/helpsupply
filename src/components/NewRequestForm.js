@@ -75,23 +75,28 @@ class NewRequestForm extends React.Component {
   };
 
   handleRequestSubmit() {
-    this.props.backend.addRequest(
-      this.props.dropSiteId,
-      this.state.requestType,
-      this.state.requestTitle,
-      this.state.requestDescription,
-      this.state.requestQuantity,
-      "open"
-    );
-    let requestObj = {};
-    requestObj.id = "";
-    requestObj.dropSiteId = this.props.dropSiteId;
-    requestObj.requestType = this.state.requestType;
-    requestObj.requestTitle = this.state.requestTitle;
-    requestObj.requestDescription = this.state.requestDescription;
-    requestObj.requestQuantity = this.state.requestQuantity;
-    requestObj.status = "open";
-    this.props.handleNewRequest(requestObj);
+    let myProps = this.props;
+    let myState = this.state;
+    this.props.backend
+      .addRequest(
+        this.props.dropSiteId,
+        this.state.requestType,
+        this.state.requestTitle,
+        this.state.requestDescription,
+        this.state.requestQuantity,
+        "open"
+      )
+      .then(data => {
+        let requestObj = {};
+        requestObj.id = data;
+        requestObj.dropSiteId = myProps.dropSiteId;
+        requestObj.requestType = myState.requestType;
+        requestObj.requestTitle = myState.requestTitle;
+        requestObj.requestDescription = myState.requestDescription;
+        requestObj.requestQuantity = myState.requestQuantity;
+        requestObj.status = "open";
+        this.props.handleNewRequest(requestObj);
+      });
 
     this.setState({
       requestType: "Masks",
@@ -133,7 +138,7 @@ class NewRequestForm extends React.Component {
     return (
       <div className="submitRequestFormContainer">
         <div className="requestFormField">
-          <div className="formLabel">Title</div>
+          <div className="formLabel">Item Needed</div>
           <input
             className="form-control newRequestFormField"
             id="requestTitle"
@@ -145,7 +150,7 @@ class NewRequestForm extends React.Component {
           <div className="formError">{this.state.requestTitleError}</div>
         </div>
         <div className="requestFormField">
-          <div className="formLabel">Description</div>
+          <div className="formLabel">Details and Requirements</div>
           <input
             className="form-control newRequestFormField"
             id="requestDescription"
@@ -176,7 +181,8 @@ class NewRequestForm extends React.Component {
               onChange={this.handleChange("requestType")}
             >
               <option value="mask">Masks</option>
-              <option value="gowns-gloves">Gowns/Gloves</option>
+              <option value="gowns">Gowns</option>
+              <option value="gloves">Gloves</option>
               <option value="sanitizer">Sanitizer</option>
               <option value="other">Other</option>
             </select>
