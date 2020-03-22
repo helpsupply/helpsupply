@@ -104,58 +104,71 @@ class EntryPortal extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="entryportal container-sm">
-          <h3 className="logored">Need supplies?</h3>
-          <form onSubmit={this.handleSubmit} autoComplete="off">
-            <div className="form-group">
-              <label htmlFor="searchterm" style={{ fontWeight: "bold" }}>
-                Enter your City or Hospital Name
-              </label>
-              <input
-                className="form-control"
-                id="searchterm"
-                placeholder="i.e. New York City or Princess Margaret"
-                value={this.state.value}
-                onChange={this.handleChange}
-                onKeyDown={this.handleKeyPress}
-              />
-            </div>
-            <ul id="searchresults" className="list-group">
-              {this.state.results.map(result => {
-                let selected = this.state.selectedResult === result.id;
-                return (
-                  <HospitalResult
-                    key={result.id}
-                    hospital={result.hospital}
-                    id={result.id}
-                    selectedResult={selected}
-                    handleSelectHospital={this.handleSelectHospital}
-                    handleRedirect={this.handleRedirect}
-                  />
-                );
-              })}
-            </ul>
-          </form>
+      <div className="homeBox">
+        <h1 className="logoText">help.supply</h1>
+        <div className="homeIntro">
+          We connect healthcare workers who desparately need COVID-19 supplies
+          with the general public.
         </div>
-        <div className="entryportal container-sm">
-          <h3 className="logored">Donate supplies?</h3>
-          <Form.Group
-            controlId="exampleForm.ControlSelect1"
-            onChange={this.handleChangeDonate}
-          >
-            <Form.Control as="select">
-              <option value="">Pick a healthcare facility</option>
-              {this.state.facilities.map((facility, i) => {
-                return (
-                  <option key={i} value={facility.id}>
-                    {facility.dropSiteName} |{" "}
-                    {hospital_index.index.id_index[facility.id].name}
-                  </option>
-                );
-              })}
-            </Form.Control>
-          </Form.Group>
+        <div className="homeBoxesContainer">
+          <div className="entryportal container-sm entryPortalFirst">
+            <h3 className="logored healthcarePro">
+              I'm a healthcare professional who needs supplies
+            </h3>
+            <form onSubmit={this.handleSubmit} autoComplete="off">
+              <div className="form-group">
+                <label htmlFor="searchterm">
+                  Start by entering your <b>City</b> or <b>Hospital Name</b>
+                </label>
+                <input
+                  className="form-control"
+                  id="searchterm"
+                  placeholder="i.e. New York City or Princess Margaret"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  onKeyDown={this.handleKeyPress}
+                />
+              </div>
+              <ul id="searchresults" className="list-group">
+                {this.state.results.map(result => {
+                  let selected = this.state.selectedResult === result.id;
+                  return (
+                    <HospitalResult
+                      key={result.id}
+                      hospital={result.hospital}
+                      id={result.id}
+                      selectedResult={selected}
+                      handleSelectHospital={this.handleSelectHospital}
+                      handleRedirect={this.handleRedirect}
+                    />
+                  );
+                })}
+              </ul>
+            </form>
+          </div>
+          <div className="entryportal container-sm">
+            <h3 className="logored">I want to donate supplies</h3>
+            <div className="homeDescription">
+              Use the dropdown menu below to find an active location looking for
+              supplies.
+            </div>
+            <Form.Group
+              controlId="exampleForm.ControlSelect1"
+              onChange={this.handleChangeDonate}
+            >
+              <Form.Control as="select">
+                <option value="">Pick a healthcare facility</option>
+                {this.state.facilities.map((facility, i) => {
+                  return (
+                    <option key={i} value={facility.id}>
+                      {facility.dropSiteName} |{" "}
+                      {hospital_index.index.id_index[facility.id].name}
+                    </option>
+                  );
+                })}
+              </Form.Control>
+            </Form.Group>
+          </div>
         </div>
       </div>
     );

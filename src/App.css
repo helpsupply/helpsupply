@@ -4,19 +4,53 @@ body {
 }
 .entryportal {
   background-color: white;
-  margin-top: 100px;
-  width: 560px;
+  margin-top: 40px;
+  width: 400px;
   border-radius: 5px;
-  padding: 40px;
+  padding: 40px 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  float: left;
+  height: 280px;
 }
+
+.entryPortalFirst {
+  margin-right: 50px;
+}
+
+.homeBox {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.logoText {
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+.homeIntro {
+  font-size: 14px;
+  width: 300px;
+  margin: auto;
+}
+
+.homeDescription {
+  font-size: 14px;
+  width: 300px;
+  margin: 0px auto 30px;
+}
+
+.healthcarePro {
+  margin-bottom: 30px;
+}
+
 h1,
 h2,
 h3 {
   font-family: "Inter", sans-serif;
 }
 .logored {
-  color: #ff584d !important;
+  color: #333 !important;
 }
 .result {
   cursor: pointer;
@@ -80,6 +114,11 @@ h3 {
   .alertText {
     float: left;
   }
+
+  .homeBoxesContainer {
+    width: 850px;
+    margin: auto;
+  }
 }
 @media only screen and (max-width: 1199px) {
   .panel {
@@ -119,6 +158,15 @@ h3 {
 
   .alertText {
     text-align: left;
+  }
+
+  .homeBoxesContainer {
+    width: 400px;
+    margin: auto;
+  }
+
+  .entryPortalFirst {
+    margin-right: 0px !important;
   }
 }
 .panel,
