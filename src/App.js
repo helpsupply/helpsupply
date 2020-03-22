@@ -9,6 +9,7 @@ import DropSite from "./components/DropSite";
 import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
+import NewDropSite from "./components/NewDropSite";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +30,9 @@ class App extends React.Component {
             <Route path="/login">
               <Login />
             </Route>
-
+            <Route path="/dropsite/new/admin/:dropsite?">
+              <NewDropSite backend={this.props.backend} />
+            </Route>
             <Route path="/signup/:dropsite?">
               <HCPSignup backend={this.props.backend} />
             </Route>

@@ -1,6 +1,4 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
-import NewSupplyForm from "./NewSupplyForm";
 
 class DropSiteNeed extends React.Component {
   constructor(props) {
@@ -38,18 +36,26 @@ class DropSiteNeed extends React.Component {
       <div className="card hospitalNeedCard">
         <div className="card-body">
           <h5 className="card-title">
+            <span className="requestLabel">Item needed:</span>
+            <br />
             {this.props.need.requestTitle}{" "}
             <span className="need-id">
+              REQUEST ID:{" "}
               {this.props.need.id
                 .substr(this.props.need.id.length - 5)
                 .toUpperCase()}
             </span>
           </h5>
           <h6 className="card-subtitle mb-2 text-muted">
-            <b>Qty: </b>
+            <span className="requestLabel">Quantity needed:</span>
+            <br />
             {this.props.need.requestQuantity}
           </h6>
           <p className="card-text">{this.props.need.requestDescription}</p>
+          <span className="requestLabel">
+            How many of this item can you provide?
+          </span>
+          <br />
           <input
             type="number"
             className="form-control qtyInput"
@@ -62,7 +68,7 @@ class DropSiteNeed extends React.Component {
               className="btn btn-primary hospitalNeedsBtn"
               onClick={this.handleAddToCart}
             >
-              Add to donation
+              Add to my donation
             </button>
           ) : (
             <button
@@ -70,7 +76,7 @@ class DropSiteNeed extends React.Component {
               className="btn btn-primary hospitalNeedsBtn"
               onClick={this.handleAddToCart}
             >
-              Add to donation
+              Add to my donation
             </button>
           )}
         </div>

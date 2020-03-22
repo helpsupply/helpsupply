@@ -99,7 +99,7 @@ class EditDropSiteForm extends React.Component {
           <div className="formError">{this.state.dropSiteDescriptionError}</div>
         </div>
         <div className="requestFormField">
-          <div className="formLabel">Deliver supplies to:</div>
+          <div className="formLabel">Deliver supplies to this address:</div>
           <input
             className="form-control newRequestFormField"
             id="dropSiteAddress"

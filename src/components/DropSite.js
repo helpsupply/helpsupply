@@ -78,7 +78,8 @@ class DropSite extends React.Component {
           dropSiteName: data.dropSiteName,
           dropSiteAddress: data.dropSiteAddress,
           dropSiteZip: data.dropSiteZip,
-          dropSiteDescription: data.dropSiteDescription
+          dropSiteDescription: data.dropSiteDescription,
+          dropSiteHospital: data.dropSiteHospital
         },
         () => {
           //console.log(this.state);
@@ -90,11 +91,15 @@ class DropSite extends React.Component {
   componentDidUpdate() {}
 
   render() {
-    console.log(this.state.cart);
+    // this code is for the future when some dropsites may not map to an exisitng hospital in the hospital_index
     let hospital = hospital_index.index.id_index[this.props.match.params.id];
     let hospitalText = "";
     if (typeof hospital === "undefined") {
-      hospitalText = "";
+      hospitalText = (
+        <div className="servingText">
+          (serving {this.state.dropSiteHospital})
+        </div>
+      );
     } else {
       hospitalText = (
         <div className="servingText">(serving {hospital.name})</div>
@@ -122,9 +127,7 @@ class DropSite extends React.Component {
                   <h3 className="mb-3 dropSiteName">
                     {this.state.dropSiteName}
                   </h3>
-                  <span className="servingText">
-                    Dropsite: {this.state.dropSiteId}
-                  </span>
+                  {hospitalText}
                 </div>
                 <div className="dropSiteDescription">
                   <p>{this.state.dropSiteDescription}</p>
@@ -140,6 +143,10 @@ class DropSite extends React.Component {
               </div>
             </div>
             <span className="group" id="needslist">
+              <div className="dropSiteInstructionHeader">
+                Healthcare workers in this area have requested the following
+                items from the public:
+              </div>
               <DropSiteNeedGroup
                 handleNewSupply={this.handleNewSupply}
                 dropSiteAddress={this.state.dropSiteAddress}
@@ -152,12 +159,10 @@ class DropSite extends React.Component {
           </div>
           {this.state.cart.length > 0 && (
             <div className="panelFull">
-              <div className="dropSiteTitle">
-                <h4 className="mb-3 dropSiteName">Your Donation</h4>
-              </div>
               <NewSupplyForm
                 backend={this.props.backend}
                 cart={this.state.cart}
+                dropSiteName={this.state.dropSiteName}
                 dropSiteId={this.state.dropSiteId}
                 dropSiteAddress={this.state.dropSiteAddress}
                 dropSiteZip={this.state.dropSiteZip}
@@ -166,7 +171,7 @@ class DropSite extends React.Component {
             </div>
           )}
           <div className="panelFull">
-            <h4 className="mb-3 dropSiteName">Current contributions</h4>
+            <h4 className="mb-3 dropSiteName">What others have donated:</h4>
             <table className="table table-striped staffTable table-bordered">
               <thead>
                 <tr>

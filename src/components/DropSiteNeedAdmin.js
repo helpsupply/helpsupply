@@ -32,15 +32,19 @@ class DropSiteNeedAdmin extends React.Component {
       <div className="card hospitalNeedCard">
         <div className="card-body">
           <h5 className="card-title">
+            <span className="requestLabel">Item needed:</span>
+            <br />
             {this.props.need.requestTitle}{" "}
             <span className="need-id">
+              REQUEST ID:{" "}
               {this.props.need.id
                 .substr(this.props.need.id.length - 5)
                 .toUpperCase()}
             </span>
           </h5>
           <h6 className="card-subtitle mb-2 text-muted">
-            <b>Qty: </b>
+            <span className="requestLabel">Quantity needed:</span>
+            <br />
             {this.props.need.requestQuantity}
           </h6>
           <p className="card-text">{this.props.need.requestDescription}</p>
@@ -54,7 +58,7 @@ class DropSiteNeedAdmin extends React.Component {
                   Delete
                 </button>
               </div>
-              <div className="statusSelectGroup">
+              {/*<div className="statusSelectGroup">
                 <select
                   value={this.state.status}
                   onChange={this.handleStatusChange}
@@ -62,7 +66,7 @@ class DropSiteNeedAdmin extends React.Component {
                   <option value="open">Open for contributions</option>
                   <option value="fulfilled">Fulfilled</option>
                 </select>
-              </div>
+          </div>*/}
             </div>
           )}
 

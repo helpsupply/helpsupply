@@ -2,7 +2,7 @@ import BackendInterface from "./backendInterface";
 import Firebase from "firebase";
 import config from "../components/Firebase/config";
 
-class FirebaseBackend extends BackendInterface{
+class FirebaseBackend extends BackendInterface {
   constructor(testApp) {
     super();
 
@@ -10,7 +10,7 @@ class FirebaseBackend extends BackendInterface{
     this.firestore = this.firebase.firestore();
     this.loggedIn = false;
 
-    this.firebase.auth().onAuthStateChanged((user) => {
+    this.firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.loggedIn = true;
       } else {
@@ -75,6 +75,45 @@ class FirebaseBackend extends BackendInterface{
         .set(newSiteObj)
         .then(function(docRef) {
           return "Drop site added";
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
+        });
+    } else {
+      console.log("Error, one or more required params missing.");
+      return Promise.resolve("Error, one or more required params missing.");
+    }
+  }
+
+  addNewDropSite(
+    dropSiteName,
+    dropSiteDescription,
+    dropSiteAddress,
+    dropSiteZip,
+    dropSiteHospital
+  ) {
+    if (dropSiteName && dropSiteAddress && dropSiteZip && dropSiteHospital) {
+      let newSiteObj = {
+        dropSiteName: dropSiteName,
+        dropSiteAddress: dropSiteAddress,
+        dropSiteZip: dropSiteZip,
+        dropSiteHospital: dropSiteHospital
+      };
+      if (dropSiteDescription) {
+        newSiteObj.dropSiteDescription = dropSiteDescription;
+      }
+      let db = this.firestore;
+      return db
+        .collection("dropSite")
+        .add(newSiteObj)
+        .then(function(docRef) {
+          return db
+            .collection("dropSite")
+            .doc(docRef.id)
+            .set({ location_id: docRef.id }, { merge: true })
+            .then(() => {
+              return docRef.id;
+            });
         })
         .catch(function(error) {
           console.error("Error writing document: ", error);
@@ -350,10 +389,13 @@ class FirebaseBackend extends BackendInterface{
   async isValidHealthcareWorker() {
     if (!this.loggedIn) return false;
 
-    var domain = this.firebase.auth().currentUser.email.split('@')[1];
-    var verification = await this.firestore.collection('domain').doc(domain).get();
-    console.log("checking validity", verification.data())
-    if (verification.data().valid == 'true') return true;
+    var domain = this.firebase.auth().currentUser.email.split("@")[1];
+    var verification = await this.firestore
+      .collection("domain")
+      .doc(domain)
+      .get();
+    console.log("checking validity", verification.data());
+    if (verification.data().valid == "true") return true;
     return false;
   }
 
@@ -361,36 +403,42 @@ class FirebaseBackend extends BackendInterface{
 
   async signupWithEmail(email, selectedDropSite) {
     var actionCodeSettings = {
-        url: 'https://help.supply/signupFinish/' + selectedDropSite,
-        handleCodeInApp: true,
+      url: "https://help.supply/signupFinish/" + selectedDropSite,
+      handleCodeInApp: true
     };
 
-    window.localStorage.setItem('intendedDropSite', selectedDropSite)
-    await this.firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-    window.localStorage.setItem('emailForSignIn', email);
+    window.localStorage.setItem("intendedDropSite", selectedDropSite);
+    await this.firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings);
+    window.localStorage.setItem("emailForSignIn", email);
   }
 
   shouldRepromptEmail() {
-    return window.localStorage.getItem('emailForSignIn') === null;
+    return window.localStorage.getItem("emailForSignIn") === null;
   }
 
   async continueSignup(url, email, dropsite) {
     if (this.firebase.auth().isSignInWithEmailLink(url)) {
-      var email = window.localStorage.getItem('emailForSignIn') || email;
+      var email = window.localStorage.getItem("emailForSignIn") || email;
       await this.firebase.auth().signInWithEmailLink(email, url);
-      window.localStorage.removeItem('emailForSignIn')
+      window.localStorage.removeItem("emailForSignIn");
 
       let uid = this.firebase.auth().currentUser.uid;
 
       console.log(uid);
       window.testfs = this.firestore;
 
-      var existing = await this.firestore.collection('domain').doc(email.split('@')[1]).get();
+      var existing = await this.firestore
+        .collection("domain")
+        .doc(email.split("@")[1])
+        .get();
       if (!existing) {
-        await this.firestore.collection('domain').doc(email.split('@')[1]).set({'valid': 'pending'});
+        await this.firestore
+          .collection("domain")
+          .doc(email.split("@")[1])
+          .set({ valid: "pending" });
       }
     } else {
-      throw "Email Link Invalid"
+      throw "Email Link Invalid";
     }
   }
 
@@ -399,18 +447,24 @@ class FirebaseBackend extends BackendInterface{
   async getDomains(pendingOnly) {
     let domains = null;
     if (pendingOnly) {
-      domains = await (this.firestore.collection('domain').where("valid", '==', "pending").get());
+      domains = await this.firestore
+        .collection("domain")
+        .where("valid", "==", "pending")
+        .get();
     } else {
-      domains = await (this.firestore.collection('domain').get());
+      domains = await this.firestore.collection("domain").get();
     }
-    return domains.docs.map((d) => d.id);
+    return domains.docs.map(d => d.id);
   }
 
   async setDomainIsValid(domain, isValid) {
     try {
-      await this.firestore.collection('domain').doc(domain).set({'status': isValid ? "approved" : "denied"});
-    } catch(e) {
-      throw "Validating domains is not allowed"
+      await this.firestore
+        .collection("domain")
+        .doc(domain)
+        .set({ status: isValid ? "approved" : "denied" });
+    } catch (e) {
+      throw "Validating domains is not allowed";
     }
   }
 
