@@ -46,8 +46,12 @@ class HCPSignup extends React.Component {
           {this.state.sent ? (
             <div className="verificationSent">
               <span className="big">
-                Thanks! Check your email for a login link (it may take a few).
+                Thanks! Check your email for a login link.
               </span>
+              <br />
+              <span className="small">
+                (it may take a few... check your Spam folder if you can't find it)
+                </span>
               <br />
               <span className="small">(You can close this window now.)</span>
             </div>
