@@ -147,7 +147,7 @@ class EntryPortal extends React.Component {
             </form>
           </div>
           <div className="entryportal container-sm">
-            <h3 className="logored">I want to donate supplies</h3>
+            <h3 className="logored logoredSupply">I want to donate supplies</h3>
             <div className="homeDescription">
               Use the dropdown menu below to find an active location looking for
               supplies.

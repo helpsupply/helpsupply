@@ -37,7 +37,7 @@ body {
 .homeDescription {
   font-size: 14px;
   width: 300px;
-  margin: 0px auto 30px;
+  margin: 0px auto 55px;
 }
 
 .healthcarePro {
@@ -52,6 +52,11 @@ h3 {
 .logored {
   color: #333 !important;
 }
+
+.logoredSupply {
+  margin-top: 20px;
+}
+
 .result {
   cursor: pointer;
 }
