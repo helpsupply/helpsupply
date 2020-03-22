@@ -28,8 +28,7 @@ class HCPSignupFinish extends React.Component {
 
   submitEmail(event) {
     if (event) event.preventDefault();
-    let url = 'https://help.supply/__/auth/action?apiKey=AIzaSyBtHRUSPc0e4rF057rotTeVpeZ3lDWoQTE&mode=signIn&oobCode=jV_76w1en9UZYiMw4FFcGeJBmfCmACZ9kWn36MHiwyQAAAFw_9p2Ag&continueUrl=https://help.supply/signupFinish/50441&lang=en'
-    //window.location.href;
+    let url = window.location.href;
     this.props.backend.continueSignup(url, this.state.confirmEmail ? this.state.email : null)
         .then(() =>  {
             this.props.backend.dropSiteExists(this.state.dropsite).then((exists) => {
