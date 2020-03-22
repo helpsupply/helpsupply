@@ -187,7 +187,7 @@ class NewDropSiteForm extends React.Component {
               <input
                 className="form-control newRequestFormField"
                 id="dropSiteHospital"
-                placeholder="i.e. New York Presbyterian"
+                placeholder="e.g. New York Presbyterian"
                 value={this.state.dropSiteHospital}
                 onChange={this.handleChange("dropSiteHospital")}
                 onBlur={this.handleValidate("dropSiteHospital")}
@@ -209,7 +209,7 @@ class NewDropSiteForm extends React.Component {
             <input
               className="form-control newRequestFormField"
               id="dropSiteName"
-              placeholder="i.e. New York Financial Dist."
+              placeholder="e.g. New York Financial Dist."
               value={this.state.dropSiteName}
               onChange={this.handleChange("dropSiteName")}
               onBlur={this.handleValidate("dropSiteName")}
@@ -221,7 +221,7 @@ class NewDropSiteForm extends React.Component {
             <textarea
               className="form-control newRequestFormField"
               id="dropSiteDescription"
-              placeholder="i.e. We are 500 healthcare workers serving 30,000 patients. We are currently desparate for supplies..."
+              placeholder="e.g. We are 500 healthcare workers serving 30,000 patients. We are currently desparate for supplies..."
               value={this.state.dropSiteDescription}
               onChange={this.handleChange("dropSiteDescription")}
               onBlur={this.handleValidate("dropSiteDescription")}
@@ -235,7 +235,7 @@ class NewDropSiteForm extends React.Component {
             <input
               className="form-control newRequestFormField"
               id="dropSiteAddress"
-              placeholder="i.e. 330 Broadway Ave, New York, NY"
+              placeholder="e.g. 330 Broadway Ave, New York, NY"
               value={this.state.dropSiteAddress}
               onChange={this.handleChange("dropSiteAddress")}
               onBlur={this.handleValidate("dropSiteAddress")}
@@ -247,7 +247,7 @@ class NewDropSiteForm extends React.Component {
             <input
               className="form-control newRequestFormField"
               id="dropSiteZip"
-              placeholder="i.e. 44502"
+              placeholder="e.g. 44502"
               value={this.state.dropSiteZip}
               onChange={this.handleChange("dropSiteZip")}
               onBlur={this.handleValidate("dropSiteZip")}

@@ -60,7 +60,7 @@ class DropSiteNeed extends React.Component {
             type="number"
             className="form-control qtyInput"
             id="qty"
-            placeholder="i.e. 50"
+            placeholder="e.g. 50"
             onChange={this.handleQtyChange}
           ></input>
           {this.state.qty > 0 ? (

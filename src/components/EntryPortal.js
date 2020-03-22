@@ -123,7 +123,7 @@ class EntryPortal extends React.Component {
                 <input
                   className="form-control"
                   id="searchterm"
-                  placeholder="i.e. New York City or Princess Margaret"
+                  placeholder="e.g. New York City or Princess Margaret"
                   value={this.state.value}
                   onChange={this.handleChange}
                   onKeyDown={this.handleKeyPress}

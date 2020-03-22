@@ -142,7 +142,7 @@ class NewRequestForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="requestTitle"
-            placeholder="i.e. N95 Masks"
+            placeholder="e.g. N95 Masks"
             value={this.state.requestTitle}
             onChange={this.handleChange("requestTitle")}
             onBlur={this.handleValidate("requestTitle")}
@@ -154,7 +154,7 @@ class NewRequestForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="requestDescription"
-            placeholder="i.e. Unopened boxes only"
+            placeholder="e.g. Unopened boxes only"
             value={this.state.requestDescription}
             onChange={this.handleChange("requestDescription")}
             onBlur={this.handleValidate("requestDescription")}
@@ -166,7 +166,7 @@ class NewRequestForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="requestQuantity"
-            placeholder="i.e. 50 or As many as possible"
+            placeholder="e.g. 50 or As many as possible"
             value={this.state.requestQuantity}
             onChange={this.handleChange("requestQuantity")}
             onBlur={this.handleValidate("requestQuantity")}
