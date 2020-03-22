@@ -149,6 +149,7 @@ h3 {
     float: left;
   }
   .hospitalNeedNewSubmit {
+    width: 300px;
     margin-top: 5px;
     float: right;
   }
