@@ -1,6 +1,6 @@
 import React from "react";
 import * as hospital_index from "../data/hospital_index";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import DropSiteNeedGroup from "./DropSiteNeedGroup";
 import NewSupplyForm from "./NewSupplyForm";
 
@@ -121,6 +121,12 @@ class DropSite extends React.Component {
         </nav>
         <div className="content">
           <div className="panelFull">
+            <Link
+              to={"/signup/" + this.state.dropSiteId}
+              className="manageDropSiteLink"
+            >
+              Manage This Dropsite
+            </Link>
             <div className="hospitalNeedsTopBar">
               <div className="hospitalNeedsLeft">
                 <div className="dropSiteTitle">
@@ -171,7 +177,9 @@ class DropSite extends React.Component {
             </div>
           )}
           <div className="panelFull">
-            <h4 className="mb-3 dropSiteName">What others have donated:</h4>
+            <h4 className="mb-3 dropSiteName">
+              What others have donated so far:
+            </h4>
             <table className="table table-striped staffTable table-bordered">
               <thead>
                 <tr>

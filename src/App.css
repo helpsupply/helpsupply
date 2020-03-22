@@ -81,6 +81,14 @@ body {
   font-size: 12px;
 }
 
+.manageDropSiteLink {
+  float: right;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
 h1,
 h2,
 h3 {
