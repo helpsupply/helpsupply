@@ -83,8 +83,20 @@ class EntryPortal extends React.Component {
 
   handleRedirect() {
     if (this.state.selectedResult !== "") {
-      let url = "/signup/" + this.state.selectedResult;
-      this.props.history.push(url);
+      if (this.props.backend.authLoaded && this.props.backend.isLoggedIn()) {
+        this.props.backend.dropSiteExists(this.state.selectedResult).then(exists => {
+          if (exists) {
+            let url = "/dropsite/" + this.state.selectedResult + "/admin";
+            this.props.history.push(url);
+          } else {
+            let url = "/dropsite/new/admin/" + this.state.selectedResult;
+            this.props.history.push(url);
+          }
+        });
+      } else {
+        let url = "/signup/" + this.state.selectedResult;
+        this.props.history.push(url);
+      }
     }
   }
 
