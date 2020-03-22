@@ -18,7 +18,8 @@ class DropSiteAdmin extends React.Component {
       dropSiteHospital: "",
       needs: [],
       supply: [],
-      verified: true
+      verified: true,
+      badDomain: true,
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
@@ -75,7 +76,8 @@ class DropSiteAdmin extends React.Component {
         });
       } else {
         this.setState({
-          verified: false
+          verified: false,
+          badDomain: this.props.backend.badDomain,
         });
         console.log("not verified, will try again in 30 seconds");
         setTimeout(this.checkVerification, 10000);
@@ -139,7 +141,7 @@ class DropSiteAdmin extends React.Component {
 
     return (
       <div className="">
-        {this.state.verified === false && (
+        {this.state.verified === false && this.state.badDomain === false && (
           <div className="alert alert-warning alertFixed" role="alert">
             <div className="spinner-border alertSpinner" role="status">
               <span className="sr-only">Loading...</span>
@@ -147,6 +149,14 @@ class DropSiteAdmin extends React.Component {
             <div className="alertText">
               Verifying your credentials (should be a few minutes). You'll be
               able to edit/add once verified.
+            </div>
+          </div>
+        )}
+        {this.state.verified === false && this.state.badDomain === true && (
+          <div className="alert alert-danger alertFixed" role="alert">
+            <div className="alertText">
+              Your email doesn't look like it's from a healthcare provider.
+              Please <a href="/logout" style={{color: '#721c24', fontWeight: 'bold', textDecoration: 'underline'}}>log out</a> and try your work email or contact help@help.supply.
             </div>
           </div>
         )}

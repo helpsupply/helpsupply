@@ -10,6 +10,7 @@ class FirebaseBackend extends BackendInterface {
     this.firestore = this.firebase.firestore();
     this.loggedIn = false;
     this.authLoaded = false;
+    this.badDomain = false;
 
     this.firebase.auth().onAuthStateChanged(user => {
       this.authLoaded = true;
@@ -418,7 +419,8 @@ class FirebaseBackend extends BackendInterface {
       .doc(domain)
       .get();
     console.log("checking validity", verification.data());
-    if (verification.data().valid == "true") return true;
+    if (verification.data() && verification.data().valid == "true") return true;
+    if (verification.data() && verification.data().valid == "false") this.badDomain = true;
     return false;
   }
 

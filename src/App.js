@@ -9,6 +9,7 @@ import DropSite from "./components/DropSite";
 import PendingDomains from "./components/PendingDomains";
 import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Profile from "./components/Profile";
 import NewDropSite from "./components/NewDropSite";
 
@@ -30,6 +31,9 @@ class App extends React.Component {
           <Switch>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/logout">
+              <Logout backend={this.props.backend} />
             </Route>
             <Route path="/dropsite/new/admin/:dropsite?">
               <NewDropSite backend={this.props.backend} />
