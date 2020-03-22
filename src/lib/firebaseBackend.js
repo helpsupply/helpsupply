@@ -414,6 +414,14 @@ class FirebaseBackend extends BackendInterface {
     return false;
   }
 
+  async dropSiteExists(dropsite) {
+    if ((await this.firestore
+      .collection("dropSite")
+      .doc(dropsite)
+      .get()).data()) return true;
+    return false;
+  }
+
   // VALIDATED DOMAINS
 
   async signupWithEmail(email, selectedDropSite) {
