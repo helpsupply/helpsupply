@@ -169,6 +169,13 @@ h3 {
     width: 850px;
     margin: auto;
   }
+
+  .servingText {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 12px;
+    float: left;
+  }
 }
 @media only screen and (max-width: 1199px) {
   .panel {
@@ -217,6 +224,18 @@ h3 {
 
   .entryPortalFirst {
     margin-right: 0px !important;
+  }
+
+  .servingText {
+    margin-top: 0px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    font-size: 12px;
+    float: left;
+  }
+
+  .dropSiteName {
+    width: 100%;
   }
 }
 .panel,
@@ -458,13 +477,6 @@ button:disabled {
 }
 
 .dropSiteIdText {
-  float: left;
-}
-
-.servingText {
-  margin-top: 8px;
-  margin-left: 10px;
-  font-size: 12px;
   float: left;
 }
 
