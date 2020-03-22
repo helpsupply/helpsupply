@@ -594,3 +594,13 @@ button:disabled {
   font-size: 12px;
   margin-top: 5px;
 }
+
+.helpFooter {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  float: left;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}

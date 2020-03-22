@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import DropSiteNeedGroupAdmin from "./DropSiteNeedGroupAdmin";
 import NewRequestForm from "./NewRequestForm";
 import EditDropSiteForm from "./EditDropSiteForm";
+import HelpFooter from "./HelpFooter";
 
 class DropSiteAdmin extends React.Component {
   constructor(props) {
@@ -265,6 +266,7 @@ class DropSiteAdmin extends React.Component {
             </table>
           </div>
         </div>
+        <HelpFooter />
       </div>
     );
   }

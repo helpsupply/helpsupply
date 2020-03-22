@@ -3,6 +3,7 @@ import * as hospital_index from "../data/hospital_index";
 import { withRouter, Link } from "react-router-dom";
 import DropSiteNeedGroup from "./DropSiteNeedGroup";
 import NewSupplyForm from "./NewSupplyForm";
+import HelpFooter from "./HelpFooter";
 
 class DropSite extends React.Component {
   constructor(props) {
@@ -200,6 +201,7 @@ class DropSite extends React.Component {
             </table>
           </div>
         </div>
+        <HelpFooter />
       </div>
     );
   }
