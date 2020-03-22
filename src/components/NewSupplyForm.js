@@ -49,7 +49,7 @@ class NewSupplyForm extends React.Component {
     this.setState({
       formActivated: true
     });
-    if (field === "supplyPhone") {
+    /* if (field === "supplyPhone") {
       if (!e.target.value) {
         this.setState({
           supplyPhoneError: "This field is necessary."
@@ -59,7 +59,9 @@ class NewSupplyForm extends React.Component {
           supplyPhoneError: ""
         });
       }
-    } else if (field === "supplyComments") {
+    } else */ if (
+      field === "supplyComments"
+    ) {
       if (!e.target.value) {
         this.setState({
           supplyCommentsError: "This field is necessary."
@@ -106,11 +108,7 @@ class NewSupplyForm extends React.Component {
 
   render() {
     let newSupplySubmitButton;
-    if (
-      this.state.supplyPhone &&
-      this.state.supplyComments &&
-      this.state.formActivated
-    ) {
+    if (this.state.supplyComments && this.state.formActivated) {
       newSupplySubmitButton = (
         <div className="finalizeDonationBtn">
           <button
@@ -193,7 +191,7 @@ class NewSupplyForm extends React.Component {
         </div>
         <div className="submitSupplyFormContainer">
           <div className="supplyFormField">
-            <div className="formLabel">Your email</div>
+            <div className="formLabel">Your email (optional)</div>
             <input
               className="form-control newSupplyFormField"
               id="supplyPhone"
