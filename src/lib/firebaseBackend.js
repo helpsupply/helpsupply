@@ -389,6 +389,21 @@ class FirebaseBackend extends BackendInterface {
   async isValidHealthcareWorker() {
     if (!this.loggedIn) return false;
 
+    let email= this.firebase.auth().currentUser.email;
+    var existing = (await this.firestore
+      .collection("domain")
+      .doc(email.split("@")[1])
+      .get()).data();
+    if (!existing) {
+      console.log("New domain, setting pending!", email)
+      await this.firestore
+        .collection("domain")
+        .doc(email.split("@")[1])
+        .set({ valid: "pending" });
+    } else {
+      console.log("pending entry found matching", email)
+    }
+
     var domain = this.firebase.auth().currentUser.email.split("@")[1];
     var verification = await this.firestore
       .collection("domain")
@@ -421,22 +436,7 @@ class FirebaseBackend extends BackendInterface {
       var email = window.localStorage.getItem("emailForSignIn") || email;
       await this.firebase.auth().signInWithEmailLink(email, url);
       window.localStorage.removeItem("emailForSignIn");
-
-      let uid = this.firebase.auth().currentUser.uid;
-
-      console.log(uid);
       window.testfs = this.firestore;
-
-      var existing = await this.firestore
-        .collection("domain")
-        .doc(email.split("@")[1])
-        .get();
-      if (!existing) {
-        await this.firestore
-          .collection("domain")
-          .doc(email.split("@")[1])
-          .set({ valid: "pending" });
-      }
     } else {
       throw "Email Link Invalid";
     }
