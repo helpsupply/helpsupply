@@ -31,32 +31,33 @@ class HCPSignup extends React.Component {
 
   render() {
     return (
-      <div className="">
-        <div className="content">
-          <div className="panelFull">
+      <div>
+          <div className="entryportal container-sm">
               <h1>Let's get started</h1>
-              <p>In order to ensure the data on Help Supply is trustworthy, we need to first verify that your healthcare affiliation. Please enter the email you use at work, i.e. kate@kp.org:</p>
+              <p>In order to ensure the data on Help Supply is trustworthy, we need to first verify that your healthcare affiliation.</p>
+              <p>Please enter the email you use at work (i.e. kate@kp.org) and we'll send you an email to verify you own it:</p>
             {this.state.sent ? (
-              <span>Check your email for a login link (you can close this tab/window)</span>
+              <div className="outlinedbox">
+                <span>Thanks! Check your email for a login link.<br />(you can close this tab/window and continue from there)</span>
+              </div>
             ) : (
               <form className="linkSubmitGroup" onSubmit={this.submitEmail}>
                 <input
-                  className="linkTitle form-control"
-                  id="linkTitle"
+                  className="form-control"
                   placeholder="Your institional email, i.e. john@kp.org"
                   value={this.state.email}
                   onChange={this.handleEmailChange}
                 />
+                <br />
                 <button
                   className="btn btn-primary linkSubmitBtn"
                   onClick={this.submitEmail}
                 >
-                  Submit
+                  Send Verification 
                 </button>
               </form>
             )}
           </div>
-        </div>
       </div>
     );
   }

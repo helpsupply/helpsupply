@@ -193,6 +193,13 @@ h3 {
   background-color: white;
 }
 
+.outlinedbox {
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
 .group-label {
   font-size: 20px;
   font-weight: 400;
