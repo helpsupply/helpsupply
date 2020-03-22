@@ -68,7 +68,8 @@ class FirebaseBackend extends BackendInterface {
         location_id: location_id,
         dropSiteAddress: dropSiteAddress,
         dropSiteZip: dropSiteZip,
-        domain: this.firebase.auth().currentUser.email.split('@')[1]
+        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        user: this.firebase.auth().currentUser.uid
       };
       if (dropSiteDescription) {
         newSiteObj.dropSiteDescription = dropSiteDescription;
@@ -102,7 +103,8 @@ class FirebaseBackend extends BackendInterface {
         dropSiteAddress: dropSiteAddress,
         dropSiteZip: dropSiteZip,
         dropSiteHospital: dropSiteHospital,
-        domain: this.firebase.auth().currentUser.email.split('@')[1]
+        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        user: this.firebase.auth().currentUser.uid
       };
       if (dropSiteDescription) {
         newSiteObj.dropSiteDescription = dropSiteDescription;
@@ -141,7 +143,8 @@ class FirebaseBackend extends BackendInterface {
       (dropSiteName || dropSiteDescription || dropSiteAddress || dropSiteZip)
     ) {
       let newSiteObj = {
-        domain: this.firebase.auth().currentUser.email.split('@')[1]
+        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        user: this.firebase.auth().currentUser.uid
       };
       if (dropSiteName) {
         newSiteObj.dropSiteName = dropSiteName;
@@ -242,7 +245,8 @@ class FirebaseBackend extends BackendInterface {
           requestDescription: requestDescription,
           requestQuantity: requestQuantity,
           status: status,
-          domain: this.firebase.auth().currentUser.email.split('@')[1]
+          domain: this.firebase.auth().currentUser.email.split('@')[1],
+          user: this.firebase.auth().currentUser.uid
         })
         .then(function(docRef) {
           return docRef.id;
