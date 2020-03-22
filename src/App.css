@@ -589,3 +589,8 @@ button:disabled {
 .quantityBlock {
   float: left;
 }
+
+.formDisclaimer {
+  font-size: 12px;
+  margin-top: 5px;
+}

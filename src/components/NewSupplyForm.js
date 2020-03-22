@@ -202,6 +202,9 @@ class NewSupplyForm extends React.Component {
               onChange={this.handleChange("supplyPhone")}
               onBlur={this.handleValidate("supplyPhone")}
             />
+            <div className="formDisclaimer">
+              Note: Your email will be publicly accessible.
+            </div>
             <div className="formError">{this.state.supplyPhoneError}</div>
           </div>
           <div className="supplyFormField">
