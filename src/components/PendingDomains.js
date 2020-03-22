@@ -18,16 +18,18 @@ class PendingDomains extends React.Component {
   }
 
   handleApproveDomain(domain) {
-    this.props.backend.setDomainIsValid(domain, true)
+    this.props.backend.setDomainIsValid(domain, true).catch((e) => alert(e));
   }
 
   handleDenyDomain(domain) {
-    this.props.backend.setDomainIsValid(domain, false)
+    this.props.backend.setDomainIsValid(domain, false).catch((e) => alert(e));
   }
 
   addDomain(event) {
     event.preventDefault()
-    this.props.backend.setDomainIsValid(this.state.newDomain, true)
+    this.props.backend.setDomainIsValid(this.state.newDomain, true).then(() =>
+      alert("added " + this.state.newDomain) 
+    ).catch((e) => alert(e));
   }
 
   handleNewDomainChange(event) {
