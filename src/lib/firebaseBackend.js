@@ -9,8 +9,10 @@ class FirebaseBackend extends BackendInterface {
     this.firebase = testApp || Firebase.initializeApp(config);
     this.firestore = this.firebase.firestore();
     this.loggedIn = false;
+    this.authLoaded = false;
 
     this.firebase.auth().onAuthStateChanged(user => {
+      this.authLoaded = true;
       if (user) {
         this.loggedIn = true;
       } else {

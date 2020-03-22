@@ -7,7 +7,7 @@ class PendingDomains extends React.Component {
     this.state = {
       newDomain: '',
       domains: [],
-      notificationsEnabled: false,
+      notificationsEnabled: "Notification" in window && Notification.permission == 'granted',
     };
     this.addDomain = this.addDomain.bind(this);
     this.handleApproveDomain = this.handleApproveDomain.bind(this);

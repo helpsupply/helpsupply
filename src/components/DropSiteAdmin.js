@@ -56,7 +56,14 @@ class DropSiteAdmin extends React.Component {
 
   checkVerification() {
     if (!this.props.backend.isLoggedIn()) {
-      setTimeout(this.checkVerification, 100);
+      console.log(this.props.backend.authLoaded)
+      if (this.props.backend.authLoaded) {
+          let url = "/dropsite/" + this.props.match.params.id;
+          this.props.history.push(url);
+          return;
+      } else {
+        setTimeout(this.checkVerification, 100);
+      }
       return;
     }
 
