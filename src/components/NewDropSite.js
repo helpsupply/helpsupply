@@ -6,7 +6,7 @@ class NewDropSite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      verified: false
+      verified: true
     };
     this.checkVerification = this.checkVerification.bind(this);
   }
