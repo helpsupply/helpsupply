@@ -1,4 +1,5 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 
 class NewRequestForm extends React.Component {
   constructor(props) {
@@ -11,9 +12,18 @@ class NewRequestForm extends React.Component {
       requestTitleError: "",
       requestDescriptionError: "",
       requestQuantityError: "",
+      requestWillingToPay: false,
       formActivated: false
     };
     this.handleRequestSubmit = this.handleRequestSubmit.bind(this);
+    this.handleWillingToPay = this.handleWillingToPay.bind(this);
+  }
+
+  handleWillingToPay(e) {
+    const value = e.target.checked;
+    this.setState({
+      requestWillingToPay: value
+    });
   }
 
   handleChange = field => e => {
@@ -64,7 +74,7 @@ class NewRequestForm extends React.Component {
     } else if (field === "requestQuantity") {
       if (!e.target.value) {
         this.setState({
-          requestQuantityError: "This field is necessary."
+          requestQuantityError: "This field is necessary and must be a number."
         });
       } else {
         this.setState({
@@ -84,7 +94,8 @@ class NewRequestForm extends React.Component {
         this.state.requestTitle,
         this.state.requestDescription,
         this.state.requestQuantity,
-        "open"
+        "open",
+        this.state.requestWillingToPay
       )
       .then(data => {
         let requestObj = {};
@@ -95,6 +106,7 @@ class NewRequestForm extends React.Component {
         requestObj.requestDescription = myState.requestDescription;
         requestObj.requestQuantity = myState.requestQuantity;
         requestObj.status = "open";
+        requestObj.requestWillingToPay = myState.requestWillingToPay;
         this.props.handleNewRequest(requestObj);
       });
 
@@ -135,6 +147,8 @@ class NewRequestForm extends React.Component {
       );
     }
 
+    console.log(this.state.requestWillingToPay);
+
     return (
       <div className="submitRequestFormContainer">
         <div className="requestFormField">
@@ -142,7 +156,7 @@ class NewRequestForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="requestTitle"
-            placeholder="i.e. N95 Masks"
+            placeholder="e.g. N95 Masks"
             value={this.state.requestTitle}
             onChange={this.handleChange("requestTitle")}
             onBlur={this.handleValidate("requestTitle")}
@@ -154,7 +168,7 @@ class NewRequestForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="requestDescription"
-            placeholder="i.e. Unopened boxes only"
+            placeholder="e.g. Unopened boxes only. We are willing to pay $1/mask."
             value={this.state.requestDescription}
             onChange={this.handleChange("requestDescription")}
             onBlur={this.handleValidate("requestDescription")}
@@ -166,13 +180,22 @@ class NewRequestForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="requestQuantity"
-            placeholder="i.e. 50 or As many as possible"
+            placeholder="e.g. 50 (must be a number)"
+            type="number"
             value={this.state.requestQuantity}
             onChange={this.handleChange("requestQuantity")}
             onBlur={this.handleValidate("requestQuantity")}
           />
           <div className="formError">{this.state.requestQuantityError}</div>
         </div>
+        <Form.Group controlId="formBasicCheckbox">
+          <Form.Check
+            onChange={this.handleWillingToPay}
+            type="checkbox"
+            checked={this.state.requestWillingToPay}
+            label="We are are willing to pay for quality supplies."
+          />
+        </Form.Group>
         <div className="requestFormField">
           <div className="formLabel">Type</div>
           <div className="requestSelectType">

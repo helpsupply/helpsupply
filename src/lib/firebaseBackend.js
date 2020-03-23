@@ -60,7 +60,8 @@ class FirebaseBackend extends BackendInterface {
     dropSiteName,
     dropSiteDescription,
     dropSiteAddress,
-    dropSiteZip
+    dropSiteZip,
+    dropSitePhone
   ) {
     if (dropSiteName && location_id && dropSiteAddress && dropSiteZip) {
       let newSiteObj = {
@@ -68,7 +69,8 @@ class FirebaseBackend extends BackendInterface {
         location_id: location_id,
         dropSiteAddress: dropSiteAddress,
         dropSiteZip: dropSiteZip,
-        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        dropSitePhone: dropSitePhone,
+        domain: this.firebase.auth().currentUser.email.split("@")[1],
         user: this.firebase.auth().currentUser.uid
       };
       if (dropSiteDescription) {
@@ -95,7 +97,8 @@ class FirebaseBackend extends BackendInterface {
     dropSiteDescription,
     dropSiteAddress,
     dropSiteZip,
-    dropSiteHospital
+    dropSiteHospital,
+    dropSitePhone
   ) {
     if (dropSiteName && dropSiteAddress && dropSiteZip && dropSiteHospital) {
       let newSiteObj = {
@@ -103,7 +106,8 @@ class FirebaseBackend extends BackendInterface {
         dropSiteAddress: dropSiteAddress,
         dropSiteZip: dropSiteZip,
         dropSiteHospital: dropSiteHospital,
-        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        dropSitePhone: dropSitePhone,
+        domain: this.firebase.auth().currentUser.email.split("@")[1],
         user: this.firebase.auth().currentUser.uid
       };
       if (dropSiteDescription) {
@@ -136,15 +140,25 @@ class FirebaseBackend extends BackendInterface {
     dropSiteName,
     dropSiteDescription,
     dropSiteAddress,
-    dropSiteZip
+    dropSiteZip,
+    dropSitePhone
   ) {
     if (
       location_id &&
-      (dropSiteName || dropSiteDescription || dropSiteAddress || dropSiteZip)
+      (dropSiteName ||
+        dropSiteDescription ||
+        dropSiteAddress ||
+        dropSiteZip ||
+        dropSitePhone)
     ) {
       let newSiteObj = {
-        domain: this.firebase.auth().currentUser.email.split('@')[1],
-        user: this.firebase.auth().currentUser.uid
+        domain: this.firebase.auth().currentUser.email.split("@")[1],
+        user: this.firebase.auth().currentUser.uid,
+        dropSiteName: "",
+        dropSiteDescription: "",
+        dropSiteAddress: "",
+        dropSiteZip: "",
+        dropSitePhone: ""
       };
       if (dropSiteName) {
         newSiteObj.dropSiteName = dropSiteName;
@@ -157,6 +171,9 @@ class FirebaseBackend extends BackendInterface {
       }
       if (dropSiteZip) {
         newSiteObj.dropSiteZip = dropSiteZip;
+      }
+      if (dropSitePhone) {
+        newSiteObj.dropSitePhone = dropSitePhone;
       }
       return this.firestore
         .collection("dropSite")
@@ -226,7 +243,8 @@ class FirebaseBackend extends BackendInterface {
     requestTitle,
     requestDescription,
     requestQuantity,
-    status
+    status,
+    requestWillingToPay
   ) {
     if (
       dropSiteId &&
@@ -245,8 +263,9 @@ class FirebaseBackend extends BackendInterface {
           requestDescription: requestDescription,
           requestQuantity: requestQuantity,
           status: status,
-          domain: this.firebase.auth().currentUser.email.split('@')[1],
-          user: this.firebase.auth().currentUser.uid
+          domain: this.firebase.auth().currentUser.email.split("@")[1],
+          user: this.firebase.auth().currentUser.uid,
+          requestWillingToPay: requestWillingToPay
         })
         .then(function(docRef) {
           return docRef.id;
@@ -429,7 +448,8 @@ class FirebaseBackend extends BackendInterface {
       .get();
     console.log("checking validity", verification.data());
     if (verification.data() && verification.data().valid == "true") return true;
-    if (verification.data() && verification.data().valid == "false") this.badDomain = true;
+    if (verification.data() && verification.data().valid == "false")
+      this.badDomain = true;
     return false;
   }
 
@@ -481,27 +501,31 @@ class FirebaseBackend extends BackendInterface {
     let newDomains = [];
 
     if (pendingOnly) {
-      domains = await (this.firestore.collection('domain').where("valid", '==', "pending"));
+      domains = await this.firestore
+        .collection("domain")
+        .where("valid", "==", "pending");
     } else {
-      domains = await (this.firestore.collection('domain'));
+      domains = await this.firestore.collection("domain");
     }
 
     return domains.onSnapshot(snapshot => {
       snapshot.docChanges().forEach(change => {
         if (change.type === "added") {
-          newDomains.push(change.doc.id)
+          newDomains.push(change.doc.id);
           // Gross layer violation here
-          if (Notification.permission === 'granted') {
-            var notification = new Notification("New domain added: " + change.doc.id);
+          if (Notification.permission === "granted") {
+            var notification = new Notification(
+              "New domain added: " + change.doc.id
+            );
           }
         }
 
         if (change.type === "removed") {
-          newDomains = newDomains.filter(doc => doc !== change.doc.id)
+          newDomains = newDomains.filter(doc => doc !== change.doc.id);
         }
-        callback(newDomains)
-      })
-    })
+        callback(newDomains);
+      });
+    });
   }
 
   async setDomainIsValid(domain, isValid) {
