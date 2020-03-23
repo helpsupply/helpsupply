@@ -31,6 +31,11 @@ class DropSiteNeedAdmin extends React.Component {
     return (
       <div className="card hospitalNeedCard">
         <div className="card-body">
+          {this.props.need.requestWillingToPay && (
+            <div className="willingToPayTrue badge badge-pill badge-success">
+              Willing to pay if high quality.
+            </div>
+          )}
           <h5 className="card-title">
             <span className="requestLabel">Item needed:</span>
             <br />

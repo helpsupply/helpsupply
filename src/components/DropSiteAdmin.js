@@ -19,7 +19,7 @@ class DropSiteAdmin extends React.Component {
       needs: [],
       supply: [],
       verified: true,
-      badDomain: true,
+      badDomain: true
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
@@ -58,11 +58,11 @@ class DropSiteAdmin extends React.Component {
 
   checkVerification() {
     if (!this.props.backend.isLoggedIn()) {
-      console.log(this.props.backend.authLoaded)
+      console.log(this.props.backend.authLoaded);
       if (this.props.backend.authLoaded) {
-          let url = "/dropsite/" + this.props.match.params.id;
-          this.props.history.push(url);
-          return;
+        let url = "/dropsite/" + this.props.match.params.id;
+        this.props.history.push(url);
+        return;
       } else {
         setTimeout(this.checkVerification, 100);
       }
@@ -77,7 +77,7 @@ class DropSiteAdmin extends React.Component {
       } else {
         this.setState({
           verified: false,
-          badDomain: this.props.backend.badDomain,
+          badDomain: this.props.backend.badDomain
         });
         console.log("not verified, will try again in 30 seconds");
         setTimeout(this.checkVerification, 10000);
@@ -112,7 +112,8 @@ class DropSiteAdmin extends React.Component {
           dropSiteAddress: data.dropSiteAddress,
           dropSiteZip: data.dropSiteZip,
           dropSiteDescription: data.dropSiteDescription,
-          dropSiteHospital: data.dropSiteHospital
+          dropSiteHospital: data.dropSiteHospital,
+          dropSitePhone: data.dropSitePhone
         },
         () => {}
       );
@@ -156,7 +157,18 @@ class DropSiteAdmin extends React.Component {
           <div className="alert alert-danger alertFixed" role="alert">
             <div className="alertText">
               Your email doesn't look like it's from a healthcare provider.
-              Please <a href="/logout" style={{color: '#721c24', fontWeight: 'bold', textDecoration: 'underline'}}>log out</a> and try your work email or contact help@help.supply.
+              Please{" "}
+              <a
+                href="/logout"
+                style={{
+                  color: "#721c24",
+                  fontWeight: "bold",
+                  textDecoration: "underline"
+                }}
+              >
+                log out
+              </a>{" "}
+              and try your work email or contact help@help.supply.
             </div>
           </div>
         )}
@@ -185,6 +197,13 @@ class DropSiteAdmin extends React.Component {
                 </div>
                 <div className="dropSiteDescription">
                   <p>{this.state.dropSiteDescription}</p>
+                  {this.state.dropSitePhone && (
+                    <div>
+                      <p>
+                        <b>Contact:</b> {this.state.dropSitePhone}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="hospitalNeedNewSubmit">
@@ -232,6 +251,7 @@ class DropSiteAdmin extends React.Component {
               dropSiteDescription={this.state.dropSiteDescription}
               dropSiteAddress={this.state.dropSiteAddress}
               dropSiteZip={this.state.dropSiteZip}
+              dropSitePhone={this.state.dropSitePhone}
               backend={this.props.backend}
               handleEditDropSite={this.handleEditDropSite}
             />

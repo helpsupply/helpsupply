@@ -47,7 +47,7 @@ class PendingDomains extends React.Component {
     }
   
     else if (Notification.permission !== "denied") {
-      Notification.requestPermission().then(function (permission) {
+      Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
           var notification = new Notification("Hi! We'll notify when new domains are added!");
           this.setState({notificationsEnabled: true});
@@ -131,6 +131,8 @@ class PendingDomains extends React.Component {
               >
                Add 
               </button>&nbsp;
+            </div>
+          </form>
               {!this.state.notificationsEnabled ?
               <button
                 className="btn btn-primary linkSubmitBtn"
@@ -139,8 +141,6 @@ class PendingDomains extends React.Component {
                Enable Notifications 
               </button>
               :''}
-            </div>
-          </form>
         </div>
       </div>
     );

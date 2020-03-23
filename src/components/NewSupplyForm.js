@@ -130,7 +130,7 @@ class NewSupplyForm extends React.Component {
     }
 
     const cart = (
-      <div>
+      <div id="donationForm">
         <div className="dropSiteTitle">
           <h4 className="mb-3 dropSiteName">Review your list of donations:</h4>
         </div>
@@ -176,7 +176,7 @@ class NewSupplyForm extends React.Component {
                 className="btn btn-success linkSubmitBtn"
                 onClick={this.handleNextStep}
               >
-                Finalize my donation
+                Next: Add my information
               </button>
             </div>
           </div>
@@ -195,7 +195,7 @@ class NewSupplyForm extends React.Component {
             <input
               className="form-control newSupplyFormField"
               id="supplyPhone"
-              placeholder="i.e. juan@gmail.com"
+              placeholder="e.g. juan@gmail.com"
               value={this.state.supplyPhone}
               onChange={this.handleChange("supplyPhone")}
               onBlur={this.handleValidate("supplyPhone")}
@@ -210,7 +210,7 @@ class NewSupplyForm extends React.Component {
             <input
               className="form-control newSupplyFormField"
               id="supplyDeliveryTime"
-              placeholder="i.e. April 2, 9am-10am"
+              placeholder="e.g. April 2, 9am-10am"
               value={this.state.supplyDeliveryTime}
               onChange={this.handleChange("supplyDeliveryTime")}
               onBlur={this.handleValidate("supplyDeliveryTime")}
@@ -224,7 +224,7 @@ class NewSupplyForm extends React.Component {
             <textarea
               className="form-control newSupplyFormField"
               id="supplyComments"
-              placeholder="i.e. I work in construction and these are unused and open masks."
+              placeholder="e.g. I work in construction and these are unused and open masks."
               value={this.state.supplyComments}
               onChange={this.handleChange("supplyComments")}
               onBlur={this.handleValidate("supplyComments")}

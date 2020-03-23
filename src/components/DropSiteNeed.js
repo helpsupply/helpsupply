@@ -35,6 +35,11 @@ class DropSiteNeed extends React.Component {
     return (
       <div className="card hospitalNeedCard">
         <div className="card-body">
+          {this.props.need.requestWillingToPay && (
+            <div className="willingToPayTrue badge badge-pill badge-success">
+              Willing to pay if high quality.
+            </div>
+          )}
           <h5 className="card-title">
             <span className="requestLabel">Item needed:</span>
             <br />
@@ -60,7 +65,7 @@ class DropSiteNeed extends React.Component {
             type="number"
             className="form-control qtyInput"
             id="qty"
-            placeholder="i.e. 50"
+            placeholder="e.g. 50"
             onChange={this.handleQtyChange}
           ></input>
           {this.state.qty > 0 ? (
