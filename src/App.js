@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./App.css";
+import { Global } from '@emotion/core'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EntryPortal from "./components/EntryPortal";
 import HCPSignup from "./components/HCPSignup";
 import HCPSignupFinish from "./components/HCPSignupFinish";
@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile";
 import NewDropSite from "./components/NewDropSite";
+import { styles } from "./App.styles";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,6 +27,8 @@ class App extends React.Component {
 
   render() {
     return (
+      <>
+      <Global styles={styles} />
       <Router>
         <div className="App">
           <Switch>
@@ -73,6 +76,7 @@ class App extends React.Component {
           </Switch>
         </div>
       </Router>
+      </>
     );
   }
 }
