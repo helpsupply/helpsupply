@@ -11,7 +11,8 @@ class EntryPortal extends React.Component {
     this.state = {
       userInput: "",
       results: [],
-      facilities: []
+      facilities: [],
+      selectedResults: ""
     };
     this.handleChangeDonate = this.handleChangeDonate.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -31,7 +32,8 @@ class EntryPortal extends React.Component {
       this.setState({ results: searchResults });
     } else {
       this.setState({
-        results: []
+        results: [],
+        selectedResult: ""
       });
     }
   }
@@ -67,6 +69,14 @@ class EntryPortal extends React.Component {
         }
       }
     }
+    if (event.key === "Enter") {
+      if (this.state.selectedResult) {
+        event.preventDefault();
+        this.handleSubmit();
+      } else {
+        event.preventDefault();
+      }
+    }
   }
 
   handleSelectHospital(id) {
@@ -75,7 +85,9 @@ class EntryPortal extends React.Component {
 
   handleSubmit(event) {
     // this prevents the page from reloading when form is submitted
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
     if (this.state.selectedResult !== "") {
       this.handleRedirect();
     }
@@ -100,6 +112,10 @@ class EntryPortal extends React.Component {
         this.props.history.push(url);
       }
     }
+  }
+
+  doNothing(event) {
+    event.preventDefault();
   }
 
   componentDidUpdate() {}
@@ -129,7 +145,7 @@ class EntryPortal extends React.Component {
             <h3 className="logored healthcarePro">
               I'm a healthcare professional who needs supplies
             </h3>
-            <form onSubmit={this.handleSubmit} autoComplete="off">
+            <form onSubmit={this.handleDoNothing} autoComplete="off">
               <div className="form-group">
                 <label htmlFor="searchterm">
                   Start by entering your <b>City</b> or <b>Hospital Name</b>
@@ -141,6 +157,7 @@ class EntryPortal extends React.Component {
                   value={this.state.value}
                   onChange={this.handleChange}
                   onKeyDown={this.handleKeyPress}
+                  required={true}
                 />
               </div>
               <ul id="searchresults" className="list-group">
