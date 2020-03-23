@@ -6,8 +6,10 @@ import HCPSignup from "./components/HCPSignup";
 import HCPSignupFinish from "./components/HCPSignupFinish";
 import DropSiteAdmin from "./components/DropSiteAdmin";
 import DropSite from "./components/DropSite";
+import PendingDomains from "./components/PendingDomains";
 import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Profile from "./components/Profile";
 import NewDropSite from "./components/NewDropSite";
 
@@ -29,6 +31,9 @@ class App extends React.Component {
           <Switch>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/logout">
+              <Logout backend={this.props.backend} />
             </Route>
             <Route path="/dropsite/new/admin/:dropsite?">
               <NewDropSite backend={this.props.backend} />
@@ -54,6 +59,10 @@ class App extends React.Component {
               <Profile backend={this.props.backend} />
             </Route>
 
+            <Route path="/pending-domains">
+              <PendingDomains backend={this.props.backend}/>
+            </Route>
+
             <Route exact path="/">
               <EntryPortal backend={this.props.backend} />
             </Route>
@@ -61,8 +70,6 @@ class App extends React.Component {
             <Route path="*">
               <NoMatch />
             </Route>
-
-            <Route path="/domainValidation"></Route>
           </Switch>
         </div>
       </Router>

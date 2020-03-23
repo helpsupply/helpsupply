@@ -9,8 +9,11 @@ class FirebaseBackend extends BackendInterface {
     this.firebase = testApp || Firebase.initializeApp(config);
     this.firestore = this.firebase.firestore();
     this.loggedIn = false;
+    this.authLoaded = false;
+    this.badDomain = false;
 
     this.firebase.auth().onAuthStateChanged(user => {
+      this.authLoaded = true;
       if (user) {
         this.loggedIn = true;
       } else {
@@ -64,7 +67,9 @@ class FirebaseBackend extends BackendInterface {
         dropSiteName: dropSiteName,
         location_id: location_id,
         dropSiteAddress: dropSiteAddress,
-        dropSiteZip: dropSiteZip
+        dropSiteZip: dropSiteZip,
+        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        user: this.firebase.auth().currentUser.uid
       };
       if (dropSiteDescription) {
         newSiteObj.dropSiteDescription = dropSiteDescription;
@@ -97,7 +102,9 @@ class FirebaseBackend extends BackendInterface {
         dropSiteName: dropSiteName,
         dropSiteAddress: dropSiteAddress,
         dropSiteZip: dropSiteZip,
-        dropSiteHospital: dropSiteHospital
+        dropSiteHospital: dropSiteHospital,
+        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        user: this.firebase.auth().currentUser.uid
       };
       if (dropSiteDescription) {
         newSiteObj.dropSiteDescription = dropSiteDescription;
@@ -135,7 +142,10 @@ class FirebaseBackend extends BackendInterface {
       location_id &&
       (dropSiteName || dropSiteDescription || dropSiteAddress || dropSiteZip)
     ) {
-      let newSiteObj = {};
+      let newSiteObj = {
+        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        user: this.firebase.auth().currentUser.uid
+      };
       if (dropSiteName) {
         newSiteObj.dropSiteName = dropSiteName;
       }
@@ -234,7 +244,9 @@ class FirebaseBackend extends BackendInterface {
           requestTitle: requestTitle,
           requestDescription: requestDescription,
           requestQuantity: requestQuantity,
-          status: status
+          status: status,
+          domain: this.firebase.auth().currentUser.email.split('@')[1],
+          user: this.firebase.auth().currentUser.uid
         })
         .then(function(docRef) {
           return docRef.id;
@@ -416,7 +428,8 @@ class FirebaseBackend extends BackendInterface {
       .doc(domain)
       .get();
     console.log("checking validity", verification.data());
-    if (verification.data().valid == "true") return true;
+    if (verification.data() && verification.data().valid == "true") return true;
+    if (verification.data() && verification.data().valid == "false") this.badDomain = true;
     return false;
   }
 
@@ -463,17 +476,32 @@ class FirebaseBackend extends BackendInterface {
 
   // VALIDATED DOMAINS
 
-  async getDomains(pendingOnly) {
+  async getDomains(pendingOnly, callback) {
     let domains = null;
+    let newDomains = [];
+
     if (pendingOnly) {
-      domains = await this.firestore
-        .collection("domain")
-        .where("valid", "==", "pending")
-        .get();
+      domains = await (this.firestore.collection('domain').where("valid", '==', "pending"));
     } else {
-      domains = await this.firestore.collection("domain").get();
+      domains = await (this.firestore.collection('domain'));
     }
-    return domains.docs.map(d => d.id);
+
+    return domains.onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type === "added") {
+          newDomains.push(change.doc.id)
+          // Gross layer violation here
+          if (Notification.permission === 'granted') {
+            var notification = new Notification("New domain added: " + change.doc.id);
+          }
+        }
+
+        if (change.type === "removed") {
+          newDomains = newDomains.filter(doc => doc !== change.doc.id)
+        }
+        callback(newDomains)
+      })
+    })
   }
 
   async setDomainIsValid(domain, isValid) {
@@ -481,7 +509,7 @@ class FirebaseBackend extends BackendInterface {
       await this.firestore
         .collection("domain")
         .doc(domain)
-        .set({ status: isValid ? "approved" : "denied" });
+        .set({ valid: isValid ? "true" : "false" });
     } catch (e) {
       throw "Validating domains is not allowed";
     }

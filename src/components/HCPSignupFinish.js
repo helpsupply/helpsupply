@@ -71,7 +71,7 @@ class HCPSignupFinish extends React.Component {
               </form>
             </div>
           ) : (
-            <h2>Checking against our database...</h2>
+            <h2>Logging you in!</h2>
           )}
         </div>
       </div>
