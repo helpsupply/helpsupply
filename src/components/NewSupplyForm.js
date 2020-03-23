@@ -130,7 +130,7 @@ class NewSupplyForm extends React.Component {
     }
 
     const cart = (
-      <div>
+      <div id="donationForm">
         <div className="dropSiteTitle">
           <h4 className="mb-3 dropSiteName">Review your list of donations:</h4>
         </div>
@@ -176,7 +176,7 @@ class NewSupplyForm extends React.Component {
                 className="btn btn-success linkSubmitBtn"
                 onClick={this.handleNextStep}
               >
-                Finalize my donation
+                Next: Add my information
               </button>
             </div>
           </div>

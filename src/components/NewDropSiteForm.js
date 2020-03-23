@@ -17,6 +17,7 @@ class NewDropSiteForm extends React.Component {
       dropSiteAddressError: "",
       dropSiteZipError: "",
       dropSiteHospitalError: "",
+      dropSitePhone: "",
       existingLocation: false
     };
     this.handleEditDropSite = this.handleEditDropSite.bind(this);
@@ -40,6 +41,10 @@ class NewDropSiteForm extends React.Component {
     } else if (field === "dropSiteZip") {
       this.setState({
         dropSiteZip: e.target.value
+      });
+    } else if (field === "dropSitePhone") {
+      this.setState({
+        dropSitePhone: e.target.value
       });
     } else if (field === "dropSiteHospital") {
       this.setState({
@@ -113,7 +118,8 @@ class NewDropSiteForm extends React.Component {
           this.state.dropSiteName,
           this.state.dropSiteDescription,
           this.state.dropSiteAddress,
-          this.state.dropSiteZip
+          this.state.dropSiteZip,
+          this.state.dropSitePhone
         )
         .then(() => {
           let url = "/dropsite/" + this.state.dropSiteId + "/admin";
@@ -126,7 +132,8 @@ class NewDropSiteForm extends React.Component {
           this.state.dropSiteDescription,
           this.state.dropSiteAddress,
           this.state.dropSiteZip,
-          this.state.dropSiteHospital
+          this.state.dropSiteHospital,
+          this.state.dropSitePhone
         )
         .then(data => {
           let url = "/dropsite/" + data + "/admin";
@@ -253,6 +260,17 @@ class NewDropSiteForm extends React.Component {
               onBlur={this.handleValidate("dropSiteZip")}
             />
             <div className="formError">{this.state.dropSiteZipError}</div>
+          </div>
+          <div className="requestFormField">
+            <div className="formLabel">Phone or Email (Optional)</div>
+            <input
+              className="form-control newRequestFormField"
+              id="dropSitePhone"
+              placeholder="e.g. admin@hospital.org"
+              value={this.state.dropSitePhone}
+              onChange={this.handleChange("dropSitePhone")}
+              onBlur={this.handleValidate("dropSitePhone")}
+            />
           </div>
           {newRequestSubmitButton}
         </div>

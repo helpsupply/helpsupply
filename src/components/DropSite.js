@@ -4,6 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 import DropSiteNeedGroup from "./DropSiteNeedGroup";
 import NewSupplyForm from "./NewSupplyForm";
 import HelpFooter from "./HelpFooter";
+import CartBanner from "./CartBanner";
 
 class DropSite extends React.Component {
   constructor(props) {
@@ -16,11 +17,21 @@ class DropSite extends React.Component {
       dropSiteDescription: "",
       needs: [],
       supply: [],
-      cart: []
+      cart: [],
+      alertClicked: false
     };
     this.handleNewSupply = this.handleNewSupply.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
+    this.handleCartScroll = this.handleCartScroll.bind(this);
+  }
+
+  handleCartScroll() {
+    var element = document.getElementById("donationForm");
+    element.scrollIntoView({ behavior: "smooth" });
+    this.setState({
+      alertClicked: true
+    });
   }
 
   handleNewSupply(supplyObj) {
@@ -80,7 +91,8 @@ class DropSite extends React.Component {
           dropSiteAddress: data.dropSiteAddress,
           dropSiteZip: data.dropSiteZip,
           dropSiteDescription: data.dropSiteDescription,
-          dropSiteHospital: data.dropSiteHospital
+          dropSiteHospital: data.dropSiteHospital,
+          dropSitePhone: data.dropSitePhone
         },
         () => {
           //console.log(this.state);
@@ -138,6 +150,13 @@ class DropSite extends React.Component {
                 </div>
                 <div className="dropSiteDescription">
                   <p>{this.state.dropSiteDescription}</p>
+                  {this.state.dropSitePhone && (
+                    <div>
+                      <p>
+                        <b>Contact:</b> {this.state.dropSitePhone}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="hospitalNeedNewSubmit">
@@ -202,6 +221,12 @@ class DropSite extends React.Component {
           </div>
         </div>
         <HelpFooter />
+        {this.state.cart.length > 0 && this.state.alertClicked === false && (
+          <CartBanner
+            number={this.state.cart.length}
+            handleCartScroll={this.handleCartScroll}
+          />
+        )}
       </div>
     );
   }

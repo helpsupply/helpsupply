@@ -84,15 +84,17 @@ class EntryPortal extends React.Component {
   handleRedirect() {
     if (this.state.selectedResult !== "") {
       if (this.props.backend.authLoaded && this.props.backend.isLoggedIn()) {
-        this.props.backend.dropSiteExists(this.state.selectedResult).then(exists => {
-          if (exists) {
-            let url = "/dropsite/" + this.state.selectedResult + "/admin";
-            this.props.history.push(url);
-          } else {
-            let url = "/dropsite/new/admin/" + this.state.selectedResult;
-            this.props.history.push(url);
-          }
-        });
+        this.props.backend
+          .dropSiteExists(this.state.selectedResult)
+          .then(exists => {
+            if (exists) {
+              let url = "/dropsite/" + this.state.selectedResult + "/admin";
+              this.props.history.push(url);
+            } else {
+              let url = "/dropsite/new/admin/" + this.state.selectedResult;
+              this.props.history.push(url);
+            }
+          });
       } else {
         let url = "/signup/" + this.state.selectedResult;
         this.props.history.push(url);
@@ -119,7 +121,7 @@ class EntryPortal extends React.Component {
       <div className="homeBox">
         <h1 className="logoText">help.supply</h1>
         <div className="homeIntro">
-          We connect healthcare workers who desparately need COVID-19 supplies
+          We connect healthcare workers who desperately need COVID-19 supplies
           with the general public.
         </div>
         <div className="homeBoxesContainer">

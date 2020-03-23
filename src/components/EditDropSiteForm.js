@@ -7,7 +7,8 @@ class EditDropSiteForm extends React.Component {
       dropSiteName: "",
       dropSiteDescription: "",
       dropSiteAddress: "",
-      dropSiteZip: ""
+      dropSiteZip: "",
+      dropSitePhone: ""
     };
     this.handleEditDropSite = this.handleEditDropSite.bind(this);
   }
@@ -25,6 +26,10 @@ class EditDropSiteForm extends React.Component {
       this.setState({
         dropSiteAddress: e.target.value
       });
+    } else if (field === "dropSitePhone") {
+      this.setState({
+        dropSitePhone: e.target.value
+      });
     }
     if (field === "dropSiteZip") {
       this.setState({
@@ -40,14 +45,23 @@ class EditDropSiteForm extends React.Component {
         this.state.dropSiteName,
         this.state.dropSiteDescription,
         this.state.dropSiteAddress,
-        this.state.dropSiteZip
+        this.state.dropSiteZip,
+        this.state.dropSitePhone
       )
       .then(() => {
         window.location.reload();
       });
   }
 
-  componentDidMount() {}
+  componentWillReceiveProps() {
+    this.setState({
+      dropSiteName: this.props.dropSiteName,
+      dropSiteDescription: this.props.dropSiteDescription,
+      dropSiteAddress: this.props.dropSiteAddress,
+      dropSiteZip: this.props.dropSiteZip,
+      dropSitePhone: this.props.dropSitePhone
+    });
+  }
 
   render() {
     let newRequestSubmitButton;
@@ -55,7 +69,8 @@ class EditDropSiteForm extends React.Component {
       (this.state.dropSiteName !== "" ||
         this.state.dropSiteDescription !== "" ||
         this.state.dropSiteAddress !== "" ||
-        this.state.dropSiteZip !== "") &&
+        this.state.dropSiteZip !== "" ||
+        this.state.dropSitePhone !== "") &&
       this.props.verified
     ) {
       newRequestSubmitButton = (
@@ -81,8 +96,7 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSiteName"
-            placeholder={this.props.dropSiteName}
-            value={this.state.dropSiteName}
+            value={this.state.dropSiteName || ""}
             onChange={this.handleChange("dropSiteName")}
           />
           <div className="formError">{this.state.dropSiteNameError}</div>
@@ -92,8 +106,7 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSiteDescription"
-            placeholder={this.props.dropSiteDescription}
-            value={this.state.dropSiteDescription}
+            value={this.state.dropSiteDescription || ""}
             onChange={this.handleChange("dropSiteDescription")}
           />
           <div className="formError">{this.state.dropSiteDescriptionError}</div>
@@ -103,8 +116,7 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSiteAddress"
-            placeholder={this.props.dropSiteAddress}
-            value={this.state.dropSiteAddress}
+            value={this.state.dropSiteAddress || ""}
             onChange={this.handleChange("dropSiteAddress")}
           />
           <div className="formError">{this.state.dropSiteAddressError}</div>
@@ -114,9 +126,18 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSiteZip"
-            placeholder={this.props.dropSiteZip}
-            value={this.state.dropSiteZip}
+            value={this.state.dropSiteZip || ""}
             onChange={this.handleChange("dropSiteZip")}
+          />
+          <div className="formError">{this.state.dropSiteZipError}</div>
+        </div>
+        <div className="requestFormField">
+          <div className="formLabel">Phone or Email (Optional)</div>
+          <input
+            className="form-control newRequestFormField"
+            id="dropSitePhone"
+            value={this.state.dropSitePhone || ""}
+            onChange={this.handleChange("dropSitePhone")}
           />
         </div>
         {newRequestSubmitButton}
