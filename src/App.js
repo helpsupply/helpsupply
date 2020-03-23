@@ -1,6 +1,5 @@
 import React from "react";
 import { Global } from '@emotion/core'
-import { styles } from "./App.styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EntryPortal from "./components/EntryPortal";
 import HCPSignup from "./components/HCPSignup";
@@ -13,7 +12,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile";
 import NewDropSite from "./components/NewDropSite";
-import StyleGuide from "./components/StyleGuide";
+import { styles } from "./App.styles";
 
 class App extends React.Component {
   constructor(props) {
@@ -69,10 +68,6 @@ class App extends React.Component {
 
             <Route exact path="/">
               <EntryPortal backend={this.props.backend} />
-            </Route>
-
-            <Route exact path="/style-guide">
-              <StyleGuide backend={this.props.backend} />
             </Route>
 
             <Route path="*">
