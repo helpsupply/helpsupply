@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.28",
     "@firebase/testing": "^0.17.1",
     "@sendgrid/mail": "^6.5.5",
     "@testing-library/jest-dom": "^4.2.4",
