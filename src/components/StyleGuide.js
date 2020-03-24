@@ -5,9 +5,28 @@ import Text from './Text/Text'
 import { TEXT_TYPE } from './Text/Text.styles'
 import { PrimaryButton, SecondaryButton } from './Button'
 import InputText from './InputText'
-import TextArea from './TextArea'
+import TextArea from './Textarea'
+import Autosuggest from './Autosuggest'
 
 class StyleGuide extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      facilities: []
+    }
+  }
+
+  componentDidMount() {
+    this.props.backend.listDropSites().then(data => {
+      const facilities = data.map((facility) => ({
+        name: facility.dropSiteName,
+        address: facility.dropSiteAddress,
+        id: facility.id
+      }))
+      this.setState({ facilities })
+    })
+  }
+
   render() {
     return (
       <div css={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '1em' }}>
@@ -23,22 +42,25 @@ class StyleGuide extends React.Component {
         <hr />
         <div css={{ width: 500, '> div': { marginBottom: 10 } }}>
           <div>
-            <PrimaryButton><Text>Primary Button</Text></PrimaryButton>
+            <PrimaryButton onClick={() => false}><Text>Primary Button</Text></PrimaryButton>
           </div>
           <div>
-            <PrimaryButton disabled><Text>Primary Button Disabled</Text></PrimaryButton>
+            <PrimaryButton disabled onClick={() => false}><Text>Primary Button Disabled</Text></PrimaryButton>
           </div>
           <div>
-            <SecondaryButton><Text type={TEXT_TYPE.NOTE}>Secondary Button</Text></SecondaryButton>
+            <SecondaryButton onClick={() => false}><Text type={TEXT_TYPE.NOTE}>Secondary Button</Text></SecondaryButton>
           </div>
           <div>
-            <SecondaryButton disabled><Text type={TEXT_TYPE.NOTE}>Secondary Button Disabled</Text></SecondaryButton>
+            <SecondaryButton disabled onClick={() => false}><Text type={TEXT_TYPE.NOTE}>Secondary Button Disabled</Text></SecondaryButton>
           </div>
         </div>
         <hr />
-        <div css={{ width: 500, '> div': { marginBottom: 10 } }}>
+        <div css={{ width: 500 }}>
           <div>
             <InputText label="Label" />
+          </div>
+          <div>
+            <Autosuggest label="City or medical facility" suggestions={this.state.facilities} />
           </div>
           <div>
             <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
