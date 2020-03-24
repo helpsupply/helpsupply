@@ -1,33 +1,32 @@
 import { css } from '@emotion/core'
-import { buttonReset, Color, Radius, Space } from 'lib/theme'
-import { type } from './constants'
+import { RADIUS } from '../../lib/theme'
+import { BUTTON_TYPE, BUTTON_RADIUS, buttonReset } from './constants'
 
 const styles = {
   root: css({
     ...buttonReset,
-    borderRadius: Radius.ROUNDED,
-  }),
-  [type.FILL]: css({
-    color: Color.WHITE,
     height: 65,
-    background: Color.CORAL,
     width: '100%',
     ':disabled': {
-      background: Color.GRAY_LIGHT
+      opacity: 0.25
     }
   }),
-  [type.LINK]: css({
-    textDecoration: 'underline',
+  [BUTTON_RADIUS.ROUNDED]: css({
+    borderRadius: RADIUS.ROUNDED
   }),
-  [type.OUTLINE]: css({
-    color: Color.CORAL,
-    height: 30,
-    padding: `0 ${Space.S10}px`,
-    border: `2px solid ${Color.CORAL}`,
-    ':disabled': {
-      color: Color.GRAY_LIGHT,
-      borderColor: Color.GRAY_LIGHT
-    }
+  [BUTTON_RADIUS.PILL]: css({
+    borderRadius: RADIUS.PILL
+  }),
+  [BUTTON_TYPE.FILL]: css({
+    color: '#FFFFFF',
+    background: '#FF5A5F',
+  }),
+  [BUTTON_TYPE.LINK]: css({
+    textDecoration: 'underline'
+  }),
+  [BUTTON_TYPE.OUTLINE]: css({
+    color: '#484848',
+    border: '2px solid #484848',
   }),
 }
 
