@@ -470,7 +470,7 @@ class FirebaseBackend extends BackendInterface {
 
   async signupWithEmail(email, selectedDropSite) {
     var actionCodeSettings = {
-      url: "https://help.supply/signupFinish/" + selectedDropSite,
+      url: window.location.protocol + "//" + window.location.host + "/signupFinish/" + selectedDropSite,
       handleCodeInApp: true
     };
 
