@@ -1,32 +1,52 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { type } from "./constants"
+import { BUTTON_RADIUS, BUTTON_TYPE } from "./constants"
 
 import styles from './Button.styles'
 
-export const PrimaryButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[type.FILL]]} {...rest}>
+export const PrimaryRoundedButton = ({ children, ...rest }) => (
+  <button css={[styles.root, styles[BUTTON_TYPE.FILL], styles[BUTTON_RADIUS.ROUNDED]]} {...rest}>
     {children}
   </button>
 )
 
-PrimaryButton.propTypes = {
+PrimaryRoundedButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 
-export const SecondaryButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[type.OUTLINE]]} {...rest}>
+export const PrimaryPillButton = ({ children, ...rest }) => (
+  <button css={[styles.root, styles[BUTTON_TYPE.FILL], styles[BUTTON_RADIUS.PILL]]} {...rest}>
     {children}
   </button>
 )
 
-SecondaryButton.propTypes = {
+PrimaryPillButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+}
+
+export const SecondaryRoundedButton = ({ children, ...rest }) => (
+  <button css={[styles.root, styles[BUTTON_TYPE.OUTLINE], styles[BUTTON_RADIUS.ROUNDED]]} {...rest}>
+    {children}
+  </button>
+)
+
+SecondaryRoundedButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+}
+
+export const SecondaryPillButton = ({ children, ...rest }) => (
+  <button css={[styles.root, styles[BUTTON_TYPE.OUTLINE], styles[BUTTON_RADIUS.PILL]]} {...rest}>
+    {children}
+  </button>
+)
+
+SecondaryPillButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 
 export const LinkButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[type.LINK]]} {...rest}>
+  <button css={[styles.root, styles[BUTTON_TYPE.LINK]]} {...rest}>
     {children}
   </button>
 )
