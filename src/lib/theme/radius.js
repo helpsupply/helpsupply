@@ -1,6 +1,4 @@
-export const RADIUS = {
+export const Radius = {
   ROUNDED: '10px',
   PILL: '9999px'
 }
-
-export default RADIUS
