@@ -19,7 +19,7 @@ const styles = {
   }),
   [type.FILL]: css({
     color: Color.WHITE,
-    background: '#FF5A5F',
+    background: Color.CORAL,
   }),
   [type.LINK]: css({
     textDecoration: 'underline'
