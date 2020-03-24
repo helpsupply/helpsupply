@@ -5,7 +5,7 @@ import Text from './Text/Text'
 import { TEXT_TYPE } from './Text/Text.styles'
 import { PrimaryButton, SecondaryButton } from './Button'
 import InputText from './InputText'
-import TextArea from './TextArea'
+import TextArea from './Textarea'
 import Autosuggest from './Autosuggest'
 
 class StyleGuide extends React.Component {
@@ -60,12 +60,10 @@ class StyleGuide extends React.Component {
             <InputText label="Label" />
           </div>
           <div>
-            <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
-          </div>
-        </div>
-        <div css={{ width: 500 }}>
-          <div>
             <Autosuggest label="City or medical facility" suggestions={this.state.facilities} />
+          </div>
+          <div>
+            <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
           </div>
         </div>
       </div>
