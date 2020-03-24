@@ -7,7 +7,7 @@ const styles = {
   }),
   activeLabel: css({
     fontSize: 12,
-    paddingTop: Space.S5,
+    paddingTop: Space.S10,
     transition: '0.2s all ease-in-out',
   }),
   container: css({
@@ -54,22 +54,18 @@ const styles = {
       },
     },
     '.react-autosuggest__suggestions-container--open': {
-      background: Color.WHITE,
       border: `1px solid ${Color.GRAY_10}`,
-      borderRadius: Radius.ROUNDED,
       boxShadow: `0px 4px 4px ${Color.GRAY_10}`,
+      borderRadius: Radius.ROUNDED,
       color: Color.GRAY_75,
-      marginTop: 2,
-      position: 'absolute',
-      zIndex: 1,
     },
     '.react-autosuggest__suggestion-match': {
       color: Color.GRAY
     },
     '.react-autosuggest__suggestions-list': {
       listStyle: 'none',
-      marginBottom: Space.S0,
       padding: `0 ${Space.S20}px`,
+      marginBottom: Space.S0,
 
       '> li': {
         padding: `${Space.S25}px 0`,
