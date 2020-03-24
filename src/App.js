@@ -60,7 +60,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/pending-domains">
-              <PendingDomains backend={this.props.backend}/>
+              <PendingDomains backend={this.props.backend} />
             </Route>
 
             <Route exact path="/">
