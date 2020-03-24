@@ -27,7 +27,7 @@ class InputText extends React.Component {
     const { label, ...rest } = this.props
 
     return (
-      <label css={[styles.root, isFocused && styles.active]}>
+      <label css={[styles.root, value && styles.active]}>
         {label && (
           <div css={[styles.label, (isFocused || value) && styles.activeLabel]}>{label}</div>
         )}

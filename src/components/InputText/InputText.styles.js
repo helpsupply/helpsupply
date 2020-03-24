@@ -3,7 +3,7 @@ import { Color, Radius, Space } from 'lib/theme'
 
 const styles = {
   active: css({
-    borderColor: Color.CORAL_30,
+    borderColor: Color.GRAY
   }),
   activeLabel: css({
     fontSize: 12,
@@ -14,17 +14,11 @@ const styles = {
     appearance: 'none',
     background: 'transparent',
     border: 0,
-    border: `1.5px solid ${Color.GRAY_50}`,
-    borderRadius: Radius.ROUNDED,
     display: 'block',
     height: '100%',
     fontSize: 16,
     padding: `${Space.S10}px ${Space.S20}px 0 ${Space.S20}px`,
     width: '100%',
-
-    ':focus': {
-      outline: 'none',
-    },
 
     '::placeholder': { /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: Color.GRAY_50,
@@ -49,9 +43,9 @@ const styles = {
 
   }),
   root: css({
+    border: `1.5px solid ${Color.GRAY_50}`,
+    borderRadius: Radius.ROUNDED,
     display: 'flex',
-    border: `2px solid transparent`,
-    borderRadius: 11,
     flexDirection: 'column',
     height: 65,
     position: 'relative'
