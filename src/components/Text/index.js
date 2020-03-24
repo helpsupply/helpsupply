@@ -1,10 +1,12 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import { TEXT_TYPE } from './constants'
-import { textStyles } from './Text.styles'
+import styles from './Text.styles'
 
-export const Text = ({ styles, children, type = TEXT_TYPE.BODY_1, as: Tag = 'span' }) => (
-    <Tag css={[textStyles[type], styles]}>{children}</Tag>
-  )
+export const Text = ({
+  children,
+  type = TEXT_TYPE.BODY_1,
+  as: Tag = 'span',
+}) => <Tag css={css(styles[type])}>{children}</Tag>
 
-export default Text;
+export default Text

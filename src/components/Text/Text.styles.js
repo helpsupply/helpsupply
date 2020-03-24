@@ -1,16 +1,8 @@
+import { TEXT_TYPE } from './constants'
+
 export const Font = `"Inter", Helvetica, Arial, sans-serif`
 
-export const TEXT_TYPE = {
-  'HEADER_1': 'HEADER_1',
-  'HEADER_2': 'HEADER_2',
-  'HEADER_3': 'HEADER_3',
-  'HEADER_4': 'HEADER_4',
-  'BODY_1': 'BODY_1',
-  'BODY_2': 'BODY_2',
-  'NOTE': 'NOTE',
-}
-
-export const textStyles = {
+export const styles = {
   [TEXT_TYPE.HEADER_1]: `
     font-family: ${Font};
     font-size: 40px;
@@ -56,3 +48,5 @@ export const textStyles = {
   letter-spacing: -0.01em;
 `,
 }
+
+export default styles
