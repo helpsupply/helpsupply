@@ -9,6 +9,7 @@ import Autosuggest from './Autosuggest'
 import TextArea from './TextArea'
 import Anchor from './Anchor'
 import InputDropdown from './InputDropdown'
+import Card from './Card'
 
 class StyleGuide extends React.Component {
   constructor(props) {
@@ -72,6 +73,8 @@ class StyleGuide extends React.Component {
             <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
           </div>
         </div>
+        <hr />
+        <Card onClick={() => false} label="Donation requirements" details="Unused, in original packaging" />
       </div>
     );
   }
