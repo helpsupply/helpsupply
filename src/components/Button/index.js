@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { BUTTON_RADIUS, BUTTON_TYPE } from "./constants"
+import { radius, type } from "./constants"
 
 import styles from './Button.styles'
 
 export const PrimaryRoundedButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[BUTTON_TYPE.FILL], styles[BUTTON_RADIUS.ROUNDED]]} {...rest}>
+  <button css={[styles.root, styles[type.FILL], styles[radius.ROUNDED]]} {...rest}>
     {children}
   </button>
 )
@@ -16,7 +16,7 @@ PrimaryRoundedButton.propTypes = {
 }
 
 export const PrimaryPillButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[BUTTON_TYPE.FILL], styles[BUTTON_RADIUS.PILL]]} {...rest}>
+  <button css={[styles.root, styles[type.FILL], styles[radius.PILL]]} {...rest}>
     {children}
   </button>
 )
@@ -26,7 +26,7 @@ PrimaryPillButton.propTypes = {
 }
 
 export const SecondaryRoundedButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[BUTTON_TYPE.OUTLINE], styles[BUTTON_RADIUS.ROUNDED]]} {...rest}>
+  <button css={[styles.root, styles[type.OUTLINE], styles[radius.ROUNDED]]} {...rest}>
     {children}
   </button>
 )
@@ -36,7 +36,7 @@ SecondaryRoundedButton.propTypes = {
 }
 
 export const SecondaryPillButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[BUTTON_TYPE.OUTLINE], styles[BUTTON_RADIUS.PILL]]} {...rest}>
+  <button css={[styles.root, styles[type.OUTLINE], styles[radius.PILL]]} {...rest}>
     {children}
   </button>
 )
@@ -46,7 +46,7 @@ SecondaryPillButton.propTypes = {
 }
 
 export const LinkButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[BUTTON_TYPE.LINK]]} {...rest}>
+  <button css={[styles.root, styles[type.LINK]]} {...rest}>
     {children}
   </button>
 )
