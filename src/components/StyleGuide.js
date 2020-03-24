@@ -5,6 +5,7 @@ import Text from './Text/Text'
 import { TEXT_TYPE } from './Text/Text.styles'
 import { PrimaryButton, SecondaryButton } from './Button'
 import InputText from './InputText'
+import TextArea from './TextArea'
 
 class StyleGuide extends React.Component {
   render() {
@@ -38,6 +39,9 @@ class StyleGuide extends React.Component {
         <div css={{ width: 500, '> div': { marginBottom: 10 } }}>
           <div>
             <InputText label="Label" />
+          </div>
+          <div>
+            <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
           </div>
         </div>
       </div>
