@@ -7,6 +7,7 @@ class FirebaseBackend extends BackendInterface {
     super();
 
     this.firebase = testApp || Firebase.initializeApp(config);
+    this.firebase.analytics();
     this.firestore = this.firebase.firestore();
     this.loggedIn = false;
     this.authLoaded = false;
