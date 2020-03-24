@@ -8,7 +8,8 @@ if (window.location.hostname == 'localhost') {
     projectId: "help-supply-staging",
     storageBucket: "help-supply-staging.appspot.com",
     messagingSenderId: "395198068697",
-    appId: "1:395198068697:web:3a7975e877fbc98c190bc8"
+    appId: "1:395198068697:web:3a7975e877fbc98c190bc8",
+    measurementId: "G-5SYKT9JHQF"
   };
 } else {
   config = {
@@ -19,7 +20,7 @@ if (window.location.hostname == 'localhost') {
     storageBucket: "hospitalcommunity.appspot.com",
     messagingSenderId: "726825294724",
     appId: "1:726825294724:web:f3dc998705fbe6c8b09bd1",
-    measurementId: "G-NBTPC1YGF7"
+    measurementId: "G-987WXEFK5D"
   };
 }
 
