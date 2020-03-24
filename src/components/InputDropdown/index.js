@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import React from 'react'
-import Text from 'components/Text/Text'
+import Text from 'components/Text'
 import { ReactComponent as Chevron } from 'static/icons/chevron.svg'
 
 import styles from './InputDropdown.styles'
@@ -9,19 +9,30 @@ import styles from './InputDropdown.styles'
 class InputDropdown extends React.Component {
   constructor(props) {
     super(props)
-
+    this.listEl = null
+    this.inputEl = null
     this.state = {
       isOpen: false,
       value: ''
     }
   }
 
-  onChange = (option) => {
-    this.setState({ value: option.label })
+  componentDidMount() {
+    window.addEventListener('mousedown', (e) => {
+      this.setState((prevState) => { // clicked outside list
+        if (prevState.isOpen && !this.listEl.contains(e.target) || e.target === this.inputEl) {
+          return ({ isOpen: !this.state.isOpen })
+        }
+      })
+    })
   }
 
-  toggleOpen = () => {
-    this.setState({ isFocused: !this.state.isFocused, isOpen: !this.state.isOpen })
+  componentWillUnmount() {
+    window.removeEventListener('mousedown')
+  }
+
+  onChange = (option) => {
+    this.setState({ value: option.label, isOpen: false })
   }
 
   render() {
@@ -35,11 +46,10 @@ class InputDropdown extends React.Component {
         </span>
         <div
           value={value}
-          onClick={this.toggleOpen}
-          onBlur={this.toggleOpen}
+          ref={(ref) => this.inputEl = ref}
           css={styles.dropdown}>
           {isOpen && (
-            <ul css={styles.list}>
+            <ul css={styles.list} ref={(ref) => this.listEl = ref}>
               {options.map(option => (
                 <li
                   onClick={() => this.onChange(option)}
