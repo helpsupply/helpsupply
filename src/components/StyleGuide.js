@@ -5,7 +5,6 @@ import { TEXT_TYPE } from './Text/constants'
 import Text from './Text'
 import { PrimaryButton, SecondaryButton } from './Button'
 import InputText from './InputText'
-import Autosuggest from './Autosuggest'
 import TextArea from './TextArea'
 import Anchor from './Anchor'
 import InputDropdown from './InputDropdown'
@@ -62,9 +61,6 @@ class StyleGuide extends React.Component {
         <div css={{ width: 500, '> div': { marginBottom: 15 } }}>
           <div>
             <InputText label="Label" />
-          </div>
-          <div>
-            <Autosuggest label="City or medical facility" suggestions={this.state.facilities} />
           </div>
           <div>
             <InputDropdown placeholder="Select supply type" options={[{ label: 'Foo', value: 'foo' }, { label: 'Bar', value: 'bar' }]} />
