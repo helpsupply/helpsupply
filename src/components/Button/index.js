@@ -34,3 +34,13 @@ export const LinkButton = ({ children, ...rest }) => (
 LinkButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
+
+export const IconButton = ({ children, ...rest }) => (
+  <button css={styles.root} {...rest}>
+    {children}
+  </button>
+)
+
+IconButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+}
