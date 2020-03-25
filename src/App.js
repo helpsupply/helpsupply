@@ -13,10 +13,9 @@ import Logout from "./components/Logout";
 import Profile from "./components/Profile";
 import NewDropSite from "./components/NewDropSite";
 import StyleGuide from "./components/StyleGuide";
-import EntryPortal from "./components/EntryPortal";
 
-import Entry from "pages/EntryPortal";
-import Request from "pages/Request/index";
+import EntryPortal from "pages/entry";
+import Request from "pages/request";
 
 class App extends React.Component {
   constructor(props) {
@@ -67,16 +66,12 @@ class App extends React.Component {
                 <PendingDomains backend={this.props.backend} />
               </Route>
 
-              <Route exact path="/">
-                <EntryPortal backend={this.props.backend} />
-              </Route>
-
               <Route exact path="/style-guide">
                 <StyleGuide backend={this.props.backend} />
               </Route>
 
-              <Route path="/start">
-                <Entry backend={this.props.backend} />
+              <Route exact path="/">
+                <EntryPortal backend={this.props.backend} />
               </Route>
               <Route path="/request">
                 <Request backend={this.props.backend} />

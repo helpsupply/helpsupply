@@ -16,9 +16,10 @@ const styles = {
   }),
   root: css({
     display: "flex",
-    height: "100%",
     flexDirection: "column",
+    height: "100%",
     justifyContent: "space-between",
+    padding: `${Space.S30}px 0`,
   }),
 };
 
