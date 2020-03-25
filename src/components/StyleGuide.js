@@ -1,12 +1,13 @@
 /** @jsx jsx */
 import React from 'react'
 import { jsx } from '@emotion/core'
-import Text from './Text/Text'
-import { TEXT_TYPE } from './Text/Text.styles'
+import { TEXT_TYPE } from './Text/constants'
+import Text from './Text'
 import { PrimaryButton, SecondaryButton } from './Button'
 import InputText from './InputText'
-import TextArea from './Textarea'
 import Autosuggest from './Autosuggest'
+import TextArea from './TextArea'
+import Anchor from './Anchor'
 
 class StyleGuide extends React.Component {
   constructor(props) {
@@ -38,7 +39,8 @@ class StyleGuide extends React.Component {
         <Text as='h4' type={TEXT_TYPE.HEADER_4}>Header 4</Text>
         <Text as='p' type={TEXT_TYPE.BODY_1}>Body 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at nunc faucibus neque finibus ultrices a non risus.</Text>
         <Text as='p' type={TEXT_TYPE.BODY_2}>Body 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at nunc faucibus neque finibus ultrices a non risus.</Text>
-        <Text as='p' >Body 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at nunc faucibus neque finibus ultrices a non risus.</Text>
+        <Text as='p' type={TEXT_TYPE.NOTE}>Note. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at nunc faucibus neque finibus ultrices a non risus.</Text>
+        <Anchor href="/">Anchor Link</Anchor>
         <hr />
         <div css={{ width: 500, '> div': { marginBottom: 10 } }}>
           <div>
@@ -71,4 +73,4 @@ class StyleGuide extends React.Component {
   }
 }
 
-export default StyleGuide;
+export default StyleGuide
