@@ -4,7 +4,7 @@ import Anchor from "components/Anchor";
 
 class EntryPortal extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
@@ -16,4 +16,4 @@ class EntryPortal extends React.Component {
   }
 }
 
-export default withRouter(EntryPortal)
+export default withRouter(EntryPortal);
