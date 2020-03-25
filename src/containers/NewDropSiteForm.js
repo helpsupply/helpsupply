@@ -13,6 +13,7 @@ class NewDropSite extends React.Component {
   }
 
   checkVerification() {
+    debugger;
     if (!this.props.backend.isLoggedIn()) {
       setTimeout(this.checkVerification, 100);
       return;
@@ -74,14 +75,14 @@ class NewDropSite extends React.Component {
             </div>
           </div>
         )}
-        <NewDropSiteForm
+        {/* <NewDropSiteForm
           backend={this.props.backend}
           dropSiteId={this.props.match.params.dropsite}
           verified={this.state.verified}
-        />
+        /> */}
       </div>
     );
   }
 }
 
-export default withRouter(NewDropSite);
+export default NewDropSite;

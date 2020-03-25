@@ -2,7 +2,6 @@ import React from "react";
 import { Global } from "@emotion/core";
 import { styles } from "./App.styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HCPSignup from "./components/HCPSignup";
 import HCPSignupFinish from "./components/HCPSignupFinish";
 import DropSiteAdmin from "./components/DropSiteAdmin";
 import DropSite from "./components/DropSite";
@@ -11,11 +10,12 @@ import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile";
-import NewDropSite from "./components/NewDropSite";
 import StyleGuide from "./components/StyleGuide";
 
+import NewDropSite from "pages/dropsite_new";
 import EntryPortal from "pages/entry";
 import Request from "pages/request";
+import SignUp from "pages/signup";
 
 class App extends React.Component {
   constructor(props) {
@@ -43,9 +43,6 @@ class App extends React.Component {
               </Route>
               <Route path="/dropsite/new/admin/:dropsite?">
                 <NewDropSite backend={this.props.backend} />
-              </Route>
-              <Route path="/signup/:dropsite?">
-                <HCPSignup backend={this.props.backend} />
               </Route>
               <Route path="/signupFinish/:dropsite?">
                 <HCPSignupFinish backend={this.props.backend} />
@@ -76,6 +73,10 @@ class App extends React.Component {
               <Route path="/request">
                 <Request backend={this.props.backend} />
               </Route>
+              <Route path="/signup/:dropsite?">
+                <SignUp backend={this.props.backend} />
+              </Route>
+
               <Route path="*">
                 <NoMatch />
               </Route>

@@ -3,18 +3,18 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import { withRouter } from "react-router-dom";
 import Box from "components/Box";
-import FindFacility from "containers/FindFacility";
+import NewDropSiteForm from "containers/NewDropSiteForm";
 import BackButton from "components/BackButton";
 
-class Request extends React.Component {
+class NewDropSite extends React.Component {
   render() {
     return (
       <Box>
         <BackButton />
-        <FindFacility {...this.props} />
+        <NewDropSiteForm {...this.props} />
       </Box>
     );
   }
 }
 
-export default withRouter(Request);
+export default withRouter(NewDropSite);
