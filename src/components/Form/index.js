@@ -44,7 +44,12 @@ class Form extends React.Component {
           )}
           {this.props.children}
         </div>
-        <PrimaryButton type="submit" disabled={disabled} css={styles.button}>
+        <PrimaryButton
+          type="submit"
+          onClick={onSubmit}
+          disabled={disabled}
+          css={styles.button}
+        >
           <Text type={TEXT_TYPE.BODY_1}>{buttonLabel}</Text>
         </PrimaryButton>
       </form>

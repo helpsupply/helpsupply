@@ -19,7 +19,7 @@ const styles = {
     flexDirection: "column",
     height: "100%",
     justifyContent: "space-between",
-    padding: `${Space.S30}px 0`,
+    paddingBottom: Space.S60,
   }),
 }
 
