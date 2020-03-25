@@ -10,9 +10,9 @@ import NoMatch from "./components/NoMatch";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile";
-import NewDropSite from "./components/NewDropSite";
 import StyleGuide from "./components/StyleGuide";
 
+import NewDropSite from "pages/dropsite_new";
 import EntryPortal from "pages/entry";
 import Request from "pages/request";
 import SignUp from "pages/signup";
@@ -73,6 +73,10 @@ class App extends React.Component {
               <Route path="/request">
                 <Request backend={this.props.backend} />
               </Route>
+              <Route path="/signup/:dropsite?">
+                <SignUp backend={this.props.backend} />
+              </Route>
+
               <Route path="*">
                 <NoMatch />
               </Route>

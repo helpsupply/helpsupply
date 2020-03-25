@@ -18,7 +18,7 @@ class DropSite extends React.Component {
       needs: [],
       supply: [],
       cart: [],
-      alertClicked: false
+      alertClicked: false,
     };
     this.handleNewSupply = this.handleNewSupply.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
@@ -30,7 +30,7 @@ class DropSite extends React.Component {
     var element = document.getElementById("donationForm");
     element.scrollIntoView({ behavior: "smooth" });
     this.setState({
-      alertClicked: true
+      alertClicked: true,
     });
   }
 
@@ -38,7 +38,7 @@ class DropSite extends React.Component {
     let oldList = this.state.supply;
     oldList.push(supplyObj);
     this.setState({
-      supply: oldList
+      supply: oldList,
     });
   }
 
@@ -46,7 +46,7 @@ class DropSite extends React.Component {
     let oldList = this.state.cart;
     oldList.push(itemToAdd);
     this.setState({
-      cart: oldList
+      cart: oldList,
     });
   }
 
@@ -54,7 +54,7 @@ class DropSite extends React.Component {
     let oldList = this.state.cart;
     oldList.splice(i, 1);
     this.setState({
-      cart: oldList
+      cart: oldList,
     });
   }
 
@@ -63,27 +63,27 @@ class DropSite extends React.Component {
   handleSubmit(event) {}
 
   componentDidMount() {
-    this.props.backend.getRequests(this.props.match.params.id).then(data => {
+    this.props.backend.getRequests(this.props.match.params.id).then((data) => {
       this.setState(
         {
-          needs: data
+          needs: data,
         },
         () => {
           // console.log(this.state);
         }
       );
     });
-    this.props.backend.listSupply(this.props.match.params.id).then(data => {
+    this.props.backend.listSupply(this.props.match.params.id).then((data) => {
       this.setState(
         {
-          supply: data
+          supply: data,
         },
         () => {
           // console.log(this.state);
         }
       );
     });
-    this.props.backend.getDropSites(this.props.match.params.id).then(data => {
+    this.props.backend.getDropSites(this.props.match.params.id).then((data) => {
       this.setState(
         {
           dropSiteId: data.location_id,
@@ -92,7 +92,7 @@ class DropSite extends React.Component {
           dropSiteZip: data.dropSiteZip,
           dropSiteDescription: data.dropSiteDescription,
           dropSiteHospital: data.dropSiteHospital,
-          dropSitePhone: data.dropSitePhone
+          dropSitePhone: data.dropSitePhone,
         },
         () => {
           //console.log(this.state);
