@@ -1,5 +1,5 @@
 import React from "react";
-import { Global } from '@emotion/core'
+import { Global } from "@emotion/core";
 import { styles } from "./App.styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HCPSignup from "./components/HCPSignup";
@@ -13,8 +13,9 @@ import Logout from "./components/Logout";
 import Profile from "./components/Profile";
 import NewDropSite from "./components/NewDropSite";
 import StyleGuide from "./components/StyleGuide";
+import EntryPortal from "./components/EntryPortal";
 
-import EntryPortal from "pages/EntryPortal";
+import Entry from "pages/EntryPortal";
 import Request from "pages/Request/index";
 
 class App extends React.Component {
@@ -22,11 +23,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       user: {},
-      userData: {}
+      userData: {},
     };
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
   render() {
     return (
@@ -74,8 +75,8 @@ class App extends React.Component {
                 <StyleGuide backend={this.props.backend} />
               </Route>
 
-              <Route path="/dropsite">
-                <EntryPortal backend={this.props.backend} />
+              <Route path="/start">
+                <Entry backend={this.props.backend} />
               </Route>
               <Route path="/request">
                 <Request backend={this.props.backend} />
