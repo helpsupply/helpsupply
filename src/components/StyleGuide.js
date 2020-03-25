@@ -10,6 +10,7 @@ import TextArea from './TextArea'
 import Anchor from './Anchor'
 import InputDropdown from './InputDropdown'
 import Card from './Card'
+import Request from './Request'
 
 class StyleGuide extends React.Component {
   constructor(props) {
@@ -119,6 +120,28 @@ class StyleGuide extends React.Component {
           label="Donation requirements"
           details="Unused, in original packaging"
         />
+        <div
+          css={{
+            padding: '20px 10px',
+            background: '#F5F5F5',
+          }}>
+          <Request
+            date="2020-03-26T05:31:40.665Z"
+            donation="0"
+            id="1454"
+            name="N95 Masks"
+            onDelete={() => false}
+            request="1750"
+          />
+          <Request
+            date="2020-03-26T05:31:40.665Z"
+            donation="400"
+            id="1454"
+            name="Surgical Masks"
+            onDelete={() => false}
+            request="800"
+          />
+        </div>
       </div>
     )
   }

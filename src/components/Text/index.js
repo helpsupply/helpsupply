@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { TEXT_TYPE } from './constants'
-import { textStyles } from './Text.styles'
+import { jsx } from "@emotion/core";
+import { TEXT_TYPE } from "./constants";
+import { textStyles } from "./Text.styles";
 
 export const Text = ({
   children,

@@ -1,4 +1,5 @@
 import { css } from '@emotion/core'
+import { Color } from './theme/lib'
 import { TEXT_TYPE } from './constants'
 
 export const Font = `"Inter", Helvetica, Arial, sans-serif`
@@ -47,6 +48,14 @@ export const textStyles = {
     fontSize: 12,
     lineHeight: '18px',
     letterSpacing: '-0.01em',
+  }),
+  [TEXT_TYPE.CONTENT]: css({
+    color: Color.GRAY_50,
+    fontFamily: Font,
+    fontSize: 12,
+    fontWeight: 500,
+    letterSpacing: '-0.01em',
+    lineHeight: '18px',
   }),
 }
 

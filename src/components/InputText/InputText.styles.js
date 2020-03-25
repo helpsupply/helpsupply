@@ -14,7 +14,6 @@ const styles = {
     appearance: 'none',
     background: 'transparent',
     border: 0,
-    border: `1.5px solid ${Color.GRAY_50}`,
     borderRadius: Radius.ROUNDED,
     display: 'block',
     height: '100%',
@@ -26,15 +25,16 @@ const styles = {
       outline: 'none',
     },
 
-    '::placeholder': { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    '::placeholder': {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: Color.GRAY_50,
-      opacity: 1, /* Firefox */
+      opacity: 1 /* Firefox */,
     },
-    ':-ms-input-placeholder': { /* Internet Explorer 10-11 */
-      color: Color.GRAY_50,
+    ':-ms-input-placeholder': {
+      /* Internet Explorer 10-11 */ color: Color.GRAY_50,
     },
-    '::-ms-input-placeholder': { /* Microsoft Edge */
-      color: Color.GRAY_50,
+    '::-ms-input-placeholder': {
+      /* Microsoft Edge */ color: Color.GRAY_50,
     },
   }),
   label: css({
@@ -46,7 +46,6 @@ const styles = {
     left: Space.S20,
     pointerEvents: 'none',
     transition: '0.2s all ease-in-out',
-
   }),
   root: css({
     display: 'flex',
@@ -54,7 +53,7 @@ const styles = {
     borderRadius: 11,
     flexDirection: 'column',
     height: 65,
-    position: 'relative'
+    position: 'relative',
   }),
 }
 
