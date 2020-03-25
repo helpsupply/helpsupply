@@ -19,7 +19,7 @@ class DropSiteAdmin extends React.Component {
       needs: [],
       supply: [],
       verified: true,
-      badDomain: true
+      badDomain: true,
     };
     this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
@@ -30,29 +30,29 @@ class DropSiteAdmin extends React.Component {
     let oldList = this.state.needs;
     oldList.push(requestObj);
     this.setState({
-      needs: oldList
+      needs: oldList,
     });
     window.scrollTo(0, 0);
   }
 
   handleRemoveRequest(requestId) {
     let oldList = this.state.needs;
-    let newList = oldList.filter(function(obj) {
+    let newList = oldList.filter(function (obj) {
       return obj.id !== requestId;
     });
     this.setState({
-      needs: newList
+      needs: newList,
     });
   }
 
   handleDeleteSupply(supplyId) {
     this.props.backend.deleteSupply(supplyId);
     let oldList = this.state.supply;
-    let newList = oldList.filter(function(obj) {
+    let newList = oldList.filter(function (obj) {
       return obj.id !== supplyId;
     });
     this.setState({
-      supply: newList
+      supply: newList,
     });
   }
 
@@ -69,15 +69,15 @@ class DropSiteAdmin extends React.Component {
       return;
     }
 
-    this.props.backend.isValidHealthcareWorker().then(verified => {
+    this.props.backend.isValidHealthcareWorker().then((verified) => {
       if (verified) {
         this.setState({
-          verified: true
+          verified: true,
         });
       } else {
         this.setState({
           verified: false,
-          badDomain: this.props.backend.badDomain
+          badDomain: this.props.backend.badDomain,
         });
         console.log("not verified, will try again in 30 seconds");
         setTimeout(this.checkVerification, 10000);
@@ -86,25 +86,25 @@ class DropSiteAdmin extends React.Component {
   }
 
   componentDidMount() {
-    this.props.backend.getRequests(this.props.match.params.id).then(data => {
+    this.props.backend.getRequests(this.props.match.params.id).then((data) => {
       this.setState(
         {
-          needs: data
+          needs: data,
         },
         () => {}
       );
     });
-    this.props.backend.listSupply(this.props.match.params.id).then(data => {
+    this.props.backend.listSupply(this.props.match.params.id).then((data) => {
       this.setState(
         {
-          supply: data
+          supply: data,
         },
         () => {
           // console.log(this.state);
         }
       );
     });
-    this.props.backend.getDropSites(this.props.match.params.id).then(data => {
+    this.props.backend.getDropSites(this.props.match.params.id).then((data) => {
       this.setState(
         {
           dropSiteId: data.location_id,
@@ -113,7 +113,7 @@ class DropSiteAdmin extends React.Component {
           dropSiteZip: data.dropSiteZip,
           dropSiteDescription: data.dropSiteDescription,
           dropSiteHospital: data.dropSiteHospital,
-          dropSitePhone: data.dropSitePhone
+          dropSitePhone: data.dropSitePhone,
         },
         () => {}
       );
@@ -163,7 +163,7 @@ class DropSiteAdmin extends React.Component {
                 style={{
                   color: "#721c24",
                   fontWeight: "bold",
-                  textDecoration: "underline"
+                  textDecoration: "underline",
                 }}
               >
                 log out
