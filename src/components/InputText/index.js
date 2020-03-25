@@ -45,7 +45,7 @@ class InputText extends React.Component {
           {...rest}
         />
       </label>
-    );
+    )
   }
 }
 
