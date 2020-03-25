@@ -1,5 +1,5 @@
-import { css } from "@emotion/core";
-import { Space } from "lib/theme";
+import { css } from '@emotion/core'
+import { Space } from 'lib/theme'
 
 const styles = {
   back: css({
@@ -16,10 +16,11 @@ const styles = {
   }),
   root: css({
     display: "flex",
-    height: "100%",
     flexDirection: "column",
+    height: "100%",
     justifyContent: "space-between",
+    padding: `${Space.S30}px 0`,
   }),
-};
+}
 
-export default styles;
+export default styles

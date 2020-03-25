@@ -13,21 +13,20 @@ import Logout from "./components/Logout";
 import Profile from "./components/Profile";
 import NewDropSite from "./components/NewDropSite";
 import StyleGuide from "./components/StyleGuide";
-import EntryPortal from "./components/EntryPortal";
 
-import Entry from "pages/EntryPortal";
-import Request from "pages/Request/index";
+import EntryPortal from "pages/entry";
+import Request from "pages/request";
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       user: {},
       userData: {},
-    };
+    }
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     return (
@@ -51,32 +50,25 @@ class App extends React.Component {
               <Route path="/signupFinish/:dropsite?">
                 <HCPSignupFinish backend={this.props.backend} />
               </Route>
-
               <Route path="/dropsite/:id/admin">
                 <DropSiteAdmin backend={this.props.backend} />
               </Route>
               <Route path="/dropsite/:id">
                 <DropSite backend={this.props.backend} />
               </Route>
-
               <Route path="/profile">
                 <Profile backend={this.props.backend} />
               </Route>
-
               <Route path="/pending-domains">
                 <PendingDomains backend={this.props.backend} />
-              </Route>
-
-              <Route exact path="/">
-                <EntryPortal backend={this.props.backend} />
               </Route>
 
               <Route exact path="/style-guide">
                 <StyleGuide backend={this.props.backend} />
               </Route>
 
-              <Route path="/start">
-                <Entry backend={this.props.backend} />
+              <Route exact path="/">
+                <EntryPortal backend={this.props.backend} />
               </Route>
               <Route path="/request">
                 <Request backend={this.props.backend} />
@@ -88,8 +80,8 @@ class App extends React.Component {
           </div>
         </Router>
       </>
-    );
+    )
   }
 }
 
-export default App;
+export default App
