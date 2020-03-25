@@ -3,18 +3,22 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import { withRouter } from "react-router-dom";
 import Box from "components/Box";
-import FindFacility from "containers/FindFacility";
+import EmailForm from "containers/EmailForm";
 import BackButton from "components/BackButton";
 
-class Request extends React.Component {
+class SignUp extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <Box>
         <BackButton />
-        <FindFacility {...this.props} />
+        <EmailForm {...this.props} />
       </Box>
     );
   }
 }
 
-export default withRouter(Request);
+export default withRouter(SignUp);
