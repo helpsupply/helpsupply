@@ -34,12 +34,15 @@ const Lifespans = {
   DEFAULT: 5
 };
 
+// DB Consts:
+const db = admin.firestore();
+const dropSiteRef = db.collection("dropSite");
+
 // look through hospitals and zip
 app.intent("HCP Signup - hospitalZip", (conv, data) => {
   let zipCode = data["zip-code"];
   // right now this index only accepts
   const searchResults = tools.searchByZip(hospital_index.index, zipCode);
-  console.log(searchResults);
 
   if (searchResults.length === 0) {
     conv.ask(
@@ -74,10 +77,28 @@ app.intent("HCP Signup - hospitalZip", (conv, data) => {
 app.intent("HCPSignup-Followup-OneResult-Yes", (conv, data) => {
   const context = conv.contexts.get("one_facility_found");
   const searchResults = context.parameters.results;
-  console.log(searchResults);
-  conv.ask(
-    `Let's look to see if: ${searchResults[0].h.name} has a drop-off location.`
-  );
+  const location_id = searchResults[0].id;
+  const dropSite = dropSiteRef.doc(`${location_id}`);
+  console.log(dropSite);
+
+  return dropSite
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        var data = doc.data();
+        conv.ask(
+          `Great we have a drop-off location for this facility at: ${data.dropSiteAddress}.`
+        );
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        conv.ask(`We don't have a drop-off location for this facility.`);
+      }
+    })
+    .catch(e => {
+      console.log("error:", e);
+      conv.close("Sorry, try again.");
+    });
 });
 
 exports.dialogflowWebhook = functions.https.onRequest(app);
