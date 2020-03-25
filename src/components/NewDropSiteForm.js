@@ -356,7 +356,7 @@ class NewDropSiteForm extends React.Component {
               responsible for procuring supplies?
             </p>
             <div className="requestFormField">
-              <div className="formLabel">Phone or Email (Optional)</div>
+              <div className="formLabel">Email or Phone number</div>
               <input
                 className="form-control newRequestFormField"
                 id="dropSitePhone"
