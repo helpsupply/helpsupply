@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
 import React from 'react'
+import { jsx } from '@emotion/core'
 
 import styles from './TextArea.styles'
 
@@ -14,7 +14,7 @@ class TextArea extends React.Component {
     }
   }
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ value: e.target.value })
   }
 
