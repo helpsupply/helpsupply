@@ -1,5 +1,5 @@
 import { css } from '@emotion/core'
-import { Color } from './theme/lib'
+import { Color } from 'lib/theme'
 import { TEXT_TYPE } from './constants'
 
 export const Font = `"Inter", Helvetica, Arial, sans-serif`
