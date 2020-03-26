@@ -4,6 +4,7 @@ import InputText from 'components/InputText'
 import { TEXT_TYPE } from 'components/Text/constants'
 import HeaderInfo from 'components/Form/HeaderInfo'
 import TextArea from 'components/TextArea'
+import InputCheckbox from 'components/Checkbox'
 
 class DropSiteForm extends React.Component {
   constructor(props) {
@@ -83,6 +84,7 @@ class DropSiteForm extends React.Component {
           label="Is there anything else you’d like others to know about the situation at your facility?"
           customOnChange={this.handleFieldChange('notes')}
         />
+        <InputCheckbox label="My facility will pay for large volumes of high-quality supplies." />
       </Form>
     )
   }
