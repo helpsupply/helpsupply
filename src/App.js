@@ -1,21 +1,22 @@
-import React from "react";
-import { Global } from "@emotion/core";
-import { styles } from "./App.styles";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HCPSignupFinish from "./components/HCPSignupFinish";
-import DropSiteAdmin from "./components/DropSiteAdmin";
-import DropSite from "./components/DropSite";
-import PendingDomains from "./components/PendingDomains";
-import NoMatch from "./components/NoMatch";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
-import Profile from "./components/Profile";
-import StyleGuide from "./components/StyleGuide";
+import React from 'react'
+import { Global } from '@emotion/core'
+import { styles } from './App.styles'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import HCPSignupFinish from './components/HCPSignupFinish'
+import DropSiteAdmin from './components/DropSiteAdmin'
+import DropSite from './components/DropSite'
+import PendingDomains from './components/PendingDomains'
+import NoMatch from './components/NoMatch'
+import Login from './components/Login'
+import Logout from './components/Logout'
+import Profile from './components/Profile'
+import StyleGuide from './components/StyleGuide'
 
-import NewDropSite from "pages/dropsite_new";
-import EntryPortal from "pages/entry";
-import Request from "pages/request";
-import SignUp from "pages/signup";
+import AdminDropSite from 'pages/dropsite_admin'
+import NewDropSite from 'pages/dropsite_new'
+import EntryPortal from 'pages/entry'
+import Request from 'pages/request'
+import SignUp from 'pages/signup'
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
   render() {
     return (
@@ -48,7 +49,7 @@ class App extends React.Component {
                 <HCPSignupFinish backend={this.props.backend} />
               </Route>
               <Route path="/dropsite/:id/admin">
-                <DropSiteAdmin backend={this.props.backend} />
+                <AdminDropSite backend={this.props.backend} />
               </Route>
               <Route path="/dropsite/:id">
                 <DropSite backend={this.props.backend} />

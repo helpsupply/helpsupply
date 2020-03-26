@@ -6,8 +6,9 @@ import * as hospital_index from '../data/hospital_index'
 import Box from 'components/Box'
 import DropSiteForm from 'containers/DropSiteForm'
 import BackButton from 'components/BackButton'
+import DropSiteAdmin from 'components/DropSiteAdmin'
 
-class NewDropSite extends React.Component {
+class AdminDropSite extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -16,27 +17,32 @@ class NewDropSite extends React.Component {
       badDomain: false,
     }
     this.checkVerification = this.checkVerification.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
   }
 
   checkVerification() {
     if (!this.props.backend.isLoggedIn()) {
-      setTimeout(this.checkVerification, 100)
+      console.log(this.props.backend.authLoaded)
+      if (this.props.backend.authLoaded) {
+        let url = '/dropsite/' + this.props.match.params.id
+        this.props.history.push(url)
+        return
+      } else {
+        setTimeout(this.checkVerification, 100)
+      }
       return
     }
 
     this.props.backend.isValidHealthcareWorker().then((verified) => {
       if (verified) {
-        console.log('verified')
         this.setState({
-          loading: false,
           verified: true,
+          loading: false,
         })
       } else {
         this.setState({
-          loading: false,
           verified: false,
           badDomain: this.props.backend.badDomain,
+          loading: false,
         })
         console.log('not verified, will try again in 30 seconds')
         setTimeout(this.checkVerification, 10000)
@@ -45,36 +51,44 @@ class NewDropSite extends React.Component {
   }
 
   componentDidMount() {
-    Promise.resolve(this.checkVerification()).then(() => {
-      const dropsite =
-        hospital_index.index.id_index[this.props.match.params.dropsite]
-      if (dropsite) {
-        this.props.history.replace(
-          `/dropsite/${this.props.match.params.dropsite}/admin`
-        )
-      }
+    this.props.backend.getRequests(this.props.match.params.id).then((data) => {
+      this.setState(
+        {
+          needs: data,
+        },
+        () => {}
+      )
     })
-  }
+    this.props.backend.listSupply(this.props.match.params.id).then((data) => {
+      this.setState(
+        {
+          supply: data,
+        },
+        () => {
+          // console.log(this.state);
+        }
+      )
+    })
+    this.props.backend.getDropSites(this.props.match.params.id).then((data) => {
+      this.setState(
+        {
+          dropSiteId: data?.location_id,
+          dropSiteName: data?.dropSiteName,
+          dropSiteAddress: data?.dropSiteAddress,
+          dropSiteZip: data?.dropSiteZip,
+          dropSiteDescription: data?.dropSiteDescription,
+          dropSiteHospital: data?.dropSiteHospital,
+          dropSitePhone: data?.dropSitePhone,
+        },
+        () => {}
+      )
+    })
 
-  onSubmit(hospital) {
-    this.props.backend.addNewDropSite(hospital).then((data) => {
-      let url = '/dropsite/' + data + '/admin'
-      this.props.history.push(url)
-    })
+    this.checkVerification()
   }
 
   render() {
-    let content = (
-      <Fragment>
-        <BackButton />
-        <DropSiteForm
-          onSubmit={this.onSubmit}
-          backend={this.props.backend}
-          dropSite={this.props.match.params.dropsite}
-          verified={this.state.verified}
-        />
-      </Fragment>
-    )
+    let content = <DropSiteAdmin backend={this.props.backend} {...this.state} />
 
     if (this.state.loading) {
       content = (
@@ -114,4 +128,4 @@ class NewDropSite extends React.Component {
   }
 }
 
-export default withRouter(NewDropSite)
+export default withRouter(AdminDropSite)

@@ -1,14 +1,14 @@
 /** @jsx jsx */
-import React from "react";
-import { jsx } from "@emotion/core";
-import * as tools from "../functions";
-import * as hospital_index from "../data/hospital_index";
-import AutosuggestHighlightMatch from "autosuggest-highlight/match";
-import AutosuggestHighlightParse from "autosuggest-highlight/parse";
-import Text from "components/Text";
-import { TEXT_TYPE } from "components/Text/constants";
-import Form from "components/Form";
-import Autosuggest from "components/Autosuggest";
+import React from 'react'
+import { jsx } from '@emotion/core'
+import * as tools from '../functions'
+import * as hospital_index from '../data/hospital_index'
+import AutosuggestHighlightMatch from 'autosuggest-highlight/match'
+import AutosuggestHighlightParse from 'autosuggest-highlight/parse'
+import Text from 'components/Text'
+import { TEXT_TYPE } from 'components/Text/constants'
+import Form from 'components/Form'
+import Autosuggest from 'components/Autosuggest'
 
 const renderSuggestion = ({ hospital }, { query }) => {
   const nameMatches = AutosuggestHighlightMatch(hospital.name, query)
@@ -103,13 +103,13 @@ class FacilityForm extends React.Component {
         .dropSiteExists(this.state.selectedResult)
         .then((exists) => {
           if (exists) {
-            let url = "/dropsite/" + this.state.selectedResult + "/admin";
-            this.props.history.push(url);
+            let url = '/dropsite/' + this.state.selectedResult + '/admin'
+            this.props.history.push(url)
           } else {
-            let url = "/dropsite/new/admin/" + this.state.selectedResult;
-            this.props.history.push(url);
+            let url = '/dropsite/new/admin/' + this.state.selectedResult
+            this.props.history.push(url)
           }
-        });
+        })
     } else {
       let url = '/signup/' + this.state.selectedResult
       this.props.history.push(url)
@@ -122,8 +122,7 @@ class FacilityForm extends React.Component {
         onSubmit={this.handleRedirect}
         title="Find your healthcare facility"
         description="I'm a healthcare professional working at:"
-        disabled={!this.state.selectedResult}
-      >
+        disabled={!this.state.selectedResult}>
         <Autosuggest
           label="City or healthcare facility"
           suggestions={this.state.results}
@@ -133,8 +132,8 @@ class FacilityForm extends React.Component {
           onSelect={this.handleSelectHospital}
         />
       </Form>
-    );
+    )
   }
 }
 
-export default FacilityForm;
+export default FacilityForm
