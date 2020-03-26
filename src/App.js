@@ -12,6 +12,7 @@ import Logout from './components/Logout'
 import Profile from './components/Profile'
 import StyleGuide from './components/StyleGuide'
 
+import NewSupplyRequest from 'pages/supplies_new'
 import AdminDropSite from 'pages/dropsite_admin'
 import NewFacility from 'pages/facility_new'
 import NewDropSite from 'pages/dropsite_new'
@@ -45,6 +46,9 @@ class App extends React.Component {
               </Route>
               <Route path="/dropsite/new/admin/:dropsite?">
                 <NewDropSite backend={this.props.backend} />
+              </Route>
+              <Route path="/new/admin/supply/:dropsite?">
+                <NewSupplyRequest backend={this.props.backend} />
               </Route>
               <Route path="/signupFinish/:dropsite?">
                 <HCPSignupFinish backend={this.props.backend} />
