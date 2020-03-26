@@ -60,7 +60,7 @@ class HCPSignup extends React.Component {
             <form className="linkSubmitGroup" onSubmit={this.submitEmail}>
               <input
                 className="form-control"
-                placeholder="Your institutional email, i.e. john@kp.org"
+                placeholder="Institutional email, i.e. john@kp.org"
                 value={this.state.email}
                 onChange={this.handleEmailChange}
               />
