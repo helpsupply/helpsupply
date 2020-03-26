@@ -12,13 +12,6 @@ class FacilityForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      errors: {
-        name: '',
-        description: '',
-        address: '',
-        zip: '',
-        hospital: '',
-      },
       dropSiteName: '',
       dropSiteZip: '',
       dropSiteAddress: '',
@@ -41,11 +34,15 @@ class FacilityForm extends React.Component {
   }
 
   render() {
+    const { dropSiteUrl, ...requiredFields } = this.state
     return (
       <Form
         buttonLabel="Submit"
         onSubmit={this.handleSubmit}
         title="Add a new facility"
+        disabled={
+          !Object.keys(requiredFields).every((key) => !!this.state[key])
+        }
         description="Enter some information about your facility.">
         <InputText
           label="Name of the facility"
