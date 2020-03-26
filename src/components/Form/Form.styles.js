@@ -15,10 +15,11 @@ const styles = {
     minHeight: 65,
   }),
   root: css({
-    display: 'flex',
-    height: '100%',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    justifyContent: "space-between",
+    paddingBottom: Space.S60,
   }),
 }
 

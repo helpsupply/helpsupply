@@ -1,22 +1,21 @@
-import React from 'react'
-import { Global } from '@emotion/core'
-import { styles } from './App.styles'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import HCPSignup from './components/HCPSignup'
-import HCPSignupFinish from './components/HCPSignupFinish'
-import DropSiteAdmin from './components/DropSiteAdmin'
-import DropSite from './components/DropSite'
-import PendingDomains from './components/PendingDomains'
-import NoMatch from './components/NoMatch'
-import Login from './components/Login'
-import Logout from './components/Logout'
-import Profile from './components/Profile'
-import NewDropSite from './components/NewDropSite'
-import StyleGuide from './components/StyleGuide'
-import EntryPortal from './components/EntryPortal'
+import React from "react";
+import { Global } from "@emotion/core";
+import { styles } from "./App.styles";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import HCPSignupFinish from "./components/HCPSignupFinish";
+import DropSiteAdmin from "./components/DropSiteAdmin";
+import DropSite from "./components/DropSite";
+import PendingDomains from "./components/PendingDomains";
+import NoMatch from "./components/NoMatch";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import Profile from "./components/Profile";
+import NewDropSite from "./components/NewDropSite";
+import StyleGuide from "./components/StyleGuide";
 
-import Entry from 'pages/EntryPortal'
-import Request from 'pages/Request/index'
+import EntryPortal from "pages/entry";
+import Request from "pages/request";
+import SignUp from "pages/signup";
 
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     return (
@@ -45,9 +44,6 @@ class App extends React.Component {
               <Route path="/dropsite/new/admin/:dropsite?">
                 <NewDropSite backend={this.props.backend} />
               </Route>
-              <Route path="/signup/:dropsite?">
-                <HCPSignup backend={this.props.backend} />
-              </Route>
               <Route path="/signupFinish/:dropsite?">
                 <HCPSignupFinish backend={this.props.backend} />
               </Route>
@@ -63,14 +59,16 @@ class App extends React.Component {
               <Route path="/pending-domains">
                 <PendingDomains backend={this.props.backend} />
               </Route>
-              <Route exact path="/">
-                <EntryPortal backend={this.props.backend} />
-              </Route>
+
               <Route exact path="/style-guide">
                 <StyleGuide backend={this.props.backend} />
               </Route>
-              <Route path="/start">
-                <Entry backend={this.props.backend} />
+
+              <Route exact path="/">
+                <EntryPortal backend={this.props.backend} />
+              </Route>
+              <Route path="/signup/:dropsite?">
+                <SignUp backend={this.props.backend} />
               </Route>
               <Route path="/request">
                 <Request backend={this.props.backend} />
