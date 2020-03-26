@@ -24,14 +24,22 @@ const app = dialogflow();
 
 /** Dialogflow Contexts {@link https://dialogflow.com/docs/contexts} */
 const AppContexts = {
-  NO_FACILITY_FOUND: "no_facility_found",
+  ADD_NEW_FACILITY: "add_new_facility",
   ONE_FACILITY_FOUND: "one_facility_found",
-  MULTIPLE_FACILITY_FOUND: "multiple_facility_found"
+  MULTIPLE_FACILITY_FOUND: "multiple_facility_found",
+  ONE_FACILITY_CONFIRMED: "one_facility_confirmed",
+  CREATE_NEW_DROPSITE: "create_new_dropsite",
+  CREATE_NEW_DROPSITE_ADDRESS_ADDED: "create_new_dropsite_address_added",
+  CREATE_NEW_DROPSITE_ADDRESS_DETAILS_ADDED:
+    "create_new_dropsite_address_details_added",
+  CREATE_NEW_DROPSITE_REQUIREMENTS_ADDED:
+    "create_new_dropsite_requirements_added"
 };
 
 /** Dialogflow Context Lifespans {@link https://dialogflow.com/docs/contexts#lifespan} */
 const Lifespans = {
-  DEFAULT: 5
+  DEFAULT: 1,
+  LONG: 10
 };
 
 // DB Consts:
@@ -39,14 +47,15 @@ const db = admin.firestore();
 const dropSiteRef = db.collection("dropSite");
 
 // look through hospitals and zip
-app.intent("HCP Signup - hospitalZip", (conv, data) => {
+app.intent("HCPSignupHospitalZip", (conv, data) => {
   let zipCode = data["zip-code"];
   // right now this index only accepts
   const searchResults = tools.searchByZip(hospital_index.index, zipCode);
 
   if (searchResults.length === 0) {
+    conv.contexts.set(AppContexts.ADD_NEW_FACILITY, Lifespans.DEFAULT);
     conv.ask(
-      `We don't currently have any facilities with that zip code. Do you want to register a new one?`
+      `We don't currently have any facilities with that zip code. Let's create a new facility. What is the name of your facility?`
     );
   } else if (searchResults.length === 1) {
     const parameters = {
@@ -70,34 +79,246 @@ app.intent("HCP Signup - hospitalZip", (conv, data) => {
     }
     outputArrayText = outputArray.join("  ");
     output = outputStart + outputArrayText + outputEnd;
-    conv.ask(output);
+
+    const parameters = {
+      results: searchResults
+    };
+    conv.contexts.set(
+      AppContexts.MULTIPLE_FACILITY_FOUND,
+      Lifespans.DEFAULT,
+      parameters
+    );
+
+    conv.ask(output + "Please tell me the number or say 'NONE'");
   }
 });
 
-app.intent("HCPSignup-Followup-OneResult-Yes", (conv, data) => {
-  const context = conv.contexts.get("one_facility_found");
+app.intent("HCPSignupFollowupMultipleResultsYes", (conv, data) => {
+  const context = conv.contexts.get("multiple_facility_found");
+  console.log(data);
+  let selection = parseInt(data["number"]) - 1;
   const searchResults = context.parameters.results;
-  const location_id = searchResults[0].id;
+  const location_id = searchResults[selection].id;
   const dropSite = dropSiteRef.doc(`${location_id}`);
-  console.log(dropSite);
 
   return dropSite
     .get()
     .then(doc => {
       if (doc.exists) {
         var data = doc.data();
+        const parameters = {
+          location_id: location_id
+        };
+        conv.contexts.set(
+          AppContexts.ONE_FACILITY_CONFIRMED,
+          Lifespans.DEFAULT,
+          parameters
+        );
         conv.ask(
-          `Great we have a drop-off location for this facility at: ${data.dropSiteAddress}.`
+          `Great! We have a drop-off location for this facility at: ${data.dropSiteAddress}.`
+        );
+        conv.ask(
+          `Would you like to 1) ADD A NEW REQUEST or 2) SEE OPEN REQUESTS AND DONATIONS?`
         );
       } else {
         // doc.data() will be undefined in this case
-        console.log("No such document!");
-        conv.ask(`We don't have a drop-off location for this facility.`);
+        const parameters = {
+          location_id: location_id
+        };
+        conv.contexts.set(
+          AppContexts.CREATE_NEW_DROPSITE,
+          Lifespans.LONG,
+          parameters
+        );
+        conv.ask(
+          `Got it. Let's create a new drop-off location for this facility. What would you like the address of the drop-off location to be?`
+        );
       }
     })
     .catch(e => {
       console.log("error:", e);
       conv.close("Sorry, try again.");
+    });
+});
+
+app.intent("HCPSignupFollowupOneResultYes", (conv, data) => {
+  const context = conv.contexts.get("one_facility_found");
+  const searchResults = context.parameters.results;
+  const location_id = searchResults[0].id;
+  const dropSite = dropSiteRef.doc(`${location_id}`);
+
+  return dropSite
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        var data = doc.data();
+        const parameters = {
+          location_id: location_id
+        };
+        conv.contexts.set(
+          AppContexts.ONE_FACILITY_CONFIRMED,
+          Lifespans.DEFAULT,
+          parameters
+        );
+        conv.ask(
+          `Great! We have a drop-off location for this facility at: ${data.dropSiteAddress}.`
+        );
+        conv.ask(
+          `Would you like to 1) ADD A NEW REQUEST or 2) SEE OPEN REQUESTS AND DONATIONS?`
+        );
+      } else {
+        // doc.data() will be undefined in this case
+        const parameters = {
+          location_id: location_id
+        };
+        conv.contexts.set(
+          AppContexts.CREATE_NEW_DROPSITE,
+          Lifespans.LONG,
+          parameters
+        );
+        conv.ask(
+          `Got it. Let's create a new drop-off location for this facility. What would you like the address of the drop-off location to be?`
+        );
+      }
+    })
+    .catch(e => {
+      console.log("error:", e);
+      conv.close("Sorry, try again.");
+    });
+});
+
+app.intent("HCPSeeDropOffDetails", (conv, data) => {
+  const context = conv.contexts.get("one_facility_confirmed");
+  const location_id = context.parameters.location_id;
+  const dropSiteURL = "https://help.supply/dropsite/" + location_id + "/admin";
+  conv.ask("To see open requests and donations, go to: " + dropSiteURL);
+});
+
+app.intent("HCPCreateNewDropsite", (conv, data) => {
+  const parameters = {
+    address: conv.query
+  };
+  conv.contexts.set(
+    AppContexts.CREATE_NEW_DROPSITE_ADDRESS_ADDED,
+    Lifespans.LONG,
+    parameters
+  );
+  conv.ask(
+    `Are there any details, like a backdoor or loading dock that people donating should know about?`
+  );
+});
+
+app.intent("HCPCreateNewDropSiteAddressDetails", (conv, data) => {
+  const parameters = {
+    addressDetails: conv.query
+  };
+  conv.contexts.set(
+    AppContexts.CREATE_NEW_DROPSITE_ADDRESS_DETAILS_ADDED,
+    Lifespans.LONG,
+    parameters
+  );
+  conv.ask(
+    `What are the requirements for donations? (e.g. sealed boxes, sterile, unused, etc.)`
+  );
+});
+
+app.intent("HCPCreateNewDropSiteRequirements", (conv, data) => {
+  const parameters = {
+    requirements: conv.query
+  };
+  conv.contexts.set(
+    AppContexts.CREATE_NEW_DROPSITE_REQUIREMENTS_ADDED,
+    Lifespans.LONG,
+    parameters
+  );
+  conv.ask(
+    `What is the contact (email/phone) for this drop-off location? This is optional. You can also say "skip".`
+  );
+});
+
+app.intent("HCPCreateNewDropSiteContact", (conv, data) => {
+  const location_idContext = conv.contexts.get(AppContexts.CREATE_NEW_DROPSITE);
+  const location_id = location_idContext.parameters.location_id;
+
+  const addressContext = conv.contexts.get(
+    AppContexts.CREATE_NEW_DROPSITE_ADDRESS_ADDED
+  );
+  const address = addressContext.parameters.address;
+
+  const addressDetailsContext = conv.contexts.get(
+    AppContexts.CREATE_NEW_DROPSITE_ADDRESS_DETAILS_ADDED
+  );
+  const addressDetails = addressDetailsContext.parameters.addressDetails;
+
+  const requirementsContext = conv.contexts.get(
+    AppContexts.CREATE_NEW_DROPSITE_REQUIREMENTS_ADDED
+  );
+  const requirements = requirementsContext.parameters.requirements;
+
+  const contact = conv.query;
+
+  const dropSite = dropSiteRef.doc(`${location_id}`);
+  return dropSite
+    .set({
+      dropSiteName: hospital_index.index.id_index[location_id].name,
+      location_id: location_id,
+      dropSiteAddress: address,
+      dropSiteDetails: addressDetails,
+      dropSiteRequirements: requirements,
+      dropSiteZip: hospital_index.index.id_index[location_id].zip,
+      dropSitePhone: contact
+    })
+    .then(function(docRef) {
+      conv.contexts.set(
+        AppContexts.CREATE_NEW_DROPSITE_FINAL_ADDED,
+        Lifespans.LONG
+      );
+      conv.ask(
+        `You can view your drop-off location at https://help.supply/dropsite/` +
+          docRef.id +
+          "/"
+      );
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error);
+    });
+});
+
+app.intent("HCPCreateNewDropSiteContactSkip", (conv, data) => {
+  const addressContext = conv.contexts.get(
+    AppContexts.CREATE_NEW_DROPSITE_ADDRESS_ADDED
+  );
+  const address = addressContext.parameters.address;
+  const addressDetailsContext = conv.contexts.get(
+    AppContexts.CREATE_NEW_DROPSITE_ADDRESS_DETAILS_ADDED
+  );
+  const addressDetails = addressDetailsContext.parameters.addressDetails;
+  const requirementsContext = conv.contexts.get(
+    AppContexts.CREATE_NEW_DROPSITE_REQUIREMENTS_ADDED
+  );
+  const requirements = requirementsContext.parameters.requirements;
+
+  const dropSite = dropSiteRef.doc(`${location_id}`);
+  return dropSite
+    .set({
+      dropSiteName: hospital_index.index.id_index[location_id].name,
+      location_id: location_id,
+      dropSiteAddress: address,
+      dropSiteDescription: addressDetails,
+      dropSiteRequirements: requirements,
+      dropSiteZip: hospital_index.index.id_index[location_id].zip
+    })
+    .then(function(docRef) {
+      conv.contexts.set(
+        AppContexts.CREATE_NEW_DROPSITE_FINAL_ADDED,
+        Lifespans.LONG
+      );
+      conv.ask(
+        `Your new drop-off location has been added: ${address} / ${addressDetails} / ${requirements}`
+      );
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error);
     });
 });
 

@@ -1,0 +1,26 @@
+/// NOT A FUNCTIONAL FILE, JUST NOTES //Default Welcome Intent HCPSignup
+{phrases: "need", inputContext: null, outputContext: "hcp_signup"} -
+HCPSignupHospitalZip {phrases: "90210", inputContext: "hcp_signup",
+outputContext: "one_facility_found" / "multiple_facility_found" /
+"add_new_facility" } - HCPSignupFollowupOneResultNo {phrases: "no",
+inputContext: "one_facility_found", outputContext: "add_new_facility"} -
+HCPSignupFollowupMultipleResultsNo {phases: "no", inputContext:
+"multiple_facility_found", outputContext: "add_new_facility"} - -
+HCPSignupFollowupOneResultYes {phrases: "yes", inputContext:
+"one_facility_found", ouputContext: "one_facility_confirmed" /
+"create_new_dropsite" } - HCPSignupFollowupMultipleResultsYes {phrases: "4",
+inputContext: "multiple_facility_found", outputContext: "one_facility_confirmed"
+/ "create_new_dropsite"} - HCPSeeDropOffDetails {phrases: "donations",
+inputContext: "one_facility_confirmed"} - HCPCreateNewDropSite {phrases: "13
+George Martin Dr", inputContext: "create_new_dropsite", outputContext:
+"create_new_dropsite_address_added"} - HCPCreateNewDropSiteAddressDetails
+{phrases: "on the dock", inputContext: "create_new_dropsite_address_added",
+outputContext: "create_new_dropsite_address_details_added"} -
+HCPCreateNewDropSiteRequirements {phrases: "new only, unsued", inputContext:
+"create_new_dropsite_address_details_added", outputContext:
+"create_new_dropsite_requirements_added"} - HCPCreateNewDropSiteContactSkip {
+phrases: "skip", inputContext: "create_new_dropsite_requirements_added",
+outputContext: "create_new_dropsite_contact_added"} -
+HCPCreateNewDropSiteContact {phrases: "me@johnsonfung.com", inputContext:
+"create_new_dropsite_requirements_added", outputContext:
+"create_new_dropsite_contact_added"} HCPCreateNewDropSite HCPSeeDropSiteDetails
