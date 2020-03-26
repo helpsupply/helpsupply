@@ -3,13 +3,7 @@ const functions = require("firebase-functions");
 const serviceAccount = require("./service-account.json");
 const hospital_index = require("./chatbot/hospital_index");
 const tools = require("./chatbot/helperFunctions");
-
-var admin = require("firebase-admin");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://hospitalcommunity.firebaseio.com"
-});
+const db = require("./chatbot/firebaseBackend");
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -33,7 +27,9 @@ const AppContexts = {
   CREATE_NEW_DROPSITE_ADDRESS_DETAILS_ADDED:
     "create_new_dropsite_address_details_added",
   CREATE_NEW_DROPSITE_REQUIREMENTS_ADDED:
-    "create_new_dropsite_requirements_added"
+    "create_new_dropsite_requirements_added",
+  CREATE_NEW_FACILITY: "create_new_facility",
+  CREATE_NEW_FACILITY_NAME_ADDED: "create_new_facility_name_added"
 };
 
 /** Dialogflow Context Lifespans {@link https://dialogflow.com/docs/contexts#lifespan} */
@@ -41,10 +37,6 @@ const Lifespans = {
   DEFAULT: 1,
   LONG: 10
 };
-
-// DB Consts:
-const db = admin.firestore();
-const dropSiteRef = db.collection("dropSite");
 
 // look through hospitals and zip
 app.intent("HCPSignupHospitalZip", (conv, data) => {
@@ -237,8 +229,19 @@ app.intent("HCPCreateNewDropSiteRequirements", (conv, data) => {
 });
 
 app.intent("HCPCreateNewDropSiteContact", (conv, data) => {
+  const facilityNameContext = conv.contexts.get(
+    AppContexts.CREATE_NEW_FACILITY
+  );
+  let facilityName;
+  if (facilityNameContext) {
+    facilityName = facilityNameContext.parameters.facilityName;
+  }
+
   const location_idContext = conv.contexts.get(AppContexts.CREATE_NEW_DROPSITE);
-  const location_id = location_idContext.parameters.location_id;
+  let location_id;
+  if (location_idContext) {
+    location_id = location_idContext.parameters.location_id;
+  }
 
   const addressContext = conv.contexts.get(
     AppContexts.CREATE_NEW_DROPSITE_ADDRESS_ADDED
@@ -257,31 +260,56 @@ app.intent("HCPCreateNewDropSiteContact", (conv, data) => {
 
   const contact = conv.query;
 
-  const dropSite = dropSiteRef.doc(`${location_id}`);
-  return dropSite
-    .set({
-      dropSiteName: hospital_index.index.id_index[location_id].name,
-      location_id: location_id,
-      dropSiteAddress: address,
-      dropSiteDetails: addressDetails,
-      dropSiteRequirements: requirements,
-      dropSiteZip: hospital_index.index.id_index[location_id].zip,
-      dropSitePhone: contact
-    })
-    .then(function(docRef) {
-      conv.contexts.set(
-        AppContexts.CREATE_NEW_DROPSITE_FINAL_ADDED,
-        Lifespans.LONG
-      );
-      conv.ask(
-        `You can view your drop-off location at https://help.supply/dropsite/` +
-          docRef.id +
-          "/"
-      );
-    })
-    .catch(function(error) {
-      console.error("Error writing document: ", error);
-    });
+  if (facilityName) {
+    return dropSiteRef
+      .add({
+        dropSiteFacilityName: facilityName,
+        dropSiteAddress: address,
+        dropSiteDetails: addressDetails,
+        dropSiteRequirements: requirements,
+        dropSitePhone: contact
+      })
+      .then(function(docRef) {
+        conv.contexts.set(
+          AppContexts.CREATE_NEW_DROPSITE_FINAL_ADDED,
+          Lifespans.LONG
+        );
+        conv.ask(
+          `You can view your drop-off location at https://help.supply/dropsite/` +
+            docRef.id +
+            "/"
+        );
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+  } else {
+    return dropSiteRef
+      .doc(`${location_id}`)
+      .set({
+        dropSiteName: hospital_index.index.id_index[location_id].name,
+        location_id: location_id,
+        dropSiteAddress: address,
+        dropSiteDetails: addressDetails,
+        dropSiteRequirements: requirements,
+        dropSiteZip: hospital_index.index.id_index[location_id].zip,
+        dropSitePhone: contact
+      })
+      .then(function(docRef) {
+        conv.contexts.set(
+          AppContexts.CREATE_NEW_DROPSITE_FINAL_ADDED,
+          Lifespans.LONG
+        );
+        conv.ask(
+          `You can view your drop-off location at https://help.supply/dropsite/` +
+            location_id +
+            "/"
+        );
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+  }
 });
 
 app.intent("HCPCreateNewDropSiteContactSkip", (conv, data) => {
@@ -320,6 +348,25 @@ app.intent("HCPCreateNewDropSiteContactSkip", (conv, data) => {
     .catch(function(error) {
       console.error("Error writing document: ", error);
     });
+});
+
+app.intent("HCPCreateNewFacility", (conv, data) => {
+  const parameters = {
+    facilityName: conv.query
+  };
+  conv.contexts.set(
+    AppContexts.CREATE_NEW_FACILITY_NAME_ADDED,
+    Lifespans.LONG,
+    parameters
+  );
+  conv.contexts.set(
+    AppContexts.CREATE_NEW_DROPSITE,
+    Lifespans.DEFAULT,
+    parameters
+  );
+  conv.ask(
+    `Got it. Let's create a new drop-off location for this facility. What would you like the address of the drop-off location to be?`
+  );
 });
 
 exports.dialogflowWebhook = functions.https.onRequest(app);
