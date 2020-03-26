@@ -1,14 +1,12 @@
 /** @jsx jsx */
-import React, { Fragment } from "react";
+import React from "react";
 import { jsx } from "@emotion/core";
 import Form from "components/Form";
 import FormGroup from "components/Form/FormGroup";
 import InputText from "components/InputText";
 import Note from "components/Note";
 import Anchor from "components/Anchor";
-import Text from "components/Text";
-import { TEXT_TYPE } from "components/Text/constants";
-import { Space } from "lib/theme";
+import HeaderInfo from "components/Form/HeaderInfo";
 
 class EmailForm extends React.Component {
   constructor(props) {
@@ -26,7 +24,7 @@ class EmailForm extends React.Component {
   submitEmail(event) {
     event.preventDefault();
     this.props.backend
-      .signupWithEmail(this.state.email, this.props.dropsite)
+      .signupWithEmail(this.state.email, this.state.dropsite)
       .then(() => this.setState({ sent: true }))
       .catch(alert);
     // TODO: handle exceptions
@@ -39,17 +37,10 @@ class EmailForm extends React.Component {
   render() {
     if (this.state.sent) {
       return (
-        <Fragment>
-          <FormGroup mb={Space.S15}>
-            <Text as="h3" type={TEXT_TYPE.HEADER_3}>
-              Thank you
-            </Text>
-          </FormGroup>
-          <Text as="p" type={TEXT_TYPE.BODY_2}>
-            We just sent you an email with a link to verify your email. It
-            should arrive within a couple minutes.
-          </Text>
-        </Fragment>
+        <HeaderInfo
+          title="Thank you"
+          description="We just sent you an email with a link to verify your email. It should arrive within a couple minutes."
+        />
       );
     }
 
