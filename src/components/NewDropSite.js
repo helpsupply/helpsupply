@@ -7,7 +7,7 @@ class NewDropSite extends React.Component {
     super(props);
     this.state = {
       verified: true,
-      badDomain: false
+      badDomain: false,
     };
     this.checkVerification = this.checkVerification.bind(this);
   }
@@ -18,11 +18,11 @@ class NewDropSite extends React.Component {
       return;
     }
 
-    this.props.backend.isValidHealthcareWorker().then(verified => {
+    this.props.backend.isValidHealthcareWorker().then((verified) => {
       if (verified) {
         console.log("verified");
         this.setState({
-          verified: true
+          verified: true,
         });
       } else {
         this.setState({
@@ -59,7 +59,18 @@ class NewDropSite extends React.Component {
           <div className="alert alert-danger alertFixed" role="alert">
             <div className="alertText">
               Your email doesn't look like it's from a healthcare provider.
-              Please <a href="/logout" style={{color: '#721c24', fontWeight: 'bold', textDecoration: 'underline'}}>log out</a> and try your work email or contact help@help.supply.
+              Please{" "}
+              <a
+                href="/logout"
+                style={{
+                  color: "#721c24",
+                  fontWeight: "bold",
+                  textDecoration: "underline",
+                }}
+              >
+                log out
+              </a>{" "}
+              and try your work email or contact help@help.supply.
             </div>
           </div>
         )}

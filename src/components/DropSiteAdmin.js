@@ -1,143 +1,66 @@
-import React from "react";
-import * as hospital_index from "../data/hospital_index";
-import { withRouter } from "react-router-dom";
-import DropSiteNeedGroupAdmin from "./DropSiteNeedGroupAdmin";
-import NewRequestForm from "./NewRequestForm";
-import EditDropSiteForm from "./EditDropSiteForm";
-import HelpFooter from "./HelpFooter";
+import React from 'react'
+import * as hospital_index from '../data/hospital_index'
+import { withRouter } from 'react-router-dom'
+import DropSiteNeedGroupAdmin from './DropSiteNeedGroupAdmin'
+import NewRequestForm from './NewRequestForm'
+import EditDropSiteForm from './EditDropSiteForm'
+import HelpFooter from './HelpFooter'
 
 class DropSiteAdmin extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      dropSiteId: "",
-      dropSiteName: "",
-      dropSiteAddress: "",
-      dropSiteZip: "",
-      dropSiteDescription: "",
-      dropSiteHospital: "",
-      needs: [],
-      supply: [],
-      verified: true,
-      badDomain: true
-    };
-    this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
-    this.handleNewRequest = this.handleNewRequest.bind(this);
-    this.checkVerification = this.checkVerification.bind(this);
+    super(props)
+    const { backend, ...rest } = this.props
+    this.state = rest
+    this.handleRemoveRequest = this.handleRemoveRequest.bind(this)
+    this.handleNewRequest = this.handleNewRequest.bind(this)
   }
 
   handleNewRequest(requestObj) {
-    let oldList = this.state.needs;
-    oldList.push(requestObj);
+    let oldList = this.state.needs
+    oldList.push(requestObj)
     this.setState({
-      needs: oldList
-    });
-    window.scrollTo(0, 0);
+      needs: oldList,
+    })
+    window.scrollTo(0, 0)
   }
 
   handleRemoveRequest(requestId) {
-    let oldList = this.state.needs;
-    let newList = oldList.filter(function(obj) {
-      return obj.id !== requestId;
-    });
+    let oldList = this.state.needs
+    let newList = oldList.filter(function (obj) {
+      return obj.id !== requestId
+    })
     this.setState({
-      needs: newList
-    });
+      needs: newList,
+    })
   }
 
   handleDeleteSupply(supplyId) {
-    this.props.backend.deleteSupply(supplyId);
-    let oldList = this.state.supply;
-    let newList = oldList.filter(function(obj) {
-      return obj.id !== supplyId;
-    });
+    this.props.backend.deleteSupply(supplyId)
+    let oldList = this.state.supply
+    let newList = oldList.filter(function (obj) {
+      return obj.id !== supplyId
+    })
     this.setState({
-      supply: newList
-    });
-  }
-
-  checkVerification() {
-    if (!this.props.backend.isLoggedIn()) {
-      console.log(this.props.backend.authLoaded);
-      if (this.props.backend.authLoaded) {
-        let url = "/dropsite/" + this.props.match.params.id;
-        this.props.history.push(url);
-        return;
-      } else {
-        setTimeout(this.checkVerification, 100);
-      }
-      return;
-    }
-
-    this.props.backend.isValidHealthcareWorker().then(verified => {
-      if (verified) {
-        this.setState({
-          verified: true
-        });
-      } else {
-        this.setState({
-          verified: false,
-          badDomain: this.props.backend.badDomain
-        });
-        console.log("not verified, will try again in 30 seconds");
-        setTimeout(this.checkVerification, 10000);
-      }
-    });
-  }
-
-  componentDidMount() {
-    this.props.backend.getRequests(this.props.match.params.id).then(data => {
-      this.setState(
-        {
-          needs: data
-        },
-        () => {}
-      );
-    });
-    this.props.backend.listSupply(this.props.match.params.id).then(data => {
-      this.setState(
-        {
-          supply: data
-        },
-        () => {
-          // console.log(this.state);
-        }
-      );
-    });
-    this.props.backend.getDropSites(this.props.match.params.id).then(data => {
-      this.setState(
-        {
-          dropSiteId: data.location_id,
-          dropSiteName: data.dropSiteName,
-          dropSiteAddress: data.dropSiteAddress,
-          dropSiteZip: data.dropSiteZip,
-          dropSiteDescription: data.dropSiteDescription,
-          dropSiteHospital: data.dropSiteHospital,
-          dropSitePhone: data.dropSitePhone
-        },
-        () => {}
-      );
-    });
-
-    this.checkVerification();
+      supply: newList,
+    })
   }
 
   componentDidUpdate() {}
 
   render() {
     // this code is for the future when some dropsites may not map to an exisitng hospital in the hospital_index
-    let hospital = hospital_index.index.id_index[this.props.match.params.id];
-    let hospitalText = "";
-    if (typeof hospital === "undefined") {
+    let hospital = hospital_index.index.id_index[this.props.match.params.id]
+    let hospitalText = ''
+    if (typeof hospital === 'undefined') {
       hospitalText = (
         <div className="servingText">
           (serving {this.state.dropSiteHospital})
         </div>
-      );
+      )
     } else {
       hospitalText = (
         <div className="servingText">(serving {hospital.name})</div>
-      );
+      )
     }
 
     return (
@@ -157,17 +80,16 @@ class DropSiteAdmin extends React.Component {
           <div className="alert alert-danger alertFixed" role="alert">
             <div className="alertText">
               Your email doesn't look like it's from a healthcare provider.
-              Please{" "}
+              Please{' '}
               <a
                 href="/logout"
                 style={{
-                  color: "#721c24",
-                  fontWeight: "bold",
-                  textDecoration: "underline"
-                }}
-              >
+                  color: '#721c24',
+                  fontWeight: 'bold',
+                  textDecoration: 'underline',
+                }}>
                 log out
-              </a>{" "}
+              </a>{' '}
               and try your work email or contact help@help.supply.
             </div>
           </div>
@@ -176,7 +98,7 @@ class DropSiteAdmin extends React.Component {
           <span className="navbar-brand mb-0 h1" id="hospitalname">
             <div className="dropSiteIdText">
               <b>Drop-off Location: {this.state.dropSiteId}</b>
-            </div>{" "}
+            </div>{' '}
             {hospitalText}
           </span>
           <a href="/" className="navbar-brand mb-0 h1 logored">
@@ -289,15 +211,14 @@ class DropSiteAdmin extends React.Component {
                           <button
                             className="btn btn-outline-danger"
                             onClick={() => {
-                              this.handleDeleteSupply(supply.id);
-                            }}
-                          >
+                              this.handleDeleteSupply(supply.id)
+                            }}>
                             Remove
                           </button>
                         )}
                       </th>
                     </tr>
-                  );
+                  )
                 })}
               </tbody>
             </table>
@@ -305,8 +226,8 @@ class DropSiteAdmin extends React.Component {
         </div>
         <HelpFooter />
       </div>
-    );
+    )
   }
 }
 
-export default withRouter(DropSiteAdmin);
+export default withRouter(DropSiteAdmin)
