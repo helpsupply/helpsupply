@@ -1,32 +1,32 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 class HCPSignup extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      email: "",
+      email: '',
       sent: false,
-      error: "",
-      dropsite: this.props.match.params.dropsite
-    };
-    this.submitEmail = this.submitEmail.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
+      error: '',
+      dropsite: this.props.match.params.dropsite,
+    }
+    this.submitEmail = this.submitEmail.bind(this)
+    this.handleEmailChange = this.handleEmailChange.bind(this)
   }
 
   componentDidMount() {}
 
   submitEmail(event) {
-    event.preventDefault();
-    this.setState({ sent: true });
+    event.preventDefault()
+    this.setState({ sent: true })
     this.props.backend
       .signupWithEmail(this.state.email, this.state.dropsite)
-      .catch(alert);
+      .catch(alert)
     // TODO: handle exceptions
   }
 
   handleEmailChange(event) {
-    this.setState({ email: event.target.value });
+    this.setState({ email: event.target.value })
   }
 
   render() {
@@ -50,8 +50,9 @@ class HCPSignup extends React.Component {
               </span>
               <br />
               <span className="small">
-                (it may take a few... check your Spam folder if you can't find it)
-                </span>
+                (it may take a few... check your Spam folder if you can't find
+                it)
+              </span>
               <br />
               <span className="small">(You can close this window now.)</span>
             </div>
@@ -59,22 +60,21 @@ class HCPSignup extends React.Component {
             <form className="linkSubmitGroup" onSubmit={this.submitEmail}>
               <input
                 className="form-control"
-                placeholder="Your institional email, i.e. john@kp.org"
+                placeholder="Institutional email, i.e. john@kp.org"
                 value={this.state.email}
                 onChange={this.handleEmailChange}
               />
               <button
                 className="btn btn-primary linkSubmitBtn"
-                onClick={this.submitEmail}
-              >
+                onClick={this.submitEmail}>
                 Send Verification
               </button>
             </form>
           )}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default withRouter(HCPSignup);
+export default withRouter(HCPSignup)
