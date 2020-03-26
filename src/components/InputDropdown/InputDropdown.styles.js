@@ -3,7 +3,7 @@ import { Color, Radius, Space } from 'lib/theme'
 
 const styles = {
   active: css({
-    borderColor: Color.GRAY,
+    borderColor: Color.CORAL_30,
   }),
   dropdown: css({
     appearance: 'none',
@@ -12,7 +12,7 @@ const styles = {
     height: 65,
     width: '100%',
     outline: 'none',
-    border: `2px solid ${Color.GRAY_50}`,
+    border: `1.5px solid ${Color.GRAY_50}`,
     borderRadius: Radius.ROUNDED,
     position: 'relative',
 
@@ -26,7 +26,7 @@ const styles = {
     top: Space.S25,
   }),
   chevronOpen: css({
-    transform: 'rotate(180deg)'
+    transform: 'rotate(180deg)',
   }),
   list: css({
     background: Color.WHITE,
@@ -44,13 +44,12 @@ const styles = {
       padding: `${Space.S25}px 0`,
       ':not(:last-of-type)': {
         borderBottom: `1px solid ${Color.GRAY_LIGHT}`,
-      }
-    }
+      },
+    },
   }),
   option: css({
     cursor: 'pointer',
-    ':hover': {
-    }
+    ':hover': {},
   }),
   placeholder: css({
     color: Color.GRAY_50,
@@ -59,6 +58,8 @@ const styles = {
     position: 'absolute',
   }),
   root: css({
+    border: `2px solid transparent`,
+    borderRadius: 11,
     display: 'flex',
     flexDirection: 'column',
     height: 65,
