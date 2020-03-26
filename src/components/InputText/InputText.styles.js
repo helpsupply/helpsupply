@@ -13,7 +13,7 @@ const styles = {
   input: css({
     appearance: 'none',
     background: 'transparent',
-    border: 0,
+    border: `2px solid ${Color.GRAY_50}`,
     borderRadius: Radius.ROUNDED,
     display: 'block',
     height: '100%',
