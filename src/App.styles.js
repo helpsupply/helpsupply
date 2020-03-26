@@ -1,4 +1,6 @@
-body {
+import { css } from '@emotion/core'
+
+export const styles = css`body {
   background: #fcfcfc;
   font-family: "Inter", sans-serif;
 }
@@ -634,4 +636,4 @@ button:disabled {
   font-weight: bold;
   padding: 20px 30px;
   text-align: center;
-}
+}`

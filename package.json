@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.28",
     "@firebase/testing": "^0.17.1",
     "@sendgrid/mail": "^6.5.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "autosuggest-highlight": "^3.1.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "firebase": "^7.11.0",
     "firebaseui": "^4.5.0",
     "mocha": "^7.1.1",
+    "moment": "^2.24.0",
     "react": "^16.13.0",
+    "react-autosuggest": "^9.4.3",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
@@ -47,7 +51,7 @@
   },
   "devDependencies": {
     "husky": "^4.2.3",
-    "pretty-quick": "^2.0.1",
-    "prettier": "^2.0.2"
+    "prettier": "^2.0.2",
+    "pretty-quick": "^2.0.1"
   }
 }
