@@ -5,6 +5,8 @@
 **Drop Site**: Where supplies can be dropped off.
 When a medical facility registers in our system, they are represented as a Drop Site.
 
+**HCP**: Healthcare Provider
+
 ## How it works
 
 Users are first directed to an entry portal where they choose to either provide or request medical supplies.
