@@ -36,6 +36,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
+
     '.react-autosuggest__container': {
       height: 65,
     },
@@ -61,6 +62,7 @@ const styles = {
       color: Color.GRAY_75,
       marginTop: 2,
       position: 'absolute',
+      width: '100%',
       zIndex: 1,
     },
     '.react-autosuggest__suggestion-match': {
