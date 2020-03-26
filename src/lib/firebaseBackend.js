@@ -57,25 +57,35 @@ class FirebaseBackend extends BackendInterface {
 
   addDropSite(
     location_id,
-    dropSiteName,
-    dropSiteDescription,
+    dropSiteFacilityName,
     dropSiteAddress,
     dropSiteZip,
-    dropSitePhone
+    dropSiteDescription,
+    dropSiteRequirements,
+    dropSiteName,
+    dropSitePhone,
+    dropSiteNotes
   ) {
-    if (dropSiteName && location_id && dropSiteAddress && dropSiteZip) {
+    if (
+      location_id &&
+      dropSiteFacilityName &&
+      dropSiteAddress &&
+      dropSiteZip &&
+      dropSiteDescription
+    ) {
       let newSiteObj = {
-        dropSiteName: dropSiteName,
         location_id: location_id,
+        dropSiteFacilityName: dropSiteFacilityName,
         dropSiteAddress: dropSiteAddress,
         dropSiteZip: dropSiteZip,
+        dropSiteDescription: dropSiteDescription,
+        dropSiteRequirements: dropSiteRequirements,
+        dropSiteName: dropSiteName,
         dropSitePhone: dropSitePhone,
+        dropSiteNotes: dropSiteNotes,
         domain: this.firebase.auth().currentUser.email.split("@")[1],
         user: this.firebase.auth().currentUser.uid
       };
-      if (dropSiteDescription) {
-        newSiteObj.dropSiteDescription = dropSiteDescription;
-      }
       return this.firestore
         .collection("dropSite")
         .doc(location_id)
@@ -93,26 +103,33 @@ class FirebaseBackend extends BackendInterface {
   }
 
   addNewDropSite(
-    dropSiteName,
-    dropSiteDescription,
+    dropSiteFacilityName,
     dropSiteAddress,
     dropSiteZip,
-    dropSiteHospital,
-    dropSitePhone
+    dropSiteDescription,
+    dropSiteRequirements,
+    dropSiteName,
+    dropSitePhone,
+    dropSiteNotes
   ) {
-    if (dropSiteName && dropSiteAddress && dropSiteZip && dropSiteHospital) {
+    if (
+      dropSiteAddress &&
+      dropSiteZip &&
+      dropSiteDescription &&
+      dropSiteFacilityName
+    ) {
       let newSiteObj = {
-        dropSiteName: dropSiteName,
+        dropSiteFacilityName: dropSiteFacilityName,
         dropSiteAddress: dropSiteAddress,
         dropSiteZip: dropSiteZip,
-        dropSiteHospital: dropSiteHospital,
+        dropSiteDescription: dropSiteDescription,
+        dropSiteRequirements: dropSiteRequirements,
+        dropSiteName: dropSiteName,
         dropSitePhone: dropSitePhone,
+        dropSiteNotes: dropSiteNotes,
         domain: this.firebase.auth().currentUser.email.split("@")[1],
         user: this.firebase.auth().currentUser.uid
       };
-      if (dropSiteDescription) {
-        newSiteObj.dropSiteDescription = dropSiteDescription;
-      }
       let db = this.firestore;
       return db
         .collection("dropSite")
@@ -137,44 +154,50 @@ class FirebaseBackend extends BackendInterface {
 
   editDropSite(
     location_id,
-    dropSiteName,
-    dropSiteDescription,
     dropSiteAddress,
     dropSiteZip,
-    dropSitePhone
+    dropSiteDescription,
+    dropSiteRequirements,
+    dropSiteName,
+    dropSitePhone,
+    dropSiteNotes
   ) {
     if (
       location_id &&
-      (dropSiteName ||
-        dropSiteDescription ||
-        dropSiteAddress ||
+      (dropSiteAddress ||
         dropSiteZip ||
-        dropSitePhone)
+        dropSiteDescription ||
+        dropSiteRequirements ||
+        dropSiteName ||
+        dropSitePhone ||
+        dropSiteNotes)
     ) {
       let newSiteObj = {
         domain: this.firebase.auth().currentUser.email.split("@")[1],
-        user: this.firebase.auth().currentUser.uid,
-        dropSiteName: "",
-        dropSiteDescription: "",
-        dropSiteAddress: "",
-        dropSiteZip: "",
-        dropSitePhone: ""
+        user: this.firebase.auth().currentUser.uid
       };
-      if (dropSiteName) {
-        newSiteObj.dropSiteName = dropSiteName;
-      }
-      if (dropSiteDescription) {
-        newSiteObj.dropSiteDescription = dropSiteDescription;
-      }
       if (dropSiteAddress) {
         newSiteObj.dropSiteAddress = dropSiteAddress;
       }
       if (dropSiteZip) {
         newSiteObj.dropSiteZip = dropSiteZip;
       }
+      if (dropSiteDescription) {
+        newSiteObj.dropSiteDescription = dropSiteDescription;
+      }
+      if (dropSiteRequirements) {
+        newSiteObj.dropSiteRequirements = dropSiteRequirements;
+      }
+      if (dropSiteName) {
+        newSiteObj.dropSiteName = dropSiteName;
+      }
       if (dropSitePhone) {
         newSiteObj.dropSitePhone = dropSitePhone;
       }
+      if (dropSiteNotes) {
+        newSiteObj.dropSiteNotes = dropSiteNotes;
+      }
+
       return this.firestore
         .collection("dropSite")
         .doc(location_id)
