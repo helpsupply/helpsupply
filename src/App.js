@@ -13,6 +13,7 @@ import Profile from './components/Profile'
 import StyleGuide from './components/StyleGuide'
 
 import AdminDropSite from 'pages/dropsite_admin'
+import NewFacility from 'pages/facility_new'
 import NewDropSite from 'pages/dropsite_new'
 import EntryPortal from 'pages/entry'
 import Request from 'pages/request'
@@ -76,6 +77,9 @@ class App extends React.Component {
               </Route>
               <Route path="/signup/:dropsite?">
                 <SignUp backend={this.props.backend} />
+              </Route>
+              <Route path="/new-facility">
+                <NewFacility backend={this.props.backend} />
               </Route>
 
               <Route path="*">
