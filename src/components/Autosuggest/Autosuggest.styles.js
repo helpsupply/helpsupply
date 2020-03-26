@@ -61,10 +61,11 @@ const styles = {
       color: Color.GRAY_75,
       marginTop: 2,
       position: 'absolute',
+      width: '100%',
       zIndex: 1,
     },
     '.react-autosuggest__suggestion-match': {
-      color: Color.GRAY
+      color: Color.GRAY,
     },
     '.react-autosuggest__suggestions-list': {
       listStyle: 'none',
@@ -75,9 +76,9 @@ const styles = {
         padding: `${Space.S25}px 0`,
         ':not(:last-of-type)': {
           borderBottom: `1px solid ${Color.GRAY_LIGHT}`,
-        }
-      }
-    }
+        },
+      },
+    },
   }),
 }
 

@@ -1,70 +1,39 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import React from 'react'
+import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
-import AutosuggestHighlightMatch from 'autosuggest-highlight/match'
-import AutosuggestHighlightParse from 'autosuggest-highlight/parse'
-import Text from 'components/Text'
-import { TEXT_TYPE } from 'components/Text/constants'
 import styles from './Autosuggest.styles'
 
-const getSuggestionValue = suggestion => suggestion.name
-
-const renderSuggestion = (suggestion, { query }) => {
-  const matches = AutosuggestHighlightMatch(suggestion.name, query)
-  const parts = AutosuggestHighlightParse(suggestion.name, matches)
-  const match = <span>
-    {parts.map((part, index) => {
-      const className = part.highlight ? 'react-autosuggest__suggestion-match' : null
-
-      return (
-        <span className={className} key={index}>
-          {part.text}
-        </span>
-      )
-    })}
-  </span>
-
-  return (
-    <div>
-      <Text as="div" type={TEXT_TYPE.BODY_2}>
-        {match}
-      </Text>
-      <Text as="div" type={TEXT_TYPE.NOTE}>{suggestion.address}</Text>
-    </div>
-  )
-}
-
 class Typeahead extends React.Component {
+  static propTypes = {
+    getSuggestionValue: PropTypes.func.isRequired,
+    onSearch: PropTypes.func.isRequired,
+    suggestions: PropTypes.array.isRequired,
+    renderSuggestion: PropTypes.func.isRequired,
+  }
+
   constructor() {
     super()
-
     this.state = {
       isFocused: false,
-      suggestions: [],
-      value: '',
+      userInput: '',
     }
   }
 
-  getSuggestions = value => {
-    const inputValue = value.trim().toLowerCase()
-    const inputLength = inputValue.length
-    console.log(!inputLength ? [] : this.props.suggestions.filter(suggest =>
-      suggest.name.toLowerCase().slice(0, inputLength) === inputValue
-    ))
-    return !inputLength ? [] : this.props.suggestions.filter(suggest =>
-      suggest.name.toLowerCase().slice(0, inputLength) === inputValue
-    )
-  }
-
   onChange = (_, { newValue }) => {
-    this.setState({
-      value: newValue
-    })
+    const isObject = typeof newValue === 'object'
+    const value = isObject ? newValue.label : newValue
+    if (!value) {
+      this.props.onSelect(undefined)
+    }
+
+    this.setState({ userInput: value })
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({ suggestions: this.getSuggestions(value) })
+    this.props.onSearch(value)
+    this.setState({ userInput: value })
   }
 
   onSuggestionsClearRequested = () => {
@@ -72,16 +41,25 @@ class Typeahead extends React.Component {
   }
 
   toggleFocus = () => {
-    console.log('yuh!')
     this.setState({ isFocused: !this.state.isFocused })
   }
 
+  onSuggestionSelect = (e, { suggestion }) => {
+    e.preventDefault()
+    this.props.onSelect(suggestion.id)
+  }
+
   render() {
-    const { isFocused, suggestions, value } = this.state
-    const { label } = this.props
+    const { isFocused, userInput } = this.state
+    const {
+      label,
+      suggestions,
+      getSuggestionValue,
+      renderSuggestion,
+    } = this.props
 
     const inputProps = {
-      value,
+      value: userInput,
       onBlur: this.toggleFocus,
       onChange: this.onChange,
       onFocus: this.toggleFocus,
@@ -91,7 +69,13 @@ class Typeahead extends React.Component {
       <div css={[styles.root, isFocused && styles.active]}>
         <label css={styles.container}>
           {label && (
-            <div css={[styles.label, (isFocused || value) && styles.activeLabel]}>{label}</div>
+            <div
+              css={[
+                styles.label,
+                (isFocused || userInput) && styles.activeLabel,
+              ]}>
+              {label}
+            </div>
           )}
         </label>
         <Autosuggest
@@ -99,6 +83,7 @@ class Typeahead extends React.Component {
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           getSuggestionValue={getSuggestionValue}
+          onSuggestionSelected={this.onSuggestionSelect}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
         />

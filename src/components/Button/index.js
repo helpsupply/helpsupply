@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
-import { type } from "./constants"
+import { type } from './constants'
 
 import styles from './Button.styles'
 
@@ -34,3 +34,9 @@ export const LinkButton = ({ children, ...rest }) => (
 LinkButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
+
+export const IconButton = ({ children, ...rest }) => (
+  <button css={styles.root} {...rest}>
+    {children}
+  </button>
+)
