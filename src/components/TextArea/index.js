@@ -15,6 +15,9 @@ class TextArea extends React.Component {
   }
 
   onChange = (e) => {
+    if (this.props.customOnChange) {
+      this.props.customOnChange(e.target.value)
+    }
     this.setState({ value: e.target.value })
   }
 
