@@ -27,7 +27,7 @@ class TextArea extends React.Component {
 
   render() {
     const { isFocused, value } = this.state
-    const { label, ...rest } = this.props
+    const { label, customOnChange, ...rest } = this.props
 
     return (
       <label css={[styles.root, isFocused && styles.active]}>
