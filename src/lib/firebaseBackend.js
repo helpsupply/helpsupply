@@ -63,6 +63,7 @@ class FirebaseBackend extends BackendInterface {
     dropSiteRequirements,
     dropSitePhone,
     dropSiteNotes,
+    requestWillingToPay,
   }) {
     if (dropSiteDescription && location_id && dropSiteAddress) {
       let newSiteObj = {
@@ -72,6 +73,7 @@ class FirebaseBackend extends BackendInterface {
         dropSiteRequirements,
         dropSitePhone,
         dropSiteNotes,
+        requestWillingToPay,
         domain: this.firebase.auth().currentUser.email.split('@')[1],
         user: this.firebase.auth().currentUser.uid,
       }

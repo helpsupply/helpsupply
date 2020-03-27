@@ -24,6 +24,7 @@ class DropSiteForm extends React.Component {
       dropSiteName: '',
       dropSitePhone: '',
       dropSiteNotes: '',
+      requestWillingToPay: false,
     }
     this.handleFieldChange = this.handleFieldChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -84,7 +85,10 @@ class DropSiteForm extends React.Component {
           label="Is there anything else you’d like others to know about the situation at your facility?"
           customOnChange={this.handleFieldChange('dropSiteNotes')}
         />
-        <InputCheckbox label="My facility will pay for large volumes of high-quality supplies." />
+        <InputCheckbox
+          customOnChange={this.handleFieldChange('requestWillingToPay')}
+          label="My facility will pay for large volumes of high-quality supplies."
+        />
       </Form>
     )
   }
