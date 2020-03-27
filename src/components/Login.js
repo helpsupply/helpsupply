@@ -1,6 +1,6 @@
-import React from "react";
-import Firebase from "firebase";
-import * as firebaseui from "firebaseui";
+import React from 'react';
+import Firebase from 'firebase';
+import * as firebaseui from 'firebaseui';
 
 class Login extends React.Component {
   constructor(props) {
@@ -10,28 +10,28 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    this.ui.start("#firebaseui-auth-container", {
+    this.ui.start('#firebaseui-auth-container', {
       callbacks: {
-        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
           // User successfully signed in.
           // Return type determines whether we continue the redirect automatically
           // or whether we leave that to developer to handle.
           return true;
         },
-        uiShown: function() {
+        uiShown: function () {
           // The widget is rendered.
           // Hide the loader.
-          document.getElementById("loader").style.display = "none";
-        }
+          document.getElementById('loader').style.display = 'none';
+        },
       },
       // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-      signInFlow: "popup",
-      signInSuccessUrl: "/",
+      signInFlow: 'popup',
+      signInSuccessUrl: '/',
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         Firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        Firebase.auth.EmailAuthProvider.PROVIDER_ID
-      ]
+        Firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],
     });
   }
 

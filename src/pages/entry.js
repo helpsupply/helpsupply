@@ -1,6 +1,6 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import Anchor from "components/Anchor";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import Anchor from 'components/Anchor';
 
 class EntryPortal extends React.Component {
   constructor(props) {

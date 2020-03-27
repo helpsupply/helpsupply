@@ -1,35 +1,32 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react'
-import { jsx } from '@emotion/core'
-import { withRouter } from 'react-router-dom'
-import * as hospital_index from '../data/hospital_index'
-import Box from 'components/Box'
-import DropSiteForm from 'containers/DropSiteForm'
-import BackButton from 'components/BackButton'
-import DropSiteAdmin from 'components/DropSiteAdmin'
+import { jsx } from '@emotion/core';
+import Box from 'components/Box';
+import DropSiteAdmin from 'components/DropSiteAdmin';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class AdminDropSite extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       verified: true,
       loading: true,
       badDomain: false,
-    }
-    this.checkVerification = this.checkVerification.bind(this)
+    };
+    this.checkVerification = this.checkVerification.bind(this);
   }
 
   checkVerification() {
     if (!this.props.backend.isLoggedIn()) {
-      console.log(this.props.backend.authLoaded)
+      console.log(this.props.backend.authLoaded);
       if (this.props.backend.authLoaded) {
-        let url = '/dropsite/' + this.props.match.params.id
-        this.props.history.push(url)
-        return
+        let url = '/dropsite/' + this.props.match.params.id;
+        this.props.history.push(url);
+        return;
       } else {
-        setTimeout(this.checkVerification, 100)
+        setTimeout(this.checkVerification, 100);
       }
-      return
+      return;
     }
 
     this.props.backend.isValidHealthcareWorker().then((verified) => {
@@ -37,17 +34,17 @@ class AdminDropSite extends React.Component {
         this.setState({
           verified: true,
           loading: false,
-        })
+        });
       } else {
         this.setState({
           verified: false,
           badDomain: this.props.backend.badDomain,
           loading: false,
-        })
-        console.log('not verified, will try again in 30 seconds')
-        setTimeout(this.checkVerification, 10000)
+        });
+        console.log('not verified, will try again in 30 seconds');
+        setTimeout(this.checkVerification, 10000);
       }
-    })
+    });
   }
 
   componentDidMount() {
@@ -56,9 +53,9 @@ class AdminDropSite extends React.Component {
         {
           needs: data,
         },
-        () => {}
-      )
-    })
+        () => {},
+      );
+    });
     this.props.backend.listSupply(this.props.match.params.id).then((data) => {
       this.setState(
         {
@@ -66,9 +63,9 @@ class AdminDropSite extends React.Component {
         },
         () => {
           // console.log(this.state);
-        }
-      )
-    })
+        },
+      );
+    });
     this.props.backend.getDropSites(this.props.match.params.id).then((data) => {
       this.setState(
         {
@@ -80,15 +77,17 @@ class AdminDropSite extends React.Component {
           dropSiteHospital: data?.dropSiteHospital,
           dropSitePhone: data?.dropSitePhone,
         },
-        () => {}
-      )
-    })
+        () => {},
+      );
+    });
 
-    this.checkVerification()
+    this.checkVerification();
   }
 
   render() {
-    let content = <DropSiteAdmin backend={this.props.backend} {...this.state} />
+    let content = (
+      <DropSiteAdmin backend={this.props.backend} {...this.state} />
+    );
 
     if (this.state.loading) {
       content = (
@@ -101,7 +100,7 @@ class AdminDropSite extends React.Component {
             to edit/add once verified.
           </div>
         </div>
-      )
+      );
     }
 
     if (!this.state.verified && this.state.badDomain) {
@@ -115,17 +114,18 @@ class AdminDropSite extends React.Component {
                 color: '#721c24',
                 fontWeight: 'bold',
                 textDecoration: 'underline',
-              }}>
+              }}
+            >
               log out
             </a>{' '}
             and try your work email or contact help@help.supply.
           </div>
         </div>
-      )
+      );
     }
 
-    return <Box>{content}</Box>
+    return <Box>{content}</Box>;
   }
 }
 
-export default withRouter(AdminDropSite)
+export default withRouter(AdminDropSite);

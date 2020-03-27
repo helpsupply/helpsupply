@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class HospitalResult extends React.Component {
   constructor(props) {
@@ -7,9 +7,9 @@ class HospitalResult extends React.Component {
   }
 
   render() {
-    let selectedClass = "list-group-item result";
+    let selectedClass = 'list-group-item result';
     if (this.props.selectedResult) {
-      selectedClass = "list-group-item result selected";
+      selectedClass = 'list-group-item result selected';
     }
 
     function selectHospital(that) {

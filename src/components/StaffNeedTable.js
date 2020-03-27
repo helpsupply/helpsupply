@@ -1,5 +1,5 @@
-import React from "react";
-import * as needTypes from "../data/needTypes";
+import React from 'react';
+import * as needTypes from '../data/needTypes';
 
 class StaffNeedTable extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class StaffNeedTable extends React.Component {
   }
 
   render() {
-    let index = needTypes.needTypes.findIndex(x => x.id === this.props.type);
+    let index = needTypes.needTypes.findIndex((x) => x.id === this.props.type);
     let fieldsArray = needTypes.needTypes[index].fields;
 
     return (
@@ -19,18 +19,18 @@ class StaffNeedTable extends React.Component {
               {fieldsArray.map((field, i) => {
                 return <th key={i}>{field.name}</th>;
               })}
-              <th style={{ width: "150px" }}>Action</th>
+              <th style={{ width: '150px' }}>Action</th>
             </tr>
           </thead>
           <tbody>
             {this.props.needs.map((need, i) => {
-              if (need.kind === this.props.type && need.status === "open") {
+              if (need.kind === this.props.type && need.status === 'open') {
                 return (
                   <tr key={i}>
                     {fieldsArray.map((field, i) => {
                       return <th key={i}>{need[field.id]}</th>;
                     })}
-                    <th style={{ width: "150px" }}>
+                    <th style={{ width: '150px' }}>
                       <button className="btn btn-primary hospitalNeedsBtn">
                         Offer to help
                       </button>
@@ -38,17 +38,17 @@ class StaffNeedTable extends React.Component {
                   </tr>
                 );
               } else {
-                return "";
+                return '';
               }
             })}
             {this.props.needs.map((need, i) => {
-              if (need.kind === this.props.type && need.status === "closed") {
+              if (need.kind === this.props.type && need.status === 'closed') {
                 return (
                   <tr key={i}>
                     {fieldsArray.map((field, i) => {
                       return <th key={i}>{need[field.id]}</th>;
                     })}
-                    <th style={{ width: "150px" }}>
+                    <th style={{ width: '150px' }}>
                       <button
                         disabled
                         className="btn btn-outline-success noHover"
@@ -59,7 +59,7 @@ class StaffNeedTable extends React.Component {
                   </tr>
                 );
               } else {
-                return "";
+                return '';
               }
             })}
           </tbody>

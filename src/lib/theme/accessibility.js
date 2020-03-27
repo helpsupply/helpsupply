@@ -5,4 +5,4 @@ export const visuallyHidden = {
   position: 'absolute',
   whiteSpace: 'nowrap',
   width: 1,
-}
+};

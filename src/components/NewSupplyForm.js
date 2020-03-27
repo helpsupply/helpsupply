@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
 class NewSupplyForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      supplyDeliveryTime: "",
-      supplyPhone: "",
-      supplyComments: "",
-      supplyQuantity: "",
-      supplyPhoneError: "",
-      supplyCommentsError: "",
-      supplyQuantityError: "",
-      supplyDeliveryTimeError: "",
+      supplyDeliveryTime: '',
+      supplyPhone: '',
+      supplyComments: '',
+      supplyQuantity: '',
+      supplyPhoneError: '',
+      supplyCommentsError: '',
+      supplyQuantityError: '',
+      supplyDeliveryTimeError: '',
       formActivated: false,
-      stage: 1
+      stage: 1,
     };
     this.handleSupplySubmit = this.handleSupplySubmit.bind(this);
     this.handleNextStep = this.handleNextStep.bind(this);
@@ -21,33 +21,33 @@ class NewSupplyForm extends React.Component {
 
   handleNextStep() {
     this.setState({
-      stage: 2
+      stage: 2,
     });
   }
 
-  handleChange = field => e => {
-    if (field === "supplyPhone") {
+  handleChange = (field) => (e) => {
+    if (field === 'supplyPhone') {
       this.setState({
-        supplyPhone: e.target.value
+        supplyPhone: e.target.value,
       });
-    } else if (field === "supplyComments") {
+    } else if (field === 'supplyComments') {
       this.setState({
-        supplyComments: e.target.value
+        supplyComments: e.target.value,
       });
-    } else if (field === "supplyQuantity") {
+    } else if (field === 'supplyQuantity') {
       this.setState({
-        supplyQuantity: e.target.value
+        supplyQuantity: e.target.value,
       });
-    } else if (field === "supplyDeliveryTime") {
+    } else if (field === 'supplyDeliveryTime') {
       this.setState({
-        supplyDeliveryTime: e.target.value
+        supplyDeliveryTime: e.target.value,
       });
     }
   };
 
-  handleValidate = field => e => {
+  handleValidate = (field) => (e) => {
     this.setState({
-      formActivated: true
+      formActivated: true,
     });
     /* if (field === "supplyPhone") {
       if (!e.target.value) {
@@ -60,25 +60,25 @@ class NewSupplyForm extends React.Component {
         });
       }
     } else */ if (
-      field === "supplyComments"
+      field === 'supplyComments'
     ) {
       if (!e.target.value) {
         this.setState({
-          supplyCommentsError: "This field is necessary."
+          supplyCommentsError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          supplyCommentsError: ""
+          supplyCommentsError: '',
         });
       }
-    } else if (field === "supplyDeliveryTime") {
+    } else if (field === 'supplyDeliveryTime') {
       if (!e.target.value) {
         this.setState({
-          supplyDeliveryTimeError: "This field is necessary."
+          supplyDeliveryTimeError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          supplyDeliveryTimeError: ""
+          supplyDeliveryTimeError: '',
         });
       }
     }
@@ -86,7 +86,7 @@ class NewSupplyForm extends React.Component {
 
   handleSupplySubmit() {
     this.setState({
-      stage: 3
+      stage: 3,
     });
 
     for (var i = 0; i < this.props.cart.length; i++) {
@@ -98,9 +98,9 @@ class NewSupplyForm extends React.Component {
           this.state.supplyPhone,
           this.props.cart[i].requestQuantity,
           this.state.supplyDeliveryTime,
-          this.state.supplyComments
+          this.state.supplyComments,
         )
-        .then(data => {
+        .then((data) => {
           console.log(data);
         });
     }
@@ -197,8 +197,8 @@ class NewSupplyForm extends React.Component {
               id="supplyPhone"
               placeholder="e.g. juan@gmail.com"
               value={this.state.supplyPhone}
-              onChange={this.handleChange("supplyPhone")}
-              onBlur={this.handleValidate("supplyPhone")}
+              onChange={this.handleChange('supplyPhone')}
+              onBlur={this.handleValidate('supplyPhone')}
             />
             <div className="formDisclaimer">
               Note: Your email will be publicly accessible.
@@ -212,8 +212,8 @@ class NewSupplyForm extends React.Component {
               id="supplyDeliveryTime"
               placeholder="e.g. April 2, 9am-10am"
               value={this.state.supplyDeliveryTime}
-              onChange={this.handleChange("supplyDeliveryTime")}
-              onBlur={this.handleValidate("supplyDeliveryTime")}
+              onChange={this.handleChange('supplyDeliveryTime')}
+              onBlur={this.handleValidate('supplyDeliveryTime')}
             />
             <div className="formError">
               {this.state.supplyDeliveryTimeError}
@@ -226,8 +226,8 @@ class NewSupplyForm extends React.Component {
               id="supplyComments"
               placeholder="e.g. I work in construction and these are unused and open masks."
               value={this.state.supplyComments}
-              onChange={this.handleChange("supplyComments")}
-              onBlur={this.handleValidate("supplyComments")}
+              onChange={this.handleChange('supplyComments')}
+              onBlur={this.handleValidate('supplyComments')}
             />
             <div className="formError">{this.state.supplyCommentsError}</div>
           </div>
