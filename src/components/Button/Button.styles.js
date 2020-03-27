@@ -1,6 +1,6 @@
-import { css } from '@emotion/core'
-import { buttonReset, Color, Radius, Space } from 'lib/theme'
-import { type } from './constants'
+import { css } from '@emotion/core';
+import { buttonReset, Color, Radius, Space } from 'lib/theme';
+import { type } from './constants';
 
 const styles = {
   root: css({
@@ -13,8 +13,8 @@ const styles = {
     background: Color.CORAL,
     width: '100%',
     ':disabled': {
-      background: Color.GRAY_LIGHT
-    }
+      background: Color.GRAY_LIGHT,
+    },
   }),
   [type.LINK]: css({
     textDecoration: 'underline',
@@ -26,9 +26,9 @@ const styles = {
     border: `2px solid ${Color.CORAL}`,
     ':disabled': {
       color: Color.GRAY_LIGHT,
-      borderColor: Color.GRAY_LIGHT
-    }
+      borderColor: Color.GRAY_LIGHT,
+    },
   }),
-}
+};
 
-export default styles
+export default styles;

@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
-import { Color, Space } from 'lib/theme'
+import { css } from '@emotion/core';
+import { Color, Space } from 'lib/theme';
 
 const styles = {
   icon: css({
@@ -31,6 +31,6 @@ const styles = {
     backgroundColor: Color.CORAL,
     borderColor: Color.CORAL,
   }),
-}
+};
 
-export default styles
+export default styles;

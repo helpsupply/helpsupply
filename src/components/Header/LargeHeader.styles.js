@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
-import { Color, Space } from 'lib/theme'
+import { css } from '@emotion/core';
+import { Color, Space } from 'lib/theme';
 
 const styles = {
   root: css({
@@ -10,6 +10,6 @@ const styles = {
     padding: `${Space.S40}px`,
     width: '100%',
   }),
-}
+};
 
-export default styles
+export default styles;

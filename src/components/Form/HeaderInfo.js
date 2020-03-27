@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import React from "react";
-import { jsx } from "@emotion/core";
-import PropTypes from "prop-types";
-import Text from "components/Text";
-import { TEXT_TYPE } from "components/Text/constants";
+import React from 'react';
+import { jsx } from '@emotion/core';
+import PropTypes from 'prop-types';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
 
-import styles from "./Form.styles.js";
+import styles from './Form.styles.js';
 
 class InfoHeader extends React.Component {
   static propTypes = {
@@ -19,7 +19,7 @@ class InfoHeader extends React.Component {
 
   render() {
     const {
-      as = "h3",
+      as = 'h3',
       description,
       title,
       type = TEXT_TYPE.HEADER_3,

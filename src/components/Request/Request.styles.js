@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
-import { Color, Space, Radius } from 'lib/theme'
+import { css } from '@emotion/core';
+import { Color, Space, Radius } from 'lib/theme';
 
 export const styles = {
   amount: css({
@@ -37,4 +37,4 @@ export const styles = {
   progressInfo: css({
     marginBottom: Space.S10,
   }),
-}
+};

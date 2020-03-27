@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "lint": "eslint \"src/{components,containers,lib/theme,lib/utils,pages}/*.{js,jsx}\"",
+    "lint": "eslint \"./src/**/*.{js,jsx}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,8 +35,20 @@
       "react-app",
       "plugin:prettier/recommended"
     ],
+    "overrides": [
+      {
+        "files": [
+          "src/**/*.test.{js,jsx}",
+          "src/test/*.{js,jsx}"
+        ],
+        "globals": {
+          "after": "readonly"
+        }
+      }
+    ],
     "rules": {
       "curly": "error",
+      "no-throw-literal": "off",
       "no-useless-constructor": "off",
       "prettier/prettier": "error",
       "react-hooks/exhaustive-deps": "warn",

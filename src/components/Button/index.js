@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import PropTypes from "prop-types";
-import { type } from "./constants";
+import { jsx } from '@emotion/core';
+import PropTypes from 'prop-types';
+import { type } from './constants';
 
-import styles from "./Button.styles";
+import styles from './Button.styles';
 
 export const PrimaryButton = ({ children, ...rest }) => (
   <button css={[styles.root, styles[type.FILL]]} {...rest}>

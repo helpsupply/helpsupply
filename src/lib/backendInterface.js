@@ -3,12 +3,12 @@ class BackendInterface {
 
   listDropSites(zipcode, radius) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   getDropSites(dropSiteId) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   addDropSite(
@@ -16,27 +16,27 @@ class BackendInterface {
     dropSiteName,
     dropSiteDescription,
     dropSiteAddress,
-    dropSiteZip
+    dropSiteZip,
   ) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   editDropSite(
     dropSiteName,
     dropSiteDescription,
     dropSiteAddress,
-    dropSiteZip
+    dropSiteZip,
   ) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   // REQUESTS
 
   getRequests(dropSiteId, requestType, status) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   addRequest(
@@ -45,10 +45,10 @@ class BackendInterface {
     requestTitle,
     requestDescription,
     requestQuantity,
-    status
+    status,
   ) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   editRequest(
@@ -57,55 +57,55 @@ class BackendInterface {
     requestTitle,
     requestDescription,
     requestQuantity,
-    status
+    status,
   ) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   isLoggedIn() {
-    throw "Abstract Interface"
+    throw 'Abstract Interface';
   }
 
   async isValidHealthcareWorker() {
-    throw "Abstract Interface"
+    throw 'Abstract Interface';
   }
 
   // VALIDATED DOMAINS
 
   getPendingDomains() {
-    throw "Abstract Interface"
+    throw 'Abstract Interface';
   }
 
   setDomainIsValid(domain, isValid) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   // HEALTH CARE PROFESSIONALS AND ADMINS
 
   signupWithEmail(email) {
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   addHealthcareProfessional(userId) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   editHealthcareProfessional(hcpId, valid) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   addDropSiteAdmin(userId, dropSiteId) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 
   removeDropSiteAdmin(userId, dropSiteId) {
     // Abstract
-    throw "Abstract Interface";
+    throw 'Abstract Interface';
   }
 }
 

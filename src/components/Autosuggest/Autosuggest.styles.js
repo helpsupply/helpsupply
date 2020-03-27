@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
-import { Color, Radius, Space } from 'lib/theme'
+import { css } from '@emotion/core';
+import { Color, Radius, Space } from 'lib/theme';
 
 const styles = {
   active: css({
@@ -66,7 +66,7 @@ const styles = {
       zIndex: 1,
     },
     '.react-autosuggest__suggestion-match': {
-      color: Color.GRAY
+      color: Color.GRAY,
     },
     '.react-autosuggest__suggestions-list': {
       listStyle: 'none',
@@ -77,10 +77,10 @@ const styles = {
         padding: `${Space.S25}px 0`,
         ':not(:last-of-type)': {
           borderBottom: `1px solid ${Color.GRAY_LIGHT}`,
-        }
-      }
-    }
+        },
+      },
+    },
   }),
-}
+};
 
-export default styles
+export default styles;

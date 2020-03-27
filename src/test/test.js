@@ -1,4 +1,4 @@
-const firebase = require("@firebase/testing");
+const firebase = require('@firebase/testing');
 const projectId = 'test-project';
 
 beforeEach(async () => {
@@ -6,14 +6,14 @@ beforeEach(async () => {
 });
 
 after(async () => {
-  await Promise.all(firebase.apps().map(app => app.delete()));
+  await Promise.all(firebase.apps().map((app) => app.delete()));
 });
 
-describe("hospital.community", () => {
-	it("Run an empty test", () => {});
+describe('hospital.community', () => {
+  it('Run an empty test', () => {});
 
-	it("Test initialize firebase with restrictive rules", async () => {
-		const rules = `
+  it('Test initialize firebase with restrictive rules', async () => {
+    const rules = `
 		service cloud.firestore {
 			match /databases/{database}/documents {
 				match /{document=**} {
@@ -21,14 +21,18 @@ describe("hospital.community", () => {
 				}
 			}
 		}
-		`
-		await firebase.loadFirestoreRules({projectId, rules});
-		const db = firebase.initializeTestApp({projectId, auth: null}).firestore();
-		await firebase.assertFails(db.collection("foo").doc("bar").set({ baz: 'bat' }));
-	});
+		`;
+    await firebase.loadFirestoreRules({ projectId, rules });
+    const db = firebase
+      .initializeTestApp({ projectId, auth: null })
+      .firestore();
+    await firebase.assertFails(
+      db.collection('foo').doc('bar').set({ baz: 'bat' }),
+    );
+  });
 
-	it("Test initialize firebase with lax rules", async () => {
-		const rules = `
+  it('Test initialize firebase with lax rules', async () => {
+    const rules = `
 		service cloud.firestore {
 			match /databases/{database}/documents {
 				match /{document=**} {
@@ -36,14 +40,18 @@ describe("hospital.community", () => {
 				}
 			}
 		}
-		`
-		await firebase.loadFirestoreRules({projectId, rules});
-		const db = firebase.initializeTestApp({projectId, auth: null}).firestore();
-		await firebase.assertSucceeds(db.collection("foo").doc("bar").set({ baz: 'bat' }));
-	});
+		`;
+    await firebase.loadFirestoreRules({ projectId, rules });
+    const db = firebase
+      .initializeTestApp({ projectId, auth: null })
+      .firestore();
+    await firebase.assertSucceeds(
+      db.collection('foo').doc('bar').set({ baz: 'bat' }),
+    );
+  });
 
-	it("Test adding a request and requiring that it can't be validated", async () => {
-		const rules = `
+  it("Test adding a request and requiring that it can't be validated", async () => {
+    const rules = `
 		service cloud.firestore {
 			match /databases/{database}/documents {
 				match /hcp/{userid} {
@@ -58,33 +66,43 @@ describe("hospital.community", () => {
 				}
 			}
 		}
-		`
-		await firebase.loadFirestoreRules({projectId, rules});
-		const db = firebase.initializeTestApp({projectId, auth: null}).firestore();
+		`;
+    await firebase.loadFirestoreRules({ projectId, rules });
+    const db = firebase
+      .initializeTestApp({ projectId, auth: null })
+      .firestore();
 
-		// First verify we can add a new request, also long as we specify that valid is false
-		let request = db.collection("request").doc("1");
-		await firebase.assertSucceeds(request.set({ request_description: 'Masks', request_quantity: 0, valid: 'false' }))
+    // First verify we can add a new request, also long as we specify that valid is false
+    let request = db.collection('request').doc('1');
+    await firebase.assertSucceeds(
+      request.set({
+        request_description: 'Masks',
+        request_quantity: 0,
+        valid: 'false',
+      }),
+    );
 
-		// Next verify we can't make it valid ourselves
-		await firebase.assertFails(request.set({ valid: 'true' }))
+    // Next verify we can't make it valid ourselves
+    await firebase.assertFails(request.set({ valid: 'true' }));
 
-		// Create an authorized healthcareprovider and make them valid 
-		// (note there's no permissions on HCP, that will be tested elsewhere)
-		request = db.collection("hcp").doc("1");
-		await firebase.assertSucceeds(request.set({ valid: 'true' }))
+    // Create an authorized healthcareprovider and make them valid
+    // (note there's no permissions on HCP, that will be tested elsewhere)
+    request = db.collection('hcp').doc('1');
+    await firebase.assertSucceeds(request.set({ valid: 'true' }));
 
-		// Log in as that user
-		const test_auth = {'uid': '1' }
-		const db2 = firebase.initializeTestApp({projectId, auth: test_auth}).firestore();
+    // Log in as that user
+    const test_auth = { uid: '1' };
+    const db2 = firebase
+      .initializeTestApp({ projectId, auth: test_auth })
+      .firestore();
 
-		// Assert that we can successfully set the request as valid
-		request = db2.collection("request").doc("1");
-		await firebase.assertSucceeds(request.set({ valid: 'true' }))
-	});
+    // Assert that we can successfully set the request as valid
+    request = db2.collection('request').doc('1');
+    await firebase.assertSucceeds(request.set({ valid: 'true' }));
+  });
 
-	it("Test that a user can index their (potentially verified) domain", async () => {
-		const rules = `
+  it('Test that a user can index their (potentially verified) domain', async () => {
+    const rules = `
 		service cloud.firestore {
 			match /databases/{database}/documents {
 				match /domain/{url} {
@@ -100,20 +118,24 @@ describe("hospital.community", () => {
 				}
 			}
 		}
-		`
-		await firebase.loadFirestoreRules({projectId, rules});
+		`;
+    await firebase.loadFirestoreRules({ projectId, rules });
 
-		const auth = {'uid': '1', 'email': 'bob@kp.org'}
-		const db = firebase.initializeTestApp({projectId, auth}).firestore();
+    const auth = { uid: '1', email: 'bob@kp.org' };
+    const db = firebase.initializeTestApp({ projectId, auth }).firestore();
 
-		// Next verify that unless the domain is approved they can't do anything
-		await firebase.assertFails(db.collection('dropsite').doc('1').set({ address: '1 Market St' }))
-		
-		// Validate the domain
-		let request = db.collection("domain").doc("kp.org");
-		await firebase.assertSucceeds(request.set({ 'status': 'valid' }))
+    // Next verify that unless the domain is approved they can't do anything
+    await firebase.assertFails(
+      db.collection('dropsite').doc('1').set({ address: '1 Market St' }),
+    );
 
-		// Next verify they can edit
-		await firebase.assertFails(db.collection('dropsite').doc('1').set({ address: '1 Market St' }))
-	});
+    // Validate the domain
+    let request = db.collection('domain').doc('kp.org');
+    await firebase.assertSucceeds(request.set({ status: 'valid' }));
+
+    // Next verify they can edit
+    await firebase.assertFails(
+      db.collection('dropsite').doc('1').set({ address: '1 Market St' }),
+    );
+  });
 });
