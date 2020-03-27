@@ -1,20 +1,30 @@
 import { css } from '@emotion/core'
+
 import { Color, Space } from 'lib/theme'
+
+const bottomBorderSize = 2
 
 const styles = {
   root: css({
-    borderBottom: `2px solid ${Color.GRAY_LIGHT}`,
+    borderBottom: `${bottomBorderSize}px solid ${Color.GRAY_LIGHT}`,
     display: 'flex',
-    marginBottom: '2em',
-    padding: `${Space.S20}px ${Space.S40}px`,
-    width: '100%',
+    padding: `${Space.S30}px ${Space.S40}px`,
+    position: 'relative',
+
+    ':after': {
+      background: Color.CORAL,
+      bottom: `-${bottomBorderSize}px`,
+      content: '""',
+      display: 'block',
+      height: `${bottomBorderSize}px`,
+      left: 0,
+      position: 'absolute',
+      width: '50%',
+    },
   }),
-  header: css({
-    color: Color.CORAL,
-    paddingLeft: Space.S10,
-  }),
-  plus: css({
-    alignSelf: 'baseline',
+
+  link: css({
+    display: 'block',
   }),
 }
 
