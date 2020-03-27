@@ -2,10 +2,31 @@
 const functions = require("firebase-functions");
 const hospital_index = require("./chatbot/hospital_index");
 const tools = require("./chatbot/helperFunctions");
-const db = require("./chatbot/firebaseBackend");
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
+// DB FUNCTIONS
+
+var admin = require("firebase-admin");
+const serviceAccount = require("./service-account.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://hospitalcommunity.firebaseio.com"
+});
+
+const database = admin.firestore();
+const dropSiteRef = database.collection("dropSite");
+
+function getDropSite(location_id) {
+  return dropSiteRef
+    .doc(location_id)
+    .get()
+    .then(doc => {
+      return doc.data();
+    })
+    .catch(console.log);
+}
+
+// END DB FUNCTIONS
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
   response.json({ messages: [{ text: "Hello from Firebase!" }] });
@@ -90,8 +111,7 @@ app.intent("HCPSignupFollowupMultipleResultsYes", (conv, data) => {
   const searchResults = context.parameters.results;
   const location_id = searchResults[selection].id;
 
-  return db
-    .getDropSite(location_id)
+  return getDropSite(location_id)
     .then(doc => {
       if (doc.exists) {
         var data = doc.data();
@@ -135,8 +155,7 @@ app.intent("HCPSignupFollowupOneResultYes", (conv, data) => {
   const searchResults = context.parameters.results;
   const location_id = searchResults[0].id;
 
-  return db
-    .getDropSite(location_id)
+  return getDropSite(location_id)
     .then(doc => {
       if (doc.exists) {
         var data = doc.data();

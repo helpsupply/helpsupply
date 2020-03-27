@@ -1,22 +1,22 @@
-[debug] [2020-03-26T23:54:07.975Z] ----------------------------------------------------------------------
-[debug] [2020-03-26T23:54:07.977Z] Command:       /usr/local/Cellar/node/12.10.0/bin/node /usr/local/bin/firebase deploy --only functions
-[debug] [2020-03-26T23:54:07.978Z] CLI Version:   7.15.1
-[debug] [2020-03-26T23:54:07.978Z] Platform:      darwin
-[debug] [2020-03-26T23:54:07.978Z] Node Version:  v12.10.0
-[debug] [2020-03-26T23:54:07.979Z] Time:          Thu Mar 26 2020 17:54:07 GMT-0600 (Mountain Daylight Time)
-[debug] [2020-03-26T23:54:07.979Z] ----------------------------------------------------------------------
-[debug] [2020-03-26T23:54:07.979Z] 
-[debug] [2020-03-26T23:54:07.991Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2020-03-26T23:54:07.992Z] > authorizing via signed-in user
-[debug] [2020-03-26T23:54:07.992Z] [iam] checking project hospitalcommunity for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
-[debug] [2020-03-26T23:54:07.995Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/hospitalcommunity:testIamPermissions  
+[debug] [2020-03-27T00:25:45.320Z] ----------------------------------------------------------------------
+[debug] [2020-03-27T00:25:45.322Z] Command:       /usr/local/Cellar/node/12.10.0/bin/node /usr/local/bin/firebase deploy --only functions
+[debug] [2020-03-27T00:25:45.322Z] CLI Version:   7.15.1
+[debug] [2020-03-27T00:25:45.322Z] Platform:      darwin
+[debug] [2020-03-27T00:25:45.322Z] Node Version:  v12.10.0
+[debug] [2020-03-27T00:25:45.323Z] Time:          Thu Mar 26 2020 18:25:45 GMT-0600 (Mountain Daylight Time)
+[debug] [2020-03-27T00:25:45.323Z] ----------------------------------------------------------------------
+[debug] [2020-03-27T00:25:45.323Z] 
+[debug] [2020-03-27T00:25:45.339Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-27T00:25:45.339Z] > authorizing via signed-in user
+[debug] [2020-03-27T00:25:45.339Z] [iam] checking project hospitalcommunity for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-03-27T00:25:45.341Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/hospitalcommunity:testIamPermissions  
 
-[debug] [2020-03-26T23:54:08.732Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:45.890Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Deploying to 'hospitalcommunity'...
 [info] 
 [info] i  deploying functions
-[debug] [2020-03-26T23:54:11.269Z] > [functions] package.json contents: {
+[debug] [2020-03-27T00:25:48.417Z] > [functions] package.json contents: {
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
@@ -43,39 +43,55 @@
   "private": true
 }
 [info] i  functions: ensuring necessary APIs are enabled...
-[debug] [2020-03-26T23:54:11.271Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/hospitalcommunity/services/cloudfunctions.googleapis.com  
+[debug] [2020-03-27T00:25:48.419Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/hospitalcommunity/services/cloudfunctions.googleapis.com  
  
-[debug] [2020-03-26T23:54:11.272Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/hospitalcommunity/services/runtimeconfig.googleapis.com  
+[debug] [2020-03-27T00:25:48.420Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/hospitalcommunity/services/runtimeconfig.googleapis.com  
  
-[debug] [2020-03-26T23:54:12.012Z] <<< HTTP RESPONSE 200
-[debug] [2020-03-26T23:54:12.132Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:49.163Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:49.305Z] <<< HTTP RESPONSE 200
 [info] ✔  functions: all necessary APIs are enabled
-[debug] [2020-03-26T23:54:12.133Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/hospitalcommunity/adminSdkConfig  
+[debug] [2020-03-27T00:25:49.306Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/hospitalcommunity/adminSdkConfig  
  
-[debug] [2020-03-26T23:54:12.742Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:49.644Z] <<< HTTP RESPONSE 200
 [info] i  functions: preparing functions directory for uploading...
-[debug] [2020-03-26T23:54:12.744Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hospitalcommunity/configs  
+[debug] [2020-03-27T00:25:49.646Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hospitalcommunity/configs  
  
-[debug] [2020-03-26T23:54:13.262Z] <<< HTTP RESPONSE 200
-[debug] [2020-03-26T23:54:13.263Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hospitalcommunity/configs/process_fb_message/variables  
+[debug] [2020-03-27T00:25:49.986Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:49.988Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hospitalcommunity/configs/process_fb_message/variables  
  
-[debug] [2020-03-26T23:54:13.579Z] <<< HTTP RESPONSE 200
-[debug] [2020-03-26T23:54:13.580Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hospitalcommunity/configs/process_fb_message/variables/verify_token  
+[debug] [2020-03-27T00:25:50.294Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:50.295Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hospitalcommunity/configs/process_fb_message/variables/page_token  
  
-[debug] [2020-03-26T23:54:13.580Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hospitalcommunity/configs/process_fb_message/variables/page_token  
+[debug] [2020-03-27T00:25:50.295Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hospitalcommunity/configs/process_fb_message/variables/verify_token  
  
-[debug] [2020-03-26T23:54:13.896Z] <<< HTTP RESPONSE 200
-[debug] [2020-03-26T23:54:13.925Z] <<< HTTP RESPONSE 200
-[info] i  functions: packaged functions (384.52 KB) for uploading
-[debug] [2020-03-26T23:54:15.150Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/hospitalcommunity/locations/us-central1/functions:generateUploadUrl  
+[debug] [2020-03-27T00:25:50.616Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:50.622Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (384.49 KB) for uploading
+[debug] [2020-03-27T00:25:52.581Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/hospitalcommunity/locations/us-central1/functions:generateUploadUrl  
  
-[debug] [2020-03-26T23:54:16.141Z] <<< HTTP RESPONSE 200
-[debug] [2020-03-26T23:54:16.142Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-43f307ec-0a1d-463c-b736-2a239c59e8ed/74ef4b7d-40c0-418c-9f0c-3930d4082eec.zip?GoogleAccessId=service-726825294724@gcf-admin-robot.iam.gserviceaccount.com&Expires=1585268655&Signature=JM7PsRPBALh8YwKxbjNIkCARAbzU5CMJGidyZWQCq9BUpHIyohDIBMhMKdu8hKZ7F6SLo71DO%2FWgzMndje1hxRFiz9eicWirWEiLiRH9O4euRi%2F6ZOKJFxElIphPxz%2B%2FocSbyUqu7qBjRPcXApr1LpUufF28W10FI4vkoCfKqm6g4ifFFuUIDb1frLDUqOp%2F5ugjHD9IqnexwVF0yhN%2B5Hgi3OVDu%2BJIZnhQuUkKM01w2TADXyb8hdZuye0F6qr1FTeDUojtfyr9gR%2BkMGi1XYOuTBTPBlV80LDbShxvm9TyQJwXCvvAbXi7kfWilIFQ5RJH8fAJ%2Bj6FeGCBTI%2BmPA%3D%3D  
+[debug] [2020-03-27T00:25:53.360Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:53.361Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-43f307ec-0a1d-463c-b736-2a239c59e8ed/08ac9116-4abe-48cb-9288-c74c924b9f0a.zip?GoogleAccessId=service-726825294724@gcf-admin-robot.iam.gserviceaccount.com&Expires=1585270553&Signature=MBlROcN96%2BJvE0tqAMxf7oBTORj77w989Mr%2FQAaVYqVu60nK9SHw5%2BitlN5iJ8x2GMvECZwdeqvFj8nQF9ufm%2F%2FCphnzfH1YF%2BgUNBLzj4UDfKAZnUDGsUQuJnpmbLOh%2FHw7tv7tTR%2BJD%2FnBHMFzlWKRPnQd%2FUxwXoLmvTKIchBLT7nDsdm%2Bm94QGgkqKLXivdrRKL4M3ruidBuijD7KsGZIt9N3tGv20q7CWxosSNTIMSNaZPXHXYXdyxsjBGWk9rPnzVGipLxnHtaUGWGMDmNEneCHuil0KfI8IqsrgV9Cj6icGjlwXnD%2BCgMTVhG5HUR1DRiPb6gEG8QtywNjpw%3D%3D  
  <request body omitted>
-[debug] [2020-03-26T23:54:17.263Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:54.331Z] <<< HTTP RESPONSE 200
 [info] ✔  functions: functions folder uploaded successfully
-[debug] [2020-03-26T23:54:17.265Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/hospitalcommunity/locations/-/functions  
+[debug] [2020-03-27T00:25:54.333Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/hospitalcommunity/locations/-/functions  
  
-[debug] [2020-03-26T23:54:17.984Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:54.850Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating Node.js 8 function helloWorld(us-central1)...
+[debug] [2020-03-27T00:25:54.852Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating Node.js 8 function dialogflowWebhook(us-central1)...
+[debug] [2020-03-27T00:25:54.853Z] Trigger is:  {"httpsTrigger":{}}
+[debug] [2020-03-27T00:25:54.854Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/hospitalcommunity/services/cloudscheduler.googleapis.com  
+ 
+[debug] [2020-03-27T00:25:55.360Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:55.362Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/hospitalcommunity/locations/us-central1/functions/helloWorld {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2020-03-27T00:25:55.365Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/hospitalcommunity/locations/us-central1/functions/dialogflowWebhook {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2020-03-27T00:25:55.918Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:55.919Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-27T00:25:55.920Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/hospitalcommunity/locations/-/functions  
+ 
+[debug] [2020-03-27T00:25:56.737Z] <<< HTTP RESPONSE 200
 [error] 
 [error] Error: Some Cloud Functions regions were unreachable, please try again later.
