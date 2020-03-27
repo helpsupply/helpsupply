@@ -8,7 +8,12 @@ import AutosuggestHighlightParse from 'autosuggest-highlight/parse'
 import Text from 'components/Text'
 import { TEXT_TYPE } from 'components/Text/constants'
 import Form from 'components/Form'
+import { ReactComponent as Plus } from 'static/icons/plus-circle.svg'
+
 import Autosuggest from 'components/Autosuggest'
+import { Space, Color } from 'lib/theme'
+import FormGroup from 'components/Form/FormGroup'
+import { IconButton } from 'components/Button'
 
 const renderSuggestion = ({ hospital }, { query }) => {
   const nameMatches = AutosuggestHighlightMatch(hospital.name, query)
@@ -94,6 +99,7 @@ class FacilityForm extends React.Component {
   }
 
   handleRedirect() {
+    debugger
     if (!this.state.selectedResult) {
       return
     }
@@ -131,6 +137,13 @@ class FacilityForm extends React.Component {
           renderSuggestion={renderSuggestion}
           onSelect={this.handleSelectHospital}
         />
+        <Text type={TEXT_TYPE.BODY_2}>
+          <FormGroup mb={5}>Not seeing your facility?</FormGroup>
+          <IconButton onClick={() => this.props.history.push('/new-facility')}>
+            <Plus css={{ marginRight: Space.S5 }} />
+            <span css={{ color: Color.CORAL }}>Find a facility</span>
+          </IconButton>
+        </Text>
       </Form>
     )
   }

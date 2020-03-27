@@ -13,15 +13,19 @@ class InputDropdown extends React.Component {
     this.inputEl = null
     this.state = {
       isOpen: false,
-      value: ''
+      value: '',
     }
   }
 
   componentDidMount() {
     window.addEventListener('mousedown', (e) => {
-      this.setState((prevState) => { // clicked outside list
-        if (prevState.isOpen && !this.listEl.contains(e.target) || e.target === this.inputEl) {
-          return ({ isOpen: !this.state.isOpen })
+      this.setState((prevState) => {
+        // clicked outside list
+        if (
+          (prevState.isOpen && !this.listEl.contains(e.target)) ||
+          e.target === this.inputEl
+        ) {
+          return { isOpen: !this.state.isOpen }
         }
       })
     })
@@ -32,6 +36,9 @@ class InputDropdown extends React.Component {
   }
 
   onChange = (option) => {
+    if (this.props.customOnChange) {
+      this.props.customOnChange(option.value)
+    }
     this.setState({ value: option.label, isOpen: false })
   }
 
@@ -46,11 +53,11 @@ class InputDropdown extends React.Component {
         </span>
         <div
           value={value}
-          ref={(ref) => this.inputEl = ref}
+          ref={(ref) => (this.inputEl = ref)}
           css={styles.dropdown}>
           {isOpen && (
-            <ul css={styles.list} ref={(ref) => this.listEl = ref}>
-              {options.map(option => (
+            <ul css={styles.list} ref={(ref) => (this.listEl = ref)}>
+              {options.map((option) => (
                 <li
                   onClick={() => this.onChange(option)}
                   css={styles.option}
@@ -64,7 +71,7 @@ class InputDropdown extends React.Component {
         </div>
         <Chevron css={[styles.chevron, isOpen && styles.chevronOpen]} />
       </div>
-    );
+    )
   }
 }
 
