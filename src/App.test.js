@@ -5,6 +5,7 @@ const fs = require('fs')
 
 import FirebaseBackend from "./lib/firebaseBackend";
 import expectExport from 'expect';
+import { AlertHeading } from 'react-bootstrap/Alert';
 
 const firebase = require("@firebase/testing");
 const projectId = 'test-project';
@@ -42,6 +43,51 @@ test('hello world', async () => {
 
 })
 
+test('Test Creation While Unverified', async () => {
+  await firebase.clearFirestoreData({ projectId });
+	await firebase.loadFirestoreRules({ projectId, rules });
+
+  let adminApp = firebase.initializeAdminApp({projectId});
+  let adminfs = adminApp.firestore();
+  await adminfs.collection('domain').doc('stanford.edu').set({'valid': 'pending'});
+
+  let auth = {'uid': 'user1', email: 'bob@stanford.edu', email_verified: true};
+  let testApp = firebase.initializeTestApp({projectId, auth});
+  testApp.auth = function() {
+    return {
+      onAuthStateChanged: function(callback) {
+        callback(auth)
+      },
+      currentUser: {
+        email: auth.email,
+        uid: auth.uid
+      }
+    }
+  }
+
+  let backend = new FirebaseBackend(testApp);
+
+  // Have a non-verified user create a dropsite
+  await backend.addDropSite(
+    '1',
+    'Stanford',
+    'University Hospital',
+    '1 El Camino Real',
+    '94107',
+    '5555555555'    
+  );
+
+  // Verify that it isn't returned from the backend
+  console.log(await backend.getDropSites('1'))
+
+  // Verify the user
+
+  // Verify that it is returned from the backend now
+
+  return
+})
+
+
 test('Test Domain Verification', async () => {
   await firebase.clearFirestoreData({ projectId });
 
@@ -63,14 +109,19 @@ test('Test Domain Verification', async () => {
   }
 
   let backend = new FirebaseBackend(testApp);
-  expect((await backend.getDomains()).sort()).toStrictEqual(['kp.org','gmail.com'].sort())
-  expect((await backend.getDomains(true)).sort()).toStrictEqual(['kp.org'].sort())
 
+  let domains = new Promise((resolve, reject) => { backend.getDomains(false, resolve) })
+  expect((await domains).sort()).toStrictEqual(['kp.org','gmail.com'].sort())
+
+  domains = new Promise((resolve, reject) => { backend.getDomains(true, resolve) })
+  expect((await domains).sort()).toStrictEqual(['kp.org'].sort())
+  
   // We shouldn't be able to do this yet
   await expect(backend.setDomainIsValid('kp.org', true)).rejects.toBe('Validating domains is not allowed');
 
   // This should be the same as before
-  expect((await backend.getDomains(true)).sort()).toStrictEqual(['kp.org'].sort())
+  domains = new Promise((resolve, reject) => { backend.getDomains(true, resolve) })
+  expect((await domains).sort()).toStrictEqual(['kp.org'].sort())
 
   // Now make our user an admin
   await adminfs.collection('admin').doc(auth.uid).set({'valid': 'true'});
@@ -78,6 +129,11 @@ test('Test Domain Verification', async () => {
   // Now try again
   await backend.setDomainIsValid('kp.org', true);
 
+
   // This should now be empty
-  expect((await backend.getDomains(true)).sort()).toStrictEqual([].sort())
+  // TODO: Figure out how to test that this doesn't resolve in N amount of time
+  //domains = new Promise((resolve, reject) => { backend.getDomains(true, resolve) })
+  //expect((await domains).sort()).toStrictEqual([].sort())
+
+  return
 })

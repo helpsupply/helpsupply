@@ -7,12 +7,13 @@ class FirebaseBackend extends BackendInterface {
     super();
 
     this.firebase = testApp || Firebase.initializeApp(config);
-    this.firebase.analytics();
+    testApp || this.firebase.analytics();
     this.firestore = this.firebase.firestore();
     this.loggedIn = false;
     this.authLoaded = false;
     this.badDomain = false;
 
+    return;
     this.firebase.auth().onAuthStateChanged(user => {
       this.authLoaded = true;
       if (user) {
@@ -514,7 +515,7 @@ class FirebaseBackend extends BackendInterface {
         if (change.type === "added") {
           newDomains.push(change.doc.id);
           // Gross layer violation here
-          if (Notification.permission === "granted") {
+          if (window.Notification && Notification.permission === "granted") {
             var notification = new Notification(
               "New domain added: " + change.doc.id
             );
