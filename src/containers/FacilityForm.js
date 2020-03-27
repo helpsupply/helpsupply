@@ -1,13 +1,13 @@
 /** @jsx jsx */
-import React from 'react'
-import { jsx } from '@emotion/core'
-import Form from 'components/Form'
-import InputText from 'components/InputText'
-import InputDropdown from 'components/InputDropdown'
-import Anchor from 'components/Anchor'
-import Note from 'components/Note'
-import states from 'data/states'
-import FacilityConfirmation from 'components/FacilityConfirmation'
+import React from 'react';
+import { jsx } from '@emotion/core';
+import Form from 'components/Form';
+import InputText from 'components/InputText';
+import InputDropdown from 'components/InputDropdown';
+import Anchor from 'components/Anchor';
+import Note from 'components/Note';
+import states from 'data/states';
+import FacilityConfirmation from 'components/FacilityConfirmation';
 
 class FacilityForm extends React.Component {
   constructor(props) {
@@ -22,34 +22,32 @@ class FacilityForm extends React.Component {
         dropSiteState: '',
         dropSiteUrl: '',
       },
-    }
-    this.handleFieldChange = this.handleFieldChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    };
   }
 
   componentWillUpdate(_, nextState) {
     if (!this.state.dropSiteId && nextState.dropSiteId) {
       this.props.backend.getDropSites(nextState.dropSiteId).then((data) => {
-        data && this.setState({ fields: data })
-      })
+        data && this.setState({ fields: data });
+      });
     }
   }
 
   handleFieldChange = (field) => (value) => {
-    this.setState({ fields: { ...this.state.fields, [field]: value } })
-  }
+    this.setState({ fields: { ...this.state.fields, [field]: value } });
+  };
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.props.backend.addNewDropSite(this.state.fields).then((data) => {
       if (!data) {
-        return
+        return;
       }
-      this.setState({ dropSiteId: data })
-    })
-  }
+      this.setState({ dropSiteId: data });
+    });
+  };
 
   render() {
-    const { dropSiteUrl, ...requiredFields } = this.state.fields
+    const { dropSiteUrl, ...requiredFields } = this.state.fields;
 
     if (this.state.dropSiteId) {
       const {
@@ -58,12 +56,13 @@ class FacilityForm extends React.Component {
         dropSiteCity,
         dropSiteState,
         dropSiteZip,
-      } = this.state.fields
+      } = this.state.fields;
       return (
         <Form
           onSubmit={() =>
             this.props.history.push(`/signup/${this.state.dropSiteId}`)
-          }>
+          }
+        >
           <FacilityConfirmation
             name={dropSiteFacilityName}
             address={[
@@ -74,7 +73,7 @@ class FacilityForm extends React.Component {
             ].join(', ')}
           />
         </Form>
-      )
+      );
     }
 
     return (

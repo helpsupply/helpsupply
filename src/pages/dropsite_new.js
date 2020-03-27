@@ -2,7 +2,6 @@
 import React from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
-import * as hospital_index from '../data/hospital_index';
 
 import Page from 'components/layouts/Page';
 import DropSiteForm from 'containers/DropSiteForm';
@@ -50,8 +49,8 @@ class NewDropSite extends React.Component {
       this.props.backend
         .getDropSites(this.props.match.params.dropsite)
         .then((data) => {
-          this.setState({ dropsite: data })
-        })
+          this.setState({ dropsite: data });
+        });
       // TODO: find out if we need to redirect in any case
       // const dropsite =
       //   hospital_index.index.id_index[this.props.match.params.dropsite]
@@ -60,28 +59,25 @@ class NewDropSite extends React.Component {
       //   `/dropsite/${this.props.match.params.dropsite}/admin`
       // )
       // }
-    })
+    });
   }
 
   onSubmit(hospital) {
     this.props.backend.addDropSite(hospital).then((data) => {
-      let url = '/dropsite/' + hospital.location_id + '/admin'
-      this.props.history.push(url)
-    })
+      let url = '/dropsite/' + hospital.location_id + '/admin';
+      this.props.history.push(url);
+    });
   }
 
   render() {
     let content = (
-      <Fragment>
-        <BackButton />
-        <DropSiteForm
-          onSubmit={this.onSubmit}
-          backend={this.props.backend}
-          dropSite={this.state.dropsite}
-          verified={this.state.verified}
-        />
-      </Fragment>
-    )
+      <DropSiteForm
+        onSubmit={this.onSubmit}
+        backend={this.props.backend}
+        dropSite={this.state.dropsite}
+        verified={this.state.verified}
+      />
+    );
 
     if (this.state.loading) {
       content = (
