@@ -1,66 +1,60 @@
 /** @jsx jsx */
-import React from 'react';
+import { useState, useCallback } from 'react';
 import { jsx } from '@emotion/core';
 import Form from 'components/Form';
 import InputText from 'components/InputText';
 import InputDropdown from 'components/InputDropdown';
 import Note from 'components/Note';
 
-class SupplyForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fields: {
-        type: '',
-        kind: '',
-        quantity: '',
-      },
-    };
-    this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function SupplyForm({ onSubmit }) {
+  const [fields, setFields] = useState({
+    type: '',
+    kind: '',
+    quantity: '',
+  });
 
-  handleFieldChange = (field) => (value) => {
-    this.setState({ [field]: value });
-  };
+  const handleFieldChange = useCallback(
+    (field) => (value) => {
+      setFields((fields) => ({ ...fields, [field]: value }));
+    },
+    [],
+  );
 
-  handleSubmit() {
-    this.props.onSubmit(this.state.fields);
-  }
+  const handleSubmit = useCallback(() => {
+    onSubmit(fields);
+  }, [fields, onSubmit]);
 
-  render() {
-    return (
-      <Form
-        buttonLabel="Submit"
-        onSubmit={this.handleSubmit}
-        description="You’ll be able to add more requests after submitting this first one."
-        title="What supplies do you need most?"
-        disabled={
-          !Object.keys(this.state.fields).every((key) => !!this.state[key])
-        }
-      >
-        <InputDropdown
-          placeholder="Select type"
-          value={this.state.type}
-          customOnChange={this.handleFieldChange('type')}
-        />
-        <InputDropdown
-          placeholder="Select kind"
-          value={this.state.kind}
-          customOnChange={this.handleFieldChange('kind')}
-        />
-        <InputText
-          label="Quantity"
-          value={this.state.quantity}
-          customOnChange={this.handleFieldChange('quantity')}
-        />
-        <Note>
-          Note: By submitting this request you acknowledge that Help Supply
-          assumes no liability for any supplies delivered by donors.
-        </Note>
-      </Form>
-    );
-  }
+  const { type, kind, quantity } = fields;
+
+  return (
+    <Form
+      buttonLabel="Submit"
+      onSubmit={handleSubmit}
+      description="You’ll be able to add more requests after submitting this first one."
+      title="What supplies do you need most?"
+      disabled={!Object.keys(fields).every((key) => !!fields[key])}
+    >
+      <InputDropdown
+        placeholder="Select type"
+        value={type}
+        customOnChange={handleFieldChange('type')}
+      />
+      <InputDropdown
+        placeholder="Select kind"
+        value={kind}
+        customOnChange={handleFieldChange('kind')}
+      />
+      <InputText
+        label="Quantity"
+        value={quantity}
+        customOnChange={handleFieldChange('quantity')}
+      />
+      <Note>
+        Note: By submitting this request you acknowledge that Help Supply
+        assumes no liability for any supplies delivered by donors.
+      </Note>
+    </Form>
+  );
 }
 
 export default SupplyForm;
