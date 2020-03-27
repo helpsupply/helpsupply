@@ -34,16 +34,19 @@ export const DropSiteForm = ({ dropSite, onSubmit }) => {
   } = fields;
   return (
     <Form
+      defaultValues={fields}
       onSubmit={handleSubmit}
       title="Set a drop-off location"
       description="This is where donors can drop off supplies. It should be an easily identifiable location including a street address."
     >
       <InputText
+        name="address"
         label="Street address"
         value={dropSiteAddress}
         customOnChange={handleFieldChange('dropSiteAddress')}
       />
       <InputText
+        name="details"
         label="Additional location details"
         value={dropSiteDescription}
         customOnChange={handleFieldChange('dropSiteDescription')}
@@ -65,13 +68,17 @@ export const DropSiteForm = ({ dropSite, onSubmit }) => {
         description="We’re also working to solve this problem at scale. Can you give us the name and contact info of the person at your facility responsible for procuring supplies?"
       />
       <InputText
+        name="name"
         label="Name"
         value={dropSiteName}
+        isRequired={false}
         customOnChange={handleFieldChange('dropSiteName')}
       />
       <InputText
+        name="phone"
         label="Email or phone number"
         value={dropSitePhone}
+        isRequired={false}
         customOnChange={handleFieldChange('dropSitePhone')}
       />
       <TextArea
