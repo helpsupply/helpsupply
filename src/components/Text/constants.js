@@ -7,4 +7,5 @@ export const TEXT_TYPE = {
   BODY_2: 'BODY_2',
   CONTENT: 'CONTENT',
   NOTE: 'NOTE',
+  BOLD: 'BOLD',
 }
