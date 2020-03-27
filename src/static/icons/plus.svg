@@ -1,4 +1,4 @@
-<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#FF5A5F" d="M7.98633.299805h3.32759v19.3H7.98633z"/>
-  <path fill="#FF5A5F" d="M19.2998 8.28564v3.32759h-19.3V8.28564z"/>
+<svg width="20" height="20" fill="#FF5A5F" xmlns="http://www.w3.org/2000/svg">
+  <path fill="current-color" d="M7.98633.299805h3.32759v19.3H7.98633z"/>
+  <path fill="current-color" d="M19.2998 8.28564v3.32759h-19.3V8.28564z"/>
 </svg>
