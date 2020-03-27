@@ -50,6 +50,9 @@ export const textStyles = {
     lineHeight: '18px',
     letterSpacing: '-0.01em',
   }),
+  [TEXT_TYPE.BOLD]: css({
+    fontWeight: 600,
+  }),
 }
 
 export default textStyles
