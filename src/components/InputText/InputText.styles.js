@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Color, Radius, Space } from 'lib/theme';
+import { Borders, Color, Radius, Space } from 'lib/theme';
 
 const styles = {
   active: css({
@@ -49,8 +49,8 @@ const styles = {
   }),
   root: css({
     display: 'flex',
-    border: `2px solid transparent`,
-    borderRadius: 11,
+    border: Borders.TRANSPARENT,
+    borderRadius: Radius.ROUNDED,
     flexDirection: 'column',
     height: 65,
     position: 'relative',
