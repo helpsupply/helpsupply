@@ -19,78 +19,66 @@ import EntryPortal from 'pages/entry';
 import Request from 'pages/request';
 import SignUp from 'pages/signup';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {},
-      userData: {},
-    };
-  }
+function App({ backend }) {
+  return (
+    <>
+      <Global styles={styles} />
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/logout">
+              <Logout backend={backend} />
+            </Route>
+            <Route path="/dropsite/new/admin/:dropsite?">
+              <NewDropSite backend={backend} />
+            </Route>
+            <Route path="/new/admin/supply/:dropsite?">
+              <NewSupplyRequest backend={backend} />
+            </Route>
+            <Route path="/signupFinish/:dropsite?">
+              <HCPSignupFinish backend={backend} />
+            </Route>
+            <Route path="/dropsite/:id/admin">
+              <AdminDropSite backend={backend} />
+            </Route>
+            <Route path="/dropsite/:id">
+              <DropSite backend={backend} />
+            </Route>
+            <Route path="/profile">
+              <Profile backend={backend} />
+            </Route>
+            <Route path="/pending-domains">
+              <PendingDomains backend={backend} />
+            </Route>
 
-  componentDidMount() {}
+            <Route exact path="/style-guide">
+              <StyleGuide backend={backend} />
+            </Route>
 
-  render() {
-    return (
-      <>
-        <Global styles={styles} />
-        <Router>
-          <div className="App">
-            <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/logout">
-                <Logout backend={this.props.backend} />
-              </Route>
-              <Route path="/dropsite/new/admin/:dropsite?">
-                <NewDropSite backend={this.props.backend} />
-              </Route>
-              <Route path="/new/admin/supply/:dropsite?">
-                <NewSupplyRequest backend={this.props.backend} />
-              </Route>
-              <Route path="/signupFinish/:dropsite?">
-                <HCPSignupFinish backend={this.props.backend} />
-              </Route>
-              <Route path="/dropsite/:id/admin">
-                <AdminDropSite backend={this.props.backend} />
-              </Route>
-              <Route path="/dropsite/:id">
-                <DropSite backend={this.props.backend} />
-              </Route>
-              <Route path="/profile">
-                <Profile backend={this.props.backend} />
-              </Route>
-              <Route path="/pending-domains">
-                <PendingDomains backend={this.props.backend} />
-              </Route>
+            <Route exact path="/">
+              <EntryPortal backend={backend} />
+            </Route>
+            <Route path="/request">
+              <Request backend={backend} />
+            </Route>
+            <Route path="/signup/:dropsite?">
+              <SignUp backend={backend} />
+            </Route>
+            <Route path="/new-facility">
+              <NewFacility backend={backend} />
+            </Route>
 
-              <Route exact path="/style-guide">
-                <StyleGuide backend={this.props.backend} />
-              </Route>
-
-              <Route exact path="/">
-                <EntryPortal backend={this.props.backend} />
-              </Route>
-              <Route path="/request">
-                <Request backend={this.props.backend} />
-              </Route>
-              <Route path="/signup/:dropsite?">
-                <SignUp backend={this.props.backend} />
-              </Route>
-              <Route path="/new-facility">
-                <NewFacility backend={this.props.backend} />
-              </Route>
-
-              <Route path="*">
-                <NoMatch />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </>
-    );
-  }
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </>
+  );
 }
 
 export default App;
