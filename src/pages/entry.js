@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { css } from '@emotion/core';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Color, Space } from 'lib/theme';
 import Anchor from 'components/Anchor';
@@ -30,42 +30,40 @@ const styles = {
   }),
 };
 
-class EntryPortal extends React.Component {
-  render() {
-    return (
-      <Fragment>
-        <LargeHeader />
-        <Box css={styles.box}>
-          <ListLink
-            href={Routes.REQUEST}
-            title="Need"
-            text="Healthcare professionals only"
-          />
-          <ListLink
-            href={Routes.DONATE}
-            title="Donate"
-            text="Open to the public"
-          />
-          <div css={styles.titleAndText}>
-            <Text css={styles.title} as="h3" type={TEXT_TYPE.HEADER_4}>
-              Nurses and doctors need supplies to keep fighting the coronavirus.
-              We help them communicate their needs to people who can help.
-            </Text>
-            <Text css={styles.text} as="p" type={TEXT_TYPE.BODY_2}>
-              Our platform gives a real-time view of immediate needs at various
-              hospitals. We make the information freely available so anyone can
-              help, including organizations who can provide supplies at scale.
-            </Text>
-          </div>
-          <Anchor href={Routes.FAQ} withIcon>
-            <Text css={textStyles.BOLD} type={TEXT_TYPE.BODY_2}>
-              Learn more
-            </Text>
-          </Anchor>
-        </Box>
-      </Fragment>
-    );
-  }
+function EntryPortal() {
+  return (
+    <Fragment>
+      <LargeHeader />
+      <Box css={styles.box}>
+        <ListLink
+          href={Routes.REQUEST}
+          title="Need"
+          text="Healthcare professionals only"
+        />
+        <ListLink
+          href={Routes.DONATE}
+          title="Donate"
+          text="Open to the public"
+        />
+        <div css={styles.titleAndText}>
+          <Text css={styles.title} as="h3" type={TEXT_TYPE.HEADER_4}>
+            Nurses and doctors need supplies to keep fighting the coronavirus.
+            We help them communicate their needs to people who can help.
+          </Text>
+          <Text css={styles.text} as="p" type={TEXT_TYPE.BODY_2}>
+            Our platform gives a real-time view of immediate needs at various
+            hospitals. We make the information freely available so anyone can
+            help, including organizations who can provide supplies at scale.
+          </Text>
+        </div>
+        <Anchor href={Routes.FAQ} withIcon>
+          <Text css={textStyles.BOLD} type={TEXT_TYPE.BODY_2}>
+            Learn more
+          </Text>
+        </Anchor>
+      </Box>
+    </Fragment>
+  );
 }
 
-export default withRouter(EntryPortal);
+export default EntryPortal;
