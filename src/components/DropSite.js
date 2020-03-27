@@ -1,20 +1,20 @@
-import React from "react";
-import * as hospital_index from "../data/hospital_index";
-import { withRouter, Link } from "react-router-dom";
-import DropSiteNeedGroup from "./DropSiteNeedGroup";
-import NewSupplyForm from "./NewSupplyForm";
-import HelpFooter from "./HelpFooter";
-import CartBanner from "./CartBanner";
+import React from 'react';
+import * as hospital_index from '../data/hospital_index';
+import { withRouter, Link } from 'react-router-dom';
+import DropSiteNeedGroup from './DropSiteNeedGroup';
+import NewSupplyForm from './NewSupplyForm';
+import HelpFooter from './HelpFooter';
+import CartBanner from './CartBanner';
 
 class DropSite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropSiteId: "",
-      dropSiteName: "",
-      dropSiteAddress: "",
-      dropSiteZip: "",
-      dropSiteDescription: "",
+      dropSiteId: '',
+      dropSiteName: '',
+      dropSiteAddress: '',
+      dropSiteZip: '',
+      dropSiteDescription: '',
       needs: [],
       supply: [],
       cart: [],
@@ -27,8 +27,8 @@ class DropSite extends React.Component {
   }
 
   handleCartScroll() {
-    var element = document.getElementById("donationForm");
-    element.scrollIntoView({ behavior: "smooth" });
+    var element = document.getElementById('donationForm');
+    element.scrollIntoView({ behavior: 'smooth' });
     this.setState({
       alertClicked: true,
     });
@@ -70,7 +70,7 @@ class DropSite extends React.Component {
         },
         () => {
           // console.log(this.state);
-        }
+        },
       );
     });
     this.props.backend.listSupply(this.props.match.params.id).then((data) => {
@@ -80,7 +80,7 @@ class DropSite extends React.Component {
         },
         () => {
           // console.log(this.state);
-        }
+        },
       );
     });
     this.props.backend.getDropSites(this.props.match.params.id).then((data) => {
@@ -96,7 +96,7 @@ class DropSite extends React.Component {
         },
         () => {
           //console.log(this.state);
-        }
+        },
       );
     });
   }
@@ -106,8 +106,8 @@ class DropSite extends React.Component {
   render() {
     // this code is for the future when some dropsites may not map to an exisitng hospital in the hospital_index
     let hospital = hospital_index.index.id_index[this.props.match.params.id];
-    let hospitalText = "";
-    if (typeof hospital === "undefined") {
+    let hospitalText = '';
+    if (typeof hospital === 'undefined') {
       hospitalText = (
         <div className="servingText">
           (serving {this.state.dropSiteHospital})
@@ -125,7 +125,7 @@ class DropSite extends React.Component {
           <span className="navbar-brand mb-0 h1" id="hospitalname">
             <div className="dropSiteIdText">
               <b>Drop-Off Location: {this.state.dropSiteId}</b>
-            </div>{" "}
+            </div>{' '}
             {hospitalText}
           </span>
           <a href="/" className="navbar-brand mb-0 h1 logored">
@@ -135,7 +135,7 @@ class DropSite extends React.Component {
         <div className="content">
           <div className="panelFull">
             <Link
-              to={"/signup/" + this.state.dropSiteId}
+              to={'/signup/' + this.state.dropSiteId}
               className="manageDropSiteLink"
             >
               Manage This Drop-off Location

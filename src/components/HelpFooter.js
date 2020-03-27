@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class HelpFooter extends React.Component {
   constructor(props) {

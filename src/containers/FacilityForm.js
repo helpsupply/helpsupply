@@ -1,16 +1,16 @@
 /** @jsx jsx */
-import React from 'react'
-import { jsx } from '@emotion/core'
-import Form from 'components/Form'
-import InputText from 'components/InputText'
-import InputDropdown from 'components/InputDropdown'
-import Anchor from 'components/Anchor'
-import Note from 'components/Note'
-import states from 'data/states'
+import React from 'react';
+import { jsx } from '@emotion/core';
+import Form from 'components/Form';
+import InputText from 'components/InputText';
+import InputDropdown from 'components/InputDropdown';
+import Anchor from 'components/Anchor';
+import Note from 'components/Note';
+import states from 'data/states';
 
 class FacilityForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       dropSiteName: '',
       dropSiteZip: '',
@@ -18,23 +18,23 @@ class FacilityForm extends React.Component {
       dropSiteCity: '',
       dropSiteState: '',
       dropSiteUrl: '',
-    }
-    this.handleFieldChange = this.handleFieldChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    };
+    this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleFieldChange = (field) => (value) => {
-    this.setState({ [field]: value })
-  }
+    this.setState({ [field]: value });
+  };
 
   handleSubmit() {
-    const { errors, ...state } = this.state
-    const payload = state
-    this.props.onSubmit(payload)
+    const { errors, ...state } = this.state;
+    const payload = state;
+    this.props.onSubmit(payload);
   }
 
   render() {
-    const { dropSiteUrl, ...requiredFields } = this.state
+    const { dropSiteUrl, ...requiredFields } = this.state;
     return (
       <Form
         buttonLabel="Submit"
@@ -43,7 +43,8 @@ class FacilityForm extends React.Component {
         disabled={
           !Object.keys(requiredFields).every((key) => !!this.state[key])
         }
-        description="Enter some information about your facility.">
+        description="Enter some information about your facility."
+      >
         <InputText
           label="Name of the facility"
           value={this.state.dropSiteName}
@@ -82,8 +83,8 @@ class FacilityForm extends React.Component {
           <Anchor href="mailto:help@help.supply">help@help.supply</Anchor>
         </Note>
       </Form>
-    )
+    );
   }
 }
 
-export default FacilityForm
+export default FacilityForm;

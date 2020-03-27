@@ -1,19 +1,19 @@
-import React from "react";
-import { Form } from "react-bootstrap";
+import React from 'react';
+import { Form } from 'react-bootstrap';
 
 class NewRequestForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      requestType: "Masks",
-      requestTitle: "",
-      requestDescription: "",
-      requestQuantity: "",
-      requestTitleError: "",
-      requestDescriptionError: "",
-      requestQuantityError: "",
+      requestType: 'Masks',
+      requestTitle: '',
+      requestDescription: '',
+      requestQuantity: '',
+      requestTitleError: '',
+      requestDescriptionError: '',
+      requestQuantityError: '',
       requestWillingToPay: false,
-      formActivated: false
+      formActivated: false,
     };
     this.handleRequestSubmit = this.handleRequestSubmit.bind(this);
     this.handleWillingToPay = this.handleWillingToPay.bind(this);
@@ -22,63 +22,63 @@ class NewRequestForm extends React.Component {
   handleWillingToPay(e) {
     const value = e.target.checked;
     this.setState({
-      requestWillingToPay: value
+      requestWillingToPay: value,
     });
   }
 
-  handleChange = field => e => {
-    if (field === "requestTitle") {
+  handleChange = (field) => (e) => {
+    if (field === 'requestTitle') {
       this.setState({
-        requestTitle: e.target.value
+        requestTitle: e.target.value,
       });
-    } else if (field === "requestDescription") {
+    } else if (field === 'requestDescription') {
       this.setState({
-        requestDescription: e.target.value
+        requestDescription: e.target.value,
       });
-    } else if (field === "requestQuantity") {
+    } else if (field === 'requestQuantity') {
       this.setState({
-        requestQuantity: e.target.value
+        requestQuantity: e.target.value,
       });
     }
-    if (field === "requestType") {
+    if (field === 'requestType') {
       this.setState({
-        requestType: e.target.value
+        requestType: e.target.value,
       });
     }
   };
 
-  handleValidate = field => e => {
+  handleValidate = (field) => (e) => {
     this.setState({
-      formActivated: true
+      formActivated: true,
     });
-    if (field === "requestTitle") {
+    if (field === 'requestTitle') {
       if (!e.target.value) {
         this.setState({
-          requestTitleError: "This field is necessary."
+          requestTitleError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          requestTitleError: ""
+          requestTitleError: '',
         });
       }
-    } else if (field === "requestDescription") {
+    } else if (field === 'requestDescription') {
       if (!e.target.value) {
         this.setState({
-          requestDescriptionError: "This field is necessary."
+          requestDescriptionError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          requestDescriptionError: ""
+          requestDescriptionError: '',
         });
       }
-    } else if (field === "requestQuantity") {
+    } else if (field === 'requestQuantity') {
       if (!e.target.value) {
         this.setState({
-          requestQuantityError: "This field is necessary and must be a number."
+          requestQuantityError: 'This field is necessary and must be a number.',
         });
       } else {
         this.setState({
-          requestQuantityError: ""
+          requestQuantityError: '',
         });
       }
     }
@@ -94,10 +94,10 @@ class NewRequestForm extends React.Component {
         this.state.requestTitle,
         this.state.requestDescription,
         this.state.requestQuantity,
-        "open",
-        this.state.requestWillingToPay
+        'open',
+        this.state.requestWillingToPay,
       )
-      .then(data => {
+      .then((data) => {
         let requestObj = {};
         requestObj.id = data;
         requestObj.dropSiteId = myProps.dropSiteId;
@@ -105,20 +105,20 @@ class NewRequestForm extends React.Component {
         requestObj.requestTitle = myState.requestTitle;
         requestObj.requestDescription = myState.requestDescription;
         requestObj.requestQuantity = myState.requestQuantity;
-        requestObj.status = "open";
+        requestObj.status = 'open';
         requestObj.requestWillingToPay = myState.requestWillingToPay;
         this.props.handleNewRequest(requestObj);
       });
 
     this.setState({
-      requestType: "Masks",
-      requestTitle: "",
-      requestDescription: "",
-      requestQuantity: "",
-      requestTitleError: "",
-      requestDescriptionError: "",
-      requestQuantityError: "",
-      formActivated: false
+      requestType: 'Masks',
+      requestTitle: '',
+      requestDescription: '',
+      requestQuantity: '',
+      requestTitleError: '',
+      requestDescriptionError: '',
+      requestQuantityError: '',
+      formActivated: false,
     });
   }
 
@@ -158,8 +158,8 @@ class NewRequestForm extends React.Component {
             id="requestTitle"
             placeholder="e.g. N95 Masks"
             value={this.state.requestTitle}
-            onChange={this.handleChange("requestTitle")}
-            onBlur={this.handleValidate("requestTitle")}
+            onChange={this.handleChange('requestTitle')}
+            onBlur={this.handleValidate('requestTitle')}
           />
           <div className="formError">{this.state.requestTitleError}</div>
         </div>
@@ -170,8 +170,8 @@ class NewRequestForm extends React.Component {
             id="requestDescription"
             placeholder="e.g. Unopened boxes only. We are willing to pay $1/mask."
             value={this.state.requestDescription}
-            onChange={this.handleChange("requestDescription")}
-            onBlur={this.handleValidate("requestDescription")}
+            onChange={this.handleChange('requestDescription')}
+            onBlur={this.handleValidate('requestDescription')}
           />
           <div className="formError">{this.state.requestDescriptionError}</div>
         </div>
@@ -183,8 +183,8 @@ class NewRequestForm extends React.Component {
             placeholder="e.g. 50 (must be a number)"
             type="number"
             value={this.state.requestQuantity}
-            onChange={this.handleChange("requestQuantity")}
-            onBlur={this.handleValidate("requestQuantity")}
+            onChange={this.handleChange('requestQuantity')}
+            onBlur={this.handleValidate('requestQuantity')}
           />
           <div className="formError">{this.state.requestQuantityError}</div>
         </div>
@@ -201,7 +201,7 @@ class NewRequestForm extends React.Component {
           <div className="requestSelectType">
             <select
               value={this.state.requestType}
-              onChange={this.handleChange("requestType")}
+              onChange={this.handleChange('requestType')}
             >
               <option value="mask">Masks</option>
               <option value="gowns">Gowns</option>

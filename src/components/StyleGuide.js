@@ -1,23 +1,23 @@
 /** @jsx jsx */
-import React from 'react'
-import { jsx } from '@emotion/core'
-import { TEXT_TYPE } from './Text/constants'
-import Text from './Text'
-import { PrimaryButton, SecondaryButton } from './Button'
-import InputText from './InputText'
-import Autosuggest from './Autosuggest'
-import TextArea from './TextArea'
-import Anchor from './Anchor'
-import InputDropdown from './InputDropdown'
-import Card from './Card'
-import Request from './Request'
+import React from 'react';
+import { jsx } from '@emotion/core';
+import { TEXT_TYPE } from './Text/constants';
+import Text from './Text';
+import { PrimaryButton, SecondaryButton } from './Button';
+import InputText from './InputText';
+import Autosuggest from './Autosuggest';
+import TextArea from './TextArea';
+import Anchor from './Anchor';
+import InputDropdown from './InputDropdown';
+import Card from './Card';
+import Request from './Request';
 
 class StyleGuide extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       facilities: [],
-    }
+    };
   }
 
   componentDidMount() {
@@ -26,9 +26,9 @@ class StyleGuide extends React.Component {
         name: facility.dropSiteName,
         address: facility.dropSiteAddress,
         id: facility.id,
-      }))
-      this.setState({ facilities })
-    })
+      }));
+      this.setState({ facilities });
+    });
   }
 
   render() {
@@ -39,7 +39,8 @@ class StyleGuide extends React.Component {
           width: '100%',
           margin: '0 auto',
           padding: '1em',
-        }}>
+        }}
+      >
         <h1>Style Guide</h1>
         <hr />
         <Text as="h1" type={TEXT_TYPE.HEADER_1}>
@@ -124,7 +125,8 @@ class StyleGuide extends React.Component {
           css={{
             padding: '20px 10px',
             background: '#F5F5F5',
-          }}>
+          }}
+        >
           <Request
             date="2020-03-26T05:31:40.665Z"
             donation="0"
@@ -143,8 +145,8 @@ class StyleGuide extends React.Component {
           />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default StyleGuide
+export default StyleGuide;

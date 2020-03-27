@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 class DropSiteNeedAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: this.props.need.status
+      status: this.props.need.status,
     };
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -18,7 +18,7 @@ class DropSiteNeedAdmin extends React.Component {
       null,
       null,
       null,
-      event.target.value
+      event.target.value,
     );
   }
 
@@ -39,9 +39,9 @@ class DropSiteNeedAdmin extends React.Component {
           <h5 className="card-title">
             <span className="requestLabel">Item needed:</span>
             <br />
-            {this.props.need.requestTitle}{" "}
+            {this.props.need.requestTitle}{' '}
             <span className="need-id">
-              REQUEST ID:{" "}
+              REQUEST ID:{' '}
               {this.props.need.id
                 .substr(this.props.need.id.length - 5)
                 .toUpperCase()}

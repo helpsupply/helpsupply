@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class LinksResult extends React.Component {
   constructor(props) {
@@ -8,11 +8,11 @@ class LinksResult extends React.Component {
 
   render() {
     function approvePost(that) {
-      that.props.approvePost("documents", that.props.id);
+      that.props.approvePost('documents', that.props.id);
     }
 
     function deletePost(that) {
-      that.props.deletePost("documents", that.props.id);
+      that.props.deletePost('documents', that.props.id);
     }
 
     let modView;

@@ -1,18 +1,16 @@
-import React from "react";
-import Firebase from "firebase";
-import * as firebaseui from "firebaseui";
+import React from 'react';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        auth: ''
+      auth: '',
     };
   }
 
   componentDidMount() {
     this.props.backend.firebase.auth().onAuthStateChanged((user) => {
-        this.setState({auth: JSON.stringify(user || "not authenticated")});
+      this.setState({ auth: JSON.stringify(user || 'not authenticated') });
     });
   }
 

@@ -4,4 +4,4 @@ export const buttonReset = {
   border: 'none',
   padding: 0,
   '&:not([disabled])': { cursor: 'pointer' },
-}
+};
