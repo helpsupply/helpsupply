@@ -9,4 +9,4 @@ export const Color = {
   GRAY_MEDIUM: '#C4C4C4',
   GRAY_LIGHT: '#DBDBDB',
   WHITE: '#FFFFFF',
-}
+};

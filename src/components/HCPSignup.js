@@ -1,14 +1,14 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class HCPSignup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: '',
       sent: false,
-      error: "",
-      dropsite: this.props.match.params.dropsite
+      error: '',
+      dropsite: this.props.match.params.dropsite,
     };
     this.submitEmail = this.submitEmail.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -50,8 +50,9 @@ class HCPSignup extends React.Component {
               </span>
               <br />
               <span className="small">
-                (it may take a few... check your Spam folder if you can't find it)
-                </span>
+                (it may take a few... check your Spam folder if you can't find
+                it)
+              </span>
               <br />
               <span className="small">(You can close this window now.)</span>
             </div>

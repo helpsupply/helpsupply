@@ -1,21 +1,20 @@
-import React from "react";
+import React from 'react';
 
 class DropSiteNeed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       status: this.props.need.status,
-      qty: 0
+      qty: 0,
     };
     this.handleQtyChange = this.handleQtyChange.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   handleQtyChange(event) {
-    let qty = 0;
     if (event.target.value > 0) {
       this.setState({
-        qty: event.target.value
+        qty: event.target.value,
       });
     }
   }
@@ -26,7 +25,7 @@ class DropSiteNeed extends React.Component {
         .substr(this.props.need.id.length - 5)
         .toUpperCase(),
       requestTitle: this.props.need.requestTitle,
-      requestQuantity: this.state.qty
+      requestQuantity: this.state.qty,
     };
     this.props.handleAddToCart(item);
   }
@@ -43,9 +42,9 @@ class DropSiteNeed extends React.Component {
           <h5 className="card-title">
             <span className="requestLabel">Item needed:</span>
             <br />
-            {this.props.need.requestTitle}{" "}
+            {this.props.need.requestTitle}{' '}
             <span className="need-id">
-              REQUEST ID:{" "}
+              REQUEST ID:{' '}
               {this.props.need.id
                 .substr(this.props.need.id.length - 5)
                 .toUpperCase()}

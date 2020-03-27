@@ -1,110 +1,110 @@
-import React from "react";
-import * as hospital_index from "../data/hospital_index";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import * as hospital_index from '../data/hospital_index';
+import { withRouter } from 'react-router-dom';
 
 class NewDropSiteForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropSiteId: "",
-      dropSiteName: "",
-      dropSiteDescription: "",
-      dropSiteAddress: "",
-      dropSiteZip: "",
-      dropSiteHospital: "",
-      dropSiteNameError: "",
-      dropSiteDescriptionError: "",
-      dropSiteAddressError: "",
-      dropSiteZipError: "",
-      dropSiteHospitalError: "",
-      dropSitePhone: "",
-      existingLocation: false
+      dropSiteId: '',
+      dropSiteName: '',
+      dropSiteDescription: '',
+      dropSiteAddress: '',
+      dropSiteZip: '',
+      dropSiteHospital: '',
+      dropSiteNameError: '',
+      dropSiteDescriptionError: '',
+      dropSiteAddressError: '',
+      dropSiteZipError: '',
+      dropSiteHospitalError: '',
+      dropSitePhone: '',
+      existingLocation: false,
     };
     this.handleEditDropSite = this.handleEditDropSite.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleValidate = this.handleValidate.bind(this);
   }
 
-  handleChange = field => e => {
-    if (field === "dropSiteName") {
+  handleChange = (field) => (e) => {
+    if (field === 'dropSiteName') {
       this.setState({
-        dropSiteName: e.target.value
+        dropSiteName: e.target.value,
       });
-    } else if (field === "dropSiteDescription") {
+    } else if (field === 'dropSiteDescription') {
       this.setState({
-        dropSiteDescription: e.target.value
+        dropSiteDescription: e.target.value,
       });
-    } else if (field === "dropSiteAddress") {
+    } else if (field === 'dropSiteAddress') {
       this.setState({
-        dropSiteAddress: e.target.value
+        dropSiteAddress: e.target.value,
       });
-    } else if (field === "dropSiteZip") {
+    } else if (field === 'dropSiteZip') {
       this.setState({
-        dropSiteZip: e.target.value
+        dropSiteZip: e.target.value,
       });
-    } else if (field === "dropSitePhone") {
+    } else if (field === 'dropSitePhone') {
       this.setState({
-        dropSitePhone: e.target.value
+        dropSitePhone: e.target.value,
       });
-    } else if (field === "dropSiteHospital") {
+    } else if (field === 'dropSiteHospital') {
       this.setState({
-        dropSiteHospital: e.target.value
+        dropSiteHospital: e.target.value,
       });
     }
   };
 
-  handleValidate = field => e => {
+  handleValidate = (field) => (e) => {
     this.setState({
-      formActivated: true
+      formActivated: true,
     });
-    if (field === "dropSiteName") {
+    if (field === 'dropSiteName') {
       if (!e.target.value) {
         this.setState({
-          dropSiteNameError: "This field is necessary."
+          dropSiteNameError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          dropSiteNameError: ""
+          dropSiteNameError: '',
         });
       }
-    } else if (field === "dropSiteDescription") {
+    } else if (field === 'dropSiteDescription') {
       if (!e.target.value) {
         this.setState({
-          dropSiteDescriptionError: "This field is necessary."
+          dropSiteDescriptionError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          dropSiteDescriptionError: ""
+          dropSiteDescriptionError: '',
         });
       }
-    } else if (field === "dropSiteAddress") {
+    } else if (field === 'dropSiteAddress') {
       if (!e.target.value) {
         this.setState({
-          dropSiteAddressError: "This field is necessary."
+          dropSiteAddressError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          dropSiteAddressError: ""
+          dropSiteAddressError: '',
         });
       }
-    } else if (field === "dropSiteZip") {
+    } else if (field === 'dropSiteZip') {
       if (!e.target.value) {
         this.setState({
-          dropSiteZipError: "This field is necessary."
+          dropSiteZipError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          dropSiteZipError: ""
+          dropSiteZipError: '',
         });
       }
-    } else if (field === "dropSiteHospital") {
+    } else if (field === 'dropSiteHospital') {
       if (!e.target.value) {
         this.setState({
-          dropSiteHospitalError: "This field is necessary."
+          dropSiteHospitalError: 'This field is necessary.',
         });
       } else {
         this.setState({
-          dropSiteHospitalError: ""
+          dropSiteHospitalError: '',
         });
       }
     }
@@ -119,10 +119,10 @@ class NewDropSiteForm extends React.Component {
           this.state.dropSiteDescription,
           this.state.dropSiteAddress,
           this.state.dropSiteZip,
-          this.state.dropSitePhone
+          this.state.dropSitePhone,
         )
         .then(() => {
-          let url = "/dropsite/" + this.state.dropSiteId + "/admin";
+          let url = '/dropsite/' + this.state.dropSiteId + '/admin';
           this.props.history.push(url);
         });
     } else {
@@ -133,10 +133,10 @@ class NewDropSiteForm extends React.Component {
           this.state.dropSiteAddress,
           this.state.dropSiteZip,
           this.state.dropSiteHospital,
-          this.state.dropSitePhone
+          this.state.dropSitePhone,
         )
-        .then(data => {
-          let url = "/dropsite/" + data + "/admin";
+        .then((data) => {
+          let url = '/dropsite/' + data + '/admin';
           this.props.history.push(url);
         });
     }
@@ -149,11 +149,11 @@ class NewDropSiteForm extends React.Component {
       this.setState({
         existingLocation: true,
         dropSiteHospital: hospital.name,
-        dropSiteId: this.props.dropSiteId
+        dropSiteId: this.props.dropSiteId,
       });
     } else {
       this.setState({
-        dropSiteId: this.props.dropSiteId
+        dropSiteId: this.props.dropSiteId,
       });
     }
   }
@@ -161,10 +161,10 @@ class NewDropSiteForm extends React.Component {
   render() {
     let newRequestSubmitButton;
     if (
-      this.state.dropSiteName !== "" &&
-      this.state.dropSiteDescription !== "" &&
-      this.state.dropSiteAddress !== "" &&
-      this.state.dropSiteZip !== "" &&
+      this.state.dropSiteName !== '' &&
+      this.state.dropSiteDescription !== '' &&
+      this.state.dropSiteAddress !== '' &&
+      this.state.dropSiteZip !== '' &&
       this.props.verified
     ) {
       newRequestSubmitButton = (
@@ -196,8 +196,8 @@ class NewDropSiteForm extends React.Component {
                 id="dropSiteHospital"
                 placeholder="e.g. New York Presbyterian"
                 value={this.state.dropSiteHospital}
-                onChange={this.handleChange("dropSiteHospital")}
-                onBlur={this.handleValidate("dropSiteHospital")}
+                onChange={this.handleChange('dropSiteHospital')}
+                onBlur={this.handleValidate('dropSiteHospital')}
               />
               <div className="formError">
                 {this.state.dropSiteHospitalError}
@@ -218,8 +218,8 @@ class NewDropSiteForm extends React.Component {
               id="dropSiteName"
               placeholder="e.g. New York Financial Dist."
               value={this.state.dropSiteName}
-              onChange={this.handleChange("dropSiteName")}
-              onBlur={this.handleValidate("dropSiteName")}
+              onChange={this.handleChange('dropSiteName')}
+              onBlur={this.handleValidate('dropSiteName')}
             />
             <div className="formError">{this.state.dropSiteNameError}</div>
           </div>
@@ -230,8 +230,8 @@ class NewDropSiteForm extends React.Component {
               id="dropSiteDescription"
               placeholder="e.g. We are 500 healthcare workers serving 30,000 patients. We are currently desparate for supplies..."
               value={this.state.dropSiteDescription}
-              onChange={this.handleChange("dropSiteDescription")}
-              onBlur={this.handleValidate("dropSiteDescription")}
+              onChange={this.handleChange('dropSiteDescription')}
+              onBlur={this.handleValidate('dropSiteDescription')}
             />
             <div className="formError">
               {this.state.dropSiteDescriptionError}
@@ -244,8 +244,8 @@ class NewDropSiteForm extends React.Component {
               id="dropSiteAddress"
               placeholder="e.g. 330 Broadway Ave, New York, NY"
               value={this.state.dropSiteAddress}
-              onChange={this.handleChange("dropSiteAddress")}
-              onBlur={this.handleValidate("dropSiteAddress")}
+              onChange={this.handleChange('dropSiteAddress')}
+              onBlur={this.handleValidate('dropSiteAddress')}
             />
             <div className="formError">{this.state.dropSiteAddressError}</div>
           </div>
@@ -256,8 +256,8 @@ class NewDropSiteForm extends React.Component {
               id="dropSiteZip"
               placeholder="e.g. 44502"
               value={this.state.dropSiteZip}
-              onChange={this.handleChange("dropSiteZip")}
-              onBlur={this.handleValidate("dropSiteZip")}
+              onChange={this.handleChange('dropSiteZip')}
+              onBlur={this.handleValidate('dropSiteZip')}
             />
             <div className="formError">{this.state.dropSiteZipError}</div>
           </div>
@@ -268,8 +268,8 @@ class NewDropSiteForm extends React.Component {
               id="dropSitePhone"
               placeholder="e.g. admin@hospital.org"
               value={this.state.dropSitePhone}
-              onChange={this.handleChange("dropSitePhone")}
-              onBlur={this.handleValidate("dropSitePhone")}
+              onChange={this.handleChange('dropSitePhone')}
+              onBlur={this.handleValidate('dropSitePhone')}
             />
           </div>
           {newRequestSubmitButton}

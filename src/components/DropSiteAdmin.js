@@ -1,66 +1,66 @@
-import React from 'react'
-import * as hospital_index from '../data/hospital_index'
-import { withRouter } from 'react-router-dom'
-import DropSiteNeedGroupAdmin from './DropSiteNeedGroupAdmin'
-import NewRequestForm from './NewRequestForm'
-import EditDropSiteForm from './EditDropSiteForm'
-import HelpFooter from './HelpFooter'
+import React from 'react';
+import * as hospital_index from '../data/hospital_index';
+import { withRouter } from 'react-router-dom';
+import DropSiteNeedGroupAdmin from './DropSiteNeedGroupAdmin';
+import NewRequestForm from './NewRequestForm';
+import EditDropSiteForm from './EditDropSiteForm';
+import HelpFooter from './HelpFooter';
 
 class DropSiteAdmin extends React.Component {
   constructor(props) {
-    super(props)
-    const { backend, ...rest } = this.props
-    this.state = rest
-    this.handleRemoveRequest = this.handleRemoveRequest.bind(this)
-    this.handleNewRequest = this.handleNewRequest.bind(this)
+    super(props);
+    const { backend, ...rest } = this.props;
+    this.state = rest;
+    this.handleRemoveRequest = this.handleRemoveRequest.bind(this);
+    this.handleNewRequest = this.handleNewRequest.bind(this);
   }
 
   handleNewRequest(requestObj) {
-    let oldList = this.state.needs
-    oldList.push(requestObj)
+    let oldList = this.state.needs;
+    oldList.push(requestObj);
     this.setState({
       needs: oldList,
-    })
-    window.scrollTo(0, 0)
+    });
+    window.scrollTo(0, 0);
   }
 
   handleRemoveRequest(requestId) {
-    let oldList = this.state.needs
+    let oldList = this.state.needs;
     let newList = oldList.filter(function (obj) {
-      return obj.id !== requestId
-    })
+      return obj.id !== requestId;
+    });
     this.setState({
       needs: newList,
-    })
+    });
   }
 
   handleDeleteSupply(supplyId) {
-    this.props.backend.deleteSupply(supplyId)
-    let oldList = this.state.supply
+    this.props.backend.deleteSupply(supplyId);
+    let oldList = this.state.supply;
     let newList = oldList.filter(function (obj) {
-      return obj.id !== supplyId
-    })
+      return obj.id !== supplyId;
+    });
     this.setState({
       supply: newList,
-    })
+    });
   }
 
   componentDidUpdate() {}
 
   render() {
     // this code is for the future when some dropsites may not map to an exisitng hospital in the hospital_index
-    let hospital = hospital_index.index.id_index[this.props.match.params.id]
-    let hospitalText = ''
+    let hospital = hospital_index.index.id_index[this.props.match.params.id];
+    let hospitalText = '';
     if (typeof hospital === 'undefined') {
       hospitalText = (
         <div className="servingText">
           (serving {this.state.dropSiteHospital})
         </div>
-      )
+      );
     } else {
       hospitalText = (
         <div className="servingText">(serving {hospital.name})</div>
-      )
+      );
     }
 
     return (
@@ -87,7 +87,8 @@ class DropSiteAdmin extends React.Component {
                   color: '#721c24',
                   fontWeight: 'bold',
                   textDecoration: 'underline',
-                }}>
+                }}
+              >
                 log out
               </a>{' '}
               and try your work email or contact help@help.supply.
@@ -211,14 +212,15 @@ class DropSiteAdmin extends React.Component {
                           <button
                             className="btn btn-outline-danger"
                             onClick={() => {
-                              this.handleDeleteSupply(supply.id)
-                            }}>
+                              this.handleDeleteSupply(supply.id);
+                            }}
+                          >
                             Remove
                           </button>
                         )}
                       </th>
                     </tr>
-                  )
+                  );
                 })}
               </tbody>
             </table>
@@ -226,8 +228,8 @@ class DropSiteAdmin extends React.Component {
         </div>
         <HelpFooter />
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(DropSiteAdmin)
+export default withRouter(DropSiteAdmin);

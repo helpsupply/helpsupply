@@ -1,31 +1,31 @@
 /** @jsx jsx */
-import React from 'react'
-import { jsx } from '@emotion/core'
-import Form from 'components/Form'
-import InputText from 'components/InputText'
-import InputDropdown from 'components/InputDropdown'
-import Note from 'components/Note'
+import React from 'react';
+import { jsx } from '@emotion/core';
+import Form from 'components/Form';
+import InputText from 'components/InputText';
+import InputDropdown from 'components/InputDropdown';
+import Note from 'components/Note';
 
 class SupplyForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       fields: {
         type: '',
         kind: '',
         quantity: '',
       },
-    }
-    this.handleFieldChange = this.handleFieldChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    };
+    this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleFieldChange = (field) => (value) => {
-    this.setState({ [field]: value })
-  }
+    this.setState({ [field]: value });
+  };
 
   handleSubmit() {
-    this.props.onSubmit(this.state.fields)
+    this.props.onSubmit(this.state.fields);
   }
 
   render() {
@@ -37,7 +37,8 @@ class SupplyForm extends React.Component {
         title="What supplies do you need most?"
         disabled={
           !Object.keys(this.state.fields).every((key) => !!this.state[key])
-        }>
+        }
+      >
         <InputDropdown
           placeholder="Select type"
           value={this.state.type}
@@ -58,8 +59,8 @@ class SupplyForm extends React.Component {
           assumes no liability for any supplies delivered by donors.
         </Note>
       </Form>
-    )
+    );
   }
 }
 
-export default SupplyForm
+export default SupplyForm;
