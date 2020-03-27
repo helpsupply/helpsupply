@@ -513,12 +513,6 @@ class FirebaseBackend extends BackendInterface {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
           newDomains.push(change.doc.id);
-          // Gross layer violation here
-          if (Notification.permission === 'granted') {
-            var notification = new Notification(
-              'New domain added: ' + change.doc.id,
-            );
-          }
         }
 
         if (change.type === 'removed') {

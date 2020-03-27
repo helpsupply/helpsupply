@@ -1,9 +1,5 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
-
 import FirebaseBackend from './lib/firebaseBackend';
-import expectExport from 'expect';
+
 const fs = require('fs');
 
 const firebase = require('@firebase/testing');
@@ -23,8 +19,6 @@ test('renders learn react link', () => {
 
 test('hello world', async () => {
   await firebase.clearFirestoreData({ projectId });
-
-  let adminApp = firebase.initializeAdminApp({ projectId });
 
   let auth = null;
   let testApp = firebase.initializeTestApp({ projectId, auth });

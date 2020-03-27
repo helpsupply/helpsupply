@@ -3,7 +3,6 @@ import { Global } from '@emotion/core';
 import { styles } from './App.styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HCPSignupFinish from './components/HCPSignupFinish';
-import DropSiteAdmin from './components/DropSiteAdmin';
 import DropSite from './components/DropSite';
 import PendingDomains from './components/PendingDomains';
 import NoMatch from './components/NoMatch';
