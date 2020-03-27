@@ -32,7 +32,7 @@ class InputDropdown extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousedown')
+    window.removeEventListener('mousedown', () => false)
   }
 
   onChange = (option) => {
