@@ -11,4 +11,7 @@ export const styles = {
       textDecoration: 'underline',
     },
   }),
+  chevron: css({
+    transform: 'rotate(270deg)',
+  }),
 }
