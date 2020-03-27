@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import React from "react";
-import PropTypes from "prop-types";
-import Autosuggest from "react-autosuggest";
-import styles from "./Autosuggest.styles";
+import { jsx } from '@emotion/core';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Autosuggest from 'react-autosuggest';
+import styles from './Autosuggest.styles';
 
 class Typeahead extends React.Component {
   static propTypes = {
@@ -17,12 +17,12 @@ class Typeahead extends React.Component {
     super();
     this.state = {
       isFocused: false,
-      userInput: "",
+      userInput: '',
     };
   }
 
   onChange = (_, { newValue }) => {
-    const isObject = typeof newValue === "object";
+    const isObject = typeof newValue === 'object';
     const value = isObject ? newValue.label : newValue;
     if (!value) {
       this.props.onSelect(undefined);

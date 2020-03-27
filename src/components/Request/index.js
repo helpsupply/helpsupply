@@ -1,18 +1,18 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import PropTypes from 'prop-types'
-import { formatDate } from 'lib/utils/datetime'
-import { numberWithCommas } from 'lib/utils/number'
-import { SecondaryButton } from 'components/Button'
-import Text from 'components/Text'
-import { TEXT_TYPE } from 'components/Text/constants'
-import { styles } from './Request.styles'
-import Note from 'components/Note'
+import { jsx } from '@emotion/core';
+import PropTypes from 'prop-types';
+import { formatDate } from 'lib/utils/datetime';
+import { numberWithCommas } from 'lib/utils/number';
+import { SecondaryButton } from 'components/Button';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
+import { styles } from './Request.styles';
+import Note from 'components/Note';
 
 export const Request = ({ date, donation, id, name, onDelete, request }) => {
-  const numberDonation = +donation
-  const numberRequest = +request
-  const progress = (numberDonation / numberRequest) * 100
+  const numberDonation = +donation;
+  const numberRequest = +request;
+  const progress = (numberDonation / numberRequest) * 100;
   return (
     <div css={styles.root}>
       <div css={styles.section}>
@@ -36,8 +36,8 @@ export const Request = ({ date, donation, id, name, onDelete, request }) => {
       </div>
       <Note css={styles.date}>Added {formatDate(date)}</Note>
     </div>
-  )
-}
+  );
+};
 
 Request.propTypes = {
   date: PropTypes.string.isRequired,
@@ -46,6 +46,6 @@ Request.propTypes = {
   name: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
   request: PropTypes.string.isRequired,
-}
+};
 
-export default Request
+export default Request;

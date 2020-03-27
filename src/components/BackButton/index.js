@@ -1,26 +1,26 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { useHistory } from 'react-router-dom'
+import { jsx } from '@emotion/core';
+import { useHistory } from 'react-router-dom';
 
-import { IconButton } from 'components/Button'
+import { IconButton } from 'components/Button';
 
-import { ReactComponent as Back } from 'static/icons/back-circle.svg'
+import { ReactComponent as Back } from 'static/icons/back-circle.svg';
 
-import styles from './BackButton.styles'
+import styles from './BackButton.styles';
 
 const goBack = ({ history }) => () => {
-  const { host } = window.location
-  const { referrer } = document
+  const { host } = window.location;
+  const { referrer } = document;
 
   if (history.length > 1 && referrer && referrer.includes(host)) {
-    history.goBack()
+    history.goBack();
   } else {
-    history.push('/')
+    history.push('/');
   }
-}
+};
 
 const BackButton = ({ onClick }) => {
-  const history = useHistory()
+  const history = useHistory();
 
   return (
     <div css={styles.root}>
@@ -28,7 +28,7 @@ const BackButton = ({ onClick }) => {
         <Back />
       </IconButton>
     </div>
-  )
-}
+  );
+};
 
-export default BackButton
+export default BackButton;

@@ -1,26 +1,26 @@
-import BackendInterface from './backendInterface'
-import Firebase from 'firebase'
-import config from '../components/Firebase/config'
+import BackendInterface from './backendInterface';
+import Firebase from 'firebase';
+import config from '../components/Firebase/config';
 
 class FirebaseBackend extends BackendInterface {
   constructor(testApp) {
-    super()
+    super();
 
-    this.firebase = testApp || Firebase.initializeApp(config)
-    this.firebase.analytics()
-    this.firestore = this.firebase.firestore()
-    this.loggedIn = false
-    this.authLoaded = false
-    this.badDomain = false
+    this.firebase = testApp || Firebase.initializeApp(config);
+    this.firebase.analytics();
+    this.firestore = this.firebase.firestore();
+    this.loggedIn = false;
+    this.authLoaded = false;
+    this.badDomain = false;
 
     this.firebase.auth().onAuthStateChanged((user) => {
-      this.authLoaded = true
+      this.authLoaded = true;
       if (user) {
-        this.loggedIn = true
+        this.loggedIn = true;
       } else {
-        this.loggedIn = false
+        this.loggedIn = false;
       }
-    })
+    });
   }
 
   listDropSites(zipcode, radius) {
@@ -29,13 +29,13 @@ class FirebaseBackend extends BackendInterface {
       .get()
       .then((snapshot) => {
         let data = snapshot.docs.map((d) => {
-          var dict = d.data()
-          dict['id'] = d.id
-          return dict
-        })
-        return data
+          var dict = d.data();
+          dict['id'] = d.id;
+          return dict;
+        });
+        return data;
       })
-      .catch(console.log)
+      .catch(console.log);
     // To do
     // create zipcode and radius filters
   }
@@ -47,12 +47,12 @@ class FirebaseBackend extends BackendInterface {
         .doc(dropSiteId)
         .get()
         .then((doc) => {
-          return doc.data()
+          return doc.data();
         })
-        .catch(console.log)
+        .catch(console.log);
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -76,20 +76,20 @@ class FirebaseBackend extends BackendInterface {
         requestWillingToPay,
         domain: this.firebase.auth().currentUser.email.split('@')[1],
         user: this.firebase.auth().currentUser.uid,
-      }
+      };
       return this.firestore
         .collection('dropSite')
         .doc(location_id)
         .set(newSiteObj)
         .then(function (docRef) {
-          return 'Drop site added'
+          return 'Drop site added';
         })
         .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+          console.error('Error writing document: ', error);
+        });
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -109,8 +109,8 @@ class FirebaseBackend extends BackendInterface {
         dropSiteCity,
         dropSiteState,
         dropSiteUrl,
-      }
-      let db = this.firestore
+      };
+      let db = this.firestore;
       return db
         .collection('dropSite')
         .add(newSiteObj)
@@ -120,15 +120,15 @@ class FirebaseBackend extends BackendInterface {
             .doc(docRef.id)
             .set({ location_id: docRef.id }, { merge: true })
             .then(() => {
-              return docRef.id
-            })
+              return docRef.id;
+            });
         })
         .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+          console.error('Error writing document: ', error);
+        });
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -138,7 +138,7 @@ class FirebaseBackend extends BackendInterface {
     dropSiteDescription,
     dropSiteAddress,
     dropSiteZip,
-    dropSitePhone
+    dropSitePhone,
   ) {
     if (
       location_id &&
@@ -156,35 +156,35 @@ class FirebaseBackend extends BackendInterface {
         dropSiteAddress: '',
         dropSiteZip: '',
         dropSitePhone: '',
-      }
+      };
       if (dropSiteName) {
-        newSiteObj.dropSiteName = dropSiteName
+        newSiteObj.dropSiteName = dropSiteName;
       }
       if (dropSiteDescription) {
-        newSiteObj.dropSiteDescription = dropSiteDescription
+        newSiteObj.dropSiteDescription = dropSiteDescription;
       }
       if (dropSiteAddress) {
-        newSiteObj.dropSiteAddress = dropSiteAddress
+        newSiteObj.dropSiteAddress = dropSiteAddress;
       }
       if (dropSiteZip) {
-        newSiteObj.dropSiteZip = dropSiteZip
+        newSiteObj.dropSiteZip = dropSiteZip;
       }
       if (dropSitePhone) {
-        newSiteObj.dropSitePhone = dropSitePhone
+        newSiteObj.dropSitePhone = dropSitePhone;
       }
       return this.firestore
         .collection('dropSite')
         .doc(location_id)
         .set(newSiteObj, { merge: true })
         .then(function () {
-          return 'Drop site updated'
+          return 'Drop site updated';
         })
         .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+          console.error('Error writing document: ', error);
+        });
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -195,12 +195,12 @@ class FirebaseBackend extends BackendInterface {
         .doc(dropSiteId)
         .delete()
         .then(() => {
-          return dropSiteId + ' deleted'
+          return dropSiteId + ' deleted';
         })
-        .catch(console.log)
+        .catch(console.log);
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -210,27 +210,27 @@ class FirebaseBackend extends BackendInterface {
     if (dropSiteId) {
       var queryBuilder = this.firestore
         .collection('request')
-        .where('dropSiteId', '==', dropSiteId)
+        .where('dropSiteId', '==', dropSiteId);
       if (requestType) {
-        queryBuilder = queryBuilder.where('requestType', '==', requestType)
+        queryBuilder = queryBuilder.where('requestType', '==', requestType);
       }
       if (status) {
-        queryBuilder = queryBuilder.where('status', '==', status)
+        queryBuilder = queryBuilder.where('status', '==', status);
       }
       return queryBuilder
         .get()
         .then((snapshot) => {
           let data = snapshot.docs.map((d) => {
-            var dict = d.data()
-            dict['id'] = d.id
-            return dict
-          })
-          return data
+            var dict = d.data();
+            dict['id'] = d.id;
+            return dict;
+          });
+          return data;
         })
-        .catch(console.log)
+        .catch(console.log);
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -241,7 +241,7 @@ class FirebaseBackend extends BackendInterface {
     requestDescription,
     requestQuantity,
     status,
-    requestWillingToPay
+    requestWillingToPay,
   ) {
     if (
       dropSiteId &&
@@ -265,14 +265,14 @@ class FirebaseBackend extends BackendInterface {
           requestWillingToPay: requestWillingToPay,
         })
         .then(function (docRef) {
-          return docRef.id
+          return docRef.id;
         })
         .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+          console.error('Error writing document: ', error);
+        });
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -282,38 +282,38 @@ class FirebaseBackend extends BackendInterface {
     requestTitle,
     requestDescription,
     requestQuantity,
-    status
+    status,
   ) {
     if (requestId) {
-      let updateObj = {}
+      let updateObj = {};
       if (requestType) {
-        updateObj.requestType = requestType
+        updateObj.requestType = requestType;
       }
       if (requestTitle) {
-        updateObj.requestTitle = requestTitle
+        updateObj.requestTitle = requestTitle;
       }
       if (requestDescription) {
-        updateObj.requestDescription = requestDescription
+        updateObj.requestDescription = requestDescription;
       }
       if (requestQuantity) {
-        updateObj.requestQuantity = requestQuantity
+        updateObj.requestQuantity = requestQuantity;
       }
       if (status) {
-        updateObj.status = status
+        updateObj.status = status;
       }
       return this.firestore
         .collection('request')
         .doc(requestId)
         .set(updateObj, { merge: true })
         .then(function (docRef) {
-          return 'Request update success.'
+          return 'Request update success.';
         })
         .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+          console.error('Error writing document: ', error);
+        });
     } else {
-      console.log('Error, requestId is required.')
-      return Promise.resolve('Error, requestId is required.')
+      console.log('Error, requestId is required.');
+      return Promise.resolve('Error, requestId is required.');
     }
 
     // To do
@@ -328,12 +328,12 @@ class FirebaseBackend extends BackendInterface {
         .doc(requestId)
         .delete()
         .then(() => {
-          return requestId + ' deleted'
+          return requestId + ' deleted';
         })
-        .catch(console.log)
+        .catch(console.log);
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -346,13 +346,13 @@ class FirebaseBackend extends BackendInterface {
       .get()
       .then((snapshot) => {
         let data = snapshot.docs.map((d) => {
-          var dict = d.data()
-          dict['id'] = d.id
-          return dict
-        })
-        return data
+          var dict = d.data();
+          dict['id'] = d.id;
+          return dict;
+        });
+        return data;
       })
-      .catch(console.log)
+      .catch(console.log);
     // To do
     // create zipcode and radius filters
   }
@@ -364,7 +364,7 @@ class FirebaseBackend extends BackendInterface {
     supplyPhone,
     supplyQuantity,
     supplyDeliveryTime,
-    supplyComments
+    supplyComments,
   ) {
     if (
       dropSiteId &&
@@ -386,14 +386,14 @@ class FirebaseBackend extends BackendInterface {
           supplyComments: supplyComments,
         })
         .then(function (docRef) {
-          return docRef.id
+          return docRef.id;
         })
         .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+          console.error('Error writing document: ', error);
+        });
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
@@ -404,55 +404,61 @@ class FirebaseBackend extends BackendInterface {
         .doc(supplyId)
         .delete()
         .then(() => {
-          return supplyId + ' deleted'
+          return supplyId + ' deleted';
         })
-        .catch(console.log)
+        .catch(console.log);
     } else {
-      console.log('Error, one or more required params missing.')
-      return Promise.resolve('Error, one or more required params missing.')
+      console.log('Error, one or more required params missing.');
+      return Promise.resolve('Error, one or more required params missing.');
     }
   }
 
   // Login State
   isLoggedIn() {
-    return this.loggedIn
+    return this.loggedIn;
   }
 
   async isValidHealthcareWorker() {
-    if (!this.loggedIn) return false
+    if (!this.loggedIn) {
+      return false;
+    }
 
-    let email = this.firebase.auth().currentUser.email
+    let email = this.firebase.auth().currentUser.email;
     var existing = (
       await this.firestore.collection('domain').doc(email.split('@')[1]).get()
-    ).data()
+    ).data();
     if (!existing) {
-      console.log('New domain, setting pending!', email)
+      console.log('New domain, setting pending!', email);
       await this.firestore
         .collection('domain')
         .doc(email.split('@')[1])
-        .set({ valid: 'pending' })
+        .set({ valid: 'pending' });
     } else {
-      console.log('pending entry found matching', email)
+      console.log('pending entry found matching', email);
     }
 
-    var domain = this.firebase.auth().currentUser.email.split('@')[1]
+    var domain = this.firebase.auth().currentUser.email.split('@')[1];
     var verification = await this.firestore
       .collection('domain')
       .doc(domain)
-      .get()
-    console.log('checking validity', verification.data())
-    if (verification.data() && verification.data().valid == 'true') return true
-    if (verification.data() && verification.data().valid == 'false')
-      this.badDomain = true
-    return false
+      .get();
+    console.log('checking validity', verification.data());
+    if (verification.data() && verification.data().valid == 'true') {
+      return true;
+    }
+    if (verification.data() && verification.data().valid == 'false') {
+      this.badDomain = true;
+    }
+    return false;
   }
 
   async dropSiteExists(dropsite) {
     if (
       (await this.firestore.collection('dropSite').doc(dropsite).get()).data()
-    )
-      return true
-    return false
+    ) {
+      return true;
+    }
+    return false;
   }
 
   // VALIDATED DOMAINS
@@ -466,60 +472,60 @@ class FirebaseBackend extends BackendInterface {
         '/signupFinish/' +
         selectedDropSite,
       handleCodeInApp: true,
-    }
+    };
 
-    window.localStorage.setItem('intendedDropSite', selectedDropSite)
-    await this.firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-    window.localStorage.setItem('emailForSignIn', email)
+    window.localStorage.setItem('intendedDropSite', selectedDropSite);
+    await this.firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings);
+    window.localStorage.setItem('emailForSignIn', email);
   }
 
   shouldRepromptEmail() {
-    return window.localStorage.getItem('emailForSignIn') === null
+    return window.localStorage.getItem('emailForSignIn') === null;
   }
 
   async continueSignup(url, email, dropsite) {
     if (this.firebase.auth().isSignInWithEmailLink(url)) {
-      var email = window.localStorage.getItem('emailForSignIn') || email
-      await this.firebase.auth().signInWithEmailLink(email, url)
-      window.localStorage.removeItem('emailForSignIn')
-      window.testfs = this.firestore
+      var email = window.localStorage.getItem('emailForSignIn') || email;
+      await this.firebase.auth().signInWithEmailLink(email, url);
+      window.localStorage.removeItem('emailForSignIn');
+      window.testfs = this.firestore;
     } else {
-      throw 'Email Link Invalid'
+      throw 'Email Link Invalid';
     }
   }
 
   // VALIDATED DOMAINS
 
   async getDomains(pendingOnly, callback) {
-    let domains = null
-    let newDomains = []
+    let domains = null;
+    let newDomains = [];
 
     if (pendingOnly) {
       domains = await this.firestore
         .collection('domain')
-        .where('valid', '==', 'pending')
+        .where('valid', '==', 'pending');
     } else {
-      domains = await this.firestore.collection('domain')
+      domains = await this.firestore.collection('domain');
     }
 
     return domains.onSnapshot((snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
-          newDomains.push(change.doc.id)
+          newDomains.push(change.doc.id);
           // Gross layer violation here
           if (Notification.permission === 'granted') {
             var notification = new Notification(
-              'New domain added: ' + change.doc.id
-            )
+              'New domain added: ' + change.doc.id,
+            );
           }
         }
 
         if (change.type === 'removed') {
-          newDomains = newDomains.filter((doc) => doc !== change.doc.id)
+          newDomains = newDomains.filter((doc) => doc !== change.doc.id);
         }
-        callback(newDomains)
-      })
-    })
+        callback(newDomains);
+      });
+    });
   }
 
   async setDomainIsValid(domain, isValid) {
@@ -527,9 +533,9 @@ class FirebaseBackend extends BackendInterface {
       await this.firestore
         .collection('domain')
         .doc(domain)
-        .set({ valid: isValid ? 'true' : 'false' })
+        .set({ valid: isValid ? 'true' : 'false' });
     } catch (e) {
-      throw 'Validating domains is not allowed'
+      throw 'Validating domains is not allowed';
     }
   }
 
@@ -552,4 +558,4 @@ class FirebaseBackend extends BackendInterface {
   }
 }
 
-export default FirebaseBackend
+export default FirebaseBackend;

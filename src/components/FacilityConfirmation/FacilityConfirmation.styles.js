@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
-import { Space } from 'lib/theme'
+import { css } from '@emotion/core';
+import { Space } from 'lib/theme';
 
 export const styles = {
   header: css({
@@ -15,6 +15,6 @@ export const styles = {
   subtext: css({
     marginBottom: Space.S15,
   }),
-}
+};
 
-export default styles
+export default styles;

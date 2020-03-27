@@ -8,7 +8,7 @@ function updateSearch(hospital_index, term) {
     results.push({ hospital: h, id: id });
   }
 
-  let words = term.split(" ");
+  let words = term.split(' ');
   let hits = [];
   for (var i = 0; i < words.length; i++) {
     let new_hits = hospital_index.term_index[words[i]] || [];
@@ -16,7 +16,7 @@ function updateSearch(hospital_index, term) {
       if (i == 0) {
         hits = new_hits;
       } else {
-        hits = hits.filter(x => new_hits.includes(x));
+        hits = hits.filter((x) => new_hits.includes(x));
       }
     }
   }
@@ -29,8 +29,8 @@ function updateSearch(hospital_index, term) {
 
   // filter out for uniques
   var uniqueResults = [];
-  results.forEach(function(result) {
-    var i = uniqueResults.findIndex(x => x.id == result.id);
+  results.forEach(function (result) {
+    var i = uniqueResults.findIndex((x) => x.id == result.id);
     if (i <= -1) {
       uniqueResults.push({ hospital: result.hospital, id: result.id });
     }

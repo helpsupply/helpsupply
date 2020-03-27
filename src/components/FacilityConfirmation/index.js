@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import styles from './FacilityConfirmation.styles.js'
-import Text from 'components/Text'
-import { TEXT_TYPE } from 'components/Text/constants'
-import { ReactComponent as Check } from 'static/icons/green-check.svg'
+import { jsx } from '@emotion/core';
+import styles from './FacilityConfirmation.styles.js';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
+import { ReactComponent as Check } from 'static/icons/green-check.svg';
 
-import { Fragment } from 'react'
+import { Fragment } from 'react';
 
 export const FacilityConfirmation = ({ name, address }) => (
   <Fragment>
@@ -21,6 +21,6 @@ export const FacilityConfirmation = ({ name, address }) => (
     <Text as="p">{name}</Text>
     <Text as="p">{address}</Text>
   </Fragment>
-)
+);
 
-export default FacilityConfirmation
+export default FacilityConfirmation;

@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
-import { Space } from 'lib/theme'
+import { css } from '@emotion/core';
+import { Space } from 'lib/theme';
 
 const styles = {
   back: css({
@@ -23,6 +23,6 @@ const styles = {
     justifyContent: 'space-between',
     paddingBottom: Space.S40,
   }),
-}
+};
 
-export default styles
+export default styles;

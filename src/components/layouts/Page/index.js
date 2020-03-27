@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/core';
 
-import Header from 'components/Header'
-import BackButton from 'components/BackButton'
+import Header from 'components/Header';
+import BackButton from 'components/BackButton';
 
-import styles from './Page.styles'
+import styles from './Page.styles';
 
 const Page = ({ children, hasBackButton = true, onBackButtonClick }) => (
   <div css={styles.root}>
@@ -12,6 +12,6 @@ const Page = ({ children, hasBackButton = true, onBackButtonClick }) => (
     {hasBackButton && <BackButton onClick={onBackButtonClick} />}
     <div css={styles.content}>{children}</div>
   </div>
-)
+);
 
-export default Page
+export default Page;

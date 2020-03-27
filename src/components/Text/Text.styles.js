@@ -1,8 +1,8 @@
-import { css } from '@emotion/core'
-import { Color } from 'lib/theme'
-import { TEXT_TYPE } from './constants'
+import { css } from '@emotion/core';
+import { Color } from 'lib/theme';
+import { TEXT_TYPE } from './constants';
 
-export const Font = `"Inter", Helvetica, Arial, sans-serif`
+export const Font = `"Inter", Helvetica, Arial, sans-serif`;
 
 export const textStyles = {
   [TEXT_TYPE.HEADER_1]: css({
@@ -53,6 +53,6 @@ export const textStyles = {
   [TEXT_TYPE.BOLD]: css({
     fontWeight: 600,
   }),
-}
+};
 
-export default textStyles
+export default textStyles;

@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import styles from './ListLink.styles'
-import Anchor from 'components/Anchor'
-import Text from 'components/Text'
-import { ReactComponent as Arrow } from 'static/icons/arrow.svg'
-import { TEXT_TYPE } from 'components/Text/constants'
+import { jsx } from '@emotion/core';
+import styles from './ListLink.styles';
+import Anchor from 'components/Anchor';
+import Text from 'components/Text';
+import { ReactComponent as Arrow } from 'static/icons/arrow.svg';
+import { TEXT_TYPE } from 'components/Text/constants';
 
 const ListLink = ({ href, text, title }) => (
   <Anchor css={styles.anchor} href={href}>
@@ -18,6 +18,6 @@ const ListLink = ({ href, text, title }) => (
       </Text>
     </div>
   </Anchor>
-)
+);
 
-export default ListLink
+export default ListLink;

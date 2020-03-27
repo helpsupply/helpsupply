@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
-import { Color } from 'lib/theme'
+import { css } from '@emotion/core';
+import { Color } from 'lib/theme';
 
 export const styles = {
   root: css({
@@ -14,4 +14,4 @@ export const styles = {
   chevron: css({
     transform: 'rotate(270deg)',
   }),
-}
+};

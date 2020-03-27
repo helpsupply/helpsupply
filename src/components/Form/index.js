@@ -1,12 +1,12 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import PropTypes from 'prop-types'
-import Text from 'components/Text'
-import { TEXT_TYPE } from 'components/Text/constants'
-import HeaderInfo from './HeaderInfo'
-import { PrimaryButton } from 'components/Button'
+import { jsx } from '@emotion/core';
+import PropTypes from 'prop-types';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
+import HeaderInfo from './HeaderInfo';
+import { PrimaryButton } from 'components/Button';
 
-import styles from './Form.styles.js'
+import styles from './Form.styles.js';
 
 export const Form = ({
   buttonLabel = 'Next',
@@ -17,9 +17,9 @@ export const Form = ({
   title,
 }) => {
   const handleSubmit = (e) => {
-    e.preventDefault()
-    onSubmit()
-  }
+    e.preventDefault();
+    onSubmit();
+  };
 
   return (
     <form onSubmit={handleSubmit} css={styles.root}>
@@ -31,14 +31,15 @@ export const Form = ({
         type="submit"
         onClick={onSubmit}
         disabled={disabled}
-        css={styles.button}>
+        css={styles.button}
+      >
         <Text type={TEXT_TYPE.BODY_1}>{buttonLabel}</Text>
       </PrimaryButton>
     </form>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;
 
 Form.propTypes = {
   buttonLabel: PropTypes.string,
@@ -46,4 +47,4 @@ Form.propTypes = {
   disabled: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   title: PropTypes.string,
-}
+};

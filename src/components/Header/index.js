@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { ReactComponent as LogoInline } from 'static/icons/logo-inline.svg'
+import { jsx } from '@emotion/core';
+import { ReactComponent as LogoInline } from 'static/icons/logo-inline.svg';
 
-import styles from './Header.styles'
+import styles from './Header.styles';
 
 const Header = () => (
   <div css={styles.root}>
@@ -10,6 +10,6 @@ const Header = () => (
       <LogoInline />
     </a>
   </div>
-)
+);
 
-export default Header
+export default Header;

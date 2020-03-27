@@ -1,8 +1,8 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/core';
 
-import { Color, Space } from 'lib/theme'
+import { Color, Space } from 'lib/theme';
 
-const bottomBorderSize = 2
+const bottomBorderSize = 2;
 
 const styles = {
   root: css({
@@ -26,6 +26,6 @@ const styles = {
   link: css({
     display: 'block',
   }),
-}
+};
 
-export default styles
+export default styles;

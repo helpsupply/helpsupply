@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
-import { Color, Radius, Space } from 'lib/theme'
+import { css } from '@emotion/core';
+import { Color, Radius, Space } from 'lib/theme';
 
 const styles = {
   active: css({
@@ -55,6 +55,6 @@ const styles = {
     height: 65,
     position: 'relative',
   }),
-}
+};
 
-export default styles
+export default styles;
