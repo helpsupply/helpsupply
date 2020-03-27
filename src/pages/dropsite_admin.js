@@ -1,10 +1,8 @@
 /** @jsx jsx */
 import React from 'react';
+import Page from 'components/layouts/Page';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
-import * as hospital_index from '../data/hospital_index';
-
-import Page from 'components/layouts/Page';
 import DropSiteAdmin from 'components/DropSiteAdmin';
 
 class AdminDropSite extends React.Component {

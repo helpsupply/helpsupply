@@ -1,33 +1,33 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import React from "react";
+import { jsx } from '@emotion/core'
+import React from 'react'
 
-import styles from "./InputText.styles";
+import styles from './InputText.styles'
 
 class InputText extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       isFocused: false,
-      value: "",
-    };
+      value: props.value || '',
+    }
   }
 
   onChange = (e) => {
     if (this.props.customOnChange) {
-      this.props.customOnChange(e.target.value);
+      this.props.customOnChange(e.target.value)
     }
-    this.setState({ value: e.target.value });
-  };
+    this.setState({ value: e.target.value })
+  }
 
   toggleFocus = () => {
-    this.setState({ isFocused: !this.state.isFocused });
-  };
+    this.setState({ isFocused: !this.state.isFocused })
+  }
 
   render() {
-    const { isFocused, value } = this.state;
-    const { label, customOnChange, ...rest } = this.props;
+    const { isFocused, value } = this.state
+    const { label, customOnChange, ...rest } = this.props
 
     return (
       <label css={[styles.root, isFocused && styles.active]}>
@@ -49,4 +49,4 @@ class InputText extends React.Component {
   }
 }
 
-export default InputText;
+export default InputText
