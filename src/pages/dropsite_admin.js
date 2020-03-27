@@ -1,9 +1,11 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import Box from 'components/Box';
-import DropSiteAdmin from 'components/DropSiteAdmin';
 import React from 'react';
+import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
+import * as hospital_index from '../data/hospital_index';
+
+import Page from 'components/layouts/Page';
+import DropSiteAdmin from 'components/DropSiteAdmin';
 
 class AdminDropSite extends React.Component {
   constructor(props) {
@@ -124,7 +126,7 @@ class AdminDropSite extends React.Component {
       );
     }
 
-    return <Box>{content}</Box>;
+    return <Page>{content}</Page>;
   }
 }
 

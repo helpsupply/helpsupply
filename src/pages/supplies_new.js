@@ -1,10 +1,11 @@
 /** @jsx jsx */
+import React from 'react';
 import { jsx } from '@emotion/core';
-import BackButton from 'components/BackButton';
-import Box from 'components/Box';
-import SupplyForm from 'containers/SupplyForm';
-import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
+import * as hospital_index from '../data/hospital_index';
+
+import Page from 'components/layouts/Page';
+import SupplyForm from 'containers/SupplyForm';
 
 class NewSupplyRequest extends React.Component {
   constructor(props) {
@@ -55,12 +56,7 @@ class NewSupplyRequest extends React.Component {
   }
 
   render() {
-    let content = (
-      <Fragment>
-        <BackButton />
-        <SupplyForm />
-      </Fragment>
-    );
+    let content = <SupplyForm />;
 
     if (this.state.loading) {
       content = (
@@ -98,7 +94,7 @@ class NewSupplyRequest extends React.Component {
       );
     }
 
-    return <Box>{content}</Box>;
+    return <Page>{content}</Page>;
   }
 }
 

@@ -1,8 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 
-import { Space } from 'lib/theme'
-
 import { IconButton } from 'components/Button'
 
 import { ReactComponent as Back } from 'static/icons/back-circle.svg'
