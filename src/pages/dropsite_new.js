@@ -11,6 +11,7 @@ class NewDropSite extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      dropsite: undefined,
       verified: true,
       loading: true,
       badDomain: false,
@@ -46,19 +47,25 @@ class NewDropSite extends React.Component {
 
   componentDidMount() {
     Promise.resolve(this.checkVerification()).then(() => {
-      const dropsite =
-        hospital_index.index.id_index[this.props.match.params.dropsite]
-      if (dropsite) {
-        this.props.history.replace(
-          `/dropsite/${this.props.match.params.dropsite}/admin`
-        )
-      }
+      this.props.backend
+        .getDropSites(this.props.match.params.dropsite)
+        .then((data) => {
+          this.setState({ dropsite: data })
+        })
+      // TODO: find out if we need to redirect in any case
+      // const dropsite =
+      //   hospital_index.index.id_index[this.props.match.params.dropsite]
+      // if (dropsite?.dropSiteDescription) {
+      // this.props.history.replace(
+      //   `/dropsite/${this.props.match.params.dropsite}/admin`
+      // )
+      // }
     })
   }
 
   onSubmit(hospital) {
-    this.props.backend.addNewDropSite(hospital).then((data) => {
-      let url = '/dropsite/' + data + '/admin'
+    this.props.backend.addDropSite(hospital).then((data) => {
+      let url = '/dropsite/' + hospital.location_id + '/admin'
       this.props.history.push(url)
     })
   }
@@ -70,7 +77,7 @@ class NewDropSite extends React.Component {
         <DropSiteForm
           onSubmit={this.onSubmit}
           backend={this.props.backend}
-          dropSite={this.props.match.params.dropsite}
+          dropSite={this.state.dropsite}
           verified={this.state.verified}
         />
       </Fragment>

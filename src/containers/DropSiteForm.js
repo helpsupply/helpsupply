@@ -17,12 +17,13 @@ class DropSiteForm extends React.Component {
         zip: '',
         hospital: '',
       },
-      locationDetails: '',
-      address: '',
-      requirements: '',
-      contactName: '',
-      contactPhone: '',
-      notes: '',
+      dropSiteId: props.dropSite.location_id,
+      dropSiteDescription: '',
+      dropSiteAddress: props.dropSite.dropSiteAddress || '',
+      dropSiteRequirements: '',
+      dropSiteName: '',
+      dropSitePhone: '',
+      dropSiteNotes: '',
     }
     this.handleFieldChange = this.handleFieldChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,8 +35,7 @@ class DropSiteForm extends React.Component {
 
   handleSubmit() {
     const { errors, ...state } = this.state
-    const payload = state
-    this.props.onSubmit(payload)
+    this.props.onSubmit({ ...state, location_id: this.state.dropSiteId })
   }
 
   render() {
@@ -46,13 +46,13 @@ class DropSiteForm extends React.Component {
         description="This is where donors can drop off supplies. It should be an easily identifiable location including a street address.">
         <InputText
           label="Street address"
-          value={this.state.address}
-          customOnChange={this.handleFieldChange('address')}
+          value={this.state.dropSiteAddress}
+          customOnChange={this.handleFieldChange('dropSiteAddress')}
         />
         <InputText
           label="Additional location details"
-          value={this.state.locationDetails}
-          customOnChange={this.handleFieldChange('locationDetails')}
+          value={this.state.dropSiteDescription}
+          customOnChange={this.handleFieldChange('dropSiteDescription')}
         />
         <HeaderInfo
           as="h4"
@@ -61,7 +61,7 @@ class DropSiteForm extends React.Component {
           description="Please enter any requirements about how supplies should be delivered."
         />
         <TextArea
-          customOnChange={this.handleFieldChange('requirements')}
+          customOnChange={this.handleFieldChange('dropSiteRequirements')}
           label="All donated items must be unused and sealed in original packaging."
         />
         <HeaderInfo
@@ -72,17 +72,17 @@ class DropSiteForm extends React.Component {
         />
         <InputText
           label="Name"
-          value={this.state.name}
-          customOnChange={this.handleFieldChange('contactName')}
+          value={this.state.dropSiteName}
+          customOnChange={this.handleFieldChange('dropSiteName')}
         />
         <InputText
           label="Email or phone number"
-          value={this.state.phone}
-          customOnChange={this.handleFieldChange('contactPhone')}
+          value={this.state.dropSitePhone}
+          customOnChange={this.handleFieldChange('dropSitePhone')}
         />
         <TextArea
           label="Is there anything else you’d like others to know about the situation at your facility?"
-          customOnChange={this.handleFieldChange('notes')}
+          customOnChange={this.handleFieldChange('dropSiteNotes')}
         />
         <InputCheckbox label="My facility will pay for large volumes of high-quality supplies." />
       </Form>

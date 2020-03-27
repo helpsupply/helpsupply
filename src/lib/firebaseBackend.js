@@ -58,25 +58,22 @@ class FirebaseBackend extends BackendInterface {
 
   addDropSite({
     location_id,
-    dropSiteName,
     dropSiteDescription,
     dropSiteAddress,
-    dropSiteZip,
+    dropSiteRequirements,
     dropSitePhone,
+    dropSiteNotes,
   }) {
-    debugger
-    if (dropSiteName && location_id && dropSiteAddress && dropSiteZip) {
+    if (dropSiteDescription && location_id && dropSiteAddress) {
       let newSiteObj = {
-        dropSiteName: dropSiteName,
-        location_id: location_id,
-        dropSiteAddress: dropSiteAddress,
-        dropSiteZip: dropSiteZip,
-        dropSitePhone: dropSitePhone,
+        location_id,
+        dropSiteDescription,
+        dropSiteAddress,
+        dropSiteRequirements,
+        dropSitePhone,
+        dropSiteNotes,
         domain: this.firebase.auth().currentUser.email.split('@')[1],
         user: this.firebase.auth().currentUser.uid,
-      }
-      if (dropSiteDescription) {
-        newSiteObj.dropSiteDescription = dropSiteDescription
       }
       return this.firestore
         .collection('dropSite')
