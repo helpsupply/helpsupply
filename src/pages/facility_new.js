@@ -1,20 +1,17 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react';
+import React from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
-import Box from 'components/Box';
-import BackButton from 'components/BackButton';
+
+import Page from 'components/layouts/Page';
 import FacilityForm from 'containers/FacilityForm';
 
 class NewFacility extends React.Component {
   render() {
     return (
-      <Box>
-        <Fragment>
-          <BackButton />
-          <FacilityForm {...this.props} />
-        </Fragment>
-      </Box>
+      <Page>
+        <FacilityForm {...this.props} />
+      </Page>
     );
   }
 }

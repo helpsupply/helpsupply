@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react';
+import React from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 import * as hospital_index from '../data/hospital_index';
-import Box from 'components/Box';
+
+import Page from 'components/layouts/Page';
 import DropSiteForm from 'containers/DropSiteForm';
-import BackButton from 'components/BackButton';
 
 class NewDropSite extends React.Component {
   constructor(props) {
@@ -65,15 +65,12 @@ class NewDropSite extends React.Component {
 
   render() {
     let content = (
-      <Fragment>
-        <BackButton />
-        <DropSiteForm
-          onSubmit={this.onSubmit}
-          backend={this.props.backend}
-          dropSite={this.props.match.params.dropsite}
-          verified={this.state.verified}
-        />
-      </Fragment>
+      <DropSiteForm
+        onSubmit={this.onSubmit}
+        backend={this.props.backend}
+        dropSite={this.props.match.params.dropsite}
+        verified={this.state.verified}
+      />
     );
 
     if (this.state.loading) {
@@ -111,7 +108,7 @@ class NewDropSite extends React.Component {
       );
     }
 
-    return <Box>{content}</Box>;
+    return <Page>{content}</Page>;
   }
 }
 
