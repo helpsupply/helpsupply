@@ -6,10 +6,10 @@ import BackButton from 'components/BackButton'
 
 import styles from './Page.styles'
 
-export const Page = ({ children }) => (
+const Page = ({ children, hasBackButton = true, onBackButtonClick }) => (
   <div css={styles.root}>
     <Header />
-    <BackButton />
+    {hasBackButton && <BackButton onClick={onBackButtonClick} />}
     <div css={styles.content}>{children}</div>
   </div>
 )
