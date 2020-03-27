@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React from 'react';
+import { useState, useCallback } from 'react';
 import { jsx } from '@emotion/core';
 import * as tools from '../functions';
 import * as hospital_index from '../data/hospital_index';
@@ -69,85 +69,66 @@ const getHospitalName = ({ hospital, id }) => ({
   value: id,
 });
 
-class FacilityForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      results: [],
-      selectedResult: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSelectHospital = this.handleSelectHospital.bind(this);
-    this.handleRedirect = this.handleRedirect.bind(this);
-  }
+function FacilityForm({ backend, history }) {
+  const [results, setResults] = useState([]);
+  const [selectedResult, setSelectedResult] = useState('');
 
-  handleSelectHospital = (value) => {
-    this.setState({ selectedResult: value });
-  };
-
-  handleChange(value) {
+  const handleChange = useCallback((value) => {
     if (value.length > 1) {
       let term = value.toUpperCase();
       const searchResults = tools.updateSearch(hospital_index.index, term);
-      this.setState({ results: searchResults });
+      setResults(searchResults);
     } else {
-      this.setState({
-        results: [],
-        selectedResult: '',
-      });
+      setResults([]);
+      setSelectedResult('');
     }
-  }
+  }, []);
 
-  handleRedirect() {
-    debugger;
-    if (!this.state.selectedResult) {
+  const handleRedirect = useCallback(() => {
+    if (!selectedResult) {
       return;
     }
 
-    if (this.props.backend.authLoaded && this.props.backend.isLoggedIn()) {
-      this.props.backend
-        .dropSiteExists(this.state.selectedResult)
-        .then((exists) => {
-          if (exists) {
-            let url = '/dropsite/' + this.state.selectedResult + '/admin';
-            this.props.history.push(url);
-          } else {
-            let url = '/dropsite/new/admin/' + this.state.selectedResult;
-            this.props.history.push(url);
-          }
-        });
+    if (backend.authLoaded && backend.isLoggedIn()) {
+      backend.dropSiteExists(selectedResult).then((exists) => {
+        if (exists) {
+          let url = '/dropsite/' + selectedResult + '/admin';
+          history.push(url);
+        } else {
+          let url = '/dropsite/new/admin/' + selectedResult;
+          history.push(url);
+        }
+      });
     } else {
-      let url = '/signup/' + this.state.selectedResult;
-      this.props.history.push(url);
+      let url = '/signup/' + selectedResult;
+      history.push(url);
     }
-  }
+  }, [backend, history, selectedResult]);
 
-  render() {
-    return (
-      <Form
-        onSubmit={this.handleRedirect}
-        title="Find your healthcare facility"
-        description="I'm a healthcare professional working at:"
-        disabled={!this.state.selectedResult}
-      >
-        <Autosuggest
-          label="City or healthcare facility"
-          suggestions={this.state.results}
-          onSearch={this.handleChange}
-          getSuggestionValue={getHospitalName}
-          renderSuggestion={renderSuggestion}
-          onSelect={this.handleSelectHospital}
-        />
-        <Text type={TEXT_TYPE.BODY_2}>
-          <FormGroup mb={5}>Not seeing your facility?</FormGroup>
-          <IconButton onClick={() => this.props.history.push('/new-facility')}>
-            <Plus css={{ marginRight: Space.S5 }} />
-            <span css={{ color: Color.CORAL }}>Find a facility</span>
-          </IconButton>
-        </Text>
-      </Form>
-    );
-  }
+  return (
+    <Form
+      onSubmit={handleRedirect}
+      title="Find your healthcare facility"
+      description="I'm a healthcare professional working at:"
+      disabled={!selectedResult}
+    >
+      <Autosuggest
+        label="City or healthcare facility"
+        suggestions={results}
+        onSearch={handleChange}
+        getSuggestionValue={getHospitalName}
+        renderSuggestion={renderSuggestion}
+        onSelect={setSelectedResult}
+      />
+      <Text type={TEXT_TYPE.BODY_2}>
+        <FormGroup mb={5}>Not seeing your facility?</FormGroup>
+        <IconButton onClick={() => history.push('/new-facility')}>
+          <Plus css={{ marginRight: Space.S5 }} />
+          <span css={{ color: Color.CORAL }}>Find a facility</span>
+        </IconButton>
+      </Text>
+    </Form>
+  );
 }
 
 export default FacilityForm;
