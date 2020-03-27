@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Form from 'components/Form';
 import InputText from 'components/InputText';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -18,12 +18,14 @@ export const DropSiteForm = ({ dropSite, onSubmit }) => {
     requestWillingToPay: false,
   });
 
-  const handleFieldChange = (field) => (value) =>
-    setFields({ ...fields, [field]: value });
-  const handleSubmit = () => {
+  const handleFieldChange = useCallback(
+    (field) => (value) => setFields({ ...fields, [field]: value }),
+    [fields],
+  );
+  const handleSubmit = useCallback(() => {
     const { dropSiteId, ...state } = fields;
     onSubmit({ ...state, location_id: dropSiteId });
-  };
+  }, [fields, onSubmit]);
   const {
     dropSiteAddress,
     dropSiteDescription,
