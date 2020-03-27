@@ -18,21 +18,23 @@ class InputDropdown extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('mousedown', (e) => {
-      this.setState((prevState) => {
-        // clicked outside list
-        if (
-          (prevState.isOpen && !this.listEl.contains(e.target)) ||
-          e.target === this.inputEl
-        ) {
-          return { isOpen: !this.state.isOpen }
-        }
-      })
-    })
+    window.addEventListener('mousedown', this.handleClick)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousedown')
+    window.removeEventListener('mousedown', this.handleClick)
+  }
+
+  handleClick = (e) => {
+    this.setState((prevState) => {
+      // clicked outside list
+      if (
+        (prevState.isOpen && !this.listEl.contains(e.target)) ||
+        e.target === this.inputEl
+      ) {
+        return { isOpen: !this.state.isOpen }
+      }
+    })
   }
 
   onChange = (option) => {
