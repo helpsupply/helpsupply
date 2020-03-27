@@ -87,14 +87,12 @@ app.intent("HCPSignupHospitalZip", (conv, data) => {
 
 app.intent("HCPSignupFollowupMultipleResultsYes", (conv, data) => {
   const context = conv.contexts.get("multiple_facility_found");
-  console.log(data);
   let selection = parseInt(data["number"]) - 1;
   const searchResults = context.parameters.results;
   const location_id = searchResults[selection].id;
-  const dropSite = dropSiteRef.doc(`${location_id}`);
 
-  return dropSite
-    .get()
+  return db
+    .getDropSite(location_id)
     .then(doc => {
       if (doc.exists) {
         var data = doc.data();
@@ -137,10 +135,9 @@ app.intent("HCPSignupFollowupOneResultYes", (conv, data) => {
   const context = conv.contexts.get("one_facility_found");
   const searchResults = context.parameters.results;
   const location_id = searchResults[0].id;
-  const dropSite = dropSiteRef.doc(`${location_id}`);
 
-  return dropSite
-    .get()
+  return db
+    .getDropSite(location_id)
     .then(doc => {
       if (doc.exists) {
         var data = doc.data();
@@ -260,6 +257,7 @@ app.intent("HCPCreateNewDropSiteContact", (conv, data) => {
 
   const contact = conv.query;
 
+  /*
   if (facilityName) {
     return dropSiteRef
       .add({
@@ -310,6 +308,7 @@ app.intent("HCPCreateNewDropSiteContact", (conv, data) => {
         console.error("Error writing document: ", error);
       });
   }
+  */
 });
 
 app.intent("HCPCreateNewDropSiteContactSkip", (conv, data) => {
@@ -326,7 +325,7 @@ app.intent("HCPCreateNewDropSiteContactSkip", (conv, data) => {
   );
   const requirements = requirementsContext.parameters.requirements;
 
-  const dropSite = dropSiteRef.doc(`${location_id}`);
+  /*
   return dropSite
     .set({
       dropSiteName: hospital_index.index.id_index[location_id].name,
@@ -348,6 +347,7 @@ app.intent("HCPCreateNewDropSiteContactSkip", (conv, data) => {
     .catch(function(error) {
       console.error("Error writing document: ", error);
     });
+    */
 });
 
 app.intent("HCPCreateNewFacility", (conv, data) => {
