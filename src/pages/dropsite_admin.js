@@ -1,11 +1,8 @@
 /** @jsx jsx */
-import React from 'react';
-import { jsx } from '@emotion/core';
-import { withRouter } from 'react-router-dom';
-import * as hospital_index from '../data/hospital_index';
-
-import Page from 'components/layouts/Page';
-import DropSiteAdmin from 'components/DropSiteAdmin';
+import React from 'react'
+import { jsx } from '@emotion/core'
+import { withRouter } from 'react-router-dom'
+import DropSiteAdmin from 'components/DropSiteAdmin'
 
 class AdminDropSite extends React.Component {
   constructor(props) {
@@ -55,7 +52,7 @@ class AdminDropSite extends React.Component {
         {
           needs: data,
         },
-        () => {},
+        () => { },
       );
     });
     this.props.backend.listSupply(this.props.match.params.id).then((data) => {
@@ -79,7 +76,7 @@ class AdminDropSite extends React.Component {
           dropSiteHospital: data?.dropSiteHospital,
           dropSitePhone: data?.dropSitePhone,
         },
-        () => {},
+        () => { },
       );
     });
 
