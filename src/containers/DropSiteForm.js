@@ -8,9 +8,9 @@ import InputCheckbox from 'components/Checkbox';
 
 export const DropSiteForm = ({ dropSite, onSubmit }) => {
   const [fields, setFields] = useState({
-    dropSiteId: dropSite.location_id,
+    dropSiteId: dropSite?.location_id,
     dropSiteDescription: '',
-    dropSiteAddress: dropSite.dropSiteAddress || '',
+    dropSiteAddress: dropSite?.dropSiteAddress || '',
     dropSiteRequirements: '',
     dropSiteName: '',
     dropSitePhone: '',
