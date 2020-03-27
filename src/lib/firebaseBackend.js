@@ -485,8 +485,9 @@ class FirebaseBackend extends BackendInterface {
 
   async continueSignup(url, email, dropsite) {
     if (this.firebase.auth().isSignInWithEmailLink(url)) {
-      var email = window.localStorage.getItem('emailForSignIn') || email;
-      await this.firebase.auth().signInWithEmailLink(email, url);
+      var emailOrStoredEmail =
+        window.localStorage.getItem('emailForSignIn') || email;
+      await this.firebase.auth().signInWithEmailLink(emailOrStoredEmail, url);
       window.localStorage.removeItem('emailForSignIn');
       window.testfs = this.firestore;
     } else {

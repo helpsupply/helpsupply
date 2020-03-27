@@ -1,8 +1,9 @@
 function updateSearch(hospital_index, term) {
+  let i;
   let results = [];
   let city_hits = hospital_index.city_index[term] || [];
 
-  for (var i = 0; i < city_hits.length; i++) {
+  for (i = 0; i < city_hits.length; i++) {
     let h = hospital_index.id_index[city_hits[i]];
     let id = city_hits[i];
     results.push({ hospital: h, id: id });
@@ -10,7 +11,7 @@ function updateSearch(hospital_index, term) {
 
   let words = term.split(' ');
   let hits = [];
-  for (var i = 0; i < words.length; i++) {
+  for (i = 0; i < words.length; i++) {
     let new_hits = hospital_index.term_index[words[i]] || [];
     if (new_hits.length > 0) {
       if (i == 0) {
@@ -21,7 +22,7 @@ function updateSearch(hospital_index, term) {
     }
   }
 
-  for (var i = 0; i < hits.length; i++) {
+  for (i = 0; i < hits.length; i++) {
     let h = hospital_index.id_index[hits[i]];
     let id = hits[i];
     results.push({ hospital: h, id: id });
@@ -30,7 +31,7 @@ function updateSearch(hospital_index, term) {
   // filter out for uniques
   var uniqueResults = [];
   results.forEach(function (result) {
-    var i = uniqueResults.findIndex((x) => x.id == result.id);
+    i = uniqueResults.findIndex((x) => x.id == result.id);
     if (i <= -1) {
       uniqueResults.push({ hospital: result.hospital, id: result.id });
     }
