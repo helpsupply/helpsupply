@@ -14,7 +14,7 @@ function updateSearch(hospital_index, term) {
   for (i = 0; i < words.length; i++) {
     let new_hits = hospital_index.term_index[words[i]] || [];
     if (new_hits.length > 0) {
-      if (i == 0) {
+      if (i === 0) {
         hits = new_hits;
       } else {
         hits = hits.filter((x) => new_hits.includes(x));
@@ -31,7 +31,7 @@ function updateSearch(hospital_index, term) {
   // filter out for uniques
   var uniqueResults = [];
   results.forEach(function (result) {
-    i = uniqueResults.findIndex((x) => x.id == result.id);
+    i = uniqueResults.findIndex((x) => x.id === result.id);
     if (i <= -1) {
       uniqueResults.push({ hospital: result.hospital, id: result.id });
     }

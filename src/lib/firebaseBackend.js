@@ -443,10 +443,10 @@ class FirebaseBackend extends BackendInterface {
       .doc(domain)
       .get();
     console.log('checking validity', verification.data());
-    if (verification.data() && verification.data().valid == 'true') {
+    if (verification.data() && verification.data().valid === 'true') {
       return true;
     }
-    if (verification.data() && verification.data().valid == 'false') {
+    if (verification.data() && verification.data().valid === 'false') {
       this.badDomain = true;
     }
     return false;

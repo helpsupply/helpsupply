@@ -1,6 +1,6 @@
 let config = null;
 
-if (window.location.hostname == 'localhost') {
+if (window.location.hostname === 'localhost') {
   config = {
     apiKey: 'AIzaSyAXmpRfgvne_w2apeWb3Q8wSNUqNey3-Mg',
     authDomain: 'help-supply-staging.firebaseapp.com',
