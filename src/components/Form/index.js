@@ -39,8 +39,6 @@ export const Form = ({
   );
 };
 
-export default Form;
-
 Form.propTypes = {
   buttonLabel: PropTypes.string,
   description: PropTypes.string,
@@ -48,3 +46,5 @@ Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   title: PropTypes.string,
 };
+
+export default Form;
