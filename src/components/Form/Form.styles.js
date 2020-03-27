@@ -6,7 +6,7 @@ const styles = {
     marginBottom: Space.S30,
   }),
   sections: css({
-    "> *": {
+    '> *': {
       marginBottom: Space.S30,
     },
   }),
@@ -15,14 +15,13 @@ const styles = {
   }),
   button: css({
     minHeight: 65,
-    marginBottom: Space.S30,
   }),
   root: css({
-    display: "flex",
-    flexDirection: "column",
-    height: "100%",
-    justifyContent: "space-between",
-    paddingBottom: Space.S60,
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    paddingBottom: Space.S40,
   }),
 }
 
