@@ -1,82 +1,72 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import Text from 'components/Text';
 import { ReactComponent as Chevron } from 'static/icons/chevron.svg';
 
 import styles from './InputDropdown.styles';
 
-class InputDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.listEl = null;
-    this.inputEl = null;
-    this.state = {
-      isOpen: false,
-      value: '',
+function InputDropdown({ customOnChange, placeholder, options = [] }) {
+  const inputEl = useRef(null);
+  const listEl = useRef(null);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    window.addEventListener('mousedown', handleClick);
+    return () => {
+      window.removeEventListener('mousedown', handleClick);
     };
-  }
+  });
 
-  componentDidMount() {
-    window.addEventListener('mousedown', this.handleClick);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('mousedown', this.handleClick);
-  }
-
-  handleClick = (e) => {
-    this.setState((prevState) => {
-      // clicked outside list
+  const handleClick = useCallback(
+    (event) => {
       if (
-        (prevState.isOpen && !this.listEl.contains(e.target)) ||
-        e.target === this.inputEl
+        (isOpen && listEl && !listEl.current.contains(event.target)) ||
+        event.target === inputEl.current
       ) {
-        return { isOpen: !this.state.isOpen };
+        setIsOpen((isOpen) => !isOpen);
       }
-    });
-  };
+    },
+    [isOpen],
+  );
 
-  onChange = (option) => {
-    if (this.props.customOnChange) {
-      this.props.customOnChange(option.value);
-    }
-    this.setState({ value: option.label, isOpen: false });
-  };
+  const onChange = useCallback(
+    (option) => () => {
+      if (customOnChange) {
+        customOnChange(option.value);
+      }
+      setValue(option.label);
+      setIsOpen(false);
+    },
+    [customOnChange],
+  );
 
-  render() {
-    const { isOpen, value } = this.state;
-    const { placeholder, options = [] } = this.props;
-
-    return (
-      <div css={[styles.root, isOpen && styles.active]}>
-        <span css={[styles.placeholder, value && styles.selected]}>
-          <Text>{value || placeholder}</Text>
-        </span>
-        <div
-          value={value}
-          ref={(ref) => (this.inputEl = ref)}
-          css={styles.dropdown}
-        >
-          {isOpen && (
-            <ul css={styles.list} ref={(ref) => (this.listEl = ref)}>
-              {options.map((option) => (
-                <li
-                  onClick={() => this.onChange(option)}
-                  css={styles.option}
-                  key={option.label}
-                  value={option.value}
-                >
-                  <Text>{option.label}</Text>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        <Chevron css={[styles.chevron, isOpen && styles.chevronOpen]} />
+  return (
+    <div css={[styles.root, isOpen && styles.active]}>
+      <span css={[styles.placeholder, value && styles.selected]}>
+        <Text>{value || placeholder}</Text>
+      </span>
+      <div value={value} ref={inputEl} css={styles.dropdown}>
+        {isOpen && (
+          <ul css={styles.list} ref={listEl}>
+            {options.map((option) => (
+              <li
+                onClick={onChange(option)}
+                css={styles.option}
+                key={option.label}
+                value={option.value}
+              >
+                <Text>{option.label}</Text>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-    );
-  }
+      <Chevron css={[styles.chevron, isOpen && styles.chevronOpen]} />
+    </div>
+  );
 }
 
 export default InputDropdown;
