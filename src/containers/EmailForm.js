@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { jsx } from '@emotion/core';
 import Form from 'components/Form';
 import FormGroup from 'components/Form/FormGroup';
@@ -8,62 +8,51 @@ import Note from 'components/Note';
 import Anchor from 'components/Anchor';
 import HeaderInfo from 'components/Form/HeaderInfo';
 
-class EmailForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      sent: false,
-      error: '',
-      dropsite: this.props.match.params.dropsite,
-    };
-    this.submitEmail = this.submitEmail.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-  }
+function EmailForm({ backend, match }) {
+  const [email, setEmail] = useState('');
+  const [sent, setSent] = useState(false);
+  const [dropsite, setDropsite] = useState(match.params.dropsite);
 
-  submitEmail(event) {
+  useEffect(() => {
+    setDropsite(match.params.dropsite);
+  }, [match.params.dropsite]);
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.backend
-      .signupWithEmail(this.state.email, this.state.dropsite)
-      .then(() => this.setState({ sent: true }))
+    backend
+      .signupWithEmail(email, dropsite)
+      .then(() => {
+        setSent(true);
+      })
       .catch(alert);
     // TODO: handle exceptions
-  }
+  };
 
-  handleEmailChange(value) {
-    this.setState({ email: value });
-  }
-
-  render() {
-    if (this.state.sent) {
-      return (
-        <HeaderInfo
-          title="Thank you"
-          description="We just sent you an email with a link to verify your email. It should arrive within a couple minutes."
-        />
-      );
-    }
-
+  if (sent) {
     return (
-      <Form
-        onSubmit={this.submitEmail}
-        title="Enter your work email address"
-        description="We need to verify your email before you request supplies."
-        disabled={!this.state.email}
-      >
-        <FormGroup mb={20}>
-          <InputText
-            label="Work email"
-            customOnChange={this.handleEmailChange}
-          />
-        </FormGroup>
-        <Note>
-          Note: we will never share your email address with any other parties.{' '}
-          <Anchor href="/">Learn more</Anchor>
-        </Note>
-      </Form>
+      <HeaderInfo
+        title="Thank you"
+        description="We just sent you an email with a link to verify your email. It should arrive within a couple minutes."
+      />
     );
   }
+
+  return (
+    <Form
+      onSubmit={handleSubmit}
+      title="Enter your work email address"
+      description="We need to verify your email before you request supplies."
+      disabled={!email}
+    >
+      <FormGroup mb={20}>
+        <InputText label="Work email" customOnChange={setEmail} />
+      </FormGroup>
+      <Note>
+        Note: we will never share your email address with any other parties.{' '}
+        <Anchor href="/">Learn more</Anchor>
+      </Note>
+    </Form>
+  );
 }
 
 export default EmailForm;
