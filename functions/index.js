@@ -13,15 +13,23 @@ admin.initializeApp({
   databaseURL: "https://hospitalcommunity.firebaseio.com"
 });
 
+// DATABASE FUNCTIONS
+
 const database = admin.firestore();
 const dropSiteRef = database.collection("dropSite");
 
 function getDropSite(location_id) {
+  console.log("getting dropsite");
   return dropSiteRef
     .doc(location_id)
     .get()
     .then(doc => {
-      return doc.data();
+      console.log(doc);
+      if (doc.exists) {
+        return doc.data();
+      } else {
+        return "";
+      }
     })
     .catch(console.log);
 }
@@ -60,10 +68,11 @@ const Lifespans = {
 
 // look through hospitals and zip
 app.intent("HCPSignupHospitalZip", (conv, data) => {
+  console.log(data);
   let zipCode = data["zip-code"];
   // right now this index only accepts
   const searchResults = tools.searchByZip(hospital_index.index, zipCode);
-
+  console.log(searchResults);
   if (searchResults.length === 0) {
     conv.contexts.set(AppContexts.ADD_NEW_FACILITY, Lifespans.DEFAULT);
     conv.ask(
@@ -112,9 +121,8 @@ app.intent("HCPSignupFollowupMultipleResultsYes", (conv, data) => {
   const location_id = searchResults[selection].id;
 
   return getDropSite(location_id)
-    .then(doc => {
-      if (doc.exists) {
-        var data = doc.data();
+    .then(data => {
+      if (data) {
         const parameters = {
           location_id: location_id
         };
@@ -154,11 +162,11 @@ app.intent("HCPSignupFollowupOneResultYes", (conv, data) => {
   const context = conv.contexts.get("one_facility_found");
   const searchResults = context.parameters.results;
   const location_id = searchResults[0].id;
+  console.log(location_id);
 
   return getDropSite(location_id)
-    .then(doc => {
-      if (doc.exists) {
-        var data = doc.data();
+    .then(data => {
+      if (data) {
         const parameters = {
           location_id: location_id
         };
@@ -174,7 +182,7 @@ app.intent("HCPSignupFollowupOneResultYes", (conv, data) => {
           `Would you like to 1) ADD A NEW REQUEST or 2) SEE OPEN REQUESTS AND DONATIONS?`
         );
       } else {
-        // doc.data() will be undefined in this case
+        // data will be "" in this case
         const parameters = {
           location_id: location_id
         };
