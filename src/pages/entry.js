@@ -1,17 +1,17 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { css } from '@emotion/core'
-import React, { Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
-import { Color, Space } from 'lib/theme'
-import Anchor from 'components/Anchor'
-import Box from 'components/Box'
-import LargeHeader from 'components/Header/LargeHeader'
-import ListLink from 'components/ListLink'
-import Text from 'components/Text'
-import { TEXT_TYPE } from 'components/Text/constants'
-import { textStyles } from 'components/Text/Text.styles'
-import Routes from 'constants/routes'
+import { jsx } from '@emotion/core';
+import { css } from '@emotion/core';
+import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
+import { Color, Space } from 'lib/theme';
+import Anchor from 'components/Anchor';
+import Box from 'components/Box';
+import LargeHeader from 'components/Header/LargeHeader';
+import ListLink from 'components/ListLink';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
+import { textStyles } from 'components/Text/Text.styles';
+import Routes from 'constants/routes';
 
 const styles = {
   box: css({
@@ -28,7 +28,7 @@ const styles = {
   title: css({
     marginBottom: `${Space.S45}px`,
   }),
-}
+};
 
 class EntryPortal extends React.Component {
   render() {
@@ -64,8 +64,8 @@ class EntryPortal extends React.Component {
           </Anchor>
         </Box>
       </Fragment>
-    )
+    );
   }
 }
 
-export default withRouter(EntryPortal)
+export default withRouter(EntryPortal);
