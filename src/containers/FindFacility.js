@@ -1,56 +1,56 @@
 /** @jsx jsx */
-import React from 'react'
-import { jsx } from '@emotion/core'
-import * as tools from '../functions'
-import * as hospital_index from '../data/hospital_index'
-import AutosuggestHighlightMatch from 'autosuggest-highlight/match'
-import AutosuggestHighlightParse from 'autosuggest-highlight/parse'
-import Text from 'components/Text'
-import { TEXT_TYPE } from 'components/Text/constants'
-import Form from 'components/Form'
-import { ReactComponent as Plus } from 'static/icons/plus-circle.svg'
+import React from 'react';
+import { jsx } from '@emotion/core';
+import * as tools from '../functions';
+import * as hospital_index from '../data/hospital_index';
+import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
+import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
+import Form from 'components/Form';
+import { ReactComponent as Plus } from 'static/icons/plus-circle.svg';
 
-import Autosuggest from 'components/Autosuggest'
-import { Space, Color } from 'lib/theme'
-import FormGroup from 'components/Form/FormGroup'
-import { IconButton } from 'components/Button'
+import Autosuggest from 'components/Autosuggest';
+import { Space, Color } from 'lib/theme';
+import FormGroup from 'components/Form/FormGroup';
+import { IconButton } from 'components/Button';
 
 const renderSuggestion = ({ hospital }, { query }) => {
-  const nameMatches = AutosuggestHighlightMatch(hospital.name, query)
-  const nameParts = AutosuggestHighlightParse(hospital.name, nameMatches)
+  const nameMatches = AutosuggestHighlightMatch(hospital.name, query);
+  const nameParts = AutosuggestHighlightParse(hospital.name, nameMatches);
   const nameMatch = (
     <span>
       {nameParts.map((part, index) => {
         const className = part.highlight
           ? 'react-autosuggest__suggestion-match'
-          : null
+          : null;
 
         return (
           <span className={className} key={index}>
             {part.text}
           </span>
-        )
+        );
       })}
     </span>
-  )
+  );
 
-  const cityMatches = AutosuggestHighlightMatch(hospital.name, query)
-  const cityParts = AutosuggestHighlightParse(hospital.city, cityMatches)
+  const cityMatches = AutosuggestHighlightMatch(hospital.name, query);
+  const cityParts = AutosuggestHighlightParse(hospital.city, cityMatches);
   const cityMatch = (
     <span>
       {cityParts.map((part, index) => {
         const className = part.highlight
           ? 'react-autosuggest__suggestion-match'
-          : null
+          : null;
 
         return (
           <span className={className} key={index}>
             {part.text}
           </span>
-        )
+        );
       })}
     </span>
-  )
+  );
 
   return (
     <div>
@@ -61,47 +61,47 @@ const renderSuggestion = ({ hospital }, { query }) => {
         {cityMatch}, {hospital.state}
       </Text>
     </div>
-  )
-}
+  );
+};
 
 const getHospitalName = ({ hospital, id }) => ({
   label: hospital.name,
   value: id,
-})
+});
 
 class FacilityForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       results: [],
       selectedResult: '',
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSelectHospital = this.handleSelectHospital.bind(this)
-    this.handleRedirect = this.handleRedirect.bind(this)
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSelectHospital = this.handleSelectHospital.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
   }
 
   handleSelectHospital = (value) => {
-    this.setState({ selectedResult: value })
-  }
+    this.setState({ selectedResult: value });
+  };
 
   handleChange(value) {
     if (value.length > 1) {
-      let term = value.toUpperCase()
-      const searchResults = tools.updateSearch(hospital_index.index, term)
-      this.setState({ results: searchResults })
+      let term = value.toUpperCase();
+      const searchResults = tools.updateSearch(hospital_index.index, term);
+      this.setState({ results: searchResults });
     } else {
       this.setState({
         results: [],
         selectedResult: '',
-      })
+      });
     }
   }
 
   handleRedirect() {
-    debugger
+    debugger;
     if (!this.state.selectedResult) {
-      return
+      return;
     }
 
     if (this.props.backend.authLoaded && this.props.backend.isLoggedIn()) {
@@ -109,16 +109,16 @@ class FacilityForm extends React.Component {
         .dropSiteExists(this.state.selectedResult)
         .then((exists) => {
           if (exists) {
-            let url = '/dropsite/' + this.state.selectedResult + '/admin'
-            this.props.history.push(url)
+            let url = '/dropsite/' + this.state.selectedResult + '/admin';
+            this.props.history.push(url);
           } else {
-            let url = '/dropsite/new/admin/' + this.state.selectedResult
-            this.props.history.push(url)
+            let url = '/dropsite/new/admin/' + this.state.selectedResult;
+            this.props.history.push(url);
           }
-        })
+        });
     } else {
-      let url = '/signup/' + this.state.selectedResult
-      this.props.history.push(url)
+      let url = '/signup/' + this.state.selectedResult;
+      this.props.history.push(url);
     }
   }
 
@@ -128,7 +128,8 @@ class FacilityForm extends React.Component {
         onSubmit={this.handleRedirect}
         title="Find your healthcare facility"
         description="I'm a healthcare professional working at:"
-        disabled={!this.state.selectedResult}>
+        disabled={!this.state.selectedResult}
+      >
         <Autosuggest
           label="City or healthcare facility"
           suggestions={this.state.results}
@@ -145,8 +146,8 @@ class FacilityForm extends React.Component {
           </IconButton>
         </Text>
       </Form>
-    )
+    );
   }
 }
 
-export default FacilityForm
+export default FacilityForm;

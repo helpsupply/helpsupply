@@ -1,7 +1,6 @@
-
-import React from "react";
-import Firebase from "firebase";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import Firebase from 'firebase';
+import { withRouter } from 'react-router-dom';
 
 class Logout extends React.Component {
   constructor(props) {
@@ -10,8 +9,11 @@ class Logout extends React.Component {
   }
 
   componentDidMount() {
-      this.props.backend.firebase.auth().signOut().then(() => {
-            this.props.history.push('/');
+    this.props.backend.firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        this.props.history.push('/');
       });
   }
 

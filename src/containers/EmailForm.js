@@ -1,20 +1,20 @@
 /** @jsx jsx */
-import React from "react";
-import { jsx } from "@emotion/core";
-import Form from "components/Form";
-import FormGroup from "components/Form/FormGroup";
-import InputText from "components/InputText";
-import Note from "components/Note";
-import Anchor from "components/Anchor";
-import HeaderInfo from "components/Form/HeaderInfo";
+import React from 'react';
+import { jsx } from '@emotion/core';
+import Form from 'components/Form';
+import FormGroup from 'components/Form/FormGroup';
+import InputText from 'components/InputText';
+import Note from 'components/Note';
+import Anchor from 'components/Anchor';
+import HeaderInfo from 'components/Form/HeaderInfo';
 
 class EmailForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: '',
       sent: false,
-      error: "",
+      error: '',
       dropsite: this.props.match.params.dropsite,
     };
     this.submitEmail = this.submitEmail.bind(this);
@@ -58,7 +58,7 @@ class EmailForm extends React.Component {
           />
         </FormGroup>
         <Note>
-          Note: we will never share your email address with any other parties.{" "}
+          Note: we will never share your email address with any other parties.{' '}
           <Anchor href="/">Learn more</Anchor>
         </Note>
       </Form>

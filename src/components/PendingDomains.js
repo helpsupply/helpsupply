@@ -1,5 +1,4 @@
-import React from "react";
-
+import React from 'react';
 
 class PendingDomains extends React.Component {
   constructor(props) {
@@ -7,7 +6,8 @@ class PendingDomains extends React.Component {
     this.state = {
       newDomain: '',
       domains: [],
-      notificationsEnabled: "Notification" in window && Notification.permission == 'granted',
+      notificationsEnabled:
+        'Notification' in window && Notification.permission == 'granted',
     };
     this.addDomain = this.addDomain.bind(this);
     this.handleApproveDomain = this.handleApproveDomain.bind(this);
@@ -26,10 +26,11 @@ class PendingDomains extends React.Component {
   }
 
   addDomain(event) {
-    event.preventDefault()
-    this.props.backend.setDomainIsValid(this.state.newDomain, true).then(() =>
-      alert("added " + this.state.newDomain) 
-    ).catch((e) => alert(e));
+    event.preventDefault();
+    this.props.backend
+      .setDomainIsValid(this.state.newDomain, true)
+      .then(() => alert('added ' + this.state.newDomain))
+      .catch((e) => alert(e));
   }
 
   handleNewDomainChange(event) {
@@ -37,38 +38,36 @@ class PendingDomains extends React.Component {
   }
 
   enableNotifications(event) {
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
-  
-    else if (Notification.permission === "granted") {
-      var notification = new Notification("Hi! We'll notify when new domains are added!");
-      this.setState({notificationsEnabled: true});
-    }
-  
-    else if (Notification.permission !== "denied") {
+    if (!('Notification' in window)) {
+      alert('This browser does not support desktop notification');
+    } else if (Notification.permission === 'granted') {
+      var notification = new Notification(
+        "Hi! We'll notify when new domains are added!",
+      );
+      this.setState({ notificationsEnabled: true });
+    } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          var notification = new Notification("Hi! We'll notify when new domains are added!");
-          this.setState({notificationsEnabled: true});
+        if (permission === 'granted') {
+          var notification = new Notification(
+            "Hi! We'll notify when new domains are added!",
+          );
+          this.setState({ notificationsEnabled: true });
         }
       });
     }
   }
 
   getDomainsCallback(data) {
-    console.log(data)
-    this.setState(
-      {
-        domains: data
-      },
-    );
+    console.log(data);
+    this.setState({
+      domains: data,
+    });
   }
 
   componentDidUpdate() {}
 
   componentDidMount() {
-    this.props.backend.getDomains(true, this.getDomainsCallback)
+    this.props.backend.getDomains(true, this.getDomainsCallback);
   }
 
   render() {
@@ -96,7 +95,7 @@ class PendingDomains extends React.Component {
                         }}
                       >
                         Approve
-                        </button>
+                      </button>
                       <button
                         className="btn btn-danger"
                         onClick={() => {
@@ -104,7 +103,7 @@ class PendingDomains extends React.Component {
                         }}
                       >
                         Deny
-                        </button>
+                      </button>
                     </th>
                   </tr>
                 );
@@ -114,7 +113,9 @@ class PendingDomains extends React.Component {
 
           <form className="form-inline" onSubmit={this.addDomain}>
             <div className="form-group mb-2">
-              <label htmlFor="staticEmail2" className="sr-only">Add a domain</label>
+              <label htmlFor="staticEmail2" className="sr-only">
+                Add a domain
+              </label>
               <input
                 className="form-control"
                 id="domainName"
@@ -124,23 +125,28 @@ class PendingDomains extends React.Component {
               />
             </div>
             <div className="form-group mx-sm-3 mb-2">
-              <label htmlFor="inputPassword2" className="sr-only">Submit</label>
+              <label htmlFor="inputPassword2" className="sr-only">
+                Submit
+              </label>
               <button
                 className="btn btn-primary linkSubmitBtn"
                 onClick={this.addDomain}
               >
-               Add 
-              </button>&nbsp;
+                Add
+              </button>
+              &nbsp;
             </div>
           </form>
-              {!this.state.notificationsEnabled ?
-              <button
-                className="btn btn-primary linkSubmitBtn"
-                onClick={this.enableNotifications}
-              >
-               Enable Notifications 
-              </button>
-              :''}
+          {!this.state.notificationsEnabled ? (
+            <button
+              className="btn btn-primary linkSubmitBtn"
+              onClick={this.enableNotifications}
+            >
+              Enable Notifications
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     );

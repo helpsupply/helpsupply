@@ -1,18 +1,18 @@
-import React from "react";
-import * as tools from "../functions";
-import * as hospital_index from "../data/hospital_index";
-import HospitalResult from "./HospitalResult";
-import { withRouter } from "react-router-dom";
-import { Form } from "react-bootstrap";
+import React from 'react';
+import * as tools from '../functions';
+import * as hospital_index from '../data/hospital_index';
+import HospitalResult from './HospitalResult';
+import { withRouter } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 
 class EntryPortal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInput: "",
+      userInput: '',
       results: [],
       facilities: [],
-      selectedResults: ""
+      selectedResults: '',
     };
     this.handleChangeDonate = this.handleChangeDonate.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -33,43 +33,43 @@ class EntryPortal extends React.Component {
     } else {
       this.setState({
         results: [],
-        selectedResult: ""
+        selectedResult: '',
       });
     }
   }
 
   handleKeyPress(event) {
-    if (event.key === "ArrowDown") {
+    if (event.key === 'ArrowDown') {
       if (this.state.results.length > 0) {
         event.preventDefault();
         var index = this.state.results
-          .map(function(e) {
+          .map(function (e) {
             return e.id;
           })
           .indexOf(this.state.selectedResult);
         if (index < this.state.results.length - 1) {
           this.setState({
-            selectedResult: this.state.results[index + 1].id
+            selectedResult: this.state.results[index + 1].id,
           });
         }
       }
     }
-    if (event.key === "ArrowUp") {
+    if (event.key === 'ArrowUp') {
       if (this.state.results.length > 0) {
         event.preventDefault();
         var index = this.state.results
-          .map(function(e) {
+          .map(function (e) {
             return e.id;
           })
           .indexOf(this.state.selectedResult);
         if (index > 0) {
           this.setState({
-            selectedResult: this.state.results[index - 1].id
+            selectedResult: this.state.results[index - 1].id,
           });
         }
       }
     }
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       if (this.state.selectedResult) {
         event.preventDefault();
         this.handleSubmit();
@@ -88,27 +88,27 @@ class EntryPortal extends React.Component {
     if (event) {
       event.preventDefault();
     }
-    if (this.state.selectedResult !== "") {
+    if (this.state.selectedResult !== '') {
       this.handleRedirect();
     }
   }
 
   handleRedirect() {
-    if (this.state.selectedResult !== "") {
+    if (this.state.selectedResult !== '') {
       if (this.props.backend.authLoaded && this.props.backend.isLoggedIn()) {
         this.props.backend
           .dropSiteExists(this.state.selectedResult)
-          .then(exists => {
+          .then((exists) => {
             if (exists) {
-              let url = "/dropsite/" + this.state.selectedResult + "/admin";
+              let url = '/dropsite/' + this.state.selectedResult + '/admin';
               this.props.history.push(url);
             } else {
-              let url = "/dropsite/new/admin/" + this.state.selectedResult;
+              let url = '/dropsite/new/admin/' + this.state.selectedResult;
               this.props.history.push(url);
             }
           });
       } else {
-        let url = "/signup/" + this.state.selectedResult;
+        let url = '/signup/' + this.state.selectedResult;
         this.props.history.push(url);
       }
     }
@@ -121,14 +121,14 @@ class EntryPortal extends React.Component {
   componentDidUpdate() {}
 
   componentDidMount() {
-    this.props.backend.listDropSites().then(data => {
+    this.props.backend.listDropSites().then((data) => {
       this.setState({ facilities: data });
     });
   }
 
   // DONATE SUPPLIES DROPDOWN HANDLER
   handleChangeDonate(event) {
-    let url = "/dropsite/" + event.target.value;
+    let url = '/dropsite/' + event.target.value;
     this.props.history.push(url);
   }
 
@@ -161,7 +161,7 @@ class EntryPortal extends React.Component {
                 />
               </div>
               <ul id="searchresults" className="list-group">
-                {this.state.results.map(result => {
+                {this.state.results.map((result) => {
                   let selected = this.state.selectedResult === result.id;
                   return (
                     <HospitalResult
@@ -192,7 +192,7 @@ class EntryPortal extends React.Component {
                 {this.state.facilities.map((facility, i) => {
                   return (
                     <option key={i} value={facility.id}>
-                      {facility.dropSiteName} |{" "}
+                      {facility.dropSiteName} |{' '}
                       {hospital_index.index.id_index[facility.id].name}
                     </option>
                   );

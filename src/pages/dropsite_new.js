@@ -1,66 +1,66 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react'
-import { jsx } from '@emotion/core'
-import { withRouter } from 'react-router-dom'
-import * as hospital_index from '../data/hospital_index'
-import Box from 'components/Box'
-import DropSiteForm from 'containers/DropSiteForm'
-import BackButton from 'components/BackButton'
+import React, { Fragment } from 'react';
+import { jsx } from '@emotion/core';
+import { withRouter } from 'react-router-dom';
+import * as hospital_index from '../data/hospital_index';
+import Box from 'components/Box';
+import DropSiteForm from 'containers/DropSiteForm';
+import BackButton from 'components/BackButton';
 
 class NewDropSite extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       verified: true,
       loading: true,
       badDomain: false,
-    }
-    this.checkVerification = this.checkVerification.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    };
+    this.checkVerification = this.checkVerification.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   checkVerification() {
     if (!this.props.backend.isLoggedIn()) {
-      setTimeout(this.checkVerification, 100)
-      return
+      setTimeout(this.checkVerification, 100);
+      return;
     }
 
     this.props.backend.isValidHealthcareWorker().then((verified) => {
       if (verified) {
-        console.log('verified')
+        console.log('verified');
         this.setState({
           loading: false,
           verified: true,
-        })
+        });
       } else {
         this.setState({
           loading: false,
           verified: false,
           badDomain: this.props.backend.badDomain,
-        })
-        console.log('not verified, will try again in 30 seconds')
-        setTimeout(this.checkVerification, 10000)
+        });
+        console.log('not verified, will try again in 30 seconds');
+        setTimeout(this.checkVerification, 10000);
       }
-    })
+    });
   }
 
   componentDidMount() {
     Promise.resolve(this.checkVerification()).then(() => {
       const dropsite =
-        hospital_index.index.id_index[this.props.match.params.dropsite]
+        hospital_index.index.id_index[this.props.match.params.dropsite];
       if (dropsite) {
         this.props.history.replace(
-          `/dropsite/${this.props.match.params.dropsite}/admin`
-        )
+          `/dropsite/${this.props.match.params.dropsite}/admin`,
+        );
       }
-    })
+    });
   }
 
   onSubmit(hospital) {
     this.props.backend.addNewDropSite(hospital).then((data) => {
-      let url = '/dropsite/' + data + '/admin'
-      this.props.history.push(url)
-    })
+      let url = '/dropsite/' + data + '/admin';
+      this.props.history.push(url);
+    });
   }
 
   render() {
@@ -74,7 +74,7 @@ class NewDropSite extends React.Component {
           verified={this.state.verified}
         />
       </Fragment>
-    )
+    );
 
     if (this.state.loading) {
       content = (
@@ -87,7 +87,7 @@ class NewDropSite extends React.Component {
             to edit/add once verified.
           </div>
         </div>
-      )
+      );
     }
 
     if (!this.state.verified && this.state.badDomain) {
@@ -101,17 +101,18 @@ class NewDropSite extends React.Component {
                 color: '#721c24',
                 fontWeight: 'bold',
                 textDecoration: 'underline',
-              }}>
+              }}
+            >
               log out
             </a>{' '}
             and try your work email or contact help@help.supply.
           </div>
         </div>
-      )
+      );
     }
 
-    return <Box>{content}</Box>
+    return <Box>{content}</Box>;
   }
 }
 
-export default withRouter(NewDropSite)
+export default withRouter(NewDropSite);
