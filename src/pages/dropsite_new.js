@@ -1,121 +1,102 @@
 /** @jsx jsx */
-import React from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
 import Page from 'components/layouts/Page';
 import DropSiteForm from 'containers/DropSiteForm';
 
-class NewDropSite extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dropsite: undefined,
-      verified: true,
-      loading: true,
-      badDomain: false,
-    };
-    this.checkVerification = this.checkVerification.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+function NewDropSite({ backend, history, match }) {
+  const [dropsite, setDropsite] = useState(undefined);
+  const [verified, setVerified] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [badDomain, setBadDomain] = useState(false);
 
-  checkVerification() {
-    if (!this.props.backend.isLoggedIn()) {
-      setTimeout(this.checkVerification, 100);
+  const checkVerification = useCallback(() => {
+    if (!backend.isLoggedIn()) {
+      window.setTimeout(checkVerification, 100);
       return;
     }
 
-    this.props.backend.isValidHealthcareWorker().then((verified) => {
+    backend.isValidHealthcareWorker().then((verified) => {
       if (verified) {
         console.log('verified');
-        this.setState({
-          loading: false,
-          verified: true,
-        });
+        setLoading(false);
+        setVerified(true);
       } else {
-        this.setState({
-          loading: false,
-          verified: false,
-          badDomain: this.props.backend.badDomain,
-        });
+        setLoading(false);
+        setVerified(false);
+        setBadDomain(backend.badDomain);
         console.log('not verified, will try again in 30 seconds');
-        setTimeout(this.checkVerification, 10000);
+        window.setTimeout(checkVerification, 10000);
       }
     });
-  }
+  }, [backend]);
 
-  componentDidMount() {
-    Promise.resolve(this.checkVerification()).then(() => {
-      this.props.backend
-        .getDropSites(this.props.match.params.dropsite)
-        .then((data) => {
-          this.setState({ dropsite: data });
-        });
+  useEffect(() => {
+    Promise.resolve(checkVerification()).then(() => {
+      backend.getDropSites(match.params.dropsite).then((data) => {
+        setDropsite(data);
+      });
       // TODO: find out if we need to redirect in any case
       // const dropsite =
-      //   hospital_index.index.id_index[this.props.match.params.dropsite]
+      //   hospital_index.index.id_index[match.params.dropsite]
       // if (dropsite?.dropSiteDescription) {
-      // this.props.history.replace(
-      //   `/dropsite/${this.props.match.params.dropsite}/admin`
+      // history.replace(
+      //   `/dropsite/${match.params.dropsite}/admin`
       // )
       // }
     });
-  }
+  }, [backend, checkVerification, match.params.dropsite]);
 
-  onSubmit(hospital) {
-    this.props.backend.addDropSite(hospital).then((data) => {
-      let url = '/dropsite/' + hospital.location_id + '/admin';
-      this.props.history.push(url);
-    });
-  }
+  const onSubmit = useCallback(
+    (hospital) => {
+      backend.addDropSite(hospital).then((data) => {
+        let url = '/dropsite/' + hospital.location_id + '/admin';
+        history.push(url);
+      });
+    },
+    [backend, history],
+  );
 
-  render() {
-    let content = (
-      <DropSiteForm
-        onSubmit={this.onSubmit}
-        backend={this.props.backend}
-        dropSite={this.state.dropsite}
-        verified={this.state.verified}
-      />
+  let content = <DropSiteForm onSubmit={onSubmit} dropSite={dropsite} />;
+
+  if (loading) {
+    content = (
+      <div className="alert alert-warning" role="alert">
+        <div className="spinner-border alertSpinner" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+        <div className="alertText">
+          Verifying your credentials (should be a few minutes). You'll be able
+          to edit/add once verified.
+        </div>
+      </div>
     );
-
-    if (this.state.loading) {
-      content = (
-        <div className="alert alert-warning" role="alert">
-          <div className="spinner-border alertSpinner" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-          <div className="alertText">
-            Verifying your credentials (should be a few minutes). You'll be able
-            to edit/add once verified.
-          </div>
-        </div>
-      );
-    }
-
-    if (!this.state.verified && this.state.badDomain) {
-      content = (
-        <div className="alert alert-danger" role="alert">
-          <div className="alertText">
-            Your email doesn't look like it's from a healthcare provider. Please{' '}
-            <a
-              href="/logout"
-              style={{
-                color: '#721c24',
-                fontWeight: 'bold',
-                textDecoration: 'underline',
-              }}
-            >
-              log out
-            </a>{' '}
-            and try your work email or contact help@help.supply.
-          </div>
-        </div>
-      );
-    }
-
-    return <Page>{content}</Page>;
   }
+
+  if (!verified && badDomain) {
+    content = (
+      <div className="alert alert-danger" role="alert">
+        <div className="alertText">
+          Your email doesn't look like it's from a healthcare provider. Please{' '}
+          <a
+            href="/logout"
+            style={{
+              color: '#721c24',
+              fontWeight: 'bold',
+              textDecoration: 'underline',
+            }}
+          >
+            log out
+          </a>{' '}
+          and try your work email or contact help@help.supply.
+        </div>
+      </div>
+    );
+  }
+
+  return <Page>{content}</Page>;
 }
 
 export default withRouter(NewDropSite);
