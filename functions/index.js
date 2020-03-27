@@ -1,6 +1,5 @@
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require("firebase-functions");
-const serviceAccount = require("./service-account.json");
 const hospital_index = require("./chatbot/hospital_index");
 const tools = require("./chatbot/helperFunctions");
 const db = require("./chatbot/firebaseBackend");
