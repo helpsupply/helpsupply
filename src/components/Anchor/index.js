@@ -2,10 +2,13 @@
 import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { styles } from './Anchor.styles'
+import { ReactComponent as Chevron } from 'static/icons/chevron.svg'
+import { Color } from 'lib/theme'
 
-export const Anchor = ({ children, ...rest }) => (
+const Anchor = ({ children, withIcon, ...rest }) => (
   <a css={styles.root} {...rest}>
     {children}
+    {withIcon && <Chevron css={styles.chevron} fill={Color.CORAL} />}
   </a>
 )
 
