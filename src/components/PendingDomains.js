@@ -37,20 +37,14 @@ class PendingDomains extends React.Component {
     this.setState({ newDomain: event.target.value });
   }
 
-  enableNotifications(event) {
+  enableNotifications() {
     if (!('Notification' in window)) {
       alert('This browser does not support desktop notification');
     } else if (Notification.permission === 'granted') {
-      var notification = new Notification(
-        "Hi! We'll notify when new domains are added!",
-      );
       this.setState({ notificationsEnabled: true });
     } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
-          var notification = new Notification(
-            "Hi! We'll notify when new domains are added!",
-          );
           this.setState({ notificationsEnabled: true });
         }
       });

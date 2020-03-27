@@ -1,12 +1,9 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react';
 import { jsx } from '@emotion/core';
-import { withRouter } from 'react-router-dom';
-import * as hospital_index from '../data/hospital_index';
 import Box from 'components/Box';
-import DropSiteForm from 'containers/DropSiteForm';
-import BackButton from 'components/BackButton';
 import DropSiteAdmin from 'components/DropSiteAdmin';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class AdminDropSite extends React.Component {
   constructor(props) {

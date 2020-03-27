@@ -1,12 +1,10 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react';
 import { jsx } from '@emotion/core';
-import { withRouter } from 'react-router-dom';
-import * as hospital_index from '../data/hospital_index';
-import Box from 'components/Box';
-import DropSiteForm from 'containers/DropSiteForm';
 import BackButton from 'components/BackButton';
+import Box from 'components/Box';
 import SupplyForm from 'containers/SupplyForm';
+import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class NewSupplyRequest extends React.Component {
   constructor(props) {

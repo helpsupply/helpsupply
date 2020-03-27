@@ -1,6 +1,4 @@
 import React from 'react';
-import Firebase from 'firebase';
-import * as firebaseui from 'firebaseui';
 
 class Profile extends React.Component {
   constructor(props) {

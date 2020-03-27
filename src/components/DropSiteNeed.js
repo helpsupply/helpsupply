@@ -12,7 +12,6 @@ class DropSiteNeed extends React.Component {
   }
 
   handleQtyChange(event) {
-    let qty = 0;
     if (event.target.value > 0) {
       this.setState({
         qty: event.target.value,

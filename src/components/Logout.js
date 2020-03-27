@@ -1,5 +1,4 @@
 import React from 'react';
-import Firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 
 class Logout extends React.Component {
