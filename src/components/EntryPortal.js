@@ -39,10 +39,11 @@ class EntryPortal extends React.Component {
   }
 
   handleKeyPress(event) {
+    let index;
     if (event.key === 'ArrowDown') {
       if (this.state.results.length > 0) {
         event.preventDefault();
-        var index = this.state.results
+        index = this.state.results
           .map(function (e) {
             return e.id;
           })
@@ -57,7 +58,7 @@ class EntryPortal extends React.Component {
     if (event.key === 'ArrowUp') {
       if (this.state.results.length > 0) {
         event.preventDefault();
-        var index = this.state.results
+        index = this.state.results
           .map(function (e) {
             return e.id;
           })
