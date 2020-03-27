@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 import Box from 'components/Box';
@@ -10,11 +10,13 @@ import Header from 'components/Header';
 class Request extends React.Component {
   render() {
     return (
-      <Box>
+      <Fragment>
         <Header />
-        <BackButton />
-        <FindFacility {...this.props} />
-      </Box>
+        <Box>
+          <BackButton />
+          <FindFacility {...this.props} />
+        </Box>
+      </Fragment>
     );
   }
 }
