@@ -1,7 +1,7 @@
 const Routes = {
-  DONATE: '/donate',
   FAQ: '/faq',
-  REQUEST: '/request',
+  REQUEST_SERVICES: '/request-services',
+  REQUEST_SUPPLIES: '/request',
 };
 
 export default Routes;
