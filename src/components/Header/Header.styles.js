@@ -10,21 +10,20 @@ const styles = {
     display: 'flex',
     padding: `${Space.S30}px ${Space.S40}px`,
     position: 'relative',
-
-    ':after': {
-      background: Color.CORAL,
-      bottom: `-${bottomBorderSize}px`,
-      content: '""',
-      display: 'block',
-      height: `${bottomBorderSize}px`,
-      left: 0,
-      position: 'absolute',
-      width: '50%',
-    },
   }),
 
   link: css({
     display: 'block',
+  }),
+
+  progressBar: css({
+    background: Color.CORAL,
+    bottom: `-${bottomBorderSize}px`,
+    content: '""',
+    display: 'block',
+    height: `${bottomBorderSize}px`,
+    left: 0,
+    position: 'absolute',
   }),
 };
 

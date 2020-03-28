@@ -96,7 +96,11 @@ function NewDropSite({ backend, history, match }) {
     );
   }
 
-  return <Page>{content}</Page>;
+  return (
+    <Page currentProgress={4} totalProgress={5}>
+      {content}
+    </Page>
+  );
 }
 
 export default withRouter(NewDropSite);

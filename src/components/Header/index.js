@@ -1,15 +1,22 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
+
 import { ReactComponent as LogoInline } from 'static/icons/logo-inline.svg';
 
 import styles from './Header.styles';
 
-const Header = () => (
-  <div css={styles.root}>
-    <a href="/" css={styles.link}>
-      <LogoInline />
-    </a>
-  </div>
-);
+const Header = ({ currentProgress, totalProgress }) => {
+  const progressBarWidth = (currentProgress / totalProgress) * 100;
+  const progressBarWidthStyle = css({ width: `${progressBarWidth}%` });
+
+  return (
+    <div css={styles.root}>
+      <a href="/" css={styles.link}>
+        <LogoInline />
+      </a>
+      <span css={[styles.progressBar, progressBarWidthStyle]} />
+    </div>
+  );
+};
 
 export default Header;

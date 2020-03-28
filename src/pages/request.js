@@ -7,7 +7,7 @@ import FindFacility from 'containers/FindFacility';
 
 function Request(props) {
   return (
-    <Page>
+    <Page currentProgress={1} totalProgress={5}>
       <FindFacility {...props} />
     </Page>
   );
