@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "hospitalcommunity"
+    "default": "help-supply-staging",
+    "production": "hospitalcommunity"
   }
 }

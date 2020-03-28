@@ -24,11 +24,13 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_HOST_ENV=development react-scripts start",
     "lint": "eslint \"./src/**/*.{js,jsx}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy-staging": "./scripts/deploy-staging.sh",
+    "deploy-production": "./scripts/deploy-production.sh"
   },
   "eslintConfig": {
     "extends": [
