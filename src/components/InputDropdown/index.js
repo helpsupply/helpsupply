@@ -15,6 +15,7 @@ const DEFAULT = 'placeholder';
 function InputDropdown({
   customOnChange,
   inputProps,
+  isHalfWidth,
   options = [],
   name,
   label,
@@ -32,8 +33,9 @@ function InputDropdown({
     },
     [customOnChange, setValue],
   );
+
   return (
-    <div css={styles.root}>
+    <div css={[styles.root, isHalfWidth && styles.rootHalfWidth]}>
       {label && (
         <div css={[styles.label, value !== DEFAULT && styles.activeLabel]}>
           {label}

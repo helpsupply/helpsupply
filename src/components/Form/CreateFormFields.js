@@ -15,7 +15,7 @@ const inputMap = {
 };
 
 function CreateFormFields(data) {
-  const formFields = data.map(({ isHalfWidth, type, ...rest }) => {
+  const formFields = data.map(({ type, ...rest }) => {
     const InputEl = inputMap[type];
 
     return <InputEl key={rest.label} {...rest} />;

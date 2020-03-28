@@ -42,7 +42,9 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: Height.INPUT,
+    margin: `0 0 ${Space.S30}px 0`,
     position: 'relative',
+    width: '100%',
 
     '&:focus-within': {
       borderColor: Color.CORAL_30,
@@ -53,6 +55,9 @@ const styles = {
 
       '& div': activeLabel,
     },
+  }),
+  rootHalfWidth: css({
+    width: 'calc(50% - 8px)',
   }),
   select: css({
     ...selectReset,

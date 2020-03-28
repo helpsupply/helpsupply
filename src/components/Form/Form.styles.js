@@ -5,6 +5,11 @@ const styles = {
   back: css({
     marginBottom: Space.S30,
   }),
+  childWrapper: css({
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  }),
   sections: css({
     '> *': {
       marginBottom: Space.S30,
