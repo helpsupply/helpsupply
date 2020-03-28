@@ -4,43 +4,18 @@ const hospital_index = require("./chatbot/hospital_index");
 const tools = require("./chatbot/helperFunctions");
 const express = require("express");
 const cors = require("cors");
-const twillioBot = express();
+const twilioBot = express();
 
 // DB FUNCTIONS
-
-var admin = require("firebase-admin");
-const serviceAccount = require("./service-account.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://hospitalcommunity.firebaseio.com"
-});
-
-// DATABASE FUNCTIONS
-
-const database = admin.firestore();
-const dropSiteRef = database.collection("dropSite");
-
-function getDropSite(location_id) {
-  console.log("getting dropsite");
-  return dropSiteRef
-    .doc(location_id)
-    .get()
-    .then(doc => {
-      console.log(doc);
-      if (doc.exists) {
-        return doc.data();
-      } else {
-        return "";
-      }
-    })
-    .catch(console.log);
-}
+const db = require("./firebaseBackend");
 
 // Automatically allow cross-origin requests
-twillioBot.use(cors({ origin: true }));
+twilioBot.use(cors({ origin: true }));
 
-twillioBot.post("/zipSearch", (req, res) => {
+// CHATBOT WEBHOOKS
+
+// Takes the zipcode and searches for available facilities
+twilioBot.post("/zipSearch", (req, res) => {
   const zipCode = req.body.CurrentInput;
   const searchResults = tools.searchByZip(hospital_index.index, zipCode);
   let responseMsg = "";
@@ -63,14 +38,30 @@ twillioBot.post("/zipSearch", (req, res) => {
     responseMsg = output + "Please tell me the number or say 'NONE'";
   }
 
-  let actionsJSON = {
-    actions: [
-      {
-        say: responseMsg
-      }
-    ]
-  };
-  res.json(actionsJSON);
+  let outputToTwilio = tools.tResponseNew(); // create new Twilio Actions object
+  outputToTwilio = tools.tResponseAddMsg(outputToTwilio, responseMsg); // add new "say" action
+  res.json(outputToTwilio); // send back to Twilio
 });
 
-exports.twillio = functions.https.onRequest(twillioBot);
+// Takes a location_id and sends dropSiteDetails
+twilioBot.post("/dropSiteDetails", (req, res) => {
+  const location_id = tools.twilioGetCollectedAnswer(
+    req,
+    "collect_dropsite_location_id",
+    "location_id"
+  ); // get the answer
+
+  console.log(tools.twilioRemember(req, "welcomeStarted"));
+
+  db.getDropSite(location_id).then(data => {
+    let outputToTwilio = tools.tResponseNew(); // create new Twilio Actions object
+    outputToTwilio = tools.tResponseAddMsg(outputToTwilio, data.dropSiteName); // add new "say" action
+    outputToTwilio = tools.tResponseAddMsg(
+      outputToTwilio,
+      data.dropSiteAddress
+    ); // add new "say" action
+    res.json(outputToTwilio); // send back to Twilio
+  });
+});
+
+exports.twilio = functions.https.onRequest(twilioBot);
