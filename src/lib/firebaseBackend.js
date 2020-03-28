@@ -52,7 +52,7 @@ class FirebaseBackend extends BackendInterface {
         .catch(console.log);
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -89,7 +89,7 @@ class FirebaseBackend extends BackendInterface {
         });
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -128,7 +128,7 @@ class FirebaseBackend extends BackendInterface {
         });
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -184,7 +184,7 @@ class FirebaseBackend extends BackendInterface {
         });
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -200,7 +200,7 @@ class FirebaseBackend extends BackendInterface {
         .catch(console.log);
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -230,7 +230,7 @@ class FirebaseBackend extends BackendInterface {
         .catch(console.log);
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -272,7 +272,7 @@ class FirebaseBackend extends BackendInterface {
         });
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -313,7 +313,7 @@ class FirebaseBackend extends BackendInterface {
         });
     } else {
       console.log('Error, requestId is required.');
-      return Promise.resolve('Error, requestId is required.');
+      return Promise.reject('Error, requestId is required.');
     }
 
     // To do
@@ -333,7 +333,7 @@ class FirebaseBackend extends BackendInterface {
         .catch(console.log);
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -393,7 +393,7 @@ class FirebaseBackend extends BackendInterface {
         });
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -409,7 +409,7 @@ class FirebaseBackend extends BackendInterface {
         .catch(console.log);
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.resolve('Error, one or more required params missing.');
+      return Promise.reject('Error, one or more required params missing.');
     }
   }
 
