@@ -74,7 +74,11 @@ function NewSupplyRequest({ backend, history }) {
     );
   }
 
-  return <Page>{content}</Page>;
+  return (
+    <Page currentProgress={1} totalProgress={5}>
+      {content}
+    </Page>
+  );
 }
 
 export default withRouter(NewSupplyRequest);

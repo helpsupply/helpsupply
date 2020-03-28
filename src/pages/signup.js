@@ -7,7 +7,7 @@ import EmailForm from 'containers/EmailForm';
 
 function SignUp(props) {
   return (
-    <Page>
+    <Page currentProgress={3} totalProgress={5}>
       <EmailForm {...props} />
     </Page>
   );

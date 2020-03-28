@@ -7,7 +7,7 @@ import FacilityForm from 'containers/FacilityForm';
 
 function NewFacility(props) {
   return (
-    <Page>
+    <Page currentProgress={2} totalProgress={5}>
       <FacilityForm {...props} />
     </Page>
   );
