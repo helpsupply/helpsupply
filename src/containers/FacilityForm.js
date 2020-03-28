@@ -6,14 +6,16 @@ import { jsx } from '@emotion/core';
 import { Emails } from 'constants/Emails';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
+import states from 'data/states';
 
 import Form from 'components/Form';
-import InputText from 'components/InputText';
-import InputDropdown from 'components/InputDropdown';
 import Anchor from 'components/Anchor';
 import Note from 'components/Note';
-import states from 'data/states';
 import FacilityConfirmation from 'components/FacilityConfirmation';
+
+import CreateFormFields, {
+  formFieldTypes,
+} from 'components/Form/CreateFormFields';
 
 function FacilityForm({ backend, history }) {
   const { t } = useTranslation();
@@ -88,6 +90,55 @@ function FacilityForm({ backend, history }) {
     );
   }
 
+  const formFieldsData = [
+    {
+      customOnChange: handleFieldChange('dropSiteFacilityName'),
+      label: t('request.facilityForm.dropSiteFacilityName.label'),
+      name: 'name',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteFacilityName,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteZip'),
+      label: t('request.facilityForm.dropSiteZip.label'),
+      name: 'zip',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteZip,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteCity'),
+      isHalfWidth: true,
+      label: t('request.facilityForm.dropSiteCity.label'),
+      name: 'city',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteCity,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteState'),
+      isHalfWidth: true,
+      label: t('request.facilityForm.dropSiteState.label'),
+      options: states,
+      name: 'state',
+      type: formFieldTypes.INPUT_DROPDOWN,
+      value: dropSiteState,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteAddress'),
+      label: t('request.facilityForm.dropSiteAddress.label'),
+      name: 'address',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteAddress,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteUrl'),
+      isRequired: false,
+      label: t('request.facilityForm.dropSiteUrl.label'),
+      name: 'url',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteUrl,
+    },
+  ];
+
   return (
     <Form
       defaultValues={fields}
@@ -97,46 +148,7 @@ function FacilityForm({ backend, history }) {
       disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
       description={t('request.facilityForm.description')}
     >
-      <InputText
-        name="name"
-        label={t('request.facilityForm.dropSiteFacilityName.label')}
-        value={dropSiteFacilityName}
-        customOnChange={handleFieldChange('dropSiteFacilityName')}
-      />
-      <InputText
-        name="zip"
-        label={t('request.facilityForm.dropSiteZip.label')}
-        value={dropSiteZip}
-        customOnChange={handleFieldChange('dropSiteZip')}
-      />
-      <div css={{ display: 'flex', '> *': { width: '50%' } }}>
-        <InputText
-          name="city"
-          label={t('request.facilityForm.dropSiteCity.label')}
-          value={dropSiteCity}
-          customOnChange={handleFieldChange('dropSiteCity')}
-        />
-        <InputDropdown
-          name="state"
-          label={t('request.facilityForm.dropSiteState.label')}
-          value={dropSiteState}
-          options={states}
-          customOnChange={handleFieldChange('dropSiteState')}
-        />
-      </div>
-      <InputText
-        name="address"
-        label={t('request.facilityForm.dropSiteAddress.label')}
-        value={dropSiteAddress}
-        customOnChange={handleFieldChange('dropSiteAddress')}
-      />
-      <InputText
-        name="url"
-        label={t('request.facilityForm.dropSiteUrl.label')}
-        isRequired={false}
-        value={dropSiteUrl}
-        customOnChange={handleFieldChange('dropSiteUrl')}
-      />
+      {CreateFormFields(formFieldsData)}
       <Note>
         {t('request.facilityForm.emailAt') + ' '}
         <Anchor href={`mailto:${Emails.HELP}`}>{Emails.HELP}</Anchor>
