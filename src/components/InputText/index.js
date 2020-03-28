@@ -13,6 +13,7 @@ function InputText({
   customOnChange,
   name,
   label,
+  isHalfWidth,
   isRequired = true,
   value: initialValue,
   validation,
@@ -38,7 +39,13 @@ function InputText({
 
   return (
     <div>
-      <label css={[styles.root, isFocused && styles.active]}>
+      <label
+        css={[
+          styles.root,
+          isFocused && styles.active,
+          isHalfWidth && styles.rootHalfWidth,
+        ]}
+      >
         {label && (
           <div css={[styles.label, (isFocused || value) && styles.activeLabel]}>
             {label}

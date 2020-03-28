@@ -30,7 +30,7 @@ export const Form = ({
       <form onSubmit={methods.handleSubmit(onSubmit)} css={styles.root}>
         <div css={styles.sections}>
           <HeaderInfo {...{ title, description }} />
-          {children}
+          <div css={styles.childWrapper}>{children}</div>
         </div>
         <PrimaryButton
           type="submit"

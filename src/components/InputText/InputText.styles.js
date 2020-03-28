@@ -57,7 +57,12 @@ const styles = {
     borderRadius: Radius.ROUNDED,
     flexDirection: 'column',
     height: Height.INPUT,
+    margin: `0 0 ${Space.S30}px 0`,
     position: 'relative',
+    width: '100%',
+  }),
+  rootHalfWidth: css({
+    width: 'calc(50% - 8px)',
   }),
 };
 
