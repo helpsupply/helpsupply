@@ -6,14 +6,36 @@ on:
       - master
 
 jobs:
-  firebase-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
         with:
           node-version: 12
-      - run: yarn deploy-staging
+      - run: |
+          export REACT_APP_HOST_ENV=staging
+          yarn install --ignore-scripts --ignore-optional --frozen-lockfile --non-interactive
+          yarn build
+          cd functions
+          npm install
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          name: build
       - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: 'help-supply-staging'
