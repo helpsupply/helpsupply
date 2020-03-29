@@ -43,7 +43,7 @@ class HCPSignupFinish extends React.Component {
             return;
           }
 
-          this.props.history.push(`/new/admin/supply/${this.state.dropsite}`);
+          this.props.history.push(Routes.SUPPLY_NEW_ADMIN(this.state.dropsite));
         });
       });
   }
