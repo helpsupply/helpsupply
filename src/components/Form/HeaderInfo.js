@@ -9,13 +9,13 @@ import styles from './Form.styles.js';
 function InfoHeader({
   as = 'h3',
   description,
+  textType = TEXT_TYPE.HEADER_3,
   title,
-  type = TEXT_TYPE.HEADER_3,
 }) {
   return (
     <div>
       {title && (
-        <Text as={as} type={type} css={styles.title}>
+        <Text as={as} type={textType} css={styles.title}>
           {title}
         </Text>
       )}

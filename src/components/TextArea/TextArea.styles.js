@@ -45,6 +45,7 @@ const styles = {
     paddingTop: Space.S20,
     left: Space.S20,
     pointerEvents: 'none',
+    right: Space.S20,
     transition: '0.2s all ease-in-out',
   }),
   root: css({
@@ -53,7 +54,9 @@ const styles = {
     borderRadius: Radius.ROUNDED,
     flexDirection: 'column',
     height: 240,
+    margin: `0 0 ${Space.S30}px 0`,
     position: 'relative',
+    width: '100%',
   }),
 };
 

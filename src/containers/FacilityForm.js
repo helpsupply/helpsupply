@@ -88,7 +88,7 @@ function FacilityForm({ backend, history }) {
     );
   }
 
-  const formData = [
+  const fieldData = [
     {
       customOnChange: handleFieldChange('dropSiteFacilityName'),
       label: t('request.facilityForm.dropSiteFacilityName.label'),
@@ -144,7 +144,7 @@ function FacilityForm({ backend, history }) {
       disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
       onSubmit={handleSubmit}
       title={t('request.facilityForm.title')}
-      fields={formData}
+      fields={fieldData}
     >
       <Note key="note">
         {t('request.facilityForm.emailAt') + ' '}
