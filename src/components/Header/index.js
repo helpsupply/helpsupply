@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 
+import { Routes } from 'constants/Routes';
+
 import { ReactComponent as LogoInline } from 'static/icons/logo-inline.svg';
 
 import styles from './Header.styles';
@@ -11,7 +13,7 @@ const Header = ({ currentProgress, totalProgress }) => {
 
   return (
     <div css={styles.root}>
-      <a href="/" css={styles.link}>
+      <a href={Routes.HOME} css={styles.link}>
         <LogoInline />
       </a>
       <span css={[styles.progressBar, progressBarWidthStyle]} />

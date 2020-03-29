@@ -3,6 +3,10 @@ import { useEffect, useCallback, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
+
 import Page from 'components/layouts/Page';
 import DropSiteForm from 'containers/DropSiteForm';
 
@@ -52,8 +56,9 @@ function NewDropSite({ backend, history, match }) {
   const onSubmit = useCallback(
     (hospital) => {
       backend.addDropSite(hospital).then((data) => {
-        let url = '/dropsite/' + hospital.location_id + '/admin';
-        history.push(url);
+        history.push(
+          routeWithParams(Routes.DROPSITE_ADMIN, { id: hospital.location_id }),
+        );
       });
     },
     [backend, history],
@@ -81,7 +86,7 @@ function NewDropSite({ backend, history, match }) {
         <div className="alertText">
           Your email doesn't look like it's from a healthcare provider. Please{' '}
           <a
-            href="/logout"
+            href={Routes.LOGOUT}
             style={{
               color: '#721c24',
               fontWeight: 'bold',
@@ -90,7 +95,8 @@ function NewDropSite({ backend, history, match }) {
           >
             log out
           </a>{' '}
-          and try your work email or contact help@help.supply.
+          and try your work email or contact{' '}
+          <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
         </div>
       </div>
     );

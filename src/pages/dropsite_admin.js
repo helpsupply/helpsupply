@@ -1,8 +1,13 @@
 /** @jsx jsx */
 import React from 'react';
-import Page from 'components/layouts/Page';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
+
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
+
+import Page from 'components/layouts/Page';
 import DropSiteAdmin from 'components/DropSiteAdmin';
 
 class AdminDropSite extends React.Component {
@@ -20,8 +25,11 @@ class AdminDropSite extends React.Component {
     if (!this.props.backend.isLoggedIn()) {
       console.log(this.props.backend.authLoaded);
       if (this.props.backend.authLoaded) {
-        let url = '/dropsite/' + this.props.match.params.id;
-        this.props.history.push(url);
+        this.props.history.push(
+          routeWithParams(Routes.DROPSITE_DETAIL, {
+            id: this.props.match.params.id,
+          }),
+        );
         return;
       } else {
         setTimeout(this.checkVerification, 100);
@@ -109,7 +117,7 @@ class AdminDropSite extends React.Component {
           <div className="alertText">
             Your email doesn't look like it's from a healthcare provider. Please{' '}
             <a
-              href="/logout"
+              href={Routes.LOGOUT}
               style={{
                 color: '#721c24',
                 fontWeight: 'bold',
@@ -118,7 +126,8 @@ class AdminDropSite extends React.Component {
             >
               log out
             </a>{' '}
-            and try your work email or contact help@help.supply.
+            and try your work email or contact{' '}
+            <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
           </div>
         </div>
       );

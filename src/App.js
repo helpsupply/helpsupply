@@ -1,15 +1,8 @@
 import React from 'react';
 import { Global } from '@emotion/core';
-import { styles } from './App.styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import HCPSignupFinish from './components/HCPSignupFinish';
-import DropSite from './components/DropSite';
-import PendingDomains from './components/PendingDomains';
-import NoMatch from './components/NoMatch';
-import Login from './components/Login';
-import Logout from './components/Logout';
-import Profile from './components/Profile';
-import StyleGuide from './components/StyleGuide/index';
+
+import { Routes } from 'constants/Routes';
 
 import NewSupplyRequest from 'pages/supplies_new';
 import AdminDropSite from 'pages/dropsite_admin';
@@ -19,6 +12,17 @@ import EntryPortal from 'pages/entry';
 import Request from 'pages/request';
 import SignUp from 'pages/signup';
 
+import HCPSignupFinish from './components/HCPSignupFinish';
+import DropSite from './components/DropSite';
+import PendingDomains from './components/PendingDomains';
+import NoMatch from './components/NoMatch';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import Profile from './components/Profile';
+import StyleGuide from './components/StyleGuide/index';
+
+import { styles } from './App.styles';
+
 function App({ backend }) {
   return (
     <>
@@ -26,48 +30,46 @@ function App({ backend }) {
       <Router>
         <div className="App">
           <Switch>
-            <Route path="/login">
+            <Route path={Routes.LOGIN}>
               <Login />
             </Route>
-            <Route path="/logout">
+            <Route path={Routes.LOGOUT}>
               <Logout backend={backend} />
             </Route>
-            <Route path="/dropsite/new/admin/:dropsite?">
+            <Route path={Routes.DROPSITE_NEW_ADMIN}>
               <NewDropSite backend={backend} />
             </Route>
-            <Route path="/new/admin/supply/:dropsite?">
+            <Route path={Routes.SUPPLY_NEW_ADMIN}>
               <NewSupplyRequest backend={backend} />
             </Route>
-            <Route path="/signupFinish/:dropsite?">
+            <Route path={Routes.SIGNUP_FINISH_DROPSITE}>
               <HCPSignupFinish backend={backend} />
             </Route>
-            <Route path="/dropsite/:id/admin">
+            <Route path={Routes.DROPSITE_ADMIN}>
               <AdminDropSite backend={backend} />
             </Route>
-            <Route path="/dropsite/:id">
+            <Route path={Routes.DROPSITE_DETAIL}>
               <DropSite backend={backend} />
             </Route>
-            <Route path="/profile">
+            <Route path={Routes.PROFILE}>
               <Profile backend={backend} />
             </Route>
-            <Route path="/pending-domains">
+            <Route path={Routes.PENDING_DOMAINS}>
               <PendingDomains backend={backend} />
             </Route>
-
-            <Route exact path="/style-guide">
+            <Route exact path={Routes.STYLE_GUIDE}>
               <StyleGuide backend={backend} />
             </Route>
-
-            <Route exact path="/">
+            <Route exact path={Routes.HOME}>
               <EntryPortal backend={backend} />
             </Route>
-            <Route path="/request">
+            <Route path={Routes.REQUEST_SUPPLIES}>
               <Request backend={backend} />
             </Route>
-            <Route path="/signup/:dropsite?">
+            <Route path={Routes.SIGNUP_DROPSITE}>
               <SignUp backend={backend} />
             </Route>
-            <Route path="/new-facility">
+            <Route path={Routes.NEW_FACILITY}>
               <NewFacility backend={backend} />
             </Route>
 

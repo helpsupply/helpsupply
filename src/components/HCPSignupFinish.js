@@ -3,6 +3,9 @@ import Firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
 import { withRouter } from 'react-router-dom';
 
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
+
 class HCPSignupFinish extends React.Component {
   constructor(props) {
     super(props);
@@ -35,11 +38,19 @@ class HCPSignupFinish extends React.Component {
       .then(() => {
         this.props.backend.getRequests(this.state.dropsite).then((requests) => {
           if (requests?.length) {
-            this.props.history.push(`/dropsite/${this.state.dropsite}/admin`);
+            this.props.history.push(
+              routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+                dropsite: this.state.dropsite,
+              }),
+            );
             return;
           }
 
-          this.props.history.push(`/new/admin/supply/${this.state.dropsite}`);
+          this.props.history.push(
+            routeWithParams(Routes.SUPPLY_NEW_ADMIN, {
+              dropsite: this.state.dropsite,
+            }),
+          );
         });
       });
   }

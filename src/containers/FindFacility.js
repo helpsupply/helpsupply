@@ -2,19 +2,24 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
-import * as tools from '../functions';
-import * as hospital_index from '../data/hospital_index';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
+
+import { Routes } from 'constants/Routes';
+import { Space, Color } from 'lib/theme';
+import { routeWithParams } from 'lib/utils/routes';
+
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Form from 'components/Form';
-import { ReactComponent as Plus } from 'static/icons/plus-circle.svg';
-
 import Autosuggest from 'components/Autosuggest';
-import { Space, Color } from 'lib/theme';
 import FormGroup from 'components/Form/FormGroup';
 import { IconButton } from 'components/Button';
+
+import { ReactComponent as Plus } from 'static/icons/plus-circle.svg';
+
+import * as tools from '../functions';
+import * as hospital_index from '../data/hospital_index';
 
 const renderSuggestion = ({ hospital }, { query }) => {
   const nameMatches = AutosuggestHighlightMatch(hospital.name, query);
@@ -94,16 +99,21 @@ function FindFacility({ backend, history }) {
     if (backend.authLoaded && backend.isLoggedIn()) {
       backend.dropSiteExists(selectedResult).then((exists) => {
         if (exists) {
-          let url = '/dropsite/' + selectedResult + '/admin';
-          history.push(url);
+          history.push(
+            routeWithParams(Routes.DROPSITE_ADMIN, { selectedResult }),
+          );
         } else {
-          let url = '/dropsite/new/admin/' + selectedResult;
-          history.push(url);
+          history.push(
+            routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+              dropsite: selectedResult,
+            }),
+          );
         }
       });
     } else {
-      let url = '/signup/' + selectedResult;
-      history.push(url);
+      history.push(
+        routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: selectedResult }),
+      );
     }
   }, [backend, history, selectedResult]);
 
@@ -124,7 +134,7 @@ function FindFacility({ backend, history }) {
       />
       <Text type={TEXT_TYPE.BODY_2}>
         <FormGroup mb={5}>{t('request.facilitySearch.notSeeing')}</FormGroup>
-        <IconButton onClick={() => history.push('/new-facility')}>
+        <IconButton onClick={() => history.push(Routes.NEW_FACILITY)}>
           <Plus css={{ marginRight: Space.S5 }} />
           <span css={{ color: Color.CORAL }}>
             {t('request.facilitySearch.addNew')}

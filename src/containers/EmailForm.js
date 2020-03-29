@@ -2,6 +2,9 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
+
+import { Routes } from 'constants/Routes';
+
 import Form from 'components/Form';
 import InputText from 'components/InputText';
 import Note from 'components/Note';
@@ -61,7 +64,9 @@ function EmailForm({ backend, match }) {
       />
       <Note>
         {t('request.workEmailForm.workEmail.disclaimer') + ' '}
-        <Anchor href="/">{t('request.workEmailForm.learnMore')}</Anchor>
+        <Anchor href={Routes.HOME}>
+          {t('request.workEmailForm.learnMore')}
+        </Anchor>
       </Note>
     </Form>
   );

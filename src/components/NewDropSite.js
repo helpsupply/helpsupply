@@ -1,5 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+
 import NewDropSiteForm from './NewDropSiteForm';
 
 class NewDropSite extends React.Component {
@@ -61,7 +65,7 @@ class NewDropSite extends React.Component {
               Your email doesn't look like it's from a healthcare provider.
               Please{' '}
               <a
-                href="/logout"
+                href={Routes.LOGOUT}
                 style={{
                   color: '#721c24',
                   fontWeight: 'bold',
@@ -70,7 +74,8 @@ class NewDropSite extends React.Component {
               >
                 log out
               </a>{' '}
-              and try your work email or contact help@help.supply.
+              and try your work email or contact{' '}
+              <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
             </div>
           </div>
         )}

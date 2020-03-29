@@ -3,6 +3,9 @@ import { useEffect, useState, useCallback } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+
 import Page from 'components/layouts/Page';
 import SupplyForm from 'containers/SupplyForm';
 
@@ -58,7 +61,7 @@ function NewSupplyRequest({ backend, history }) {
         <div className="alertText">
           Your email doesn't look like it's from a healthcare provider. Please{' '}
           <a
-            href="/logout"
+            href={Routes.LOGOUT}
             style={{
               color: '#721c24',
               fontWeight: 'bold',
@@ -68,7 +71,7 @@ function NewSupplyRequest({ backend, history }) {
             log out
           </a>{' '}
           and try your work email or contact{' '}
-          <a href="mailto:help@help.supply">help@help.supply</a>.
+          <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
         </div>
       </div>
     );

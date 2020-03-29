@@ -2,8 +2,11 @@
 import { jsx } from '@emotion/core';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
+import { Routes } from 'constants/Routes';
+
 import Anchor from 'components/Anchor';
 import Box from 'components/Box';
 import LargeHeader from 'components/Header/LargeHeader';
@@ -11,7 +14,6 @@ import ListLink from 'components/ListLink';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { textStyles } from 'components/Text/Text.styles';
-import Routes from 'constants/Routes';
 
 const styles = {
   box: css({
