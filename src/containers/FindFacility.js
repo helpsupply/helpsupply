@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import * as tools from '../functions';
 import * as hospital_index from '../data/hospital_index';
@@ -69,7 +70,8 @@ const getHospitalName = ({ hospital, id }) => ({
   value: id,
 });
 
-function FacilityForm({ backend, history }) {
+function FindFacility({ backend, history }) {
+  const { t } = useTranslation();
   const [results, setResults] = useState([]);
   const [selectedResult, setSelectedResult] = useState('');
 
@@ -108,12 +110,12 @@ function FacilityForm({ backend, history }) {
   return (
     <Form
       onSubmit={handleRedirect}
-      title="Find your healthcare facility"
-      description="I'm a healthcare professional working at:"
+      title={t('request.facilitySearch.title')}
+      description={t('request.facilitySearch.description')}
       disabled={!selectedResult}
     >
       <Autosuggest
-        label="City or healthcare facility"
+        label={t('request.facilitySearch.search.label')}
         suggestions={results}
         onSearch={handleChange}
         getSuggestionValue={getHospitalName}
@@ -121,14 +123,16 @@ function FacilityForm({ backend, history }) {
         onSelect={setSelectedResult}
       />
       <Text type={TEXT_TYPE.BODY_2}>
-        <FormGroup mb={5}>Not seeing your facility?</FormGroup>
+        <FormGroup mb={5}>{t('request.facilitySearch.notSeeing')}</FormGroup>
         <IconButton onClick={() => history.push('/new-facility')}>
           <Plus css={{ marginRight: Space.S5 }} />
-          <span css={{ color: Color.CORAL }}>Find a facility</span>
+          <span css={{ color: Color.CORAL }}>
+            {t('request.facilitySearch.addNew')}
+          </span>
         </IconButton>
       </Text>
     </Form>
   );
 }
 
-export default FacilityForm;
+export default FindFacility;

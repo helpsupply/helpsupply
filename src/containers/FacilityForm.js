@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { useState, useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import Form from 'components/Form';
 import InputText from 'components/InputText';
@@ -10,6 +11,7 @@ import states from 'data/states';
 import FacilityConfirmation from 'components/FacilityConfirmation';
 
 function FacilityForm({ backend, history }) {
+  const { t } = useTranslation();
   const [dropSiteId, setDropSiteId] = useState('');
   const [fields, setFields] = useState({
     dropSiteFacilityName: '',
@@ -78,34 +80,34 @@ function FacilityForm({ backend, history }) {
   return (
     <Form
       defaultValues={fields}
-      buttonLabel="Submit"
+      buttonLabel={t('request.facilityForm.submit')}
       onSubmit={handleSubmit}
-      title="Add a new facility"
+      title={t('request.facilityForm.title')}
       disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
-      description="Enter some information about your facility."
+      description={t('request.facilityForm.description')}
     >
       <InputText
         name="name"
-        label="Name of the facility"
+        label={t('request.facilityForm.dropSiteFacilityName.label')}
         value={dropSiteFacilityName}
         customOnChange={handleFieldChange('dropSiteFacilityName')}
       />
       <InputText
         name="zip"
-        label="Zip code"
+        label={t('request.facilityForm.dropSiteZip.label')}
         value={dropSiteZip}
         customOnChange={handleFieldChange('dropSiteZip')}
       />
       <div css={{ display: 'flex', '> *': { width: '50%' } }}>
         <InputText
           name="city"
-          label="City"
+          label={t('request.facilityForm.dropSiteCity.label')}
           value={dropSiteCity}
           customOnChange={handleFieldChange('dropSiteCity')}
         />
         <InputDropdown
           name="state"
-          placeholder="State"
+          placeholder={t('request.facilityForm.dropSiteState.label')}
           value={dropSiteState}
           options={states}
           customOnChange={handleFieldChange('dropSiteState')}
@@ -113,19 +115,19 @@ function FacilityForm({ backend, history }) {
       </div>
       <InputText
         name="address"
-        label="Full Street Address"
+        label={t('request.facilityForm.dropSiteAddress.label')}
         value={dropSiteAddress}
         customOnChange={handleFieldChange('dropSiteAddress')}
       />
       <InputText
         name="url"
-        label="Website URL (optional)"
+        label={t('request.facilityForm.dropSiteUrl.label')}
         isRequired={false}
         value={dropSiteUrl}
         customOnChange={handleFieldChange('dropSiteUrl')}
       />
       <Note>
-        If you’re working from a temporary facility, email us at{' '}
+        {t('request.facilityForm.emailAt') + ' '}
         <Anchor href="mailto:help@help.supply">help@help.supply</Anchor>
       </Note>
     </Form>

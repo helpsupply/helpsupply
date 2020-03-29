@@ -1,12 +1,15 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import InputCheckbox from 'components/Checkbox';
 import Form from 'components/Form';
+import HeaderInfo from 'components/Form/HeaderInfo';
 import InputText from 'components/InputText';
 import { TEXT_TYPE } from 'components/Text/constants';
-import HeaderInfo from 'components/Form/HeaderInfo';
 import TextArea from 'components/TextArea';
-import InputCheckbox from 'components/Checkbox';
 
 export const DropSiteForm = ({ dropSite, onSubmit }) => {
+  const { t } = useTranslation();
   const [fields, setFields] = useState({
     dropSiteId: dropSite?.location_id,
     dropSiteDescription: '',
@@ -36,58 +39,58 @@ export const DropSiteForm = ({ dropSite, onSubmit }) => {
     <Form
       defaultValues={fields}
       onSubmit={handleSubmit}
-      title="Set a drop-off location"
-      description="This is where donors can drop off supplies. It should be an easily identifiable location including a street address."
+      title={t('request.dropSiteForm.title')}
+      description={t('request.dropSiteForm.description')}
     >
       <InputText
         name="address"
-        label="Street address"
+        label={t('request.dropSiteForm.dropSiteAddress.label')}
         value={dropSiteAddress}
         customOnChange={handleFieldChange('dropSiteAddress')}
       />
       <InputText
         name="details"
-        label="Additional location details"
+        label={t('request.dropSiteForm.dropSiteDescription.label')}
         value={dropSiteDescription}
         customOnChange={handleFieldChange('dropSiteDescription')}
       />
       <HeaderInfo
         as="h4"
         type={TEXT_TYPE.HEADER_4}
-        title="Add requirements (optional)"
-        description="Please enter any requirements about how supplies should be delivered."
+        title={t('request.dropSiteForm.requirements.title')}
+        description={t('request.dropSiteForm.requirements.description')}
       />
       <TextArea
         customOnChange={handleFieldChange('dropSiteRequirements')}
-        label="All donated items must be unused and sealed in original packaging."
+        label={t('request.dropSiteForm.dropSiteRequirements.label')}
       />
       <HeaderInfo
         as="h4"
         type={TEXT_TYPE.HEADER_4}
-        title="More info (optional)"
-        description="We’re also working to solve this problem at scale. Can you give us the name and contact info of the person at your facility responsible for procuring supplies?"
+        title={t('request.dropSiteForm.moreInfo.title')}
+        description={t('request.dropSiteForm.moreInfo.description')}
       />
       <InputText
         name="name"
-        label="Name"
+        label={t('request.dropSiteForm.dropSiteName.label')}
         value={dropSiteName}
         isRequired={false}
         customOnChange={handleFieldChange('dropSiteName')}
       />
       <InputText
         name="phone"
-        label="Email or phone number"
+        label={t('request.dropSiteForm.dropSitePhone.label')}
         value={dropSitePhone}
         isRequired={false}
         customOnChange={handleFieldChange('dropSitePhone')}
       />
       <TextArea
-        label="Is there anything else you’d like others to know about the situation at your facility?"
+        label={t('request.dropSiteForm.dropSiteNotes.label')}
         customOnChange={handleFieldChange('dropSiteNotes')}
       />
       <InputCheckbox
         customOnChange={handleFieldChange('requestWillingToPay')}
-        label="My facility will pay for large volumes of high-quality supplies."
+        label={t('request.dropSiteForm.requestWillingToPay.label')}
       />
     </Form>
   );

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import Form from 'components/Form';
 import InputText from 'components/InputText';
@@ -15,6 +16,7 @@ const validate = (val) => {
 };
 
 function EmailForm({ backend, match }) {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
   const [dropsite, setDropsite] = useState(match.params.dropsite);
@@ -37,8 +39,8 @@ function EmailForm({ backend, match }) {
   if (sent) {
     return (
       <HeaderInfo
-        title="Thank you"
-        description="We just sent you an email with a link to verify your email. It should arrive within a couple minutes."
+        title={t('request.workEmailForm.sent.title')}
+        description={t('request.workEmailForm.sent.description')}
       />
     );
   }
@@ -47,19 +49,19 @@ function EmailForm({ backend, match }) {
     <Form
       defaultValues={{ email: '' }}
       onSubmit={handleSubmit}
-      title="Enter your work email address"
-      description="We need to verify your email before you request supplies."
+      title={t('request.workEmailForm.title')}
+      description={t('request.workEmailForm.description')}
       disabled={!isValidEmail(email)}
     >
       <InputText
         name="email"
-        label="Work email"
+        label={t('request.workEmailForm.workEmail.label')}
         validation={{ validate }}
         customOnChange={setEmail}
       />
       <Note>
-        Note: we will never share your email address with any other parties.{' '}
-        <Anchor href="/">Learn more</Anchor>
+        {t('request.workEmailForm.workEmail.disclaimer') + ' '}
+        <Anchor href="/">{t('request.workEmailForm.learnMore')}</Anchor>
       </Note>
     </Form>
   );

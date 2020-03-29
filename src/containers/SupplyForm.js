@@ -5,8 +5,10 @@ import Form from 'components/Form';
 import InputText from 'components/InputText';
 import InputDropdown from 'components/InputDropdown';
 import Note from 'components/Note';
+import { useTranslation } from 'react-i18next';
 
 function SupplyForm({ onSubmit }) {
+  const { t } = useTranslation();
   const [fields, setFields] = useState({
     type: undefined,
     kind: undefined,
@@ -31,32 +33,29 @@ function SupplyForm({ onSubmit }) {
       defaultValues={fields}
       buttonLabel="Submit"
       onSubmit={handleSubmit}
-      description="You’ll be able to add more requests after submitting this first one."
-      title="What supplies do you need most?"
+      description={t('request.supplyForm.description')}
+      title={t('request.supplyForm.title')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
     >
       <InputDropdown
         name="type"
-        placeholder="Select type"
+        placeholder={t('request.supplyForm.type.label')}
         value={type}
         customOnChange={handleFieldChange('type')}
       />
       <InputDropdown
         name="kind"
-        placeholder="Select kind"
+        placeholder={t('request.supplyForm.kind.label')}
         value={kind}
         customOnChange={handleFieldChange('kind')}
       />
       <InputText
         name="quantity"
-        label="Quantity"
+        label={t('request.supplyForm.quantity.label')}
         value={quantity}
         customOnChange={handleFieldChange('quantity')}
       />
-      <Note>
-        Note: By submitting this request you acknowledge that Help Supply
-        assumes no liability for any supplies delivered by donors.
-      </Note>
+      <Note>{t('request.supplyForm.disclaimer')}</Note>
     </Form>
   );
 }
