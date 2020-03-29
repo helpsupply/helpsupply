@@ -3,8 +3,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
-import Routes from 'constants/routes';
-import Emails from 'constants/emails';
+import { Emails, Routes } from 'lib/constants';
 
 import Page from 'components/layouts/Page';
 import DropSiteForm from 'containers/DropSiteForm';

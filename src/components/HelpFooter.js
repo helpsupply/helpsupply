@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Emails from 'constants/emails';
+import { Emails } from 'lib/constants';
 
 class HelpFooter extends React.Component {
   constructor(props) {

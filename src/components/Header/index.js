@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 
-import Routes from 'constants/routes';
+import { Routes } from 'lib/constants';
 
 import { ReactComponent as LogoInline } from 'static/icons/logo-inline.svg';
 

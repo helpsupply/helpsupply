@@ -1,8 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Routes from 'constants/routes';
-import Emails from 'constants/emails';
+import { Emails, Routes } from 'lib/constants';
 
 import NewDropSiteForm from './NewDropSiteForm';
 
