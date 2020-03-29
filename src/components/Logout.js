@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
 
 class Logout extends React.Component {
   constructor(props) {

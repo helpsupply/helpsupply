@@ -2,7 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/routes';
 
 import * as tools from '../functions';
 import * as hospital_index from '../data/hospital_index';
@@ -106,13 +107,21 @@ class EntryPortal extends React.Component {
       if (backend.authLoaded && backend.isLoggedIn()) {
         backend.dropSiteExists(selectedResult).then((exists) => {
           if (exists) {
-            history.push(Routes.DROPSITE_ADMIN(selectedResult));
+            history.push(
+              routeWithParams(Routes.DROPSITE_ADMIN, { id: selectedResult }),
+            );
           } else {
-            history.push(Routes.DROPSITE_NEW_ADMIN(selectedResult));
+            history.push(
+              routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+                dropsite: selectedResult,
+              }),
+            );
           }
         });
       } else {
-        history.push(Routes.SIGNUP_DROPSITE(selectedResult));
+        history.push(
+          routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: selectedResult }),
+        );
       }
     }
   }
@@ -131,7 +140,9 @@ class EntryPortal extends React.Component {
 
   // DONATE SUPPLIES DROPDOWN HANDLER
   handleChangeDonate(event) {
-    this.props.history.push(Routes.DROPSITE_DETAIL(event.target.value));
+    this.props.history.push(
+      routeWithParams(Routes.DROPSITE_DETAIL, { id: event.target.value }),
+    );
   }
 
   render() {

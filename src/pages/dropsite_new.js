@@ -3,7 +3,9 @@ import { useEffect, useCallback, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
-import { Emails, Routes } from 'lib/constants';
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/routes';
 
 import Page from 'components/layouts/Page';
 import DropSiteForm from 'containers/DropSiteForm';
@@ -54,7 +56,9 @@ function NewDropSite({ backend, history, match }) {
   const onSubmit = useCallback(
     (hospital) => {
       backend.addDropSite(hospital).then((data) => {
-        history.push(Routes.DROPSITE_ADMIN(hospital.location_id));
+        history.push(
+          routeWithParams(Routes.DROPSITE_ADMIN, { id: hospital.location_id }),
+        );
       });
     },
     [backend, history],

@@ -5,8 +5,9 @@ import { jsx } from '@emotion/core';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 
+import { Routes } from 'constants/Routes';
 import { Space, Color } from 'lib/theme';
-import { Routes } from 'lib/constants';
+import { routeWithParams } from 'lib/routes';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -98,13 +99,21 @@ function FindFacility({ backend, history }) {
     if (backend.authLoaded && backend.isLoggedIn()) {
       backend.dropSiteExists(selectedResult).then((exists) => {
         if (exists) {
-          history.push(Routes.DROPSITE_ADMIN(selectedResult));
+          history.push(
+            routeWithParams(Routes.DROPSITE_ADMIN, { selectedResult }),
+          );
         } else {
-          history.push(Routes.DROPSITE_NEW_ADMIN(selectedResult));
+          history.push(
+            routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+              dropsite: selectedResult,
+            }),
+          );
         }
       });
     } else {
-      history.push(Routes.SIGNUP_DROPSITE(selectedResult));
+      history.push(
+        routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: selectedResult }),
+      );
     }
   }, [backend, history, selectedResult]);
 

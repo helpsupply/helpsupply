@@ -2,7 +2,8 @@ import React from 'react';
 import * as hospital_index from '../data/hospital_index';
 import { withRouter } from 'react-router-dom';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/routes';
 
 class NewDropSiteForm extends React.Component {
   constructor(props) {
@@ -124,7 +125,11 @@ class NewDropSiteForm extends React.Component {
           this.state.dropSitePhone,
         )
         .then(() => {
-          this.props.history.push(Routes.DROPSITE_ADMIN(this.state.dropSiteId));
+          this.props.history.push(
+            routeWithParams(Routes.DROPSITE_ADMIN, {
+              id: this.state.dropSiteId,
+            }),
+          );
         });
     } else {
       this.props.backend
@@ -137,7 +142,11 @@ class NewDropSiteForm extends React.Component {
           this.state.dropSitePhone,
         )
         .then((data) => {
-          this.props.history.push(Routes.DROPSITE_ADMIN(data));
+          this.props.history.push(
+            routeWithParams(Routes.DROPSITE_ADMIN, {
+              id: data,
+            }),
+          );
         });
     }
   }

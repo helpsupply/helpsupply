@@ -3,7 +3,9 @@ import { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 
-import { Emails, Routes } from 'lib/constants';
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/routes';
 
 import Form from 'components/Form';
 import InputText from 'components/InputText';
@@ -66,7 +68,13 @@ function FacilityForm({ backend, history }) {
 
   if (dropSiteId) {
     return (
-      <Form onSubmit={() => history.push(Routes.SIGNUP_DROPSITE(dropSiteId))}>
+      <Form
+        onSubmit={() =>
+          history.push(
+            routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: dropSiteId }),
+          )
+        }
+      >
         <FacilityConfirmation
           name={dropSiteFacilityName}
           address={[

@@ -3,7 +3,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
-import { Emails, Routes } from 'lib/constants';
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
 
 import Page from 'components/layouts/Page';
 import SupplyForm from 'containers/SupplyForm';

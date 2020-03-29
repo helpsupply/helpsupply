@@ -2,7 +2,7 @@ import React from 'react';
 import { Global } from '@emotion/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
 
 import NewSupplyRequest from 'pages/supplies_new';
 import AdminDropSite from 'pages/dropsite_admin';
@@ -36,19 +36,19 @@ function App({ backend }) {
             <Route path={Routes.LOGOUT}>
               <Logout backend={backend} />
             </Route>
-            <Route path={Routes.DROPSITE_NEW_ADMIN(':dropsite?')}>
+            <Route path={Routes.DROPSITE_NEW_ADMIN}>
               <NewDropSite backend={backend} />
             </Route>
-            <Route path={Routes.SUPPLY_NEW_ADMIN(':dropsite?')}>
+            <Route path={Routes.SUPPLY_NEW_ADMIN}>
               <NewSupplyRequest backend={backend} />
             </Route>
-            <Route path={Routes.SIGNUP_FINISH_DROPSITE(':dropsite?')}>
+            <Route path={Routes.SIGNUP_FINISH_DROPSITE}>
               <HCPSignupFinish backend={backend} />
             </Route>
-            <Route path={Routes.DROPSITE_ADMIN(':id')}>
+            <Route path={Routes.DROPSITE_ADMIN}>
               <AdminDropSite backend={backend} />
             </Route>
-            <Route path={Routes.DROPSITE_DETAIL(':id')}>
+            <Route path={Routes.DROPSITE_DETAIL}>
               <DropSite backend={backend} />
             </Route>
             <Route path={Routes.PROFILE}>
@@ -66,7 +66,7 @@ function App({ backend }) {
             <Route path={Routes.REQUEST_SUPPLIES}>
               <Request backend={backend} />
             </Route>
-            <Route path={Routes.SIGNUP_DROPSITE(':dropsite?')}>
+            <Route path={Routes.SIGNUP_DROPSITE}>
               <SignUp backend={backend} />
             </Route>
             <Route path={Routes.NEW_FACILITY}>

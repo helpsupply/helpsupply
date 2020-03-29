@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
 
 import Form from 'components/Form';
 import InputText from 'components/InputText';

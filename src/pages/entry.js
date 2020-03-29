@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
 
 import Anchor from 'components/Anchor';
 import Box from 'components/Box';

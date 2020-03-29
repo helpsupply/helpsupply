@@ -3,7 +3,8 @@ import Firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
 import { withRouter } from 'react-router-dom';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/routes';
 
 class HCPSignupFinish extends React.Component {
   constructor(props) {
@@ -38,12 +39,18 @@ class HCPSignupFinish extends React.Component {
         this.props.backend.getRequests(this.state.dropsite).then((requests) => {
           if (requests?.length) {
             this.props.history.push(
-              Routes.DROPSITE_NEW_ADMIN(this.state.dropsite),
+              routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+                dropsite: this.state.dropsite,
+              }),
             );
             return;
           }
 
-          this.props.history.push(Routes.SUPPLY_NEW_ADMIN(this.state.dropsite));
+          this.props.history.push(
+            routeWithParams(Routes.SUPPLY_NEW_ADMIN, {
+              dropsite: this.state.dropsite,
+            }),
+          );
         });
       });
   }

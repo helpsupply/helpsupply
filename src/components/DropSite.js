@@ -2,7 +2,7 @@ import React from 'react';
 import * as hospital_index from '../data/hospital_index';
 import { withRouter, Link } from 'react-router-dom';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
 
 import DropSiteNeedGroup from './DropSiteNeedGroup';
 import NewSupplyForm from './NewSupplyForm';

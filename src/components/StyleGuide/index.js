@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import { useEffect, useState } from 'react';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
 
 import Anchor from '../Anchor';
 import Autosuggest from '../Autosuggest';

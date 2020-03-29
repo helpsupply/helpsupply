@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'lib/constants';
+import { Routes } from 'constants/Routes';
 
 import { IconButton } from 'components/Button';
 

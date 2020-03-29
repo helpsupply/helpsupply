@@ -1,0 +1,18 @@
+export const Routes = {
+  DROPSITE_DETAIL: `/dropsite/:id`,
+  DROPSITE_ADMIN: `/dropsite/:id/admin`,
+  DROPSITE_NEW_ADMIN: `/dropsite/new/admin/:dropsite?`,
+  FAQ: '/faq',
+  HOME: '/',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+  PENDING_DOMAINS: '/pending-domains',
+  PROFILE: '/profile',
+  NEW_FACILITY: '/new-facility',
+  REQUEST_SERVICES: '/request-services',
+  REQUEST_SUPPLIES: '/request',
+  SIGNUP_DROPSITE: `/signup/:dropsite?`,
+  SIGNUP_FINISH_DROPSITE: `/signupFinish/:dropsite?`,
+  STYLE_GUIDE: '/style-guide',
+  SUPPLY_NEW_ADMIN: `/new/admin/supply/:dropsite?`,
+};

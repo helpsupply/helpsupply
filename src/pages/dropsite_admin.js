@@ -3,7 +3,9 @@ import React from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
-import { Emails, Routes } from 'lib/constants';
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/routes';
 
 import Page from 'components/layouts/Page';
 import DropSiteAdmin from 'components/DropSiteAdmin';
@@ -24,7 +26,9 @@ class AdminDropSite extends React.Component {
       console.log(this.props.backend.authLoaded);
       if (this.props.backend.authLoaded) {
         this.props.history.push(
-          Routes.DROPSITE_DETAIL(this.props.match.params.id),
+          routeWithParams(Routes.DROPSITE_DETAIL, {
+            id: this.props.match.params.id,
+          }),
         );
         return;
       } else {
