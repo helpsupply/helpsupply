@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
 import Anchor from 'components/Anchor';
@@ -11,7 +12,6 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { textStyles } from 'components/Text/Text.styles';
 import Routes from 'constants/routes';
-import { useTranslation } from 'react-i18next';
 
 const styles = {
   box: css({
