@@ -8,8 +8,8 @@ import Note from 'components/Note';
 
 function SupplyForm({ onSubmit }) {
   const [fields, setFields] = useState({
-    type: '',
-    kind: '',
+    type: undefined,
+    kind: undefined,
     quantity: '',
   });
 
@@ -28,6 +28,7 @@ function SupplyForm({ onSubmit }) {
 
   return (
     <Form
+      defaultValues={fields}
       buttonLabel="Submit"
       onSubmit={handleSubmit}
       description="You’ll be able to add more requests after submitting this first one."
@@ -35,16 +36,19 @@ function SupplyForm({ onSubmit }) {
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
     >
       <InputDropdown
+        name="type"
         placeholder="Select type"
         value={type}
         customOnChange={handleFieldChange('type')}
       />
       <InputDropdown
+        name="kind"
         placeholder="Select kind"
         value={kind}
         customOnChange={handleFieldChange('kind')}
       />
       <InputText
+        name="quantity"
         label="Quantity"
         value={quantity}
         customOnChange={handleFieldChange('quantity')}

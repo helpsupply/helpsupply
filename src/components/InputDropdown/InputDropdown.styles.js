@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Borders, Color, selectReset, Radius, Space } from 'lib/theme';
+import { Borders, Color, selectReset, Radius, Space, Height } from 'lib/theme';
 
 const styles = {
   chevron: css({
@@ -7,7 +7,11 @@ const styles = {
     right: Space.S25,
     top: Space.S25,
   }),
-
+  error: css({
+    color: Color.CORAL,
+    position: 'absolute',
+    top: Height.INPUT,
+  }),
   placeholder: css({
     color: Color.GRAY_50,
     paddingLeft: Space.S25,
@@ -20,7 +24,7 @@ const styles = {
     borderRadius: Radius.ROUNDED,
     display: 'flex',
     flexDirection: 'column',
-    height: 65,
+    height: Height.INPUT,
     position: 'relative',
 
     '&:focus-within svg': {

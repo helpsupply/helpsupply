@@ -2,11 +2,17 @@
 import { useState, useEffect } from 'react';
 import { jsx } from '@emotion/core';
 import Form from 'components/Form';
-import FormGroup from 'components/Form/FormGroup';
 import InputText from 'components/InputText';
 import Note from 'components/Note';
 import Anchor from 'components/Anchor';
 import HeaderInfo from 'components/Form/HeaderInfo';
+import { isValidEmail } from 'lib/utils/validations';
+
+const validate = (val) => {
+  if (!isValidEmail(val)) {
+    return 'Please enter a valid email address';
+  }
+};
 
 function EmailForm({ backend, match }) {
   const [email, setEmail] = useState('');
@@ -39,14 +45,18 @@ function EmailForm({ backend, match }) {
 
   return (
     <Form
+      defaultValues={{ email: '' }}
       onSubmit={handleSubmit}
       title="Enter your work email address"
       description="We need to verify your email before you request supplies."
-      disabled={!email}
+      disabled={!isValidEmail(email)}
     >
-      <FormGroup mb={20}>
-        <InputText label="Work email" customOnChange={setEmail} />
-      </FormGroup>
+      <InputText
+        name="email"
+        label="Work email"
+        validation={{ validate }}
+        customOnChange={setEmail}
+      />
       <Note>
         Note: we will never share your email address with any other parties.{' '}
         <Anchor href="/">Learn more</Anchor>
