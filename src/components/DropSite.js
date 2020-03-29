@@ -89,13 +89,13 @@ class DropSite extends React.Component {
     this.props.backend.getDropSites(this.props.match.params.id).then((data) => {
       this.setState(
         {
-          dropSiteId: data.location_id,
-          dropSiteName: data.dropSiteName,
-          dropSiteAddress: data.dropSiteAddress,
-          dropSiteZip: data.dropSiteZip,
-          dropSiteDescription: data.dropSiteDescription,
-          dropSiteHospital: data.dropSiteHospital,
-          dropSitePhone: data.dropSitePhone,
+          dropSiteId: data?.location_id,
+          dropSiteName: data?.dropSiteName,
+          dropSiteAddress: data?.dropSiteAddress,
+          dropSiteZip: data?.dropSiteZip,
+          dropSiteDescription: data?.dropSiteDescription,
+          dropSiteHospital: data?.dropSiteHospital,
+          dropSitePhone: data?.dropSitePhone,
         },
         () => {
           //console.log(this.state);
