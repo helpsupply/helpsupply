@@ -10,12 +10,13 @@ export const routeWithParams = (route, params) => {
         console.error(
           `routeWithParams ERROR: There is no matching parameter for :${routeParam}`,
         );
+        return undefined;
       }
 
       return params[routeParam];
-    } else {
-      return routeSection;
     }
+
+    return routeSection;
   });
 
   return newRouteArray.join('/');
