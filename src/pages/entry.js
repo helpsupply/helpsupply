@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { css } from '@emotion/core';
 import { Fragment } from 'react';
+import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
 import Anchor from 'components/Anchor';
 import Box from 'components/Box';
