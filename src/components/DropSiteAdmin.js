@@ -3,6 +3,7 @@ import * as hospital_index from '../data/hospital_index';
 import { withRouter } from 'react-router-dom';
 
 import Routes from 'constants/routes';
+import Emails from 'constants/emails';
 
 import DropSiteNeedGroupAdmin from './DropSiteNeedGroupAdmin';
 import NewRequestForm from './NewRequestForm';
@@ -94,7 +95,8 @@ class DropSiteAdmin extends React.Component {
               >
                 log out
               </a>{' '}
-              and try your work email or contact help@help.supply.
+              and try your work email or contact{' '}
+              <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
             </div>
           </div>
         )}

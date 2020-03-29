@@ -4,6 +4,7 @@ import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
 import Routes from 'constants/routes';
+import Emails from 'constants/emails';
 
 import Page from 'components/layouts/Page';
 import SupplyForm from 'containers/SupplyForm';
@@ -70,7 +71,7 @@ function NewSupplyRequest({ backend, history }) {
             log out
           </a>{' '}
           and try your work email or contact{' '}
-          <a href="mailto:help@help.supply">help@help.supply</a>.
+          <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
         </div>
       </div>
     );

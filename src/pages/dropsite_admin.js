@@ -4,6 +4,7 @@ import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
 import Routes from 'constants/routes';
+import Emails from 'constants/emails';
 
 import Page from 'components/layouts/Page';
 import DropSiteAdmin from 'components/DropSiteAdmin';
@@ -121,7 +122,8 @@ class AdminDropSite extends React.Component {
             >
               log out
             </a>{' '}
-            and try your work email or contact help@help.supply.
+            and try your work email or contact{' '}
+            <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
           </div>
         </div>
       );

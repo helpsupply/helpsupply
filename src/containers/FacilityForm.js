@@ -2,6 +2,9 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
+
+import Emails from 'constants/emails';
+
 import Form from 'components/Form';
 import InputText from 'components/InputText';
 import InputDropdown from 'components/InputDropdown';
@@ -128,7 +131,7 @@ function FacilityForm({ backend, history }) {
       />
       <Note>
         {t('request.facilityForm.emailAt') + ' '}
-        <Anchor href="mailto:help@help.supply">help@help.supply</Anchor>
+        <Anchor href={`mailto:${Emails.HELP}`}>{Emails.HELP}</Anchor>
       </Note>
     </Form>
   );

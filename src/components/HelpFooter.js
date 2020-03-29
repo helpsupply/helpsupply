@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Emails from 'constants/emails';
+
 class HelpFooter extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +11,7 @@ class HelpFooter extends React.Component {
     return (
       <div className="helpFooter">
         <div>
-          Stuck? <a href="mailto:help@help.supply">help@help.supply</a>
+          Stuck? <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>
         </div>
       </div>
     );
