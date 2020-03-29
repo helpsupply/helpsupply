@@ -1,12 +1,26 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
+import PropTypes from 'prop-types';
 import { useCallback, useState } from 'react';
+import { TEXT_TYPE } from 'components/Text/constants';
+import Text from 'components/Text';
+import { useFormContext } from 'react-hook-form';
+import { required } from 'lib/utils/validations';
 
 import styles from './InputText.styles';
 
-function InputText({ customOnChange, label, value: initialValue, ...rest }) {
+function InputText({
+  customOnChange,
+  name,
+  label,
+  isRequired = true,
+  value: initialValue,
+  validation,
+}) {
   const [isFocused, setIsFocused] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(initialValue || '');
+
+  const { register, errors } = useFormContext();
 
   const onChange = useCallback(
     (event) => {
@@ -23,22 +37,34 @@ function InputText({ customOnChange, label, value: initialValue, ...rest }) {
   }, []);
 
   return (
-    <label css={[styles.root, isFocused && styles.active]}>
-      {label && (
-        <div css={[styles.label, (isFocused || value) && styles.activeLabel]}>
-          {label}
-        </div>
-      )}
-      <input
-        css={styles.input}
-        onBlur={toggleFocus}
-        onFocus={toggleFocus}
-        onChange={onChange}
-        value={value ?? initialValue}
-        {...rest}
-      />
-    </label>
+    <div>
+      <label css={[styles.root, isFocused && styles.active]}>
+        {label && (
+          <div css={[styles.label, (isFocused || value) && styles.activeLabel]}>
+            {label}
+          </div>
+        )}
+        <input
+          ref={
+            register &&
+            register({ ...validation, ...(isRequired && { required }) })
+          }
+          css={styles.input}
+          onBlur={toggleFocus}
+          onFocus={toggleFocus}
+          onChange={onChange}
+          name={name}
+        />
+      </label>
+      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.error}>
+        {errors[name]?.message}
+      </Text>
+    </div>
   );
 }
 
 export default InputText;
+
+InputText.propTypes = {
+  name: PropTypes.string.isRequired,
+};

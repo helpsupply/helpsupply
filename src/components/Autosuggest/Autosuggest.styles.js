@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Borders, Color, Radius, Space } from 'lib/theme';
+import { Borders, Color, Radius, Space, Height } from 'lib/theme';
 
 const styles = {
   active: css({
@@ -15,7 +15,7 @@ const styles = {
     borderRadius: Radius.ROUNDED,
     color: Color.GRAY_50,
     fontSize: 16,
-    height: 65,
+    height: Height.INPUT,
     paddingLeft: Space.S20,
     pointerEvents: 'none',
     position: 'absolute',
@@ -38,7 +38,7 @@ const styles = {
     position: 'relative',
 
     '.react-autosuggest__container': {
-      height: 65,
+      height: Height.INPUT,
     },
     '.react-autosuggest__input': {
       appearance: 'none',

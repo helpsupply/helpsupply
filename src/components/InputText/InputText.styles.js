@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Borders, Color, Radius, Space } from 'lib/theme';
+import { Borders, Color, Radius, Space, Height } from 'lib/theme';
 
 const styles = {
   active: css({
@@ -9,6 +9,10 @@ const styles = {
     fontSize: 12,
     paddingTop: Space.S10,
     transition: '0.2s all ease-in-out',
+  }),
+  error: css({
+    color: Color.CORAL,
+    position: 'absolute',
   }),
   input: css({
     appearance: 'none',
@@ -52,7 +56,7 @@ const styles = {
     border: Borders.TRANSPARENT,
     borderRadius: Radius.ROUNDED,
     flexDirection: 'column',
-    height: 65,
+    height: Height.INPUT,
     position: 'relative',
   }),
 };

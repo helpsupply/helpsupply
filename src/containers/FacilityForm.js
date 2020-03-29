@@ -21,12 +21,14 @@ function FacilityForm({ backend, history }) {
   });
 
   useEffect(() => {
-    backend.getDropSites(dropSiteId).then((data) => {
-      if (!data) {
-        return;
-      }
-      setFields(data);
-    });
+    if (dropSiteId) {
+      backend.getDropSites(dropSiteId).then((data) => {
+        if (!data) {
+          return;
+        }
+        setFields(data);
+      });
+    }
   }, [backend, dropSiteId]);
 
   const handleFieldChange = useCallback(
@@ -49,7 +51,6 @@ function FacilityForm({ backend, history }) {
   }, [backend, fields]);
 
   const { dropSiteUrl, ...requiredFields } = fields;
-
   const {
     dropSiteFacilityName,
     dropSiteAddress,
@@ -76,6 +77,7 @@ function FacilityForm({ backend, history }) {
 
   return (
     <Form
+      defaultValues={fields}
       buttonLabel="Submit"
       onSubmit={handleSubmit}
       title="Add a new facility"
@@ -83,22 +85,26 @@ function FacilityForm({ backend, history }) {
       description="Enter some information about your facility."
     >
       <InputText
+        name="name"
         label="Name of the facility"
         value={dropSiteFacilityName}
         customOnChange={handleFieldChange('dropSiteFacilityName')}
       />
       <InputText
+        name="zip"
         label="Zip code"
         value={dropSiteZip}
         customOnChange={handleFieldChange('dropSiteZip')}
       />
       <div css={{ display: 'flex', '> *': { width: '50%' } }}>
         <InputText
+          name="city"
           label="City"
           value={dropSiteCity}
           customOnChange={handleFieldChange('dropSiteCity')}
         />
         <InputDropdown
+          name="state"
           placeholder="State"
           value={dropSiteState}
           options={states}
@@ -106,12 +112,15 @@ function FacilityForm({ backend, history }) {
         />
       </div>
       <InputText
+        name="address"
         label="Full Street Address"
         value={dropSiteAddress}
         customOnChange={handleFieldChange('dropSiteAddress')}
       />
       <InputText
+        name="url"
         label="Website URL (optional)"
+        isRequired={false}
         value={dropSiteUrl}
         customOnChange={handleFieldChange('dropSiteUrl')}
       />

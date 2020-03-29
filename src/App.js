@@ -9,7 +9,7 @@ import NoMatch from './components/NoMatch';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Profile from './components/Profile';
-import StyleGuide from './components/StyleGuide';
+import StyleGuide from './components/StyleGuide/index';
 
 import NewSupplyRequest from 'pages/supplies_new';
 import AdminDropSite from 'pages/dropsite_admin';
