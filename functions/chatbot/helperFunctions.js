@@ -43,11 +43,21 @@ function tResponseAddMsg(responseObj, message) {
   return responseObj;
 }
 
+function tResponseEndByListening(responseObj) {
+  responseObj.actions.push({
+    listen: true
+  });
+  return responseObj;
+}
+
 // adds a redirects for chatbot to a specific task or webhook
-function tResponseAddRedirect(responseObj, urlRedirectTrue, taskNameOrURL) {
+function tResponseEndByRedirect(responseObj, urlRedirectTrue, taskNameOrURL) {
   if (urlRedirectTrue) {
     responseObj.actions.push({
-      redirect: taskNameOrURL
+      redirect: {
+        uri: taskNameOrURL,
+        method: "POST"
+      }
     });
   } else {
     let taskURL = "task://" + taskNameOrURL;
@@ -58,26 +68,10 @@ function tResponseAddRedirect(responseObj, urlRedirectTrue, taskNameOrURL) {
   return responseObj;
 }
 
-// adds a single key/value pair in the Memory object to be retrievable by twilioRemember()
-function tResponseAddMemory(responseObj, key, value) {
-  let rememberObj = {};
-  rememberObj[key] = value;
+// adds a memory
+function tResponseAddMemory(responseObj, objWithKeyValuePairs) {
   responseObj.actions.push({
-    remember: rememberObj
-  });
-  return responseObj;
-}
-
-function tResponseAddMultipleMemories(responseObj, arrayOfKeyValuePairs) {
-  // NEED TO DEBUG THIS
-  let rememberObj = {};
-  for (var i = 0; i < arrayOfKeyValuePairs.length; i++) {
-    Object.keys(arrayOfKeyValuePairs[i]).forEach(function eachKey(key) {
-      rememberObj[key] = arrayOfKeyValuePairs[i][key];
-    });
-  }
-  responseObj.actions.push({
-    remember: { rememberObj }
+    remember: objWithKeyValuePairs
   });
   return responseObj;
 }
@@ -101,7 +95,7 @@ module.exports = {
   twilioRemember: twilioRemember,
   tResponseNew: tResponseNew,
   tResponseAddMsg: tResponseAddMsg,
-  tResponseAddRedirect: tResponseAddRedirect,
-  tResponseAddMemory: tResponseAddMemory,
-  tResponseAddMultipleMemories: tResponseAddMultipleMemories
+  tResponseEndByListening: tResponseEndByListening,
+  tResponseEndByRedirect: tResponseEndByRedirect,
+  tResponseAddMemory: tResponseAddMemory
 };

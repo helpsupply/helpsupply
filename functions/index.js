@@ -16,28 +16,45 @@ twilioBot.use(bodyParser.urlencoded({ extended: false }));
 
 // CHATBOT WEBHOOKS
 
-// Tester webhook
+// TESTER/TUTORIAL HOOKS // Use the simulator at: https://www.twilio.com/console/autopilot/helpsupply/simulator and start by chatting "test"
 twilioBot.post("/tester", (req, res) => {
   if (tools.verifyTwilio(req)) {
-    let outputToTwilio = {
-      actions: [{ say: "test successful" }]
-    };
+    // this will verify that the POST request is from our Twilio account
+    let outputToTwilio = tools.tResponseNew(); // this will create a new response to send back to Twilio
+    outputToTwilio = tools.tResponseAddMsg(outputToTwilio, "Test successful"); // add a message to send to the user
+    // you can add memory key/value pairs, which will stay with the user until the end of the conversation.
+    const newMemories = { fishName: "Dory", snakeName: "Voldemort" };
+    outputToTwilio = tools.tResponseAddMemory(outputToTwilio, newMemories);
+    // outputToTwilio = tools.tResponseEndByListening(outputToTwilio); // (optional) needed in order for the conversation to stay open (and for memories to pass to the subsequent tasks). In this case,
+    outputToTwilio = tools.tResponseEndByRedirect(
+      outputToTwilio,
+      true,
+      "https://us-central1-hospitalcommunity.cloudfunctions.net/twilio/testerEnd"
+    ); // (optional) when this task is done, automatically redirect to this new task without waiting for user reply
     res.json(outputToTwilio);
   } else {
     return res.status(401).send("Unauthorized");
   }
 });
 
-twilioBot.post("/tester2", (req, res) => {
+twilioBot.post("/testerEnd", (req, res) => {
   if (tools.verifyTwilio(req)) {
-    let outputToTwilio = {
-      actions: [{ say: "test successful" }]
-    };
+    console.log("testerEndStarted");
+    const catName = tools.twilioRemember(req, "fishName"); // this allows you to grab any memories previously stored in this conversation.
+    let outputToTwilio = tools.tResponseNew();
+    outputToTwilio = tools.tResponseAddMsg(
+      outputToTwilio,
+      "Test successful. Your fish's name is " +
+        catName +
+        ". Conversation ended."
+    );
     res.json(outputToTwilio);
   } else {
     return res.status(401).send("Unauthorized");
   }
 });
+
+// END TESTER/TUTORIAL HOOKS
 
 // Takes the zipcode and searches for available facilities
 twilioBot.post("/zipSearch", (req, res) => {
@@ -64,8 +81,9 @@ twilioBot.post("/zipSearch", (req, res) => {
       responseMsg = output + "Please tell me the number or say 'NONE'";
     }
 
-    let outputToTwilio = tools.tResponseNew(); // create new Twilio Actions object
-    outputToTwilio = tools.tResponseAddMsg(outputToTwilio, responseMsg); // add new "say" action
+    let outputToTwilio = tools.tResponseNew();
+    outputToTwilio = tools.tResponseAddMsg(outputToTwilio, responseMsg);
+    outputToTwilio = tools.tResponseEndByListening(outputToTwilio);
     res.json(outputToTwilio); // send back to Twilio
   } else {
     return res.status(401).send("Unauthorized");
@@ -81,13 +99,29 @@ twilioBot.post("/dropSiteDetails", (req, res) => {
       "location_id"
     ); // get the answer
     db.getDropSite(location_id).then(data => {
-      let outputToTwilio = tools.tResponseNew(); // create new Twilio Actions object
-      outputToTwilio = tools.tResponseAddMsg(outputToTwilio, data.dropSiteName); // add new "say" action
-      outputToTwilio = tools.tResponseAddMsg(
-        outputToTwilio,
-        data.dropSiteAddress
-      ); // add new "say" action
-      res.json(outputToTwilio); // send back to Twilio
+      let outputToTwilio = tools.tResponseNew();
+      if (data) {
+        outputToTwilio = tools.tResponseAddMsg(
+          outputToTwilio,
+          data.dropSiteName
+        );
+        outputToTwilio = tools.tResponseAddMsg(
+          outputToTwilio,
+          data.dropSiteAddress
+        ); // add new "say" action
+        outputToTwilio = tools.tResponseEndByListening(outputToTwilio);
+      } else {
+        outputToTwilio = tools.tResponseAddMsg(
+          outputToTwilio,
+          "We couldn't find a location with that id, try again?"
+        );
+        outputToTwilio = tools.tResponseEndByRedirect(
+          outputToTwilio,
+          false,
+          "review_drop_site_details"
+        );
+      }
+      res.json(outputToTwilio);
     });
   } else {
     return res.status(401).send("Unauthorized");
