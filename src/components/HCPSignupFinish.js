@@ -33,19 +33,14 @@ class HCPSignupFinish extends React.Component {
     this.props.backend
       .continueSignup(url, this.state.confirmEmail ? this.state.email : null)
       .then(() => {
-        this.props.backend
-          .dropSiteExists(this.state.dropsite)
-          .then((exists) => {
-            let url = '/dropsite/new/admin/' + this.state.dropsite;
-            this.props.history.push(url);
-            // if (exists) {
-            //   let url = "/dropsite/" + this.state.dropsite + "/admin";
-            //   this.props.history.push(url);
-            // } else {
-            //   let url = "/dropsite/new/admin/" + this.state.dropsite;
-            //   this.props.history.push(url);
-            // }
-          });
+        this.props.backend.getRequests(this.state.dropsite).then((requests) => {
+          if (requests?.length) {
+            this.props.history.push(`/dropsite/${this.state.dropsite}/admin`);
+            return;
+          }
+
+          this.props.history.push(`/new/admin/supply/${this.state.dropsite}`);
+        });
       });
   }
 
