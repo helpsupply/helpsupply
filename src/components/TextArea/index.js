@@ -6,7 +6,7 @@ import styles from './TextArea.styles';
 
 function TextArea({ customOnChange, label, value: initialValue, ...rest }) {
   const [isFocused, setIsFocused] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(initialValue);
 
   const onChange = useCallback(
     (event) => {
