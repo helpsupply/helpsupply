@@ -7,7 +7,7 @@ import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 
 import { Routes } from 'constants/Routes';
 import { Space, Color } from 'lib/theme';
-import { routeWithParams } from 'lib/routes';
+import { routeWithParams } from 'lib/utils/routes';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';

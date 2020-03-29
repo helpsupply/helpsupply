@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
 import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/routes';
+import { routeWithParams } from 'lib/utils/routes';
 
 import * as tools from '../functions';
 import * as hospital_index from '../data/hospital_index';

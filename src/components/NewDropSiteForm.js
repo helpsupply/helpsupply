@@ -3,7 +3,7 @@ import * as hospital_index from '../data/hospital_index';
 import { withRouter } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/routes';
+import { routeWithParams } from 'lib/utils/routes';
 
 class NewDropSiteForm extends React.Component {
   constructor(props) {

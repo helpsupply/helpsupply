@@ -5,7 +5,7 @@ import { jsx } from '@emotion/core';
 
 import { Emails } from 'constants/Emails';
 import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/routes';
+import { routeWithParams } from 'lib/utils/routes';
 
 import Form from 'components/Form';
 import InputText from 'components/InputText';

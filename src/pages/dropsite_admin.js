@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import { Emails } from 'constants/Emails';
 import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/routes';
+import { routeWithParams } from 'lib/utils/routes';
 
 import Page from 'components/layouts/Page';
 import DropSiteAdmin from 'components/DropSiteAdmin';

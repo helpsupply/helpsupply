@@ -4,7 +4,7 @@ import * as firebaseui from 'firebaseui';
 import { withRouter } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/routes';
+import { routeWithParams } from 'lib/utils/routes';
 
 class HCPSignupFinish extends React.Component {
   constructor(props) {
