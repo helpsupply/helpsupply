@@ -10,6 +10,15 @@ const styles = {
     paddingTop: Space.S10,
     transition: '0.2s all ease-in-out',
   }),
+  container: css({
+    display: 'flex',
+    border: Borders.TRANSPARENT,
+    borderRadius: Radius.ROUNDED,
+    flexDirection: 'column',
+    height: Height.INPUT,
+    margin: 0,
+    width: '100%',
+  }),
   error: css({
     color: Color.CORAL,
     position: 'absolute',
@@ -52,11 +61,6 @@ const styles = {
     transition: '0.2s all ease-in-out',
   }),
   root: css({
-    display: 'flex',
-    border: Borders.TRANSPARENT,
-    borderRadius: Radius.ROUNDED,
-    flexDirection: 'column',
-    height: Height.INPUT,
     margin: `0 0 ${Space.S30}px 0`,
     position: 'relative',
     width: '100%',

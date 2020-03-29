@@ -12,10 +12,12 @@ export const formFieldTypes = {
 export const formFieldPropTypes = {
   customOnChange: PropTypes.func,
   isHalfWidth: PropTypes.bool,
+  isRequired: PropTypes.bool,
   label: PropTypes.string,
-  type: PropTypes.oneOf(Object.values(formFieldTypes)).isRequired,
+  name: PropTypes.string.isRequired,
   options: PropTypes.array,
   placeholder: PropTypes.string,
+  type: PropTypes.oneOf(Object.values(formFieldTypes)).isRequired,
   value: PropTypes.string,
 };
 
@@ -24,8 +26,8 @@ const inputMap = {
   [formFieldTypes.INPUT_TEXT]: InputText,
 };
 
-function CreateFormFields(data) {
-  const formFields = data.map(({ type, ...rest }) => {
+function CreateFormFields(fields) {
+  const formFields = fields.map(({ type, ...rest }) => {
     const InputEl = inputMap[type];
 
     return <InputEl key={rest.label} {...rest} />;
@@ -35,7 +37,7 @@ function CreateFormFields(data) {
 }
 
 CreateFormFields.propTypes = {
-  data: PropTypes.arrayOf(
+  fields: PropTypes.arrayOf(
     PropTypes.shape({
       formFieldPropTypes,
     }),

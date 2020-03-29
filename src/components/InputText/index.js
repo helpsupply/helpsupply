@@ -38,14 +38,8 @@ function InputText({
   }, []);
 
   return (
-    <div>
-      <label
-        css={[
-          styles.root,
-          isFocused && styles.active,
-          isHalfWidth && styles.rootHalfWidth,
-        ]}
-      >
+    <div css={[styles.root, isHalfWidth && styles.rootHalfWidth]}>
+      <label css={[styles.container, isFocused && styles.active]}>
         {label && (
           <div css={[styles.label, (isFocused || value) && styles.activeLabel]}>
             {label}

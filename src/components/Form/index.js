@@ -10,7 +10,7 @@ import { useForm, FormContext } from 'react-hook-form';
 
 import styles from './Form.styles.js';
 
-export const Form = ({
+const Form = ({
   buttonLabel,
   children,
   defaultValues,

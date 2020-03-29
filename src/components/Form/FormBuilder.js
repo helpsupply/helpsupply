@@ -6,41 +6,44 @@ import CreateFormFields, {
   formFieldPropTypes,
 } from 'components/Form/CreateFormFields';
 
-function CreateForm({
+function FormBuilder({
   buttonLabel,
-  disabled,
+  children,
+  defaultValues,
   description,
-  formFields,
+  disabled,
+  fields,
   onSubmit,
-  otherContent,
   title,
 }) {
   return (
     <Form
       buttonLabel={buttonLabel || 'Submit'}
+      defaultValues={defaultValues}
       onSubmit={onSubmit}
       title={title}
       disabled={disabled}
       description={description}
     >
-      {CreateFormFields(formFields)}
-      {otherContent}
+      {CreateFormFields(fields)}
+      {children}
     </Form>
   );
 }
 
-CreateForm.propTypes = {
+FormBuilder.propTypes = {
   buttonLabel: PropTypes.string,
+  children: PropTypes.object,
+  defaultValues: PropTypes.object,
   description: PropTypes.string,
   disabled: PropTypes.bool,
-  formFields: PropTypes.arrayOf(
+  fields: PropTypes.arrayOf(
     PropTypes.shape({
-      formFieldPropTypes,
+      ...formFieldPropTypes,
     }),
   ).isRequired,
   onSubmit: PropTypes.func.isRequired,
-  otherContent: PropTypes.object,
   title: PropTypes.string,
 };
 
-export default CreateForm;
+export default FormBuilder;
