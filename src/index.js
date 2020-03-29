@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import FirebaseBackend from './lib/firebaseBackend';
 
+import './i18n';
+
 ReactDOM.render(
   <App backend={new FirebaseBackend()} />,
   document.getElementById('root'),
