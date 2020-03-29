@@ -12,5 +12,7 @@ export const Routes = {
   REQUEST_SERVICES: '/request-services',
   REQUEST_SUPPLIES: '/request',
   SIGNUP_DROPSITE: (dropsiteId) => `/signup/${dropsiteId}`,
+  SIGNUP_FINISH_DROPSITE: (dropsiteId) => `/signupFinish/${dropsiteId}`,
   STYLE_GUIDE: '/style-guide',
+  SUPPLY_NEW_ADMIN: (dropsiteId) => `/new/admin/supply/${dropsiteId}`,
 };

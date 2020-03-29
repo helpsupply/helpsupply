@@ -36,19 +36,19 @@ function App({ backend }) {
             <Route path={Routes.LOGOUT}>
               <Logout backend={backend} />
             </Route>
-            <Route path="/dropsite/new/admin/:dropsite?">
+            <Route path={Routes.DROPSITE_NEW_ADMIN(':dropsite?')}>
               <NewDropSite backend={backend} />
             </Route>
-            <Route path="/new/admin/supply/:dropsite?">
+            <Route path={Routes.SUPPLY_NEW_ADMIN(':dropsite?')}>
               <NewSupplyRequest backend={backend} />
             </Route>
-            <Route path={Routes.SIGNUP_FINISH}>
+            <Route path={Routes.SIGNUP_FINISH_DROPSITE(':dropsite?')}>
               <HCPSignupFinish backend={backend} />
             </Route>
-            <Route path="/dropsite/:id/admin">
+            <Route path={Routes.DROPSITE_ADMIN(':id')}>
               <AdminDropSite backend={backend} />
             </Route>
-            <Route path="/dropsite/:id">
+            <Route path={Routes.DROPSITE_DETAIL(':id')}>
               <DropSite backend={backend} />
             </Route>
             <Route path={Routes.PROFILE}>
@@ -66,12 +66,13 @@ function App({ backend }) {
             <Route path={Routes.REQUEST_SUPPLIES}>
               <Request backend={backend} />
             </Route>
-            <Route path="/signup/:dropsite?">
+            <Route path={Routes.SIGNUP_DROPSITE(':dropsite?')}>
               <SignUp backend={backend} />
             </Route>
             <Route path={Routes.NEW_FACILITY}>
               <NewFacility backend={backend} />
             </Route>
+
             <Route path="*">
               <NoMatch />
             </Route>
