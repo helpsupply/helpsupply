@@ -39,7 +39,7 @@ const Form = ({
           css={styles.button}
         >
           <Text type={TEXT_TYPE.BODY_1}>
-            {buttonLabel || t('generic.form.submitLabel')}
+            {buttonLabel || t('generic.form.submitLabelNext')}
           </Text>
         </PrimaryButton>
       </form>

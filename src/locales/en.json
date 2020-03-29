@@ -1,6 +1,7 @@
 {
   "translations": {
-    "generic.form.submitLabel": "Next",
+    "generic.form.submitLabel": "Submit",
+    "generic.form.submitLabelNext": "Next",
     "home.intro.learnMore": "Learn more",
     "home.intro.paragraph1": "Our platform gives a real-time view of the immediate needs of healthcare workers. We provide this information to the organizations of paid workers and volunteers that are ready and able to help.",
     "home.intro.paragraph2": "Want to know more about who we’re working with, or have supplies or services you want to donate?",
@@ -31,7 +32,6 @@
     "request.facilityForm.dropSiteUrl.label": "Website URL (optional)",
     "request.facilityForm.title": "Add a new facility",
     "request.facilityForm.description": "Enter some information about your facility.",
-    "request.facilityForm.submit": "Submit",
     "request.facilityForm.emailAt": "If you’re working from a temporary facility, email us at",
     "request.facilitySearch.addNew": "Add a new facility",
     "request.facilitySearch.description": "I'm a healthcare professional working at:",

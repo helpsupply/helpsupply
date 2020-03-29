@@ -139,7 +139,6 @@ function FacilityForm({ backend, history }) {
 
   return (
     <FormBuilder
-      buttonLabel={t('request.facilityForm.submit')}
       defaultValues={fields}
       description={t('request.facilityForm.description')}
       disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
@@ -148,8 +147,8 @@ function FacilityForm({ backend, history }) {
       fields={formData}
     >
       <Note key="note">
-        If you’re working from a temporary facility, email us at{' '}
-        <Anchor href="mailto:help@help.supply">help@help.supply</Anchor>
+        {t('request.facilityForm.emailAt') + ' '}
+        <Anchor href={`mailto:${Emails.HELP}`}>{Emails.HELP}</Anchor>
       </Note>
     </FormBuilder>
   );
