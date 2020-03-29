@@ -45,13 +45,13 @@ function SupplyForm({ onSubmit }) {
     >
       <InputDropdown
         name="type"
-        placeholder={t('request.supplyForm.type.label')}
+        label={t('request.supplyForm.type.label')}
         value={type}
         customOnChange={handleFieldChange('type')}
       />
       <InputDropdown
         name="kind"
-        placeholder={t('request.supplyForm.kind.label')}
+        label={t('request.supplyForm.kind.label')}
         value={kind}
         customOnChange={handleFieldChange('kind')}
       />

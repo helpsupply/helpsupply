@@ -1,24 +1,41 @@
 import { css } from '@emotion/core';
 import { Borders, Color, selectReset, Radius, Space, Height } from 'lib/theme';
 
+const activeLabel = {
+  fontSize: 12,
+  paddingTop: Space.S10,
+};
+
 const styles = {
+  activeLabel: css(activeLabel),
   chevron: css({
     position: 'absolute',
+    pointerEvents: 'none',
     right: Space.S25,
     top: Space.S25,
+    transition: 'transform 0.2s ease-in-out',
+  }),
+  label: css({
+    color: Color.GRAY_50,
+    fontSize: 16,
+    position: 'absolute',
+    height: '100%',
+    paddingTop: Space.S20,
+    left: Space.S20,
+    pointerEvents: 'none',
+    transition: '0.2s all ease-in-out',
   }),
   error: css({
     color: Color.CORAL,
     position: 'absolute',
     top: Height.INPUT,
   }),
-  placeholder: css({
+  optionLabel: css({
     color: Color.GRAY_50,
     paddingLeft: Space.S25,
     paddingTop: Space.S20,
     position: 'absolute',
   }),
-
   root: css({
     border: Borders.TRANSPARENT,
     borderRadius: Radius.ROUNDED,
@@ -27,21 +44,25 @@ const styles = {
     height: Height.INPUT,
     position: 'relative',
 
-    '&:focus-within svg': {
-      transform: 'rotate(180deg)',
+    '&:focus-within': {
+      borderColor: Color.CORAL_30,
+
+      '& svg': {
+        transform: 'rotate(180deg)',
+      },
+
+      '& div': activeLabel,
     },
   }),
-
   select: css({
     ...selectReset,
     border: Borders.GRAY,
     borderRadius: Radius.ROUNDED,
     height: '100%',
-    padding: `0 ${Space.S20}px`,
+    padding: `${Space.S10}px ${Space.S20}px 0`,
   }),
-
   selectDefaultState: css({
-    color: Color.GRAY_50,
+    color: 'transparent',
   }),
 };
 

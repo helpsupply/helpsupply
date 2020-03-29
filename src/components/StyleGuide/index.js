@@ -101,7 +101,7 @@ function StyleGuide({ backend }) {
           </div>
           <div>
             <InputDropdown
-              placeholder="Select supply type"
+              label="Select supply type"
               options={[
                 { label: 'Foo', value: 'foo' },
                 { label: 'Bar', value: 'bar' },

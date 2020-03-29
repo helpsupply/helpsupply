@@ -17,7 +17,7 @@ function InputDropdown({
   inputProps,
   options = [],
   name,
-  placeholder,
+  label,
   isRequired = true,
 }) {
   const [value, setValue] = useState(DEFAULT);
@@ -34,6 +34,11 @@ function InputDropdown({
   );
   return (
     <div css={styles.root}>
+      {label && (
+        <div css={[styles.label, value !== DEFAULT && styles.activeLabel]}>
+          {label}
+        </div>
+      )}
       <select
         css={[styles.select, value === DEFAULT && styles.selectDefaultState]}
         onChange={handleChange}
@@ -42,8 +47,8 @@ function InputDropdown({
         ref={register && register({ ...(isRequired && { required }) })}
         {...inputProps}
       >
-        <option css={styles.placeholder} disabled value={DEFAULT}>
-          {placeholder}
+        <option css={styles.optionLabel} disabled value={DEFAULT}>
+          {label}
         </option>
 
         {options.map((o) => (
