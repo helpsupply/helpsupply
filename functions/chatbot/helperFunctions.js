@@ -1,3 +1,21 @@
+const twilio = require("twilio"); // needed in verifyTwilio() for verification
+
+function verifyTwilio(req) {
+  // as per https://www.twilio.com/blog/how-to-secure-twilio-webhook-urls-in-nodejs
+  const twilioSignature = req.headers["x-twilio-signature"];
+  const params = req.body;
+  const baseUrl =
+    "https://us-central1-hospitalcommunity.cloudfunctions.net/twilio";
+  const url = baseUrl + req.path;
+  const requestIsValid = twilio.validateRequest(
+    process.env.TWILIO_AUTH_TOKEN,
+    twilioSignature,
+    url,
+    params
+  );
+  return requestIsValid;
+}
+
 function searchByZip(hospital_index, zip) {
   let results = [];
   let city_hits = hospital_index.zip_index[zip] || [];
@@ -77,6 +95,7 @@ function twilioRemember(twilioRequest, field) {
 }
 
 module.exports = {
+  verifyTwilio: verifyTwilio,
   searchByZip: searchByZip,
   twilioGetCollectedAnswer: twilioGetCollectedAnswer,
   twilioRemember: twilioRemember,
