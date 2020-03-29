@@ -1,6 +1,9 @@
 import React from 'react';
 import * as hospital_index from '../data/hospital_index';
 import { withRouter, Link } from 'react-router-dom';
+
+import Routes from 'constants/routes';
+
 import DropSiteNeedGroup from './DropSiteNeedGroup';
 import NewSupplyForm from './NewSupplyForm';
 import HelpFooter from './HelpFooter';
@@ -128,7 +131,7 @@ class DropSite extends React.Component {
             </div>{' '}
             {hospitalText}
           </span>
-          <a href="/" className="navbar-brand mb-0 h1 logored">
+          <a href={Routes.HOME} className="navbar-brand mb-0 h1 logored">
             help.supply
           </a>
         </nav>

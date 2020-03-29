@@ -3,6 +3,8 @@ import { useEffect, useCallback, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
+import Routes from 'constants/routes';
+
 import Page from 'components/layouts/Page';
 import DropSiteForm from 'containers/DropSiteForm';
 
@@ -81,7 +83,7 @@ function NewDropSite({ backend, history, match }) {
         <div className="alertText">
           Your email doesn't look like it's from a healthcare provider. Please{' '}
           <a
-            href="/logout"
+            href={Routes.LOGOUT}
             style={{
               color: '#721c24',
               fontWeight: 'bold',

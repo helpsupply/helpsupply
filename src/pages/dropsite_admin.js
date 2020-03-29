@@ -1,8 +1,11 @@
 /** @jsx jsx */
 import React from 'react';
-import Page from 'components/layouts/Page';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
+
+import Routes from 'constants/routes';
+
+import Page from 'components/layouts/Page';
 import DropSiteAdmin from 'components/DropSiteAdmin';
 
 class AdminDropSite extends React.Component {
@@ -109,7 +112,7 @@ class AdminDropSite extends React.Component {
           <div className="alertText">
             Your email doesn't look like it's from a healthcare provider. Please{' '}
             <a
-              href="/logout"
+              href={Routes.LOGOUT}
               style={{
                 color: '#721c24',
                 fontWeight: 'bold',

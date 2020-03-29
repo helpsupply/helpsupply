@@ -2,6 +2,8 @@
 import { jsx } from '@emotion/core';
 import { useEffect, useState } from 'react';
 
+import Routes from 'constants/routes';
+
 import Anchor from '../Anchor';
 import Autosuggest from '../Autosuggest';
 import { PrimaryButton, SecondaryButton } from '../Button';
@@ -63,7 +65,7 @@ function StyleGuide({ backend }) {
         Note. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at
         nunc faucibus neque finibus ultrices a non risus.
       </Text>
-      <Anchor href="/">Anchor Link</Anchor>
+      <Anchor href={Routes.HOME}>Anchor Link</Anchor>
       <hr />
       <div css={{ width: 500, '> div': { marginBottom: 10 } }}>
         <div>
