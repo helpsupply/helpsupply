@@ -12,6 +12,7 @@
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "facepaint": "^1.2.1",
     "firebase": "^7.11.0",
     "firebaseui": "^4.5.0",
     "mocha": "^7.1.1",
