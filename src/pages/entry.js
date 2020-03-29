@@ -11,7 +11,7 @@ import ListLink from 'components/ListLink';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { textStyles } from 'components/Text/Text.styles';
-import Routes from 'constants/routes';
+import Routes from 'constants/Routes';
 
 const styles = {
   box: css({
