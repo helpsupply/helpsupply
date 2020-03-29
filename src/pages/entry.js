@@ -11,6 +11,7 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { textStyles } from 'components/Text/Text.styles';
 import Routes from 'constants/routes';
+import { useTranslation } from 'react-i18next';
 
 const styles = {
   box: css({
@@ -30,38 +31,36 @@ const styles = {
 };
 
 function EntryPortal() {
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <LargeHeader />
       <Box css={styles.box}>
         <ListLink
           href={Routes.REQUEST_SERVICES}
-          title="Need services"
-          text="Support for myself so I can keep working"
+          title={t('home.needServices.title')}
+          text={t('home.needServices.description')}
         />
         <ListLink
           href={Routes.REQUEST_SUPPLIES}
-          title="Need supplies"
-          text="Items for use in the facility where I work"
+          title={t('home.needSupplies.title')}
+          text={t('home.needSupplies.description')}
         />
         <div css={styles.titleAndText}>
           <Text css={styles.title} as="h3" type={TEXT_TYPE.HEADER_4}>
-            You need support and supplies to keep fighting the coronavirus. We
-            help you communicate your needs to people who can help.
+            {t('home.intro.title')}
           </Text>
           <Text css={styles.text} as="p" type={TEXT_TYPE.BODY_2}>
-            Our platform gives a real-time view of the immediate needs of
-            healthcare workers. We provide this information to the organizations
-            of paid workers and volunteers that are ready and able to help.
+            {t('home.intro.paragraph1')}
           </Text>
           <Text css={styles.text} as="p" type={TEXT_TYPE.BODY_2}>
-            Want to know more about who we’re working with, or have supplies or
-            services you want to donate?
+            {t('home.intro.paragraph2')}
           </Text>
         </div>
         <Anchor href={Routes.FAQ} withIcon>
           <Text css={textStyles.BOLD} type={TEXT_TYPE.BODY_2}>
-            Learn more
+            {t('home.intro.learnMore')}
           </Text>
         </Anchor>
       </Box>

@@ -12,6 +12,7 @@ import Request from '../Request';
 import Text from '../Text';
 import { TEXT_TYPE } from '../Text/constants';
 import TextArea from '../TextArea';
+import Form from 'components/Form';
 
 function StyleGuide({ backend }) {
   const [facilities, setFacilities] = useState([]);
@@ -87,32 +88,35 @@ function StyleGuide({ backend }) {
         </div>
       </div>
       <hr />
-      <div css={{ width: 500, '> div': { marginBottom: 15 } }}>
-        <div>
-          <InputText label="Label" />
+      <Form>
+        <div css={{ width: 500, '> div': { marginBottom: 15 } }}>
+          <div>
+            <InputText label="Label" />
+          </div>
+          <div>
+            <Autosuggest
+              label="City or medical facility"
+              suggestions={facilities}
+            />
+          </div>
+          <div>
+            <InputDropdown
+              placeholder="Select supply type"
+              options={[
+                { label: 'Foo', value: 'foo' },
+                { label: 'Bar', value: 'bar' },
+              ]}
+            />
+          </div>
+          <div>
+            <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
+          </div>
         </div>
-        <div>
-          <Autosuggest
-            label="City or medical facility"
-            suggestions={facilities}
-          />
-        </div>
-        <div>
-          <InputDropdown
-            placeholder="Select supply type"
-            options={[
-              { label: 'Foo', value: 'foo' },
-              { label: 'Bar', value: 'bar' },
-            ]}
-          />
-        </div>
-        <div>
-          <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
-        </div>
-      </div>
+      </Form>
       <hr />
       <Card
         onClick={() => false}
+        editLabel="Edit"
         label="Donation requirements"
         details="Unused, in original packaging"
       />

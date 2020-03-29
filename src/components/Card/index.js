@@ -6,7 +6,7 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { styles } from './Card.styles';
 
-export const Card = ({ details, onClick, label }) => (
+export const Card = ({ details, editLabel, onClick, label }) => (
   <div css={styles.root}>
     <div>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.label}>
@@ -15,7 +15,7 @@ export const Card = ({ details, onClick, label }) => (
       <Text as="p">{details}</Text>
     </div>
     <SecondaryButton onClick={onClick}>
-      <Text type={TEXT_TYPE.NOTE}>Edit</Text>
+      <Text type={TEXT_TYPE.NOTE}>{editLabel}</Text>
     </SecondaryButton>
   </div>
 );
