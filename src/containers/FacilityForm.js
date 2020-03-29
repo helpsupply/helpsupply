@@ -107,7 +107,7 @@ function FacilityForm({ backend, history }) {
         />
         <InputDropdown
           name="state"
-          placeholder={t('request.facilityForm.dropSiteState.label')}
+          label={t('request.facilityForm.dropSiteState.label')}
           value={dropSiteState}
           options={states}
           customOnChange={handleFieldChange('dropSiteState')}
