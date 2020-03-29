@@ -9,6 +9,16 @@ export const formFieldTypes = {
   INPUT_TEXT: 'INPUT_TEXT',
 };
 
+export const formFieldPropTypes = {
+  customOnChange: PropTypes.func,
+  isHalfWidth: PropTypes.bool,
+  label: PropTypes.string,
+  type: PropTypes.oneOf(Object.values(formFieldTypes)).isRequired,
+  options: PropTypes.array,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+};
+
 const inputMap = {
   [formFieldTypes.INPUT_DROPDOWN]: InputDropdown,
   [formFieldTypes.INPUT_TEXT]: InputText,
@@ -27,13 +37,7 @@ function CreateFormFields(data) {
 CreateFormFields.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      customOnChange: PropTypes.func,
-      isHalfWidth: PropTypes.bool,
-      label: PropTypes.string,
-      type: PropTypes.oneOf(Object.values(formFieldTypes)).isRequired,
-      options: PropTypes.array,
-      placeholder: PropTypes.string,
-      value: PropTypes.string,
+      formFieldPropTypes,
     }),
   ).isRequired,
 };
