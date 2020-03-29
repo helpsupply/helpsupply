@@ -1,7 +1,16 @@
 export const Routes = {
+  DROPSITE_DETAIL: (dropsiteId) => `/dropsite/${dropsiteId}`,
+  DROPSITE_ADMIN: (dropsiteId) => `/dropsite/${dropsiteId}/admin`,
+  DROPSITE_NEW_ADMIN: (dropsiteId) => `/dropsite/new/admin/${dropsiteId}`,
   FAQ: '/faq',
   HOME: '/',
+  LOGIN: '/login',
   LOGOUT: '/logout',
+  PENDING_DOMAINS: '/pending-domains',
+  PROFILE: '/profile',
+  NEW_FACILITY: '/new-facility',
   REQUEST_SERVICES: '/request-services',
   REQUEST_SUPPLIES: '/request',
+  SIGNUP_DROPSITE: (dropsiteId) => `/signup/${dropsiteId}`,
+  STYLE_GUIDE: '/style-guide',
 };

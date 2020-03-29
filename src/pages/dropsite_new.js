@@ -54,8 +54,7 @@ function NewDropSite({ backend, history, match }) {
   const onSubmit = useCallback(
     (hospital) => {
       backend.addDropSite(hospital).then((data) => {
-        let url = '/dropsite/' + hospital.location_id + '/admin';
-        history.push(url);
+        history.push(Routes.DROPSITE_ADMIN(hospital.location_id));
       });
     },
     [backend, history],

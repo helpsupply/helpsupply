@@ -1,9 +1,13 @@
 import React from 'react';
-import * as tools from '../functions';
-import * as hospital_index from '../data/hospital_index';
-import HospitalResult from './HospitalResult';
 import { withRouter } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+
+import { Routes } from 'lib/constants';
+
+import * as tools from '../functions';
+import * as hospital_index from '../data/hospital_index';
+
+import HospitalResult from './HospitalResult';
 
 class EntryPortal extends React.Component {
   constructor(props) {
@@ -95,22 +99,20 @@ class EntryPortal extends React.Component {
   }
 
   handleRedirect() {
-    if (this.state.selectedResult !== '') {
-      if (this.props.backend.authLoaded && this.props.backend.isLoggedIn()) {
-        this.props.backend
-          .dropSiteExists(this.state.selectedResult)
-          .then((exists) => {
-            if (exists) {
-              let url = '/dropsite/' + this.state.selectedResult + '/admin';
-              this.props.history.push(url);
-            } else {
-              let url = '/dropsite/new/admin/' + this.state.selectedResult;
-              this.props.history.push(url);
-            }
-          });
+    const { backend, history } = this.props;
+    const { selectedResult } = this.state;
+
+    if (selectedResult !== '') {
+      if (backend.authLoaded && backend.isLoggedIn()) {
+        backend.dropSiteExists(selectedResult).then((exists) => {
+          if (exists) {
+            history.push(Routes.DROPSITE_ADMIN(selectedResult));
+          } else {
+            history.push(Routes.DROPSITE_NEW_ADMIN(selectedResult));
+          }
+        });
       } else {
-        let url = '/signup/' + this.state.selectedResult;
-        this.props.history.push(url);
+        history.push(Routes.SIGNUP_DROPSITE(selectedResult));
       }
     }
   }
@@ -129,8 +131,7 @@ class EntryPortal extends React.Component {
 
   // DONATE SUPPLIES DROPDOWN HANDLER
   handleChangeDonate(event) {
-    let url = '/dropsite/' + event.target.value;
-    this.props.history.push(url);
+    this.props.history.push(Routes.DROPSITE_DETAIL(event.target.value));
   }
 
   render() {

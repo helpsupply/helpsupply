@@ -2,6 +2,8 @@
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { Routes } from 'lib/constants';
+
 import { IconButton } from 'components/Button';
 
 import { ReactComponent as Back } from 'static/icons/back-circle.svg';
@@ -15,7 +17,7 @@ const goBack = ({ history }) => () => {
   if (history.length > 1 && referrer && referrer.includes(host)) {
     history.goBack();
   } else {
-    history.push('/');
+    history.push(Routes.HOME);
   }
 };
 

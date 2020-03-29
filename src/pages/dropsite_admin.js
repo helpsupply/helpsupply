@@ -23,8 +23,9 @@ class AdminDropSite extends React.Component {
     if (!this.props.backend.isLoggedIn()) {
       console.log(this.props.backend.authLoaded);
       if (this.props.backend.authLoaded) {
-        let url = '/dropsite/' + this.props.match.params.id;
-        this.props.history.push(url);
+        this.props.history.push(
+          Routes.DROPSITE_DETAIL(this.props.match.params.id),
+        );
         return;
       } else {
         setTimeout(this.checkVerification, 100);
