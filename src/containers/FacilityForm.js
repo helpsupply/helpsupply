@@ -12,10 +12,8 @@ import Form from 'components/Form';
 import Anchor from 'components/Anchor';
 import Note from 'components/Note';
 import FacilityConfirmation from 'components/FacilityConfirmation';
-
-import CreateFormFields, {
-  formFieldTypes,
-} from 'components/Form/CreateFormFields';
+import CreateForm from 'components/Form/CreateForm';
+import { formFieldTypes } from 'components/Form/CreateFormFields';
 
 function FacilityForm({ backend, history }) {
   const { t } = useTranslation();
@@ -90,71 +88,70 @@ function FacilityForm({ backend, history }) {
     );
   }
 
-  const formFieldsData = [
-    {
-      customOnChange: handleFieldChange('dropSiteFacilityName'),
-      label: t('request.facilityForm.dropSiteFacilityName.label'),
-      name: 'name',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteFacilityName,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteZip'),
-      label: t('request.facilityForm.dropSiteZip.label'),
-      name: 'zip',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteZip,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteCity'),
-      isHalfWidth: true,
-      label: t('request.facilityForm.dropSiteCity.label'),
-      name: 'city',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteCity,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteState'),
-      isHalfWidth: true,
-      label: t('request.facilityForm.dropSiteState.label'),
-      options: states,
-      name: 'state',
-      type: formFieldTypes.INPUT_DROPDOWN,
-      value: dropSiteState,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteAddress'),
-      label: t('request.facilityForm.dropSiteAddress.label'),
-      name: 'address',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteAddress,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteUrl'),
-      isRequired: false,
-      label: t('request.facilityForm.dropSiteUrl.label'),
-      name: 'url',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteUrl,
-    },
-  ];
+  const formData = {
+    buttonLabel: t('request.facilityForm.submit'),
+    defaultValues: fields,
+    description: t('request.facilityForm.description'),
+    disabled: !Object.keys(requiredFields).every((key) => !!fields[key]),
+    onSubmit: handleSubmit,
+    title: t('request.facilityForm.title'),
+    formFields: [
+      {
+        customOnChange: handleFieldChange('dropSiteFacilityName'),
+        label: t('request.facilityForm.dropSiteFacilityName.label'),
+        name: 'name',
+        type: formFieldTypes.INPUT_TEXT,
+        value: dropSiteFacilityName,
+      },
+      {
+        customOnChange: handleFieldChange('dropSiteZip'),
+        label: t('request.facilityForm.dropSiteZip.label'),
+        name: 'zip',
+        type: formFieldTypes.INPUT_TEXT,
+        value: dropSiteZip,
+      },
+      {
+        customOnChange: handleFieldChange('dropSiteCity'),
+        isHalfWidth: true,
+        label: t('request.facilityForm.dropSiteCity.label'),
+        name: 'city',
+        type: formFieldTypes.INPUT_TEXT,
+        value: dropSiteCity,
+      },
+      {
+        customOnChange: handleFieldChange('dropSiteState'),
+        isHalfWidth: true,
+        label: t('request.facilityForm.dropSiteState.label'),
+        options: states,
+        name: 'state',
+        type: formFieldTypes.INPUT_DROPDOWN,
+        value: dropSiteState,
+      },
+      {
+        customOnChange: handleFieldChange('dropSiteAddress'),
+        label: t('request.facilityForm.dropSiteAddress.label'),
+        name: 'address',
+        type: formFieldTypes.INPUT_TEXT,
+        value: dropSiteAddress,
+      },
+      {
+        customOnChange: handleFieldChange('dropSiteUrl'),
+        isRequired: false,
+        label: t('request.facilityForm.dropSiteUrl.label'),
+        name: 'url',
+        type: formFieldTypes.INPUT_TEXT,
+        value: dropSiteUrl,
+      },
+    ],
+    otherContent: [
+      <Note key="note">
+        If you’re working from a temporary facility, email us at{' '}
+        <Anchor href="mailto:help@help.supply">help@help.supply</Anchor>
+      </Note>,
+    ],
+  };
 
-  return (
-    <Form
-      defaultValues={fields}
-      buttonLabel={t('request.facilityForm.submit')}
-      onSubmit={handleSubmit}
-      title={t('request.facilityForm.title')}
-      disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
-      description={t('request.facilityForm.description')}
-    >
-      {CreateFormFields(formFieldsData)}
-      <Note>
-        {t('request.facilityForm.emailAt') + ' '}
-        <Anchor href={`mailto:${Emails.HELP}`}>{Emails.HELP}</Anchor>
-      </Note>
-    </Form>
-  );
+  return CreateForm(formData);
 }
 
 export default FacilityForm;
