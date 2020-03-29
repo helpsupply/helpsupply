@@ -35,7 +35,9 @@ const styles = {
     borderRadius: Radius.ROUNDED,
     display: 'flex',
     flexDirection: 'column',
+    margin: `0 0 ${Space.S30}px 0`,
     position: 'relative',
+    width: '100%',
 
     '.react-autosuggest__container': {
       height: Height.INPUT,

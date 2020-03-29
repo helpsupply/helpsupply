@@ -1,15 +1,15 @@
 /** @jsx jsx */
 import { useState, useCallback } from 'react';
 import { jsx } from '@emotion/core';
-import Form from 'components/Form';
-import InputCheckbox from 'components/Checkbox';
-import InputDropdown from 'components/InputDropdown';
-import InputText from 'components/InputText';
+import { useTranslation } from 'react-i18next';
+
+import { Space } from 'lib/theme';
+
 import Note from 'components/Note';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-import TextArea from 'components/TextArea';
-import { useTranslation } from 'react-i18next';
+import FormBuilder from 'components/Form/FormBuilder';
+import { formFieldTypes } from 'components/Form/CreateFormFields';
 
 function SupplyForm({ onSubmit }) {
   const { t } = useTranslation();
@@ -34,55 +34,70 @@ function SupplyForm({ onSubmit }) {
 
   const { detailedRequirements, type, kind, quantity } = fields;
 
+  const fieldData = [
+    {
+      customOnChange: handleFieldChange('type'),
+      label: t('request.supplyForm.type.label'),
+      name: 'type',
+      type: formFieldTypes.INPUT_DROPDOWN,
+      value: type,
+    },
+    {
+      customOnChange: handleFieldChange('kind'),
+      label: t('request.supplyForm.kind.label'),
+      name: 'kind',
+      type: formFieldTypes.INPUT_DROPDOWN,
+      value: kind,
+    },
+    {
+      customOnChange: handleFieldChange('quantity'),
+      label: t('request.supplyForm.quantity.label'),
+      name: 'quantity',
+      type: formFieldTypes.INPUT_TEXT,
+      value: quantity,
+    },
+    {
+      type: formFieldTypes.NODE,
+      node: [
+        <Text as="p" key="text" type={TEXT_TYPE.BODY_2}>
+          {t('request.supplyForm.detailedRequirements.note')}
+        </Text>,
+      ],
+    },
+    {
+      customOnChange: handleFieldChange('detailedRequirements'),
+      label: t('request.supplyForm.detailedRequirements.label'),
+      name: 'detailedRequirements',
+      type: formFieldTypes.TEXT_AREA,
+      value: detailedRequirements,
+    },
+    {
+      customOnChange: handleFieldChange('requestWillingToPay'),
+      label: t('request.supplyForm.facilityWillPayLargeVolumes.label'),
+      name: 'facilityWillPayLargeVolumes',
+      type: formFieldTypes.INPUT_CHECKBOX,
+      value: '1',
+    },
+    {
+      type: formFieldTypes.NODE,
+      node: [
+        <Note key="note-2" css={{ marginTop: Space.S20, width: '100%' }}>
+          {t('request.supplyForm.disclaimer')}
+        </Note>,
+      ],
+    },
+  ];
+
   return (
-    <Form
+    <FormBuilder
       defaultValues={fields}
       buttonLabel="Submit"
       onSubmit={handleSubmit}
       description={t('request.supplyForm.description')}
       title={t('request.supplyForm.title')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
-    >
-      <InputDropdown
-        name="type"
-        label={t('request.supplyForm.type.label')}
-        value={type}
-        customOnChange={handleFieldChange('type')}
-      />
-      <InputDropdown
-        name="kind"
-        label={t('request.supplyForm.kind.label')}
-        value={kind}
-        customOnChange={handleFieldChange('kind')}
-      />
-      <InputText
-        name="quantity"
-        label={t('request.supplyForm.quantity.label')}
-        value={quantity}
-        customOnChange={handleFieldChange('quantity')}
-      />
-      <Note>{t('request.supplyForm.disclaimer')}</Note>
-
-      <Text as="p" type={TEXT_TYPE.BODY_2}>
-        {t('request.supplyForm.detailedRequirements.note')}
-      </Text>
-
-      <TextArea
-        customOnChange={handleFieldChange('detailedRequirements')}
-        label={t('request.supplyForm.detailedRequirements.label')}
-        name="detailedRequirements"
-        value={detailedRequirements}
-      />
-
-      <InputCheckbox
-        customOnChange={handleFieldChange('requestWillingToPay')}
-        label={t('request.supplyForm.facilityWillPayLargeVolumes.label')}
-        name="facilityWillPayLargeVolumes"
-        value="1"
-      />
-
-      <Note>{t('request.supplyForm.disclaimer')}</Note>
-    </Form>
+      fields={fieldData}
+    />
   );
 }
 
