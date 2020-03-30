@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Color, Radius, Space } from 'lib/theme';
+import { Borders, Color, Radius, Space, Height } from 'lib/theme';
 
 const styles = {
   active: css({
@@ -11,11 +11,11 @@ const styles = {
     transition: '0.2s all ease-in-out',
   }),
   container: css({
-    border: `1.5px solid ${Color.GRAY_50}`,
+    border: Borders.GRAY,
     borderRadius: Radius.ROUNDED,
     color: Color.GRAY_50,
     fontSize: 16,
-    height: 65,
+    height: Height.INPUT,
     paddingLeft: Space.S20,
     pointerEvents: 'none',
     position: 'absolute',
@@ -31,14 +31,16 @@ const styles = {
     transition: '0.2s all ease-in-out',
   }),
   root: css({
-    border: `2px solid transparent`,
-    borderRadius: 11,
+    border: Borders.TRANSPARENT,
+    borderRadius: Radius.ROUNDED,
     display: 'flex',
     flexDirection: 'column',
+    margin: `0 0 ${Space.S30}px 0`,
     position: 'relative',
+    width: '100%',
 
     '.react-autosuggest__container': {
-      height: 65,
+      height: Height.INPUT,
     },
     '.react-autosuggest__input': {
       appearance: 'none',

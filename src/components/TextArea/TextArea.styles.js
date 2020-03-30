@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Color, Radius, Space, visuallyHidden } from 'lib/theme';
+import { Borders, Color, Radius, Space, visuallyHidden } from 'lib/theme';
 
 const styles = {
   active: css({
@@ -45,15 +45,18 @@ const styles = {
     paddingTop: Space.S20,
     left: Space.S20,
     pointerEvents: 'none',
+    right: Space.S20,
     transition: '0.2s all ease-in-out',
   }),
   root: css({
     display: 'flex',
-    border: `2px solid transparent`,
-    borderRadius: 11,
+    border: Borders.TRANSPARENT,
+    borderRadius: Radius.ROUNDED,
     flexDirection: 'column',
     height: 240,
+    margin: `0 0 ${Space.S30}px 0`,
     position: 'relative',
+    width: '100%',
   }),
 };
 

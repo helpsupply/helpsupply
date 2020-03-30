@@ -1,66 +1,104 @@
 /** @jsx jsx */
-import React from 'react';
+import { useState, useCallback } from 'react';
 import { jsx } from '@emotion/core';
-import Form from 'components/Form';
-import InputText from 'components/InputText';
-import InputDropdown from 'components/InputDropdown';
+import { useTranslation } from 'react-i18next';
+
+import { Space } from 'lib/theme';
+
 import Note from 'components/Note';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
+import FormBuilder from 'components/Form/FormBuilder';
+import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-class SupplyForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fields: {
-        type: '',
-        kind: '',
-        quantity: '',
-      },
-    };
-    this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function SupplyForm({ onSubmit }) {
+  const { t } = useTranslation();
+  const [fields, setFields] = useState({
+    detailedRequirements: undefined,
+    type: undefined,
+    kind: undefined,
+    quantity: undefined,
+    requestWillingToPay: false,
+  });
 
-  handleFieldChange = (field) => (value) => {
-    this.setState({ [field]: value });
-  };
+  const handleFieldChange = useCallback(
+    (field) => (value) => {
+      setFields((fields) => ({ ...fields, [field]: value }));
+    },
+    [],
+  );
 
-  handleSubmit() {
-    this.props.onSubmit(this.state.fields);
-  }
+  const handleSubmit = useCallback(() => {
+    onSubmit(fields);
+  }, [fields, onSubmit]);
 
-  render() {
-    return (
-      <Form
-        buttonLabel="Submit"
-        onSubmit={this.handleSubmit}
-        description="You’ll be able to add more requests after submitting this first one."
-        title="What supplies do you need most?"
-        disabled={
-          !Object.keys(this.state.fields).every((key) => !!this.state[key])
-        }
-      >
-        <InputDropdown
-          placeholder="Select type"
-          value={this.state.type}
-          customOnChange={this.handleFieldChange('type')}
-        />
-        <InputDropdown
-          placeholder="Select kind"
-          value={this.state.kind}
-          customOnChange={this.handleFieldChange('kind')}
-        />
-        <InputText
-          label="Quantity"
-          value={this.state.quantity}
-          customOnChange={this.handleFieldChange('quantity')}
-        />
-        <Note>
-          Note: By submitting this request you acknowledge that Help Supply
-          assumes no liability for any supplies delivered by donors.
-        </Note>
-      </Form>
-    );
-  }
+  const { detailedRequirements, type, kind, quantity } = fields;
+
+  const fieldData = [
+    {
+      customOnChange: handleFieldChange('type'),
+      label: t('request.supplyForm.type.label'),
+      name: 'type',
+      type: formFieldTypes.INPUT_DROPDOWN,
+      value: type,
+    },
+    {
+      customOnChange: handleFieldChange('kind'),
+      label: t('request.supplyForm.kind.label'),
+      name: 'kind',
+      type: formFieldTypes.INPUT_DROPDOWN,
+      value: kind,
+    },
+    {
+      customOnChange: handleFieldChange('quantity'),
+      label: t('request.supplyForm.quantity.label'),
+      name: 'quantity',
+      type: formFieldTypes.INPUT_TEXT,
+      value: quantity,
+    },
+    {
+      type: formFieldTypes.NODE,
+      node: [
+        <Text as="p" key="text" type={TEXT_TYPE.BODY_2}>
+          {t('request.supplyForm.detailedRequirements.note')}
+        </Text>,
+      ],
+    },
+    {
+      customOnChange: handleFieldChange('detailedRequirements'),
+      label: t('request.supplyForm.detailedRequirements.label'),
+      name: 'detailedRequirements',
+      type: formFieldTypes.TEXT_AREA,
+      value: detailedRequirements,
+    },
+    {
+      customOnChange: handleFieldChange('requestWillingToPay'),
+      label: t('request.supplyForm.facilityWillPayLargeVolumes.label'),
+      name: 'facilityWillPayLargeVolumes',
+      type: formFieldTypes.INPUT_CHECKBOX,
+      value: '1',
+    },
+    {
+      type: formFieldTypes.NODE,
+      node: [
+        <Note key="note-2" css={{ marginTop: Space.S20, width: '100%' }}>
+          {t('request.supplyForm.disclaimer')}
+        </Note>,
+      ],
+    },
+  ];
+
+  return (
+    <FormBuilder
+      defaultValues={fields}
+      buttonLabel="Submit"
+      onSubmit={handleSubmit}
+      description={t('request.supplyForm.description')}
+      title={t('request.supplyForm.title')}
+      disabled={!Object.keys(fields).every((key) => !!fields[key])}
+      fields={fieldData}
+    />
+  );
 }
 
 export default SupplyForm;

@@ -1,131 +1,157 @@
 /** @jsx jsx */
-import React from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
+
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
+import states from 'data/states';
+
 import Form from 'components/Form';
-import InputText from 'components/InputText';
-import InputDropdown from 'components/InputDropdown';
 import Anchor from 'components/Anchor';
 import Note from 'components/Note';
-import states from 'data/states';
 import FacilityConfirmation from 'components/FacilityConfirmation';
+import FormBuilder from 'components/Form/FormBuilder';
+import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-class FacilityForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dropSiteId: '',
-      fields: {
-        dropSiteFacilityName: '',
-        dropSiteZip: '',
-        dropSiteAddress: '',
-        dropSiteCity: '',
-        dropSiteState: '',
-        dropSiteUrl: '',
-      },
-    };
-  }
+function FacilityForm({ backend, history }) {
+  const { t } = useTranslation();
+  const [dropSiteId, setDropSiteId] = useState('');
+  const [fields, setFields] = useState({
+    dropSiteFacilityName: '',
+    dropSiteZip: '',
+    dropSiteAddress: '',
+    dropSiteCity: '',
+    dropSiteState: '',
+    dropSiteUrl: '',
+  });
 
-  componentWillUpdate(_, nextState) {
-    if (!this.state.dropSiteId && nextState.dropSiteId) {
-      this.props.backend.getDropSites(nextState.dropSiteId).then((data) => {
-        data && this.setState({ fields: data });
+  useEffect(() => {
+    if (dropSiteId) {
+      backend.getDropSites(dropSiteId).then((data) => {
+        if (!data) {
+          return;
+        }
+        setFields(data);
       });
     }
-  }
+  }, [backend, dropSiteId]);
 
-  handleFieldChange = (field) => (value) => {
-    this.setState({ fields: { ...this.state.fields, [field]: value } });
-  };
+  const handleFieldChange = useCallback(
+    (field) => (value) => {
+      setFields((fields) => ({
+        ...fields,
+        [field]: value,
+      }));
+    },
+    [],
+  );
 
-  handleSubmit = () => {
-    this.props.backend.addNewDropSite(this.state.fields).then((data) => {
+  const handleSubmit = useCallback(() => {
+    backend.addNewDropSite(fields).then((data) => {
       if (!data) {
         return;
       }
-      this.setState({ dropSiteId: data });
+      setDropSiteId(data);
     });
-  };
+  }, [backend, fields]);
 
-  render() {
-    const { dropSiteUrl, ...requiredFields } = this.state.fields;
+  const { dropSiteUrl, ...requiredFields } = fields;
+  const {
+    dropSiteFacilityName,
+    dropSiteAddress,
+    dropSiteCity,
+    dropSiteState,
+    dropSiteZip,
+  } = fields;
 
-    if (this.state.dropSiteId) {
-      const {
-        dropSiteFacilityName,
-        dropSiteAddress,
-        dropSiteCity,
-        dropSiteState,
-        dropSiteZip,
-      } = this.state.fields;
-      return (
-        <Form
-          onSubmit={() =>
-            this.props.history.push(`/signup/${this.state.dropSiteId}`)
-          }
-        >
-          <FacilityConfirmation
-            name={dropSiteFacilityName}
-            address={[
-              dropSiteAddress,
-              dropSiteCity,
-              dropSiteState,
-              dropSiteZip,
-            ].join(', ')}
-          />
-        </Form>
-      );
-    }
-
+  if (dropSiteId) {
     return (
       <Form
-        buttonLabel="Submit"
-        onSubmit={this.handleSubmit}
-        title="Add a new facility"
-        disabled={
-          !Object.keys(requiredFields).every((key) => !!this.state.fields[key])
+        onSubmit={() =>
+          history.push(
+            routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: dropSiteId }),
+          )
         }
-        description="Enter some information about your facility."
       >
-        <InputText
-          label="Name of the facility"
-          value={this.state.dropSiteFacilityName}
-          customOnChange={this.handleFieldChange('dropSiteFacilityName')}
+        <FacilityConfirmation
+          name={dropSiteFacilityName}
+          address={[
+            dropSiteAddress,
+            dropSiteCity,
+            dropSiteState,
+            dropSiteZip,
+          ].join(', ')}
         />
-        <InputText
-          label="Zip code"
-          value={this.state.dropSiteZip}
-          customOnChange={this.handleFieldChange('dropSiteZip')}
-        />
-        <div css={{ display: 'flex', '> *': { width: '50%' } }}>
-          <InputText
-            label="City"
-            value={this.state.dropSiteCity}
-            customOnChange={this.handleFieldChange('dropSiteCity')}
-          />
-          <InputDropdown
-            placeholder="State"
-            value={this.state.dropSiteState}
-            options={states}
-            customOnChange={this.handleFieldChange('dropSiteState')}
-          />
-        </div>
-        <InputText
-          label="Full Street Address"
-          value={this.state.dropSiteAddress}
-          customOnChange={this.handleFieldChange('dropSiteAddress')}
-        />
-        <InputText
-          label="Website URL (optional)"
-          value={this.state.dropSiteUrl}
-          customOnChange={this.handleFieldChange('dropSiteUrl')}
-        />
-        <Note>
-          If you’re working from a temporary facility, email us at{' '}
-          <Anchor href="mailto:help@help.supply">help@help.supply</Anchor>
-        </Note>
       </Form>
     );
   }
+
+  const fieldData = [
+    {
+      customOnChange: handleFieldChange('dropSiteFacilityName'),
+      label: t('request.facilityForm.dropSiteFacilityName.label'),
+      name: 'name',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteFacilityName,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteZip'),
+      label: t('request.facilityForm.dropSiteZip.label'),
+      name: 'zip',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteZip,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteCity'),
+      isHalfWidth: true,
+      label: t('request.facilityForm.dropSiteCity.label'),
+      name: 'city',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteCity,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteState'),
+      isHalfWidth: true,
+      label: t('request.facilityForm.dropSiteState.label'),
+      options: states,
+      name: 'state',
+      type: formFieldTypes.INPUT_DROPDOWN,
+      value: dropSiteState,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteAddress'),
+      label: t('request.facilityForm.dropSiteAddress.label'),
+      name: 'address',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteAddress,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteUrl'),
+      isRequired: false,
+      label: t('request.facilityForm.dropSiteUrl.label'),
+      name: 'url',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteUrl,
+    },
+  ];
+
+  return (
+    <FormBuilder
+      defaultValues={fields}
+      description={t('request.facilityForm.description')}
+      disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
+      onSubmit={handleSubmit}
+      title={t('request.facilityForm.title')}
+      fields={fieldData}
+    >
+      <Note key="note">
+        {t('request.facilityForm.emailAt') + ' '}
+        <Anchor href={`mailto:${Emails.HELP}`}>{Emails.HELP}</Anchor>
+      </Note>
+    </FormBuilder>
+  );
 }
 
 export default FacilityForm;

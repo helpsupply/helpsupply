@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Form from 'components/Form';
-import InputText from 'components/InputText';
+import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { TEXT_TYPE } from 'components/Text/constants';
-import HeaderInfo from 'components/Form/HeaderInfo';
-import TextArea from 'components/TextArea';
-import InputCheckbox from 'components/Checkbox';
+import FormBuilder from 'components/Form/FormBuilder';
+import { formFieldTypes } from 'components/Form/CreateFormFields';
 
 export const DropSiteForm = ({ dropSite, onSubmit }) => {
+  const { t } = useTranslation();
   const [fields, setFields] = useState({
     dropSiteId: dropSite?.location_id,
     dropSiteDescription: '',
@@ -18,69 +18,95 @@ export const DropSiteForm = ({ dropSite, onSubmit }) => {
     requestWillingToPay: false,
   });
 
-  const handleFieldChange = (field) => (value) =>
-    setFields({ ...fields, [field]: value });
-  const handleSubmit = () => {
+  const handleFieldChange = useCallback(
+    (field) => (value) => setFields({ ...fields, [field]: value }),
+    [fields],
+  );
+  const handleSubmit = useCallback(() => {
     const { dropSiteId, ...state } = fields;
     onSubmit({ ...state, location_id: dropSiteId });
-  };
+  }, [fields, onSubmit]);
+
   const {
     dropSiteAddress,
     dropSiteDescription,
     dropSiteName,
     dropSitePhone,
   } = fields;
+
+  const fieldData = [
+    {
+      customOnChange: handleFieldChange('dropSiteAddress'),
+      label: t('request.dropSiteForm.dropSiteAddress.label'),
+      name: 'address',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteAddress,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteDescription'),
+      label: t('request.dropSiteForm.dropSiteDescription.label'),
+      name: 'details',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteDescription,
+    },
+    {
+      as: 'h4',
+      description: t('request.dropSiteForm.requirements.description'),
+      title: t('request.dropSiteForm.requirements.title'),
+      textType: TEXT_TYPE.HEADER_4,
+      type: formFieldTypes.HEADER_INFO,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteRequirements'),
+      label: t('request.dropSiteForm.dropSiteRequirements.label'),
+      name: 'requirement',
+      type: formFieldTypes.TEXT_AREA,
+    },
+    {
+      as: 'h4',
+      description: t('request.dropSiteForm.moreInfo.description'),
+      title: t('request.dropSiteForm.moreInfo.title'),
+      textType: TEXT_TYPE.HEADER_4,
+      type: formFieldTypes.HEADER_INFO,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteName'),
+      isRequired: false,
+      label: t('request.dropSiteForm.dropSiteName.label'),
+      name: 'name',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSiteName,
+    },
+    {
+      customOnChange: handleFieldChange('dropSitePhone'),
+      isRequired: false,
+      label: t('request.dropSiteForm.dropSitePhone.label'),
+      name: 'phone',
+      type: formFieldTypes.INPUT_TEXT,
+      value: dropSitePhone,
+    },
+    {
+      customOnChange: handleFieldChange('dropSiteNotes'),
+      label: t('request.dropSiteForm.dropSiteNotes.label'),
+      name: 'notes',
+      type: formFieldTypes.TEXT_AREA,
+    },
+    {
+      customOnChange: handleFieldChange('requestWillingToPay'),
+      label: t('request.dropSiteForm.requestWillingToPay.label'),
+      name: 'willingnessToPay',
+      type: formFieldTypes.INPUT_CHECKBOX,
+    },
+  ];
+
   return (
-    <Form
+    <FormBuilder
+      defaultValues={fields}
       onSubmit={handleSubmit}
-      title="Set a drop-off location"
-      description="This is where donors can drop off supplies. It should be an easily identifiable location including a street address."
-    >
-      <InputText
-        label="Street address"
-        value={dropSiteAddress}
-        customOnChange={handleFieldChange('dropSiteAddress')}
-      />
-      <InputText
-        label="Additional location details"
-        value={dropSiteDescription}
-        customOnChange={handleFieldChange('dropSiteDescription')}
-      />
-      <HeaderInfo
-        as="h4"
-        type={TEXT_TYPE.HEADER_4}
-        title="Add requirements (optional)"
-        description="Please enter any requirements about how supplies should be delivered."
-      />
-      <TextArea
-        customOnChange={handleFieldChange('dropSiteRequirements')}
-        label="All donated items must be unused and sealed in original packaging."
-      />
-      <HeaderInfo
-        as="h4"
-        type={TEXT_TYPE.HEADER_4}
-        title="More info (optional)"
-        description="We’re also working to solve this problem at scale. Can you give us the name and contact info of the person at your facility responsible for procuring supplies?"
-      />
-      <InputText
-        label="Name"
-        value={dropSiteName}
-        customOnChange={handleFieldChange('dropSiteName')}
-      />
-      <InputText
-        label="Email or phone number"
-        value={dropSitePhone}
-        customOnChange={handleFieldChange('dropSitePhone')}
-      />
-      <TextArea
-        label="Is there anything else you’d like others to know about the situation at your facility?"
-        customOnChange={handleFieldChange('dropSiteNotes')}
-      />
-      <InputCheckbox
-        customOnChange={handleFieldChange('requestWillingToPay')}
-        label="My facility will pay for large volumes of high-quality supplies."
-      />
-    </Form>
+      title={t('request.dropSiteForm.title')}
+      description={t('request.dropSiteForm.description')}
+      fields={fieldData}
+    />
   );
 };
 

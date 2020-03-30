@@ -1,19 +1,25 @@
 /** @jsx jsx */
-import React from 'react';
+import { useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
-import * as tools from '../functions';
-import * as hospital_index from '../data/hospital_index';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
+
+import { Routes } from 'constants/Routes';
+import { Space, Color } from 'lib/theme';
+import { routeWithParams } from 'lib/utils/routes';
+
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Form from 'components/Form';
-import { ReactComponent as Plus } from 'static/icons/plus-circle.svg';
-
 import Autosuggest from 'components/Autosuggest';
-import { Space, Color } from 'lib/theme';
 import FormGroup from 'components/Form/FormGroup';
 import { IconButton } from 'components/Button';
+
+import { ReactComponent as Plus } from 'static/icons/plus-circle.svg';
+
+import * as tools from '../functions';
+import * as hospital_index from '../data/hospital_index';
 
 const renderSuggestion = ({ hospital }, { query }) => {
   const nameMatches = AutosuggestHighlightMatch(hospital.name, query);
@@ -69,85 +75,74 @@ const getHospitalName = ({ hospital, id }) => ({
   value: id,
 });
 
-class FacilityForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      results: [],
-      selectedResult: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSelectHospital = this.handleSelectHospital.bind(this);
-    this.handleRedirect = this.handleRedirect.bind(this);
-  }
+function FindFacility({ backend, history }) {
+  const { t } = useTranslation();
+  const [results, setResults] = useState([]);
+  const [selectedResult, setSelectedResult] = useState('');
 
-  handleSelectHospital = (value) => {
-    this.setState({ selectedResult: value });
-  };
-
-  handleChange(value) {
+  const handleChange = useCallback((value) => {
     if (value.length > 1) {
       let term = value.toUpperCase();
       const searchResults = tools.updateSearch(hospital_index.index, term);
-      this.setState({ results: searchResults });
+      setResults(searchResults);
     } else {
-      this.setState({
-        results: [],
-        selectedResult: '',
-      });
+      setResults([]);
+      setSelectedResult('');
     }
-  }
+  }, []);
 
-  handleRedirect() {
-    debugger;
-    if (!this.state.selectedResult) {
+  const handleRedirect = useCallback(() => {
+    if (!selectedResult) {
       return;
     }
 
-    if (this.props.backend.authLoaded && this.props.backend.isLoggedIn()) {
-      this.props.backend
-        .dropSiteExists(this.state.selectedResult)
-        .then((exists) => {
-          if (exists) {
-            let url = '/dropsite/' + this.state.selectedResult + '/admin';
-            this.props.history.push(url);
-          } else {
-            let url = '/dropsite/new/admin/' + this.state.selectedResult;
-            this.props.history.push(url);
-          }
-        });
+    if (backend.authLoaded && backend.isLoggedIn()) {
+      backend.dropSiteExists(selectedResult).then((exists) => {
+        if (exists) {
+          history.push(
+            routeWithParams(Routes.DROPSITE_ADMIN, { selectedResult }),
+          );
+        } else {
+          history.push(
+            routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+              dropsite: selectedResult,
+            }),
+          );
+        }
+      });
     } else {
-      let url = '/signup/' + this.state.selectedResult;
-      this.props.history.push(url);
+      history.push(
+        routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: selectedResult }),
+      );
     }
-  }
+  }, [backend, history, selectedResult]);
 
-  render() {
-    return (
-      <Form
-        onSubmit={this.handleRedirect}
-        title="Find your healthcare facility"
-        description="I'm a healthcare professional working at:"
-        disabled={!this.state.selectedResult}
-      >
-        <Autosuggest
-          label="City or healthcare facility"
-          suggestions={this.state.results}
-          onSearch={this.handleChange}
-          getSuggestionValue={getHospitalName}
-          renderSuggestion={renderSuggestion}
-          onSelect={this.handleSelectHospital}
-        />
-        <Text type={TEXT_TYPE.BODY_2}>
-          <FormGroup mb={5}>Not seeing your facility?</FormGroup>
-          <IconButton onClick={() => this.props.history.push('/new-facility')}>
-            <Plus css={{ marginRight: Space.S5 }} />
-            <span css={{ color: Color.CORAL }}>Find a facility</span>
-          </IconButton>
-        </Text>
-      </Form>
-    );
-  }
+  return (
+    <Form
+      onSubmit={handleRedirect}
+      title={t('request.facilitySearch.title')}
+      description={t('request.facilitySearch.description')}
+      disabled={!selectedResult}
+    >
+      <Autosuggest
+        label={t('request.facilitySearch.search.label')}
+        suggestions={results}
+        onSearch={handleChange}
+        getSuggestionValue={getHospitalName}
+        renderSuggestion={renderSuggestion}
+        onSelect={setSelectedResult}
+      />
+      <Text type={TEXT_TYPE.BODY_2}>
+        <FormGroup mb={5}>{t('request.facilitySearch.notSeeing')}</FormGroup>
+        <IconButton onClick={() => history.push(Routes.NEW_FACILITY)}>
+          <Plus css={{ marginRight: Space.S5 }} />
+          <span css={{ color: Color.CORAL }}>
+            {t('request.facilitySearch.addNew')}
+          </span>
+        </IconButton>
+      </Text>
+    </Form>
+  );
 }
 
-export default FacilityForm;
+export default FindFacility;

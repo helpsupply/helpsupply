@@ -1,69 +1,80 @@
 /** @jsx jsx */
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
-import Form from 'components/Form';
-import FormGroup from 'components/Form/FormGroup';
-import InputText from 'components/InputText';
+
+import { Routes } from 'constants/Routes';
+import { isValidEmail } from 'lib/utils/validations';
+
 import Note from 'components/Note';
 import Anchor from 'components/Anchor';
 import HeaderInfo from 'components/Form/HeaderInfo';
+import FormBuilder from 'components/Form/FormBuilder';
+import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-class EmailForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      sent: false,
-      error: '',
-      dropsite: this.props.match.params.dropsite,
-    };
-    this.submitEmail = this.submitEmail.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
+const validate = (val) => {
+  if (!isValidEmail(val)) {
+    return 'Please enter a valid email address';
   }
+};
 
-  submitEmail(event) {
+function EmailForm({ backend, match }) {
+  const { t } = useTranslation();
+  const [email, setEmail] = useState('');
+  const [sent, setSent] = useState(false);
+  const [dropsite, setDropsite] = useState(match.params.dropsite);
+
+  useEffect(() => {
+    setDropsite(match.params.dropsite);
+  }, [match.params.dropsite]);
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.backend
-      .signupWithEmail(this.state.email, this.state.dropsite)
-      .then(() => this.setState({ sent: true }))
+    backend
+      .signupWithEmail(email, dropsite)
+      .then(() => {
+        setSent(true);
+      })
       .catch(alert);
     // TODO: handle exceptions
-  }
+  };
 
-  handleEmailChange(value) {
-    this.setState({ email: value });
-  }
-
-  render() {
-    if (this.state.sent) {
-      return (
-        <HeaderInfo
-          title="Thank you"
-          description="We just sent you an email with a link to verify your email. It should arrive within a couple minutes."
-        />
-      );
-    }
-
+  if (sent) {
     return (
-      <Form
-        onSubmit={this.submitEmail}
-        title="Enter your work email address"
-        description="We need to verify your email before you request supplies."
-        disabled={!this.state.email}
-      >
-        <FormGroup mb={20}>
-          <InputText
-            label="Work email"
-            customOnChange={this.handleEmailChange}
-          />
-        </FormGroup>
-        <Note>
-          Note: we will never share your email address with any other parties.{' '}
-          <Anchor href="/">Learn more</Anchor>
-        </Note>
-      </Form>
+      <HeaderInfo
+        title={t('request.workEmailForm.sent.title')}
+        description={t('request.workEmailForm.sent.description')}
+      />
     );
   }
+
+  const fieldData = [
+    {
+      customOnChange: setEmail,
+      label: t('request.workEmailForm.workEmail.label'),
+      name: 'email',
+      type: formFieldTypes.INPUT_TEXT,
+      validation: { validate },
+    },
+  ];
+
+  return (
+    <FormBuilder
+      defaultValues={{ email: '' }}
+      onSubmit={handleSubmit}
+      title={t('request.workEmailForm.title')}
+      description={t('request.workEmailForm.description')}
+      disabled={!isValidEmail(email)}
+      fields={fieldData}
+    >
+      <Note>
+        {t('request.workEmailForm.workEmail.disclaimer') + ' '}
+        <Anchor href={Routes.HOME}>
+          {t('request.workEmailForm.learnMore')}
+        </Anchor>
+      </Note>
+    </FormBuilder>
+  );
 }
 
 export default EmailForm;

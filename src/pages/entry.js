@@ -1,9 +1,12 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { css } from '@emotion/core';
-import React, { Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
+import { Routes } from 'constants/Routes';
+
 import Anchor from 'components/Anchor';
 import Box from 'components/Box';
 import LargeHeader from 'components/Header/LargeHeader';
@@ -11,7 +14,6 @@ import ListLink from 'components/ListLink';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { textStyles } from 'components/Text/Text.styles';
-import Routes from 'constants/routes';
 
 const styles = {
   box: css({
@@ -22,50 +24,50 @@ const styles = {
     color: Color.GRAY_75,
   }),
   titleAndText: css({
-    margin: `${Space.S50}px 0 ${Space.S20}px 0`,
+    marginTop: `${Space.S50}px`,
     paddingRight: '20px',
   }),
   title: css({
-    marginBottom: `${Space.S45}px`,
+    marginBottom: `${Space.S20}px`,
   }),
 };
 
-class EntryPortal extends React.Component {
-  render() {
-    return (
-      <Fragment>
-        <LargeHeader />
-        <Box css={styles.box}>
-          <ListLink
-            href={Routes.REQUEST}
-            title="Need"
-            text="Healthcare professionals only"
-          />
-          <ListLink
-            href={Routes.DONATE}
-            title="Donate"
-            text="Open to the public"
-          />
-          <div css={styles.titleAndText}>
-            <Text css={styles.title} as="h3" type={TEXT_TYPE.HEADER_4}>
-              Nurses and doctors need supplies to keep fighting the coronavirus.
-              We help them communicate their needs to people who can help.
-            </Text>
-            <Text css={styles.text} as="p" type={TEXT_TYPE.BODY_2}>
-              Our platform gives a real-time view of immediate needs at various
-              hospitals. We make the information freely available so anyone can
-              help, including organizations who can provide supplies at scale.
-            </Text>
-          </div>
-          <Anchor href={Routes.FAQ} withIcon>
-            <Text css={textStyles.BOLD} type={TEXT_TYPE.BODY_2}>
-              Learn more
-            </Text>
-          </Anchor>
-        </Box>
-      </Fragment>
-    );
-  }
+function EntryPortal() {
+  const { t } = useTranslation();
+
+  return (
+    <Fragment>
+      <LargeHeader />
+      <Box css={styles.box}>
+        <ListLink
+          href={Routes.REQUEST_SERVICES}
+          title={t('home.needServices.title')}
+          text={t('home.needServices.description')}
+        />
+        <ListLink
+          href={Routes.REQUEST_SUPPLIES}
+          title={t('home.needSupplies.title')}
+          text={t('home.needSupplies.description')}
+        />
+        <div css={styles.titleAndText}>
+          <Text css={styles.title} as="h3" type={TEXT_TYPE.HEADER_4}>
+            {t('home.intro.title')}
+          </Text>
+          <Text css={styles.text} as="p" type={TEXT_TYPE.BODY_2}>
+            {t('home.intro.paragraph1')}
+          </Text>
+          <Text css={styles.text} as="p" type={TEXT_TYPE.BODY_2}>
+            {t('home.intro.paragraph2')}
+          </Text>
+        </div>
+        <Anchor href={Routes.FAQ} withIcon>
+          <Text css={textStyles.BOLD} type={TEXT_TYPE.BODY_2}>
+            {t('home.intro.learnMore')}
+          </Text>
+        </Anchor>
+      </Box>
+    </Fragment>
+  );
 }
 
-export default withRouter(EntryPortal);
+export default EntryPortal;

@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import { Routes } from 'constants/Routes';
+
 class Logout extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,7 @@ class Logout extends React.Component {
       .auth()
       .signOut()
       .then(() => {
-        this.props.history.push('/');
+        this.props.history.push(Routes.HOME);
       });
   }
 

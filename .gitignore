@@ -5,3 +5,5 @@ sendgrid.env
 node_modules/
 
 .idea
+.firebase/
+build/

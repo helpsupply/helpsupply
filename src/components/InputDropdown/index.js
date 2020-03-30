@@ -1,82 +1,74 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React from 'react';
+import PropTypes from 'prop-types';
+import { useState, useCallback } from 'react';
+import { TEXT_TYPE } from 'components/Text/constants';
 import Text from 'components/Text';
 import { ReactComponent as Chevron } from 'static/icons/chevron.svg';
+import { useFormContext } from 'react-hook-form';
+import { required } from 'lib/utils/validations';
 
 import styles from './InputDropdown.styles';
 
-class InputDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.listEl = null;
-    this.inputEl = null;
-    this.state = {
-      isOpen: false,
-      value: '',
-    };
-  }
+const DEFAULT = 'placeholder';
 
-  componentDidMount() {
-    window.addEventListener('mousedown', this.handleClick);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('mousedown', this.handleClick);
-  }
-
-  handleClick = (e) => {
-    this.setState((prevState) => {
-      // clicked outside list
-      if (
-        (prevState.isOpen && !this.listEl.contains(e.target)) ||
-        e.target === this.inputEl
-      ) {
-        return { isOpen: !this.state.isOpen };
+function InputDropdown({
+  customOnChange,
+  inputProps,
+  isHalfWidth,
+  options = [],
+  name,
+  label,
+  isRequired = true,
+}) {
+  const [value, setValue] = useState(DEFAULT);
+  const { register, errors } = useFormContext();
+  const handleChange = useCallback(
+    (e) => {
+      const { value: newValue } = e.target;
+      if (customOnChange) {
+        customOnChange(newValue);
       }
-    });
-  };
+      setValue(newValue);
+    },
+    [customOnChange, setValue],
+  );
 
-  onChange = (option) => {
-    if (this.props.customOnChange) {
-      this.props.customOnChange(option.value);
-    }
-    this.setState({ value: option.label, isOpen: false });
-  };
-
-  render() {
-    const { isOpen, value } = this.state;
-    const { placeholder, options = [] } = this.props;
-
-    return (
-      <div css={[styles.root, isOpen && styles.active]}>
-        <span css={[styles.placeholder, value && styles.selected]}>
-          <Text>{value || placeholder}</Text>
-        </span>
-        <div
-          value={value}
-          ref={(ref) => (this.inputEl = ref)}
-          css={styles.dropdown}
-        >
-          {isOpen && (
-            <ul css={styles.list} ref={(ref) => (this.listEl = ref)}>
-              {options.map((option) => (
-                <li
-                  onClick={() => this.onChange(option)}
-                  css={styles.option}
-                  key={option.label}
-                  value={option.value}
-                >
-                  <Text>{option.label}</Text>
-                </li>
-              ))}
-            </ul>
-          )}
+  return (
+    <div css={[styles.root, isHalfWidth && styles.rootHalfWidth]}>
+      {label && (
+        <div css={[styles.label, value !== DEFAULT && styles.activeLabel]}>
+          {label}
         </div>
-        <Chevron css={[styles.chevron, isOpen && styles.chevronOpen]} />
-      </div>
-    );
-  }
+      )}
+      <select
+        css={[styles.select, value === DEFAULT && styles.selectDefaultState]}
+        onChange={handleChange}
+        name={name}
+        defaultValue={DEFAULT}
+        ref={register && register({ ...(isRequired && { required }) })}
+        {...inputProps}
+      >
+        <option css={styles.optionLabel} disabled value={DEFAULT}>
+          {label}
+        </option>
+
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+      <Chevron css={styles.chevron} />
+      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.error}>
+        {errors[name]?.message}
+      </Text>
+    </div>
+  );
 }
 
 export default InputDropdown;
+
+InputDropdown.propTypes = {
+  name: PropTypes.string.isRequired,
+};

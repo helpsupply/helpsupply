@@ -1,50 +1,42 @@
 /** @jsx jsx */
-import React from 'react';
 import { jsx } from '@emotion/core';
+import { useCallback, useState } from 'react';
 
 import styles from './TextArea.styles';
 
-class TextArea extends React.Component {
-  constructor(props) {
-    super(props);
+function TextArea({ customOnChange, label, value: initialValue, ...rest }) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [value, setValue] = useState(initialValue);
 
-    this.state = {
-      isFocused: false,
-      value: '',
-    };
-  }
+  const onChange = useCallback(
+    (event) => {
+      if (customOnChange) {
+        customOnChange(event.target.value);
+      }
+      setValue(event.target.value);
+    },
+    [customOnChange],
+  );
 
-  onChange = (e) => {
-    if (this.props.customOnChange) {
-      this.props.customOnChange(e.target.value);
-    }
-    this.setState({ value: e.target.value });
-  };
+  const toggleFocus = useCallback(() => {
+    setIsFocused((value) => !value);
+  }, []);
 
-  toggleFocus = () => {
-    this.setState({ isFocused: !this.state.isFocused });
-  };
-
-  render() {
-    const { isFocused, value } = this.state;
-    const { label, customOnChange, ...rest } = this.props;
-
-    return (
-      <label css={[styles.root, isFocused && styles.active]}>
-        {label && (
-          <div css={[styles.label, value && styles.activeLabel]}>{label}</div>
-        )}
-        <textarea
-          css={styles.textarea}
-          onBlur={this.toggleFocus}
-          onFocus={this.toggleFocus}
-          onChange={this.onChange}
-          value={value}
-          {...rest}
-        />
-      </label>
-    );
-  }
+  return (
+    <label css={[styles.root, isFocused && styles.active]}>
+      {label && (
+        <div css={[styles.label, value && styles.activeLabel]}>{label}</div>
+      )}
+      <textarea
+        css={styles.textarea}
+        onBlur={toggleFocus}
+        onFocus={toggleFocus}
+        onChange={onChange}
+        value={value}
+        {...rest}
+      />
+    </label>
+  );
 }
 
 export default TextArea;

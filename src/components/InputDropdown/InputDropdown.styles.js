@@ -1,72 +1,73 @@
 import { css } from '@emotion/core';
-import { Color, Radius, Space } from 'lib/theme';
+import { Borders, Color, selectReset, Radius, Space, Height } from 'lib/theme';
+
+const activeLabel = {
+  fontSize: 12,
+  paddingTop: Space.S10,
+};
 
 const styles = {
-  active: css({
-    borderColor: Color.CORAL_30,
-  }),
-  dropdown: css({
-    appearance: 'none',
-    backgroundColor: 'transparent',
-    display: 'block',
-    height: 65,
-    width: '100%',
-    outline: 'none',
-    border: `1.5px solid ${Color.GRAY_50}`,
-    borderRadius: Radius.ROUNDED,
-    position: 'relative',
-
-    '&::-ms-expand': {
-      display: 'none',
-    },
-  }),
+  activeLabel: css(activeLabel),
   chevron: css({
     position: 'absolute',
+    pointerEvents: 'none',
     right: Space.S25,
     top: Space.S25,
+    transition: 'transform 0.2s ease-in-out',
   }),
-  chevronOpen: css({
-    transform: 'rotate(180deg)',
-  }),
-  list: css({
-    background: Color.WHITE,
-    border: `1px solid ${Color.GRAY_10}`,
-    borderRadius: Radius.ROUNDED,
-    boxShadow: `0px 4px 4px ${Color.GRAY_10}`,
-    listStyle: 'none',
-    padding: `0 ${Space.S20}px`,
+  label: css({
+    color: Color.GRAY_50,
+    fontSize: 16,
     position: 'absolute',
-    top: 65,
-    width: '100%',
-    zIndex: 1,
-
-    '> li': {
-      padding: `${Space.S25}px 0`,
-      ':not(:last-of-type)': {
-        borderBottom: `1px solid ${Color.GRAY_LIGHT}`,
-      },
-    },
+    height: '100%',
+    paddingTop: Space.S20,
+    left: Space.S20,
+    pointerEvents: 'none',
+    transition: '0.2s all ease-in-out',
   }),
-  option: css({
-    cursor: 'pointer',
-    ':hover': {},
+  error: css({
+    color: Color.CORAL,
+    position: 'absolute',
+    top: Height.INPUT,
   }),
-  placeholder: css({
+  optionLabel: css({
     color: Color.GRAY_50,
     paddingLeft: Space.S25,
     paddingTop: Space.S20,
     position: 'absolute',
   }),
   root: css({
-    border: `2px solid transparent`,
-    borderRadius: 11,
+    border: Borders.TRANSPARENT,
+    borderRadius: Radius.ROUNDED,
     display: 'flex',
     flexDirection: 'column',
-    height: 65,
+    height: Height.INPUT,
+    margin: `0 0 ${Space.S30}px 0`,
     position: 'relative',
+    width: '100%',
+
+    '&:focus-within': {
+      borderColor: Color.CORAL_30,
+
+      '& svg': {
+        transform: 'rotate(180deg)',
+      },
+
+      '& div': activeLabel,
+    },
   }),
-  selected: css({
-    color: Color.GRAY,
+  rootHalfWidth: css({
+    width: 'calc(50% - 8px)',
+  }),
+  select: css({
+    ...selectReset,
+    border: Borders.GRAY,
+    borderRadius: Radius.ROUNDED,
+    height: '100%',
+    padding: `${Space.S10}px ${Space.S20}px 0`,
+  }),
+  selectDefaultState: css({
+    color: 'transparent',
   }),
 };
 

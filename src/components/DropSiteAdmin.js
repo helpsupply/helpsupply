@@ -1,6 +1,10 @@
 import React from 'react';
 import * as hospital_index from '../data/hospital_index';
 import { withRouter } from 'react-router-dom';
+
+import { Emails } from 'constants/Emails';
+import { Routes } from 'constants/Routes';
+
 import DropSiteNeedGroupAdmin from './DropSiteNeedGroupAdmin';
 import NewRequestForm from './NewRequestForm';
 import EditDropSiteForm from './EditDropSiteForm';
@@ -82,7 +86,7 @@ class DropSiteAdmin extends React.Component {
               Your email doesn't look like it's from a healthcare provider.
               Please{' '}
               <a
-                href="/logout"
+                href={Routes.LOGOUT}
                 style={{
                   color: '#721c24',
                   fontWeight: 'bold',
@@ -91,7 +95,8 @@ class DropSiteAdmin extends React.Component {
               >
                 log out
               </a>{' '}
-              and try your work email or contact help@help.supply.
+              and try your work email or contact{' '}
+              <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
             </div>
           </div>
         )}
@@ -102,7 +107,7 @@ class DropSiteAdmin extends React.Component {
             </div>{' '}
             {hospitalText}
           </span>
-          <a href="/" className="navbar-brand mb-0 h1 logored">
+          <a href={Routes.HOME} className="navbar-brand mb-0 h1 logored">
             help.supply
           </a>
         </nav>

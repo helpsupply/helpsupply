@@ -1,52 +1,71 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React from 'react';
+import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
+import { TEXT_TYPE } from 'components/Text/constants';
+import Text from 'components/Text';
+import { useFormContext } from 'react-hook-form';
+import { required } from 'lib/utils/validations';
 
 import styles from './InputText.styles';
 
-class InputText extends React.Component {
-  constructor(props) {
-    super(props);
+function InputText({
+  customOnChange,
+  name,
+  label,
+  isHalfWidth,
+  isRequired = true,
+  value: initialValue,
+  validation,
+}) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [value, setValue] = useState(initialValue || '');
 
-    this.state = {
-      isFocused: false,
-      value: props.value || '',
-    };
-  }
+  const { register, errors } = useFormContext();
 
-  onChange = (e) => {
-    if (this.props.customOnChange) {
-      this.props.customOnChange(e.target.value);
-    }
-    this.setState({ value: e.target.value });
-  };
+  const onChange = useCallback(
+    (event) => {
+      if (customOnChange) {
+        customOnChange(event.target.value);
+      }
+      setValue(event.target.value);
+    },
+    [customOnChange],
+  );
 
-  toggleFocus = () => {
-    this.setState({ isFocused: !this.state.isFocused });
-  };
+  const toggleFocus = useCallback(() => {
+    setIsFocused((value) => !value);
+  }, []);
 
-  render() {
-    const { isFocused, value } = this.state;
-    const { label, customOnChange, ...rest } = this.props;
-
-    return (
-      <label css={[styles.root, isFocused && styles.active]}>
+  return (
+    <div css={[styles.root, isHalfWidth && styles.rootHalfWidth]}>
+      <label css={[styles.container, isFocused && styles.active]}>
         {label && (
           <div css={[styles.label, (isFocused || value) && styles.activeLabel]}>
             {label}
           </div>
         )}
         <input
+          ref={
+            register &&
+            register({ ...validation, ...(isRequired && { required }) })
+          }
           css={styles.input}
-          onBlur={this.toggleFocus}
-          onFocus={this.toggleFocus}
-          onChange={this.onChange}
-          value={value}
-          {...rest}
+          onBlur={toggleFocus}
+          onFocus={toggleFocus}
+          onChange={onChange}
+          name={name}
         />
       </label>
-    );
-  }
+      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.error}>
+        {errors[name]?.message}
+      </Text>
+    </div>
+  );
 }
 
 export default InputText;
+
+InputText.propTypes = {
+  name: PropTypes.string.isRequired,
+};
