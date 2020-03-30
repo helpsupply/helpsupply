@@ -1,6 +1,7 @@
 export const Routes = {
-  DROPSITE_DETAIL: `/dropsite/:id`,
   DROPSITE_ADMIN: `/dropsite/:id/admin`,
+  DROPSITE_CONTACT: `/dropsite/:id/contact`,
+  DROPSITE_DETAIL: `/dropsite/:id`,
   DROPSITE_NEW_ADMIN: `/dropsite/new/admin/:dropsite?`,
   FAQ: '/faq',
   HOME: '/',

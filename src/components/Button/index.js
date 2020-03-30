@@ -6,7 +6,7 @@ import { type } from './constants';
 import styles from './Button.styles';
 
 export const PrimaryButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[type.FILL]]} {...rest}>
+  <button css={[styles.root, styles[type.FILL]]} type="button" {...rest}>
     {children}
   </button>
 );
@@ -16,7 +16,7 @@ PrimaryButton.propTypes = {
 };
 
 export const SecondaryButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[type.OUTLINE]]} {...rest}>
+  <button css={[styles.root, styles[type.OUTLINE]]} type="button" {...rest}>
     {children}
   </button>
 );
@@ -26,7 +26,7 @@ SecondaryButton.propTypes = {
 };
 
 export const LinkButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[type.LINK]]} {...rest}>
+  <button css={[styles.root, styles[type.LINK]]} type="button" {...rest}>
     {children}
   </button>
 );
@@ -36,7 +36,7 @@ LinkButton.propTypes = {
 };
 
 export const IconButton = ({ children, ...rest }) => (
-  <button css={styles.root} {...rest}>
+  <button css={styles.root} type="button" {...rest}>
     {children}
   </button>
 );

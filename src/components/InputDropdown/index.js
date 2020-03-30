@@ -21,8 +21,8 @@ function InputDropdown({
   label,
   isRequired = true,
 }) {
-  const [value, setValue] = useState(DEFAULT);
-  const { register, errors } = useFormContext();
+  const { register, errors, getValues } = useFormContext();
+  const [value, setValue] = useState(getValues()[name] || DEFAULT);
   const handleChange = useCallback(
     (e) => {
       const { value: newValue } = e.target;

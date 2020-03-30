@@ -11,18 +11,16 @@ import styles from './InputText.styles';
 
 function InputText({
   customOnChange,
-  name,
-  label,
+  defaultValue,
   isHalfWidth,
   isRequired = true,
-  value: initialValue,
+  label,
+  name,
   validation,
 }) {
+  const { register, errors, getValues } = useFormContext();
   const [isFocused, setIsFocused] = useState(false);
-  const [value, setValue] = useState(initialValue || '');
-
-  const { register, errors } = useFormContext();
-
+  const [value, setValue] = useState(getValues()[name] || defaultValue);
   const onChange = useCallback(
     (event) => {
       if (customOnChange) {
