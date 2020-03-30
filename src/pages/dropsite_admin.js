@@ -1,54 +1,33 @@
 /** @jsx jsx */
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
+import DropSiteAdmin from 'components/Dropsite/Admin';
 import Page from 'components/layouts/Page';
-import DropSiteAdmin from 'components/DropSiteAdmin';
 
-class AdminDropSite extends React.Component {
-  componentDidMount() {
-    this.props.backend.getRequests(this.props.match.params.id).then((data) => {
-      this.setState(
-        {
-          needs: data,
-        },
-        () => {},
-      );
+function AdminDropSite({ backend, match }) {
+  const [dropSite, setDropSite] = useState(undefined);
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    backend.getDropSites(match.params.id).then((data) => {
+      data && setDropSite({ ...data, dropSiteId: data.location_id });
     });
-    this.props.backend.listSupply(this.props.match.params.id).then((data) => {
-      this.setState(
-        {
-          supply: data,
-        },
-        () => {
-          // console.log(this.state);
-        },
-      );
+    backend.getRequests(match.params.id).then((data) => {
+      data && setRequests(data);
     });
-    this.props.backend.getDropSites(this.props.match.params.id).then((data) => {
-      this.setState(
-        {
-          dropSiteId: data?.location_id,
-          dropSiteName: data?.dropSiteName,
-          dropSiteAddress: data?.dropSiteAddress,
-          dropSiteZip: data?.dropSiteZip,
-          dropSiteDescription: data?.dropSiteDescription,
-          dropSiteHospital: data?.dropSiteHospital,
-          dropSitePhone: data?.dropSitePhone,
-        },
-        () => {},
-      );
-    });
+  }, [backend, match.params.id]);
+
+  if (!dropSite) {
+    return null;
   }
 
-  render() {
-    return (
-      <Page>
-        <DropSiteAdmin backend={this.props.backend} {...this.state} />
-      </Page>
-    );
-  }
+  return (
+    <Page currentProgress={4} totalProgress={5}>
+      <DropSiteAdmin {...{ dropSite, requests }} />
+    </Page>
+  );
 }
 
 export default withRouter(AdminDropSite);

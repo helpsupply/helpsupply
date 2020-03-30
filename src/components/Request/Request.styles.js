@@ -23,18 +23,4 @@ export const styles = {
     marginBottom: Space.S20,
     padding: Space.S20,
   }),
-  progress: css({
-    background: Color.CORAL,
-    borderRadius: Radius.ROUNDED,
-    height: Space.S10,
-  }),
-  progressBar: css({
-    background: Color.GRAY_10,
-    borderRadius: Radius.ROUNDED,
-    height: Space.S10,
-    width: '100%',
-  }),
-  progressInfo: css({
-    marginBottom: Space.S10,
-  }),
 };
