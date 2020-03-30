@@ -18,9 +18,11 @@ function InputText({
   name,
   validation,
 }) {
-  const { register, errors, getValues } = useFormContext();
+  const methods = useFormContext();
   const [isFocused, setIsFocused] = useState(false);
-  const [value, setValue] = useState(getValues()[name] || defaultValue);
+  const [value, setValue] = useState(
+    methods?.getValues()[name] || defaultValue,
+  );
   const onChange = useCallback(
     (event) => {
       if (customOnChange) {
@@ -44,10 +46,10 @@ function InputText({
           </div>
         )}
         <input
-          ref={
-            register &&
-            register({ ...validation, ...(isRequired && { required }) })
-          }
+          ref={methods?.register({
+            ...validation,
+            ...(isRequired && { required }),
+          })}
           css={styles.input}
           onBlur={toggleFocus}
           onFocus={toggleFocus}
@@ -56,7 +58,7 @@ function InputText({
         />
       </label>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.error}>
-        {errors[name]?.message}
+        {methods?.errors[name]?.message}
       </Text>
     </div>
   );

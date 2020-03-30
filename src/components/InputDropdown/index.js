@@ -21,8 +21,8 @@ function InputDropdown({
   label,
   isRequired = true,
 }) {
-  const { register, errors, getValues } = useFormContext();
-  const [value, setValue] = useState(getValues()[name] || DEFAULT);
+  const methods = useFormContext();
+  const [value, setValue] = useState(methods?.getValues()[name] || DEFAULT);
   const handleChange = useCallback(
     (e) => {
       const { value: newValue } = e.target;
@@ -46,7 +46,7 @@ function InputDropdown({
         onChange={handleChange}
         name={name}
         defaultValue={DEFAULT}
-        ref={register && register({ ...(isRequired && { required }) })}
+        ref={methods?.register({ ...(isRequired && { required }) })}
         {...inputProps}
       >
         <option css={styles.optionLabel} disabled value={DEFAULT}>
@@ -61,7 +61,7 @@ function InputDropdown({
       </select>
       <Chevron css={styles.chevron} />
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.error}>
-        {errors[name]?.message}
+        {methods?.errors[name]?.message}
       </Text>
     </div>
   );
