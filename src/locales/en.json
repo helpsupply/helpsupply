@@ -54,6 +54,7 @@
     "request.workEmailForm.sent.title": "Thank you",
     "request.workEmailForm.sent.description": "We just sent you an email with a link to verify your email. It should arrive within a couple minutes.",
     "request.workEmailForm.title": "Enter your work email address",
+    "request.workEmailForm.workEmail.label": "Work email",
     "request.workEmailForm.workEmail.disclaimer": "Note: we will never share your email address with any other parties.",
     "request.dropSiteContactForm.title": "Contact info",
     "request.dropSiteContactForm.description": "Enter the contact information for the person coordinating supplies at your facility.",

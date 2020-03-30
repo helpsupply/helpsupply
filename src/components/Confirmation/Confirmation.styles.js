@@ -8,6 +8,7 @@ export const styles = {
   }),
   title: css({
     marginRight: Space.S10,
+    marginBottom: 0,
   }),
   root: css({
     width: '100%',
