@@ -16,11 +16,16 @@ import Requests from './Requests';
 import { styles } from './DropSiteAdmin.styles';
 
 export const DropSiteAdmin = ({
-  dropSiteAddress,
-  dropSiteDescription,
-  dropSiteFacilityName,
-  dropSiteName,
-  dropSitePhone,
+  dropSite: {
+    dropSiteAddress,
+    dropSiteDescription,
+    dropSiteFacilityName,
+    dropSiteName,
+    dropSitePhone,
+  },
+  handleUpdateContact,
+  handleUpdateLocation,
+  handleRequestSupplies,
   requests,
 }) => {
   const { t } = useTranslation();
@@ -38,21 +43,31 @@ export const DropSiteAdmin = ({
       {dropSitePhone}
     </Fragment>
   );
+
   return (
     <Fragment>
-      <Text css={styles.name} as="h2" type={TEXT_TYPE.HEADER_3}>
+      <Text
+        css={[styles.name, styles.section]}
+        as="h2"
+        type={TEXT_TYPE.HEADER_3}
+      >
         {dropSiteFacilityName}
       </Text>
+      <div css={styles.section}>
+        <Card
+          onClick={handleUpdateLocation}
+          label={t('dropsite.details.title')}
+          details={locationDetails}
+          editLabel={t('generic.form.changeLabel')}
+        />
+      </div>
       <Card
-        label="Drop-off location"
-        details={locationDetails}
-        editLabel="Change"
+        onClick={handleUpdateContact}
+        label={t('dropsite.contact.title')}
+        details={contactDetails}
+        editLabel={t('generic.form.changeLabel')}
       />
-      <Card label="Contact info" details={contactDetails} editLabel="Change" />
-      <PrimaryButton
-        css={styles.button}
-        onClick={() => (window.location.href = Routes.REQUEST_SUPPLIES)}
-      >
+      <PrimaryButton css={styles.button} onClick={handleRequestSupplies}>
         <Text>{t('dropsite.requestSuppliesButton.label')}</Text>
       </PrimaryButton>
       <Text css={styles.requestsHeader} as="h3" type={TEXT_TYPE.HEADER_4}>

@@ -5,8 +5,10 @@ import { withRouter } from 'react-router-dom';
 
 import DropSiteAdmin from 'components/Dropsite/Admin';
 import Page from 'components/layouts/Page';
+import { routeWithParams } from 'lib/utils/routes';
+import { Routes } from 'constants/Routes';
 
-function AdminDropSite({ backend, match }) {
+function AdminDropSite({ backend, history, match }) {
   const [dropSite, setDropSite] = useState(undefined);
   const [requests, setRequests] = useState([]);
 
@@ -19,13 +21,45 @@ function AdminDropSite({ backend, match }) {
     });
   }, [backend, match.params.id]);
 
+  const handleUpdateContact = () => {
+    history.push(
+      routeWithParams(Routes.DROPSITE_CONTACT, {
+        id: dropSite.dropSiteId,
+      }),
+    );
+  };
+
+  const handleUpdateLocation = () => {
+    history.push(
+      routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+        id: dropSite.dropSiteId,
+      }),
+    );
+  };
+
+  const handleRequestSupplies = () => {
+    history.push(
+      routeWithParams(Routes.SUPPLY_NEW_ADMIN, {
+        id: dropSite.dropSiteId,
+      }),
+    );
+  };
+
   if (!dropSite) {
     return null;
   }
 
   return (
     <Page currentProgress={4} totalProgress={5}>
-      <DropSiteAdmin {...{ dropSite, requests }} />
+      <DropSiteAdmin
+        {...{
+          dropSite,
+          requests,
+          handleUpdateContact,
+          handleUpdateLocation,
+          handleRequestSupplies,
+        }}
+      />
     </Page>
   );
 }

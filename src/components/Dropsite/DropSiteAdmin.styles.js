@@ -10,7 +10,6 @@ export const styles = {
   }),
   name: css({
     color: Color.GRAY,
-    marginBottom: Space.S30,
   }),
   number: css({
     fontWeight: 'normal',
@@ -27,5 +26,8 @@ export const styles = {
     background: Color.GRAY_10,
     margin: `${Space.S30}px -${Space.S40}px 0`,
     padding: `${Space.S30}px ${Space.S40}px`,
+  }),
+  section: css({
+    marginBottom: Space.S30,
   }),
 };

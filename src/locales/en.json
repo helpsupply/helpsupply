@@ -19,15 +19,10 @@
     "request.dropSiteForm.description": "This is where donors can drop off supplies. It should be an easily identifiable location including a street address.",
     "request.dropSiteForm.dropSiteAddress.label": "Street address",
     "request.dropSiteForm.dropSiteDescription.label": "Additional location details",
-    "request.dropSiteForm.dropSiteName.label": "Name",
-    "request.dropSiteForm.dropSiteNotes.label": "Is there anything else you’d like others to know about the situation at your facility?",
-    "request.dropSiteForm.dropSitePhone.label": "Email or phone number",
-    "request.dropSiteForm.dropSiteRequirements.label": "All donated items must be unused and sealed in original packaging.",
+    "request.dropSiteForm.dropSiteNotes.label": "Notes (e.g. All donated items must be unused and sealed in original packaging)",
     "request.dropSiteForm.moreInfo.description": "We’re also working to solve this problem at scale. Can you give us the name and contact info of the person at your facility responsible for procuring supplies?",
-    "request.dropSiteForm.moreInfo.title": "More info (optional)",
     "request.dropSiteForm.requestWillingToPay.label": "My facility will pay for large volumes of high-quality supplies.",
     "request.dropSiteForm.requirements.description": "Please enter any requirements about how supplies should be delivered.,",
-    "request.dropSiteForm.requirements.title": "Add requirements (optional)",
     "request.dropSiteForm.title": "Set a drop-off location",
     "request.facilityAdded.title": "We added your facility",
     "request.facilityAdded.newFacility": "New facility",
@@ -69,6 +64,8 @@
     "dropsite.requestSuppliesButton.label": "Request supplies",
     "dropsite.openRequests.title": "Open requests",
     "dropsite.openRequests.requestId": "Request ID",
-    "dropsite.footer.content": "If you have recommendations for improving this tool, please email us at"
+    "dropsite.footer.content": "If you have recommendations for improving this tool, please email us at",
+    "dropsite.details.title": "Drop-off location",
+    "dropsite.contact.title": "Contact info"
   }
 }
