@@ -13,6 +13,7 @@ import styles from './Form.styles.js';
 const Form = ({
   buttonLabel,
   children,
+  subSection,
   defaultValues,
   description,
   disabled,
@@ -32,16 +33,19 @@ const Form = ({
           <HeaderInfo {...{ title, description }} />
           <div css={styles.childWrapper}>{children}</div>
         </div>
-        <PrimaryButton
-          type="submit"
-          onClick={onSubmit}
-          disabled={disabled}
-          css={styles.button}
-        >
-          <Text type={TEXT_TYPE.BODY_1}>
-            {buttonLabel || t('generic.form.submitLabelNext')}
-          </Text>
-        </PrimaryButton>
+        <div>
+          {subSection}
+          <PrimaryButton
+            type="submit"
+            onClick={onSubmit}
+            disabled={disabled}
+            css={styles.button}
+          >
+            <Text type={TEXT_TYPE.BODY_1}>
+              {buttonLabel || t('generic.form.submitLabelNext')}
+            </Text>
+          </PrimaryButton>
+        </div>
       </form>
     </FormContext>
   );
@@ -55,4 +59,5 @@ Form.propTypes = {
   disabled: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   title: PropTypes.string,
+  subSection: PropTypes.object,
 };

@@ -13,8 +13,8 @@ function ConfirmationWrapper({ children, title }) {
       <div css={[styles.header, styles.section]}>
         <Text as="h3" type={TEXT_TYPE.HEADER_3} css={styles.title}>
           {title}
+          <Check css={styles.check} />
         </Text>
-        <Check />
       </div>
       {children}
     </div>
