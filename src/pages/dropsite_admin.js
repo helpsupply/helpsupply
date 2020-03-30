@@ -45,6 +45,12 @@ function AdminDropSite({ backend, history, match }) {
     );
   };
 
+  const deleteRequest = (id) => {
+    backend.deleteRequest(id).then((data) => {
+      setRequests(requests.filter((req) => req.id === data));
+    });
+  };
+
   if (!dropSite) {
     return null;
   }
@@ -58,6 +64,7 @@ function AdminDropSite({ backend, history, match }) {
           handleUpdateContact,
           handleUpdateLocation,
           handleRequestSupplies,
+          onDelete: deleteRequest,
         }}
       />
     </Page>

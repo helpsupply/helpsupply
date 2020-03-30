@@ -26,6 +26,7 @@ export const DropSiteAdmin = ({
   handleUpdateContact,
   handleUpdateLocation,
   handleRequestSupplies,
+  onDelete,
   requests,
 }) => {
   const { t } = useTranslation();
@@ -75,7 +76,7 @@ export const DropSiteAdmin = ({
         <span css={styles.number}>4</span>
       </Text>
       <div css={styles.requestsContainer}>
-        <Requests requests={requests} />
+        <Requests onDelete={onDelete} requests={requests} />
         <div css={styles.footer}>
           <Note>
             {t('dropsite.footer.content')}{' '}

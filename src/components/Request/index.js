@@ -13,9 +13,16 @@ import Note from 'components/Note';
 
 import { styles } from './Request.styles';
 
-export const Request = ({ date, id, name, onDelete, request }) => {
+export const Request = ({
+  date,
+  id,
+  onDelete,
+  requestDescription,
+  requestQuantity,
+  requestTitle,
+}) => {
   const { t } = useTranslation();
-  const numberRequest = +request;
+  const numberRequest = +requestQuantity;
   return (
     <div css={styles.root}>
       <div css={styles.section}>
@@ -23,14 +30,17 @@ export const Request = ({ date, id, name, onDelete, request }) => {
           {' '}
           {t('dropsite.openRequests.requestId')} #{id}
         </Note>
-        <SecondaryButton onDelete={onDelete}>
+        <SecondaryButton onClick={onDelete}>
           <Text type={TEXT_TYPE.NOTE}>{t('generic.button.deleteLabel')}</Text>
         </SecondaryButton>
       </div>
-      <div css={styles.requestName}>
-        <Text>{name}</Text>{' '}
+      <div css={styles.requestTitle}>
+        <Text>{requestTitle}</Text>{' '}
         <Text css={styles.amount}>{numberWithCommas(numberRequest)}</Text>
       </div>
+      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.description}>
+        {requestDescription}
+      </Text>
       <Note css={styles.date}>
         {t('generic.label.added')} {formatDate(date)}
       </Note>
@@ -39,11 +49,12 @@ export const Request = ({ date, id, name, onDelete, request }) => {
 };
 
 Request.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: PropTypes.string,
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
-  request: PropTypes.string.isRequired,
+  requestDescription: PropTypes.string,
+  requestQuantity: PropTypes.string.isRequired,
+  requestTitle: PropTypes.string.isRequired,
 };
 
 export default Request;

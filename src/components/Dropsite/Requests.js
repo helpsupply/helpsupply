@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
-import { useTranslation } from 'react-i18next';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -9,14 +8,34 @@ import { Request } from 'components/Request';
 
 import { styles } from './DropSiteAdmin.styles';
 
-export const Requests = ({ requests }) => {
-  const { t } = useTranslation();
+const groupBy = (arr, key) => {
+  return arr.reduce((acc, item) => {
+    var group = item[key];
+    acc[group] = acc[group] || [];
+    acc[group].push(item);
+    return acc;
+  }, {});
+};
+
+export const Requests = ({ onDelete, requests }) => {
+  const groupedRequests = groupBy(requests, 'requestType');
   return (
     <Fragment>
-      <Text as="h4" type={TEXT_TYPE.HEADER_4}>
-        Masks
-      </Text>
-      <Request css={styles.request} />
+      {Object.entries(groupedRequests).map(([k, v]) => (
+        <Fragment key={k}>
+          <Text as="h4" type={TEXT_TYPE.HEADER_4}>
+            {k}
+          </Text>
+          {v.map((request) => (
+            <Request
+              key={request.id}
+              css={styles.request}
+              onDelete={() => onDelete(request.id)}
+              {...request}
+            />
+          ))}
+        </Fragment>
+      ))}
     </Fragment>
   );
 };

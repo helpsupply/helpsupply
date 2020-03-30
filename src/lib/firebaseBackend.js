@@ -316,7 +316,7 @@ class FirebaseBackend extends BackendInterface {
         .doc(requestId)
         .delete()
         .then(() => {
-          return requestId + ' deleted';
+          return requestId;
         })
         .catch(console.log);
     } else {

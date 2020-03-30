@@ -10,6 +10,10 @@ export const styles = {
   date: css({
     marginTop: Space.S20,
   }),
+  description: css({
+    color: Color.GRAY,
+    marginTop: Space.S10,
+  }),
   section: css({
     display: 'flex',
     justifyContent: 'space-between',
