@@ -1,7 +1,5 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { useEffect, useState } from 'react';
-
 import { Routes } from 'constants/Routes';
 
 import Anchor from '../Anchor';
