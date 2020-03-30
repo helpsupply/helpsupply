@@ -11,7 +11,7 @@ import states from 'data/states';
 import Form from 'components/Form';
 import Anchor from 'components/Anchor';
 import Note from 'components/Note';
-import FacilityConfirmation from 'components/FacilityConfirmation';
+import { FacilityConfirmation } from 'components/Confirmation';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
