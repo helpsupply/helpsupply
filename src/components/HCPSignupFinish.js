@@ -12,7 +12,7 @@ class HCPSignupFinish extends React.Component {
     this.state = {
       email: '',
       confirmEmail: false,
-      dropsite: this.props.match.params.dropsite,
+      dropsite: this.props.match.params.id,
     };
     this.ui = new firebaseui.auth.AuthUI(Firebase.auth());
 
@@ -33,25 +33,45 @@ class HCPSignupFinish extends React.Component {
       event.preventDefault();
     }
     let url = window.location.href;
+    let hasAddress;
     this.props.backend
       .continueSignup(url, this.state.confirmEmail ? this.state.email : null)
       .then(() => {
-        this.props.backend.getRequests(this.state.dropsite).then((requests) => {
-          if (requests?.length) {
-            this.props.history.push(
-              routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
-                id: this.state.dropsite,
-              }),
-            );
-            return;
-          }
+        this.props.backend
+          .getDropSites(this.state.dropsite)
+          .then((data) => {
+            hasAddress = !!data.dropSiteAddress;
+            if (!hasAddress) {
+              this.props.history.push(
+                routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+                  id: this.state.dropsite,
+                }),
+              );
+            }
+          })
+          .then(() => {
+            if (!hasAddress) {
+              return;
+            }
+            this.props.backend
+              .getRequests(this.state.dropsite)
+              .then((requests) => {
+                if (requests?.length) {
+                  this.props.history.push(
+                    routeWithParams(Routes.DROPSITE_ADMIN, {
+                      id: this.state.dropsite,
+                    }),
+                  );
+                  return;
+                }
 
-          this.props.history.push(
-            routeWithParams(Routes.SUPPLY_NEW_ADMIN, {
-              id: this.state.dropsite,
-            }),
-          );
-        });
+                this.props.history.push(
+                  routeWithParams(Routes.SUPPLY_NEW_ADMIN, {
+                    dropsite: this.state.dropsite,
+                  }),
+                );
+              });
+          });
       });
   }
 

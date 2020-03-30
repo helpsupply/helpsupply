@@ -13,7 +13,7 @@ export const Routes = {
   REQUEST_SERVICES: '/request-services',
   REQUEST_SUPPLIES: '/request',
   SIGNUP_DROPSITE: `/signup/:id`,
-  SIGNUP_FINISH_DROPSITE: `/signupFinish/:dropsite?`,
+  SIGNUP_FINISH_DROPSITE: `/signupFinish/:id`,
   STYLE_GUIDE: '/style-guide',
   SUPPLY_NEW_ADMIN: `/new/admin/supply/:id`,
 };
