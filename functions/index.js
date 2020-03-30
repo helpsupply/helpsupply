@@ -15,6 +15,15 @@ twilioBot.use(cors({ origin: true }));
 twilioBot.use(bodyParser.urlencoded({ extended: false }));
 
 // CHATBOT WEBHOOKS
+twilioBot.post("/testdb", (req, res) => {
+ if (tools.verifyTwilio(req)) {
+    let outputToTwilio = tools.tResponseNew();
+    outputToTwilio = tools.tResponseAddMsg(outputToTwilio, "Test successful");
+  } else {
+    return res.status(401).send("Unauthorized");
+  }
+}
+
 
 // TESTER/TUTORIAL HOOKS // Use the simulator at: https://www.twilio.com/console/autopilot/helpsupply/simulator and start by chatting "test"
 twilioBot.post("/tester", (req, res) => {
@@ -98,7 +107,7 @@ twilioBot.post("/dropSiteDetails", (req, res) => {
       "collect_dropsite_location_id",
       "location_id"
     ); // get the answer
-    db.getDropSite(location_id).then(data => {
+    db.getDropSites(location_id).then(data => {
       let outputToTwilio = tools.tResponseNew();
       if (data) {
         outputToTwilio = tools.tResponseAddMsg(
