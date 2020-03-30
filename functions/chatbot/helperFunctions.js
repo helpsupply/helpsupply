@@ -76,7 +76,13 @@ function tResponseAddMemory(responseObj, objWithKeyValuePairs) {
   return responseObj;
 }
 
-// returns collected answer from requested "collect" action
+// returns array of collected answers from requested "collect" action
+function twilioGetCollectedAnswersObj(twilioRequest, twilioCollectName) {
+  let Memory = JSON.parse(twilioRequest.body.Memory);
+  return Memory.twilio.collected_data[twilioCollectName].answers;
+}
+
+// returns single collected answer from requested "collect" action
 function twilioGetCollectedAnswer(twilioRequest, twilioCollectName, field) {
   let Memory = JSON.parse(twilioRequest.body.Memory);
   return Memory.twilio.collected_data[twilioCollectName].answers[field].answer;
@@ -91,6 +97,7 @@ function twilioRemember(twilioRequest, field) {
 module.exports = {
   verifyTwilio: verifyTwilio,
   searchByZip: searchByZip,
+  twilioGetCollectedAnswersObj: twilioGetCollectedAnswersObj,
   twilioGetCollectedAnswer: twilioGetCollectedAnswer,
   twilioRemember: twilioRemember,
   tResponseNew: tResponseNew,

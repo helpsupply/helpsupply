@@ -1,9 +1,21 @@
-var admin = require("firebase-admin");
-const serviceAccount = require("./service-account.json");
+// Switch for prod
+const prodEnv = false;
 
+let serviceAccount;
+let databaseURL;
+
+if (prodEnv) {
+  serviceAccount = require("./service-account.json");
+  databaseURL = "https://hospitalcommunity.firebaseio.com";
+} else {
+  serviceAccount = require("./service-account-staging.json");
+  databaseURL = "https://help-supply-staging.firebaseio.com";
+}
+
+var admin = require("firebase-admin");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://hospitalcommunity.firebaseio.com"
+  databaseURL: databaseURL
 });
 
 // DATABASE FUNCTIONS

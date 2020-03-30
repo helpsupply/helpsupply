@@ -15,15 +15,6 @@ twilioBot.use(cors({ origin: true }));
 twilioBot.use(bodyParser.urlencoded({ extended: false }));
 
 // CHATBOT WEBHOOKS
-twilioBot.post("/testdb", (req, res) => {
- if (tools.verifyTwilio(req)) {
-    let outputToTwilio = tools.tResponseNew();
-    outputToTwilio = tools.tResponseAddMsg(outputToTwilio, "Test successful");
-  } else {
-    return res.status(401).send("Unauthorized");
-  }
-}
-
 
 // TESTER/TUTORIAL HOOKS // Use the simulator at: https://www.twilio.com/console/autopilot/helpsupply/simulator and start by chatting "test"
 twilioBot.post("/tester", (req, res) => {
@@ -58,6 +49,31 @@ twilioBot.post("/testerEnd", (req, res) => {
         ". Conversation ended."
     );
     res.json(outputToTwilio);
+  } else {
+    return res.status(401).send("Unauthorized");
+  }
+});
+
+twilioBot.post("/testdb", (req, res) => {
+  if (tools.verifyTwilio(req)) {
+    const answersObj = tools.twilioGetCollectedAnswersObj(req, "add_dropsite");
+    const newDropSiteObj = {
+      location_id: answersObj.location_id.answer,
+      dropSiteDescription: answersObj.dropSiteDescription.answer,
+      dropSiteAddress: answersObj.dropSiteAddress.answer,
+      dropSiteRequirements: answersObj.dropSiteRequirements.answer,
+      dropSitePhone: answersObj.dropSitePhone.answer,
+      dropSiteNotes: answersObj.dropSiteNotes.answer,
+      requestWillingToPay: answersObj.requestWillingToPay.answer,
+      domain: answersObj.domain.answer,
+      user: answersObj.user.answer
+    };
+    db.addDropSite(newDropSiteObj).then(data => {
+      console.log(data);
+      let outputToTwilio = tools.tResponseNew();
+      outputToTwilio = tools.tResponseAddMsg(outputToTwilio, data);
+      res.json(outputToTwilio);
+    });
   } else {
     return res.status(401).send("Unauthorized");
   }
