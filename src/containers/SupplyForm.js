@@ -10,6 +10,7 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import SupplyConfirmation from 'components/SupplyConfirmation';
 
 function SupplyForm({ onSubmit }) {
   const { t } = useTranslation();
@@ -28,9 +29,17 @@ function SupplyForm({ onSubmit }) {
     [],
   );
 
+  const [submitSuccess, setSubmitSuccess] = useState(false);
   const handleSubmit = useCallback(() => {
-    onSubmit(fields);
+    if (onSubmit) {
+      onSubmit(fields);
+    }
+    setSubmitSuccess(true);
   }, [fields, onSubmit]);
+
+  if (submitSuccess) {
+    return <SupplyConfirmation />;
+  }
 
   const { detailedRequirements, type, kind, quantity } = fields;
 
@@ -91,7 +100,7 @@ function SupplyForm({ onSubmit }) {
   return (
     <FormBuilder
       defaultValues={fields}
-      buttonLabel="Submit"
+      buttonLabel={t('generic.form.submitLabel')}
       onSubmit={handleSubmit}
       description={t('request.supplyForm.description')}
       title={t('request.supplyForm.title')}

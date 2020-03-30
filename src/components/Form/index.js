@@ -13,6 +13,9 @@ import styles from './Form.styles.js';
 const Form = ({
   buttonLabel,
   children,
+  customChildWrapper,
+  customSectionsWrapper,
+  subSection,
   defaultValues,
   description,
   disabled,
@@ -28,20 +31,23 @@ const Form = ({
   return (
     <FormContext {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} css={styles.root}>
-        <div css={styles.sections}>
+        <div css={[styles.sections, customSectionsWrapper]}>
           <HeaderInfo {...{ title, description }} />
-          <div css={styles.childWrapper}>{children}</div>
+          <div css={[styles.childWrapper, customChildWrapper]}>{children}</div>
         </div>
-        <PrimaryButton
-          type="submit"
-          onClick={onSubmit}
-          disabled={disabled}
-          css={styles.button}
-        >
-          <Text type={TEXT_TYPE.BODY_1}>
-            {buttonLabel || t('generic.form.submitLabelNext')}
-          </Text>
-        </PrimaryButton>
+        <div css={customSectionsWrapper}>
+          {subSection}
+          <PrimaryButton
+            type="submit"
+            onClick={onSubmit}
+            disabled={disabled}
+            css={styles.button}
+          >
+            <Text type={TEXT_TYPE.BODY_1}>
+              {buttonLabel || t('generic.form.submitLabelNext')}
+            </Text>
+          </PrimaryButton>
+        </div>
       </form>
     </FormContext>
   );
@@ -51,8 +57,11 @@ export default Form;
 
 Form.propTypes = {
   buttonLabel: PropTypes.string,
+  customChildWrapper: PropTypes.string,
+  customSectionsWrapper: PropTypes.string,
   description: PropTypes.string,
   disabled: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  subSection: PropTypes.object,
 };

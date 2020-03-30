@@ -9,7 +9,7 @@ import { Routes } from 'constants/Routes';
 import Page from 'components/layouts/Page';
 import SupplyForm from 'containers/SupplyForm';
 
-function NewSupplyRequest({ backend, history }) {
+function NewSupplyRequest({ backend }) {
   const [verified, setVerified] = useState(true);
   const [loading, setLoading] = useState(true);
   const [badDomain, setBadDomain] = useState(false);

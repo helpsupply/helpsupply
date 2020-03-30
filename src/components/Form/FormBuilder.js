@@ -10,6 +10,9 @@ import CreateFormFields, {
 function FormBuilder({
   buttonLabel,
   children,
+  subSection,
+  customChildWrapper,
+  customSectionsWrapper,
   defaultValues,
   description,
   disabled,
@@ -22,13 +25,16 @@ function FormBuilder({
   return (
     <Form
       buttonLabel={buttonLabel || t('generic.form.submitLabel')}
+      customChildWrapper={customChildWrapper}
+      customSectionsWrapper={customSectionsWrapper}
+      subSection={subSection}
       defaultValues={defaultValues}
       onSubmit={onSubmit}
       title={title}
       disabled={disabled}
       description={description}
     >
-      {CreateFormFields(fields)}
+      {fields && CreateFormFields(fields)}
       {children}
     </Form>
   );
@@ -37,6 +43,8 @@ function FormBuilder({
 FormBuilder.propTypes = {
   buttonLabel: PropTypes.string,
   children: PropTypes.object,
+  customChildWrapper: PropTypes.string,
+  customSectionsWrapper: PropTypes.string,
   defaultValues: PropTypes.object,
   description: PropTypes.string,
   disabled: PropTypes.bool,
@@ -44,9 +52,10 @@ FormBuilder.propTypes = {
     PropTypes.shape({
       ...formFieldPropTypes,
     }),
-  ).isRequired,
+  ),
   onSubmit: PropTypes.func.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  subSection: PropTypes.object,
 };
 
 export default FormBuilder;
