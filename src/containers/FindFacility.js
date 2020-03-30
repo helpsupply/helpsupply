@@ -100,19 +100,19 @@ function FindFacility({ backend, history }) {
       backend.dropSiteExists(selectedResult).then((exists) => {
         if (exists) {
           history.push(
-            routeWithParams(Routes.DROPSITE_ADMIN, { selectedResult }),
+            routeWithParams(Routes.DROPSITE_ADMIN, { id: selectedResult }),
           );
         } else {
           history.push(
             routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
-              dropsite: selectedResult,
+              id: selectedResult,
             }),
           );
         }
       });
     } else {
       history.push(
-        routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: selectedResult }),
+        routeWithParams(Routes.SIGNUP_DROPSITE, { id: selectedResult }),
       );
     }
   }, [backend, history, selectedResult]);

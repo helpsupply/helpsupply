@@ -120,7 +120,7 @@ class EntryPortal extends React.Component {
         });
       } else {
         history.push(
-          routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: selectedResult }),
+          routeWithParams(Routes.SIGNUP_DROPSITE, { id: selectedResult }),
         );
       }
     }
