@@ -2,3 +2,5 @@
 node_modules sendgrid.env
 sendgrid.env
 node_modules/
+service-account-staging.json
+service-account.json

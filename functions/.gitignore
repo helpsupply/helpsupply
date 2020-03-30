@@ -1,3 +1,3 @@
 node_modules/
-service-account-staging.json
-service-account.json
+/functions/service-account-staging.json
+/functions/service-account.json
