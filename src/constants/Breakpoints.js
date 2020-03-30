@@ -1,7 +1,7 @@
 export const Breakpoints = {
   MEDIUM: 480,
-  LARGE: 1024,
-  LARGER: 1920,
+  LARGE: 900,
+  LARGER: 1366,
 };
 
 export const BreakpointsAll = [
