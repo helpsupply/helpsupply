@@ -1,39 +1,39 @@
-import React from "react";
+import React from 'react';
 
 class EditDropSiteForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropSiteName: "",
-      dropSiteDescription: "",
-      dropSiteAddress: "",
-      dropSiteZip: "",
-      dropSitePhone: ""
+      dropSiteName: '',
+      dropSiteDescription: '',
+      dropSiteAddress: '',
+      dropSiteZip: '',
+      dropSitePhone: '',
     };
     this.handleEditDropSite = this.handleEditDropSite.bind(this);
   }
 
-  handleChange = field => e => {
-    if (field === "dropSiteName") {
+  handleChange = (field) => (e) => {
+    if (field === 'dropSiteName') {
       this.setState({
-        dropSiteName: e.target.value
+        dropSiteName: e.target.value,
       });
-    } else if (field === "dropSiteDescription") {
+    } else if (field === 'dropSiteDescription') {
       this.setState({
-        dropSiteDescription: e.target.value
+        dropSiteDescription: e.target.value,
       });
-    } else if (field === "dropSiteAddress") {
+    } else if (field === 'dropSiteAddress') {
       this.setState({
-        dropSiteAddress: e.target.value
+        dropSiteAddress: e.target.value,
       });
-    } else if (field === "dropSitePhone") {
+    } else if (field === 'dropSitePhone') {
       this.setState({
-        dropSitePhone: e.target.value
+        dropSitePhone: e.target.value,
       });
     }
-    if (field === "dropSiteZip") {
+    if (field === 'dropSiteZip') {
       this.setState({
-        dropSiteZip: e.target.value
+        dropSiteZip: e.target.value,
       });
     }
   };
@@ -46,7 +46,7 @@ class EditDropSiteForm extends React.Component {
         this.state.dropSiteDescription,
         this.state.dropSiteAddress,
         this.state.dropSiteZip,
-        this.state.dropSitePhone
+        this.state.dropSitePhone,
       )
       .then(() => {
         window.location.reload();
@@ -59,18 +59,18 @@ class EditDropSiteForm extends React.Component {
       dropSiteDescription: this.props.dropSiteDescription,
       dropSiteAddress: this.props.dropSiteAddress,
       dropSiteZip: this.props.dropSiteZip,
-      dropSitePhone: this.props.dropSitePhone
+      dropSitePhone: this.props.dropSitePhone,
     });
   }
 
   render() {
     let newRequestSubmitButton;
     if (
-      (this.state.dropSiteName !== "" ||
-        this.state.dropSiteDescription !== "" ||
-        this.state.dropSiteAddress !== "" ||
-        this.state.dropSiteZip !== "" ||
-        this.state.dropSitePhone !== "") &&
+      (this.state.dropSiteName !== '' ||
+        this.state.dropSiteDescription !== '' ||
+        this.state.dropSiteAddress !== '' ||
+        this.state.dropSiteZip !== '' ||
+        this.state.dropSitePhone !== '') &&
       this.props.verified
     ) {
       newRequestSubmitButton = (
@@ -96,8 +96,8 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSiteName"
-            value={this.state.dropSiteName || ""}
-            onChange={this.handleChange("dropSiteName")}
+            value={this.state.dropSiteName || ''}
+            onChange={this.handleChange('dropSiteName')}
           />
           <div className="formError">{this.state.dropSiteNameError}</div>
         </div>
@@ -106,8 +106,8 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSiteDescription"
-            value={this.state.dropSiteDescription || ""}
-            onChange={this.handleChange("dropSiteDescription")}
+            value={this.state.dropSiteDescription || ''}
+            onChange={this.handleChange('dropSiteDescription')}
           />
           <div className="formError">{this.state.dropSiteDescriptionError}</div>
         </div>
@@ -116,8 +116,8 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSiteAddress"
-            value={this.state.dropSiteAddress || ""}
-            onChange={this.handleChange("dropSiteAddress")}
+            value={this.state.dropSiteAddress || ''}
+            onChange={this.handleChange('dropSiteAddress')}
           />
           <div className="formError">{this.state.dropSiteAddressError}</div>
         </div>
@@ -126,8 +126,8 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSiteZip"
-            value={this.state.dropSiteZip || ""}
-            onChange={this.handleChange("dropSiteZip")}
+            value={this.state.dropSiteZip || ''}
+            onChange={this.handleChange('dropSiteZip')}
           />
           <div className="formError">{this.state.dropSiteZipError}</div>
         </div>
@@ -136,8 +136,8 @@ class EditDropSiteForm extends React.Component {
           <input
             className="form-control newRequestFormField"
             id="dropSitePhone"
-            value={this.state.dropSitePhone || ""}
-            onChange={this.handleChange("dropSitePhone")}
+            value={this.state.dropSitePhone || ''}
+            onChange={this.handleChange('dropSitePhone')}
           />
         </div>
         {newRequestSubmitButton}
