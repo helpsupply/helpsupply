@@ -1,42 +1,27 @@
 /** @jsx jsx */
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 
 import { Emails } from 'constants/Emails';
-import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/utils/routes';
+
 import states from 'data/states';
 
-import Form from 'components/Form';
 import Anchor from 'components/Anchor';
 import Note from 'components/Note';
-import { FacilityConfirmation } from 'components/Confirmation';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function FacilityForm({ backend, history }) {
+function FacilityForm({ handleSubmit, history, dropSite }) {
   const { t } = useTranslation();
-  const [dropSiteId, setDropSiteId] = useState('');
   const [fields, setFields] = useState({
-    dropSiteFacilityName: '',
-    dropSiteZip: '',
-    dropSiteAddress: '',
-    dropSiteCity: '',
-    dropSiteState: '',
-    dropSiteUrl: '',
+    dropSiteFacilityName: dropSite.dropSiteFacilityName || '',
+    dropSiteZip: dropSite.dropSiteZip || '',
+    dropSiteAddress: dropSite.dropSiteAddress || '',
+    dropSiteCity: dropSite.dropSiteCity || '',
+    dropSiteState: dropSite.dropSiteState || '',
+    dropSiteUrl: dropSite.dropSiteUrl || '',
   });
-
-  useEffect(() => {
-    if (dropSiteId) {
-      backend.getDropSites(dropSiteId).then((data) => {
-        if (!data) {
-          return;
-        }
-        setFields(data);
-      });
-    }
-  }, [backend, dropSiteId]);
 
   const handleFieldChange = useCallback(
     (field) => (value) => {
@@ -48,15 +33,6 @@ function FacilityForm({ backend, history }) {
     [],
   );
 
-  const handleSubmit = useCallback(() => {
-    backend.addNewDropSite(fields).then((data) => {
-      if (!data) {
-        return;
-      }
-      setDropSiteId(data);
-    });
-  }, [backend, fields]);
-
   const { dropSiteUrl, ...requiredFields } = fields;
   const {
     dropSiteFacilityName,
@@ -66,40 +42,18 @@ function FacilityForm({ backend, history }) {
     dropSiteZip,
   } = fields;
 
-  if (dropSiteId) {
-    return (
-      <Form
-        onSubmit={() =>
-          history.push(
-            routeWithParams(Routes.SIGNUP_DROPSITE, { dropsite: dropSiteId }),
-          )
-        }
-      >
-        <FacilityConfirmation
-          name={dropSiteFacilityName}
-          address={[
-            dropSiteAddress,
-            dropSiteCity,
-            dropSiteState,
-            dropSiteZip,
-          ].join(', ')}
-        />
-      </Form>
-    );
-  }
-
   const fieldData = [
     {
       customOnChange: handleFieldChange('dropSiteFacilityName'),
       label: t('request.facilityForm.dropSiteFacilityName.label'),
-      name: 'name',
+      name: 'dropSiteFacilityName',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteFacilityName,
     },
     {
       customOnChange: handleFieldChange('dropSiteZip'),
       label: t('request.facilityForm.dropSiteZip.label'),
-      name: 'zip',
+      name: 'dropSiteZip',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteZip,
     },
@@ -107,7 +61,7 @@ function FacilityForm({ backend, history }) {
       customOnChange: handleFieldChange('dropSiteCity'),
       isHalfWidth: true,
       label: t('request.facilityForm.dropSiteCity.label'),
-      name: 'city',
+      name: 'dropSiteCity',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteCity,
     },
@@ -116,14 +70,14 @@ function FacilityForm({ backend, history }) {
       isHalfWidth: true,
       label: t('request.facilityForm.dropSiteState.label'),
       options: states,
-      name: 'state',
+      name: 'dropSiteState',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: dropSiteState,
     },
     {
       customOnChange: handleFieldChange('dropSiteAddress'),
       label: t('request.facilityForm.dropSiteAddress.label'),
-      name: 'address',
+      name: 'dropSiteAddress',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteAddress,
     },
@@ -131,7 +85,7 @@ function FacilityForm({ backend, history }) {
       customOnChange: handleFieldChange('dropSiteUrl'),
       isRequired: false,
       label: t('request.facilityForm.dropSiteUrl.label'),
-      name: 'url',
+      name: 'dropSiteUrl',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteUrl,
     },
@@ -142,7 +96,7 @@ function FacilityForm({ backend, history }) {
       defaultValues={fields}
       description={t('request.facilityForm.description')}
       disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
-      onSubmit={handleSubmit}
+      onSubmit={() => handleSubmit(fields)}
       title={t('request.facilityForm.title')}
       fields={fieldData}
     >

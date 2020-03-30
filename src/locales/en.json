@@ -25,6 +25,7 @@
     "request.dropSiteForm.requirements.title": "Add requirements (optional)",
     "request.dropSiteForm.title": "Set a drop-off location",
     "request.facilityAdded.title": "We added your facility",
+    "request.facilityAdded.newFacility": "New facility",
     "request.facilityForm.dropSiteFacilityName.label": "Name of the facility",
     "request.facilityForm.dropSiteZip.label": "Zip code",
     "request.facilityForm.dropSiteCity.label": "City",
