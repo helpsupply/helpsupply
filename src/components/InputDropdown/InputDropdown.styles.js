@@ -38,7 +38,7 @@ const styles = {
   }),
   root: css({
     border: Borders.TRANSPARENT,
-    borderRadius: Radius.ROUNDED,
+    borderRadius: Radius.ROUNDED_WRAP,
     display: 'flex',
     flexDirection: 'column',
     height: Height.INPUT,

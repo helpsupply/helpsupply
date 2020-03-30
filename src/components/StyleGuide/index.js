@@ -1,11 +1,8 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { useEffect, useState } from 'react';
-
 import { Routes } from 'constants/Routes';
 
 import Anchor from '../Anchor';
-import Autosuggest from '../Autosuggest';
 import { PrimaryButton, SecondaryButton } from '../Button';
 import Card from '../Card';
 import InputDropdown from '../InputDropdown';
@@ -14,22 +11,8 @@ import Request from '../Request';
 import Text from '../Text';
 import { TEXT_TYPE } from '../Text/constants';
 import TextArea from '../TextArea';
-import Form from 'components/Form';
 
-function StyleGuide({ backend }) {
-  const [facilities, setFacilities] = useState([]);
-
-  useEffect(() => {
-    backend.listDropSites().then((data) => {
-      const facilities = data.map((facility) => ({
-        name: facility.dropSiteName,
-        address: facility.dropSiteAddress,
-        id: facility.id,
-      }));
-      setFacilities(facilities);
-    });
-  });
-
+function StyleGuide() {
   return (
     <div
       css={{
@@ -90,31 +73,23 @@ function StyleGuide({ backend }) {
         </div>
       </div>
       <hr />
-      <Form>
-        <div css={{ width: 500, '> div': { marginBottom: 15 } }}>
-          <div>
-            <InputText label="Label" />
-          </div>
-          <div>
-            <Autosuggest
-              label="City or medical facility"
-              suggestions={facilities}
-            />
-          </div>
-          <div>
-            <InputDropdown
-              label="Select supply type"
-              options={[
-                { label: 'Foo', value: 'foo' },
-                { label: 'Bar', value: 'bar' },
-              ]}
-            />
-          </div>
-          <div>
-            <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
-          </div>
+      <div css={{ width: 500, '> div': { marginBottom: 15 } }}>
+        <div>
+          <InputText label="Label" />
         </div>
-      </Form>
+        <div>
+          <InputDropdown
+            label="Select supply type"
+            options={[
+              { label: 'Foo', value: 'foo' },
+              { label: 'Bar', value: 'bar' },
+            ]}
+          />
+        </div>
+        <div>
+          <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
+        </div>
+      </div>
       <hr />
       <Card
         onClick={() => false}

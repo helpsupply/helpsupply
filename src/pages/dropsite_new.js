@@ -3,7 +3,6 @@ import { useEffect, useCallback, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
-import { Emails } from 'constants/Emails';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 

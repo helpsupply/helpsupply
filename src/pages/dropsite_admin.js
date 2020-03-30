@@ -7,10 +7,6 @@ import Page from 'components/layouts/Page';
 import DropSiteAdmin from 'components/DropSiteAdmin';
 
 class AdminDropSite extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.backend.getRequests(this.props.match.params.id).then((data) => {
       this.setState(

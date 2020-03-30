@@ -13,7 +13,7 @@ const styles = {
   container: css({
     display: 'flex',
     border: Borders.TRANSPARENT,
-    borderRadius: Radius.ROUNDED,
+    borderRadius: Radius.ROUNDED_WRAP,
     flexDirection: 'column',
     height: Height.INPUT,
     margin: 0,
