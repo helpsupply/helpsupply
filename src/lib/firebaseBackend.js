@@ -132,14 +132,14 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
-  editDropSite(
+  editDropSite({
     location_id,
     dropSiteName,
     dropSiteDescription,
     dropSiteAddress,
     dropSiteZip,
     dropSitePhone,
-  ) {
+  }) {
     if (
       location_id &&
       (dropSiteName ||

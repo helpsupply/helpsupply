@@ -110,11 +110,11 @@ function App({ backend }) {
               <Logout backend={backend} />
             </Route>
             <ProtectedRoute backend={backend} path={Routes.DROPSITE_CONTACT}>
-              <ContactDropSite />
+              <ContactDropSite backend={backend} />
             </ProtectedRoute>
-            <Route path={Routes.DROPSITE_NEW_ADMIN}>
+            <ProtectedRoute backend={backend} path={Routes.DROPSITE_NEW_ADMIN}>
               <NewDropSite backend={backend} />
-            </Route>
+            </ProtectedRoute>
             <ProtectedRoute backend={backend} path={Routes.SUPPLY_NEW_ADMIN}>
               <NewSupplyRequest backend={backend} />
             </ProtectedRoute>

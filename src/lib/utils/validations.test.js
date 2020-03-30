@@ -1,4 +1,4 @@
-import { isValidEmail } from './validations';
+import { isValidEmail, isValidPhoneNumber } from './validations';
 
 describe('utils/validations', () => {
   describe('isValidEmail', () => {
@@ -20,6 +20,16 @@ describe('utils/validations', () => {
       expect(isValidEmail('alsowrong.@rr.com')).toBe(false);
       expect(isValidEmail('+nope@rr.com')).toBe(false);
       expect(isValidEmail('nope+@rr.com')).toBe(false);
+    });
+  });
+  describe('isValidPhoneNumber', () => {
+    it('validates strings with 10 digits', () => {
+      expect(isValidPhoneNumber('(111) 111-1111')).toBe(true);
+      expect(isValidPhoneNumber('(111)-111-1111')).toBe(true);
+    });
+    it('invalidates strings with less or more than 10 digits', () => {
+      expect(isValidPhoneNumber('1')).toBe(false);
+      expect(isValidPhoneNumber('12345678901')).toBe(false);
     });
   });
 });

@@ -1,6 +1,7 @@
 {
   "translations": {
     "generic.form.submitLabel": "Submit",
+    "generic.form.changeLabel": "Change",
     "generic.form.submitLabelNext": "Next",
     "home.intro.learnMore": "Learn more",
     "home.intro.paragraph1": "Our platform gives a real-time view of the immediate needs of healthcare workers. We provide this information to the organizations of paid workers and volunteers that are ready and able to help.",
@@ -53,6 +54,10 @@
     "request.workEmailForm.sent.description": "We just sent you an email with a link to verify your email. It should arrive within a couple minutes.",
     "request.workEmailForm.title": "Enter your work email address",
     "request.workEmailForm.workEmail.disclaimer": "Note: we will never share your email address with any other parties.",
-    "request.workEmailForm.workEmail.label": "Work email"
+    "request.dropSiteContactForm.title": "Contact info",
+    "request.dropSiteContactForm.description": "Enter the contact information for the person coordinating supplies at your facility.",
+    "request.dropSiteContactForm.name.label": "Name",
+    "request.dropSiteContactForm.contact.label": "Email or phone number",
+    "request.dropSiteContactForm.sent.title": "We added the facility contact info"
   }
 }
