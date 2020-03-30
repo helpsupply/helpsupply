@@ -23,36 +23,53 @@ class FirebaseBackend extends BackendInterface {
     });
   }
 
-  listDropSites(zipcode, radius) {
-    return this.firestore
-      .collection('dropSite')
-      .get()
-      .then((snapshot) => {
-        let data = snapshot.docs.map((d) => {
-          var dict = d.data();
-          dict['id'] = d.id;
-          return dict;
-        });
-        return data;
-      })
-      .catch(console.log);
+  async listDropSites(zipcode, radius) {
+    let snapshot = await this.firestore.collection('dropSite').get();
+    let data = snapshot.docs.map((d) => {
+      var dict = d.data();
+      dict['id'] = d.id;
+      return dict;
+    });
+
+    let domain_names = [
+      ...new Set(data.map((d) => d.domain).filter((d) => d !== undefined)),
+    ];
+    const domains = await Promise.all(
+      domain_names.map((id) => this.firestore.doc(`domain/${id}`).get()),
+    );
+    let valid_domains = new Set();
+    domains.map((d) => d.data().valid === 'true' && valid_domains.add(d.id));
+
+    return data.map((d) => {
+      d.valid = valid_domains.has(d.domain);
+      return d;
+    });
+
     // To do
     // create zipcode and radius filters
   }
 
-  getDropSites(dropSiteId) {
+  async getDropSites(dropSiteId) {
     if (dropSiteId) {
-      return this.firestore
+      let doc = await this.firestore
         .collection('dropSite')
         .doc(dropSiteId)
-        .get()
-        .then((doc) => {
-          return doc.data();
-        })
-        .catch(console.log);
+        .get();
+      let dropsite = doc.data();
+      let domain = dropsite.domain;
+      if (domain) {
+        let domainStatus = await this.firestore
+          .collection('domain')
+          .doc(domain)
+          .get();
+        dropsite.valid = domainStatus.data().valid == 'true';
+      } else {
+        dropsite.valid = false;
+      }
+      return dropsite;
     } else {
       console.log('Error, one or more required params missing.');
-      return Promise.reject('Error, one or more required params missing.');
+      await Promise.reject('Error, one or more required params missing.');
     }
   }
 
@@ -93,6 +110,9 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
+  // Note: for the moment, this is done before a user even logs in so it
+  // is not signed with any credentials and assumed to be invalid until
+  // it is edited later in the flow.
   addNewDropSite({
     dropSiteFacilityName,
     dropSiteZip,

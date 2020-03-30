@@ -28,12 +28,22 @@ service cloud.firestore {
         return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
       }
       function isSigned() {
-        return (request.resource.data.domain == request.auth.token.email.split('@')[1] &&
+        return ('domain' in request.resource.data &&
+                'user' in request.resource.data &&
+                request.resource.data.domain == request.auth.token.email.split('@')[1] &&
                 request.resource.data.user == request.auth.uid)
       }
+      function isPending(exists) {
+        return (((exists &&
+                !('domain' in resource.data) &&
+                !('user' in resource.data)) ||
+                !exists) &&
+                !('domain' in request.resource.data) &&
+                !('user' in request.resource.data))
+      }
       allow read: if true;
-      allow create: if isSigned();
-      allow update: if isHCP() && isSigned();
+      allow create: if isSigned() || isPending(false);
+      allow update: if (isHCP() && isSigned()) || isPending(true);
       allow delete: if isHCP();
     }
 

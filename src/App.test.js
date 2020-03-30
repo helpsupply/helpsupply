@@ -18,6 +18,24 @@ test('renders learn react link', () => {
 // Note:
 // You need to have `firebase emulators:start --only firestore` running for these to pass
 
+function setupTestApp(auth) {
+  let testApp = firebase.initializeTestApp({ projectId, auth });
+  // The built-in test app doesn't implement much in the way of auth
+  // beyond checking security rules so we mock out the parts we need
+  testApp.auth = function () {
+    return {
+      onAuthStateChanged: function (callback) {
+        callback(auth);
+      },
+      currentUser: {
+        email: auth ? auth.email : null,
+        uid: auth ? auth.uid : null,
+      },
+    };
+  };
+  return testApp;
+}
+
 test('hello world', async () => {
   await firebase.clearFirestoreData({ projectId });
 
@@ -36,7 +54,7 @@ test('hello world', async () => {
   expect(await backend.isLoggedIn()).toBe(false);
 });
 
-test('Test Creation While Unverified', async () => {
+test('Test Dropsite Creation While Unverified', async () => {
   await firebase.clearFirestoreData({ projectId });
   await firebase.loadFirestoreRules({ projectId, rules });
 
@@ -48,18 +66,7 @@ test('Test Creation While Unverified', async () => {
     .set({ valid: 'pending' });
 
   let auth = { uid: 'user1', email: 'bob@stanford.edu', email_verified: true };
-  let testApp = firebase.initializeTestApp({ projectId, auth });
-  testApp.auth = function () {
-    return {
-      onAuthStateChanged: function (callback) {
-        callback(auth);
-      },
-      currentUser: {
-        email: auth.email,
-        uid: auth.uid,
-      },
-    };
-  };
+  let testApp = setupTestApp(auth);
 
   let backend = new FirebaseBackend(testApp);
 
@@ -75,13 +82,36 @@ test('Test Creation While Unverified', async () => {
   });
 
   // Verify that it isn't returned from the backend
-  console.log(await backend.getDropSites('1'));
+  expect((await backend.getDropSites('1')).valid).toStrictEqual(false);
+  expect((await backend.listDropSites())[0].valid).toStrictEqual(false);
 
   // Verify the user
+  await adminfs.collection('domain').doc('stanford.edu').set({ valid: 'true' });
 
   // Verify that it is returned from the backend now
+  expect((await backend.getDropSites('1')).valid).toStrictEqual(true);
+  expect((await backend.listDropSites())[0].valid).toStrictEqual(true);
 
   return;
+});
+
+test('Test Creation of new Dropsite (while not logged in)', async () => {
+  await firebase.clearFirestoreData({ projectId });
+  await firebase.loadFirestoreRules({ projectId, rules });
+
+  let testApp = setupTestApp(null);
+  let backend = new FirebaseBackend(testApp);
+
+  let dropsite = await backend.addNewDropSite({
+    dropSiteFacilityName: 'Stanford Hospital',
+    dropSiteZip: '94701',
+    dropSiteAddress: '1 El Camino Real',
+    dropSiteCity: 'Stanford',
+    dropSiteState: 'CA',
+    dropSiteUrl: 'https://stanford.edu',
+  });
+
+  expect((await backend.getDropSites(dropsite)).valid).toStrictEqual(false);
 });
 
 test('Test Domain Verification', async () => {
@@ -95,14 +125,7 @@ test('Test Domain Verification', async () => {
   await adminfs.collection('domain').doc('gmail.com').set({ valid: 'false' });
 
   let auth = { uid: '1', email_verified: true };
-  let testApp = firebase.initializeTestApp({ projectId, auth });
-  testApp.auth = function () {
-    return {
-      onAuthStateChanged: function (callback) {
-        callback(auth);
-      },
-    };
-  };
+  let testApp = setupTestApp(auth);
 
   let backend = new FirebaseBackend(testApp);
 
