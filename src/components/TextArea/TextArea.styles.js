@@ -51,7 +51,7 @@ const styles = {
   root: css({
     display: 'flex',
     border: Borders.TRANSPARENT,
-    borderRadius: Radius.ROUNDED,
+    borderRadius: Radius.ROUNDED_WRAP,
     flexDirection: 'column',
     height: 240,
     margin: `0 0 ${Space.S30}px 0`,

@@ -32,7 +32,7 @@ const styles = {
   }),
   root: css({
     border: Borders.TRANSPARENT,
-    borderRadius: Radius.ROUNDED,
+    borderRadius: Radius.ROUNDED_WRAP,
     display: 'flex',
     flexDirection: 'column',
     margin: `0 0 ${Space.S30}px 0`,
