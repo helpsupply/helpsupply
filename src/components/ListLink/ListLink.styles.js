@@ -3,16 +3,15 @@ import { Color, Space } from 'lib/theme';
 
 const styles = {
   root: css({
+    borderBottom: `1px solid ${Color.GRAY_25}`,
     padding: `${Space.S40}px 0`,
     width: '100%',
-  }),
-  anchor: css({
+    ':last-child': {
+      borderBottom: ['', '', '0'],
+    },
     ':hover': {
       textDecoration: 'none',
     },
-  }),
-  borderBottom: css({
-    borderBottom: `1px solid ${Color.GRAY_25}`,
   }),
   text: css({
     color: Color.GRAY_75,

@@ -1,13 +1,15 @@
-import { css } from '@emotion/core';
+import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
+
+const mobileMinHeight = '276px';
 
 const styles = {
   root: css({
     alignItems: 'flex-end',
     backgroundColor: `${Color.CORAL}`,
     display: 'flex',
-    minHeight: '276px',
-    padding: `${Space.S40}px`,
+    minHeight: [mobileMinHeight, '', 'auto'],
+    padding: [`${Space.S40}px`, '', 0],
     width: '100%',
   }),
 };
