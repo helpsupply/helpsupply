@@ -227,4 +227,4 @@ export default [
     label: 'WY',
     value: 'WY',
   },
-]
+];

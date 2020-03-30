@@ -7,16 +7,14 @@ import { ReactComponent as Arrow } from 'static/icons/arrow.svg';
 import { TEXT_TYPE } from 'components/Text/constants';
 
 const ListLink = ({ href, text, title }) => (
-  <Anchor css={styles.anchor} href={href}>
-    <div css={[styles.root, styles.borderBottom]}>
-      <div css={styles.titleWithIcon}>
-        <Text type={TEXT_TYPE.HEADER_3}>{title}</Text>
-        <Arrow />
-      </div>
-      <Text css={styles.text} type={TEXT_TYPE.BODY_2}>
-        {text}
-      </Text>
+  <Anchor css={styles.root} href={href}>
+    <div css={styles.titleWithIcon}>
+      <Text type={TEXT_TYPE.HEADER_3}>{title}</Text>
+      <Arrow />
     </div>
+    <Text css={styles.text} type={TEXT_TYPE.BODY_2}>
+      {text}
+    </Text>
   </Anchor>
 );
 
