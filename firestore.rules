@@ -28,7 +28,8 @@ service cloud.firestore {
         return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
       }
       function isSigned() {
-        return ('domain' in request.resource.data &&
+        return (request.auth.token.email_verified &&
+                'domain' in request.resource.data &&
                 'user' in request.resource.data &&
                 request.resource.data.domain == request.auth.token.email.split('@')[1] &&
                 request.resource.data.user == request.auth.uid)
@@ -51,8 +52,17 @@ service cloud.firestore {
       function isHCP() {
         return request.auth != null && request.auth.token.email_verified && get(/databases/$(database)/documents/domain/$(request.auth.token.email.split('@')[1])).data.valid == 'true';
       }
+      function isSigned() {
+        return (request.auth.token.email_verified &&
+                'domain' in request.resource.data &&
+                'user' in request.resource.data &&
+                request.resource.data.domain == request.auth.token.email.split('@')[1] &&
+                request.resource.data.user == request.auth.uid)
+      }
       allow read: if true;
-      allow write: if isHCP();
+      allow create: if isSigned();
+      allow update: if isSigned();
+      allow delete: if isHCP();
     }
     match /supply/{site} {
       function isHCP() {

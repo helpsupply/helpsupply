@@ -114,6 +114,44 @@ test('Test Creation of new Dropsite (while not logged in)', async () => {
   expect((await backend.getDropSites(dropsite)).valid).toStrictEqual(false);
 });
 
+test('Test Request Creation', async () => {
+  await firebase.clearFirestoreData({ projectId });
+  await firebase.loadFirestoreRules({ projectId, rules });
+
+  let auth = { uid: 'user1', email: 'bob@stanford.edu', email_verified: true };
+  let testApp = setupTestApp(auth);
+
+  let backend = new FirebaseBackend(testApp);
+
+  // Add a request with a logged in (unverified) user
+  let request = await backend.addRequest(
+    '1',
+    'Masks',
+    'N95 Masks',
+    'blabla',
+    '1000',
+    'open',
+    true,
+  );
+
+  // The request shouldn't be valid
+  expect((await backend.getRequests('1'))[0].valid).toStrictEqual(false);
+
+  // Now grant stanford.edu the status of valid
+  let adminApp = firebase.initializeAdminApp({ projectId });
+  let adminfs = adminApp.firestore();
+  await adminfs.collection('domain').doc('stanford.edu').set({ valid: 'true' });
+
+  // Verify that the request is now valid
+  expect((await backend.getRequests('1'))[0].valid).toStrictEqual(true);
+
+  // Edit this request
+  await backend.editRequest(request, 'Masks', 'N95 Masks', 'foobar');
+
+  // Make sure it remains valid
+  expect((await backend.getRequests('1'))[0].valid).toStrictEqual(true);
+});
+
 test('Test Domain Verification', async () => {
   await firebase.clearFirestoreData({ projectId });
 
