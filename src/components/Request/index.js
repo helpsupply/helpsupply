@@ -1,51 +1,60 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+
 import { formatDate } from 'lib/utils/datetime';
 import { numberWithCommas } from 'lib/utils/number';
+
 import { SecondaryButton } from 'components/Button';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-import { styles } from './Request.styles';
 import Note from 'components/Note';
 
-export const Request = ({ date, donation, id, name, onDelete, request }) => {
-  const numberDonation = +donation;
-  const numberRequest = +request;
-  const progress = (numberDonation / numberRequest) * 100;
+import { styles } from './Request.styles';
+
+export const Request = ({
+  date,
+  id,
+  onDelete,
+  requestDescription,
+  requestQuantity,
+  requestTitle,
+}) => {
+  const { t } = useTranslation();
+  const numberRequest = +requestQuantity;
   return (
     <div css={styles.root}>
       <div css={styles.section}>
-        <Note>Request ID #{id}</Note>
-        <SecondaryButton onDelete={onDelete}>
-          <Text type={TEXT_TYPE.NOTE}>Delete</Text>
+        <Note>
+          {' '}
+          {t('dropsite.openRequests.requestId')} #{id}
+        </Note>
+        <SecondaryButton onClick={onDelete}>
+          <Text type={TEXT_TYPE.NOTE}>{t('generic.button.deleteLabel')}</Text>
         </SecondaryButton>
       </div>
-      <div css={styles.requestName}>
-        <Text>{name}</Text>{' '}
+      <div css={styles.requestTitle}>
+        <Text>{requestTitle}</Text>{' '}
         <Text css={styles.amount}>{numberWithCommas(numberRequest)}</Text>
       </div>
-      <div css={[styles.section, styles.progressInfo]}>
-        <Note>
-          {progress ? `${numberDonation} donations` : 'No donations yet'}
-        </Note>
-        <Note>{progress}% Completed</Note>
-      </div>
-      <div css={styles.progressBar}>
-        <div css={[styles.progress, { width: `${progress}%` }]} />
-      </div>
-      <Note css={styles.date}>Added {formatDate(date)}</Note>
+      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.description}>
+        {requestDescription}
+      </Text>
+      <Note css={styles.date}>
+        {t('generic.label.added')} {formatDate(date)}
+      </Note>
     </div>
   );
 };
 
 Request.propTypes = {
-  date: PropTypes.string.isRequired,
-  donation: PropTypes.string.isRequired,
+  date: PropTypes.string,
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
-  request: PropTypes.string.isRequired,
+  requestDescription: PropTypes.string,
+  requestQuantity: PropTypes.string.isRequired,
+  requestTitle: PropTypes.string.isRequired,
 };
 
 export default Request;

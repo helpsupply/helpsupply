@@ -15,16 +15,16 @@ const validate = (val) => {
   }
 };
 
-function ContactForm({ backend, location_id, dropSiteName, dropSitePhone }) {
+function ContactForm({ backend, dropSite }) {
   const { t } = useTranslation();
-  const [name, setName] = useState(dropSiteName);
-  const [contact, setContact] = useState(dropSitePhone);
+  const [name, setName] = useState(dropSite.dropSiteName);
+  const [contact, setContact] = useState(dropSite.dropSitePhone);
   const [sent, setSent] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     backend
-      .editDropSite({ location_id, dropSiteName: name, dropSitePhone: contact })
+      .editDropSite({ ...dropSite, dropSiteName: name, dropSitePhone: contact })
       .then(() => {
         setSent(true);
       })

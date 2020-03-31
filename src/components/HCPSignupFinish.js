@@ -40,7 +40,7 @@ class HCPSignupFinish extends React.Component {
           if (requests?.length) {
             this.props.history.push(
               routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
-                dropsite: this.state.dropsite,
+                id: this.state.dropsite,
               }),
             );
             return;
@@ -48,7 +48,7 @@ class HCPSignupFinish extends React.Component {
 
           this.props.history.push(
             routeWithParams(Routes.SUPPLY_NEW_ADMIN, {
-              dropsite: this.state.dropsite,
+              id: this.state.dropsite,
             }),
           );
         });

@@ -7,20 +7,20 @@ import Page from 'components/layouts/Page';
 import ContactForm from 'containers/ContactForm';
 
 function ContactDropSite({ backend, match }) {
-  const [dropsite, setDropsite] = useState();
+  const [dropSite, setDropSite] = useState();
   useEffect(() => {
     backend.getDropSites(match.params.id).then((data) => {
-      setDropsite(data);
+      setDropSite(data);
     });
   }, [backend, match.params.id]);
 
-  if (!dropsite) {
+  if (!dropSite) {
     return null;
   }
 
   return (
     <Page currentProgress={4} totalProgress={5}>
-      <ContactForm backend={backend} {...dropsite} />
+      <ContactForm backend={backend} dropSite={dropSite} />
     </Page>
   );
 }

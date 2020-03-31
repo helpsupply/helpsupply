@@ -68,30 +68,20 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
-  addDropSite({
-    location_id,
-    dropSiteDescription,
-    dropSiteAddress,
-    dropSiteRequirements,
-    dropSitePhone,
-    dropSiteNotes,
-    requestWillingToPay,
-  }) {
-    if (dropSiteDescription && location_id && dropSiteAddress) {
+  addDropSite(dropSite) {
+    if (
+      dropSite.dropSiteDescription &&
+      dropSite.location_id &&
+      dropSite.dropSiteAddress
+    ) {
       let newSiteObj = {
-        location_id,
-        dropSiteDescription,
-        dropSiteAddress,
-        dropSiteRequirements,
-        dropSitePhone,
-        dropSiteNotes,
-        requestWillingToPay,
+        ...dropSite,
         domain: this.firebase.auth().currentUser.email.split('@')[1],
         user: this.firebase.auth().currentUser.uid,
       };
       return this.firestore
         .collection('dropSite')
-        .doc(location_id)
+        .doc(dropSite.location_id)
         .set(newSiteObj)
         .then(function (docRef) {
           return 'Drop site added';
@@ -326,7 +316,7 @@ class FirebaseBackend extends BackendInterface {
         .doc(requestId)
         .delete()
         .then(() => {
-          return requestId + ' deleted';
+          return requestId;
         })
         .catch(console.log);
     } else {
@@ -513,9 +503,9 @@ class FirebaseBackend extends BackendInterface {
           newDomains.push(change.doc.id);
           // Gross layer violation here
           if (window.Notification && Notification.permission === 'granted') {
-            var notification = new Notification(
-              'New domain added: ' + change.doc.id,
-            );
+            // var notification = new Notification(
+            //   'New domain added: ' + change.doc.id,
+            // );
           }
         }
 

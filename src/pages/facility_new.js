@@ -63,7 +63,7 @@ function NewFacility({ backend, history }) {
           onSubmit={() =>
             history.push(
               routeWithParams(Routes.SIGNUP_DROPSITE, {
-                dropsite: dropSite.location_id,
+                id: dropSite.location_id,
               }),
             )
           }

@@ -22,16 +22,16 @@ function EmailForm({ backend, match }) {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
-  const [dropsite, setDropsite] = useState(match.params.dropsite);
+  const [dropSite, setDropSite] = useState(match.params.id);
 
   useEffect(() => {
-    setDropsite(match.params.dropsite);
-  }, [match.params.dropsite]);
+    setDropSite(match.params.id);
+  }, [match.params.id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     backend
-      .signupWithEmail(email, dropsite)
+      .signupWithEmail(email, dropSite)
       .then(() => {
         setSent(true);
       })

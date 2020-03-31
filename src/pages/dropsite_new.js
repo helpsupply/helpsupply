@@ -10,36 +10,32 @@ import Page from 'components/layouts/Page';
 import DropSiteForm from 'containers/DropSiteForm';
 
 function NewDropSite({ backend, history, match }) {
-  const [dropsite, setDropsite] = useState(undefined);
+  const [dropSite, setDropSite] = useState(undefined);
 
   useEffect(() => {
-    backend.getDropSites(match.params.dropsite).then((data) => {
-      setDropsite(data);
+    backend.getDropSites(match.params.id).then((data) => {
+      setDropSite(data);
     });
-    // TODO: find out if we need to redirect in any case
-    // const dropsite =
-    //   hospital_index.index.id_index[match.params.dropsite]
-    // if (dropsite?.dropSiteDescription) {
-    // history.replace(
-    //   `/dropsite/${match.params.dropsite}/admin`
-    // )
-    // }
-  }, [backend, match.params.dropsite]);
+  }, [backend, match.params.id]);
 
   const onSubmit = useCallback(
-    (hospital) => {
-      backend.addDropSite(hospital).then((data) => {
+    (dropSite) => {
+      backend.addDropSite(dropSite).then(() => {
         history.push(
-          routeWithParams(Routes.DROPSITE_ADMIN, { id: hospital.location_id }),
+          routeWithParams(Routes.DROPSITE_ADMIN, { id: dropSite.location_id }),
         );
       });
     },
     [backend, history],
   );
 
+  if (!dropSite) {
+    return null;
+  }
+
   return (
     <Page currentProgress={4} totalProgress={5}>
-      <DropSiteForm onSubmit={onSubmit} dropSite={dropsite} />
+      <DropSiteForm onSubmit={onSubmit} dropSite={dropSite} />
     </Page>
   );
 }
