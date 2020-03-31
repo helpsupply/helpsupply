@@ -1,5 +1,6 @@
 import { css, keyframes } from '@emotion/core';
 import { Radius, Space } from 'lib/theme';
+import { colors, loaderSize } from './constants';
 
 const spin = keyframes({
   to: { transform: 'rotate(360deg)' },
@@ -7,20 +8,20 @@ const spin = keyframes({
 
 const styles = {
   loader: css({
-    width: 30,
-    height: 30,
-    border: '4px solid #ffeeba',
+    width: loaderSize,
+    height: loaderSize,
+    border: `4px solid ${colors.YELLOW}`,
     borderRadius: '50%',
-    borderTopColor: '#856404',
-    borderRightColor: '#856404',
+    borderTopColor: colors.YELLOW_DARK,
+    borderRightColor: colors.YELLOW_DARK,
     animation: `${spin} 1s linear infinite`,
     marginRight: Space.S30,
   }),
   root: css({
-    background: '#fff3cd',
-    border: `1px solid #ffeeba`,
+    background: colors.YELLOW_LIGHTER,
+    border: `1px solid ${colors.YELLOW_LIGHT}`,
     borderRadius: Radius.ROUNDED,
-    color: '#856404',
+    color: colors.YELLOW_DARK,
     padding: Space.S20,
     display: 'flex',
     alignItems: 'center',

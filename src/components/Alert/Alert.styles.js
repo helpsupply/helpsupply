@@ -1,11 +1,12 @@
 import { css } from '@emotion/core';
 import { Radius, Space } from 'lib/theme';
+import { colors } from './constants';
 
 const styles = {
   link: css({
-    color: 'rgb(114, 28, 36)',
-    ':hover': {
-      color: 'rgb(114, 28, 36)',
+    color: colors.RED_DARK,
+    ':hover, :focus': {
+      color: colors.RED_DARK,
     },
   }),
   logout: css({
@@ -13,10 +14,10 @@ const styles = {
     textDecoration: 'underline',
   }),
   root: css({
-    background: '#f8d7da',
-    border: `1px solid #f5c6cb`,
+    background: colors.RED_LIGHTEST,
+    border: `1px solid ${colors.RED_LIGHTER}`,
     borderRadius: Radius.ROUNDED,
-    color: '#721c24',
+    color: colors.RED_DARK,
     padding: Space.S20,
   }),
 };
