@@ -59,6 +59,9 @@
     "request.dropSiteContactForm.description": "Enter the contact information for the person coordinating supplies at your facility.",
     "request.dropSiteContactForm.name.label": "Name",
     "request.dropSiteContactForm.contact.label": "Email or phone number",
-    "request.dropSiteContactForm.sent.title": "We added the facility contact info"
+    "login.alert.preLink": "Your email doesn't look like it's from a healthcare provider. Please ",
+    "login.alert.link": "log out",
+    "login.alert.postLink": " and try your work email or contact ",
+    "login.loading.message": "Verifying your credentials (should be a few minutes). You'll be able to edit/add once verified."
   }
 }

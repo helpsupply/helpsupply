@@ -2,6 +2,7 @@ import React from 'react';
 import { Global } from '@emotion/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Routes } from 'constants/Routes';
 
@@ -14,20 +15,22 @@ import EntryPortal from 'pages/entry';
 import Request from 'pages/request';
 import SignUp from 'pages/signup';
 
-import HCPSignupFinish from './components/HCPSignupFinish';
-import DropSite from './components/DropSite';
-import PendingDomains from './components/PendingDomains';
-import NoMatch from './components/NoMatch';
-import Login from './components/Login';
-import Logout from './components/Logout';
-import Profile from './components/Profile';
-import StyleGuide from './components/StyleGuide/index';
-import Box from './components/Box';
+import HCPSignupFinish from 'components/HCPSignupFinish';
+import DropSite from 'components/DropSite';
+import PendingDomains from 'components/PendingDomains';
+import NoMatch from 'components/NoMatch';
+import Login from 'components/Login';
+import Logout from 'components/Logout';
+import Profile from 'components/Profile';
+import StyleGuide from 'components/StyleGuide/index';
+import Box from 'components/Box';
+import InvalidEmail from 'components/Alert/InvalidEmail';
+import Loading from 'components/Loading';
 
 import { styles } from './App.styles';
-import { Emails } from 'constants/Emails';
 
 const ProtectedRoute = ({ backend, children, path }) => {
+  const { t } = useTranslation();
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
   const [badDomain, setBadDomain] = useState(false);
@@ -55,15 +58,7 @@ const ProtectedRoute = ({ backend, children, path }) => {
   if (loading) {
     content = (
       <Box>
-        <div className="alert alert-warning" role="alert">
-          <div className="spinner-border alertSpinner" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-          <div className="alertText">
-            Verifying your credentials (should be a few minutes). You'll be able
-            to edit/add once verified.
-          </div>
-        </div>
+        <Loading message={t('login.loading.message')} />
       </Box>
     );
   }
@@ -72,23 +67,7 @@ const ProtectedRoute = ({ backend, children, path }) => {
   if (!verified && badDomain) {
     content = (
       <Box>
-        <div className="alert alert-danger" role="alert">
-          <div className="alertText">
-            Your email doesn't look like it's from a healthcare provider. Please{' '}
-            <a
-              href={Routes.LOGOUT}
-              style={{
-                color: '#721c24',
-                fontWeight: 'bold',
-                textDecoration: 'underline',
-              }}
-            >
-              log out
-            </a>{' '}
-            and try your work email or contact{' '}
-            <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
-          </div>
-        </div>
+        <InvalidEmail />
       </Box>
     );
   }
