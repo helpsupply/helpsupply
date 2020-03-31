@@ -2,6 +2,9 @@ import React from "react";
 import * as hospital_index from "../data/hospital_index";
 import { withRouter } from "react-router-dom";
 
+import { Routes } from "constants/Routes";
+import { routeWithParams } from "lib/utils/routes";
+
 class NewDropSiteForm extends React.Component {
   constructor(props) {
     super(props);
@@ -18,44 +21,11 @@ class NewDropSiteForm extends React.Component {
       dropSiteZipError: "",
       dropSiteHospitalError: "",
       dropSitePhone: "",
-      existingLocation: false,
-      stage: "address"
+      existingLocation: false
     };
     this.handleEditDropSite = this.handleEditDropSite.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleValidate = this.handleValidate.bind(this);
-    this.handleNext = this.handleNext.bind(this);
-    this.handlePrevStage = this.handlePrevStage.bind(this);
-  }
-
-  handlePrevStage() {
-    if (
-      this.state.stage === "address" &&
-      this.state.existingLocation === false
-    ) {
-      this.setState({
-        stage: "name"
-      });
-    } else if (
-      this.state.stage === "address" &&
-      this.state.existingLocation === true
-    ) {
-      this.props.history.push("/");
-    } else if (this.state.stage === "requirements") {
-      this.setState({
-        stage: "address"
-      });
-    } else if (this.state.stage === "info") {
-      this.setState({
-        stage: "requirements"
-      });
-    }
-  }
-
-  handleNext(dest) {
-    this.setState({
-      stage: dest
-    });
   }
 
   handleChange = field => e => {
@@ -90,7 +60,17 @@ class NewDropSiteForm extends React.Component {
     this.setState({
       formActivated: true
     });
-    if (field === "dropSiteDescription") {
+    if (field === "dropSiteName") {
+      if (!e.target.value) {
+        this.setState({
+          dropSiteNameError: "This field is necessary."
+        });
+      } else {
+        this.setState({
+          dropSiteNameError: ""
+        });
+      }
+    } else if (field === "dropSiteDescription") {
       if (!e.target.value) {
         this.setState({
           dropSiteDescriptionError: "This field is necessary."
@@ -138,15 +118,18 @@ class NewDropSiteForm extends React.Component {
       this.props.backend
         .addDropSite(
           this.state.dropSiteId,
-          hospital_index.index.id_index[this.props.dropSiteId],
+          this.state.dropSiteName,
           this.state.dropSiteDescription,
           this.state.dropSiteAddress,
           this.state.dropSiteZip,
           this.state.dropSitePhone
         )
         .then(() => {
-          let url = "/dropsite/" + this.state.dropSiteId + "/admin";
-          this.props.history.push(url);
+          this.props.history.push(
+            routeWithParams(Routes.DROPSITE_ADMIN, {
+              id: this.state.dropSiteId
+            })
+          );
         });
     } else {
       this.props.backend
@@ -155,12 +138,15 @@ class NewDropSiteForm extends React.Component {
           this.state.dropSiteDescription,
           this.state.dropSiteAddress,
           this.state.dropSiteZip,
-          this.state.dropSiteName,
+          this.state.dropSiteHospital,
           this.state.dropSitePhone
         )
         .then(data => {
-          let url = "/dropsite/" + data + "/admin";
-          this.props.history.push(url);
+          this.props.history.push(
+            routeWithParams(Routes.DROPSITE_ADMIN, {
+              id: data
+            })
+          );
         });
     }
   }
@@ -176,104 +162,44 @@ class NewDropSiteForm extends React.Component {
       });
     } else {
       this.setState({
-        stage: "name",
         dropSiteId: this.props.dropSiteId
       });
     }
   }
 
-  componentWillReceiveProps() {}
-
   render() {
-    let nextBtnName;
-    if (this.state.dropSiteHospital) {
-      nextBtnName = (
-        <button
-          className="btn btn-primary linkSubmitBtn"
-          onClick={() => {
-            this.handleNext("address");
-          }}
-        >
-          Submit
-        </button>
-      );
-    } else {
-      nextBtnName = (
-        <button disabled className="btn btn-primary linkSubmitBtn">
-          Submit
-        </button>
-      );
-    }
-    let nextBtnAddress;
-    if (this.state.dropSiteAddress && this.state.dropSiteZip) {
-      nextBtnAddress = (
-        <button
-          className="btn btn-primary linkSubmitBtn"
-          onClick={() => {
-            this.handleNext("requirements");
-          }}
-        >
-          Submit
-        </button>
-      );
-    } else {
-      nextBtnAddress = (
-        <button disabled className="btn btn-primary linkSubmitBtn">
-          Submit
-        </button>
-      );
-    }
-    let nextBtnRequirements;
-    if (this.state.dropSiteDescription) {
-      nextBtnRequirements = (
-        <button
-          className="btn btn-primary linkSubmitBtn"
-          onClick={() => {
-            this.handleNext("info");
-          }}
-        >
-          Submit
-        </button>
-      );
-    } else {
-      nextBtnRequirements = (
-        <button disabled className="btn btn-primary linkSubmitBtn">
-          Submit
-        </button>
-      );
-    }
-
     let newRequestSubmitButton;
-    if (this.props.verified) {
+    if (
+      this.state.dropSiteName !== "" &&
+      this.state.dropSiteDescription !== "" &&
+      this.state.dropSiteAddress !== "" &&
+      this.state.dropSiteZip !== "" &&
+      this.props.verified
+    ) {
       newRequestSubmitButton = (
         <button
           className="btn btn-primary linkSubmitBtn"
           onClick={this.handleEditDropSite}
         >
-          Submit
+          Add Drop-off Location
         </button>
       );
     } else {
       newRequestSubmitButton = (
         <button disabled className="btn btn-primary linkSubmitBtn">
-          Submit
+          Add Drop-off Location
         </button>
       );
     }
 
     return (
-      <div className="homeBox">
-        <button onClick={this.handlePrevStage}>Back</button>
-        <h1 className="logoText">help.supply</h1>
-        {this.state.stage === "name" && (
-          <div>
-            <h2>What's the name of your facility</h2>
-            <p>
-              This is the name of the hospital or clinic that these donations
-              will serve.
-            </p>
-
+      <div className="centerPanel">
+        <div className="submitRequestFormContainer">
+          {this.state.existingLocation === false && (
             <div className="requestFormField">
+              <div className="formLabel">
+                What hospital/clinic does this drop-off serve?
+              </div>
               <input
                 className="form-control newRequestFormField"
                 id="dropSiteHospital"
@@ -286,89 +212,77 @@ class NewDropSiteForm extends React.Component {
                 {this.state.dropSiteHospitalError}
               </div>
             </div>
-            {nextBtnName}
-          </div>
-        )}
-        {this.state.stage === "address" && (
-          <div>
-            <h2>Set a drop-off location</h2>
-            <p>
-              This is where donors can drop off supplies. It should be an easily
-              identifiable location including a street address.
-            </p>
-            <div className="requestFormField">
-              <input
-                className="form-control newRequestFormField"
-                id="dropSiteAddress"
-                placeholder="e.g. 330 Broadway Ave, New York, NY"
-                value={this.state.dropSiteAddress}
-                onChange={this.handleChange("dropSiteAddress")}
-                onBlur={this.handleValidate("dropSiteAddress")}
-              />
-              <div className="formError">{this.state.dropSiteAddressError}</div>
+          )}
+          {this.state.existingLocation === true && (
+            <div className="newDropSiteFormServingText">
+              Serving:
+              <br /> {this.state.dropSiteHospital}
             </div>
-            <div className="requestFormField">
-              <div className="formLabel">Zip</div>
-              <input
-                className="form-control newRequestFormField"
-                id="dropSiteZip"
-                placeholder="e.g. 44502"
-                value={this.state.dropSiteZip}
-                onChange={this.handleChange("dropSiteZip")}
-                onBlur={this.handleValidate("dropSiteZip")}
-              />
-              <div className="formError">{this.state.dropSiteZipError}</div>
-            </div>
-            {nextBtnAddress}
-          </div>
-        )}
+          )}
 
-        {this.state.stage === "requirements" && (
-          <div>
-            <h2>Add requirements</h2>
-            <p>
-              Please enter any requirements about how supplies should be
-              delivered.
-            </p>
-            <div className="requestFormField">
-              <textarea
-                className="form-control newRequestFormField"
-                id="dropSiteDescription"
-                placeholder="e.g. All donated items must be unused and sealed in original packaging...."
-                value={this.state.dropSiteDescription}
-                onChange={this.handleChange("dropSiteDescription")}
-                onBlur={this.handleValidate("dropSiteDescription")}
-              />
-              <div className="formError">
-                {this.state.dropSiteDescriptionError}
-              </div>
-            </div>
-            {nextBtnRequirements}
+          <div className="requestFormField">
+            <div className="formLabel">Drop-off Location Name</div>
+            <input
+              className="form-control newRequestFormField"
+              id="dropSiteName"
+              placeholder="e.g. New York Financial Dist."
+              value={this.state.dropSiteName}
+              onChange={this.handleChange("dropSiteName")}
+              onBlur={this.handleValidate("dropSiteName")}
+            />
+            <div className="formError">{this.state.dropSiteNameError}</div>
           </div>
-        )}
-
-        {this.state.stage === "info" && (
-          <div>
-            <h2>More info (optional)</h2>
-            <p>
-              We’re also working to solve this problem at scale. Can you give us
-              the name and contact info of the person at your hospital
-              responsible for procuring supplies?
-            </p>
-            <div className="requestFormField">
-              <div className="formLabel">Email or Phone number</div>
-              <input
-                className="form-control newRequestFormField"
-                id="dropSitePhone"
-                placeholder="e.g. admin@hospital.org"
-                value={this.state.dropSitePhone}
-                onChange={this.handleChange("dropSitePhone")}
-                onBlur={this.handleValidate("dropSitePhone")}
-              />
+          <div className="requestFormField">
+            <div className="formLabel">Drop-off Location Description</div>
+            <textarea
+              className="form-control newRequestFormField"
+              id="dropSiteDescription"
+              placeholder="e.g. We are 500 healthcare workers serving 30,000 patients. We are currently desparate for supplies..."
+              value={this.state.dropSiteDescription}
+              onChange={this.handleChange("dropSiteDescription")}
+              onBlur={this.handleValidate("dropSiteDescription")}
+            />
+            <div className="formError">
+              {this.state.dropSiteDescriptionError}
             </div>
-            {newRequestSubmitButton}
           </div>
-        )}
+          <div className="requestFormField">
+            <div className="formLabel">Deliver supplies to this address:</div>
+            <input
+              className="form-control newRequestFormField"
+              id="dropSiteAddress"
+              placeholder="e.g. 330 Broadway Ave, New York, NY"
+              value={this.state.dropSiteAddress}
+              onChange={this.handleChange("dropSiteAddress")}
+              onBlur={this.handleValidate("dropSiteAddress")}
+            />
+            <div className="formError">{this.state.dropSiteAddressError}</div>
+          </div>
+          <div className="requestFormField">
+            <div className="formLabel">Zip</div>
+            <input
+              className="form-control newRequestFormField"
+              id="dropSiteZip"
+              placeholder="e.g. 44502"
+              value={this.state.dropSiteZip}
+              onChange={this.handleChange("dropSiteZip")}
+              onBlur={this.handleValidate("dropSiteZip")}
+            />
+            <div className="formError">{this.state.dropSiteZipError}</div>
+          </div>
+          <div className="requestFormField">
+            <div className="formLabel">Phone or Email (Optional)</div>
+            <input
+              className="form-control newRequestFormField"
+              id="dropSitePhone"
+              placeholder="e.g. admin@hospital.org"
+              value={this.state.dropSitePhone}
+              onChange={this.handleChange("dropSitePhone")}
+              onBlur={this.handleValidate("dropSitePhone")}
+            />
+          </div>
+          {newRequestSubmitButton}
+        </div>
       </div>
     );
   }
