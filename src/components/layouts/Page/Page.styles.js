@@ -18,10 +18,12 @@ const containerDesktop = {
 const styles = {
   container: css({
     flex: 1,
+    height: '100%',
   }),
   content: css({
     display: 'flex',
     flexDirection: 'column',
+    height: ['100%', '', 'auto'],
     padding: [
       `0 ${Space.S40}px ${Space.S40}px`,
       '',
