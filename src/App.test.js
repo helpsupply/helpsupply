@@ -1,6 +1,4 @@
 import FirebaseBackend from './lib/firebaseBackend';
-import expectExport from 'expect';
-import { AlertHeading } from 'react-bootstrap/Alert';
 const fs = require('fs');
 
 const firebase = require('@firebase/testing');

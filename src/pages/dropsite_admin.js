@@ -58,13 +58,13 @@ function AdminDropSite({ backend, history, match }) {
   return (
     <Page currentProgress={4} totalProgress={5}>
       <DropSiteAdmin
+        onDelete={deleteRequest}
         {...{
           dropSite,
           requests,
           handleUpdateContact,
           handleUpdateLocation,
           handleRequestSupplies,
-          onDelete: deleteRequest,
         }}
       />
     </Page>

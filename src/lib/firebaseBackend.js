@@ -503,9 +503,9 @@ class FirebaseBackend extends BackendInterface {
           newDomains.push(change.doc.id);
           // Gross layer violation here
           if (window.Notification && Notification.permission === 'granted') {
-            var notification = new Notification(
-              'New domain added: ' + change.doc.id,
-            );
+            // var notification = new Notification(
+            //   'New domain added: ' + change.doc.id,
+            // );
           }
         }
 

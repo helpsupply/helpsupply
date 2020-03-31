@@ -2,7 +2,6 @@
 import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
-import { Routes } from 'constants/Routes';
 import { Emails } from 'constants/Emails';
 
 import Text from 'components/Text';
@@ -27,7 +26,7 @@ export const DropSiteAdmin = ({
   handleUpdateLocation,
   handleRequestSupplies,
   onDelete,
-  requests,
+  requests = [],
 }) => {
   const { t } = useTranslation();
   const locationDetails = (
@@ -73,7 +72,7 @@ export const DropSiteAdmin = ({
       </PrimaryButton>
       <Text css={styles.requestsHeader} as="h3" type={TEXT_TYPE.HEADER_4}>
         {t('dropsite.openRequests.title')}
-        <span css={styles.number}>4</span>
+        <span css={styles.number}>{requests.length}</span>
       </Text>
       <div css={styles.requestsContainer}>
         <Requests onDelete={onDelete} requests={requests} />
