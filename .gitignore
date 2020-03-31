@@ -7,3 +7,6 @@ node_modules/
 .idea
 .firebase/
 build/
+
+service-account-staging.json
+service-account.json
