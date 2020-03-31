@@ -12,15 +12,24 @@ const containerDesktop = {
   flexDirection: 'column',
   position: 'fixed',
   top: 0,
+  justifyContent: 'center',
 };
 
 const styles = {
+  container: css({
+    flex: 1,
+    height: '100%',
+  }),
   content: css({
     display: 'flex',
-    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    padding: [`0 ${Space.S40}px ${Space.S40}px`, '', `0 ${paddingDesktop}%`],
+    height: ['100%', '', 'auto'],
+    padding: [
+      `0 ${Space.S40}px ${Space.S40}px`,
+      '',
+      `${Space.S30}px ${paddingDesktop}%`,
+    ],
+    overflow: 'auto',
   }),
   headerContentDesktop: css({
     padding: `0 ${rightPaddingDesktop}% 0 ${paddingDesktop}%`,
@@ -36,6 +45,11 @@ const styles = {
     ...containerDesktop,
     left: '50%',
     right: 0,
+  }),
+  root: css({
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
   }),
 };
 

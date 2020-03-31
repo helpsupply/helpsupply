@@ -26,7 +26,7 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingBottom: Space.S40,
+    height: '100%',
   }),
 };
 

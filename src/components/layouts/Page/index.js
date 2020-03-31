@@ -27,11 +27,10 @@ const renderHeader = ({
         </div>
       </div>
     );
-  } else {
-    return (
-      <Header currentProgress={currentProgress} totalProgress={totalProgress} />
-    );
   }
+  return (
+    <Header currentProgress={currentProgress} totalProgress={totalProgress} />
+  );
 };
 
 const renderPageContent = ({
@@ -41,7 +40,7 @@ const renderPageContent = ({
   isHome,
   onBackButtonClick,
 }) => (
-  <div css={isDesktop && styles.rightContainerDesktop}>
+  <div css={[styles.container, isDesktop && styles.rightContainerDesktop]}>
     <div css={styles.content}>
       {!isHome && hasBackButton && <BackButton onClick={onBackButtonClick} />}
       {children}
@@ -63,7 +62,7 @@ const Page = ({
     matchesBreakpoint(Breakpoints.LARGE));
 
   return (
-    <Fragment>
+    <div css={styles.root}>
       {renderHeader({ currentProgress, isDesktop, isHome, totalProgress })}
       {renderPageContent({
         children,
@@ -72,7 +71,7 @@ const Page = ({
         isHome,
         onBackButtonClick,
       })}
-    </Fragment>
+    </div>
   );
 };
 
