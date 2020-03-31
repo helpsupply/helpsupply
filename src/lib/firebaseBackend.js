@@ -23,6 +23,24 @@ class FirebaseBackend extends BackendInterface {
     });
   }
 
+  async _checkValidity(data) {
+    let domain_names = [
+      ...new Set(data.map((d) => d.domain).filter((d) => d !== undefined)),
+    ];
+    const domains = await Promise.all(
+      domain_names.map((id) => this.firestore.doc(`domain/${id}`).get()),
+    );
+    let valid_domains = new Set();
+    domains.map(
+      (d) => d.data() && d.data().valid === 'true' && valid_domains.add(d.id),
+    );
+
+    return data.map((d) => {
+      d.valid = valid_domains.has(d.domain);
+      return d;
+    });
+  }
+
   async listDropSites(zipcode, radius) {
     let snapshot = await this.firestore.collection('dropSite').get();
     let data = snapshot.docs.map((d) => {
@@ -31,20 +49,7 @@ class FirebaseBackend extends BackendInterface {
       return dict;
     });
 
-    let domain_names = [
-      ...new Set(data.map((d) => d.domain).filter((d) => d !== undefined)),
-    ];
-    const domains = await Promise.all(
-      domain_names.map((id) => this.firestore.doc(`domain/${id}`).get()),
-    );
-    let valid_domains = new Set();
-    domains.map((d) => d.data().valid === 'true' && valid_domains.add(d.id));
-
-    return data.map((d) => {
-      d.valid = valid_domains.has(d.domain);
-      return d;
-    });
-
+    return this._checkValidity(data);
     // To do
     // create zipcode and radius filters
   }
@@ -56,17 +61,7 @@ class FirebaseBackend extends BackendInterface {
         .doc(dropSiteId)
         .get();
       let dropsite = doc.data();
-      let domain = dropsite.domain;
-      if (domain) {
-        let domainStatus = await this.firestore
-          .collection('domain')
-          .doc(domain)
-          .get();
-        dropsite.valid = domainStatus.data().valid == 'true';
-      } else {
-        dropsite.valid = false;
-      }
-      return dropsite;
+      return (await this._checkValidity([dropsite]))[0];
     } else {
       console.log('Error, one or more required params missing.');
       await Promise.reject('Error, one or more required params missing.');
@@ -210,7 +205,7 @@ class FirebaseBackend extends BackendInterface {
 
   // REQUESTS
 
-  getRequests(dropSiteId, requestType, status) {
+  async getRequests(dropSiteId, requestType, status) {
     if (dropSiteId) {
       var queryBuilder = this.firestore
         .collection('request')
@@ -221,17 +216,13 @@ class FirebaseBackend extends BackendInterface {
       if (status) {
         queryBuilder = queryBuilder.where('status', '==', status);
       }
-      return queryBuilder
-        .get()
-        .then((snapshot) => {
-          let data = snapshot.docs.map((d) => {
-            var dict = d.data();
-            dict['id'] = d.id;
-            return dict;
-          });
-          return data;
-        })
-        .catch(console.log);
+      let snapshot = await queryBuilder.get();
+      let data = snapshot.docs.map((d) => {
+        var dict = d.data();
+        dict['id'] = d.id;
+        return dict;
+      });
+      return this._checkValidity(data);
     } else {
       console.log('Error, one or more required params missing.');
       return Promise.reject('Error, one or more required params missing.');
@@ -289,7 +280,10 @@ class FirebaseBackend extends BackendInterface {
     status,
   ) {
     if (requestId) {
-      let updateObj = {};
+      let updateObj = {
+        domain: this.firebase.auth().currentUser.email.split('@')[1],
+        user: this.firebase.auth().currentUser.uid,
+      };
       if (requestType) {
         updateObj.requestType = requestType;
       }
