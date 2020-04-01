@@ -74,10 +74,11 @@ class FirebaseBackend extends BackendInterface {
       dropSite.location_id &&
       dropSite.dropSiteAddress
     ) {
+      const { currentUser } = this.firebase.auth();
       let newSiteObj = {
         ...dropSite,
-        domain: this.firebase.auth().currentUser.email.split('@')[1],
-        user: this.firebase.auth().currentUser.uid,
+        domain: currentUser.email.split('@')[1],
+        user: currentUser.uid,
       };
       return this.firestore
         .collection('dropSite')
@@ -99,14 +100,15 @@ class FirebaseBackend extends BackendInterface {
   // is not signed with any credentials and assumed to be invalid until
   // it is edited later in the flow.
   addNewDropSite({
-    dropSiteFacilityName,
-    dropSiteZip,
-    dropSiteAddress,
-    dropSiteCity,
-    dropSiteState,
-    dropSiteUrl,
+    dropSiteFacilityName = '',
+    dropSiteZip = '',
+    dropSiteAddress = '',
+    dropSiteCity = '',
+    dropSiteState = '',
+    dropSiteUrl = '',
   }) {
-    if (dropSiteFacilityName && dropSiteAddress && dropSiteZip) {
+    if (dropSiteFacilityName && dropSiteZip) {
+      const { currentUser } = this.firebase.auth();
       let newSiteObj = {
         dropSiteFacilityName,
         dropSiteZip,
@@ -114,6 +116,8 @@ class FirebaseBackend extends BackendInterface {
         dropSiteCity,
         dropSiteState,
         dropSiteUrl,
+        domain: currentUser?.email.split('@')[1] || '',
+        user: currentUser?.uid || '',
       };
       let db = this.firestore;
       return db

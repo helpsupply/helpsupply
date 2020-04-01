@@ -3,10 +3,13 @@ import { useEffect, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
 
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
+
 import Page from 'components/layouts/Page';
 import ContactForm from 'containers/ContactForm';
 
-function ContactDropSite({ backend, match }) {
+function ContactDropSite({ backend, history, match }) {
   const [dropSite, setDropSite] = useState();
   useEffect(() => {
     backend.getDropSites(match.params.id).then((data) => {
@@ -19,7 +22,17 @@ function ContactDropSite({ backend, match }) {
   }
 
   return (
-    <Page currentProgress={4} totalProgress={5}>
+    <Page
+      onBackButtonClick={() =>
+        history.push(
+          routeWithParams(Routes.DROPSITE_ADMIN, {
+            id: match.params.id,
+          }),
+        )
+      }
+      currentProgress={4}
+      totalProgress={5}
+    >
       <ContactForm backend={backend} dropSite={dropSite} />
     </Page>
   );

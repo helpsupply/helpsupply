@@ -95,26 +95,36 @@ function FindFacility({ backend, history }) {
     if (!selectedResult) {
       return;
     }
-
-    if (backend.authLoaded && backend.isLoggedIn()) {
-      backend.dropSiteExists(selectedResult).then((exists) => {
-        if (exists) {
+    const facility = hospital_index.index.id_index[selectedResult];
+    backend
+      .dropSiteExists(selectedResult)
+      .then((exists) => {
+        if (!exists) {
+          // create dropsite with corresponding facilty id and info
+          backend.addDropSite({
+            location_id: selectedResult,
+            dropSiteFacilityName: facility.name,
+            dropSiteCity: facility.city,
+            dropSiteState: facility.state,
+            dropSiteZip: facility.zip,
+          });
+        }
+      })
+      .then(() => {
+        if (backend.authLoaded && backend.isLoggedIn()) {
           history.push(
-            routeWithParams(Routes.DROPSITE_ADMIN, { id: selectedResult }),
+            routeWithParams(Routes.DROPSITE_ADMIN, {
+              id: selectedResult,
+            }),
           );
         } else {
           history.push(
-            routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+            routeWithParams(Routes.SIGNUP_DROPSITE, {
               id: selectedResult,
             }),
           );
         }
       });
-    } else {
-      history.push(
-        routeWithParams(Routes.SIGNUP_DROPSITE, { id: selectedResult }),
-      );
-    }
   }, [backend, history, selectedResult]);
 
   return (
