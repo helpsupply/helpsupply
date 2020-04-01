@@ -11,10 +11,7 @@ import { ReactComponent as Back } from 'static/icons/back-circle.svg';
 import styles from './BackButton.styles';
 
 const goBack = ({ history }) => () => {
-  const { host } = window.location;
-  const { referrer } = document;
-
-  if (history.length > 1 && referrer && referrer.includes(host)) {
+  if (history.length > 1) {
     history.goBack();
   } else {
     history.push(Routes.HOME);
