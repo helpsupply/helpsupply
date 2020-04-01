@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { Emails } from 'constants/Emails';
 import { Routes } from 'constants/Routes';
 
+import Anchor, { anchorTypes } from 'components/Anchor';
+
 import NewDropSiteForm from './NewDropSiteForm';
 
 class NewDropSite extends React.Component {
@@ -75,7 +77,10 @@ class NewDropSite extends React.Component {
                 log out
               </a>{' '}
               and try your work email or contact{' '}
-              <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
+              <Anchor href={`mailto:${Emails.HELP}`} as={anchorTypes.A}>
+                {Emails.HELP}
+              </Anchor>
+              .
             </div>
           </div>
         )}

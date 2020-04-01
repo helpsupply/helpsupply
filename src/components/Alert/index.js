@@ -3,7 +3,8 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { Emails } from 'constants/Emails';
 import { Routes } from 'constants/Routes';
-import Anchor from 'components/Anchor';
+
+import Anchor, { anchorTypes } from 'components/Anchor';
 
 import styles from './Alert.styles';
 
@@ -16,7 +17,11 @@ export const Alert = () => {
         {t('login.alert.link')}
       </Anchor>
       {t('login.alert.postLink')}
-      <Anchor css={styles.link} href={`mailto:${Emails.HELP}`}>
+      <Anchor
+        css={styles.link}
+        href={`mailto:${Emails.HELP}`}
+        as={anchorTypes.A}
+      >
         {Emails.HELP}
       </Anchor>
       .

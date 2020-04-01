@@ -7,7 +7,7 @@ import { Emails } from 'constants/Emails';
 
 import states from 'data/states';
 
-import Anchor from 'components/Anchor';
+import Anchor, { anchorTypes } from 'components/Anchor';
 import Note from 'components/Note';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
@@ -102,7 +102,9 @@ function FacilityForm({ handleSubmit, history, dropSite }) {
     >
       <Note key="note">
         {t('request.facilityForm.emailAt') + ' '}
-        <Anchor href={`mailto:${Emails.HELP}`}>{Emails.HELP}</Anchor>
+        <Anchor href={`mailto:${Emails.HELP}`} as={anchorTypes.A}>
+          {Emails.HELP}
+        </Anchor>
       </Note>
     </FormBuilder>
   );

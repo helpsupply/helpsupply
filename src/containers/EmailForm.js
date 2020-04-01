@@ -7,7 +7,7 @@ import { Routes } from 'constants/Routes';
 import { isValidEmail } from 'lib/utils/validations';
 
 import Note from 'components/Note';
-import Anchor from 'components/Anchor';
+import Anchor, { anchorTypes } from 'components/Anchor';
 import HeaderInfo from 'components/Form/HeaderInfo';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
@@ -69,7 +69,7 @@ function EmailForm({ backend, match }) {
     >
       <Note>
         {t('request.workEmailForm.workEmail.disclaimer') + ' '}
-        <Anchor href={Routes.HOME}>
+        <Anchor href={Routes.HOME} as={anchorTypes.A}>
           {t('request.workEmailForm.learnMore')}
         </Anchor>
       </Note>
