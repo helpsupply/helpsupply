@@ -5,17 +5,17 @@ let serviceAccount;
 let databaseURL;
 
 if (prodEnv) {
-  serviceAccount = require("./service-account.json");
-  databaseURL = "https://hospitalcommunity.firebaseio.com";
+  serviceAccount = null; //require("./service-account.json");
+  databaseURL = 'https://hospitalcommunity.firebaseio.com';
 } else {
-  serviceAccount = require("./service-account-staging.json");
-  databaseURL = "https://help-supply-staging.firebaseio.com";
+  serviceAccount = null; //require("./service-account-staging.json");
+  databaseURL = 'https://help-supply-staging.firebaseio.com';
 }
 
-var admin = require("firebase-admin");
+var admin = require('firebase-admin');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: databaseURL
+  databaseURL: databaseURL,
 });
 
 // DATABASE FUNCTIONS
@@ -24,12 +24,12 @@ const database = admin.firestore();
 
 function listDropSites(zipcode, radius) {
   return database
-    .collection("dropSite")
+    .collection('dropSite')
     .get()
-    .then(snapshot => {
-      let data = snapshot.docs.map(d => {
+    .then((snapshot) => {
+      let data = snapshot.docs.map((d) => {
         var dict = d.data();
-        dict["id"] = d.id;
+        dict['id'] = d.id;
         return dict;
       });
       return data;
@@ -42,20 +42,20 @@ function listDropSites(zipcode, radius) {
 function getDropSites(dropSiteId) {
   if (dropSiteId) {
     return database
-      .collection("dropSite")
+      .collection('dropSite')
       .doc(dropSiteId)
       .get()
-      .then(doc => {
+      .then((doc) => {
         if (doc.exists) {
           return doc.data();
         } else {
-          return "";
+          return '';
         }
       })
       .catch(console.log);
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
@@ -68,7 +68,7 @@ function addDropSite({
   dropSiteNotes,
   requestWillingToPay,
   domain,
-  user
+  user,
 }) {
   if (dropSiteDescription && location_id && dropSiteAddress) {
     let newSiteObj = {
@@ -80,21 +80,21 @@ function addDropSite({
       dropSiteNotes,
       requestWillingToPay,
       domain: domain,
-      user: user
+      user: user,
     };
     return database
-      .collection("dropSite")
+      .collection('dropSite')
       .doc(location_id)
       .set(newSiteObj)
-      .then(function(docRef) {
-        return "Drop site added";
+      .then(function (docRef) {
+        return 'Drop site added';
       })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
+      .catch(function (error) {
+        console.error('Error writing document: ', error);
       });
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
@@ -106,7 +106,7 @@ function addNewDropSite({
   dropSiteState,
   dropSiteUrl,
   domain,
-  user
+  user,
 }) {
   if (dropSiteFacilityName && dropSiteAddress && dropSiteZip) {
     let newSiteObj = {
@@ -117,26 +117,26 @@ function addNewDropSite({
       dropSiteState,
       dropSiteUrl,
       domain: domain,
-      user: user
+      user: user,
     };
     return database
-      .collection("dropSite")
+      .collection('dropSite')
       .add(newSiteObj)
-      .then(function(docRef) {
+      .then(function (docRef) {
         return database
-          .collection("dropSite")
+          .collection('dropSite')
           .doc(docRef.id)
           .set({ location_id: docRef.id }, { merge: true })
           .then(() => {
             return docRef.id;
           });
       })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
+      .catch(function (error) {
+        console.error('Error writing document: ', error);
       });
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
@@ -148,7 +148,7 @@ function editDropSite(
   dropSiteZip,
   dropSitePhone,
   domain,
-  user
+  user,
 ) {
   if (
     location_id &&
@@ -161,11 +161,11 @@ function editDropSite(
     let newSiteObj = {
       domain: domain,
       user: user,
-      dropSiteName: "",
-      dropSiteDescription: "",
-      dropSiteAddress: "",
-      dropSiteZip: "",
-      dropSitePhone: ""
+      dropSiteName: '',
+      dropSiteDescription: '',
+      dropSiteAddress: '',
+      dropSiteZip: '',
+      dropSitePhone: '',
     };
     if (dropSiteName) {
       newSiteObj.dropSiteName = dropSiteName;
@@ -183,34 +183,34 @@ function editDropSite(
       newSiteObj.dropSitePhone = dropSitePhone;
     }
     return database
-      .collection("dropSite")
+      .collection('dropSite')
       .doc(location_id)
       .set(newSiteObj, { merge: true })
-      .then(function() {
-        return "Drop site updated";
+      .then(function () {
+        return 'Drop site updated';
       })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
+      .catch(function (error) {
+        console.error('Error writing document: ', error);
       });
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
 function deleteDropSite(dropSiteId) {
   if (dropSiteId) {
     return database
-      .collection("dropSite")
+      .collection('dropSite')
       .doc(dropSiteId)
       .delete()
       .then(() => {
-        return dropSiteId + " deleted";
+        return dropSiteId + ' deleted';
       })
       .catch(console.log);
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
@@ -219,28 +219,28 @@ function deleteDropSite(dropSiteId) {
 function getRequests(dropSiteId, requestType, status) {
   if (dropSiteId) {
     var queryBuilder = database
-      .collection("request")
-      .where("dropSiteId", "==", dropSiteId);
+      .collection('request')
+      .where('dropSiteId', '==', dropSiteId);
     if (requestType) {
-      queryBuilder = queryBuilder.where("requestType", "==", requestType);
+      queryBuilder = queryBuilder.where('requestType', '==', requestType);
     }
     if (status) {
-      queryBuilder = queryBuilder.where("status", "==", status);
+      queryBuilder = queryBuilder.where('status', '==', status);
     }
     return queryBuilder
       .get()
-      .then(snapshot => {
-        let data = snapshot.docs.map(d => {
+      .then((snapshot) => {
+        let data = snapshot.docs.map((d) => {
           var dict = d.data();
-          dict["id"] = d.id;
+          dict['id'] = d.id;
           return dict;
         });
         return data;
       })
       .catch(console.log);
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
@@ -253,7 +253,7 @@ function addRequest(
   status,
   requestWillingToPay,
   domain,
-  user
+  user,
 ) {
   if (
     dropSiteId &&
@@ -264,7 +264,7 @@ function addRequest(
     status
   ) {
     return database
-      .collection("request")
+      .collection('request')
       .add({
         dropSiteId: dropSiteId,
         requestType: requestType,
@@ -274,17 +274,17 @@ function addRequest(
         status: status,
         domain: domain,
         user: user,
-        requestWillingToPay: requestWillingToPay
+        requestWillingToPay: requestWillingToPay,
       })
-      .then(function(docRef) {
+      .then(function (docRef) {
         return docRef.id;
       })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
+      .catch(function (error) {
+        console.error('Error writing document: ', error);
       });
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
@@ -294,7 +294,7 @@ function editRequest(
   requestTitle,
   requestDescription,
   requestQuantity,
-  status
+  status,
 ) {
   if (requestId) {
     let updateObj = {};
@@ -314,18 +314,18 @@ function editRequest(
       updateObj.status = status;
     }
     return database
-      .collection("request")
+      .collection('request')
       .doc(requestId)
       .set(updateObj, { merge: true })
-      .then(function(docRef) {
-        return "Request update success.";
+      .then(function (docRef) {
+        return 'Request update success.';
       })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
+      .catch(function (error) {
+        console.error('Error writing document: ', error);
       });
   } else {
-    console.log("Error, requestId is required.");
-    return Promise.reject("Error, requestId is required.");
+    console.log('Error, requestId is required.');
+    return Promise.reject('Error, requestId is required.');
   }
 
   // To do
@@ -336,16 +336,16 @@ function editRequest(
 function deleteRequest(requestId) {
   if (requestId) {
     return database
-      .collection("request")
+      .collection('request')
       .doc(requestId)
       .delete()
       .then(() => {
-        return requestId + " deleted";
+        return requestId + ' deleted';
       })
       .catch(console.log);
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
@@ -353,13 +353,13 @@ function deleteRequest(requestId) {
 
 function listSupply(dropSiteId) {
   return database
-    .collection("supply")
-    .where("dropSiteId", "==", dropSiteId)
+    .collection('supply')
+    .where('dropSiteId', '==', dropSiteId)
     .get()
-    .then(snapshot => {
-      let data = snapshot.docs.map(d => {
+    .then((snapshot) => {
+      let data = snapshot.docs.map((d) => {
         var dict = d.data();
-        dict["id"] = d.id;
+        dict['id'] = d.id;
         return dict;
       });
       return data;
@@ -376,7 +376,7 @@ function addSupply(
   supplyPhone,
   supplyQuantity,
   supplyDeliveryTime,
-  supplyComments
+  supplyComments,
 ) {
   if (
     dropSiteId &&
@@ -387,7 +387,7 @@ function addSupply(
     supplyComments
   ) {
     return database
-      .collection("supply")
+      .collection('supply')
       .add({
         dropSiteId: dropSiteId,
         requestId: requestId,
@@ -395,33 +395,33 @@ function addSupply(
         supplyPhone: supplyPhone,
         supplyQuantity: supplyQuantity,
         supplyDeliveryTime: supplyDeliveryTime,
-        supplyComments: supplyComments
+        supplyComments: supplyComments,
       })
-      .then(function(docRef) {
+      .then(function (docRef) {
         return docRef.id;
       })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
+      .catch(function (error) {
+        console.error('Error writing document: ', error);
       });
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
 function deleteSupply(supplyId) {
   if (supplyId) {
     return database
-      .collection("supply")
+      .collection('supply')
       .doc(supplyId)
       .delete()
       .then(() => {
-        return supplyId + " deleted";
+        return supplyId + ' deleted';
       })
       .catch(console.log);
   } else {
-    console.log("Error, one or more required params missing.");
-    return Promise.reject("Error, one or more required params missing.");
+    console.log('Error, one or more required params missing.');
+    return Promise.reject('Error, one or more required params missing.');
   }
 }
 
@@ -438,5 +438,5 @@ module.exports = {
   deleteRequest: deleteRequest,
   listSupply: listSupply,
   addSupply: addSupply,
-  deleteSupply: deleteSupply
+  deleteSupply: deleteSupply,
 };
