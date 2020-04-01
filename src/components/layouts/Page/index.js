@@ -1,52 +1,35 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import { Fragment } from 'react';
+import { useCallback, useState } from 'react';
+import { css, jsx } from '@emotion/core';
 
-import styles from './Page.styles';
+import { useMediaQuery } from 'hooks/useMediaQuery';
+import { Breakpoints } from 'constants/Breakpoints';
 
 import BackButton from 'components/BackButton';
 import Header from 'components/Header';
 import IntroContent from 'components/IntroContent';
 import LargeHeader from 'components/Header/LargeHeader';
 
-import { useMediaQuery } from 'hooks/useMediaQuery';
-import { Breakpoints } from 'constants/Breakpoints';
+import styles from './Page.styles';
 
-const renderHeader = ({
-  currentProgress,
-  isDesktop,
-  isHome,
-  totalProgress,
-}) => {
-  if (isHome || isDesktop) {
-    return (
-      <div css={isDesktop && styles.leftContainerDesktop}>
-        <div css={isDesktop && styles.headerContentDesktop}>
-          <LargeHeader />
-          {isDesktop && <IntroContent isDesktop />}
-        </div>
-      </div>
-    );
-  }
-  return (
-    <Header currentProgress={currentProgress} totalProgress={totalProgress} />
-  );
-};
-
-const renderPageContent = ({
+const PageContent = ({
   children,
   hasBackButton,
   isDesktop,
-  isHome,
   onBackButtonClick,
-}) => (
-  <div css={[styles.container, isDesktop && styles.rightContainerDesktop]}>
-    <div css={styles.content}>
-      {!isHome && hasBackButton && <BackButton onClick={onBackButtonClick} />}
-      {children}
+  topPadding,
+}) => {
+  const paddingStyles = topPadding > 0 && css({ paddingTop: topPadding });
+
+  return (
+    <div css={[styles.pageContentContainer, isDesktop && paddingStyles]}>
+      <div css={styles.pageContent}>
+        {hasBackButton && <BackButton onClick={onBackButtonClick} />}
+        {children}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Page = ({
   children,
@@ -56,21 +39,49 @@ const Page = ({
   currentProgress,
   totalProgress,
 }) => {
+  const [pageContentTopPadding, setPageContentTopPadding] = useState(0);
   const { matchesBreakpoint } = useMediaQuery();
+
   const isDesktop =
     (`(min-width: ${Breakpoints.LARGE}px)`,
     matchesBreakpoint(Breakpoints.LARGE));
+  const willUseSmallHeader = !isHome && !isDesktop;
+
+  const headerRef = useCallback((node) => {
+    if (node) {
+      setPageContentTopPadding(node.getBoundingClientRect().top);
+
+      window.addEventListener('resize', () =>
+        setPageContentTopPadding(node.getBoundingClientRect().top),
+      );
+    }
+  }, []);
 
   return (
     <div css={styles.root}>
-      {renderHeader({ currentProgress, isDesktop, isHome, totalProgress })}
-      {renderPageContent({
-        children,
-        hasBackButton,
-        isDesktop,
-        isHome,
-        onBackButtonClick,
-      })}
+      {willUseSmallHeader && (
+        <Header
+          currentProgress={currentProgress}
+          totalProgress={totalProgress}
+        />
+      )}
+
+      {!willUseSmallHeader && (
+        <div css={isDesktop && styles.headerContainerDesktop}>
+          <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
+            <LargeHeader />
+            {isDesktop && <IntroContent isDesktop />}
+          </div>
+        </div>
+      )}
+
+      <PageContent
+        children={children}
+        hasBackButton={hasBackButton}
+        isDesktop={isDesktop}
+        onBackButtonClick={onBackButtonClick}
+        topPadding={pageContentTopPadding}
+      />
     </div>
   );
 };
