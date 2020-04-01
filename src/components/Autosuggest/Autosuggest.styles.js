@@ -73,6 +73,9 @@ const styles = {
     '.react-autosuggest__suggestions-list': {
       listStyle: 'none',
       marginBottom: Space.S0,
+      maxHeight: '250px',
+      overflow: 'scroll',
+      '-webkit-overflow-scrolling': 'touch',
       padding: `0 ${Space.S20}px`,
 
       '> li': {
