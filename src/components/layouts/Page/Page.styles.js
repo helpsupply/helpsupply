@@ -5,46 +5,39 @@ const paddingDesktop = 22;
 const additionalRightPadding = paddingDesktop * 0.2;
 const rightPaddingDesktop = paddingDesktop + additionalRightPadding;
 
-const containerDesktop = {
-  bottom: 0,
-  display: 'flex',
-  flex: 1,
-  flexDirection: 'column',
-  position: 'fixed',
-  top: 0,
-  justifyContent: 'center',
-};
-
 const styles = {
-  container: css({
+  headerContainerDesktop: css({
+    backgroundColor: Color.CORAL,
+    bottom: 0,
+    display: 'flex',
     flex: 1,
-    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    left: 0,
+    position: 'fixed',
+    right: '50%',
+    top: 0,
   }),
-  content: css({
+  headerContentDesktop: css({
+    overflow: 'auto',
+    padding: `${Space.S40}px ${rightPaddingDesktop}% ${Space.S40}px ${paddingDesktop}%`,
+  }),
+  pageContent: css({
     display: 'flex',
     flexDirection: 'column',
     height: ['100%', '', 'auto'],
     padding: [
       `0 ${Space.S40}px ${Space.S40}px`,
       '',
-      `${Space.S30}px ${paddingDesktop}%`,
+      `${Space.S40}px ${paddingDesktop}% ${Space.S40}px `,
     ],
-    overflow: 'auto',
   }),
-  headerContentDesktop: css({
-    padding: `0 ${rightPaddingDesktop}% 0 ${paddingDesktop}%`,
-  }),
-  leftContainerDesktop: css({
-    ...containerDesktop,
-    backgroundColor: Color.CORAL,
-    justifyContent: 'center',
-    left: 0,
-    right: '50%',
-  }),
-  rightContainerDesktop: css({
-    ...containerDesktop,
-    left: '50%',
-    right: 0,
+  pageContentContainer: css({
+    alignSelf: ['', '', 'flex-end'],
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    width: ['', '', '50%'],
   }),
   root: css({
     display: 'flex',
