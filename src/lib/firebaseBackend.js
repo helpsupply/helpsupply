@@ -483,7 +483,7 @@ class FirebaseBackend extends BackendInterface {
       window.localStorage.removeItem('emailForSignIn');
       window.testfs = this.firestore;
     } else {
-      throw 'Email Link Invalid';
+      throw new Error('Email Link Invalid');
     }
   }
 
@@ -528,7 +528,7 @@ class FirebaseBackend extends BackendInterface {
         .doc(domain)
         .set({ valid: isValid ? 'true' : 'false' });
     } catch (e) {
-      throw 'Validating domains is not allowed';
+      throw new Error('Validating domains is not allowed');
     }
   }
 
