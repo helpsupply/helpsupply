@@ -12,7 +12,9 @@ i18n
       en: englishLocale,
     },
     fallbackLng: 'en',
-    debug: process.env.NODE_ENV === 'development',
+    debug:
+      process.env.NODE_ENV === 'development' &&
+      process.env.REACT_APP_DEBUG_TRANSLATIONS === 'true',
     ns: ['translations'],
     defaultNS: 'translations',
     keySeparator: false,

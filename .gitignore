@@ -1,4 +1,5 @@
 # .gitignore
+.env
 .DS_Store
 node_modules sendgrid.env
 sendgrid.env
