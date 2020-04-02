@@ -5,10 +5,10 @@ import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/utils/routes';
 import { Emails } from 'constants/Emails';
 
 import states from 'data/states';
+import { useStateValue, actions } from 'state/StateProvider';
 
 import Anchor, { anchorTypes } from 'components/Anchor';
 import Note from 'components/Note';
@@ -18,6 +18,7 @@ import { formFieldTypes } from 'components/Form/CreateFormFields';
 function FacilityForm({ backend, dropSite, dropSiteId }) {
   const { t } = useTranslation();
   const history = useHistory();
+  const dispatch = useStateValue()[1];
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
@@ -36,9 +37,11 @@ function FacilityForm({ backend, dropSite, dropSiteId }) {
       return backend
         .editDropSite({ location_id: dropSiteId, ...fields })
         .then((data) => {
-          history.push(
-            routeWithParams(Routes.FACILITY_CONFIRMATION, { id: dropSiteId }),
-          );
+          dispatch({
+            type: actions.ADD_PENDING_FACILITY,
+            pendingFacility: { location_id: dropSiteId, ...fields },
+          });
+          history.push(Routes.FACILITY_CONFIRMATION);
         });
     }
 
@@ -47,7 +50,11 @@ function FacilityForm({ backend, dropSite, dropSiteId }) {
         return;
       }
 
-      history.push(routeWithParams(Routes.FACILITY_CONFIRMATION, { id: data }));
+      dispatch({
+        type: actions.ADD_PENDING_FACILITY,
+        pendingFacility: { location_id: data, ...fields },
+      });
+      history.push(Routes.FACILITY_CONFIRMATION);
     });
   };
 

@@ -1,48 +1,41 @@
 /** @jsx jsx */
-import { useEffect, useState } from 'react';
 import { jsx } from '@emotion/core';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
+import { useStateValue } from 'state/StateProvider';
 
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
 import { FacilityConfirmation as FacilityConfirmationComponent } from 'components/Confirmation';
 
-function FacilityConfirmation({ backend }) {
+function FacilityConfirmation() {
   const history = useHistory();
-  const params = useParams();
+  const [{ pendingFacility }] = useStateValue();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [dropSite, setDropSite] = useState();
-
-  useEffect(() => {
-    backend.getDropSites(params.id).then((data) => {
-      setDropSite(data);
-      setIsLoading(false);
-    });
-  }, [backend, params.id]);
+  const hasPendingFacility =
+    !!pendingFacility && !!Object.keys(pendingFacility).length;
 
   const handleOnEdit = () => {
     history.push(
       routeWithParams(Routes.FACILITY_EDIT, {
-        id: dropSite.location_id,
+        id: pendingFacility.location_id,
       }),
     );
   };
 
   return (
     <Page currentProgress={2} totalProgress={5}>
-      {isLoading && <PageLoader />}
-      {!isLoading && (
+      {!hasPendingFacility && <PageLoader />}
+      {hasPendingFacility && (
         <FacilityConfirmationComponent
           onEdit={handleOnEdit}
-          name={dropSite.dropSiteFacilityName}
-          streetAddress={dropSite.dropSiteAddress}
-          city={dropSite.dropSiteCity}
-          state={dropSite.dropSiteState}
-          zip={dropSite.dropSiteZip}
+          name={pendingFacility.dropSiteFacilityName}
+          streetAddress={pendingFacility.dropSiteAddress}
+          city={pendingFacility.dropSiteCity}
+          state={pendingFacility.dropSiteState}
+          zip={pendingFacility.dropSiteZip}
         />
       )}
     </Page>

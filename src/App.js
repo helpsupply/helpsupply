@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Routes } from 'constants/Routes';
 
+import { StateProvider } from 'state/StateProvider';
+
 import NewSupplyRequest from 'pages/supplies_new';
 import NewSupplyRequestConfirmation from 'pages/supplies_new_confirmation';
 import AdminDropSite from 'pages/dropsite_admin';
@@ -31,6 +33,8 @@ import StyleGuide from 'components/StyleGuide/index';
 import Box from 'components/Box';
 import InvalidEmail from 'components/Alert/InvalidEmail';
 import Loading from 'components/Loading';
+
+import { actions } from 'state/StateProvider';
 
 import { styles } from './App.styles';
 
@@ -82,7 +86,7 @@ const ProtectedRoute = ({ backend, children, path }) => {
 
 function App({ backend }) {
   return (
-    <>
+    <StateProvider>
       <Global styles={styles} />
       <Router>
         <div className="App">
@@ -160,16 +164,16 @@ function App({ backend }) {
             <Route exact path={Routes.FACILITY_CONFIRMATION}>
               <FacilityConfirmation backend={backend} />
             </Route>
-            <Route exact path={Routes.FACILITY_EDIT}>
+            <ProtectedRoute exact path={Routes.FACILITY_EDIT} backend={backend}>
               <FacilityEdit backend={backend} />
-            </Route>
+            </ProtectedRoute>
             <Route path="*">
               <NoMatch />
             </Route>
           </Switch>
         </div>
       </Router>
-    </>
+    </StateProvider>
   );
 }
 
