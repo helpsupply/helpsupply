@@ -2,26 +2,54 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
+import { useHistory } from 'react-router-dom';
 
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
 import { Emails } from 'constants/Emails';
 
 import states from 'data/states';
 
-import Anchor from 'components/Anchor';
+import Anchor, { anchorTypes } from 'components/Anchor';
 import Note from 'components/Note';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function FacilityForm({ handleSubmit, history, dropSite }) {
+function FacilityForm({ backend, dropSite, dropSiteId }) {
   const { t } = useTranslation();
+  const history = useHistory();
+
+  const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    dropSiteFacilityName: dropSite.dropSiteFacilityName || '',
-    dropSiteZip: dropSite.dropSiteZip || '',
-    dropSiteAddress: dropSite.dropSiteAddress || '',
-    dropSiteCity: dropSite.dropSiteCity || '',
-    dropSiteState: dropSite.dropSiteState || '',
-    dropSiteUrl: dropSite.dropSiteUrl || '',
+    dropSiteFacilityName: dropSite?.dropSiteFacilityName || '',
+    dropSiteZip: dropSite?.dropSiteZip || '',
+    dropSiteAddress: dropSite?.dropSiteAddress || '',
+    dropSiteCity: dropSite?.dropSiteCity || '',
+    dropSiteState: dropSite?.dropSiteState || '',
+    dropSiteUrl: dropSite?.dropSiteUrl || '',
   });
+
+  const handleSubmit = () => {
+    setIsLoading(true);
+
+    if (dropSiteId) {
+      return backend
+        .editDropSite({ location_id: dropSiteId, ...fields })
+        .then((data) => {
+          history.push(
+            routeWithParams(Routes.FACILITY_CONFIRMATION, { id: dropSiteId }),
+          );
+        });
+    }
+
+    backend.addNewDropSite(fields).then((data) => {
+      if (!data) {
+        return;
+      }
+
+      history.push(routeWithParams(Routes.FACILITY_CONFIRMATION, { id: data }));
+    });
+  };
 
   const handleFieldChange = useCallback(
     (field) => (value) => {
@@ -99,10 +127,13 @@ function FacilityForm({ handleSubmit, history, dropSite }) {
       onSubmit={() => handleSubmit(fields)}
       title={t('request.facilityForm.title')}
       fields={fieldData}
+      isLoading={isLoading}
     >
       <Note key="note">
         {t('request.facilityForm.emailAt') + ' '}
-        <Anchor href={`mailto:${Emails.HELP}`}>{Emails.HELP}</Anchor>
+        <Anchor href={`mailto:${Emails.HELP}`} as={anchorTypes.A}>
+          {Emails.HELP}
+        </Anchor>
       </Note>
     </FormBuilder>
   );

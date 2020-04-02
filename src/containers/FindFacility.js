@@ -79,6 +79,7 @@ function FindFacility({ backend, history }) {
   const { t } = useTranslation();
   const [results, setResults] = useState([]);
   const [selectedResult, setSelectedResult] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = useCallback((value) => {
     if (value.length > 1) {
@@ -96,25 +97,42 @@ function FindFacility({ backend, history }) {
       return;
     }
 
-    if (backend.authLoaded && backend.isLoggedIn()) {
-      backend.dropSiteExists(selectedResult).then((exists) => {
-        if (exists) {
+    setIsLoading(true);
+
+    const facility = hospital_index.index.id_index[selectedResult];
+    backend
+      .dropSiteExists(selectedResult)
+      .then((exists) => {
+        if (!exists) {
+          // create dropsite with corresponding facilty id and info
+          backend.addDropSite({
+            location_id: selectedResult,
+            dropSiteFacilityName: facility.name,
+            dropSiteCity: facility.city,
+            dropSiteState: facility.state,
+            dropSiteZip: facility.zip,
+          });
+        }
+      })
+      .then(() => {
+        if (backend.authLoaded && backend.isLoggedIn()) {
           history.push(
-            routeWithParams(Routes.DROPSITE_ADMIN, { id: selectedResult }),
+            routeWithParams(Routes.DROPSITE_ADMIN, {
+              id: selectedResult,
+            }),
           );
         } else {
           history.push(
-            routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+            routeWithParams(Routes.SIGNUP_DROPSITE, {
               id: selectedResult,
             }),
           );
         }
+      })
+      .catch((error) => {
+        console.error('error', error);
+        setIsLoading(false);
       });
-    } else {
-      history.push(
-        routeWithParams(Routes.SIGNUP_DROPSITE, { id: selectedResult }),
-      );
-    }
   }, [backend, history, selectedResult]);
 
   return (
@@ -123,6 +141,7 @@ function FindFacility({ backend, history }) {
       title={t('request.facilitySearch.title')}
       description={t('request.facilitySearch.description')}
       disabled={!selectedResult}
+      isLoading={isLoading}
     >
       <Autosuggest
         label={t('request.facilitySearch.search.label')}

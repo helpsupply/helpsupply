@@ -12,17 +12,17 @@ export const PrimaryButton = ({ children, ...rest }) => (
 );
 
 PrimaryButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 export const SecondaryButton = ({ children, ...rest }) => (
   <button css={[styles.root, styles[type.OUTLINE]]} type="button" {...rest}>
-    {children}
+    <span css={styles.inner}>{children}</span>
   </button>
 );
 
 SecondaryButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 export const LinkButton = ({ children, ...rest }) => (
@@ -32,7 +32,7 @@ export const LinkButton = ({ children, ...rest }) => (
 );
 
 LinkButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 export const IconButton = ({ children, ...rest }) => (

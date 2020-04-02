@@ -11,7 +11,7 @@ import { TEXT_TYPE } from 'components/Text/constants';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function SupplyForm({ onSubmit }) {
+function SupplyForm({ handleSubmit }) {
   const { t } = useTranslation();
   const [fields, setFields] = useState({
     detailedRequirements: undefined,
@@ -27,10 +27,6 @@ function SupplyForm({ onSubmit }) {
     },
     [],
   );
-
-  const handleSubmit = useCallback(() => {
-    onSubmit(fields);
-  }, [fields, onSubmit]);
 
   const { detailedRequirements, type, kind, quantity } = fields;
 
@@ -90,12 +86,12 @@ function SupplyForm({ onSubmit }) {
 
   return (
     <FormBuilder
+      buttonLabel={t('generic.form.submitLabel')}
       defaultValues={fields}
-      buttonLabel="Submit"
-      onSubmit={handleSubmit}
       description={t('request.supplyForm.description')}
-      title={t('request.supplyForm.title')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
+      onSubmit={() => handleSubmit(fields)}
+      title={t('request.supplyForm.title')}
       fields={fieldData}
     />
   );

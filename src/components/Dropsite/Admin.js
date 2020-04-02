@@ -2,14 +2,16 @@
 import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
+
 import { Emails } from 'constants/Emails';
+import { TEXT_TYPE } from 'components/Text/constants';
 
 import Text from 'components/Text';
-import { TEXT_TYPE } from 'components/Text/constants';
 import Note from 'components/Note';
-import Anchor from 'components/Anchor';
+import Anchor, { anchorTypes } from 'components/Anchor';
 import Card from 'components/Card';
 import { PrimaryButton } from 'components/Button';
+
 import Requests from './Requests';
 
 import { styles } from './DropSiteAdmin.styles';
@@ -79,7 +81,10 @@ export const DropSiteAdmin = ({
         <div css={styles.footer}>
           <Note>
             {t('dropsite.footer.content')}{' '}
-            <Anchor href={`mailto:${Emails.HELP}`}>{Emails.HELP}</Anchor>.
+            <Anchor href={`mailto:${Emails.HELP}`} as={anchorTypes.A}>
+              {Emails.HELP}
+            </Anchor>
+            .
           </Note>
         </div>
       </div>

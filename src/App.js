@@ -9,11 +9,15 @@ import { Routes } from 'constants/Routes';
 import NewSupplyRequest from 'pages/supplies_new';
 import AdminDropSite from 'pages/dropsite_admin';
 import ContactDropSite from 'pages/dropsite_contact';
+import ContactDropSiteConfirmation from 'pages/dropsite_contact_confirmation';
 import NewFacility from 'pages/facility_new';
+import FacilityConfirmation from 'pages/facility_confirmation';
+import FacilityEdit from 'pages/facility_edit';
 import NewDropSite from 'pages/dropsite_new';
 import EntryPortal from 'pages/entry';
 import Request from 'pages/request';
 import SignUp from 'pages/signup';
+import SignUpConfirmation from 'pages/signup_confirmation';
 
 import HCPSignupFinish from 'components/HCPSignupFinish';
 import DropSite from 'components/DropSite';
@@ -88,8 +92,19 @@ function App({ backend }) {
             <Route path={Routes.LOGOUT}>
               <Logout backend={backend} />
             </Route>
-            <ProtectedRoute backend={backend} path={Routes.DROPSITE_CONTACT}>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.DROPSITE_CONTACT}
+            >
               <ContactDropSite backend={backend} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.DROPSITE_CONTACT_CONFIRMATION}
+            >
+              <ContactDropSiteConfirmation backend={backend} />
             </ProtectedRoute>
             <ProtectedRoute backend={backend} path={Routes.DROPSITE_NEW_ADMIN}>
               <NewDropSite backend={backend} />
@@ -121,13 +136,21 @@ function App({ backend }) {
             <Route path={Routes.REQUEST_SUPPLIES}>
               <Request backend={backend} />
             </Route>
-            <Route path={Routes.SIGNUP_DROPSITE}>
+            <Route exact path={Routes.SIGNUP_DROPSITE}>
               <SignUp backend={backend} />
             </Route>
-            <Route path={Routes.NEW_FACILITY}>
+            <Route exact path={Routes.SIGNUP_DROPSITE_CONFIRMATION}>
+              <SignUpConfirmation backend={backend} />
+            </Route>
+            <Route exact path={Routes.NEW_FACILITY}>
               <NewFacility backend={backend} />
             </Route>
-
+            <Route exact path={Routes.FACILITY_CONFIRMATION}>
+              <FacilityConfirmation backend={backend} />
+            </Route>
+            <Route exact path={Routes.FACILITY_EDIT}>
+              <FacilityEdit backend={backend} />
+            </Route>
             <Route path="*">
               <NoMatch />
             </Route>

@@ -10,10 +10,12 @@ import CreateFormFields, {
 function FormBuilder({
   buttonLabel,
   children,
+  subSection,
   defaultValues,
   description,
   disabled,
   fields,
+  isLoading,
   onSubmit,
   title,
 }) {
@@ -22,11 +24,13 @@ function FormBuilder({
   return (
     <Form
       buttonLabel={buttonLabel || t('generic.form.submitLabel')}
+      subSection={subSection}
       defaultValues={defaultValues}
       onSubmit={onSubmit}
       title={title}
       disabled={disabled}
       description={description}
+      isLoading={isLoading}
     >
       {CreateFormFields(fields)}
       {children}
@@ -45,8 +49,10 @@ FormBuilder.propTypes = {
       ...formFieldPropTypes,
     }),
   ).isRequired,
+  isLoading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   title: PropTypes.string,
+  subSection: PropTypes.object,
 };
 
 export default FormBuilder;

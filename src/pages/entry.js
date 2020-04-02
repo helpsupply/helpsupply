@@ -19,7 +19,7 @@ function EntryPortal() {
     matchesBreakpoint(Breakpoints.LARGE));
 
   return (
-    <Page isHome>
+    <Page isHome hasBackButton={false}>
       <ListLink
         href={Routes.REQUEST_SERVICES}
         title={t('home.needServices.title')}

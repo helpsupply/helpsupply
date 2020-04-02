@@ -3,7 +3,6 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
 import englishLocale from './locales/en.json';
-console.log(englishLocale);
 
 i18n
   .use(LanguageDetector)

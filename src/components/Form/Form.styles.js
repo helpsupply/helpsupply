@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Space } from 'lib/theme';
+import { Height, Space } from 'lib/theme';
 
 const styles = {
   back: css({
@@ -19,7 +19,13 @@ const styles = {
     marginBottom: Space.S15,
   }),
   button: css({
-    minHeight: 65,
+    minHeight: Height.INPUT,
+    position: 'relative',
+  }),
+  loader: css({
+    left: '20px',
+    position: 'absolute',
+    top: `calc(50% - ${Height.LOADER / 2})`,
   }),
   root: css({
     display: 'flex',

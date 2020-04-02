@@ -5,13 +5,15 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
+
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
-import ContactForm from 'containers/ContactForm';
+import { FacilityConfirmation as FacilityConfirmationComponent } from 'components/Confirmation';
 
-function ContactDropSite({ backend }) {
+function FacilityConfirmation({ backend }) {
   const history = useHistory();
   const params = useParams();
+
   const [isLoading, setIsLoading] = useState(true);
   const [dropSite, setDropSite] = useState();
 
@@ -22,24 +24,29 @@ function ContactDropSite({ backend }) {
     });
   }, [backend, params.id]);
 
+  const handleOnEdit = () => {
+    history.push(
+      routeWithParams(Routes.FACILITY_EDIT, {
+        id: dropSite.location_id,
+      }),
+    );
+  };
+
   return (
-    <Page
-      onBackButtonClick={() =>
-        history.push(
-          routeWithParams(Routes.DROPSITE_ADMIN, {
-            id: params.id,
-          }),
-        )
-      }
-      currentProgress={4}
-      totalProgress={5}
-    >
+    <Page currentProgress={2} totalProgress={5}>
       {isLoading && <PageLoader />}
-      {!isLoading && !!dropSite && (
-        <ContactForm backend={backend} dropSite={dropSite} />
+      {!isLoading && (
+        <FacilityConfirmationComponent
+          onEdit={handleOnEdit}
+          name={dropSite.dropSiteFacilityName}
+          streetAddress={dropSite.dropSiteAddress}
+          city={dropSite.dropSiteCity}
+          state={dropSite.dropSiteState}
+          zip={dropSite.dropSiteZip}
+        />
       )}
     </Page>
   );
 }
 
-export default ContactDropSite;
+export default FacilityConfirmation;
