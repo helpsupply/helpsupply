@@ -3,12 +3,12 @@ class BackendInterface {
 
   listDropSites(zipcode, radius) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   getDropSites(dropSiteId) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   addDropSite(
@@ -19,7 +19,7 @@ class BackendInterface {
     dropSiteZip,
   ) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   editDropSite(
@@ -29,14 +29,14 @@ class BackendInterface {
     dropSiteZip,
   ) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   // REQUESTS
 
   getRequests(dropSiteId, requestType, status) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   addRequest(
@@ -48,7 +48,7 @@ class BackendInterface {
     status,
   ) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   editRequest(
@@ -60,52 +60,52 @@ class BackendInterface {
     status,
   ) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   isLoggedIn() {
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   async isValidHealthcareWorker() {
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   // VALIDATED DOMAINS
 
   getPendingDomains() {
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   setDomainIsValid(domain, isValid) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   // HEALTH CARE PROFESSIONALS AND ADMINS
 
   signupWithEmail(email) {
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   addHealthcareProfessional(userId) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   editHealthcareProfessional(hcpId, valid) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   addDropSiteAdmin(userId, dropSiteId) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 
   removeDropSiteAdmin(userId, dropSiteId) {
     // Abstract
-    throw 'Abstract Interface';
+    throw new Error('Abstract Interface');
   }
 }
 
