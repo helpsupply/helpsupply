@@ -5,13 +5,15 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
+
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
-import ContactForm from 'containers/ContactForm';
+import { ContactConfirmation } from 'components/Confirmation';
 
-function ContactDropSite({ backend }) {
+function ContactDropSiteConfirmation({ backend }) {
   const history = useHistory();
   const params = useParams();
+
   const [isLoading, setIsLoading] = useState(true);
   const [dropSite, setDropSite] = useState();
 
@@ -21,6 +23,14 @@ function ContactDropSite({ backend }) {
       setIsLoading(false);
     });
   }, [backend, params.id]);
+
+  const handleOnEdit = () => {
+    history.push(
+      routeWithParams(Routes.DROPSITE_CONTACT, {
+        id: params.id,
+      }),
+    );
+  };
 
   return (
     <Page
@@ -36,10 +46,14 @@ function ContactDropSite({ backend }) {
     >
       {isLoading && <PageLoader />}
       {!isLoading && !!dropSite && (
-        <ContactForm backend={backend} dropSite={dropSite} />
+        <ContactConfirmation
+          onEdit={handleOnEdit}
+          name={dropSite.dropSiteName}
+          contact={dropSite.dropSitePhone}
+        />
       )}
     </Page>
   );
 }
 
-export default ContactDropSite;
+export default ContactDropSiteConfirmation;

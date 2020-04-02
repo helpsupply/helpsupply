@@ -22,20 +22,26 @@ function EmailForm({ backend, match }) {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [dropSite, setDropSite] = useState(match.params.id);
 
   useEffect(() => {
     setDropSite(match.params.id);
   }, [match.params.id]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
+    setIsLoading(true);
+
     backend
       .signupWithEmail(email, dropSite)
       .then(() => {
         setSent(true);
+        setIsLoading(false);
       })
-      .catch(alert);
+      .catch((error) => {
+        console.error('error', error);
+        setIsLoading(false);
+      });
     // TODO: handle exceptions
   };
 
@@ -65,6 +71,7 @@ function EmailForm({ backend, match }) {
       title={t('request.workEmailForm.title')}
       description={t('request.workEmailForm.description')}
       disabled={!isValidEmail(email)}
+      isLoading={isLoading}
       fields={fieldData}
     >
       <Note>

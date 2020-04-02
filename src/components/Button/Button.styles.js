@@ -3,6 +3,10 @@ import { buttonReset, Color, Radius, Space } from 'lib/theme';
 import { type } from './constants';
 
 const styles = {
+  inner: css({
+    display: 'block',
+    marginBottom: '1px',
+  }),
   root: css({
     ...buttonReset,
     borderRadius: Radius.ROUNDED,

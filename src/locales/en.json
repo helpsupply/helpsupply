@@ -67,6 +67,7 @@
     "request.dropSiteContactForm.name.label": "Name",
     "request.dropSiteContactForm.contact.label": "Email or phone number",
     "request.dropSiteContactForm.sent.title": "We added the facility contact info",
+    "request.dropSiteContactForm.sent.button.label": "Create new request",
     "dropsite.requestSuppliesButton.label": "Request supplies",
     "dropsite.openRequests.title": "Open requests",
     "dropsite.openRequests.requestId": "Request ID",
