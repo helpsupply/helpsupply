@@ -11,6 +11,8 @@ import AdminDropSite from 'pages/dropsite_admin';
 import ContactDropSite from 'pages/dropsite_contact';
 import ContactDropSiteConfirmation from 'pages/dropsite_contact_confirmation';
 import NewFacility from 'pages/facility_new';
+import FacilityConfirmation from 'pages/facility_confirmation';
+import FacilityEdit from 'pages/facility_edit';
 import NewDropSite from 'pages/dropsite_new';
 import EntryPortal from 'pages/entry';
 import Request from 'pages/request';
@@ -136,10 +138,15 @@ function App({ backend }) {
             <Route path={Routes.SIGNUP_DROPSITE}>
               <SignUp backend={backend} />
             </Route>
-            <Route path={Routes.NEW_FACILITY}>
+            <Route exact path={Routes.NEW_FACILITY}>
               <NewFacility backend={backend} />
             </Route>
-
+            <Route exact path={Routes.FACILITY_CONFIRMATION}>
+              <FacilityConfirmation backend={backend} />
+            </Route>
+            <Route exact path={Routes.FACILITY_EDIT}>
+              <FacilityEdit backend={backend} />
+            </Route>
             <Route path="*">
               <NoMatch />
             </Route>

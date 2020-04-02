@@ -8,7 +8,14 @@ import Text from 'components/Text';
 import SubRow from './SubRow';
 import ConfirmationWrapper from './ConfirmationWrapper';
 
-function FacilityConfirmation({ onEdit, name, address }) {
+function FacilityConfirmation({
+  onEdit,
+  name,
+  streetAddress,
+  city,
+  state,
+  zip,
+}) {
   const { t } = useTranslation();
 
   return (
@@ -20,7 +27,11 @@ function FacilityConfirmation({ onEdit, name, address }) {
         details={
           <Fragment>
             <Text as="p">{name}</Text>
-            <Text as="p">{address}</Text>
+            <Text as="p">
+              {streetAddress}
+              <br />
+              {`${city}, ${state}  ${zip}`}
+            </Text>
           </Fragment>
         }
       />
