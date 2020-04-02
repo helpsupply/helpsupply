@@ -1,10 +1,15 @@
+import { getPersistedState, persistState } from './persistState';
 import { actions } from './StateProvider';
 
-export const initialState = {
+const persistedState = getPersistedState();
+
+export const initialState = persistedState || {
   pendingFacility: {},
 };
 
 export const reducer = (state, action) => {
+  persistState(state, action);
+
   switch (action.type) {
     case actions.ADD_PENDING_FACILITY:
       return {

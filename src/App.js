@@ -34,8 +34,6 @@ import Box from 'components/Box';
 import InvalidEmail from 'components/Alert/InvalidEmail';
 import Loading from 'components/Loading';
 
-import { actions } from 'state/StateProvider';
-
 import { styles } from './App.styles';
 
 const ProtectedRoute = ({ backend, children, path }) => {
