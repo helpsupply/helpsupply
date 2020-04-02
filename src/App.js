@@ -17,6 +17,7 @@ import NewDropSite from 'pages/dropsite_new';
 import EntryPortal from 'pages/entry';
 import Request from 'pages/request';
 import SignUp from 'pages/signup';
+import SignUpConfirmation from 'pages/signup_confirmation';
 
 import HCPSignupFinish from 'components/HCPSignupFinish';
 import DropSite from 'components/DropSite';
@@ -135,8 +136,11 @@ function App({ backend }) {
             <Route path={Routes.REQUEST_SUPPLIES}>
               <Request backend={backend} />
             </Route>
-            <Route path={Routes.SIGNUP_DROPSITE}>
+            <Route exact path={Routes.SIGNUP_DROPSITE}>
               <SignUp backend={backend} />
+            </Route>
+            <Route exact path={Routes.SIGNUP_DROPSITE_CONFIRMATION}>
+              <SignUpConfirmation backend={backend} />
             </Route>
             <Route exact path={Routes.NEW_FACILITY}>
               <NewFacility backend={backend} />

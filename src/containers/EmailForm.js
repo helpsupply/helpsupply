@@ -2,32 +2,37 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
 import { isValidEmail } from 'lib/utils/validations';
 
 import Note from 'components/Note';
 import Anchor, { anchorTypes } from 'components/Anchor';
-import HeaderInfo from 'components/Form/HeaderInfo';
+
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-const validate = (val) => {
-  if (!isValidEmail(val)) {
-    return 'Please enter a valid email address';
-  }
-};
-
-function EmailForm({ backend, match }) {
+function EmailForm({ backend }) {
+  const history = useHistory();
+  const params = useParams();
   const { t } = useTranslation();
+
   const [email, setEmail] = useState('');
-  const [sent, setSent] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
-  const [dropSite, setDropSite] = useState(match.params.id);
+  const [dropSite, setDropSite] = useState(params.id);
 
   useEffect(() => {
-    setDropSite(match.params.id);
-  }, [match.params.id]);
+    setDropSite(params.id);
+  }, [params.id]);
+
+  const validate = (val) => {
+    if (!isValidEmail(val)) {
+      return t('request.workEmailForm.workEmail.validation.label');
+    }
+  };
 
   const handleSubmit = () => {
     setIsLoading(true);
@@ -35,8 +40,11 @@ function EmailForm({ backend, match }) {
     backend
       .signupWithEmail(email, dropSite)
       .then(() => {
-        setSent(true);
-        setIsLoading(false);
+        history.push(
+          routeWithParams(Routes.SIGNUP_DROPSITE_CONFIRMATION, {
+            id: params.id,
+          }),
+        );
       })
       .catch((error) => {
         console.error('error', error);
@@ -44,15 +52,6 @@ function EmailForm({ backend, match }) {
       });
     // TODO: handle exceptions
   };
-
-  if (sent) {
-    return (
-      <HeaderInfo
-        title={t('request.workEmailForm.sent.title')}
-        description={t('request.workEmailForm.sent.description')}
-      />
-    );
-  }
 
   const fieldData = [
     {
