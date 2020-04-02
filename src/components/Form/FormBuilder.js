@@ -15,6 +15,7 @@ function FormBuilder({
   description,
   disabled,
   fields,
+  isLoading,
   onSubmit,
   title,
 }) {
@@ -29,6 +30,7 @@ function FormBuilder({
       title={title}
       disabled={disabled}
       description={description}
+      isLoading={isLoading}
     >
       {CreateFormFields(fields)}
       {children}
@@ -47,6 +49,7 @@ FormBuilder.propTypes = {
       ...formFieldPropTypes,
     }),
   ).isRequired,
+  isLoading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   title: PropTypes.string,
   subSection: PropTypes.object,

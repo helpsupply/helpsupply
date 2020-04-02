@@ -79,6 +79,7 @@ function FindFacility({ backend, history }) {
   const { t } = useTranslation();
   const [results, setResults] = useState([]);
   const [selectedResult, setSelectedResult] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = useCallback((value) => {
     if (value.length > 1) {
@@ -95,6 +96,9 @@ function FindFacility({ backend, history }) {
     if (!selectedResult) {
       return;
     }
+
+    setIsLoading(true);
+
     const facility = hospital_index.index.id_index[selectedResult];
     backend
       .dropSiteExists(selectedResult)
@@ -124,6 +128,10 @@ function FindFacility({ backend, history }) {
             }),
           );
         }
+      })
+      .catch((error) => {
+        console.error('error', error);
+        setIsLoading(false);
       });
   }, [backend, history, selectedResult]);
 
@@ -133,6 +141,7 @@ function FindFacility({ backend, history }) {
       title={t('request.facilitySearch.title')}
       description={t('request.facilitySearch.description')}
       disabled={!selectedResult}
+      isLoading={isLoading}
     >
       <Autosuggest
         label={t('request.facilitySearch.search.label')}

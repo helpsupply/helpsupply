@@ -14,6 +14,9 @@ export const styles = {
     marginBottom: 0,
   }),
   root: css({
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
     width: '100%',
   }),
   section: css({

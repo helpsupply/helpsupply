@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
+import { useForm, FormContext } from 'react-hook-form';
 import PropTypes from 'prop-types';
+
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import HeaderInfo from './HeaderInfo';
 import { PrimaryButton } from 'components/Button';
-import { useForm, FormContext } from 'react-hook-form';
+import Loader from 'components/Loader';
 
 import styles from './Form.styles.js';
 
@@ -17,6 +19,7 @@ const Form = ({
   defaultValues,
   description,
   disabled,
+  isLoading,
   onSubmit,
   title,
 }) => {
@@ -35,12 +38,8 @@ const Form = ({
         </div>
         <div>
           {subSection}
-          <PrimaryButton
-            type="submit"
-            onClick={onSubmit}
-            disabled={disabled}
-            css={styles.button}
-          >
+          <PrimaryButton type="submit" disabled={disabled} css={styles.button}>
+            {isLoading && <Loader passedStyles={styles.loader} />}
             <Text type={TEXT_TYPE.BODY_1}>
               {buttonLabel || t('generic.form.submitLabelNext')}
             </Text>
@@ -57,6 +56,7 @@ Form.propTypes = {
   buttonLabel: PropTypes.string,
   description: PropTypes.string,
   disabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   title: PropTypes.string,
   subSection: PropTypes.object,

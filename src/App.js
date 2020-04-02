@@ -9,6 +9,7 @@ import { Routes } from 'constants/Routes';
 import NewSupplyRequest from 'pages/supplies_new';
 import AdminDropSite from 'pages/dropsite_admin';
 import ContactDropSite from 'pages/dropsite_contact';
+import ContactDropSiteConfirmation from 'pages/dropsite_contact_confirmation';
 import NewFacility from 'pages/facility_new';
 import NewDropSite from 'pages/dropsite_new';
 import EntryPortal from 'pages/entry';
@@ -88,8 +89,19 @@ function App({ backend }) {
             <Route path={Routes.LOGOUT}>
               <Logout backend={backend} />
             </Route>
-            <ProtectedRoute backend={backend} path={Routes.DROPSITE_CONTACT}>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.DROPSITE_CONTACT}
+            >
               <ContactDropSite backend={backend} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.DROPSITE_CONTACT_CONFIRMATION}
+            >
+              <ContactDropSiteConfirmation backend={backend} />
             </ProtectedRoute>
             <ProtectedRoute backend={backend} path={Routes.DROPSITE_NEW_ADMIN}>
               <NewDropSite backend={backend} />
