@@ -157,16 +157,36 @@ twilioBot.post('/dropSiteDetails', (req, res) => {
   }
 });
 
+var admin = require('firebase-admin');
+var app = admin.initializeApp();
+app.auth = () => {
+  return { onAuthStateChanged: () => {} };
+};
+let backend = new FirebaseBackend(app);
+
 // lt -h "http://serverless.social" -p 5001
-twilioBot.all('/chatFlow/:task', (req, res) => {
+twilioBot.all('/chatFlow/:task', async (req, res) => {
   if (tools.verifyTwilio(req)) {
+    let state = await backend.getConversationState(req.body.UserIdentifier);
+    console.log('Got state', state);
+    let context = {
+      backend: backend,
+      user: req.body.UserIdentifier,
+      remember: (key, value) => {
+        state[key] = value;
+      },
+    };
+
     let answers = JSON.parse(req.body.Memory).twilio.collected_data[
       'collect_' + req.params.task
     ].answers;
-    let [state, response, next_task] = chatFlow[req.params.task].handler(
+    let [response, next_task] = await chatFlow[req.params.task].handler(
+      context,
       answers,
-      {},
+      state,
     );
+    console.log('Setting state', state);
+    await backend.setConversationState(context.user, state);
     let outputToTwilio = tools.tResponseNew();
     outputToTwilio = tools.tResponseAddMsg(outputToTwilio, response);
     if (next_task)

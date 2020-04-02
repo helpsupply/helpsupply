@@ -3,11 +3,12 @@ import Firebase from 'firebase';
 import config from '../components/Firebase/config';
 
 class FirebaseBackend extends BackendInterface {
+  // Note: testApp can also be an admin app
   constructor(testApp) {
     super();
 
     this.firebase = testApp || Firebase.initializeApp(config);
-    testApp || this.firebase.analytics();
+    testApp || (this.firebase.analytics && this.firebase.analytics());
     this.firestore = this.firebase.firestore();
     this.loggedIn = false;
     this.authLoaded = false;
@@ -483,6 +484,17 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
+  // Conversation state
+  // Note: only firebase functions have permissions to call these
+  async getConversationState(user) {
+    let state = await this.firestore.collection('conversation').doc(user).get();
+    return state ? state.data() || {} : {};
+  }
+
+  async setConversationState(user, state) {
+    await this.firestore.collection('conversation').doc(user).set(state);
+  }
+
   // VALIDATED DOMAINS
 
   async getDomains(pendingOnly, callback) {
@@ -502,7 +514,11 @@ class FirebaseBackend extends BackendInterface {
         if (change.type === 'added') {
           newDomains.push(change.doc.id);
           // Gross layer violation here
-          if (window.Notification && Notification.permission === 'granted') {
+          if (
+            typeof window !== 'undefined' &&
+            window.Notification &&
+            Notification.permission === 'granted'
+          ) {
             // var notification = new Notification(
             //   'New domain added: ' + change.doc.id,
             // );

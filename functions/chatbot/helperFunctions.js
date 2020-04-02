@@ -3,6 +3,8 @@ const functionhost =
   'http://slimy-panda-64.serverless.social/help-supply-staging/us-central1';
 
 function verifyTwilio(req) {
+  if (process.env.HELP_SUPPLY_HOST) return true; // Don't validate during dev
+
   // as per https://www.twilio.com/blog/how-to-secure-twilio-webhook-urls-in-nodejs
   const twilioSignature = req.headers['x-twilio-signature'];
   const params = req.body;
@@ -14,7 +16,6 @@ function verifyTwilio(req) {
     url,
     params,
   );
-  return true;
   return requestIsValid;
 }
 

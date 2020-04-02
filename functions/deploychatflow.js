@@ -18,7 +18,7 @@ const chatFlow = require('./chatflow').chatFlow;
 console.log(chatFlow);
 
 const functionhost =
-  'http://slimy-panda-64.serverless.social/help-supply-staging/us-central1';
+  process.env.HELP_SUPPLY_HOST + '/help-supply-staging/us-central1';
 
 let twilioImport = {
   friendlyName: '',
