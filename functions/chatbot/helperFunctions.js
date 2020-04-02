@@ -1,17 +1,20 @@
-const twilio = require("twilio"); // needed in verifyTwilio() for verification
+const twilio = require('twilio'); // needed in verifyTwilio() for verification
+const functionhost =
+  'http://slimy-panda-64.serverless.social/help-supply-staging/us-central1';
 
 function verifyTwilio(req) {
+  if (process.env.HELP_SUPPLY_HOST) return true; // Don't validate during dev
+
   // as per https://www.twilio.com/blog/how-to-secure-twilio-webhook-urls-in-nodejs
-  const twilioSignature = req.headers["x-twilio-signature"];
+  const twilioSignature = req.headers['x-twilio-signature'];
   const params = req.body;
-  const baseUrl =
-    "https://us-central1-hospitalcommunity.cloudfunctions.net/twilio";
-  const url = baseUrl + req.path;
+  const baseUrl = functionhost + '/twilio';
+  const url = baseUrl + req.url;
   const requestIsValid = twilio.validateRequest(
     process.env.TWILIO_AUTH_TOKEN,
     twilioSignature,
     url,
-    params
+    params,
   );
   return requestIsValid;
 }
@@ -30,7 +33,7 @@ function searchByZip(hospital_index, zip) {
 // creates a new response object
 function tResponseNew() {
   const actionsTemplate = {
-    actions: []
+    actions: [],
   };
   return actionsTemplate;
 }
@@ -38,14 +41,14 @@ function tResponseNew() {
 // adds a new message to the response object
 function tResponseAddMsg(responseObj, message) {
   responseObj.actions.push({
-    say: message
+    say: message,
   });
   return responseObj;
 }
 
 function tResponseEndByListening(responseObj) {
   responseObj.actions.push({
-    listen: true
+    listen: true,
   });
   return responseObj;
 }
@@ -56,13 +59,13 @@ function tResponseEndByRedirect(responseObj, urlRedirectTrue, taskNameOrURL) {
     responseObj.actions.push({
       redirect: {
         uri: taskNameOrURL,
-        method: "POST"
-      }
+        method: 'POST',
+      },
     });
   } else {
-    let taskURL = "task://" + taskNameOrURL;
+    let taskURL = 'task://' + taskNameOrURL;
     responseObj.actions.push({
-      redirect: taskURL
+      redirect: taskURL,
     });
   }
   return responseObj;
@@ -71,7 +74,7 @@ function tResponseEndByRedirect(responseObj, urlRedirectTrue, taskNameOrURL) {
 // adds a memory
 function tResponseAddMemory(responseObj, objWithKeyValuePairs) {
   responseObj.actions.push({
-    remember: objWithKeyValuePairs
+    remember: objWithKeyValuePairs,
   });
   return responseObj;
 }
@@ -104,5 +107,5 @@ module.exports = {
   tResponseAddMsg: tResponseAddMsg,
   tResponseEndByListening: tResponseEndByListening,
   tResponseEndByRedirect: tResponseEndByRedirect,
-  tResponseAddMemory: tResponseAddMemory
+  tResponseAddMemory: tResponseAddMemory,
 };
