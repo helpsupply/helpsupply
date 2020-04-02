@@ -4,7 +4,7 @@ export const Routes = {
   DROPSITE_CONTACT_CONFIRMATION: `/dropsite/:id/contact/confirmation`,
   DROPSITE_DETAIL: `/dropsite/:id`,
   DROPSITE_NEW_ADMIN: `/dropsite/new/admin/:id`,
-  FACILITY_CONFIRMATION: '/facility/:id/confirmation',
+  FACILITY_CONFIRMATION: '/facility/confirmation',
   FACILITY_EDIT: '/facility/:id/edit',
   FAQ: '/faq',
   HOME: '/',

@@ -14,10 +14,16 @@ function FacilityEdit({ backend }) {
   const [dropSite, setDropSite] = useState();
 
   useEffect(() => {
-    backend.getDropSites(params.id).then((data) => {
-      setDropSite(data);
-      setIsLoading(false);
-    });
+    backend
+      .getDropSites(params.id)
+      .then((data) => {
+        setDropSite(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('error', error);
+        setIsLoading(false);
+      });
   }, [backend, params.id]);
 
   return (
