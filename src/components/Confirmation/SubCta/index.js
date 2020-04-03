@@ -6,9 +6,9 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { styles } from './SubCta.styles';
 
-const SubCta = ({ message, href }) => {
+const SubCta = ({ message, href, passedStyles }) => {
   return (
-    <Anchor href={href}>
+    <Anchor href={href} css={passedStyles}>
       <Text css={styles.subCta} type={TEXT_TYPE.BODY_2}>
         {message}
       </Text>

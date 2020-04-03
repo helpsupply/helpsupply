@@ -20,4 +20,5 @@ export const Routes = {
   SIGNUP_FINISH_DROPSITE: `/signup/finish/:id`,
   STYLE_GUIDE: '/style-guide',
   SUPPLY_NEW_ADMIN: `/new/admin/supply/:id`,
+  SUPPLY_NEW_ADMIN_CONFIRMATION: `/new/admin/supply/:id/confirmation`,
 };

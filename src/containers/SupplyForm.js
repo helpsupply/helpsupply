@@ -2,7 +2,10 @@
 import { useState, useCallback } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
+import { useHistory, useParams } from 'react-router-dom';
 
+import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
 import { Space } from 'lib/theme';
 
 import Note from 'components/Note';
@@ -11,8 +14,12 @@ import { TEXT_TYPE } from 'components/Text/constants';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function SupplyForm({ handleSubmit }) {
+function SupplyForm({ backend }) {
+  const history = useHistory();
+  const params = useParams();
+
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
     detailedRequirements: undefined,
     type: undefined,
@@ -28,7 +35,25 @@ function SupplyForm({ handleSubmit }) {
     [],
   );
 
-  const { detailedRequirements, type, kind, quantity } = fields;
+  const handleSubmit = () => {
+    console.log('handle supply submit for dropsite', fields);
+    setIsLoading(true);
+
+    // TODO: plug this form in
+    setTimeout(() => {
+      history.push(
+        routeWithParams(Routes.SUPPLY_NEW_ADMIN_CONFIRMATION, {
+          id: params.id,
+        }),
+      );
+    }, 2000);
+  };
+
+  const {
+    requestWillingToPay,
+    detailedRequirements,
+    ...requiredFields
+  } = fields;
 
   const fieldData = [
     {
@@ -36,21 +61,43 @@ function SupplyForm({ handleSubmit }) {
       label: t('request.supplyForm.type.label'),
       name: 'type',
       type: formFieldTypes.INPUT_DROPDOWN,
-      value: type,
+      value: requiredFields.type,
+      options: [
+        // TODO: get real options
+        {
+          value: 'mask',
+          label: 'Mask',
+        },
+        {
+          value: 'mask_v2',
+          label: 'Mask V2',
+        },
+      ],
     },
     {
       customOnChange: handleFieldChange('kind'),
       label: t('request.supplyForm.kind.label'),
       name: 'kind',
       type: formFieldTypes.INPUT_DROPDOWN,
-      value: kind,
+      value: requiredFields.kind,
+      options: [
+        // TODO: get real kinds
+        {
+          value: 'kind_one',
+          label: 'Kind One',
+        },
+        {
+          value: 'kind_two',
+          label: 'Kind two',
+        },
+      ],
     },
     {
       customOnChange: handleFieldChange('quantity'),
       label: t('request.supplyForm.quantity.label'),
       name: 'quantity',
       type: formFieldTypes.INPUT_TEXT,
-      value: quantity,
+      value: requiredFields.quantity,
     },
     {
       type: formFieldTypes.NODE,
@@ -72,7 +119,7 @@ function SupplyForm({ handleSubmit }) {
       label: t('request.supplyForm.facilityWillPayLargeVolumes.label'),
       name: 'facilityWillPayLargeVolumes',
       type: formFieldTypes.INPUT_CHECKBOX,
-      value: '1',
+      value: `${requestWillingToPay}`,
     },
     {
       type: formFieldTypes.NODE,
@@ -89,10 +136,11 @@ function SupplyForm({ handleSubmit }) {
       buttonLabel={t('generic.form.submitLabel')}
       defaultValues={fields}
       description={t('request.supplyForm.description')}
-      disabled={!Object.keys(fields).every((key) => !!fields[key])}
-      onSubmit={() => handleSubmit(fields)}
+      disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
+      onSubmit={handleSubmit}
       title={t('request.supplyForm.title')}
       fields={fieldData}
+      isLoading={isLoading}
     />
   );
 }

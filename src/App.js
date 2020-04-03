@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Routes } from 'constants/Routes';
 
 import NewSupplyRequest from 'pages/supplies_new';
+import NewSupplyRequestConfirmation from 'pages/supplies_new_confirmation';
 import AdminDropSite from 'pages/dropsite_admin';
 import ContactDropSite from 'pages/dropsite_contact';
 import ContactDropSiteConfirmation from 'pages/dropsite_contact_confirmation';
@@ -109,8 +110,19 @@ function App({ backend }) {
             <ProtectedRoute backend={backend} path={Routes.DROPSITE_NEW_ADMIN}>
               <NewDropSite backend={backend} />
             </ProtectedRoute>
-            <ProtectedRoute backend={backend} path={Routes.SUPPLY_NEW_ADMIN}>
+            <ProtectedRoute
+              exact
+              backend={backend}
+              path={Routes.SUPPLY_NEW_ADMIN}
+            >
               <NewSupplyRequest backend={backend} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              backend={backend}
+              path={Routes.SUPPLY_NEW_ADMIN_CONFIRMATION}
+            >
+              <NewSupplyRequestConfirmation backend={backend} />
             </ProtectedRoute>
             <Route path={Routes.SIGNUP_FINISH_DROPSITE}>
               <HCPSignupFinish backend={backend} />
