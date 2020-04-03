@@ -11,7 +11,7 @@ import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidEmail } from 'lib/utils/validations';
 
-import { useLoggedIn } from 'hooks/useLoggedIn';
+import { useAuth } from 'hooks/useAuth';
 
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
@@ -19,7 +19,7 @@ import Note from 'components/Note';
 import Anchor, { anchorTypes } from 'components/Anchor';
 
 function HCPSignupFinish({ backend }) {
-  const { loggedIn } = useLoggedIn();
+  const { isLoggedIn } = useAuth();
   const history = useHistory();
   const params = useParams();
   const { t } = useTranslation();
@@ -31,14 +31,14 @@ function HCPSignupFinish({ backend }) {
   const { id: dropsite } = params;
 
   useEffect(() => {
-    if (loggedIn && dropsite) {
+    if (isLoggedIn && dropsite) {
       history.push(
         routeWithParams(Routes.DROPSITE_ADMIN, {
           id: dropsite,
         }),
       );
     }
-  }, [loggedIn, history, dropsite]);
+  }, [isLoggedIn, history, dropsite]);
 
   const handleSubmit = useCallback(
     ({ email }) => {
