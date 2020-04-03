@@ -7,14 +7,17 @@ import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 
 import Page from 'components/layouts/Page';
+import PageLoader from 'components/Loader/PageLoader';
 import DropSiteForm from 'containers/DropSiteForm';
 
 function NewDropSite({ backend, history, match }) {
   const [dropSite, setDropSite] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     backend.getDropSites(match.params.id).then((data) => {
       setDropSite(data);
+      setIsLoading(false);
     });
   }, [backend, match.params.id]);
 
@@ -29,13 +32,10 @@ function NewDropSite({ backend, history, match }) {
     [backend, history],
   );
 
-  if (!dropSite) {
-    return null;
-  }
-
   return (
     <Page currentProgress={4} totalProgress={5}>
-      <DropSiteForm onSubmit={onSubmit} dropSite={dropSite} />
+      {isLoading && <PageLoader />}
+      {!isLoading && <DropSiteForm onSubmit={onSubmit} dropSite={dropSite} />}
     </Page>
   );
 }
