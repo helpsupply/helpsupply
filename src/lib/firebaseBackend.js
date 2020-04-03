@@ -224,7 +224,7 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
-  addRequest(
+  addRequest({
     dropSiteId,
     requestType,
     requestTitle,
@@ -232,12 +232,11 @@ class FirebaseBackend extends BackendInterface {
     requestQuantity,
     status,
     requestWillingToPay,
-  ) {
+  }) {
     if (
       dropSiteId &&
       requestType &&
       requestTitle &&
-      requestDescription &&
       requestQuantity &&
       status
     ) {
@@ -247,12 +246,12 @@ class FirebaseBackend extends BackendInterface {
           dropSiteId: dropSiteId,
           requestType: requestType,
           requestTitle: requestTitle,
-          requestDescription: requestDescription,
+          requestDescription: requestDescription || '',
           requestQuantity: requestQuantity,
           status: status,
           domain: this.firebase.auth().currentUser.email.split('@')[1],
           user: this.firebase.auth().currentUser.uid,
-          requestWillingToPay: requestWillingToPay,
+          requestWillingToPay: requestWillingToPay || false,
         })
         .then(function (docRef) {
           return docRef.id;
@@ -266,34 +265,28 @@ class FirebaseBackend extends BackendInterface {
     }
   }
 
-  editRequest(
+  editRequest({
     requestId,
     requestType,
     requestTitle,
     requestDescription,
     requestQuantity,
     status,
-  ) {
+    requestWillingToPay,
+  }) {
     if (requestId) {
       let updateObj = {
         domain: this.firebase.auth().currentUser.email.split('@')[1],
         user: this.firebase.auth().currentUser.uid,
+        requestId,
+        requestType,
+        requestTitle,
+        requestDescription,
+        requestQuantity,
+        status,
+        requestWillingToPay,
       };
-      if (requestType) {
-        updateObj.requestType = requestType;
-      }
-      if (requestTitle) {
-        updateObj.requestTitle = requestTitle;
-      }
-      if (requestDescription) {
-        updateObj.requestDescription = requestDescription;
-      }
-      if (requestQuantity) {
-        updateObj.requestQuantity = requestQuantity;
-      }
-      if (status) {
-        updateObj.status = status;
-      }
+
       return this.firestore
         .collection('request')
         .doc(requestId)

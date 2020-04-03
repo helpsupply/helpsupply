@@ -39,26 +39,28 @@ class BackendInterface {
     throw new Error('Abstract Interface');
   }
 
-  addRequest(
+  addRequest({
     dropSiteId,
     requestType,
     requestTitle,
     requestDescription,
     requestQuantity,
     status,
-  ) {
+    requestWillingToPay,
+  }) {
     // Abstract
     throw new Error('Abstract Interface');
   }
 
-  editRequest(
+  editRequest({
     requestId,
     requestType,
     requestTitle,
     requestDescription,
     requestQuantity,
     status,
-  ) {
+    requestWillingToPay,
+  }) {
     // Abstract
     throw new Error('Abstract Interface');
   }
