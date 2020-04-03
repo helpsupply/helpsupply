@@ -2,16 +2,20 @@ import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-export const useLoggedIn = () => {
-  const [user, setUser] = useState({ loggedIn: false });
+export const useAuth = () => {
+  const [auth, setAuth] = useState({
+    isInitializing: true,
+    isLoggedIn: false,
+    user: null,
+  });
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUser({ loggedIn: true, email: user.email });
-      } else {
-        setUser({ loggedIn: false });
-      }
+      setAuth({
+        isInitializing: false,
+        isLoggedIn: user !== null,
+        user: user,
+      });
     });
 
     return () => {
@@ -19,5 +23,5 @@ export const useLoggedIn = () => {
     };
   }, []);
 
-  return user;
+  return auth;
 };
