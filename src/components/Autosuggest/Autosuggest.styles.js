@@ -83,6 +83,9 @@ const styles = {
         ':not(:last-of-type)': {
           borderBottom: `1px solid ${Color.GRAY_LIGHT}`,
         },
+        '& > div': {
+          cursor: 'pointer',
+        },
       },
     },
   }),
