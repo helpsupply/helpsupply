@@ -12,3 +12,6 @@ export const Color = {
   GRAY_LIGHT: '#DBDBDB',
   WHITE: '#FFFFFF',
 };
+
+Color.PRIMARY = Color.CORAL;
+Color.SECONDARY = Color.CORAL_30;

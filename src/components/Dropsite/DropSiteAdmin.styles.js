@@ -19,7 +19,7 @@ export const styles = {
     marginTop: Space.S30,
   }),
   requestsHeader: css({
-    color: Color.CORAL,
+    color: Color.PRIMARY,
     marginTop: Space.S10,
   }),
   requestsContainer: css({
