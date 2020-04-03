@@ -16,4 +16,5 @@ export const Routes = {
   SIGNUP_FINISH_DROPSITE: `/signupFinish/:dropsite?`,
   STYLE_GUIDE: '/style-guide',
   SUPPLY_NEW_ADMIN: `/new/admin/supply/:id`,
+  VERIFY_FROM_CHAT: `/verifyFromChat/:email`,
 };

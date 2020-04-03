@@ -1,9 +1,12 @@
+const hospital_index = require('./chatbot/hospital_index');
+const tools = require('./chatbot/helperFunctions');
+
 const chatFlow = {
   greeting: {
-    say: 'Hello!',
     collect: [
       {
-        question: 'Hi! Are you a healthcare professional?',
+        question:
+          'Hi! Welcome to Help Supply. We’re here to help Healthcare Professionals easily connect with services that make their lives easier during COVID-19. Are you a healthcare professional looking for some help?',
         name: 'is_hcp',
         type: 'Twilio.YES_NO',
       },
@@ -16,39 +19,62 @@ const chatFlow = {
     },
     samples: ['hi', 'hello', 'sup', 'hey'],
   },
-  dev: {
-    say: 'I see you are devloper',
-    collect: [
-      {
-        question: 'r u devleper?',
-        name: 'is_dev',
-        type: 'Twilio.YES_NO',
-      },
-    ],
-    handler: async function (context, parsed_data, state) {
-      state.counter = (state.counter || 0) + 1;
-      return ['Nice! ' + context.user + '#' + state.counter];
-    },
-    samples: ['dev', 'test'],
-  },
+
   select_service: {
-    say: 'We can connect you with organization that provide many services',
     collect: [
       {
-        question: 'What do you need?\n1.Groceries\n2.Mental Health',
+        question: 'What do you need?\r\n1.Groceries\r\n2.Mental Health',
         name: 'service_type',
       },
     ],
     handler: async function (context, parsed_data, state) {
-      console.log(parsed_data);
-      if (parsed_data.service_type.answer == '1') {
-        return ['Thanks!', 'request_groceries'];
-      } else if (parsed_data.service_type.answer == '2') {
-        return ['Thanks!', 'request_mental_health'];
-      }
-      return ["I didn't get that, come again?", 'select_service'];
+      state.active_request = parsed_data.service_type.answer;
+      return [
+        "Great, we can help you with that. First we need to confirm you're a healthcare professional.",
+        'find_facility',
+      ];
     },
   },
+
+  find_facility: {
+    collect: [
+      {
+        question:
+          "We're currently servicing select hospital networks, select which you are a part of:\r\n1. NYU\r\n2. Cornell\r\n3. Other",
+        name: 'hospital',
+        type: 'Twilio.NUMBER_SEQUENCE',
+      },
+    ],
+    handler: async function (context, parsed_data, state) {
+      switch (parsed_data.hospital.answer) {
+        case '1':
+          state.network = 'nyu';
+          return ['Thanks.', 'verify_email'];
+        case '2':
+          state.network = 'cornell';
+          return ['Thanks.', 'verify_email'];
+        case '3':
+          return ["Sorry, we aren't servicing your hospital yet."];
+        default:
+          return ["I didn't catch that, come again?", 'find_facility'];
+      }
+    },
+  },
+
+  verify_email: {
+    collect: [
+      {
+        question:
+          "What is your work email, we'll send you an email to confirm your affiliation",
+        name: 'email',
+      },
+    ],
+    handler: async function (context, parsed_data, state) {
+      context.verify_email(parsed_data.email.answer);
+      return ['Thanks, please check your email!'];
+    },
+  },
+
   request_groceries: {
     say: "Great, we're partnering with [SOME ORG] who can help",
     collect: [

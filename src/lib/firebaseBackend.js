@@ -1,6 +1,10 @@
 import BackendInterface from './backendInterface';
 import Firebase from 'firebase';
-import config from '../components/Firebase/config';
+
+let config = {};
+try {
+  config = require('../components/Firebase/config');
+} catch (e) {}
 
 class FirebaseBackend extends BackendInterface {
   // Note: testApp can also be an admin app
@@ -14,14 +18,18 @@ class FirebaseBackend extends BackendInterface {
     this.authLoaded = false;
     this.badDomain = false;
 
-    this.firebase.auth().onAuthStateChanged((user) => {
-      this.authLoaded = true;
-      if (user) {
-        this.loggedIn = true;
-      } else {
-        this.loggedIn = false;
-      }
-    });
+    let auth = this.firebase.auth();
+
+    if (auth.onAuthStateChanged) {
+      auth.onAuthStateChanged((user) => {
+        this.authLoaded = true;
+        if (user) {
+          this.loggedIn = true;
+        } else {
+          this.loggedIn = false;
+        }
+      });
+    }
   }
 
   async _checkValidity(data) {

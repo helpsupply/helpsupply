@@ -17,13 +17,14 @@ const { exec } = require('child_process');
 const chatFlow = require('./chatflow').chatFlow;
 console.log(chatFlow);
 
-const functionhost =
-  process.env.HELP_SUPPLY_HOST + '/help-supply-staging/us-central1';
+const functionhost = process.env.HELP_SUPPLY_HOST
+  ? process.env.HELP_SUPPLY_HOST + '/help-supply-staging/us-central1'
+  : 'https://us-central1-help-supply-staging.cloudfunctions.net/';
 
 let twilioImport = {
   friendlyName: '',
   logQueries: true,
-  uniqueName: 'helpsupply2',
+  uniqueName: 'helpsupply_staging',
   defaults: {
     defaults: {
       assistant_initiation: 'task://greeting',
@@ -106,23 +107,33 @@ for (const taskname in chatFlow) {
       taggedText: s,
     };
   });
+  let actions = [];
+  if (chatFlow[taskname].collect) {
+    actions.push({
+      collect: {
+        on_complete: {
+          redirect: {
+            method: 'POST',
+            uri: functionhost + '/twilio/chatFlow/' + taskname,
+          },
+        },
+        name: 'collect_' + taskname,
+        questions: chatFlow[taskname].collect,
+      },
+    });
+  } else {
+    actions.push({
+      redirect: {
+        method: 'POST',
+        uri: functionhost + '/twilio/chatFlow/' + taskname,
+      },
+    });
+  }
+
   let task = {
     uniqueName: taskname,
     actions: {
-      actions: [
-        {
-          collect: {
-            on_complete: {
-              redirect: {
-                method: 'POST',
-                uri: functionhost + '/twilio/chatFlow/' + taskname,
-              },
-            },
-            name: 'collect_' + taskname,
-            questions: chatFlow[taskname].collect,
-          },
-        },
-      ],
+      actions: actions,
     },
     fields: [],
     samples: samples,

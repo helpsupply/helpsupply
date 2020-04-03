@@ -22,6 +22,7 @@ import NoMatch from 'components/NoMatch';
 import Login from 'components/Login';
 import Logout from 'components/Logout';
 import Profile from 'components/Profile';
+import VerifyFromChat from 'components/VerifyFromChat';
 import StyleGuide from 'components/StyleGuide/index';
 import Box from 'components/Box';
 import InvalidEmail from 'components/Alert/InvalidEmail';
@@ -127,7 +128,9 @@ function App({ backend }) {
             <Route path={Routes.NEW_FACILITY}>
               <NewFacility backend={backend} />
             </Route>
-
+            <Route path={Routes.VERIFY_FROM_CHAT}>
+              <VerifyFromChat backend={backend} />
+            </Route>
             <Route path="*">
               <NoMatch />
             </Route>

@@ -11,7 +11,7 @@ const chatFlow = require('./chatflow').chatFlow;
 
 //const db = require('./firebaseBackend');
 
-import FirebaseBackend from '../src/lib/firebaseBackend';
+import FirebaseBackend from 'firebase-backend';
 
 // Setup Express app for listening to requests
 const twilioBot = express();
@@ -157,14 +157,68 @@ twilioBot.post('/dropSiteDetails', (req, res) => {
   }
 });
 
+var twilio = require('twilio');
+
+const accountSid = 'AC123fd9157f152b83bcd2cd75427ac1ab';
+const authToken = 'your_auth_token';
+const client = require('twilio')(accountSid, authToken);
+
+client.messages
+  .create({
+    body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+    from: '+15017122661',
+    to: '+15558675310',
+  })
+  .then((message) => console.log(message.sid));
+
 var admin = require('firebase-admin');
 var app = admin.initializeApp();
-app.auth = () => {
-  return { onAuthStateChanged: () => {} };
-};
 let backend = new FirebaseBackend(app);
 
-// lt -h "http://serverless.social" -p 5001
+/*
+ * In order to send an email login link, we need to load up the
+ * client libraries, which is a pain. Note that, auth doesn't
+ * work against emulated firebase :(
+ */
+
+let firebase_client = require('firebase');
+let config = {
+  apiKey: 'AIzaSyAXmpRfgvne_w2apeWb3Q8wSNUqNey3-Mg',
+  authDomain: 'help-supply-staging.firebaseapp.com',
+  databaseURL: 'https://help-supply-staging.firebaseio.com',
+  projectId: 'help-supply-staging',
+  storageBucket: 'help-supply-staging.appspot.com',
+  messagingSenderId: '395198068697',
+  appId: '1:395198068697:web:3a7975e877fbc98c190bc8',
+  measurementId: 'G-5SYKT9JHQF',
+};
+firebase_client.initializeApp(config);
+
+async function sendVerification(userRecord) {
+  var actionCodeSettings = {
+    url: 'http://' + 'localhost:3000' + '/verifyFromChat/' + userRecord.email,
+    handleCodeInApp: true,
+  };
+  await firebase_client
+    .auth()
+    .sendSignInLinkToEmail(userRecord.email, actionCodeSettings);
+  console.log('Email sent!');
+}
+
+async function verify_email(email) {
+  let user = null;
+  try {
+    user = await app.auth().getUserByEmail(email);
+  } catch (error) {
+    user = await app.auth().createUser({ email: email });
+  }
+  return await sendVerification(user);
+}
+
+twilioBot.all('/confirmValidation/:token', async (req, res) => {
+  res.send('??' + app.auth().createUser);
+});
+
 twilioBot.all('/chatFlow/:task', async (req, res) => {
   if (tools.verifyTwilio(req)) {
     let state = await backend.getConversationState(req.body.UserIdentifier);
@@ -175,11 +229,14 @@ twilioBot.all('/chatFlow/:task', async (req, res) => {
       remember: (key, value) => {
         state[key] = value;
       },
+      verify_email: verify_email,
     };
 
-    let answers = JSON.parse(req.body.Memory).twilio.collected_data[
-      'collect_' + req.params.task
-    ].answers;
+    let answers = (
+      (JSON.parse(req.body.Memory).twilio.collected_data || {})[
+        'collect_' + req.params.task
+      ] || {}
+    ).answers;
     let [response, next_task] = await chatFlow[req.params.task].handler(
       context,
       answers,
