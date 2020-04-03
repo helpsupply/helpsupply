@@ -6,7 +6,7 @@ const mobileMinHeight = '276px';
 const styles = {
   root: css({
     alignItems: 'flex-end',
-    backgroundColor: `${Color.CORAL}`,
+    backgroundColor: `${Color.PRIMARY}`,
     display: 'flex',
     minHeight: [mobileMinHeight, '', 'auto'],
     padding: [`${Space.S40}px`, '', 0],

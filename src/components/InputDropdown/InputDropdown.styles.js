@@ -26,7 +26,7 @@ const styles = {
     transition: '0.2s all ease-in-out',
   }),
   error: css({
-    color: Color.CORAL,
+    color: Color.PRIMARY,
     position: 'absolute',
     top: Height.INPUT,
   }),
@@ -47,7 +47,7 @@ const styles = {
     width: '100%',
 
     '&:focus-within': {
-      borderColor: Color.CORAL_30,
+      borderColor: Color.SECONDARY,
 
       '& svg': {
         transform: 'rotate(180deg)',

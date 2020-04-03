@@ -25,7 +25,7 @@ const IntroContent = ({ isDesktop }) => {
       </Text>
       <Anchor
         href={Routes.FAQ}
-        iconColor={isDesktop ? Color.WHITE : Color.CORAL}
+        iconColor={isDesktop ? Color.WHITE : Color.PRIMARY}
         withIcon
       >
         <Text css={[styles.anchor, textStyles.BOLD]} type={TEXT_TYPE.BODY_2}>

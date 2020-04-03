@@ -28,8 +28,8 @@ const styles = {
     justifyContent: 'center',
   }),
   iconContainerChecked: css({
-    backgroundColor: Color.CORAL,
-    borderColor: Color.CORAL,
+    backgroundColor: Color.PRIMARY,
+    borderColor: Color.PRIMARY,
   }),
 };
 
