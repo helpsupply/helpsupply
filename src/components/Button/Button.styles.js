@@ -16,7 +16,7 @@ const styles = {
   [type.FILL]: css({
     color: Color.WHITE,
     height: 65,
-    background: Color.CORAL,
+    background: Color.PRIMARY,
     width: '100%',
     ':disabled': {
       background: Color.GRAY_LIGHT,
@@ -26,10 +26,10 @@ const styles = {
     textDecoration: 'underline',
   }),
   [type.OUTLINE]: css({
-    color: Color.CORAL,
+    color: Color.PRIMARY,
     height: 30,
     padding: `0 ${Space.S10}px`,
-    border: `2px solid ${Color.CORAL}`,
+    border: `2px solid ${Color.PRIMARY}`,
     ':disabled': {
       color: Color.GRAY_LIGHT,
       borderColor: Color.GRAY_LIGHT,

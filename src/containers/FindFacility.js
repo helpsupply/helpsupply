@@ -155,7 +155,7 @@ function FindFacility({ backend, history }) {
         <FormGroup mb={5}>{t('request.facilitySearch.notSeeing')}</FormGroup>
         <IconButton onClick={() => history.push(Routes.NEW_FACILITY)}>
           <Plus css={{ marginRight: Space.S5 }} />
-          <span css={{ color: Color.CORAL }}>
+          <span css={{ color: Color.PRIMARY }}>
             {t('request.facilitySearch.addNew')}
           </span>
         </IconButton>

@@ -3,7 +3,7 @@ import { Borders, Color, Radius, Space, Height } from 'lib/theme';
 
 const styles = {
   active: css({
-    borderColor: Color.CORAL_30,
+    borderColor: Color.SECONDARY,
   }),
   activeLabel: css({
     fontSize: 12,
@@ -20,7 +20,7 @@ const styles = {
     width: '100%',
   }),
   error: css({
-    color: Color.CORAL,
+    color: Color.PRIMARY,
     position: 'absolute',
   }),
   input: css({

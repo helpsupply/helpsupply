@@ -3,7 +3,7 @@ import { Color, Space, Radius } from 'lib/theme';
 
 export const styles = {
   amount: css({
-    color: Color.CORAL,
+    color: Color.PRIMARY,
     fontWeight: 500,
     paddingLeft: Space.S5,
   }),

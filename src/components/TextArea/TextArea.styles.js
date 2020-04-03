@@ -3,7 +3,7 @@ import { Borders, Color, Radius, Space, visuallyHidden } from 'lib/theme';
 
 const styles = {
   active: css({
-    borderColor: Color.CORAL_30,
+    borderColor: Color.SECONDARY,
   }),
   activeLabel: css({
     ...visuallyHidden,

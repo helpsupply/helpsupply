@@ -7,7 +7,7 @@ const rightPaddingDesktop = paddingDesktop + additionalRightPadding;
 
 const styles = {
   headerContainerDesktop: css({
-    backgroundColor: Color.CORAL,
+    backgroundColor: Color.PRIMARY,
     bottom: 0,
     display: 'flex',
     flex: 1,
