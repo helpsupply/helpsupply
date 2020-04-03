@@ -122,15 +122,15 @@ test('Test Request Creation', async () => {
   let backend = new FirebaseBackend(testApp);
 
   // Add a request with a logged in (unverified) user
-  let request = await backend.addRequest(
-    '1',
-    'Masks',
-    'N95 Masks',
-    'blabla',
-    '1000',
-    'open',
-    true,
-  );
+  let request = await backend.addRequest({
+    dropSiteId: '1',
+    requestType: 'Masks',
+    requestTitle: 'N95 Masks',
+    requestDescription: 'blabla',
+    requestQuantity: '1000',
+    status: 'open',
+    requestWillingToPay: true,
+  });
 
   // The request shouldn't be valid
   expect((await backend.getRequests('1'))[0].valid).toStrictEqual(false);

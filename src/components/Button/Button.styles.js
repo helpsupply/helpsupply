@@ -2,10 +2,12 @@ import { css } from '@emotion/core';
 import { buttonReset, Color, Radius, Space } from 'lib/theme';
 import { type } from './constants';
 
+const innerBottomOffset = 2;
+
 const styles = {
   inner: css({
     display: 'block',
-    marginBottom: '1px',
+    marginBottom: innerBottomOffset,
   }),
   root: css({
     ...buttonReset,
