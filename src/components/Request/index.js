@@ -53,7 +53,8 @@ Request.propTypes = {
   id: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
   requestDescription: PropTypes.string,
-  requestQuantity: PropTypes.string.isRequired,
+  requestQuantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   requestTitle: PropTypes.string.isRequired,
 };
 

@@ -56,7 +56,7 @@ function SupplyConfirmation() {
       />
 
       <SubCta
-        href={routeWithParams(Routes.DROPSITE_DETAIL, {
+        href={routeWithParams(Routes.DROPSITE_ADMIN, {
           id: params.id,
         })}
         passedStyles={styles.subCta}

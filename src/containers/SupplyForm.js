@@ -21,10 +21,10 @@ function SupplyForm({ backend }) {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    detailedRequirements: undefined,
-    type: undefined,
-    kind: undefined,
-    quantity: undefined,
+    requestDescription: '',
+    requestTitle: '',
+    requestType: '',
+    requestQuantity: '',
     requestWillingToPay: false,
   });
 
@@ -36,88 +36,96 @@ function SupplyForm({ backend }) {
   );
 
   const handleSubmit = () => {
-    console.log('handle supply submit for dropsite', fields);
     setIsLoading(true);
 
-    // TODO: plug this form in
-    setTimeout(() => {
+    const { requestQuantity, ...request } = fields;
+    const requestCountAsNumber = parseInt(requestQuantity, 10);
+    const payload = {
+      dropSiteId: params.id,
+      status: 'open',
+      requestQuantity: requestCountAsNumber,
+      ...request,
+    };
+
+    backend.addRequest(payload).then((data) => {
+      if (!data) {
+        return;
+      }
+
       history.push(
         routeWithParams(Routes.SUPPLY_NEW_ADMIN_CONFIRMATION, {
           id: params.id,
+          requestId: data,
         }),
       );
-    }, 2000);
+    });
   };
 
-  const {
-    requestWillingToPay,
-    detailedRequirements,
-    ...requiredFields
-  } = fields;
+  const { requestDescription, requestWillingToPay, ...requiredFields } = fields;
 
   const fieldData = [
     {
-      customOnChange: handleFieldChange('type'),
+      customOnChange: handleFieldChange('requestType'),
       label: t('request.supplyForm.type.label'),
       name: 'type',
       type: formFieldTypes.INPUT_DROPDOWN,
-      value: requiredFields.type,
+      value: requiredFields.requestType,
       options: [
         // TODO: get real options
         {
-          value: 'mask',
+          value: 'Mask',
           label: 'Mask',
         },
         {
-          value: 'mask_v2',
+          value: 'Mask V2',
           label: 'Mask V2',
         },
       ],
     },
     {
-      customOnChange: handleFieldChange('kind'),
+      customOnChange: handleFieldChange('requestTitle'),
       label: t('request.supplyForm.kind.label'),
       name: 'kind',
       type: formFieldTypes.INPUT_DROPDOWN,
-      value: requiredFields.kind,
+      value: requiredFields.requestTitle,
       options: [
         // TODO: get real kinds
         {
-          value: 'kind_one',
+          value: 'Kind One',
           label: 'Kind One',
         },
         {
-          value: 'kind_two',
+          value: 'Kind Two',
           label: 'Kind two',
         },
       ],
     },
     {
-      customOnChange: handleFieldChange('quantity'),
+      customOnChange: handleFieldChange('requestQuantity'),
       label: t('request.supplyForm.quantity.label'),
       name: 'quantity',
       type: formFieldTypes.INPUT_TEXT,
-      value: requiredFields.quantity,
+      value: requiredFields.requestQuantity,
     },
     {
       type: formFieldTypes.NODE,
       node: [
         <Text as="p" key="text" type={TEXT_TYPE.BODY_2}>
-          {t('request.supplyForm.detailedRequirements.note')}
+          {t('request.supplyForm.requestDescription.note')}
         </Text>,
       ],
     },
     {
-      customOnChange: handleFieldChange('detailedRequirements'),
-      label: t('request.supplyForm.detailedRequirements.label'),
-      name: 'detailedRequirements',
+      customOnChange: handleFieldChange('requestDescription'),
+      label: t('request.supplyForm.requestDescription.label'),
+      name: 'requestDescription',
       type: formFieldTypes.TEXT_AREA,
-      value: detailedRequirements,
+      value: requestDescription,
     },
     {
       customOnChange: handleFieldChange('requestWillingToPay'),
-      label: t('request.supplyForm.facilityWillPayLargeVolumes.label'),
-      name: 'facilityWillPayLargeVolumes',
+      label: t('request.supplyForm.requestWillingToPay.label'),
+      name: 'requestWillingToPay',
       type: formFieldTypes.INPUT_CHECKBOX,
       value: `${requestWillingToPay}`,
     },
