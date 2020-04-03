@@ -63,6 +63,7 @@
     "request.workEmailForm.workEmail.label": "Work email",
     "request.workEmailForm.workEmail.disclaimer": "Note: we will never share your email address with any other parties.",
     "request.workEmailForm.workEmail.validation.label": "Please enter a valid email address",
+    "request.workEmailForm.finish.title": "Please enter your email, once more",
     "request.dropSiteContactForm.title": "Contact info",
     "request.dropSiteContactForm.description": "Enter the contact information for the person coordinating supplies at your facility.",
     "request.dropSiteContactForm.name.label": "Name",
