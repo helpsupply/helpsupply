@@ -465,15 +465,30 @@ class FirebaseBackend extends BackendInterface {
     window.localStorage.setItem('emailForSignIn', email);
   }
 
-  shouldRepromptEmail() {
-    return window.localStorage.getItem('emailForSignIn') === null;
+  getEmailForSignIn() {
+    return window.localStorage.getItem('emailForSignIn');
   }
 
-  async continueSignup(url, email, dropsite) {
+  async continueSignup(url, email) {
     if (this.firebase.auth().isSignInWithEmailLink(url)) {
-      var emailOrStoredEmail =
-        window.localStorage.getItem('emailForSignIn') || email;
-      await this.firebase.auth().signInWithEmailLink(emailOrStoredEmail, url);
+      const emailOrStoredEmail =
+        email || window.localStorage.getItem('emailForSignIn');
+
+      await this.firebase
+        .auth()
+        .signInWithEmailLink(emailOrStoredEmail, url)
+        .then((result) => {
+          if (process.env.NODE_ENV !== 'production') {
+            console.log(result);
+          }
+        })
+        .catch((err) => {
+          if (process.env.NODE_ENV !== 'production') {
+            console.error(err);
+          }
+          throw new Error('Email Link Invalid');
+        });
+
       window.localStorage.removeItem('emailForSignIn');
       window.testfs = this.firestore;
     } else {
