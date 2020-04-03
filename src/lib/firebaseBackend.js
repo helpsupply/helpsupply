@@ -462,7 +462,7 @@ class FirebaseBackend extends BackendInterface {
         window.location.protocol +
         '//' +
         window.location.host +
-        '/signupFinish/' +
+        '/signup/finish/' +
         selectedDropSite,
       handleCodeInApp: true,
     };
