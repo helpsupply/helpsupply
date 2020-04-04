@@ -11,6 +11,7 @@ import Note from 'components/Note';
 import Anchor, { anchorTypes } from 'components/Anchor';
 import Card from 'components/Card';
 import { PrimaryButton } from 'components/Button';
+import Loader from 'components/Loader';
 
 import Requests from './Requests';
 
@@ -27,6 +28,7 @@ export const DropSiteAdmin = ({
   handleUpdateContact,
   handleUpdateLocation,
   handleRequestSupplies,
+  isRequestsLoading,
   onDelete,
   requests = [],
 }) => {
@@ -77,7 +79,10 @@ export const DropSiteAdmin = ({
         <span css={styles.number}>{requests.length}</span>
       </Text>
       <div css={styles.requestsContainer}>
-        <Requests onDelete={onDelete} requests={requests} />
+        {isRequestsLoading && <Loader passedStyles={styles.loader} />}
+        {!isRequestsLoading && (
+          <Requests onDelete={onDelete} requests={requests} />
+        )}
         <div css={styles.footer}>
           <Note>
             {t('dropsite.footer.content')}{' '}

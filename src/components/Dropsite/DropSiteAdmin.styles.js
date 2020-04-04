@@ -8,6 +8,9 @@ export const styles = {
   footer: css({
     marginTop: Space.S30,
   }),
+  loader: css({
+    margin: 'auto',
+  }),
   name: css({
     color: Color.GRAY,
   }),

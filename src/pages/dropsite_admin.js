@@ -9,6 +9,7 @@ import { routeWithParams } from 'lib/utils/routes';
 import DropSiteAdmin from 'components/Dropsite/Admin';
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
+import DeleteRequestModal from 'components/Request/DeleteRequestModal';
 
 function AdminDropSite({ backend }) {
   const history = useHistory();
@@ -16,7 +17,11 @@ function AdminDropSite({ backend }) {
 
   const [dropSite, setDropSite] = useState(undefined);
   const [requests, setRequests] = useState([]);
+  const [requestIdToBeDeleted, setRequestIdToBeDeleted] = useState(undefined);
+  const [requestToBeDeleted, setRequestToBeDeleted] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRequestsLoading, setIsRequestsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     backend.getDropSites(params.id).then((data) => {
@@ -52,9 +57,37 @@ function AdminDropSite({ backend }) {
     );
   };
 
-  const deleteRequest = (id) => {
-    backend.deleteRequest(id).then((data) => {
-      setRequests(requests.filter((req) => req.id === data));
+  const openConfirmDeleteRequestModal = (id) => {
+    const selectedRequest = requests.find((request) => request.id === id);
+
+    setRequestIdToBeDeleted(id);
+    setRequestToBeDeleted(selectedRequest);
+
+    setIsModalOpen(true);
+  };
+
+  const closeConfirmDeleteRequestModal = () => {
+    setIsModalOpen(false);
+
+    setRequestIdToBeDeleted(undefined);
+    setRequestToBeDeleted(undefined);
+  };
+
+  const deleteRequest = () => {
+    if (!requestIdToBeDeleted) {
+      return;
+    }
+
+    setIsRequestsLoading(true);
+
+    backend.deleteRequest(requestIdToBeDeleted).then((data) => {
+      setRequests(requests.filter((req) => req.id !== data));
+
+      setIsModalOpen(false);
+      setIsRequestsLoading(false);
+
+      setRequestIdToBeDeleted(undefined);
+      setRequestToBeDeleted(undefined);
     });
   };
 
@@ -63,8 +96,9 @@ function AdminDropSite({ backend }) {
       {isLoading && <PageLoader />}
       {!isLoading && !!dropSite && (
         <DropSiteAdmin
-          onDelete={deleteRequest}
+          onDelete={openConfirmDeleteRequestModal}
           {...{
+            isRequestsLoading,
             dropSite,
             requests,
             handleUpdateContact,
@@ -73,6 +107,13 @@ function AdminDropSite({ backend }) {
           }}
         />
       )}
+      <DeleteRequestModal
+        isOpen={isModalOpen}
+        deleteRequest={deleteRequest}
+        onRequestClose={closeConfirmDeleteRequestModal}
+        isLoading={isRequestsLoading}
+        request={requestToBeDeleted}
+      />
     </Page>
   );
 }

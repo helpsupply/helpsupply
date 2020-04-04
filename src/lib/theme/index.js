@@ -1,4 +1,5 @@
 export * from './accessibility';
+export * from './animations';
 export * from './borders';
 export * from './colors';
 export * from './height';
