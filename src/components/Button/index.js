@@ -5,18 +5,23 @@ import { type } from './constants';
 
 import styles from './Button.styles';
 
-export const PrimaryButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[type.FILL]]} type="button" {...rest}>
+export const PrimaryButton = ({ children, isOutline = false, ...rest }) => (
+  <button
+    css={[styles.root, styles[type.PRIMARY], isOutline && styles[type.OUTLINE]]}
+    type="button"
+    {...rest}
+  >
     {children}
   </button>
 );
 
 PrimaryButton.propTypes = {
+  isOutline: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 export const SecondaryButton = ({ children, ...rest }) => (
-  <button css={[styles.root, styles[type.OUTLINE]]} type="button" {...rest}>
+  <button css={[styles.root, styles[type.SECONDARY]]} type="button" {...rest}>
     <span css={styles.inner}>{children}</span>
   </button>
 );

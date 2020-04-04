@@ -13,7 +13,8 @@ const styles = {
     ...buttonReset,
     borderRadius: Radius.ROUNDED,
   }),
-  [type.FILL]: css({
+  [type.PRIMARY]: css({
+    border: `2px solid transparent`,
     color: Color.WHITE,
     height: 65,
     background: Color.PRIMARY,
@@ -25,11 +26,20 @@ const styles = {
   [type.LINK]: css({
     textDecoration: 'underline',
   }),
-  [type.OUTLINE]: css({
+  [type.SECONDARY]: css({
     color: Color.PRIMARY,
     height: 30,
     padding: `0 ${Space.S10}px`,
     border: `2px solid ${Color.PRIMARY}`,
+    ':disabled': {
+      color: Color.GRAY_LIGHT,
+      borderColor: Color.GRAY_LIGHT,
+    },
+  }),
+  [type.OUTLINE]: css({
+    background: 'transparent',
+    border: `2px solid ${Color.PRIMARY}`,
+    color: Color.PRIMARY,
     ':disabled': {
       color: Color.GRAY_LIGHT,
       borderColor: Color.GRAY_LIGHT,

@@ -5,10 +5,12 @@ import { ReactComponent as LoaderIcon } from 'static/icons/loader.svg';
 
 import styles from './Loader.styles';
 
-export const Loader = ({ passedStyles }) => {
+export const Loader = ({ isPrimaryColor = false, passedStyles }) => {
+  const iconColor = isPrimaryColor ? styles.svgPrimary : styles.svg;
+
   return (
     <span css={[styles.root, passedStyles]}>
-      <LoaderIcon />
+      <LoaderIcon css={iconColor} />
     </span>
   );
 };

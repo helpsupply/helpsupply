@@ -1,4 +1,5 @@
 export const Color = {
+  BLACK_75: 'rgba(0, 0, 0, .75)',
   CORAL: '#FF5A5F',
   CORAL_30: '#FFCECF', // 30% of Color.CORAL
   GREEN: '#3BD089',

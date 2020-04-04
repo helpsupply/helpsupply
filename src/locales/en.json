@@ -75,6 +75,10 @@
     "dropsite.openRequests.requestId": "Request ID",
     "dropsite.footer.content": "If you have recommendations for improving this tool, please email us at",
     "dropsite.details.title": "Drop-off location",
-    "dropsite.contact.title": "Contact info"
+    "dropsite.contact.title": "Contact info",
+    "dropsite.deleteRequest.modal.title": "Are you sure you want to delete this request for",
+    "dropsite.deleteRequest.modal.description": "Your action can’t be undone, but you can always create a new request.",
+    "dropsite.deleteRequest.modal.cancelBtn": "No, cancel",
+    "dropsite.deleteRequest.modal.deleteBtn": "Yes, delete"
   }
 }
