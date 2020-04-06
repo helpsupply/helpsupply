@@ -1,12 +1,18 @@
 import React from 'react';
 import { Global } from '@emotion/core';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useEffect, useState, useCallback } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Routes } from 'constants/Routes';
 
 import { StateProvider } from 'state/StateProvider';
+import { useAuth } from 'hooks/useAuth';
 
 import NewSupplyRequest from 'pages/supplies_new';
 import NewSupplyRequestConfirmation from 'pages/supplies_new_confirmation';
@@ -38,15 +44,13 @@ import { styles } from './App.styles';
 
 const ProtectedRoute = ({ backend, children, path }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
   const [badDomain, setBadDomain] = useState(false);
+  const { isInitializing, isLoggedIn } = useAuth();
 
-  const checkVerification = useCallback(() => {
-    if (!backend.isLoggedIn() && !backend.authLoaded) {
-      window.setTimeout(checkVerification, 100);
-      return;
-    }
+  const checkValid = useCallback(() => {
     backend.isValidHealthcareWorker().then((verified) => {
       setLoading(false);
       setVerified(verified);
@@ -58,8 +62,17 @@ const ProtectedRoute = ({ backend, children, path }) => {
   }, [backend]);
 
   useEffect(() => {
-    checkVerification();
-  }, [checkVerification]);
+    if (isInitializing) {
+      return;
+    }
+
+    if (!isInitializing && !isLoggedIn) {
+      history.push(Routes.HOME);
+      return;
+    }
+
+    checkValid();
+  }, [isInitializing, isLoggedIn, checkValid, history]);
 
   let content = <Route path={path}>{children}</Route>;
   if (loading) {
