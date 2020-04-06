@@ -61,6 +61,9 @@ class FirebaseBackend extends BackendInterface {
         .collection('dropSite')
         .doc(dropSiteId)
         .get();
+      if (!doc.exists) {
+        return false;
+      }
       let dropsite = doc.data();
       return (await this._checkValidity([dropsite]))[0];
     } else {

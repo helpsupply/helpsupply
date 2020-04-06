@@ -27,91 +27,103 @@ function HCPSignupFinish({ backend }) {
   const [email, setEmail] = useState('');
   const [shouldConfirmEmail, setShouldConfirmEmail] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   const { id: dropsite } = params;
 
-  useEffect(() => {
-    if (isLoggedIn && dropsite) {
-      history.push(
-        routeWithParams(Routes.DROPSITE_ADMIN, {
-          id: dropsite,
-        }),
-      );
-    }
-  }, [isLoggedIn, history, dropsite]);
+  const newDropSitePage = routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
+    id: dropsite,
+  });
+  const adminDropSitePage = routeWithParams(Routes.DROPSITE_ADMIN, {
+    id: dropsite,
+  });
+  const newSupplyPage = routeWithParams(Routes.SUPPLY_NEW_ADMIN, {
+    id: dropsite,
+  });
+
+  const routeToNextPage = useCallback(() => {
+    let hasAddress;
+
+    backend
+      .getDropSites(dropsite)
+      .then((data) => {
+        hasAddress = !!data.dropSiteAddress;
+        if (!hasAddress) {
+          history.push(newDropSitePage);
+        }
+      })
+      .then(() => {
+        backend.getRequests(dropsite).then((requests) => {
+          if (requests?.length) {
+            history.push(adminDropSitePage);
+            return;
+          }
+
+          history.push(routeWithParams(newSupplyPage));
+        });
+      });
+  }, [
+    adminDropSitePage,
+    backend,
+    dropsite,
+    history,
+    newDropSitePage,
+    newSupplyPage,
+  ]);
 
   const handleSubmit = useCallback(
     ({ email }) => {
-      if (backend.authLoaded && backend.isLoggedIn()) {
-        history.push(
-          routeWithParams(Routes.DROPSITE_ADMIN, {
-            id: dropsite,
-          }),
-        );
-      }
-
       if (!email) {
         return;
       }
+      setSubmitting(true);
 
       let url = window.location.href;
-      let hasAddress;
 
       backend
         .continueSignup(url, shouldConfirmEmail ? email : null)
         .then(() => {
-          backend
-            .getDropSites(dropsite)
-            .then((data) => {
-              hasAddress = !!data.dropSiteAddress;
-              if (!hasAddress) {
-                history.push(
-                  routeWithParams(Routes.DROPSITE_NEW_ADMIN, {
-                    id: dropsite,
-                  }),
-                );
-              }
-            })
-            .then(() => {
-              if (!hasAddress) {
-                return;
-              }
-              backend.getRequests(dropsite).then((requests) => {
-                if (requests?.length) {
-                  history.push(
-                    routeWithParams(Routes.DROPSITE_ADMIN, {
-                      id: dropsite,
-                    }),
-                  );
-                  return;
-                }
-
-                history.push(
-                  routeWithParams(Routes.SUPPLY_NEW_ADMIN, {
-                    dropsite: dropsite,
-                  }),
-                );
-              });
-            });
+          routeToNextPage();
+          setSubmitting(false);
         })
         .catch((error) => {
           console.error('error', error);
+          setSubmitting(false);
           setIsLoading(false);
           // todo: handle this error
         });
     },
-    [backend, shouldConfirmEmail, dropsite, history],
+    [backend, shouldConfirmEmail, routeToNextPage],
   );
 
   useEffect(() => {
-    const emailForSignIn = backend.getEmailForSignIn();
-    setShouldConfirmEmail(emailForSignIn === null);
-    if (!shouldConfirmEmail) {
-      handleSubmit({ email: emailForSignIn });
+    if (submitting) {
       return;
     }
-    setIsLoading(false);
-  }, [backend, handleSubmit, shouldConfirmEmail]);
+
+    const emailForSignIn = backend.getEmailForSignIn();
+    setShouldConfirmEmail(emailForSignIn === null);
+
+    if (isLoggedIn && dropsite && emailForSignIn === null) {
+      routeToNextPage();
+      setSubmitting(true);
+      return;
+    }
+
+    if (emailForSignIn === null) {
+      setIsLoading(false);
+    } else {
+      handleSubmit({ email: emailForSignIn });
+    }
+  }, [
+    backend,
+    dropsite,
+    handleSubmit,
+    isLoggedIn,
+    routeToNextPage,
+    submitting,
+    setSubmitting,
+  ]);
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
