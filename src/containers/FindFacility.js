@@ -149,7 +149,7 @@ function FindFacility({ backend, history }) {
         onSearch={handleChange}
         getSuggestionValue={getHospitalName}
         renderSuggestion={renderSuggestion}
-        onSuggestionsClearRequested={() => setSelectedResult('')}
+        onSuggestionsClearRequested={() => null}
         onSelect={setSelectedResult}
       />
       <Text type={TEXT_TYPE.BODY_2}>
