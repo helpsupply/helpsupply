@@ -6,7 +6,7 @@ export const Routes = {
   DROPSITE_NEW_ADMIN: `/dropsite/new/admin/:id`,
   FACILITY_CONFIRMATION: '/facility/confirmation',
   FACILITY_EDIT: '/facility/:id/edit',
-  FAQ: '/faq',
+  FAQ: '/learn-more',
   HOME: '/',
   LOGIN: '/login',
   LOGOUT: '/logout',

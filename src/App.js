@@ -33,6 +33,7 @@ import SignupFinish from 'pages/signup_approve';
 import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceType from 'pages/service_type';
+import LearnMore from 'pages/learn_more';
 // End MVP
 
 import HCPSignupFinish from 'components/HCPSignupFinish';
@@ -135,6 +136,9 @@ function App({ backend }) {
             <ProtectedRoute backend={backend} exact path={Routes.SERVICE_TYPE}>
               <ServiceType backend={backend} />
             </ProtectedRoute>
+            <Route exact path={Routes.FAQ}>
+              <LearnMore backend={backend} />
+            </Route>
             <Route path="*">
               <NoMatch />
             </Route>
