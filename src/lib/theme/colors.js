@@ -5,6 +5,7 @@ export const Color = {
   GREEN: '#3BD089',
   GRAY: '#484848',
   GRAY_10: '#ECECEC', // 10% opacity of Color.GRAY
+  GRAY_20: '#DADADA', // 20% opacity
   GRAY_25: '#D1D1D1', // 25% opacity
   GRAY_30: '#C8C8C8', // 30% opacity
   GRAY_50: '#9F9F9F', // 50% opacity

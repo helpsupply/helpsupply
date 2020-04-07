@@ -11,7 +11,7 @@ const styles = {
   textarea: css({
     appearance: 'none',
     background: 'transparent',
-    border: `1.5px solid ${Color.GRAY_50}`,
+    border: Borders.GRAY,
     borderRadius: Radius.ROUNDED,
     display: 'block',
     height: '100%',

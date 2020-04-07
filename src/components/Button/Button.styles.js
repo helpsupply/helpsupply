@@ -20,7 +20,8 @@ const styles = {
     background: Color.PRIMARY,
     width: '100%',
     ':disabled': {
-      background: Color.GRAY_LIGHT,
+      color: Color.GRAY,
+      background: Color.GRAY_20,
     },
   }),
   [type.LINK]: css({
@@ -32,8 +33,8 @@ const styles = {
     padding: `0 ${Space.S10}px`,
     border: `2px solid ${Color.PRIMARY}`,
     ':disabled': {
-      color: Color.GRAY_LIGHT,
-      borderColor: Color.GRAY_LIGHT,
+      color: Color.GRAY_20,
+      borderColor: Color.GRAY_20,
     },
   }),
   [type.OUTLINE]: css({
@@ -41,8 +42,8 @@ const styles = {
     border: `2px solid ${Color.PRIMARY}`,
     color: Color.PRIMARY,
     ':disabled': {
-      color: Color.GRAY_LIGHT,
-      borderColor: Color.GRAY_LIGHT,
+      color: Color.GRAY_20,
+      borderColor: Color.GRAY_20,
     },
   }),
 };

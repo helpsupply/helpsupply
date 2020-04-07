@@ -26,7 +26,7 @@ const styles = {
   input: css({
     appearance: 'none',
     background: 'transparent',
-    border: `2px solid ${Color.GRAY_50}`,
+    border: Borders.GRAY2,
     borderRadius: Radius.ROUNDED,
     display: 'block',
     height: '100%',
