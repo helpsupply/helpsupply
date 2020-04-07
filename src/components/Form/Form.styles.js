@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Height, Space } from 'lib/theme';
+import { Color, Height, Space } from 'lib/theme';
 
 const styles = {
   back: css({
@@ -9,6 +9,11 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+  }),
+  description: css({
+    '& strong': {
+      color: Color.PRIMARY,
+    },
   }),
   sections: css({
     '> *': {

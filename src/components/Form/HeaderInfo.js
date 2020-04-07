@@ -20,7 +20,7 @@ function InfoHeader({
         </Text>
       )}
       {description && (
-        <Text as="p" type={TEXT_TYPE.BODY_2}>
+        <Text as="div" type={TEXT_TYPE.BODY_2} css={styles.description}>
           {description}
         </Text>
       )}
@@ -29,7 +29,7 @@ function InfoHeader({
 }
 
 InfoHeader.propTypes = {
-  description: PropTypes.string,
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   title: PropTypes.string,
 };
 
