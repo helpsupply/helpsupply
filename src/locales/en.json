@@ -2,6 +2,7 @@
   "translations": {
     "generic.form.submitLabel": "Submit",
     "generic.form.changeLabel": "Change",
+    "generic.form.submitLabelCta": "Please complete form",
     "generic.form.submitLabelNext": "Next",
     "generic.button.deleteLabel": "Delete",
     "generic.label.added": "Added",

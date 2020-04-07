@@ -29,6 +29,10 @@ const Form = ({
     mode: ['onChange'],
   });
 
+  const localButtonLabel = disabled
+    ? t('generic.form.submitLabelCta')
+    : t('generic.form.submitLabelNext');
+
   return (
     <FormContext {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} css={styles.root}>
@@ -41,7 +45,7 @@ const Form = ({
           <PrimaryButton type="submit" disabled={disabled} css={styles.button}>
             {isLoading && <Loader passedStyles={styles.loader} />}
             <Text type={TEXT_TYPE.BODY_1}>
-              {buttonLabel || t('generic.form.submitLabelNext')}
+              {buttonLabel || localButtonLabel}
             </Text>
           </PrimaryButton>
         </div>

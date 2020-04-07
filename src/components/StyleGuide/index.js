@@ -50,7 +50,7 @@ function StyleGuide() {
       </Text>
       <Anchor href={Routes.HOME}>Anchor Link</Anchor>
       <hr />
-      <div css={{ width: 500, '> div': { marginBottom: 10 } }}>
+      <div css={{ '> div': { marginBottom: 10 } }}>
         <div>
           <PrimaryButton onClick={() => false}>
             <Text>Primary Button</Text>
@@ -73,12 +73,13 @@ function StyleGuide() {
         </div>
       </div>
       <hr />
-      <div css={{ width: 500, '> div': { marginBottom: 15 } }}>
+      <div css={{ '> div': { marginBottom: 15 } }}>
         <div>
-          <InputText label="Label" />
+          <InputText label="Label" name="example" />
         </div>
         <div>
           <InputDropdown
+            name="example"
             label="Select supply type"
             options={[
               { label: 'Foo', value: 'foo' },
@@ -109,7 +110,8 @@ function StyleGuide() {
           id="1454"
           name="N95 Masks"
           onDelete={() => false}
-          request="1750"
+          requestQuantity="1750"
+          requestTitle="example"
         />
         <Request
           date="2020-03-26T05:31:40.665Z"
@@ -117,7 +119,8 @@ function StyleGuide() {
           id="1454"
           name="Surgical Masks"
           onDelete={() => false}
-          request="800"
+          requestQuantity="800"
+          requestTitle="example"
         />
       </div>
     </div>
