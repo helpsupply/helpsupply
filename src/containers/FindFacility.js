@@ -104,7 +104,7 @@ function FindFacility({ backend, history }) {
       .dropSiteExists(selectedResult)
       .then((exists) => {
         if (!exists) {
-          // create dropsite with corresponding facilty id and info
+          // create dropsite with corresponding facility id and info
           backend.addDropSite({
             location_id: selectedResult,
             dropSiteFacilityName: facility.name,
@@ -149,6 +149,7 @@ function FindFacility({ backend, history }) {
         onSearch={handleChange}
         getSuggestionValue={getHospitalName}
         renderSuggestion={renderSuggestion}
+        onSuggestionsClearRequested={() => setSelectedResult('')}
         onSelect={setSelectedResult}
       />
       <Text type={TEXT_TYPE.BODY_2}>
