@@ -30,6 +30,13 @@ export const textStyles = {
     lineHeight: '24px',
     letterSpacing: '-0.02em',
   }),
+  [TEXT_TYPE.HEADER_5]: css({
+    fontFamily: Font,
+    fontSize: 18,
+    fontWeight: 600,
+    lineHeight: '26px',
+    letterSpacing: '-0.01em',
+  }),
   [TEXT_TYPE.BODY_1]: css({
     fontFamily: Font,
     fontSize: 16,
