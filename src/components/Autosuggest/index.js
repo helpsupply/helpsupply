@@ -10,6 +10,7 @@ function Autosuggest({
   label,
   onSearch,
   onSelect,
+  onSuggestionsClearRequested,
   renderSuggestion,
   suggestions,
 }) {
@@ -68,6 +69,7 @@ function Autosuggest({
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
         getSuggestionValue={getSuggestionValue}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
         onSuggestionSelected={onSuggestionSelect}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
@@ -79,6 +81,7 @@ function Autosuggest({
 Autosuggest.propTypes = {
   getSuggestionValue: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
+  onSuggestionsClearRequested: PropTypes.func.isRequired,
   renderSuggestion: PropTypes.func.isRequired,
   suggestions: PropTypes.array.isRequired,
 };
