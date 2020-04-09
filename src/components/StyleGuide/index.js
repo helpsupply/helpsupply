@@ -1,10 +1,14 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
+import { useCallback } from 'react';
 import { Routes } from 'constants/Routes';
+import { useTranslation } from 'react-i18next';
+import { useForm, FormContext } from 'react-hook-form';
 
 import Anchor from '../Anchor';
 import { PrimaryButton, SecondaryButton } from '../Button';
 import Card from '../Card';
+import InputDate from '../InputDate';
 import InputDropdown from '../InputDropdown';
 import InputText from '../InputText';
 import Request from '../Request';
@@ -13,6 +17,15 @@ import { TEXT_TYPE } from '../Text/constants';
 import TextArea from '../TextArea';
 
 function StyleGuide() {
+  const { t } = useTranslation();
+  const methods = useForm({
+    mode: ['onChange'],
+  });
+
+  const handleSubmit = useCallback((e) => {
+    console.log('test submit', e);
+  }, []);
+
   return (
     <div
       css={{
@@ -23,7 +36,9 @@ function StyleGuide() {
       }}
     >
       <h1>Style Guide</h1>
+
       <hr />
+
       <Text as="h1" type={TEXT_TYPE.HEADER_1}>
         Header 1
       </Text>
@@ -49,34 +64,42 @@ function StyleGuide() {
         nunc faucibus neque finibus ultrices a non risus.
       </Text>
       <Anchor href={Routes.HOME}>Anchor Link</Anchor>
+
       <hr />
+
       <div css={{ '> div': { marginBottom: 10 } }}>
         <div>
           <PrimaryButton onClick={() => false}>
             <Text>Primary Button</Text>
           </PrimaryButton>
         </div>
+
         <div>
           <PrimaryButton disabled onClick={() => false}>
             <Text>Primary Button Disabled</Text>
           </PrimaryButton>
         </div>
+
         <div>
           <SecondaryButton onClick={() => false}>
             <Text type={TEXT_TYPE.NOTE}>Secondary Button</Text>
           </SecondaryButton>
         </div>
+
         <div>
           <SecondaryButton disabled onClick={() => false}>
             <Text type={TEXT_TYPE.NOTE}>Secondary Button Disabled</Text>
           </SecondaryButton>
         </div>
       </div>
+
       <hr />
+
       <div css={{ '> div': { marginBottom: 15 } }}>
         <div>
           <InputText label="Label" name="example" />
         </div>
+
         <div>
           <InputDropdown
             name="example"
@@ -87,17 +110,35 @@ function StyleGuide() {
             ]}
           />
         </div>
+
+        <div>
+          <hr />
+          <FormContext {...methods}>
+            <form onSubmit={methods.handleSubmit(handleSubmit)}>
+              <InputDate
+                name="example date"
+                label={t('generic.form.daypicker.placeholder')}
+              />
+              <button type="submit">test submit</button>
+            </form>
+          </FormContext>
+          <hr />
+        </div>
+
         <div>
           <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
         </div>
       </div>
+
       <hr />
+
       <Card
         onClick={() => false}
         editLabel="Edit"
         label="Donation requirements"
         details="Unused, in original packaging"
       />
+
       <div
         css={{
           padding: '20px 10px',
