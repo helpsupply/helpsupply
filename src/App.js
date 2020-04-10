@@ -23,10 +23,17 @@ import NewFacility from 'pages/facility_new';
 import FacilityConfirmation from 'pages/facility_confirmation';
 import FacilityEdit from 'pages/facility_edit';
 import NewDropSite from 'pages/dropsite_new';
-import EntryPortal from 'pages/entry';
 import Request from 'pages/request';
+
+// MVP
+import EntryPortal from 'pages/entry';
 import SignUp from 'pages/signup';
 import SignUpConfirmation from 'pages/signup_confirmation';
+import SignupFinish from 'pages/signup_approve';
+import Contact from 'pages/contact';
+import ContactConfirmation from 'pages/contact_confirmation';
+import ServiceType from 'pages/service_type';
+// End MVP
 
 import HCPSignupFinish from 'components/HCPSignupFinish';
 import DropSite from 'components/DropSite';
@@ -102,6 +109,37 @@ function App({ backend }) {
       <Router>
         <div className="App">
           <Switch>
+            {/*MVP Routes*/}
+            <Route exact path={Routes.HOME}>
+              <EntryPortal backend={backend} />
+            </Route>
+            <Route exact path={Routes.EMAIL_FORM}>
+              <SignUp backend={backend} />
+            </Route>
+            <Route exact path={Routes.EMAIL_SENT}>
+              <SignUpConfirmation backend={backend} />
+            </Route>
+            <Route exact path={Routes.EMAIL_APPROVE}>
+              <SignupFinish backend={backend} />
+            </Route>
+            <ProtectedRoute backend={backend} exact path={Routes.CONTACT_FORM}>
+              <Contact backend={backend} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.CONTACT_CONFIRMATION}
+            >
+              <ContactConfirmation backend={backend} />
+            </ProtectedRoute>
+            <ProtectedRoute backend={backend} exact path={Routes.SERVICE_TYPE}>
+              <ServiceType backend={backend} />
+            </ProtectedRoute>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+            {/*END MVP Routes*/}
+
             <Route path={Routes.LOGIN}>
               <Login />
             </Route>
@@ -178,9 +216,6 @@ function App({ backend }) {
             <ProtectedRoute exact path={Routes.FACILITY_EDIT} backend={backend}>
               <FacilityEdit backend={backend} />
             </ProtectedRoute>
-            <Route path="*">
-              <NoMatch />
-            </Route>
           </Switch>
         </div>
       </Router>

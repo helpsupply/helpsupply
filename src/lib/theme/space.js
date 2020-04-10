@@ -15,4 +15,5 @@ export const Space = {
   S60: 60,
   S65: 65,
   S70: 70,
+  S90: 90,
 };

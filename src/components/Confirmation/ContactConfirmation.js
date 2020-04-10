@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
@@ -17,25 +17,20 @@ import ConfirmationWrapper from './ConfirmationWrapper';
 
 import styles from './ContactConfirmation.styles';
 
-function ContactConfirmation({ name, contact, onCtaClick, onEdit }) {
+function ContactConfirmation({ name, contact, onEdit }) {
   const history = useHistory();
-  const params = useParams();
   const { t } = useTranslation();
 
   const handleOnCtaClick = () => {
-    history.push(
-      routeWithParams(Routes.DROPSITE_ADMIN, {
-        id: params.id,
-      }),
-    );
+    history.push(routeWithParams(Routes.SERVICE_TYPE));
   };
 
   return (
-    <ConfirmationWrapper title={t('request.dropSiteContactForm.sent.title')}>
+    <ConfirmationWrapper title={t('service.contactConfirm.title')}>
       <SubRow
         onClick={onEdit}
         editLabel={t('generic.form.changeLabel')}
-        label={t('request.dropSiteContactForm.title')}
+        label={t('service.contactForm.title')}
         details={
           <Fragment>
             <Text as="p">{name}</Text>

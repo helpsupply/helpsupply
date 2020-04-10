@@ -14,6 +14,10 @@ const styles = {
 
   link: css({
     display: 'block',
+
+    '& svg': {
+      fill: Color.PRIMARY,
+    },
   }),
 
   progressBar: css({

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 
 import Form from 'components/Form';
 import CreateFormFields, {
@@ -19,11 +18,9 @@ function FormBuilder({
   onSubmit,
   title,
 }) {
-  const { t } = useTranslation();
-
   return (
     <Form
-      buttonLabel={buttonLabel || t('generic.form.submitLabel')}
+      buttonLabel={buttonLabel}
       subSection={subSection}
       defaultValues={defaultValues}
       onSubmit={onSubmit}
