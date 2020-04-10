@@ -1,9 +1,10 @@
-import { css } from '@emotion/core';
-import { Color, Space } from 'lib/theme';
+import { css } from 'lib/utils/media-queries';
+import { Borders, Color, Space } from 'lib/theme';
 
 const styles = {
   root: css({
-    borderBottom: `1px solid ${Color.GRAY_25}`,
+    backgroundColor: Color.PRIMARY,
+    borderBottom: Borders.GRAY1,
     padding: `${Space.S40}px 0`,
     width: '100%',
     ':last-child': {
@@ -14,14 +15,14 @@ const styles = {
     },
   }),
   text: css({
-    color: Color.GRAY_75,
+    color: Color.WHITE,
   }),
   titleWithIcon: css({
     alignItems: 'center',
-    color: `${Color.GRAY}`,
+    color: Color.WHITE,
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: `${Space.S5}px`,
+    marginBottom: Space.S5,
   }),
 };
 

@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import Page from 'components/layouts/Page';
 import HeaderInfo from 'components/Form/HeaderInfo';
 
-function SignUp({ backend }) {
+function SignUpConfirmation({ backend }) {
   const { t } = useTranslation();
 
   const email = backend.getEmailForSignIn()
@@ -29,4 +29,4 @@ function SignUp({ backend }) {
   );
 }
 
-export default SignUp;
+export default SignUpConfirmation;

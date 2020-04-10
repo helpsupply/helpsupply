@@ -6,7 +6,7 @@ import EmailForm from 'containers/EmailForm';
 
 function SignUp({ backend }) {
   return (
-    <Page currentProgress={3} totalProgress={5}>
+    <Page currentProgress={1} totalProgress={5}>
       <EmailForm backend={backend} />
     </Page>
   );

@@ -13,6 +13,7 @@ import LargeHeader from 'components/Header/LargeHeader';
 import styles from './Page.styles';
 
 const PageContent = ({
+  contentContainerStyles,
   children,
   hasBackButton,
   isDesktop,
@@ -22,7 +23,13 @@ const PageContent = ({
   const paddingStyles = topPadding > 0 && css({ paddingTop: topPadding });
 
   return (
-    <div css={[styles.pageContentContainer, isDesktop && paddingStyles]}>
+    <div
+      css={[
+        styles.pageContentContainer,
+        isDesktop && paddingStyles,
+        contentContainerStyles,
+      ]}
+    >
       <div css={styles.pageContent}>
         {hasBackButton && <BackButton onClick={onBackButtonClick} />}
         {children}
@@ -33,10 +40,12 @@ const PageContent = ({
 
 const Page = ({
   children,
+  contentContainerStyles,
   hasBackButton = true,
   isHome,
   onBackButtonClick,
   currentProgress,
+  rootContainerStyles,
   totalProgress,
 }) => {
   const [pageContentTopPadding, setPageContentTopPadding] = useState(0);
@@ -58,7 +67,7 @@ const Page = ({
   }, []);
 
   return (
-    <div css={styles.root}>
+    <div css={[styles.root, rootContainerStyles]}>
       {willUseSmallHeader && (
         <Header
           currentProgress={currentProgress}
@@ -77,6 +86,7 @@ const Page = ({
 
       <PageContent
         children={children}
+        contentContainerStyles={contentContainerStyles}
         hasBackButton={hasBackButton}
         isDesktop={isDesktop}
         onBackButtonClick={onBackButtonClick}

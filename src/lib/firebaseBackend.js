@@ -1,6 +1,7 @@
 import BackendInterface from './backendInterface';
 import Firebase from 'firebase';
 import config from '../components/Firebase/config';
+import { Routes } from '../constants/Routes';
 
 class FirebaseBackend extends BackendInterface {
   // Note: testApp can also be an admin app
@@ -464,6 +465,16 @@ class FirebaseBackend extends BackendInterface {
     };
 
     window.localStorage.setItem('intendedDropSite', selectedDropSite);
+    await this.firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings);
+    window.localStorage.setItem('emailForSignIn', email);
+  }
+
+  async signupServicesWithEmail(email) {
+    const actionCodeSettings = {
+      url: `${window.location.protocol}//${window.location.host}${Routes.EMAIL_APPROVE}/`,
+      handleCodeInApp: true,
+    };
+
     await this.firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings);
     window.localStorage.setItem('emailForSignIn', email);
   }

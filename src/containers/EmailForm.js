@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
@@ -16,17 +16,11 @@ import { formFieldTypes } from 'components/Form/CreateFormFields';
 
 function EmailForm({ backend }) {
   const history = useHistory();
-  const params = useParams();
   const { t } = useTranslation();
 
   const [email, setEmail] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [dropSite, setDropSite] = useState(params.id);
-
-  useEffect(() => {
-    setDropSite(params.id);
-  }, [params.id]);
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
@@ -38,13 +32,9 @@ function EmailForm({ backend }) {
     setIsLoading(true);
 
     backend
-      .signupWithEmail(email, dropSite)
+      .signupServicesWithEmail(email)
       .then(() => {
-        history.push(
-          routeWithParams(Routes.SIGNUP_DROPSITE_CONFIRMATION, {
-            id: params.id,
-          }),
-        );
+        history.push(routeWithParams(Routes.EMAIL_SENT));
       })
       .catch((error) => {
         console.error('error', error);

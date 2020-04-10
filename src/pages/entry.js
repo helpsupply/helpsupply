@@ -10,6 +10,12 @@ import { Breakpoints } from 'constants/Breakpoints';
 import { Routes } from 'constants/Routes';
 import { useMediaQuery } from 'hooks/useMediaQuery';
 
+import { Color } from 'lib/theme';
+
+const containerStyles = {
+  background: Color.PRIMARY,
+};
+
 function EntryPortal() {
   const { t } = useTranslation();
 
@@ -19,16 +25,16 @@ function EntryPortal() {
     matchesBreakpoint(Breakpoints.LARGE));
 
   return (
-    <Page isHome hasBackButton={false}>
+    <Page
+      isHome
+      hasBackButton={false}
+      contentContainerStyles={containerStyles}
+      rootContainerStyles={containerStyles}
+    >
       <ListLink
-        href={Routes.REQUEST_SERVICES}
+        href={Routes.EMAIL_FORM}
         title={t('home.needServices.title')}
         text={t('home.needServices.description')}
-      />
-      <ListLink
-        href={Routes.REQUEST_SUPPLIES}
-        title={t('home.needSupplies.title')}
-        text={t('home.needSupplies.description')}
       />
       {!isDesktop && <IntroContent />}
     </Page>
