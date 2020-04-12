@@ -28,7 +28,14 @@ const chatFlow = {
       },
     ],
     handler: async function (context, parsed_data, state) {
-      state.active_request = parsed_data.service_type.answer;
+      switch (parsed_data.service_type.answer) {
+        case '1':
+          state.active_request = 'request_groceries';
+          break;
+        case '2':
+          state.active_request = 'request_mental_health';
+          break;
+      }
       return [
         "Great, we can help you with that. First we need to confirm you're a healthcare professional.",
         'find_facility',
@@ -71,7 +78,10 @@ const chatFlow = {
     ],
     handler: async function (context, parsed_data, state) {
       context.verify_email(parsed_data.email.answer);
-      return ['Thanks, please check your email!'];
+      return [
+        "Thanks, please check your email! Your request won't be live until you click the enclosed link. Let's continue...",
+        state.active_request,
+      ];
     },
   },
 
