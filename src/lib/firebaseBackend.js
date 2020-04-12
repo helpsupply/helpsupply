@@ -3,6 +3,8 @@ import Firebase from 'firebase';
 import config from '../components/Firebase/config';
 import { Routes } from '../constants/Routes';
 
+import OrganizationIndex from './organizations/index';
+
 class FirebaseBackend extends BackendInterface {
   // Note: testApp can also be an admin app
   constructor(testApp) {
@@ -15,14 +17,28 @@ class FirebaseBackend extends BackendInterface {
     this.authLoaded = false;
     this.badDomain = false;
 
-    this.firebase.auth().onAuthStateChanged((user) => {
-      this.authLoaded = true;
-      if (user) {
-        this.loggedIn = true;
-      } else {
-        this.loggedIn = false;
-      }
-    });
+    let auth = this.firebase.auth();
+
+    if (auth.onAuthStateChanged) {
+      auth.onAuthStateChanged((user) => {
+        this.authLoaded = true;
+        if (user) {
+          this.loggedIn = true;
+        } else {
+          this.loggedIn = false;
+        }
+      });
+    }
+  }
+
+  // Returns an array of pairs [RequestKind, OrganizationId]
+  async getServicesForZip(zipCode) {
+    return OrganizationIndex.ByZip[zipCode];
+  }
+
+  // Returns a full metadata object a la lib/organizations/manyc.js
+  async getMetadataForProvider(provider) {
+    return OrganizationIndex.Metadata[provider];
   }
 
   async _checkValidity(data) {
@@ -121,8 +137,8 @@ class FirebaseBackend extends BackendInterface {
         dropSiteCity,
         dropSiteState,
         dropSiteUrl,
-        domain: currentUser?.email.split('@')[1] || '',
-        user: currentUser?.uid || '',
+        domain: currentUser.email.split('@')[1] || '',
+        user: currentUser.uid || '',
       };
       let db = this.firestore;
       return db
