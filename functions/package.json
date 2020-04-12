@@ -24,7 +24,8 @@
     "twilio": "^3.41.1"
   },
   "devDependencies": {
-    "firebase-functions-test": "^0.1.6"
+    "firebase-functions-test": "^0.1.6",
+    "jest": "^25.3.0"
   },
   "private": true
 }

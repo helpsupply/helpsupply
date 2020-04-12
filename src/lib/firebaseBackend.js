@@ -41,6 +41,80 @@ class FirebaseBackend extends BackendInterface {
     return OrganizationIndex.Metadata[provider];
   }
 
+  // Saves a request to the database, with the appropriate request
+  async saveServiceRequest(request) {
+    if (request.kind === undefined) throw new Error("Request needs a 'kind'");
+    if (request.organization === undefined)
+      throw new Error("Request needs a mapped 'organization'");
+
+    if (request.user !== undefined)
+      throw new Error("'user' is a reserved property for Requests");
+    if (request.domain !== undefined)
+      throw new Error("'domain' is a reserved property for Requests");
+    if (request.status !== undefined)
+      throw new Error("'status' is a reserved property for Requests");
+    if (request.sent !== undefined)
+      throw new Error("'sent' is a reserved property for Requests");
+
+    const { currentUser } = this.firebase.auth();
+    request.domain = currentUser ? currentUser.email.split('@')[1] || '' : '';
+    request.user = currentUser ? currentUser.uid || '' : '';
+
+    return (await this.firestore.collection('servicerequest').add(request)).id;
+  }
+
+  // Saves a request to the database, with the appropriate request
+  async updateServiceRequest(id, request) {
+    if (request.user !== undefined)
+      throw new Error("'user' is a reserved property for Requests");
+    if (request.domain !== undefined)
+      throw new Error("'domain' is a reserved property for Requests");
+    if (request.status !== undefined)
+      throw new Error("'status' is a reserved property for Requests");
+    if (request.sent !== undefined)
+      throw new Error("'sent' is a reserved property for Requests");
+
+    await this.firestore
+      .collection('servicerequest')
+      .doc(id)
+      .set(request, { merge: true });
+  }
+
+  // Get a specific Service Request
+  async getServiceRequest(id) {
+    const { currentUser } = this.firebase.auth();
+    let snapshot = await this.firestore
+      .collection('servicerequest')
+      .doc(id)
+      .get();
+    let dict = snapshot.data();
+    dict.id = snapshot.id;
+    return dict;
+  }
+
+  // Delete a service request
+  async deleteServiceRequest(id) {
+    await this.firestore.collection('servicerequest').doc(id).delete();
+  }
+
+  // Gets all requests for a given user
+  async getAllServiceRequests() {
+    const { currentUser } = this.firebase.auth();
+    let snapshot = await this.firestore
+      .collection('servicerequest')
+      .where('user', '==', currentUser.uid)
+      .get();
+    return snapshot.docs.map((d) => {
+      var dict = d.data();
+      dict['id'] = d.id;
+      return dict;
+    });
+  }
+
+  /*
+   * Legacy code below! (primarily for the old PPE flow)
+   */
+
   async _checkValidity(data) {
     let domain_names = [
       ...new Set(data.map((d) => d.domain).filter((d) => d !== undefined)),

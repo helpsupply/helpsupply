@@ -72,5 +72,11 @@ service cloud.firestore {
       allow create: if true;
       allow update, delete: if isHCP();
     }
+
+    match /servicerequest/{reqid} {
+      allow read, update, delete: if resource.data.user == request.auth.uid;
+      allow create: if request.resource.data.user == request.auth.uid;
+    }
+
   }
 }

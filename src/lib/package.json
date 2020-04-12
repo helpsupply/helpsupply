@@ -1,0 +1,14 @@
+{
+  "name": "firebase-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "firebaseBackend.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.3.0"
+  }
+}
