@@ -34,13 +34,13 @@ function EmailForm({ backend }) {
     backend
       .signupServicesWithEmail(email)
       .then(() => {
-        history.push(routeWithParams(Routes.EMAIL_SENT));
+        history.push(routeWithParams(Routes.EMAIL_SIGNUP_SENT));
       })
       .catch((error) => {
         console.error('error', error);
         setIsLoading(false);
       });
-    // TODO: handle exceptions
+    // service TODO: handle exceptions
   };
 
   const fieldData = [

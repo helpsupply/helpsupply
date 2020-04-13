@@ -71,7 +71,7 @@ function SupplyForm({ backend }) {
       type: formFieldTypes.INPUT_DROPDOWN,
       value: requiredFields.requestType,
       options: [
-        // TODO: get real options
+        // supply TODO: get real options
         {
           value: 'Mask',
           label: 'Mask',
@@ -89,7 +89,7 @@ function SupplyForm({ backend }) {
       type: formFieldTypes.INPUT_DROPDOWN,
       value: requiredFields.requestTitle,
       options: [
-        // TODO: get real kinds
+        // supply TODO: get real kinds
         {
           value: 'Kind One',
           label: 'Kind One',

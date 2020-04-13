@@ -2,148 +2,126 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
+import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
+import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
-import { Emails } from 'constants/Emails';
+import { routeWithParams } from 'lib/utils/routes';
 
-import states from 'data/states';
-import { useStateValue, actions } from 'state/StateProvider';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
+import Form from 'components/Form';
+import Autosuggest from 'components/Autosuggest';
 
-import Anchor, { anchorTypes } from 'components/Anchor';
-import Note from 'components/Note';
-import FormBuilder from 'components/Form/FormBuilder';
-import { formFieldTypes } from 'components/Form/CreateFormFields';
+import * as tools from '../functions';
+// service todo: update this list with service organizations instead of list of hospitals
+import * as hospital_index from '../data/hospital_index';
 
-function FacilityForm({ backend, dropSite, dropSiteId }) {
-  const { t } = useTranslation();
-  const history = useHistory();
-  const dispatch = useStateValue()[1];
+const renderSuggestion = ({ hospital }, { query }) => {
+  const nameMatches = AutosuggestHighlightMatch(hospital.name, query);
+  const nameParts = AutosuggestHighlightParse(hospital.name, nameMatches);
+  const nameMatch = (
+    <span>
+      {nameParts.map((part, index) => {
+        const className = part.highlight
+          ? 'react-autosuggest__suggestion-match'
+          : null;
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [fields, setFields] = useState({
-    dropSiteFacilityName: dropSite?.dropSiteFacilityName || '',
-    dropSiteZip: dropSite?.dropSiteZip || '',
-    dropSiteAddress: dropSite?.dropSiteAddress || '',
-    dropSiteCity: dropSite?.dropSiteCity || '',
-    dropSiteState: dropSite?.dropSiteState || '',
-    dropSiteUrl: dropSite?.dropSiteUrl || '',
-  });
-
-  const handleSubmit = () => {
-    setIsLoading(true);
-
-    if (dropSiteId) {
-      return backend
-        .editDropSite({ location_id: dropSiteId, ...fields })
-        .then((data) => {
-          dispatch({
-            type: actions.ADD_PENDING_FACILITY,
-            pendingFacility: { location_id: dropSiteId, ...fields },
-          });
-          history.push(Routes.FACILITY_CONFIRMATION);
-        });
-    }
-
-    backend.addNewDropSite(fields).then((data) => {
-      if (!data) {
-        return;
-      }
-
-      dispatch({
-        type: actions.ADD_PENDING_FACILITY,
-        pendingFacility: { location_id: data, ...fields },
-      });
-      history.push(Routes.FACILITY_CONFIRMATION);
-    });
-  };
-
-  const handleFieldChange = useCallback(
-    (field) => (value) => {
-      setFields((fields) => ({
-        ...fields,
-        [field]: value,
-      }));
-    },
-    [],
+        return (
+          <span className={className} key={index}>
+            {part.text}
+          </span>
+        );
+      })}
+    </span>
   );
 
-  const { dropSiteUrl, ...requiredFields } = fields;
-  const {
-    dropSiteFacilityName,
-    dropSiteAddress,
-    dropSiteCity,
-    dropSiteState,
-    dropSiteZip,
-  } = fields;
+  const cityMatches = AutosuggestHighlightMatch(hospital.name, query);
+  const cityParts = AutosuggestHighlightParse(hospital.city, cityMatches);
+  const cityMatch = (
+    <span>
+      {cityParts.map((part, index) => {
+        const className = part.highlight
+          ? 'react-autosuggest__suggestion-match'
+          : null;
 
-  const fieldData = [
-    {
-      customOnChange: handleFieldChange('dropSiteFacilityName'),
-      label: t('request.facilityForm.nameLabel'),
-      name: 'dropSiteFacilityName',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteFacilityName,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteZip'),
-      label: t('request.facilityForm.zipLabel'),
-      name: 'dropSiteZip',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteZip,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteCity'),
-      isHalfWidth: true,
-      label: t('request.facilityForm.cityLabel'),
-      name: 'dropSiteCity',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteCity,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteState'),
-      isHalfWidth: true,
-      label: t('request.facilityForm.stateLabel'),
-      options: states,
-      name: 'dropSiteState',
-      type: formFieldTypes.INPUT_DROPDOWN,
-      value: dropSiteState,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteAddress'),
-      label: t('request.facilityForm.addressLabel'),
-      name: 'dropSiteAddress',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteAddress,
-    },
-    {
-      customOnChange: handleFieldChange('dropSiteUrl'),
-      isRequired: false,
-      label: t('request.facilityForm.urlLabel'),
-      name: 'dropSiteUrl',
-      type: formFieldTypes.INPUT_TEXT,
-      value: dropSiteUrl,
-    },
-  ];
+        return (
+          <span className={className} key={index}>
+            {part.text}
+          </span>
+        );
+      })}
+    </span>
+  );
 
   return (
-    <FormBuilder
-      defaultValues={fields}
-      description={t('request.facilityForm.description')}
-      disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
-      onSubmit={() => handleSubmit(fields)}
-      title={t('request.facilityForm.title')}
-      fields={fieldData}
+    <div>
+      <Text as="div" type={TEXT_TYPE.BODY_2}>
+        {nameMatch}
+      </Text>
+      <Text as="div" type={TEXT_TYPE.NOTE}>
+        {cityMatch}, {hospital.state}
+      </Text>
+    </div>
+  );
+};
+
+const getHospitalName = ({ hospital, id }) => ({
+  label: hospital.name,
+  value: id,
+});
+
+function FindFacility({ backend }) {
+  const history = useHistory();
+  const { t } = useTranslation();
+  const [results, setResults] = useState([]);
+  const [selectedResult, setSelectedResult] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = useCallback((value) => {
+    if (value.length > 1) {
+      let term = value.toUpperCase();
+      const searchResults = tools.updateSearch(hospital_index.index, term);
+      setResults(searchResults);
+    } else {
+      setResults([]);
+      setSelectedResult('');
+    }
+  }, []);
+
+  const handleRedirect = useCallback(() => {
+    if (!selectedResult) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    // service todo: incorporate facility data below, and decide what validation or state management happens here
+    // const facility = hospital_index.index.id_index[selectedResult];
+    history.push(routeWithParams(Routes.EMAIL_SIGNUP_FORM));
+  }, [history, selectedResult]);
+
+  return (
+    <Form
+      onSubmit={handleRedirect}
+      title={t('service.facilityForm.title')}
+      description={t('service.facilityForm.description')}
+      disabled={!selectedResult}
       isLoading={isLoading}
     >
-      <Note key="note">
-        {t('request.facilityForm.emailAt') + ' '}
-        <Anchor href={`mailto:${Emails.HELP}`} as={anchorTypes.A}>
-          {Emails.HELP}
-        </Anchor>
-      </Note>
-    </FormBuilder>
+      <Autosuggest
+        label={t('service.facilityForm.search.label')}
+        suggestions={results}
+        onSearch={handleChange}
+        getSuggestionValue={getHospitalName}
+        renderSuggestion={renderSuggestion}
+        onSuggestionsClearRequested={() => null}
+        onSelect={setSelectedResult}
+      />
+      <Text type={TEXT_TYPE.BODY_2}>{t('service.facilityForm.notSeeing')}</Text>
+    </Form>
   );
 }
 
-export default FacilityForm;
+export default FindFacility;
