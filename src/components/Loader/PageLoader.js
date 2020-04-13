@@ -6,7 +6,7 @@ import styles from './PageLoader.styles';
 export const PageLoader = ({ passedStyles }) => {
   return (
     <span css={[styles.root, passedStyles]}>
-      Page is loading... TODO: add a page loader
+      Page is loading... service TODO: add a page loader
     </span>
   );
 };

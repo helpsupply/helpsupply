@@ -193,7 +193,7 @@ test('Test Domain Verification', async () => {
   await backend.setDomainIsValid('kp.org', true);
 
   // This should now be empty
-  // TODO: Figure out how to test that this doesn't resolve in N amount of time
+  // service/supply TODO: Figure out how to test that this doesn't resolve in N amount of time
   //domains = new Promise((resolve, reject) => { backend.getDomains(true, resolve) })
   //expect((await domains).sort()).toStrictEqual([].sort())
   return;

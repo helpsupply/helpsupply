@@ -72,7 +72,7 @@ const getHospitalName = ({ hospital, id }) => ({
   value: id,
 });
 
-function FindFacility({ backend }) {
+function ServiceFacilityForm({ backend }) {
   const history = useHistory();
   const { t } = useTranslation();
   const [results, setResults] = useState([]);
@@ -124,4 +124,4 @@ function FindFacility({ backend }) {
   );
 }
 
-export default FindFacility;
+export default ServiceFacilityForm;

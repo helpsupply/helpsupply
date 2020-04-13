@@ -90,7 +90,7 @@ function HCPSignupFinish({ backend }) {
           console.error('error', error);
           setSubmitting(false);
           setIsLoading(false);
-          // todo: handle this error
+          // supply todo: handle this error
         });
     },
     [backend, shouldConfirmEmail, routeToNextPage],

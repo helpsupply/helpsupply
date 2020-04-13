@@ -34,7 +34,7 @@ function ServiceTypeForm() {
     setIsLoading(true);
     history.push(routeWithParams(Routes.SERVICE_TYPE));
     console.log(
-      'todo: route to specific service request form, groceries, childcare, etc.',
+      'service todo: route to specific service request form, groceries, childcare, etc.',
     );
   };
 

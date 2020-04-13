@@ -16,7 +16,7 @@ function Contact({ backend }) {
   return (
     <Page
       onBackButtonClick={() =>
-        // todo: if user has contact info set, route to userDetail page
+        // service todo: if user has contact info set, route to userDetail page
         history.push(routeWithParams(Routes.HOME))
       }
       currentProgress={2}

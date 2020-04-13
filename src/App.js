@@ -27,9 +27,10 @@ import Request from 'pages/request';
 
 // MVP
 import EntryPortal from 'pages/entry';
+import Facility from 'pages/facility';
 import SignUp from 'pages/signup';
 import SignUpConfirmation from 'pages/signup_confirmation';
-import SignupFinish from 'pages/signup_approve';
+import SignupComplete from 'pages/signup_approve';
 import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceType from 'pages/service_type';
@@ -91,7 +92,7 @@ const ProtectedRoute = ({ backend, children, path }) => {
     );
   }
 
-  // TODO: check if this accounts for mismatched validation, ie email does not match facility
+  // service/supply TODO: check if this accounts for mismatched validation, ie email does not match facility
   if (!verified && badDomain) {
     content = (
       <Box>
@@ -114,14 +115,17 @@ function App({ backend }) {
             <Route exact path={Routes.HOME}>
               <EntryPortal backend={backend} />
             </Route>
-            <Route exact path={Routes.EMAIL_FORM}>
+            <Route exact path={Routes.FACILITY}>
+              <Facility backend={backend} />
+            </Route>
+            <Route exact path={Routes.EMAIL_SIGNUP_FORM}>
               <SignUp backend={backend} />
             </Route>
-            <Route exact path={Routes.EMAIL_SENT}>
+            <Route exact path={Routes.EMAIL_SIGNUP_SENT}>
               <SignUpConfirmation backend={backend} />
             </Route>
-            <Route exact path={Routes.EMAIL_APPROVE}>
-              <SignupFinish backend={backend} />
+            <Route exact path={Routes.EMAIL_SIGNUP_COMPLETE}>
+              <SignupComplete backend={backend} />
             </Route>
             <ProtectedRoute backend={backend} exact path={Routes.CONTACT_FORM}>
               <Contact backend={backend} />

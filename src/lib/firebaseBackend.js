@@ -570,7 +570,7 @@ export default class FirebaseBackend {
 
   async signupServicesWithEmail(email) {
     const actionCodeSettings = {
-      url: `${window.location.protocol}//${window.location.host}${Routes.EMAIL_APPROVE}/`,
+      url: `${window.location.protocol}//${window.location.host}${Routes.EMAIL_SIGNUP_COMPLETE}/`,
       handleCodeInApp: true,
     };
 

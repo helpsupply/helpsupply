@@ -22,7 +22,7 @@ class HCPSignup extends React.Component {
     this.props.backend
       .signupWithEmail(this.state.email, this.state.dropsite)
       .catch(alert);
-    // TODO: handle exceptions
+    // supply TODO: handle exceptions
   }
 
   handleEmailChange(event) {

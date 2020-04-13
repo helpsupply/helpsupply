@@ -50,7 +50,7 @@ function SignupFinish({ backend }) {
           console.error('error', error);
           setSubmitting(false);
           setIsLoading(false);
-          // todo: handle this error
+          // service todo: handle this error
         });
     },
     [backend, routeToNextPage, shouldConfirmEmail],
