@@ -45,7 +45,6 @@ function InputDropdown({
         css={[styles.select, value === DEFAULT && styles.selectDefaultState]}
         onChange={handleChange}
         name={name}
-        defaultValue={DEFAULT}
         ref={methods?.register({ ...(isRequired && { required }) })}
         {...inputProps}
       >

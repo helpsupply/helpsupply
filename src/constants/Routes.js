@@ -23,9 +23,10 @@ export const Routes = {
   SUPPLY_NEW_ADMIN_CONFIRMATION: `/new/admin/supply/:id/confirmation/:requestId`,
 
   // MVP Routes
-  EMAIL_FORM: `/signin`,
-  EMAIL_SENT: `/signin/confirm`,
-  EMAIL_APPROVE: `/signin/complete`,
+  FACILITY: `/facility`,
+  EMAIL_SIGNUP_FORM: `/signup`,
+  EMAIL_SIGNUP_SENT: `/signup/confirm`,
+  EMAIL_SIGNUP_COMPLETE: `/signup/complete`,
   CONTACT_FORM: `/contact`,
   CONTACT_CONFIRMATION: `/contact/confirm`,
   SERVICE_TYPE: '/service',
