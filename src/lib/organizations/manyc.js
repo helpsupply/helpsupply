@@ -1,4 +1,4 @@
-import RequestKinds from './kinds';
+const RequestKinds = require('./kinds');
 
 const MANYCMetadata = {
   id: 'manyc',

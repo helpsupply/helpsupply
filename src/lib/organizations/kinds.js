@@ -5,4 +5,4 @@ const RequestKinds = {
   MENTALHEALTH: 'mentalhealth',
 };
 
-export default RequestKinds;
+module.exports = RequestKinds;
