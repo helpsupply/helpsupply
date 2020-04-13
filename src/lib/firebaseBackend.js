@@ -43,18 +43,24 @@ class FirebaseBackend extends BackendInterface {
 
   // Saves a request to the database, with the appropriate request
   async saveServiceRequest(request) {
-    if (request.kind === undefined) throw new Error("Request needs a 'kind'");
-    if (request.organization === undefined)
+    if (request.kind === undefined) {
+      throw new Error("Request needs a 'kind'");
+    }
+    if (request.organization === undefined) {
       throw new Error("Request needs a mapped 'organization'");
-
-    if (request.user !== undefined)
+    }
+    if (request.user !== undefined) {
       throw new Error("'user' is a reserved property for Requests");
-    if (request.domain !== undefined)
+    }
+    if (request.domain !== undefined) {
       throw new Error("'domain' is a reserved property for Requests");
-    if (request.status !== undefined)
+    }
+    if (request.status !== undefined) {
       throw new Error("'status' is a reserved property for Requests");
-    if (request.sent !== undefined)
+    }
+    if (request.sent !== undefined) {
       throw new Error("'sent' is a reserved property for Requests");
+    }
 
     const { currentUser } = this.firebase.auth();
     request.domain = currentUser ? currentUser.email.split('@')[1] || '' : '';
@@ -65,14 +71,18 @@ class FirebaseBackend extends BackendInterface {
 
   // Saves a request to the database, with the appropriate request
   async updateServiceRequest(id, request) {
-    if (request.user !== undefined)
+    if (request.user !== undefined) {
       throw new Error("'user' is a reserved property for Requests");
-    if (request.domain !== undefined)
+    }
+    if (request.domain !== undefined) {
       throw new Error("'domain' is a reserved property for Requests");
-    if (request.status !== undefined)
+    }
+    if (request.status !== undefined) {
       throw new Error("'status' is a reserved property for Requests");
-    if (request.sent !== undefined)
+    }
+    if (request.sent !== undefined) {
       throw new Error("'sent' is a reserved property for Requests");
+    }
 
     await this.firestore
       .collection('servicerequest')
@@ -82,7 +92,8 @@ class FirebaseBackend extends BackendInterface {
 
   // Get a specific Service Request
   async getServiceRequest(id) {
-    const { currentUser } = this.firebase.auth();
+    // todo: incorporate user data into service request data
+    // const { currentUser } = this.firebase.auth();
     let snapshot = await this.firestore
       .collection('servicerequest')
       .doc(id)

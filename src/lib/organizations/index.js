@@ -10,6 +10,7 @@ function RegisterOrganization(metadata) {
     OrganizationIndex.ByZip[zip] = (OrganizationIndex.ByZip[zip] || []).concat([
       [metadata.Kind, metadata.id],
     ]);
+    return zip;
   });
   OrganizationIndex.Metadata[metadata.id] = metadata;
 }
