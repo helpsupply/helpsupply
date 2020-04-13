@@ -1,15 +1,13 @@
-import BackendInterface from './backendInterface';
-import Firebase from 'firebase';
 import config from '../components/Firebase/config';
 import { Routes } from '../constants/Routes';
 
 import OrganizationIndex from './organizations/index';
 
-class FirebaseBackend extends BackendInterface {
+const Firebase = require('firebase');
+
+export default class FirebaseBackend {
   // Note: testApp can also be an admin app
   constructor(testApp) {
-    super();
-
     this.firebase = testApp || Firebase.initializeApp(config);
     testApp || (this.firebase.analytics && this.firebase.analytics());
     this.firestore = this.firebase.firestore();
@@ -32,12 +30,12 @@ class FirebaseBackend extends BackendInterface {
   }
 
   // Returns an array of pairs [RequestKind, OrganizationId]
-  async getServicesForZip(zipCode) {
+  getServicesForZip(zipCode) {
     return OrganizationIndex.ByZip[zipCode];
   }
 
   // Returns a full metadata object a la lib/organizations/manyc.js
-  async getMetadataForProvider(provider) {
+  getMetadataForProvider(provider) {
     return OrganizationIndex.Metadata[provider];
   }
 
@@ -70,18 +68,20 @@ class FirebaseBackend extends BackendInterface {
   }
 
   // Saves a request to the database, with the appropriate request
-  async updateServiceRequest(id, request) {
-    if (request.user !== undefined) {
-      throw new Error("'user' is a reserved property for Requests");
-    }
-    if (request.domain !== undefined) {
-      throw new Error("'domain' is a reserved property for Requests");
-    }
-    if (request.status !== undefined) {
-      throw new Error("'status' is a reserved property for Requests");
-    }
-    if (request.sent !== undefined) {
-      throw new Error("'sent' is a reserved property for Requests");
+  async updateServiceRequest(id, request, admin) {
+    if (admin !== true) {
+      if (request.user !== undefined) {
+        throw new Error("'user' is a reserved property for Requests");
+      }
+      if (request.domain !== undefined) {
+        throw new Error("'domain' is a reserved property for Requests");
+      }
+      if (request.status !== undefined) {
+        throw new Error("'status' is a reserved property for Requests");
+      }
+      if (request.sent !== undefined) {
+        throw new Error("'sent' is a reserved property for Requests");
+      }
     }
 
     await this.firestore
@@ -92,8 +92,6 @@ class FirebaseBackend extends BackendInterface {
 
   // Get a specific Service Request
   async getServiceRequest(id) {
-    // todo: incorporate user data into service request data
-    // const { currentUser } = this.firebase.auth();
     let snapshot = await this.firestore
       .collection('servicerequest')
       .doc(id)
@@ -689,5 +687,3 @@ class FirebaseBackend extends BackendInterface {
     // To do
   }
 }
-
-export default FirebaseBackend;

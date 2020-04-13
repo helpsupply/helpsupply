@@ -1,4 +1,5 @@
 import MANYCMetadata from './manyc';
+import DummyMetadata from './dummy';
 
 var OrganizationIndex = {
   ByZip: {},
@@ -17,5 +18,6 @@ function RegisterOrganization(metadata) {
 
 // We should compute this statically beforehand
 RegisterOrganization(MANYCMetadata);
+RegisterOrganization(DummyMetadata);
 
 export default OrganizationIndex;
