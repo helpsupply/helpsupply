@@ -117,7 +117,7 @@ function StyleGuide() {
             <form onSubmit={methods.handleSubmit(handleSubmit)}>
               <InputDate
                 name="example date"
-                label={t('generic.form.daypicker.placeholder')}
+                label={t('global.form.daypicker.placeholder')}
               />
               <button type="submit">test submit</button>
             </form>

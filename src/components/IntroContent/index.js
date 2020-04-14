@@ -23,11 +23,7 @@ const IntroContent = ({ isDesktop }) => {
       <Text css={styles.text} as="p" type={TEXT_TYPE.BODY_2}>
         {t('home.intro.paragraph1')}
       </Text>
-      <Anchor
-        href={Routes.FAQ}
-        iconColor={isDesktop ? Color.WHITE : Color.PRIMARY}
-        withIcon
-      >
+      <Anchor href={Routes.FAQ} iconColor={Color.WHITE} withIcon>
         <Text css={[styles.anchor, textStyles.BOLD]} type={TEXT_TYPE.BODY_2}>
           {t('home.intro.learnMore')}
         </Text>

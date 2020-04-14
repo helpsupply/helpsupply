@@ -41,7 +41,7 @@ function ServiceTypeForm() {
   const fieldData = [
     {
       customOnChange: handleFieldChange('serviceType'),
-      label: t('service.selectType.form.serviceType.label'),
+      label: t('service.selectType.form.serviceTypeLabel'),
       // todo: move these values to enum
       options: [
         { label: 'Groceries', value: 'groceries' },
@@ -55,7 +55,7 @@ function ServiceTypeForm() {
     },
     {
       customOnChange: handleFieldChange('urgency'),
-      label: t('service.selectType.form.urgency.label'),
+      label: t('service.selectType.form.urgencyLabel'),
       // todo: move these values to enum
       options: [
         { label: "Immediately - I'm in crisis", value: 'immediate' },

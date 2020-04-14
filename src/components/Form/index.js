@@ -30,8 +30,8 @@ const Form = ({
   });
 
   const localButtonLabel = disabled
-    ? t('generic.form.submitLabelCta')
-    : t('generic.form.submitLabelNext');
+    ? t('global.form.submitLabelCta')
+    : t('global.form.submitLabelNext');
 
   return (
     <FormContext {...methods}>
