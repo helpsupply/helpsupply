@@ -24,7 +24,7 @@ function EmailForm({ backend }) {
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
-      return t('request.workEmailForm.workEmail.validation.label');
+      return t('request.workEmailForm.workEmail.validationLabel');
     }
   };
 

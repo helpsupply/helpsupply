@@ -2,9 +2,7 @@
 import { jsx } from '@emotion/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import { ReactComponent as Chevron } from 'static/icons/chevron.svg';
-
 import { styles } from './Anchor.styles';
 
 export const anchorTypes = {

@@ -48,13 +48,13 @@ function ContactForm({ backend, dropSite }) {
   const fieldData = [
     {
       customOnChange: setName,
-      label: t('request.dropSiteContactForm.name.label'),
+      label: t('request.dropSiteContactForm.nameLabel'),
       name: 'name',
       type: formFieldTypes.INPUT_TEXT,
     },
     {
       customOnChange: setContact,
-      label: t('request.dropSiteContactForm.contact.label'),
+      label: t('request.dropSiteContactForm.contactLabel'),
       name: 'contact',
       type: formFieldTypes.INPUT_TEXT,
       validation: { validate },

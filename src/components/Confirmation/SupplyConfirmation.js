@@ -43,7 +43,7 @@ function SupplyConfirmation() {
     <ConfirmationWrapper title={t('request.supplyConfirmation.header')}>
       <SubRow
         onClick={handleOnEditClick}
-        editLabel={t('generic.form.changeLabel')}
+        editLabel={t('global.form.changeLabel')}
         label={`${t('request.supplyConfirmation.subText.note')} #1454`}
         details={
           <Fragment>
@@ -60,7 +60,7 @@ function SupplyConfirmation() {
           id: params.id,
         })}
         passedStyles={styles.subCta}
-        message={t('request.supplyConfirmation.subSection.subCta')}
+        message={t('request.supplyConfirmation.subSection.cta')}
       />
 
       <PrimaryButton

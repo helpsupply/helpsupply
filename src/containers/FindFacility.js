@@ -144,7 +144,7 @@ function FindFacility({ backend, history }) {
       isLoading={isLoading}
     >
       <Autosuggest
-        label={t('request.facilitySearch.search.label')}
+        label={t('request.facilitySearch.label')}
         suggestions={results}
         onSearch={handleChange}
         getSuggestionValue={getHospitalName}

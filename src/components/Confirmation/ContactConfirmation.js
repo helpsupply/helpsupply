@@ -29,7 +29,7 @@ function ContactConfirmation({ name, contact, onEdit }) {
     <ConfirmationWrapper title={t('service.contactConfirm.title')}>
       <SubRow
         onClick={onEdit}
-        editLabel={t('generic.form.changeLabel')}
+        editLabel={t('global.form.changeLabel')}
         label={t('service.contactForm.title')}
         details={
           <Fragment>
@@ -45,7 +45,7 @@ function ContactConfirmation({ name, contact, onEdit }) {
         onClick={handleOnCtaClick}
       >
         <Text type={TEXT_TYPE.BODY_1}>
-          {t('request.dropSiteContactForm.sent.button.label')}
+          {t('request.dropSiteContactForm.sent.buttonLabel')}
         </Text>
       </PrimaryButton>
     </ConfirmationWrapper>

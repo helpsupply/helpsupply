@@ -11,7 +11,7 @@ function SignUpConfirmation({ backend }) {
 
   const email = backend.getEmailForSignIn()
     ? `**${backend.getEmailForSignIn()}**`
-    : t('request.workEmailForm.sent.description.emailDefault');
+    : t('request.workEmailForm.sent.emailDefault');
 
   return (
     <Page>

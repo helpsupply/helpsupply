@@ -1,116 +1,202 @@
 {
   "translations": {
-    "generic.form.submitLabel": "Submit",
-    "generic.form.changeLabel": "Change",
-    "generic.form.submitLabelCta": "Please complete form",
-    "generic.form.submitLabelNext": "Next",
-    "generic.form.daypicker.placeholder": "Date needed",
-    "generic.button.deleteLabel": "Delete",
-    "generic.label.added": "Added",
-    "home.intro.learnMore": "Learn more",
-    "home.intro.paragraph1": "This includes doctors, nurses, technicians, and anyone working alongside them during this crisis.",
-    "home.intro.title": "Welcome to Help Supply. We're helping medical professionals in NYC with their immediate needs around childcare, pet care, groceries and emotional support.",
-    "home.needServices.description": "I’m looking for support so I can keep working",
-    "home.needServices.title": "I’m a medical worker",
-    "home.needSupplies.description": "Items for use in the facility where I work",
-    "home.needSupplies.title": "Need supplies",
-    "learnMore.faq.bullet1": "Who can request help? Our focus is on helping anyone working for a NYC medical facility or EMT service treating people suffering from COVID-19. Support staff, nurses, and doctors are all encouraged to make requests.",
-    "learnMore.faq.bullet2": "How can I be sure that my request and information stay private? We share your data securely on a per-request basis with only the service organization that will fulfill your request.",
-    "learnMore.faq.bullet3": "Does Help Supply provide the volunteer services? No. We gather requests and then route them to the most appropriate of our partner organizations to provide volunteers to fulfill them. Our current partners include Mutual Aid NYC, Workers Need Childcare, and NYC COVID Care Network.",
-    "learnMore.faq.bullet4": "How long will I have to wait for help? Many people are in difficult situations, and the volume of requests is high. Our partners will contact you as soon as they can.",
-    "learnMore.faq.bullet5": "Will you expand to other cities besides NYC? We're currently working to expand to other cities. If you are a volunteer service organization and would like to work with us, please let us know at help@help.supply.",
-    "learnMore.about.title": "What we're doing",
-    "learnMore.about.paragraph1": "We quickly and seamlessly connect healthcare workers to the services and support they need to keep up the fight against COVID-19.",
-    "learnMore.about.paragraph2": "Healthcare workers have daily needs that are squeezed by the COVID-19 fight; needs like grocery shopping, childcare, pet care and mental health support are a challenge to meet. We've built relationships with trusted partners who have armies of volunteers ready to help and equipped with risk-reduction training and supplies. Launched in NYC, Help Supply is expanding to other hard-hit markets.",
-    "learnMore.about.who.title": "Who we are",
-    "learnMore.about.who.paragraph1": "We're a group of designers, technologists, medical students and community organizers from across the country who heard from the healthcare workers in their networks that they are being overwhelmed by this crisis.",
-    "learnMore.about.who.paragraph2": "Since many of us make digital products and services professionally, we decided to apply those skills to help solve everyday problems for healthcare workers so they can focus on caring for the infected.",
-    "learnMore.about.partners.title": "Our partners",
-    "learnMore.about.partners.paragraph1": "We're partnering with the following aid organizations:",
-    "learnMore.about.partners.paragraph2": "We're partnering with Mutual Aid NYC, Workers Need Childcare, and NYC COVID Care Network.",
-    "learnMore.about.partners.paragraph3": "We're looking for more organizations, especially in Detroit and New Orleans. If you're an organization providing aid and want to partner with Help Supply, contact us at help@help.supply.",
-    "learnMore.contact.title": "Contact",
-    "learnMore.contact.subtitle1": "Questions and comments:",
-    "learnMore.contact.subtitle2": "Media inquiries:",
-    "login.alert.preLink": "Your email doesn't look like it's from a healthcare provider. Please ",
-    "login.alert.link": "log out",
-    "login.alert.postLink": " and try your work email or contact ",
-    "login.loading.message": "Verifying your credentials (should be a few minutes). You'll be able to edit/add once verified.",
-    "request.dropSiteForm.description": "This is where donors can drop off supplies. It should be an easily identifiable location including a street address.",
-    "request.dropSiteForm.dropSiteAddress.label": "Street address",
-    "request.dropSiteForm.dropSiteDescription.label": "Additional location details",
-    "request.dropSiteForm.dropSiteNotes.label": "Notes (e.g. All donated items must be unused and sealed in original packaging)",
-    "request.dropSiteForm.moreInfo.description": "We’re also working to solve this problem at scale. Can you give us the name and contact info of the person at your facility responsible for procuring supplies?",
-    "request.dropSiteForm.requestWillingToPay.label": "My facility will pay for large volumes of high-quality supplies.",
-    "request.dropSiteForm.requirements.description": "Please enter any requirements about how supplies should be delivered.,",
-    "request.dropSiteForm.title": "Set a drop-off location",
-    "request.facilityAdded.title": "Your facility has been added",
-    "request.facilityAdded.newFacility": "New facility",
-    "request.facilityForm.dropSiteFacilityName.label": "Name of the facility",
-    "request.facilityForm.dropSiteZip.label": "Zip code",
-    "request.facilityForm.dropSiteCity.label": "City",
-    "request.facilityForm.dropSiteState.label": "State",
-    "request.facilityForm.dropSiteAddress.label": "Full Street Address",
-    "request.facilityForm.dropSiteUrl.label": "Website URL (optional)",
-    "request.facilityForm.title": "Add a new facility",
-    "request.facilityForm.description": "Enter some information about your facility.",
-    "request.facilityForm.emailAt": "If you’re working from a temporary facility, email us at",
-    "request.facilitySearch.addNew": "Add a new facility",
-    "request.facilitySearch.description": "I'm a healthcare professional working at:",
-    "request.facilitySearch.notSeeing": "Not seeing your facility?",
-    "request.facilitySearch.search.label": "City or healthcare facility",
-    "request.facilitySearch.title": "Find your healthcare facility",
-    "request.supplyForm.description": "You’ll be able to add more requests after submitting this first one.",
-    "request.supplyForm.requestDescription.note": "Include any detailed requirements about the supplies you need.",
-    "request.supplyForm.requestDescription.label": "i.e.: All donated items must be unused and sealed in original packaging.",
-    "request.supplyForm.disclaimer": "Note: By submitting this request you acknowledge that Help Supply assumes no liability for any supplies delivered by donors.",
-    "request.supplyForm.kind.label": "Select kind",
-    "request.supplyForm.quantity.label": "Quantity",
-    "request.supplyForm.title": "What supplies do you need most?",
-    "request.supplyForm.type.label": "Select type",
-    "request.supplyForm.requestWillingToPay.label": "My facility will pay for large volumes of high-quality supplies.",
-    "request.supplyConfirmation.header": "We just added your new request",
-    "request.supplyConfirmation.message": "Your need will be communicated to the organizations working to deliver supplies to facilities like yours.",
-    "request.supplyConfirmation.subText.note": "Request ID",
-    "request.supplyConfirmation.subText.cta": "Change",
-    "request.supplyConfirmation.subSection.subCta": "View all open requests",
-    "request.supplyConfirmation.submitLabel": "Request other supplies",
-    "request.workEmailForm.description": "We need to verify your email before you request services.",
-    "request.workEmailForm.learnMore": "Learn more",
-    "request.workEmailForm.sent.title": "Thank you",
-    "request.workEmailForm.sent.description": "We just sent an email to {{email}}. Please click the link in that email to to start requesting services.",
-    "request.workEmailForm.sent.description.emailDefault": "the email address you provided",
-    "request.workEmailForm.title": "Enter your work email address",
-    "request.workEmailForm.workEmail.label": "Work email",
-    "request.workEmailForm.workEmail.disclaimer": "Note: we will never share your email address with any other parties.",
-    "request.workEmailForm.workEmail.validation.label": "Please enter a valid email address",
-    "request.workEmailForm.finish.title": "Please enter your email, once more",
-    "request.dropSiteContactForm.title": "Contact info",
-    "request.dropSiteContactForm.description": "Enter the contact information for the person coordinating supplies at your facility.",
-    "request.dropSiteContactForm.name.label": "Name",
-    "request.dropSiteContactForm.contact.label": "Email or phone number",
-    "request.dropSiteContactForm.sent.title": "We added the facility contact info",
-    "request.dropSiteContactForm.sent.button.label": "Create new request",
-    "dropsite.requestSuppliesButton.label": "Request supplies",
-    "dropsite.openRequests.title": "Open requests",
-    "dropsite.openRequests.requestId": "Request ID",
-    "dropsite.footer.content": "If you have recommendations for improving this tool, please email us at",
-    "dropsite.details.title": "Drop-off location",
-    "dropsite.contact.title": "Contact info",
-    "dropsite.deleteRequest.modal.title": "Are you sure you want to delete this request for",
-    "dropsite.deleteRequest.modal.description": "Your action can’t be undone, but you can always create a new request.",
-    "dropsite.deleteRequest.modal.cancelBtn": "No, cancel",
-    "dropsite.deleteRequest.modal.deleteBtn": "Yes, delete",
-    "service.contactForm.title": "Contact info",
-    "service.contactForm.description": "Enter your contact information so we can coordinate the services you request.",
-    "service.contactForm.name.label": "Name",
-    "service.contactForm.contact.label": "Email or phone number",
-    "service.contactForm.sent.title": "We added the facility contact info",
-    "service.contactForm.sent.button.label": "Create new request",
-    "service.contactConfirm.title": "We added your contact info",
-    "service.selectType.title": "What type of service are you looking for?",
-    "service.selectType.description": "Please indicate the type of service and urgency of your request below",
-    "service.selectType.form.serviceType.label": "Service type",
-    "service.selectType.form.urgency.label": "Urgency"
+    "global": {
+      "form": {
+        "submitLabel": "Submit",
+        "changeLabel": "Change",
+        "addedLabel": "Added",
+        "deleteLabel": "Delete",
+        "submitLabelCta": "Please complete form",
+        "submitLabelNext": "Next",
+        "daypicker": {
+          "placeholder": "Date needed"
+        }
+      }
+    },
+    "home": {
+      "intro": {
+        "learnMore": "Learn more",
+        "paragraph1": "This includes doctors, nurses, technicians, and anyone working alongside them during this crisis.",
+        "title": "Welcome to Help Supply. We're helping medical professionals in NYC with their immediate needs around childcare, pet care, groceries and emotional support."
+      },
+      "needServices": {
+        "description": "I’m looking for support so I can keep working",
+        "title": "I’m a medical worker"
+      },
+      "needSupplies": {
+        "description": "Items for use in the facility where I work",
+        "title": "Need supplies"
+      }
+    },
+    "learnMore": {
+      "faq": {
+        "bullet1": "Who can request help? Our focus is on helping anyone working for a NYC medical facility or EMT service treating people suffering from COVID-19. Support staff, nurses, and doctors are all encouraged to make requests.",
+        "bullet2": "How can I be sure that my request and information stay private? We share your data securely on a per-request basis with only the service organization that will fulfill your request.",
+        "bullet3": "Does Help Supply provide the volunteer services? No. We gather requests and then route them to the most appropriate of our partner organizations to provide volunteers to fulfill them. Our current partners include Mutual Aid NYC, Workers Need Childcare, and NYC COVID Care Network.",
+        "bullet4": "How long will I have to wait for help? Many people are in difficult situations, and the volume of requests is high. Our partners will contact you as soon as they can.",
+        "bullet5": "Will you expand to other cities besides NYC? We're currently working to expand to other cities. If you are a volunteer service organization and would like to work with us, please let us know at"
+      },
+      "about": {
+        "title": "What we're doing",
+        "paragraph1": "We quickly and seamlessly connect healthcare workers to the services and support they need to keep up the fight against COVID-19.",
+        "paragraph2": "Healthcare workers have daily needs that are squeezed by the COVID-19 fight; needs like grocery shopping, childcare, pet care and mental health support are a challenge to meet. We've built relationships with trusted partners who have armies of volunteers ready to help and equipped with risk-reduction training and supplies. Launched in NYC, Help Supply is expanding to other hard-hit markets.",
+        "who": {
+          "title": "Who we are",
+          "paragraph1": "We're a group of designers, technologists, medical students and community organizers from across the country who heard from the healthcare workers in their networks that they are being overwhelmed by this crisis.",
+          "paragraph2": "Since many of us make digital products and services professionally, we decided to apply those skills to help solve everyday problems for healthcare workers so they can focus on caring for the infected."
+        },
+        "partners": {
+          "title": "Our partners",
+          "paragraph1": "We're partnering with the following aid organizations:",
+          "paragraph2": "We're partnering with Mutual Aid NYC, Workers Need Childcare, and NYC COVID Care Network.",
+          "paragraph3": "We're looking for more organizations, especially in Detroit and New Orleans. If you're an organization providing aid and want to partner with Help Supply, contact us at"
+        }
+      },
+      "contact": {
+        "title": "Contact",
+        "subtitle1": "Questions and comments:",
+        "subtitle2": "Media inquiries:"
+      }
+    },
+    "login": {
+      "alert": {
+        "preLink": "Your email doesn't look like it's from a healthcare provider. Please ",
+        "link": "log out",
+        "postLink": " and try your work email or contact "
+      },
+      "loading": {
+        "message": "Verifying your credentials (should be a few minutes). You'll be able to edit/add once verified."
+      }
+    },
+    "request": {
+      "dropSiteForm": {
+        "title": "Set a drop-off location",
+        "description": "This is where donors can drop off supplies. It should be an easily identifiable location including a street address.",
+        "addressLabel": "Street address",
+        "detailsLabel": "Additional location details",
+        "notesLabel": "Notes (e.g. All donated items must be unused and sealed in original packaging)",
+        "willingToPayLabel": "My facility will pay for large volumes of high-quality supplies."
+      },
+      "facilityAdded": {
+        "title": "Your facility has been added",
+        "newFacility": "New facility"
+      },
+      "facilityForm": {
+        "title": "Add a new facility",
+        "description": "Enter some information about your facility.",
+        "nameLabel": "Name of the facility",
+        "zipLabel": "Zip code",
+        "cityLabel": "City",
+        "stateLabel": "State",
+        "urlLabel": "Website URL (optional)",
+        "emailAt": "If you’re working from a temporary facility, email us at"
+      },
+      "facilitySearch": {
+        "addNew": "Add a new facility",
+        "description": "I'm a healthcare professional working at:",
+        "notSeeing": "Not seeing your facility?",
+        "label": "City or healthcare facility",
+        "title": "Find your healthcare facility"
+      },
+      "supplyForm": {
+        "description": "You’ll be able to add more requests after submitting this first one.",
+        "kindLabel": "Select kind",
+        "quantityLabel": "Quantity",
+        "title": "What supplies do you need most?",
+        "typeLabel": "Select type",
+        "disclaimer": "Note: By submitting this request you acknowledge that Help Supply assumes no liability for any supplies delivered by donors.",
+        "requestDescription": {
+          "note": "Include any detailed requirements about the supplies you need.",
+          "label": "i.e.: All donated items must be unused and sealed in original packaging."
+        }
+      },
+      "supplyConfirmation": {
+        "header": "We just added your new request",
+        "message": "Your need will be communicated to the organizations working to deliver supplies to facilities like yours.",
+        "submitLabel": "Request other supplies",
+        "subText": {
+          "note": "Request ID",
+          "cta": "Change"
+        },
+        "subSection": {
+          "cta": "View all open requests"
+        }
+      },
+      "workEmailForm": {
+        "title": "Enter your work email address",
+        "description": "We need to verify your email before you request services.",
+        "learnMore": "Learn more",
+        "workEmail": {
+          "label": "Work email",
+          "disclaimer": "Note: we will never share your email address with any other parties.",
+          "validationLabel": "Please enter a valid email address"
+        },
+        "sent": {
+          "title": "Thank you",
+          "description": "We just sent an email to {{email}}. Please click the link in that email to to start requesting services.",
+          "emailDefault": "the email address you provided"
+        },
+        "finish": {
+          "title": "Please enter your email, once more"
+        }
+      },
+      "dropSiteContactForm": {
+        "title": "Contact info",
+        "description": "Enter the contact information for the person coordinating supplies at your facility.",
+        "nameLabel": "Name",
+        "contactLabel": "Email or phone number",
+        "sent": {
+          "title": "We added the facility contact info",
+          "buttonLabel": "Create new request"
+        }
+      }
+    },
+    "dropsite": {
+      "requestSuppliesButton": "Request supplies",
+      "openRequests": {
+        "title": "Open requests",
+        "requestId": "Request ID"
+      },
+      "footer": {
+        "content": "If you have recommendations for improving this tool, please email us at"
+      },
+      "details": {
+        "title": "Drop-off location"
+      },
+      "contact": {
+        "title": "Contact info"
+      },
+      "deleteRequest": {
+        "modal": {
+          "title": "Are you sure you want to delete this request for",
+          "description": "Your action can’t be undone, but you can always create a new request.",
+          "cancelBtn": "No, cancel",
+          "deleteBtn": "Yes, delete"
+        }
+      }
+    },
+    "service": {
+      "contactForm": {
+        "title": "Contact info",
+        "description": "Enter your contact information so we can coordinate the services you request.",
+        "nameLabel": "Name",
+        "contactLabel": "Email or phone number",
+        "sent": {
+          "title": "We added the facility contact info",
+          "buttonLabel": "Create new request"
+        }
+      },
+      "contactConfirm": {
+        "title": "We added your contact info"
+      },
+      "selectType": {
+        "title": "What type of service are you looking for?",
+        "description": "Please indicate the type of service and urgency of your request below",
+        "form": {
+          "serviceTypeLabel": "Service type",
+          "urgencyLabel": "Urgency"
+        }
+      }
+    }
   }
 }

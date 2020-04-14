@@ -62,17 +62,17 @@ export const DropSiteAdmin = ({
           onClick={handleUpdateLocation}
           label={t('dropsite.details.title')}
           details={locationDetails}
-          editLabel={t('generic.form.changeLabel')}
+          editLabel={t('global.form.changeLabel')}
         />
       </div>
       <Card
         onClick={handleUpdateContact}
         label={t('dropsite.contact.title')}
         details={contactDetails}
-        editLabel={t('generic.form.changeLabel')}
+        editLabel={t('global.form.changeLabel')}
       />
       <PrimaryButton css={styles.button} onClick={handleRequestSupplies}>
-        <Text>{t('dropsite.requestSuppliesButton.label')}</Text>
+        <Text>{t('dropsite.requestSuppliesButton')}</Text>
       </PrimaryButton>
       <Text css={styles.requestsHeader} as="h3" type={TEXT_TYPE.HEADER_4}>
         {t('dropsite.openRequests.title')}
