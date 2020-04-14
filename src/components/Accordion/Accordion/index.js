@@ -17,7 +17,7 @@ const usePrevious = (value) => {
   return ref.current;
 };
 
-const Accordion = ({ data, defaultSelected = null }) => {
+export const Accordion = ({ data, defaultSelected = null }) => {
   const [selected, setSelected] = useState(defaultSelected ?? null);
   const prevDefault = usePrevious(defaultSelected);
 

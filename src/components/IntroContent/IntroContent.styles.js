@@ -7,7 +7,7 @@ const styles = {
     marginRight: [`${Space.S20}px`, '', 'auto'],
   }),
   anchor: css({
-    color: [Color.PRIMARY, '', Color.WHITE],
+    color: Color.WHITE,
   }),
   text: css({
     color: [Color.WHITE, '', Color.WHITE],

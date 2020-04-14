@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import Toggle from './Toggle';
+import Toggle from '../Toggle';
 import { styles } from './Head.styles';
 
-const Head = ({ children, position, onChange }) => {
+export const Head = ({ children, position, onChange }) => {
   return (
     <div css={styles.root}>
       <Toggle
