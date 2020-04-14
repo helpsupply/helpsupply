@@ -1,0 +1,910 @@
+{
+  "baseName": "MANYC Needs Requests",
+  "base": "appkLWaTOjeY3Cq0t",
+  "table": "Individual Needs Requests",
+  "exportTime": "2020-04-12T16:44:15.538Z",
+  "fields": {
+    "Unique ID": {
+      "description": "This doesn't need to be your legal name, but please include first + last",
+      "type": "autoNumber",
+      "options": null,
+      "isComputed": true
+    },
+    "Cell": {
+      "description": "We'll use this to link you to folks in need & may share it with folks in your immediate area for you to make a hyper-local phone tree or WhatsApp group.",
+      "type": "phoneNumber",
+      "options": null,
+      "isComputed": false
+    },
+    "Email": {
+      "description": "We'll use this to link you to folks in need & may share it with folks in your immediate area for you to make a hyper-local listserv.",
+      "type": "email",
+      "options": null,
+      "isComputed": false
+    },
+    "Language Access: is your primary language something other than English, for which you'd need translation & interpretation support to connect to volunteers?": {
+      "description": "Please say yes ONLY if you are fluent or near-fluent.",
+      "type": "multipleSelects",
+      "options": {
+        "choices": [
+          {
+            "id": "sel6HBB1sseIvk12y",
+            "name": "Spanish",
+            "color": "blueLight2"
+          },
+          {
+            "id": "sel9W4YTtAL6rQsZv",
+            "name": "Chinese: Mandarin",
+            "color": "tealLight2"
+          },
+          {
+            "id": "selz95jKRIRZo2smJ",
+            "name": "Chinese: Cantonese",
+            "color": "cyanLight2"
+          },
+          {
+            "id": "selcWdQAghhjlxyL5",
+            "name": "Russian",
+            "color": "greenLight2"
+          },
+          {
+            "id": "selgElNpF6ttrJsic",
+            "name": "Haitian Kreyol",
+            "color": "yellowLight2"
+          },
+          {
+            "id": "selOwwFtMq223xIUR",
+            "name": "Bengali",
+            "color": "orangeLight2"
+          },
+          {
+            "id": "sel9WeUMlQYwUvIEF",
+            "name": "Yiddish",
+            "color": "redLight2"
+          },
+          {
+            "id": "selwB422p33CrDhBu",
+            "name": "French",
+            "color": "pinkLight2"
+          },
+          {
+            "id": "selrKXBvC7OPEqkoQ",
+            "name": "Italian",
+            "color": "purpleLight2"
+          },
+          {
+            "id": "selh9WtjSDxemn1TO",
+            "name": "Korean",
+            "color": "grayLight2"
+          },
+          {
+            "id": "selMaBAd4gKZRSuqb",
+            "name": "Arabic",
+            "color": "blueLight1"
+          },
+          {
+            "id": "selAKfOzLn60wflCx",
+            "name": "Polish",
+            "color": "cyanLight1"
+          },
+          {
+            "id": "selF6sKFs5SXacvyj",
+            "name": "Tagalog",
+            "color": "tealLight1"
+          },
+          {
+            "id": "selcU4MBeFwV1VweH",
+            "name": "ASL",
+            "color": "greenLight1"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "If you're seeking other types of support, please describe.": {
+      "description": "Depending on people's needs and interests, we may expand the types of mutual aid we're able to coordinate. These might include transportation, emotional support, household assistance, childcare, dog walking, petsitting, etc. ",
+      "type": "multilineText",
+      "options": null,
+      "isComputed": false
+    },
+    "What type(s) of support are you seeking?": {
+      "description": "",
+      "type": "multipleSelects",
+      "options": {
+        "choices": [
+          {
+            "id": "sel2id9wbZhujdxrW",
+            "name": "Deliver groceries or supplies to me",
+            "color": "blueLight2"
+          },
+          {
+            "id": "selm6h4vEtkXQaeSE",
+            "name": "Pick up a prescription for me",
+            "color": "tealLight2"
+          },
+          {
+            "id": "selQue6HfiJXTnUEp",
+            "name": "1 on 1 check-ins (phone call, Zoom, etc to touch base with a neighbor)",
+            "color": "tealLight2"
+          },
+          {
+            "id": "selJMftjooAza4JJX",
+            "name": "Financial support",
+            "color": "greenLight2"
+          },
+          {
+            "id": "seli3mDu6XgTWaOIj",
+            "name": "Translation and interpretation in a language other than English",
+            "color": "yellowLight2"
+          },
+          {
+            "id": "selV4rWiocysT8mnU",
+            "name": "Social services guidance (filing for medicare, unemployment, etc)",
+            "color": "redLight2"
+          },
+          {
+            "id": "selDV3yo5cnrx0ggR",
+            "name": "Other (please describe below)",
+            "color": "purpleLight2"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "Financial Support: how much do you need right now, if anything?": {
+      "description": "",
+      "type": "singleSelect",
+      "options": {
+        "choices": [
+          {
+            "id": "selGNBizRd0en1iAH",
+            "name": "$20",
+            "color": "blueLight2"
+          },
+          {
+            "id": "selOGhoRWiOGj2HGH",
+            "name": "$50",
+            "color": "cyanLight2"
+          },
+          {
+            "id": "selqrtbnbNcRGeZT2",
+            "name": "$75",
+            "color": "orangeLight2"
+          },
+          {
+            "id": "sel90tZ8azBy2vRQT",
+            "name": "$100",
+            "color": "tealLight2"
+          },
+          {
+            "id": "sel62akRECQtB9ojO",
+            "name": "$150",
+            "color": "greenLight2"
+          },
+          {
+            "id": "sele0ZnoycvoA2N1g",
+            "name": "$200",
+            "color": "yellowLight2"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "Cross Streets": {
+      "description": "",
+      "type": "singleLineText",
+      "options": null,
+      "isComputed": false
+    },
+    "Other language(s) spoken:": {
+      "description": "",
+      "type": "singleLineText",
+      "options": null,
+      "isComputed": false
+    },
+    "Which of these ways are best to get in touch with you?": {
+      "description": "",
+      "type": "multipleSelects",
+      "options": {
+        "choices": [
+          {
+            "id": "selcp4xYi4krApJaA",
+            "name": "Text message",
+            "color": "blueLight2"
+          },
+          {
+            "id": "sel4Kt8uCXDtWnUmO",
+            "name": "Phone call",
+            "color": "cyanLight2"
+          },
+          {
+            "id": "selhaWIIpvrt6LOeH",
+            "name": "Email",
+            "color": "tealLight2"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "Last Name": {
+      "description": "",
+      "type": "singleLineText",
+      "options": null,
+      "isComputed": false
+    },
+    "What borough/region are you in?": {
+      "description": "",
+      "type": "singleSelect",
+      "options": {
+        "choices": [
+          {
+            "id": "selzJV1oeBWzfMkgL",
+            "name": "Brooklyn",
+            "color": "blueLight2"
+          },
+          {
+            "id": "selkUoJSAVkXrya7h",
+            "name": "Bronx",
+            "color": "cyanLight2"
+          },
+          {
+            "id": "selma30mltZzqi1iq",
+            "name": "Queens",
+            "color": "tealLight2"
+          },
+          {
+            "id": "selkr7s8xnZNSXoiR",
+            "name": "Staten Island",
+            "color": "greenLight2"
+          },
+          {
+            "id": "selihZrYb0KwDJKDi",
+            "name": "Manhattan",
+            "color": "yellowLight2"
+          },
+          {
+            "id": "selAtZOZfhASGacls",
+            "name": "Long Island",
+            "color": "orangeLight2"
+          },
+          {
+            "id": "sel0eAjjuHR4ZEWkT",
+            "name": "Other",
+            "color": "redLight2"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "What neighborhood?": {
+      "description": "",
+      "type": "multipleRecordLinks",
+      "options": {
+        "linkedTableId": "tblV3dLwc48yQbvuL",
+        "isReversed": false,
+        "inverseLinkFieldId": "fld5lSc7TJoHzbHo3"
+      },
+      "isComputed": false,
+      "choices": {
+        "recFmntRNA2ogXWTv": "Brooklyn: Midwood",
+        "reck6ZNuyUBPY6PqU": "Brooklyn: Bedford",
+        "recbn89fpmX3WJcAG": "Bronx: Fordham South",
+        "rec8P7urnVXn1RUV3": "Brooklyn: Borough Park",
+        "recmgim5DLUJxIwg3": "Brooklyn: Rugby-Remsen Village",
+        "reckgDP5Dl8FlTRc1": "Queens: East Flushing",
+        "recBt8MRpzwchW2SN": "Queens: Woodhaven",
+        "recsmnxsnlyIJQ8Rs": "Brooklyn: Madison",
+        "recXVn0EGs8hiB0Hd": "Queens: Auburndale",
+        "recnmRp8VOPw8T4aW": "Bronx: Williamsbridge-Olinville",
+        "reclnd7HtQc736XTR": "Queens: Murray Hill",
+        "recb2qULGHl160xaB": "Queens: East Elmhurst",
+        "rec7qT3Ukge53eS72": "Brooklyn: Brownsville",
+        "recdxgPMUKkwBZ0pz": "Brooklyn: East New York (Pennsylvania Ave)",
+        "recOibbsqqo8EsKnT": "Brooklyn: Kensington-Ocean Parkway",
+        "recikCXGrAeMfjYvN": "Bronx: Parkchester",
+        "recBZzWKFeOYoCQ2d": "Brooklyn: Erasmus",
+        "reclz1tk6mTivjj1o": "Queens: Cambria Heights",
+        "recpmRDBDcaIYbptB": "Brooklyn: East Flatbush-Farragut",
+        "rec7LnO49Z8E8FaJ1": "Brooklyn: Ocean Parkway South",
+        "recp5MW4PMErg7Yds": "Brooklyn: Starrett City",
+        "rec37zKWTYbIsmckj": "Bronx: Morrisania-Melrose",
+        "recQLh0tYzrNWIjWe": "Queens: Elmhurst",
+        "recOqk3gdEC0NeY8a": "Manhattan: East Village",
+        "recgdX7TxWTQ5fUtL": "Queens: Glen Oaks-Floral Park-New Hyde Park",
+        "rec02NiJe7AlEIYVU": "Bronx: Longwood",
+        "recVFUkRNzMc6c6Jq": "Manhattan: Yorkville",
+        "recxfWdLdX5IynHO1": "Manhattan: Upper East Side-Carnegie Hill",
+        "rec522avpxTsZYDTt": "Brooklyn: Windsor Terrace",
+        "recHo8NvycTYuDpEX": "Queens: Hammels-Arverne-Edgemere",
+        "recZfypEmfU9qRGGh": "Bronx: Rikers Island",
+        "reci4tzA3fPCxt6Kp": "Bronx: Hunts Point",
+        "recov0vOrgb5mcGW3": "Queens: Jackson Heights",
+        "recyTTNQoPNSlMGU4": "Brooklyn: Bath Beach",
+        "rec0qlbsZeGuB2Z5J": "Staten Island: Old Town-Dongan Hills-South Beach",
+        "recuTrcMjZ1D2Qcf3": "Brooklyn: Flatbush",
+        "rec2t24tXc6cwIk0g": "Bronx: Melrose South-Mott Haven North",
+        "recgeLPXZ3SGIipTs": "Brooklyn: Ocean Hill",
+        "recxEYxGKWb8DFzgh": "Manhattan: Morningside Heights",
+        "recqafiqtCch4mdVk": "Bronx: Soundview-Bruckner",
+        "recaeQa9kbZBSVt7u": "Bronx: Allerton-Pelham Gardens",
+        "recp6j00HLyHSlN5l": "Queens: Jamaica Estates-Holliswood",
+        "recY3v69enmYX082Y": "Queens: Hollis",
+        "recCHOZeBh7va2OiN": "Brooklyn: Flatlands",
+        "recrFu0hjbvjX9ozi": "Brooklyn: East New York",
+        "recpGjz65uG23bggR": "Bronx: Kingsbridge Heights",
+        "rec3EtJBOXMBCip3T": "Queens: Springfield Gardens North",
+        "rec9JC9901xXKsFFg": "Brooklyn: Canarsie",
+        "recJ9qrth3zUYwQtF": "Bronx: Norwood",
+        "rec3zQ6ghaLPibVW6": "Manhattan: Manhattanville",
+        "recaXNSQkV7iCr94j": "Manhattan: West Village",
+        "reczAdepEVNjCRagg": "Staten Island: Grasmere-Arrochar-Ft. Wadsworth",
+        "recSyLdO8d1iio35o": "Queens: Queens Village",
+        "recnfvD5ybIKaWsnZ": "Manhattan: Chinatown",
+        "rec2KvvLIwFOhGH7N": "Bronx: Pelham Bay-Country Club-City Island",
+        "recBmOqVIYxCrSVGU": "Bronx: Woodlawn-Wakefield",
+        "recNwHcNE984L0wvD": "Queens: Old Astoria",
+        "recsv0X6I0uxM6aZu": "Queens: Astoria",
+        "recKbNC5mCSOhuCKK": "Manhattan: Stuyvesant Town-Cooper Village",
+        "rec2GAND7XkWaTFeI": "Brooklyn: Dyker Heights",
+        "recqXfY2BxebbYfoT": "Brooklyn: Bensonhurst West",
+        "recvBZSsMKCM2KzOV": "Staten Island: West New Brighton-New Brighton-St. George",
+        "recHq29roVId6gcbC": "Staten Island: New Brighton-Silver Lake",
+        "recBPmIRyr2aqq3Mw": "Staten Island: Westerleigh",
+        "recQ57zLkv1Qc7tBU": "Bronx: University Heights-Morris Heights",
+        "recZ9s2Z5J5Rpg2PW": "Queens: Bayside-Bayside Hills",
+        "recrAtENqaM69Ou8l": "Brooklyn: Crown Heights North",
+        "recj2yYFjvvTsJg0Y": "Bronx: East Concourse-Concourse Village",
+        "recq6jNXmskCoBzLS": "Queens: North Corona",
+        "recMxZoaLPOUSMIrT": "Brooklyn: Cypress Hills-City Line",
+        "recfiq1KY1fF1tIb6": "Queens: Kew Gardens Hills",
+        "recqhk1JBWvy7rd36": "Queens: Pomonok-Flushing Heights-Hillcrest",
+        "recpuGcE39Ktu6Xpq": "Brooklyn: North Side-South Side",
+        "recljPXU53dmQpLYp": "Manhattan: Lower East Side",
+        "recTkKYmZMe8omFTv": "Brooklyn: Greenpoint",
+        "recvpRYwmZ9BBQrEQ": "Bronx: Spuyten Duyvil-Kingsbridge",
+        "recV6x3wv2z0vuKr2": "Brooklyn: Sunset Park East",
+        "recAjO3MJr7zEcdR0": "Manhattan: Marble Hill-Inwood",
+        "rec9Rw2clHIYxmIwD": "Brooklyn: Homecrest",
+        "recy1h8n5nUVwipgh": "Manhattan: Washington Heights North",
+        "recN5SK81vKkbKE5W": "Queens: Steinway",
+        "recYFRt41f1XXmwOE": "Bronx: Mott Haven-Port Morris",
+        "recMdc3F9cy9OC9HZ": "Brooklyn: West Brighton",
+        "recvJZw6AmV5UpeS1": "Manhattan: Central Harlem North-Polo Grounds",
+        "recl6QwqyELNfV4Wd": "Queens: Queensbridge-Ravenswood-Long Island City",
+        "rec3wbTMDvCcTdN7q": "Staten Island: New Dorp-Midland Beach",
+        "recJAOAgQou2iJftV": "Bronx: Van Cortlandt Village",
+        "recbqgWlAEtwUKt2Y": "Bronx: Co-op City",
+        "recnS09z5gpEJVwU1": "Brooklyn: Bay Ridge",
+        "recxt7MHeVBExSEPF": "Brooklyn: Sunset Park West",
+        "recdUWx0t0pMGITMO": "Brooklyn: Fort Greene",
+        "recbRytWj2V9JDMOP": "Manhattan: SoHo-TriBeCa-Civic Center-Little Italy",
+        "recCfY0YgihGizfsj": "Manhattan: Battery Park City-Lower Manhattan",
+        "rec9tHltbOEbPNuDa": "Manhattan: Clinton",
+        "recjoDIdFeWOpAbkw": "Brooklyn: Prospect Heights",
+        "recuNKnqv6li4fYhM": "Queens: Baisley Park",
+        "recvUTmfci9434f9I": "Queens: South Jamaica",
+        "recL7HVHhytXYUJah": "Queens: Ozone Park",
+        "recTYu5z0IHz2QOU0": "Brooklyn: Georgetown-Marine Park-Bergen Beach-Mill Basin",
+        "recI1tN6ZqCYBTJvt": "Brooklyn: Brighton Beach",
+        "recECsyJy8KYhCHlN": "Brooklyn: Bensonhurst East",
+        "recXIS2yDN2DBBa56": "Bronx: West Farms-Bronx River",
+        "rec15BrBYyPfE3tsp": "Brooklyn: Sheepshead Bay-Gerritsen Beach-Manhattan Beach",
+        "recJMz4CtN9S0E1Wk": "Bronx: Westchester-Unionport",
+        "recoVirlMomPBw3rn": "Staten Island: Oakwood-Oakwood Beach",
+        "recVWklQpSugYHRRp": "Staten Island: Grymes Hill-Clifton-Fox Hills",
+        "recz4Nvdj6LtjHnw9": "Brooklyn: Park Slope-Gowanus",
+        "recyv21YT02FvxeMR": "Staten Island: Stapleton-Rosebank",
+        "recQXP5W7lZSIABr3": "Queens: Fresh Meadows-Utopia",
+        "recxdRBDOB6Dnhyfg": "Queens: Bellerose",
+        "recvhiS3Ga0Ne5upp": "Brooklyn: Stuyvesant Heights",
+        "recG5pRUGiWYwpNIt": "Brooklyn: East Williamsburg",
+        "recg9lPKRheC8wWST": "Queens: Ridgewood",
+        "rec4UTwqIxERvWYdA": "Manhattan: East Harlem South",
+        "recs9BM9VTdezCmAP": "Queens: Rego Park",
+        "recQQgNTXMPPAhDiv": "Manhattan: East Harlem North",
+        "recVyiOYR6ZhWSYrE": "Brooklyn: Bushwick North",
+        "recPdXQiVWunYOReZ": "Brooklyn: Bushwick South",
+        "recfinrr8sOvRUuhR": "Manhattan: Central Harlem South",
+        "recfg6pFPMxSMzuyN": "Queens: College Point",
+        "recWPKzfYdsmx2Ou4": "Manhattan: Midtown-Midtown South",
+        "recMWeh94uLQ7NRm0": "Queens: Glendale",
+        "recBjSfEbTTJ6ynDU": "Staten Island: Charleston-Richmond Valley-Tottenville",
+        "rec6r0OtLou0OVz0e": "Staten Island: park-cemetery-etc-Staten Island",
+        "recjLfi1ZRT6MALJJ": "Staten Island: New Springville-Bloomfield-Travis",
+        "recW79Q8lS06VqHGl": "Staten Island: Todt Hill-Emerson Hill-Heartland Village-Lighthouse Hill",
+        "recAPUS6dm9dY9DmD": "Queens: South Ozone Park",
+        "recluf4zEEcJYuK1w": "Queens: Lindenwood-Howard Beach",
+        "recn6OsVMt8pL31NC": "Brooklyn: Prospect Lefferts Gardens-Wingate",
+        "recdPbg6a7a9eoiiS": "Manhattan: Murray Hill-Kips Bay",
+        "recVbFPnIGQj65R1R": "Staten Island: Mariner's Harbor-Arlington-Port Ivory-Graniteville",
+        "recI698QBEWVKsnvX": "Brooklyn: Crown Heights South",
+        "recw5iuCSlAEHuIVx": "Brooklyn: Brooklyn Heights-Cobble Hill",
+        "recCJoH7RxgGOuDVI": "Staten Island: Port Richmond",
+        "reck06Owio4YzXt65": "Queens: Hunters Point-Sunnyside-West Maspeth",
+        "recdQjwnYKLtp3F8J": "Bronx: Claremont-Bathgate",
+        "reczIGeeu4YOarhXW": "Bronx: Van Nest-Morris Park-Westchester Square",
+        "recFe0yJd6Z5PNNvj": "Bronx: Pelham Parkway",
+        "recr4XGLAUrqlMOMo": "Bronx: Mount Hope",
+        "recOQ6UtX1Wwf12qe": "Queens: Ft. Totten-Bay Terrace-Clearview",
+        "recmdfvjBplx0fxTl": "Queens: Whitestone",
+        "recNlt2F1q8skIS4d": "Manhattan: Turtle Bay-East Midtown",
+        "recaX8Aibck9npHw0": "Manhattan: Lenox Hill-Roosevelt Island",
+        "recksaz1vd4NALLiR": "Queens: Elmhurst-Maspeth",
+        "recBYIJTUTaHpypf6": "Queens: Woodside",
+        "recc65thfAFIctcQf": "Queens: St. Albans",
+        "recyMqnFESFsT5SDW": "Queens: Laurelton",
+        "recHfDWCfIixTtjco": "Manhattan: Hamilton Heights",
+        "recBktp3itYt4HwIa": "Queens: Jamaica",
+        "recYZwJdSL41enF9H": "Queens: Richmond Hill",
+        "recmpl5u6ZdbqdQdG": "Queens: Briarwood-Jamaica Hills",
+        "recLKRfOGV9ZTW2Ek": "Queens: Kew Gardens",
+        "recMr3d111TjZFZ8c": "Queens: Middle Village",
+        "rectMrWp17sf5Ixz3": "Queens: Maspeth",
+        "recpc0a5HXlo3VvWC": "Manhattan: Upper West Side",
+        "rechieU95JducDzef": "Manhattan: Lincoln Square",
+        "recGLjiJKduYhjQPf": "Bronx: Bronxdale",
+        "receJSrMx6z8bFEio": "Queens: Oakland Gardens",
+        "recqQyCPgqlFK7jPN": "Queens: Douglas Manor-Douglaston-Little Neck",
+        "recmMliRUS3DCI0eJ": "Staten Island: Annadale-Huguenot-Prince's Bay-Eltingville",
+        "recDGcCeTbwNcO2sW": "Staten Island: Great Kills",
+        "rec1BQcSXR4wDZolF": "Brooklyn: Seagate-Coney Island",
+        "recLmNuSqZdJEeJ5d": "Queens: Corona",
+        "recWOKlJ2oaE5a6OX": "Bronx: Schuylerville-Throgs Neck-Edgewater Park",
+        "rec2uZuZ6AgqthNlh": "Brooklyn: Gravesend",
+        "recI4gYIyECAx9Agh": "Bronx: East Tremont",
+        "reckiWvjPaMV1eo9u": "Bronx: North Riverdale-Fieldston-Riverdale",
+        "recaksG8pS45TDcwr": "Bronx: Bedford Park-Fordham North",
+        "rectpxHxyKxIj7o5X": "Bronx: Belmont",
+        "recTlOpY9Z08Mm7Fo": "Bronx: Eastchester-Edenwald-Baychester",
+        "recADLCLRCk9CL1aQ": "Queens: Breezy Point-Belle Harbor-Rockaway Park-Broad Channel",
+        "recoOpyF9lXJVqD21": "Bronx: Crotona Park East",
+        "recdHFeJ7wbbK45Nc": "Staten Island: Rossville-Woodrow",
+        "recp84BdiYsHaXyCi": "Staten Island: Arden Heights",
+        "rec4jt2Ncc7gqwsLz": "Queens: Far Rockaway-Bayswater",
+        "rec0KML4kLDlWjz94": "Bronx: Soundview-Castle Hill-Clason Point-Harding Park",
+        "recFiousFI5IRTbJN": "Bronx: park-cemetery-etc-Bronx",
+        "recHKd9TLlHMzf1GN": "Brooklyn: Carroll Gardens-Columbia Street-Red Hook",
+        "recyKmq9bGUz4NU8A": "Manhattan: park-cemetery-etc-Manhattan",
+        "recMF3izsvyubLpgg": "Queens: Rosedale",
+        "rechCFmW4jsJYcZ7S": "Queens: Flushing",
+        "recqpWGmiPqH1qhYw": "Queens: Queensboro Hill",
+        "recqpoquHL639ecz0": "Manhattan: Hudson Yards-Chelsea-Flatiron-Union Square",
+        "recjiXKUkDLiWsgiw": "Manhattan: Gramercy",
+        "reci6AYmzKBOoj3DI": "Brooklyn: DUMBO-Vinegar Hill-Downtown Brooklyn-Boerum Hill",
+        "recxwkBOYl4Uy3ROu": "Brooklyn: Clinton Hill",
+        "recTeDwfXqNPUMM1Z": "Brooklyn: Williamsburg",
+        "recNtb1TSF491VYo7": "Brooklyn: park-cemetery-etc-Brooklyn",
+        "rec0AdDldHb0yA5pa": "Manhattan: Washington Heights South",
+        "recPuiBaenTG5Kq8d": "Bronx: Highbridge",
+        "recYdEqGYEZ90Ufo8": "Bronx: West Concourse",
+        "recWSNwilPfOxEcrO": "Queens: Forest Hills",
+        "recSHPu2YOd7O1rds": "Queens: park-cemetery-etc-Queens",
+        "recpJNBz7imj29Lb2": "Queens: Springfield Gardens South-Brookville",
+        "rec19d3sh1Xl7QlMa": "Queens: Airport"
+      }
+    },
+    "How soon do you need support?": {
+      "description": "",
+      "type": "singleSelect",
+      "options": {
+        "choices": [
+          {
+            "id": "selqRjvo5aOH1klD9",
+            "name": "Immediately, I'm in crisis",
+            "color": "redLight1"
+          },
+          {
+            "id": "selYKne9Et1ixIAqG",
+            "name": "In the next few days",
+            "color": "yellowLight1"
+          },
+          {
+            "id": "selTT0Yv0ED8OFoJr",
+            "name": "I'm okay for now, but am worried that I won't be soon",
+            "color": "blueLight2"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "Is anyone in your household, including you, in a high-risk group for COVID19 (60+, disabled, pregnant, immunocompromised, underlying medical conditions, etc)?": {
+      "description": "",
+      "type": "singleSelect",
+      "options": {
+        "choices": [
+          {
+            "id": "seluuRfqVA5sV4Pvz",
+            "name": "Yes, someone in the household is in one of these highest-risk groups.",
+            "color": "redLight2"
+          },
+          {
+            "id": "selgU9nZKoI3PS0yC",
+            "name": "No, no one in one of these groups lives here.",
+            "color": "grayLight2"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "Are you, or anyone in your household in one or more of these hardest-hit groups? Please select all that apply.": {
+      "description": "",
+      "type": "multipleSelects",
+      "options": {
+        "choices": [
+          {
+            "id": "sel16ggKhhZZWuuwW",
+            "name": "Seniors & elders",
+            "color": "redDark1"
+          },
+          {
+            "id": "selI9fiEsK72ir3VV",
+            "name": "People with disabilities and chronic illnesses/immuno-compromised",
+            "color": "pinkBright"
+          },
+          {
+            "id": "sel9iXUHwQBxwJR9A",
+            "name": "Healthcare workers",
+            "color": "cyanLight1"
+          },
+          {
+            "id": "selexY5vfIh92Q3UR",
+            "name": "Incarcerated people and communities subject to over-policing",
+            "color": "cyanLight1"
+          },
+          {
+            "id": "selEn4rgpYWic7GOr",
+            "name": "Immigrants",
+            "color": "greenLight1"
+          },
+          {
+            "id": "selqVY6nHa4nY4UiF",
+            "name": "Care workers and domestic workers",
+            "color": "yellowLight1"
+          },
+          {
+            "id": "selqBUFEUEdVjd2GM",
+            "name": "Black / Indigenous / People of Color",
+            "color": "tealLight1"
+          },
+          {
+            "id": "selMmyDg8L7M3W5Om",
+            "name": "Low-wage workers & folks outside the formal economy",
+            "color": "orangeLight1"
+          },
+          {
+            "id": "selXGEQoVmIddR6Ut",
+            "name": "People who are homeless, housing unstable, or public housing residents",
+            "color": "orangeLight1"
+          },
+          {
+            "id": "selVE9DKPc7h3FR1i",
+            "name": "Youth",
+            "color": "grayLight1"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "Advocacy Interests": {
+      "description": "",
+      "type": "multipleSelects",
+      "options": {
+        "choices": [
+          {
+            "id": "selF1X5ias1ooPH7e",
+            "name": "Education",
+            "color": "blueLight2"
+          },
+          {
+            "id": "selpL8ofctzvSrlYR",
+            "name": "Criminal Justice Reform",
+            "color": "cyanLight2"
+          },
+          {
+            "id": "selst5cfuTr7EHBe5",
+            "name": "Disability Justice",
+            "color": "tealLight2"
+          },
+          {
+            "id": "selxel1eBm0d3wfqa",
+            "name": "Elders & Care Advocacy",
+            "color": "greenLight2"
+          },
+          {
+            "id": "selJLXEIlzmGcE3Mg",
+            "name": "Environmental Justice",
+            "color": "yellowLight2"
+          },
+          {
+            "id": "selBrYolL0Ht8iZHS",
+            "name": "Housing",
+            "color": "orangeLight2"
+          },
+          {
+            "id": "seliQWo9Gp7mJbNtq",
+            "name": "Immigrants Rights",
+            "color": "redLight2"
+          },
+          {
+            "id": "selJoB3esJcFzeuSa",
+            "name": "Labor Rights",
+            "color": "pinkLight2"
+          },
+          {
+            "id": "selqFD10Df7gHNtMT",
+            "name": "LGBTQIA2+ Rights",
+            "color": "purpleLight2"
+          },
+          {
+            "id": "seldLag2SOUWKFZ8P",
+            "name": "Transit",
+            "color": "grayLight2"
+          },
+          {
+            "id": "selP1hSCkWgmmCorw",
+            "name": "Veterans",
+            "color": "blueLight1"
+          },
+          {
+            "id": "selDNNqYWBJGyhXCe",
+            "name": "Voting Rights",
+            "color": "cyanLight1"
+          },
+          {
+            "id": "selntx3eBhy4hcam4",
+            "name": "Youth Advocacy",
+            "color": "tealLight1"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "Anything else you want to share about your situation at this time?": {
+      "description": "",
+      "type": "multilineText",
+      "options": null,
+      "isComputed": false
+    },
+    "By checking this box, I agree to have my information shared with groups providing support in my neighborhood, borough and/or citywide. I understand that this information will not be shared widely or used for any other purpose.": {
+      "description": "",
+      "type": "checkbox",
+      "options": {
+        "icon": "check",
+        "color": "greenBright"
+      },
+      "isComputed": false
+    },
+    "Timestamp Created": {
+      "description": "",
+      "type": "createdTime",
+      "options": {
+        "result": {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            },
+            "timeFormat": {
+              "name": "12hour",
+              "format": "h:mma"
+            },
+            "timeZone": "client"
+          }
+        }
+      },
+      "isComputed": true
+    },
+    "Timestamp Modified": {
+      "description": "",
+      "type": "lastModifiedTime",
+      "options": {
+        "isValid": true,
+        "referencedFieldIds": [],
+        "result": {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            },
+            "timeFormat": {
+              "name": "12hour",
+              "format": "h:mma"
+            },
+            "timeZone": "client"
+          }
+        }
+      },
+      "isComputed": true
+    },
+    "Group Claiming": {
+      "description": "",
+      "type": "multipleRecordLinks",
+      "options": {
+        "linkedTableId": "tblZuOxd9eBW6c2Bq",
+        "isReversed": false,
+        "inverseLinkFieldId": "fldIq1pZnhWLNWXdW"
+      },
+      "isComputed": false,
+      "choices": {
+        "rec1NhnlKtpjgC28R": "NYC DSA North Brooklyn Branch",
+        "rectqYldCGV3fd8uM": "NYC DSA Central Brooklyn Branch",
+        "recNvVVjlz0WSrE4O": "NYC DSA South Brooklyn Branch",
+        "rec6zlNymp43WBTqY": "Bed Stuy Strong",
+        "rect5yXwUlf9NrNkG": "Bed Stuy Strong",
+        "recJHIb5CxsCboPhG": "Bed Stuy Strong",
+        "rec4tbN2PcH5F3Tyb": "Bed Stuy Strong",
+        "rec8iJZlAUpmCgcea": "Astoria Mutual Aid",
+        "recUHd4vqJoUwJs45": "DSA Bronx/Upper Manhattan Mutual Aid",
+        "recuzYHiGgFuSfZV2": "NYC DSA Central Brooklyn Branch",
+        "recYtCBZHs2Tp4NiR": "NYC DSA East Williamsburg Mutual Aid",
+        "rec2b3m7sdu5VaUhq": "NYC DSA BedStuy Mutual Aid",
+        "recAfGCWJpsg5MExU": "NYC DSA Crown Heights Mutual Aid",
+        "rec5yhPsV8TwRtfIJ": "NYC DSA Prospect Heights Mutual Aid",
+        "rechBQVVGaKTzccty": "NYC DSA Flatbush Mutual Aid",
+        "recLWQpYdjph0CRcw": "NYC DSA Ridgewood Mutual Aid",
+        "recCTBZJQwtpFqKZa": "NYC DSA Park Slope Mutual Aid",
+        "recZ34OJJqzsbCqhL": "NYC DSA PLG Mutual Aid",
+        "rec9xL0NfgmIBhEix": "NYC DSA Clinton Hill/Fort Greene Mutual Aid",
+        "recQp5GpeVmre7ojL": "NYC DSA Forest Hills",
+        "recZa2kzduY88CLsH": "Brooklyn Neighbors Clinton Hill/Fort Greene",
+        "rec2YKpMJ4XlRBj0k": "MANYC",
+        "recS5OOqJ3SSTn1iJ": "Crown Heights Mutual Aid",
+        "recwI8Sla4qVSwW1U": "Not Me, UES: Mutual Aid Network for Manhattan",
+        "rec6qvCrWXAnKtxOK": "DSA Bronx/Upper Manhattan Mutual Aid",
+        "recCV9ZdxkGtR9bYh": "NYC DSA Central Brooklyn Branch",
+        "recYQMXCdANLlSk24": "NYC DSA BedStuy Mutual Aid",
+        "recgq00RuX1rBaZe6": "NYC DSA Crown Heights Mutual Aid",
+        "recNCBm9MFyixNebK": "NYC DSA Flatbush Mutual Aid",
+        "recM1LKPGKn6thh24": "NYC DSA Park Slope Mutual Aid",
+        "recA2MpcSETKx4PwE": "NYC DSA PLG Mutual Aid",
+        "recrepVULAZ1dZIeC": "NYC DSA Clinton Hill/Fort Greene Mutual Aid",
+        "recZYouQ6blHzcmf8": "NYC DSA East Williamsburg Mutual Aid",
+        "reclqBf12nUXvM6Y4": "NYC DSA Prospect Heights Mutual Aid",
+        "recJaXgZuZoOlBufB": "Bed Stuy Strong",
+        "rece8mRSLbZ5wj1um": "Astoria Mutual Aid",
+        "recOGluBEZioa0gOI": "NYC DSA Queens Branch",
+        "recDmoKMsuvHyqfww": "Clinton Hill/Fort Greene Mutual Aid",
+        "recf0c2yInoLT9D0k": "NYC DSA Queens Branch",
+        "recE9mcIKaV3O8Yix": "Ridgewood Mutual Aid"
+      }
+    },
+    "Status": {
+      "description": "",
+      "type": "singleSelect",
+      "options": {
+        "choices": [
+          {
+            "id": "sel1UyMFslncpINlS",
+            "name": "Dispatched",
+            "color": "greenLight2"
+          },
+          {
+            "id": "sel30XqKRG6pq8kdh",
+            "name": "In Progress - We Take Responsibility For This",
+            "color": "yellowBright"
+          },
+          {
+            "id": "sel4EbcU6n3svMMSQ",
+            "name": "In Progress- Unable to contact",
+            "color": "yellowLight2"
+          },
+          {
+            "id": "selBOBAeHF9hDDjMH",
+            "name": "In Progress - We Can’t Take Responsibility for This Anymore",
+            "color": "redLight1"
+          },
+          {
+            "id": "selakGyyAX64UAO05",
+            "name": "EMERGENCY- Has Urgent Needs to be filled; that we cannot!",
+            "color": "redBright"
+          },
+          {
+            "id": "seliekZA0r34reV5t",
+            "name": "Resolved - Able to Fill Need",
+            "color": "purpleLight1"
+          },
+          {
+            "id": "sel6jbuv6LhC8tvhz",
+            "name": "Resolved - Cancelled",
+            "color": "grayLight2"
+          },
+          {
+            "id": "sel09uaEgqJJlKFlK",
+            "name": "Resolved - Follow up next week",
+            "color": "purpleBright"
+          }
+        ]
+      },
+      "isComputed": false
+    },
+    "Notes": {
+      "description": "",
+      "type": "multilineText",
+      "options": null,
+      "isComputed": false
+    },
+    "Automation Logs": {
+      "description": "",
+      "type": "singleLineText",
+      "options": null,
+      "isComputed": false
+    },
+    "First Name": {
+      "description": "",
+      "type": "singleLineText",
+      "options": null,
+      "isComputed": false
+    },
+    "Zip Code": {
+      "description": "",
+      "type": "number",
+      "options": {
+        "precision": 0
+      },
+      "isComputed": false
+    },
+    "MANYC Claiming": {
+      "description": "",
+      "type": "multipleRecordLinks",
+      "options": {
+        "linkedTableId": "tblzKCo7SF3ck9Sth",
+        "isReversed": false,
+        "inverseLinkFieldId": "flddq9w6knJPpiVkB"
+      },
+      "isComputed": false,
+      "choices": {
+        "rec2cuNeWEUfr56a5": "Goldi",
+        "recNy3HF6R0i0mhVE": "Dylana",
+        "recTEvrhswjxyyLix": "Yael",
+        "recmzd0NhlLgJRRIC": "Anna Jacobs",
+        "recFjtqGeOwC2xfSJ": "Sierra"
+      }
+    },
+    "Full Name": {
+      "description": "",
+      "type": "formula",
+      "options": {
+        "isValid": true,
+        "referencedFieldIds": ["fldCHQy0iLyv1P9Y5", "fldUWNbMExgcxH78N"],
+        "result": {
+          "type": "singleLineText"
+        }
+      },
+      "isComputed": true
+    },
+    "Automation Modified": {
+      "description": "",
+      "type": "lastModifiedTime",
+      "options": {
+        "isValid": true,
+        "referencedFieldIds": [
+          "fldjGes5g1F8KOcZJ",
+          "fldXTqUrYYpeYAnbY",
+          "fldCHQy0iLyv1P9Y5",
+          "fldMlbq2CyArXGhzr",
+          "fldqNARaZsw69vdvY",
+          "fldLd8AxtjdC4kvS8",
+          "fldwtmyufRclcPsib",
+          "fldUWNbMExgcxH78N"
+        ],
+        "result": {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            },
+            "timeFormat": {
+              "name": "12hour",
+              "format": "h:mma"
+            },
+            "timeZone": "client"
+          }
+        }
+      },
+      "isComputed": true
+    }
+  }
+}
