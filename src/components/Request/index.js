@@ -31,7 +31,7 @@ export const Request = ({
           {t('dropsite.openRequests.requestId')} #{id}
         </Note>
         <SecondaryButton onClick={onDelete}>
-          <Text type={TEXT_TYPE.NOTE}>{t('generic.button.deleteLabel')}</Text>
+          <Text type={TEXT_TYPE.NOTE}>{t('global.deleteLabel')}</Text>
         </SecondaryButton>
       </div>
       <div css={styles.requestTitle}>
@@ -42,7 +42,7 @@ export const Request = ({
         {requestDescription}
       </Text>
       <Note css={styles.date}>
-        {t('generic.label.added')} {formatDate(date)}
+        {t('global.addedLabel')} {formatDate(date)}
       </Note>
     </div>
   );

@@ -66,7 +66,7 @@ function SupplyForm({ backend }) {
   const fieldData = [
     {
       customOnChange: handleFieldChange('requestType'),
-      label: t('request.supplyForm.type.label'),
+      label: t('request.supplyForm.typeLabel'),
       name: 'type',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: requiredFields.requestType,
@@ -84,7 +84,7 @@ function SupplyForm({ backend }) {
     },
     {
       customOnChange: handleFieldChange('requestTitle'),
-      label: t('request.supplyForm.kind.label'),
+      label: t('request.supplyForm.kindLabel'),
       name: 'kind',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: requiredFields.requestTitle,
@@ -102,7 +102,7 @@ function SupplyForm({ backend }) {
     },
     {
       customOnChange: handleFieldChange('requestQuantity'),
-      label: t('request.supplyForm.quantity.label'),
+      label: t('request.supplyForm.quantityLabel'),
       name: 'quantity',
       type: formFieldTypes.INPUT_TEXT,
       value: requiredFields.requestQuantity,
@@ -124,7 +124,7 @@ function SupplyForm({ backend }) {
     },
     {
       customOnChange: handleFieldChange('requestWillingToPay'),
-      label: t('request.supplyForm.requestWillingToPay.label'),
+      label: t('request.supplyForm.willingToPayLabel'),
       name: 'requestWillingToPay',
       type: formFieldTypes.INPUT_CHECKBOX,
       value: `${requestWillingToPay}`,
@@ -141,7 +141,7 @@ function SupplyForm({ backend }) {
 
   return (
     <FormBuilder
-      buttonLabel={t('generic.form.submitLabel')}
+      buttonLabel={t('global.form.submitLabel')}
       defaultValues={fields}
       description={t('request.supplyForm.description')}
       disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}

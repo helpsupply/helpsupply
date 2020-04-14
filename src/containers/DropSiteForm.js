@@ -21,21 +21,21 @@ export const DropSiteForm = ({ dropSite, onSubmit }) => {
   const fieldData = [
     {
       customOnChange: handleFieldChange('dropSiteAddress'),
-      label: t('request.dropSiteForm.dropSiteAddress.label'),
+      label: t('request.dropSiteForm.addressLabel'),
       name: 'dropSiteAddress',
       type: formFieldTypes.INPUT_TEXT,
       defaultValue: dropSiteAddress,
     },
     {
       customOnChange: handleFieldChange('dropSiteDescription'),
-      label: t('request.dropSiteForm.dropSiteDescription.label'),
+      label: t('request.dropSiteForm.detailsLabel'),
       name: 'dropSiteDescription',
       type: formFieldTypes.INPUT_TEXT,
       defaultValue: dropSiteDescription,
     },
     {
       customOnChange: handleFieldChange('dropSiteNotes'),
-      label: t('request.dropSiteForm.dropSiteNotes.label'),
+      label: t('request.dropSiteForm.notesLabel'),
       name: 'dropSiteNotes',
       type: formFieldTypes.TEXT_AREA,
     },

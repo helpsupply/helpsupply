@@ -22,7 +22,7 @@ function FacilityConfirmation({
     <ConfirmationWrapper title={t('request.facilityAdded.title')}>
       <SubRow
         onClick={onEdit}
-        editLabel={t('generic.form.changeLabel')}
+        editLabel={t('global.form.changeLabel')}
         label={t('request.facilityAdded.newFacility')}
         details={
           <Fragment>

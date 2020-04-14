@@ -80,14 +80,14 @@ function FacilityForm({ backend, dropSite, dropSiteId }) {
   const fieldData = [
     {
       customOnChange: handleFieldChange('dropSiteFacilityName'),
-      label: t('request.facilityForm.dropSiteFacilityName.label'),
+      label: t('request.facilityForm.nameLabel'),
       name: 'dropSiteFacilityName',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteFacilityName,
     },
     {
       customOnChange: handleFieldChange('dropSiteZip'),
-      label: t('request.facilityForm.dropSiteZip.label'),
+      label: t('request.facilityForm.zipLabel'),
       name: 'dropSiteZip',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteZip,
@@ -95,7 +95,7 @@ function FacilityForm({ backend, dropSite, dropSiteId }) {
     {
       customOnChange: handleFieldChange('dropSiteCity'),
       isHalfWidth: true,
-      label: t('request.facilityForm.dropSiteCity.label'),
+      label: t('request.facilityForm.cityLabel'),
       name: 'dropSiteCity',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteCity,
@@ -103,7 +103,7 @@ function FacilityForm({ backend, dropSite, dropSiteId }) {
     {
       customOnChange: handleFieldChange('dropSiteState'),
       isHalfWidth: true,
-      label: t('request.facilityForm.dropSiteState.label'),
+      label: t('request.facilityForm.stateLabel'),
       options: states,
       name: 'dropSiteState',
       type: formFieldTypes.INPUT_DROPDOWN,
@@ -111,7 +111,7 @@ function FacilityForm({ backend, dropSite, dropSiteId }) {
     },
     {
       customOnChange: handleFieldChange('dropSiteAddress'),
-      label: t('request.facilityForm.dropSiteAddress.label'),
+      label: t('request.facilityForm.addressLabel'),
       name: 'dropSiteAddress',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteAddress,
@@ -119,7 +119,7 @@ function FacilityForm({ backend, dropSite, dropSiteId }) {
     {
       customOnChange: handleFieldChange('dropSiteUrl'),
       isRequired: false,
-      label: t('request.facilityForm.dropSiteUrl.label'),
+      label: t('request.facilityForm.urlLabel'),
       name: 'dropSiteUrl',
       type: formFieldTypes.INPUT_TEXT,
       value: dropSiteUrl,

@@ -17,7 +17,6 @@ i18n
       process.env.REACT_APP_DEBUG_TRANSLATIONS === 'true',
     ns: ['translations'],
     defaultNS: 'translations',
-    keySeparator: false,
     interpolation: {
       escapeValue: false,
     },
