@@ -105,13 +105,13 @@ function FindFacility({ backend }) {
   return (
     <Form
       onSubmit={handleRedirect}
-      title={t('service.facilityForm.title')}
-      description={t('service.facilityForm.description')}
+      title={t('request.facilityForm.title')}
+      description={t('request.facilityForm.description')}
       disabled={!selectedResult}
       isLoading={isLoading}
     >
       <Autosuggest
-        label={t('service.facilityForm.search.label')}
+        label={t('request.facilitySearch.label')}
         suggestions={results}
         onSearch={handleChange}
         getSuggestionValue={getHospitalName}
@@ -119,7 +119,9 @@ function FindFacility({ backend }) {
         onSuggestionsClearRequested={() => null}
         onSelect={setSelectedResult}
       />
-      <Text type={TEXT_TYPE.BODY_2}>{t('service.facilityForm.notSeeing')}</Text>
+      <Text type={TEXT_TYPE.BODY_2}>
+        {t('request.facilitySearch.notSeeing')}
+      </Text>
     </Form>
   );
 }
