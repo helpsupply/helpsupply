@@ -27,12 +27,15 @@ import Request from 'pages/request';
 
 // MVP
 import EntryPortal from 'pages/entry';
+import Facility from 'pages/facility';
 import SignUp from 'pages/signup';
 import SignUpConfirmation from 'pages/signup_confirmation';
-import SignupFinish from 'pages/signup_approve';
+import SignupComplete from 'pages/signup_approve';
 import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceType from 'pages/service_type';
+import ServiceGrocery from 'pages/service_grocery';
+import ServiceAdditionalInfo from 'pages/service_additional_info';
 import LearnMore from 'pages/learn_more';
 // End MVP
 
@@ -91,7 +94,7 @@ const ProtectedRoute = ({ backend, children, path }) => {
     );
   }
 
-  // TODO: check if this accounts for mismatched validation, ie email does not match facility
+  // service/supply TODO: check if this accounts for mismatched validation, ie email does not match facility
   if (!verified && badDomain) {
     content = (
       <Box>
@@ -114,14 +117,17 @@ function App({ backend }) {
             <Route exact path={Routes.HOME}>
               <EntryPortal backend={backend} />
             </Route>
-            <Route exact path={Routes.EMAIL_FORM}>
+            <Route exact path={Routes.FACILITY}>
+              <Facility backend={backend} />
+            </Route>
+            <Route exact path={Routes.EMAIL_SIGNUP_FORM}>
               <SignUp backend={backend} />
             </Route>
-            <Route exact path={Routes.EMAIL_SENT}>
+            <Route exact path={Routes.EMAIL_SIGNUP_SENT}>
               <SignUpConfirmation backend={backend} />
             </Route>
-            <Route exact path={Routes.EMAIL_APPROVE}>
-              <SignupFinish backend={backend} />
+            <Route exact path={Routes.EMAIL_SIGNUP_COMPLETE}>
+              <SignupComplete backend={backend} />
             </Route>
             <ProtectedRoute backend={backend} exact path={Routes.CONTACT_FORM}>
               <Contact backend={backend} />
@@ -136,9 +142,42 @@ function App({ backend }) {
             <ProtectedRoute backend={backend} exact path={Routes.SERVICE_TYPE}>
               <ServiceType backend={backend} />
             </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_GROCERIES_WHERE}
+            >
+              <ServiceGrocery backend={backend} step={1} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_GROCERIES_WHEN}
+            >
+              <ServiceGrocery backend={backend} step={2} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_GROCERIES_WHAT}
+            >
+              <ServiceGrocery backend={backend} step={3} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_ADDITIONAL_INFO}
+            >
+              <ServiceAdditionalInfo backend={backend} />
+            </ProtectedRoute>
             <Route exact path={Routes.FAQ}>
               <LearnMore backend={backend} />
             </Route>
+            {process.env.NODE_ENV !== 'production' && (
+              <Route exact path={Routes.STYLE_GUIDE}>
+                <StyleGuide backend={backend} />
+              </Route>
+            )}
             <Route path="*">
               <NoMatch />
             </Route>
@@ -195,9 +234,6 @@ function App({ backend }) {
             </Route>
             <Route path={Routes.PENDING_DOMAINS}>
               <PendingDomains backend={backend} />
-            </Route>
-            <Route exact path={Routes.STYLE_GUIDE}>
-              <StyleGuide backend={backend} />
             </Route>
             <Route exact path={Routes.HOME}>
               <EntryPortal backend={backend} />

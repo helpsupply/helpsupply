@@ -10,7 +10,7 @@ import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
 import { ContactConfirmation } from 'components/Confirmation';
 
-// todo: Temp values while we build backend for this part.
+// service todo: Temp values while we build backend for this part.
 const TEMP_NAME = 'Temp User';
 const TEMP_CONTACT = 'medicalWorker@healthcarefacility.com';
 

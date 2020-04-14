@@ -42,7 +42,7 @@ function ContactForm({ backend, dropSite }) {
         console.error('error', error);
         setIsLoading(false);
       });
-    // TODO: handle exceptions
+    // supply TODO: handle exceptions
   };
 
   const fieldData = [

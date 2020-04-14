@@ -1,17 +1,47 @@
 const RequestKinds = require('./kinds');
 
 const DummyMetadata = {
-  id: 'dummy',
-  Organization: 'Test Dummy Organization',
+  id: 'testOrg',
+  Organization: 'test org NYC',
   Kind: RequestKinds.GROCERY,
-  ZipCodes: [0],
-
+  ZipCodes: [11238, 11222],
+  Fields: [
+    {
+      id: 'first_name',
+      label: 'First Name',
+    },
+    {
+      id: 'last_name',
+      label: 'Phone',
+    },
+    {
+      id: 'email',
+      label: 'Email',
+    },
+    {
+      id: 'urgency',
+      label: 'How soon do you need support?',
+      choices: [
+        {
+          name: 'Immediately',
+          value: 1,
+        },
+        {
+          name: 'In the next few days',
+          value: 2,
+        },
+        {
+          name: 'Sometime soon',
+          value: 3,
+        },
+      ],
+    },
+  ],
   DeliverRequest: async (backend, request) => {
     let url = await backend.getWebhookForOrg('dummy');
     await backend.postWebhook(url, { list: request.list });
   },
-
-  HandleUpdate: async (row) => {},
+  HandleUpdate: (row) => {},
 };
 
 export default DummyMetadata;

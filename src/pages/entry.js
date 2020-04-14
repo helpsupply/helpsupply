@@ -32,7 +32,7 @@ function EntryPortal() {
       rootContainerStyles={containerStyles}
     >
       <ListLink
-        href={Routes.EMAIL_FORM}
+        href={Routes.FACILITY}
         title={t('home.needServices.title')}
         text={t('home.needServices.description')}
       />

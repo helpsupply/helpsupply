@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
+import RequestKinds from 'lib/organizations/kinds';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
@@ -31,11 +32,19 @@ function ServiceTypeForm() {
   );
 
   const handleSubmit = () => {
+    const { serviceType } = fields;
     setIsLoading(true);
-    history.push(routeWithParams(Routes.SERVICE_TYPE));
-    console.log(
-      'todo: route to specific service request form, groceries, childcare, etc.',
-    );
+
+    switch (serviceType) {
+      case RequestKinds.GROCERY:
+        history.push(routeWithParams(Routes.SERVICE_GROCERIES_WHERE));
+        break;
+      default:
+        history.push(routeWithParams(Routes.SERVICE_TYPE));
+        console.log(
+          'service todo: route to specific service request form, groceries, childcare, etc.',
+        );
+    }
   };
 
   const fieldData = [
@@ -44,10 +53,10 @@ function ServiceTypeForm() {
       label: t('service.selectType.form.serviceTypeLabel'),
       // todo: move these values to enum
       options: [
-        { label: 'Groceries', value: 'groceries' },
-        { label: 'Childcare', value: 'childcare' },
-        { label: 'Pet care', value: 'petcare' },
-        { label: 'Emotional support', value: 'emotional-support' },
+        { label: 'Groceries', value: RequestKinds.GROCERY },
+        { label: 'Childcare', value: RequestKinds.CHILDCARE },
+        { label: 'Pet care', value: RequestKinds.PETCARE },
+        { label: 'Emotional support', value: RequestKinds.MENTALHEALTH },
       ],
       name: 'serviceType',
       type: formFieldTypes.INPUT_DROPDOWN,
