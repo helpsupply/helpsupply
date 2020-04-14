@@ -13,6 +13,7 @@ const styles = {
     cursor: 'pointer',
     display: 'flex',
     userSelect: 'none',
+    width: '100%',
   }),
   input: css({
     display: 'none',

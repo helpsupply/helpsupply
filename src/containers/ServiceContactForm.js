@@ -75,27 +75,27 @@ function ServiceContactForm({ backend }) {
   const fieldData = [
     {
       customOnChange: handleFieldChange('firstName'),
-      label: t('request.dropSiteContactForm.nameLabel'),
+      label: t('service.contactForm.labels.firstName'),
       name: 'firstName',
       type: formFieldTypes.INPUT_TEXT,
     },
     {
       customOnChange: handleFieldChange('lastName'),
-      label: t('request.dropSiteContactForm.contactLabel'),
+      label: t('service.contactForm.labels.lastName'),
       name: 'lastName',
       type: formFieldTypes.INPUT_TEXT,
     },
     {
       customOnChange: handleFieldChange('phone'),
       isRequired: false,
-      label: t('service.contactForm.phone.label'),
+      label: t('service.contactForm.labels.phone'),
       name: 'phone',
       type: formFieldTypes.INPUT_TEXT,
       validation: { validate },
     },
     {
       customOnChange: handleFieldChange('contactPreference'),
-      label: t('service.contactForm.contactPreference.label'),
+      label: t('service.contactForm.labels.contactPreference'),
       options: [
         { label: 'Email', value: 'email' },
         { label: 'Phone', value: 'phone' },
@@ -107,13 +107,13 @@ function ServiceContactForm({ backend }) {
       type: formFieldTypes.NODE,
       node: [
         <Note key="note-2" css={{ width: '100%' }}>
-          {t('service.contactForm.languagePreference.description')}
+          {t('service.contactForm.note')}
         </Note>,
       ],
     },
     {
       customOnChange: handleFieldChange('languagePreference'),
-      label: t('service.contactForm.languagePreference.label'),
+      label: t('service.contactForm.labels.languagePreference'),
       options: LANGUAGES,
       name: 'languagePreference',
       type: formFieldTypes.INPUT_DROPDOWN,

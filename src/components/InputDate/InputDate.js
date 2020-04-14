@@ -10,7 +10,7 @@ import { ReactComponent as Chevron } from 'static/icons/chevron.svg';
 
 import { dayPickerStyles, styles } from './InputDate.styles';
 
-function InputDate({ label }) {
+function InputDate({ label, customOnChange }) {
   const [isFocused, setIsFocused] = useState(false);
   const [initialValue] = useState(new Date());
   const [value, setValue] = useState(initialValue);
@@ -20,13 +20,20 @@ function InputDate({ label }) {
     setIsFocused((value) => !value);
   }, []);
 
-  const handleDayChange = useCallback((selectedDay) => {
-    if (!selectedDay) {
-      setValue('');
-      return;
-    }
-    setValue(selectedDay);
-  }, []);
+  const handleDayChange = useCallback(
+    (selectedDay) => {
+      if (customOnChange) {
+        customOnChange(selectedDay);
+      }
+
+      if (!selectedDay) {
+        setValue('');
+        return;
+      }
+      setValue(selectedDay);
+    },
+    [customOnChange],
+  );
 
   return (
     <label css={[styles.container, isFocused && styles.active]}>
