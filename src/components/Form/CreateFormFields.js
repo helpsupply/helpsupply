@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 import HeaderInfo from 'components/Form/HeaderInfo';
 import InputCheckbox from 'components/Checkbox';
-import InputText from 'components/InputText';
+import InputDate from 'components/InputDate';
 import InputDropdown from 'components/InputDropdown';
+import InputText from 'components/InputText';
 import TextArea from 'components/TextArea';
 
 export const formFieldTypes = {
   HEADER_INFO: 'HEADER_INFO',
   INPUT_CHECKBOX: 'INPUT_CHECKBOX',
+  INPUT_DATE: 'INPUT_DATE',
   INPUT_DROPDOWN: 'INPUT_DROPDOWN',
   INPUT_TEXT: 'INPUT_TEXT',
   NODE: 'NODE',
@@ -26,12 +28,17 @@ export const formFieldPropTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(Object.values(formFieldTypes)).isRequired,
   validation: PropTypes.object,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.instanceOf(Date),
+  ]),
 };
 
 const inputMap = {
   [formFieldTypes.HEADER_INFO]: HeaderInfo,
   [formFieldTypes.INPUT_CHECKBOX]: InputCheckbox,
+  [formFieldTypes.INPUT_DATE]: InputDate,
   [formFieldTypes.INPUT_DROPDOWN]: InputDropdown,
   [formFieldTypes.INPUT_TEXT]: InputText,
   [formFieldTypes.TEXT_AREA]: TextArea,

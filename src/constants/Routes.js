@@ -30,4 +30,8 @@ export const Routes = {
   CONTACT_FORM: `/contact`,
   CONTACT_CONFIRMATION: `/contact/confirm`,
   SERVICE_TYPE: '/service',
+  SERVICE_GROCERIES_WHERE: '/service/grocery/location',
+  SERVICE_GROCERIES_WHEN: '/service/grocery/date',
+  SERVICE_GROCERIES_WHAT: '/service/grocery/items',
+  SERVICE_ADDITIONAL_INFO: '/service/additionalinfo',
 };

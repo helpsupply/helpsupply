@@ -34,6 +34,8 @@ import SignupComplete from 'pages/signup_approve';
 import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceType from 'pages/service_type';
+import ServiceGrocery from 'pages/service_grocery';
+import ServiceAdditionalInfo from 'pages/service_additional_info';
 import LearnMore from 'pages/learn_more';
 // End MVP
 
@@ -140,9 +142,42 @@ function App({ backend }) {
             <ProtectedRoute backend={backend} exact path={Routes.SERVICE_TYPE}>
               <ServiceType backend={backend} />
             </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_GROCERIES_WHERE}
+            >
+              <ServiceGrocery backend={backend} step={1} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_GROCERIES_WHEN}
+            >
+              <ServiceGrocery backend={backend} step={2} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_GROCERIES_WHAT}
+            >
+              <ServiceGrocery backend={backend} step={3} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_ADDITIONAL_INFO}
+            >
+              <ServiceAdditionalInfo backend={backend} />
+            </ProtectedRoute>
             <Route exact path={Routes.FAQ}>
               <LearnMore backend={backend} />
             </Route>
+            {process.env.NODE_ENV !== 'production' && (
+              <Route exact path={Routes.STYLE_GUIDE}>
+                <StyleGuide backend={backend} />
+              </Route>
+            )}
             <Route path="*">
               <NoMatch />
             </Route>
@@ -199,9 +234,6 @@ function App({ backend }) {
             </Route>
             <Route path={Routes.PENDING_DOMAINS}>
               <PendingDomains backend={backend} />
-            </Route>
-            <Route exact path={Routes.STYLE_GUIDE}>
-              <StyleGuide backend={backend} />
             </Route>
             <Route exact path={Routes.HOME}>
               <EntryPortal backend={backend} />

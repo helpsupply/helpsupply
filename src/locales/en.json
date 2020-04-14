@@ -179,15 +179,21 @@
       "contactForm": {
         "title": "Contact info",
         "description": "Enter your contact information so we can coordinate the services you request.",
-        "nameLabel": "Name",
-        "contactLabel": "Email or phone number",
+        "labels": {
+          "firstName": "First name",
+          "languagePreference": "Preferred language",
+          "lastName": "Last name",
+          "phone": "Phone number",
+          "contactPreference": "Preferred contact method"
+        },
+        "note": "Tell us if you are more comfortable with a non-English language and we'll try to find someone who speaks your language.",
         "sent": {
           "title": "We added the facility contact info",
           "buttonLabel": "Create new request"
         }
       },
       "contactConfirm": {
-        "title": "We added your contact info"
+        "title": "Thank you for providing your contact info"
       },
       "selectType": {
         "title": "What type of service are you looking for?",
@@ -195,6 +201,51 @@
         "form": {
           "serviceTypeLabel": "Service type",
           "urgencyLabel": "Urgency"
+        }
+      },
+      "additionalInfo": {
+        "title": "Is there anything else we should know?",
+        "description": "Tell us any additional information that might be helpful to the volunteer fulfilling your request.",
+        "labels": {
+          "additionalInfo": "Additional info (optional)"
+        }
+      },
+      "grocery": {
+        "where": {
+          "title": "Where do you want groceries delivered?",
+          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address. Our childcare partner, Workers Need Childcare, only uses licensed childcare",
+          "add": "Add an additional contact person for this request",
+          "labels": {
+            "zip": "ZIP code",
+            "neighborhood": "Neighborhood",
+            "crossStreet": "Cross Street"
+          },
+          "additionalContact": {
+            "title": "Additional contact info",
+            "labels": {
+              "email": "Email address (optional)",
+              "lastName": "Last name (optional)",
+              "relationship": "Relationship (optional)"
+            }
+          }
+        },
+        "when": {
+          "title": "When do you want groceries delivered?",
+          "description": "Select the day and time you prefer to receive your groceries.",
+          "labels": {
+            "day": "Day",
+            "recurring": "This is a recurring need",
+            "time": "Time"
+          },
+          "note": "Please bear in mind that many people need help and we cannot guarantee a quick response to your request."
+        },
+        "what": {
+          "title": "What groceries do you need?",
+          "description": "The more specific your request, the more likely you will receive what you need.",
+          "labels": {
+            "groceryList": "Grocery list (e.g., 6 bananas, 1 loaf whole wheat bread, 2 avocados)",
+            "dietaryRestrictions": "Dietary restrictions"
+          }
         }
       }
     }
