@@ -20,6 +20,19 @@ export const isValidPhoneNumber = (value) => {
   return re.test(strippedValue);
 };
 
+/**
+ * Checks for valid 5 digit or 5-4 digit zip codes
+ */
+export const isValidZipCode = (zipCode) => {
+  const re = /^[0-9]{5}(?:-[0-9]{4})?$/;
+  return re.test(zipCode);
+};
+
+/**
+ * Validates if value exists and is not empty
+ */
+export const isNotEmpty = (value) => !!value;
+
 export const required = {
   value: true,
   message: 'This field is required',
