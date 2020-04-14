@@ -203,6 +203,7 @@ const styles = {
     display: 'block',
     height: Height.INPUT,
     position: 'relative',
+    width: '100%',
   }),
   label: css({
     color: Color.GRAY_50,
