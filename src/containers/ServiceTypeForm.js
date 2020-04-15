@@ -11,13 +11,13 @@ import RequestKinds from 'lib/organizations/kinds';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function ServiceTypeForm() {
+function ServiceTypeForm({ backend }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    serviceType: '',
+    kind: '',
     urgency: '',
   });
 
@@ -31,13 +31,20 @@ function ServiceTypeForm() {
     [],
   );
 
-  const handleSubmit = () => {
-    const { serviceType } = fields;
+  const handleSubmit = async () => {
+    const { kind } = fields;
     setIsLoading(true);
-
-    switch (serviceType) {
+    const serviceRequestId = await backend.saveServiceRequest(fields);
+    if (!serviceRequestId) {
+      return;
+    }
+    switch (kind) {
       case RequestKinds.GROCERY:
-        history.push(routeWithParams(Routes.SERVICE_GROCERIES_WHERE));
+        history.push(
+          routeWithParams(Routes.SERVICE_GROCERIES_WHERE, {
+            id: serviceRequestId,
+          }),
+        );
         break;
       default:
         history.push(routeWithParams(Routes.SERVICE_TYPE));
@@ -49,7 +56,7 @@ function ServiceTypeForm() {
 
   const fieldData = [
     {
-      customOnChange: handleFieldChange('serviceType'),
+      customOnChange: handleFieldChange('kind'),
       label: t('service.selectType.form.serviceTypeLabel'),
       // todo: move these values to enum
       options: [
@@ -58,9 +65,9 @@ function ServiceTypeForm() {
         { label: 'Pet care', value: RequestKinds.PETCARE },
         { label: 'Emotional support', value: RequestKinds.MENTALHEALTH },
       ],
-      name: 'serviceType',
+      name: 'kind',
       type: formFieldTypes.INPUT_DROPDOWN,
-      value: fields.serviceType,
+      value: fields.kind,
     },
     {
       customOnChange: handleFieldChange('urgency'),

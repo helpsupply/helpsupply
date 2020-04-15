@@ -11,7 +11,7 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
 
-function GroceryFormDate() {
+function GroceryFormDate({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -32,10 +32,10 @@ function GroceryFormDate() {
     [],
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
-    // service todo: wire-up form events
-    history.push(routeWithParams(Routes.SERVICE_GROCERIES_WHAT));
+    await onSave(fields);
+    history.push(routeWithParams(Routes.SERVICE_GROCERIES_WHAT, { id }));
   };
 
   const fieldData = [
