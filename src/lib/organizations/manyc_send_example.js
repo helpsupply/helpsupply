@@ -30,7 +30,7 @@ const example = {
 (async () => {
   let url = 'https://hook.integromat.com/4nwig47x0n625x2zxzuaj7tv9fqijhqn';
   console.log(JSON.stringify(example, null, 2));
-  return;
+  //return;
   let response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(example),

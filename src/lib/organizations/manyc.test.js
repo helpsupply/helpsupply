@@ -41,6 +41,7 @@ test('Request Mapping', () => {
     if (Array.isArray(val)) {
       val.map((v) => {
         expect(v).toBeDefined();
+        return null;
       });
     }
     expect(val).toBeDefined();

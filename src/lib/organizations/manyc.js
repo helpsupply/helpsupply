@@ -62,7 +62,9 @@ const FIELD_MAP = {
   "Language Access: is your primary language something other than English, for which you'd need translation & interpretation support to connect to volunteers?": (
     request,
   ) => {
-    if (request.language_preference === 'English') return [];
+    if (request.language_preference === 'English') {
+      return [];
+    }
     // This was made from manyc_format.json with the following python:
     // print(json.dumps({f['name']: f['id'] for f in fmt['fields']['Language Access: is your primary language something other than English, for which you\'d need translation & interpretation support to connect to volunteers?']['options']['choices']}, indent=2))
     return [
