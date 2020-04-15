@@ -37,6 +37,7 @@ import ServiceType from 'pages/service_type';
 import ServiceGrocery from 'pages/service_grocery';
 import ServiceChildcare from 'pages/service_childcare';
 import ServicePetcare from 'pages/service_petcare';
+import ServiceEmotional from 'pages/service_emotional';
 import ServiceAdditionalInfo from 'pages/service_additional_info';
 import LearnMore from 'pages/learn_more';
 import Dashboard from 'pages/dashboard';
@@ -217,6 +218,20 @@ function App({ backend }) {
               path={Routes.SERVICE_PETCARE_DETAILS}
             >
               <ServicePetcare backend={backend} step={3} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_EMOTIONAL_WHEN}
+            >
+              <ServiceEmotional backend={backend} step={1} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_EMOTIONAL_WHAT}
+            >
+              <ServiceEmotional backend={backend} step={2} />
             </ProtectedRoute>
             <ProtectedRoute
               backend={backend}

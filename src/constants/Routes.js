@@ -41,5 +41,7 @@ export const Routes = {
   SERVICE_PETCARE_WHERE: '/service/petcare/location',
   SERVICE_PETCARE_WHEN: '/service/petcare/date',
   SERVICE_PETCARE_DETAILS: '/service/petcare/details',
+  SERVICE_EMOTIONAL_WHEN: '/service/help/date',
+  SERVICE_EMOTIONAL_WHAT: '/service/help/type',
   SERVICE_ADDITIONAL_INFO: '/service/additionalinfo/:id',
 };

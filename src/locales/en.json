@@ -358,6 +358,26 @@
             "remove": "Remove"
           }
         }
+      },
+      "emotional": {
+        "when": {
+          "title": "When would you like to speak with someone?",
+          "description": "Our service partners will work directly with you to accommodate your preferences.",
+          "labels": {
+            "day": "Preferred day",
+            "recurring": "This is a recurring need",
+            "time": "Preferred time"
+          },
+          "note": "Please bear in mind that many people need help and we cannot guarantee a quick response to your request."
+        },
+        "what": {
+          "title": "What type of support are you most interested in?",
+          "description": "Select the type of volunteer expertise that will be most helpful to you.",
+          "labels": {
+            "type": "Preferred support",
+            "agreement": "I understand Help Supply and its service partners connect individuals, and are not professional theraputic organizations"
+          }
+        }
       }
     }
   }
