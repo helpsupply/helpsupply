@@ -206,6 +206,14 @@
           "buttonLabel": "Create new request"
         }
       },
+      "additionalContact": {
+        "title": "Additional contact info",
+        "labels": {
+          "email": "Email address (optional)",
+          "lastName": "Last name (optional)",
+          "relationship": "Relationship (optional)"
+        }
+      },
       "contactConfirm": {
         "title": "Thank you for providing your contact info"
       },
@@ -233,14 +241,6 @@
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
             "crossStreet": "Cross Street"
-          },
-          "additionalContact": {
-            "title": "Additional contact info",
-            "labels": {
-              "email": "Email address (optional)",
-              "lastName": "Last name (optional)",
-              "relationship": "Relationship (optional)"
-            }
           }
         },
         "when": {
@@ -259,6 +259,69 @@
           "labels": {
             "groceryList": "Grocery list (e.g., 6 bananas, 1 loaf whole wheat bread, 2 avocados)",
             "dietaryRestrictions": "Dietary restrictions"
+          }
+        }
+      },
+      "childcare": {
+        "where": {
+          "title": "Where do you need childcare?",
+          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address. Our childcare partner, Workers Need Childcare, only uses licensed childcare",
+          "add": "Add an additional contact person for this request",
+          "labels": {
+            "zip": "ZIP code",
+            "neighborhood": "Neighborhood",
+            "crossStreet": "Cross Street"
+          }
+        },
+        "when": {
+          "title": "What days will you need childcare?",
+          "description": "Our service partners will work directly with you to accommodate your preferences.",
+          "labels": {
+            "mondays": "Mondays",
+            "tuesdays": "Tuesdays",
+            "wednesdays": "Wednesdays",
+            "thursdays": "Thursdays",
+            "fridays": "Fridays",
+            "saturdays": "Saturdays",
+            "sundays": "Sundays",
+            "varies": "It varies week-to-week",
+            "mornings": "Mornings",
+            "afternoons": "Afternoons",
+            "evenings": "Evenings",
+            "nights": "Nights"
+          },
+          "additional": {
+            "title": "What times do you need childcare?",
+            "description": "Select all that apply:"
+          },
+          "note": "Please bear in mind that many people need help and we cannot guarantee a quick response to your request."
+        },
+        "details": {
+          "title": "Child details",
+          "description": "Share the age and any special needs for each child in need of care.",
+          "labels": {
+            "title": "Child",
+            "birthMonth": "Birth Month",
+            "birthYear": "Birth Year",
+            "specialNeeds": "Special Needs",
+            "addAnother": "Add another child",
+            "remove": "Remove"
+          }
+        },
+        "what": {
+          "title": "What childcare options are you interested in?",
+          "description": "Select all that apply",
+          "labels": {
+            "childCareCenters": "Childcare centers - free and paid",
+            "mutualAid": "Mutual aid networks (free, volunteer childcare)",
+            "enrichmentCenters": "DOE Regional Enrichment Centers (for essential workers only)",
+            "babySitters": "Babysitters - free and paid",
+            "freeOptions": "Only free options",
+            "noteLowCost": "If you’re interested in low-cost options, how much would you be able to pay? Could be daily, weekly, or monthly. No amount is too small.",
+            "paymentAbility": "Payment ability",
+            "noteRisk": "Is anyone in your household at higher risk of severe illness due to COVID-19? Learn more",
+            "householdRisk": "Household risk",
+            "noteShare": "We will share this information with our childcare partner organization, Workers Need Childcare, which will connect you with a licensed childcare professional."
           }
         }
       }

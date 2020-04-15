@@ -34,5 +34,9 @@ export const Routes = {
   SERVICE_GROCERIES_WHERE: '/service/grocery/location/:id',
   SERVICE_GROCERIES_WHEN: '/service/grocery/date/:id',
   SERVICE_GROCERIES_WHAT: '/service/grocery/items/:id',
+  SERVICE_CHILDCARE_WHERE: '/service/childcare/location',
+  SERVICE_CHILDCARE_WHEN: '/service/childcare/date',
+  SERVICE_CHILDCARE_DETAILS: '/service/childcare/details',
+  SERVICE_CHILDCARE_WHAT: '/service/childcare/options',
   SERVICE_ADDITIONAL_INFO: '/service/additionalinfo/:id',
 };

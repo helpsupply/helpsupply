@@ -51,7 +51,9 @@ function CreateFormFields(fields) {
     }
 
     const InputEl = inputMap[type];
-    return <InputEl key={rest.label || rest.title} {...rest} />;
+    return (
+      <InputEl key={rest.customkey || rest.label || rest.title} {...rest} />
+    );
   });
 
   return formFields;
