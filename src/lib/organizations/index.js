@@ -1,4 +1,5 @@
 import MANYCMetadata from './manyc';
+import WorkersNeedChildcareMetadata from './workersneedchildcare';
 // import DummyMetadata from './dummy';
 
 var OrganizationIndex = {
@@ -18,6 +19,7 @@ function RegisterOrganization(metadata) {
 
 // We should compute this statically beforehand
 RegisterOrganization(MANYCMetadata);
+RegisterOrganization(WorkersNeedChildcareMetadata);
 // RegisterOrganization(DummyMetadata);
 
 export default OrganizationIndex;

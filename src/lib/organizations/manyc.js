@@ -2,12 +2,7 @@ const RequestKinds = require('./kinds');
 
 // These are pulled from the Airtable export given to us by MANYC
 const CHOICE_DELIVER_GROCERIES = 'sel2id9wbZhujdxrW';
-const CHOICE_BOROUGH_MANHATTAN = 'selihZrYb0KwDJKDi';
-const CHOICE_NEIGHBORHOOD_CENTRAL_HARLEM_SOUTH = 'recfinrr8sOvRUuhR';
 const CHOICE_HEALTHCARE_WORKER = 'sel9iXUHwQBxwJR9A';
-const CHOICE_TEXT_MESSAGE = 'selcp4xYi4krApJaA';
-const CHOICE_NEXT_FEW_DAYS = 'selYKne9Et1ixIAqG';
-const CHOICE_MANDARIN = 'sel9W4YTtAL6rQsZv';
 
 function get_field(name) {
   return (request) => {
