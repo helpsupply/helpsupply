@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 import { textStyles } from 'components/Text/Text.styles';
-import { Borders, buttonReset, Color, Space } from 'lib/theme';
+import { buttonReset, Color, Space } from 'lib/theme';
 
 const styles = {
   closedButton: css([
@@ -18,11 +18,6 @@ const styles = {
     '& path': {
       fill: Color.PRIMARY,
     },
-  }),
-  openContainer: css({
-    borderTop: Borders.GRAY1,
-    padding: `${Space.S30}px 0`,
-    width: '100%',
   }),
 };
 

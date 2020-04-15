@@ -35,6 +35,7 @@ import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceType from 'pages/service_type';
 import ServiceGrocery from 'pages/service_grocery';
+import ServiceChildcare from 'pages/service_childcare';
 import ServiceAdditionalInfo from 'pages/service_additional_info';
 import LearnMore from 'pages/learn_more';
 import Dashboard from 'pages/dashboard';
@@ -166,6 +167,34 @@ function App({ backend }) {
               path={Routes.SERVICE_GROCERIES_WHAT}
             >
               <ServiceGrocery backend={backend} step={3} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_CHILDCARE_WHERE}
+            >
+              <ServiceChildcare backend={backend} step={1} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_CHILDCARE_WHEN}
+            >
+              <ServiceChildcare backend={backend} step={2} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_CHILDCARE_DETAILS}
+            >
+              <ServiceChildcare backend={backend} step={3} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_CHILDCARE_WHAT}
+            >
+              <ServiceChildcare backend={backend} step={4} />
             </ProtectedRoute>
             <ProtectedRoute
               backend={backend}
