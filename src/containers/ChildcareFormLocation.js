@@ -32,7 +32,7 @@ const LANGUAGES = [
   { label: 'Spanish', value: 'spanish' },
 ];
 
-function GroceryFormLocation({ id, onSave }) {
+function ChildcareFormLocation() {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -54,23 +54,23 @@ function GroceryFormLocation({ id, onSave }) {
     [],
   );
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setIsLoading(true);
-    await onSave(fields);
-    history.push(routeWithParams(Routes.SERVICE_GROCERIES_WHEN, { id }));
+    // service todo: wire-up form events
+    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHEN));
   };
 
   const fieldData = [
     {
       customOnChange: handleFieldChange('zipCode'),
-      label: t('service.grocery.where.labels.zip'),
+      label: t('service.childcare.where.labels.zip'),
       name: 'zipCode',
       type: formFieldTypes.INPUT_TEXT,
       value: fields.zipCode,
     },
     {
       customOnChange: handleFieldChange('neighborhood'),
-      label: t('service.grocery.where.labels.neighborhood'),
+      label: t('service.childcare.where.labels.neighborhood'),
       // service todo: wire-up neighborhoods data
       options: neighborhoods.Brooklyn,
       name: 'neighborhood',
@@ -79,7 +79,7 @@ function GroceryFormLocation({ id, onSave }) {
     },
     {
       customOnChange: handleFieldChange('crossStreet'),
-      label: t('service.grocery.where.labels.crossStreet'),
+      label: t('service.childcare.where.labels.crossStreet'),
       name: 'crossStreet',
       type: formFieldTypes.INPUT_TEXT,
       value: fields.crossStreet,
@@ -88,7 +88,7 @@ function GroceryFormLocation({ id, onSave }) {
       type: formFieldTypes.NODE,
       node: [
         <AdditionalCta
-          cta={t('service.grocery.where.add')}
+          cta={t('service.childcare.where.add')}
           key="additional"
           onClick={() => setAddAdditionalContact(true)}
           open={addAdditionalContact}
@@ -160,8 +160,8 @@ function GroceryFormLocation({ id, onSave }) {
     <FormBuilder
       defaultValues={fields}
       onSubmit={handleSubmit}
-      title={t('service.grocery.where.title')}
-      description={t('service.grocery.where.description')}
+      title={t('service.childcare.where.title')}
+      description={t('service.childcare.where.description')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={
         addAdditionalContact
@@ -173,4 +173,4 @@ function GroceryFormLocation({ id, onSave }) {
   );
 }
 
-export default GroceryFormLocation;
+export default ChildcareFormLocation;

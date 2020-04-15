@@ -3,26 +3,25 @@ import { jsx } from '@emotion/core';
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 
 import { ReactComponent as Plus } from 'static/icons/plus-circle.svg';
 
-import styles from './AdditionalContact.styles';
+import styles from './AdditionalCta.styles';
 
-export const AdditionalContact = ({ cta, onClick, open, title }) => (
+export const AdditionalCta = ({ cta, onClick, open, title }) => (
   <Fragment>
-    {open && (
-      <div css={styles.openContainer}>
-        <Text type={TEXT_TYPE.HEADER_4}>{title}</Text>
-      </div>
-    )}
+    {open && <AdditionalFormTitle title={title} />}
 
     {!open && (
       <Text
         onClick={(e) => {
           e.preventDefault();
-          onClick(true);
+          if (onClick) {
+            onClick();
+          }
         }}
         as="button"
         type={TEXT_TYPE.BODY_2}
@@ -35,11 +34,11 @@ export const AdditionalContact = ({ cta, onClick, open, title }) => (
   </Fragment>
 );
 
-AdditionalContact.propTypes = {
+AdditionalCta.propTypes = {
   cta: PropTypes.string,
   onClick: PropTypes.func,
   open: PropTypes.bool,
   title: PropTypes.string,
 };
 
-export default AdditionalContact;
+export default AdditionalCta;
