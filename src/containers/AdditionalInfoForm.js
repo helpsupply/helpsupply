@@ -2,7 +2,7 @@
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
@@ -10,8 +10,9 @@ import { routeWithParams } from 'lib/utils/routes';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function AdditionalInfoForm() {
+function AdditionalInfoForm({ backend }) {
   const history = useHistory();
+  const params = useParams();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -29,10 +30,13 @@ function AdditionalInfoForm() {
     [],
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
+    await backend.updateServiceRequest(params.id, fields, true);
     console.log('go to review/submit', fields);
-    history.push(routeWithParams(Routes.SERVICE_ADDITIONAL_INFO));
+    history.push(
+      routeWithParams(Routes.SERVICE_ADDITIONAL_INFO, { id: params.id }),
+    );
   };
 
   const fieldData = [

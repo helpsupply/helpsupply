@@ -45,7 +45,9 @@ export default class FirebaseBackend {
       throw new Error("Request needs a 'kind'");
     }
     if (request.organization === undefined) {
-      throw new Error("Request needs a mapped 'organization'");
+      // TODO: map a request to an organization
+      request.organization = 'placeholder';
+      // throw new Error("Request needs a mapped 'organization'");
     }
     if (request.user !== undefined) {
       throw new Error("'user' is a reserved property for Requests");
@@ -63,7 +65,6 @@ export default class FirebaseBackend {
     const { currentUser } = this.firebase.auth();
     request.domain = currentUser ? currentUser.email.split('@')[1] || '' : '';
     request.user = currentUser ? currentUser.uid || '' : '';
-
     return (await this.firestore.collection('servicerequest').add(request)).id;
   }
 
