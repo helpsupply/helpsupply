@@ -2,6 +2,7 @@
   "translations": {
     "global": {
       "form": {
+        "editLabel": "Edit",
         "submitLabel": "Submit",
         "changeLabel": "Change",
         "addedLabel": "Added",
@@ -11,6 +12,19 @@
         "daypicker": {
           "placeholder": "Date needed"
         }
+      }
+    },
+    "dashboard": {
+      "title": "Your Requests",
+      "cta": "Request more services",
+      "contact": {
+        "title": "Contact info"
+      },
+      "openRequests": {
+        "title": "Open requests",
+        "crossStreet": "Cross street:",
+        "dietaryRestrictions": "Dietary restrictions:",
+        "dateNeededLabel": "Needed by"
       }
     },
     "home": {
