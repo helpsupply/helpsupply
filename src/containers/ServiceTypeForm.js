@@ -49,6 +49,9 @@ function ServiceTypeForm({ backend }) {
       case RequestKinds.CHILDCARE:
         history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHERE));
         break;
+      case RequestKinds.PETCARE:
+        history.push(routeWithParams(Routes.SERVICE_PETCARE_WHERE));
+        break;
       default:
         history.push(routeWithParams(Routes.SERVICE_TYPE));
         console.log(
