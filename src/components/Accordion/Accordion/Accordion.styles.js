@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Borders, Space } from 'lib/theme';
+import { Color, Borders, Space } from 'lib/theme';
 
 export const styles = {
   root: css({
@@ -8,6 +8,7 @@ export const styles = {
     padding: 0,
   }),
   head: css({
+    color: Color.GRAY,
     position: 'relative',
     textAlign: 'left',
     width: '100%',
@@ -21,6 +22,7 @@ export const styles = {
     padding: `${Space.S25}px 0`,
   }),
   content: css({
+    color: Color.GRAY_75,
     marginBottom: Space.S15,
     marginTop: Space.S40,
   }),

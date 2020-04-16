@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
+
 import { Head, Accordion } from 'components/Accordion';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -16,7 +17,7 @@ const faq = [
     },
   },
   {
-    title: 'About Help Supply',
+    title: 'About HS',
     content: () => {
       return <About />;
     },
