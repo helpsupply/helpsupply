@@ -37,6 +37,7 @@ import ServiceType from 'pages/service_type';
 import ServiceGrocery from 'pages/service_grocery';
 import ServiceAdditionalInfo from 'pages/service_additional_info';
 import LearnMore from 'pages/learn_more';
+import Dashboard from 'pages/dashboard';
 // End MVP
 
 import HCPSignupFinish from 'components/HCPSignupFinish';
@@ -129,6 +130,9 @@ function App({ backend }) {
             <Route exact path={Routes.EMAIL_SIGNUP_COMPLETE}>
               <SignupComplete backend={backend} />
             </Route>
+            <ProtectedRoute backend={backend} exact path={Routes.DASHBOARD}>
+              <Dashboard backend={backend} />
+            </ProtectedRoute>
             <ProtectedRoute backend={backend} exact path={Routes.CONTACT_FORM}>
               <Contact backend={backend} />
             </ProtectedRoute>

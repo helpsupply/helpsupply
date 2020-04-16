@@ -24,6 +24,7 @@ export const Routes = {
 
   // MVP Routes
   FACILITY: `/facility`,
+  DASHBOARD: '/dashboard',
   EMAIL_SIGNUP_FORM: `/signup`,
   EMAIL_SIGNUP_SENT: `/signup/confirm`,
   EMAIL_SIGNUP_COMPLETE: `/signup/complete`,

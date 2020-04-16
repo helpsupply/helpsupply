@@ -17,6 +17,7 @@ export const Request = ({
   date,
   id,
   onDelete,
+  onEdit,
   requestDescription,
   requestQuantity,
   requestTitle,
@@ -30,9 +31,6 @@ export const Request = ({
           {' '}
           {t('dropsite.openRequests.requestId')} #{id}
         </Note>
-        <SecondaryButton onClick={onDelete}>
-          <Text type={TEXT_TYPE.NOTE}>{t('global.deleteLabel')}</Text>
-        </SecondaryButton>
       </div>
       <div css={styles.requestTitle}>
         <Text>{requestTitle}</Text>{' '}
@@ -44,6 +42,12 @@ export const Request = ({
       <Note css={styles.date}>
         {t('global.addedLabel')} {formatDate(date)}
       </Note>
+      <SecondaryButton onClick={onEdit}>
+        <Text type={TEXT_TYPE.NOTE}>{t('global.form.editLabel')}</Text>
+      </SecondaryButton>
+      <SecondaryButton onClick={onDelete}>
+        <Text type={TEXT_TYPE.NOTE}>{t('global.form.deleteLabel')}</Text>
+      </SecondaryButton>
     </div>
   );
 };
