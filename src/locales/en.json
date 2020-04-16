@@ -2,6 +2,7 @@
   "translations": {
     "global": {
       "form": {
+        "editLabel": "Edit",
         "submitLabel": "Submit",
         "changeLabel": "Change",
         "addedLabel": "Added",
@@ -13,19 +14,29 @@
         }
       }
     },
+    "dashboard": {
+      "title": "Your Requests",
+      "cta": "Request more services",
+      "contact": {
+        "title": "Contact info"
+      },
+      "openRequests": {
+        "title": "Open requests",
+        "crossStreet": "Cross street:",
+        "dietaryRestrictions": "Dietary restrictions:",
+        "dateNeededLabel": "Needed by"
+      }
+    },
     "home": {
-      "intro": {
-        "learnMore": "Learn more",
-        "paragraph1": "This includes doctors, nurses, technicians, and anyone working alongside them during this crisis.",
-        "title": "Welcome to Help Supply. We're helping medical professionals in NYC with their immediate needs around childcare, pet care, groceries and emotional support."
-      },
-      "needServices": {
-        "description": "I’m looking for support so I can keep working",
-        "title": "I’m a medical worker"
-      },
-      "needSupplies": {
-        "description": "Items for use in the facility where I work",
-        "title": "Need supplies"
+      "intro": "Healthcare workers caring for those with the virus need support. We connect them to service organizations providing childcare, pet care, groceries, and emotional support.",
+      "needHelp": "I need help",
+      "openRequests": "I already have open requests",
+      "howItWorks": {
+        "title": "How it works",
+        "bullet1": "You make a request",
+        "bullet2": "We share your request with one of our trusted partner organizations.",
+        "bullet3": "A volunteer will connect with you to fulfill your request.",
+        "learnMore": "Learn more"
       }
     },
     "learnMore": {
@@ -192,6 +203,14 @@
           "buttonLabel": "Create new request"
         }
       },
+      "additionalContact": {
+        "title": "Additional contact info",
+        "labels": {
+          "email": "Email address (optional)",
+          "lastName": "Last name (optional)",
+          "relationship": "Relationship (optional)"
+        }
+      },
       "contactConfirm": {
         "title": "Thank you for providing your contact info"
       },
@@ -210,6 +229,22 @@
           "additionalInfo": "Additional info (optional)"
         }
       },
+      "when": {
+        "labels": {
+          "mondays": "Mondays",
+          "tuesdays": "Tuesdays",
+          "wednesdays": "Wednesdays",
+          "thursdays": "Thursdays",
+          "fridays": "Fridays",
+          "saturdays": "Saturdays",
+          "sundays": "Sundays",
+          "varies": "It varies week-to-week",
+          "mornings": "Mornings",
+          "afternoons": "Afternoons",
+          "evenings": "Evenings",
+          "nights": "Nights"
+        }
+      },
       "grocery": {
         "where": {
           "title": "Where do you want groceries delivered?",
@@ -219,14 +254,6 @@
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
             "crossStreet": "Cross Street"
-          },
-          "additionalContact": {
-            "title": "Additional contact info",
-            "labels": {
-              "email": "Email address (optional)",
-              "lastName": "Last name (optional)",
-              "relationship": "Relationship (optional)"
-            }
           }
         },
         "when": {
@@ -245,6 +272,107 @@
           "labels": {
             "groceryList": "Grocery list (e.g., 6 bananas, 1 loaf whole wheat bread, 2 avocados)",
             "dietaryRestrictions": "Dietary restrictions"
+          }
+        }
+      },
+      "childcare": {
+        "where": {
+          "title": "Where do you need childcare?",
+          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address. Our childcare partner, Workers Need Childcare, only uses licensed childcare",
+          "add": "Add an additional contact person for this request",
+          "labels": {
+            "zip": "ZIP code",
+            "neighborhood": "Neighborhood",
+            "crossStreet": "Cross Street"
+          }
+        },
+        "when": {
+          "title": "What days will you need childcare?",
+          "description": "Our service partners will work directly with you to accommodate your preferences.",
+          "additional": {
+            "title": "What times do you need childcare?",
+            "description": "Select all that apply:"
+          },
+          "note": "Please bear in mind that many people need help and we cannot guarantee a quick response to your request."
+        },
+        "details": {
+          "title": "Child details",
+          "description": "Share the age and any special needs for each child in need of care.",
+          "labels": {
+            "title": "Child",
+            "birthMonth": "Birth Month",
+            "birthYear": "Birth Year",
+            "specialNeeds": "Special Needs",
+            "addAnother": "Add another child",
+            "remove": "Remove"
+          }
+        },
+        "what": {
+          "title": "What childcare options are you interested in?",
+          "description": "Select all that apply",
+          "labels": {
+            "childCareCenters": "Childcare centers - free and paid",
+            "mutualAid": "Mutual aid networks (free, volunteer childcare)",
+            "enrichmentCenters": "DOE Regional Enrichment Centers (for essential workers only)",
+            "babySitters": "Babysitters - free and paid",
+            "freeOptions": "Only free options",
+            "noteLowCost": "If you’re interested in low-cost options, how much would you be able to pay? Could be daily, weekly, or monthly. No amount is too small.",
+            "paymentAbility": "Payment ability",
+            "noteRisk": "Is anyone in your household at higher risk of severe illness due to COVID-19? Learn more",
+            "householdRisk": "Household risk",
+            "noteShare": "We will share this information with our childcare partner organization, Workers Need Childcare, which will connect you with a licensed childcare professional."
+          }
+        }
+      },
+      "petcare": {
+        "where": {
+          "title": "We need a little more info on  where you need pet care",
+          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address. Our childcare partner, Workers Need Childcare, only uses licensed childcare",
+          "add": "Add an additional contact person for this request",
+          "labels": {
+            "zip": "ZIP code",
+            "neighborhood": "Neighborhood",
+            "crossStreet": "Cross Street"
+          }
+        },
+        "when": {
+          "title": "When do you need pet care?",
+          "description": "Our service partners will work directly with you to accommodate your preferences.",
+          "additional": {
+            "title": "What times do you need petcare?",
+            "description": "Select all that apply:"
+          },
+          "note": "Please bear in mind that many people need help and we cannot guarantee a quick response to your request."
+        },
+        "details": {
+          "title": "Pet details",
+          "description": "Select the type of pet and the care neeeded for each.",
+          "labels": {
+            "title": "Pet",
+            "petType": "Pet type",
+            "careNeeded": "Care needed",
+            "addAnother": "Add another pet",
+            "remove": "Remove"
+          }
+        }
+      },
+      "emotional": {
+        "when": {
+          "title": "When would you like to speak with someone?",
+          "description": "Our service partners will work directly with you to accommodate your preferences.",
+          "labels": {
+            "day": "Preferred day",
+            "recurring": "This is a recurring need",
+            "time": "Preferred time"
+          },
+          "note": "Please bear in mind that many people need help and we cannot guarantee a quick response to your request."
+        },
+        "what": {
+          "title": "What type of support are you most interested in?",
+          "description": "Select the type of volunteer expertise that will be most helpful to you.",
+          "labels": {
+            "type": "Preferred support",
+            "agreement": "I understand Help Supply and its service partners connect individuals, and are not professional theraputic organizations"
           }
         }
       }

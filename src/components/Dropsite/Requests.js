@@ -30,7 +30,7 @@ export const Requests = ({ onDelete, requests }) => {
             <Request
               key={request.id}
               css={styles.request}
-              onDelete={() => onDelete(request.id)}
+              onDelete={() => onDelete(request)}
               {...request}
             />
           ))}

@@ -24,6 +24,7 @@ export const Routes = {
 
   // MVP Routes
   FACILITY: `/facility`,
+  DASHBOARD: '/dashboard',
   EMAIL_SIGNUP_FORM: `/signup`,
   EMAIL_SIGNUP_SENT: `/signup/confirm`,
   // Update firebaseBackend.js if you change this (it can't require this, because
@@ -35,5 +36,14 @@ export const Routes = {
   SERVICE_GROCERIES_WHERE: '/service/grocery/location/:id',
   SERVICE_GROCERIES_WHEN: '/service/grocery/date/:id',
   SERVICE_GROCERIES_WHAT: '/service/grocery/items/:id',
+  SERVICE_CHILDCARE_WHERE: '/service/childcare/location',
+  SERVICE_CHILDCARE_WHEN: '/service/childcare/date',
+  SERVICE_CHILDCARE_DETAILS: '/service/childcare/details',
+  SERVICE_CHILDCARE_WHAT: '/service/childcare/options',
+  SERVICE_PETCARE_WHERE: '/service/petcare/location',
+  SERVICE_PETCARE_WHEN: '/service/petcare/date',
+  SERVICE_PETCARE_DETAILS: '/service/petcare/details',
+  SERVICE_EMOTIONAL_WHEN: '/service/help/date',
+  SERVICE_EMOTIONAL_WHAT: '/service/help/type',
   SERVICE_ADDITIONAL_INFO: '/service/additionalinfo/:id',
 };

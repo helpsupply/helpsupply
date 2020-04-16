@@ -44,6 +44,9 @@ const styles = {
     flexDirection: 'column',
     height: '100%',
   }),
+  copyright: css({
+    color: Color.WHITE_25,
+  }),
 };
 
 export default styles;

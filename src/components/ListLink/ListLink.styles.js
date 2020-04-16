@@ -1,28 +1,24 @@
 import { css } from 'lib/utils/media-queries';
-import { Borders, Color, Space } from 'lib/theme';
+import { Color, Radius, Space } from 'lib/theme';
 
 const styles = {
   root: css({
-    backgroundColor: Color.PRIMARY,
-    borderBottom: Borders.GRAY1,
-    padding: `${Space.S40}px 0`,
+    background: Color.WHITE,
+    borderRadius: Radius.ROUNDED,
+    display: 'block',
+    padding: Space.S30,
+    textDecoration: 'none',
     width: '100%',
-    ':last-child': {
-      borderBottom: ['', '', '0'],
-    },
-    ':hover': {
+
+    '&:hover': {
       textDecoration: 'none',
     },
   }),
-  text: css({
-    color: Color.WHITE,
-  }),
-  titleWithIcon: css({
+  content: css({
     alignItems: 'center',
-    color: Color.WHITE,
+    color: Color.PRIMARY,
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: Space.S5,
   }),
 };
 

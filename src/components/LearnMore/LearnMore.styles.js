@@ -8,7 +8,7 @@ export const styles = {
     marginRight: Space.S10,
     position: 'relative',
     '&:before': {
-      content: '-',
+      content: "'-'",
       left: 2,
       position: 'absolute',
     },

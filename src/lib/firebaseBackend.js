@@ -61,6 +61,27 @@ export default class FirebaseBackend {
     return OrganizationIndex.Metadata[provider];
   }
 
+  async getServiceRequests(status) {
+    const { currentUser } = this.firebase.auth();
+    if (!currentUser.uid) {
+      return Promise.reject('You must be logged in to view your requests.');
+    }
+    var queryBuilder = this.firestore
+      .collection('servicerequest')
+      .where('user', '==', currentUser.uid);
+    if (status) {
+      queryBuilder = queryBuilder.where('status', '==', status);
+    }
+    let snapshot = await queryBuilder.get();
+    let data = snapshot.docs.map((d) => {
+      var dict = d.data();
+      dict['id'] = d.id;
+      return dict;
+    });
+
+    return data;
+  }
+
   // Saves a request to the database, with the appropriate request
   async saveServiceRequest(request) {
     if (request.kind === undefined) {
@@ -83,6 +104,7 @@ export default class FirebaseBackend {
     if (request.sent !== undefined) {
       throw new Error("'sent' is a reserved property for Requests");
     }
+    request.status = 'open';
 
     const { currentUser } = this.firebase.auth();
     request.domain = currentUser ? currentUser.email.split('@')[1] || '' : '';

@@ -9,7 +9,7 @@ const styles = {
     backgroundColor: `${Color.PRIMARY}`,
     display: 'flex',
     minHeight: [mobileMinHeight, '', 'auto'],
-    padding: [`${Space.S40}px`, '', 0],
+    padding: [`${Space.S20}px`, '', 0],
     width: '100%',
   }),
 };
