@@ -21,6 +21,7 @@ const matchUrgencyToText = (text) => {
       console.log(URGENCY_TEXT[k]);
       t = URGENCY_TEXT[k];
     }
+    return null;
   });
   return t;
 };

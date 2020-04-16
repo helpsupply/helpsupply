@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useEffect, useState } from 'react';
 import { jsx } from '@emotion/core';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory /*useParams*/ } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
@@ -15,7 +15,7 @@ import UserDashboard from 'components/Dashboard/UserDashboard';
 function AdminDashboard({ backend }) {
   const history = useHistory();
 
-  const [contact, setDropSite] = useState(undefined);
+  // const [contact, setDropSite] = useState(undefined);
   const [openRequests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [requestToBeDeleted, setRequestToBeDeleted] = useState(undefined);
@@ -45,11 +45,16 @@ function AdminDashboard({ backend }) {
         );
         break;
       case RequestKinds.CHILDCARE:
-      // TODO: route to childcare service
+        // TODO: route to childcare service
+        break;
       case RequestKinds.MENTALHEALTH:
-      // TODO: route to mental health service
+        // TODO: route to mental health service
+        break;
       case RequestKinds.PETCARE:
-      // TODO: route to petcare service
+        // TODO: route to petcare service
+        break;
+      default:
+        return;
     }
   };
 

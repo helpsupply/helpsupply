@@ -6,7 +6,7 @@ import RequestKinds from 'lib/organizations/kinds';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-import { Request } from 'components/Request';
+// import { Request } from 'components/Request';
 
 import { styles } from './UserDashboard.styles';
 import GroceryRequest from 'components/Services/GroceryRequest';
