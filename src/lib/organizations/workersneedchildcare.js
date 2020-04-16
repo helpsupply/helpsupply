@@ -40,8 +40,8 @@ const FIELD_MAP = {
   'What days do you need childcare?': get_field_wrap_array('day'),
   'What times do you need childcare?': get_field_wrap_array('time'),
 
-  "Child's First Name": get_field('child_first_name'),
-  "Child's Last Name": get_field('child_last_name'),
+  'Child’s First Name': get_field('child_first_name'),
+  'Child’s Last Name': get_field('child_last_name'),
   "Child's Birth Year": get_field('child_birth_year'),
 
   'What childcare options are you interested in?': function (request) {

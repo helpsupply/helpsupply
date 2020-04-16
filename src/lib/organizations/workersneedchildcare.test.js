@@ -19,7 +19,7 @@ test('Request Mapping', async () => {
     first_name: 'John',
     last_name: 'Smith',
     zip_code: '00000',
-    neighborhoods: ['Manhattan: Central Harlem South'],
+    neighborhoods: ['Manhattan: Central Harlem'],
     preferred_contact: 'PHONE',
     urgency: 'FEW_DAYS',
     language_preference: 'Spanish', // not standard
