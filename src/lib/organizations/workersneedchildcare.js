@@ -92,7 +92,7 @@ https://help.supply/r/${request.id}
 const WorkersNeedChildcareMetadata = {
   id: 'workersneedchildcare',
   Organization: 'Workers Need Childcare NYC',
-  Kind: RequestKinds.GROCERY,
+  Kind: RequestKinds.CHILDCARE,
   ZipCodes: [10001, 10002],
   // Called by the backend when a request is saved with
   // organization = 'manyc'

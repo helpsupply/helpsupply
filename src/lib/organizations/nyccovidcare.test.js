@@ -1,4 +1,4 @@
-const WorkersNeedChildcare = require('./workersneedchildcare').default;
+const WorkersNeedChildcare = require('./nyccovidcare').default;
 
 test('Request Mapping', () => {
   let payloads = [];
@@ -14,29 +14,20 @@ test('Request Mapping', () => {
   let request = {
     id: 'ABCDEFG',
 
-    phone: '555-555-5555',
-    email: 'test@test.com',
     first_name: 'John',
     last_name: 'Smith',
+    email: 'test@test.com',
+    phone: '555-555-5555',
     zip_code: '00000',
-    neighborhoods: ['Manhattan: Central Harlem South'],
     preferred_contact: 'PHONE',
     urgency: 'FEW_DAYS',
-    language_preference: 'Spanish', // not standard
+    language_preference: 'Spanish',
 
-    // Childcare Specific
     day: 'Monday',
     time: 'Afternoon',
-    recurring: true, // not standard
+    recurring: true,
 
-    child_first_name: 'Mini',
-    child_last_name: 'Me',
-    child_birth_year: '2000',
-    child_special_needs: 'none', // not standard
-
-    childcare_types: ['BABYSITTERS'],
-    payment: '$0',
-    at_risk: 'DONTKNOW',
+    volunteer_type: 'Life Coach',
 
     other_notes: 'i love cookies',
   };
