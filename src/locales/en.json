@@ -232,6 +232,22 @@
           "additionalInfo": "Additional info (optional)"
         }
       },
+      "when": {
+        "labels": {
+          "mondays": "Mondays",
+          "tuesdays": "Tuesdays",
+          "wednesdays": "Wednesdays",
+          "thursdays": "Thursdays",
+          "fridays": "Fridays",
+          "saturdays": "Saturdays",
+          "sundays": "Sundays",
+          "varies": "It varies week-to-week",
+          "mornings": "Mornings",
+          "afternoons": "Afternoons",
+          "evenings": "Evenings",
+          "nights": "Nights"
+        }
+      },
       "grocery": {
         "where": {
           "title": "Where do you want groceries delivered?",
@@ -276,20 +292,6 @@
         "when": {
           "title": "What days will you need childcare?",
           "description": "Our service partners will work directly with you to accommodate your preferences.",
-          "labels": {
-            "mondays": "Mondays",
-            "tuesdays": "Tuesdays",
-            "wednesdays": "Wednesdays",
-            "thursdays": "Thursdays",
-            "fridays": "Fridays",
-            "saturdays": "Saturdays",
-            "sundays": "Sundays",
-            "varies": "It varies week-to-week",
-            "mornings": "Mornings",
-            "afternoons": "Afternoons",
-            "evenings": "Evenings",
-            "nights": "Nights"
-          },
           "additional": {
             "title": "What times do you need childcare?",
             "description": "Select all that apply:"
@@ -322,6 +324,38 @@
             "noteRisk": "Is anyone in your household at higher risk of severe illness due to COVID-19? Learn more",
             "householdRisk": "Household risk",
             "noteShare": "We will share this information with our childcare partner organization, Workers Need Childcare, which will connect you with a licensed childcare professional."
+          }
+        }
+      },
+      "petcare": {
+        "where": {
+          "title": "We need a little more info on  where you need pet care",
+          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address. Our childcare partner, Workers Need Childcare, only uses licensed childcare",
+          "add": "Add an additional contact person for this request",
+          "labels": {
+            "zip": "ZIP code",
+            "neighborhood": "Neighborhood",
+            "crossStreet": "Cross Street"
+          }
+        },
+        "when": {
+          "title": "When do you need pet care?",
+          "description": "Our service partners will work directly with you to accommodate your preferences.",
+          "additional": {
+            "title": "What times do you need petcare?",
+            "description": "Select all that apply:"
+          },
+          "note": "Please bear in mind that many people need help and we cannot guarantee a quick response to your request."
+        },
+        "details": {
+          "title": "Pet details",
+          "description": "Select the type of pet and the care neeeded for each.",
+          "labels": {
+            "title": "Pet",
+            "petType": "Pet type",
+            "careNeeded": "Care needed",
+            "addAnother": "Add another pet",
+            "remove": "Remove"
           }
         }
       }
