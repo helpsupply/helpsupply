@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { css, jsx } from '@emotion/core';
 
 import { useMediaQuery } from 'hooks/useMediaQuery';
@@ -7,8 +7,9 @@ import { Breakpoints } from 'constants/Breakpoints';
 
 import BackButton from 'components/BackButton';
 import Header from 'components/Header';
-import IntroContent from 'components/IntroContent';
+import Text from 'components/Text';
 import LargeHeader from 'components/Header/LargeHeader';
+import Intro from 'components/EntryContent/Intro';
 
 import styles from './Page.styles';
 
@@ -66,6 +67,8 @@ const Page = ({
     }
   }, []);
 
+  const today = new Date();
+
   return (
     <div css={[styles.root, rootContainerStyles]}>
       {willUseSmallHeader && (
@@ -79,7 +82,14 @@ const Page = ({
         <div css={isDesktop && styles.headerContainerDesktop}>
           <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
             <LargeHeader />
-            {isDesktop && <IntroContent isDesktop />}
+            {isDesktop && (
+              <Fragment>
+                <Intro />
+                <Text css={styles.copyright}>
+                  &copy; {today.getFullYear()} Help Supply, LLC
+                </Text>
+              </Fragment>
+            )}
           </div>
         </div>
       )}
