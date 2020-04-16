@@ -7,7 +7,7 @@ export const styles = {
     justifyContent: 'space-between',
   }),
   label: css({
-    color: Color.GRAY,
+    color: Color.GRAY_75,
     fontWeight: 500,
   }),
 };
