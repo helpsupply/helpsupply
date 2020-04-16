@@ -38,7 +38,7 @@ const DummyMetadata = {
     },
   ],
   DeliverRequest: async (backend, request) => {
-    let url = await backend.getWebhookForOrg('dummy');
+    let url = await backend.getWebhookForOrg('testOrg');
     await backend.postWebhook(url, { list: request.list });
   },
   HandleUpdate: (row) => {},

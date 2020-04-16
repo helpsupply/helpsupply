@@ -38,7 +38,7 @@ describe('Service Request Routing', () => {
     await admin
       .firestore()
       .collection('webhook')
-      .doc('dummy')
+      .doc('testOrg')
       .set({ url: 'http://test' });
 
     // Login with a dummy user
@@ -53,7 +53,7 @@ describe('Service Request Routing', () => {
     let backend = new FirebaseBackend(testApp);
     let id = await backend.saveServiceRequest({
       kind: 'grocery',
-      organization: 'dummy',
+      organization: 'testOrg',
       list: 'bananas, fruit',
     });
 
@@ -92,7 +92,7 @@ describe('Service Request Routing', () => {
     await admin
       .firestore()
       .collection('webhook')
-      .doc('dummy')
+      .doc('testOrg')
       .set({ url: 'http://nogood' });
 
     // Login with a dummy user
@@ -107,7 +107,7 @@ describe('Service Request Routing', () => {
     let backend = new FirebaseBackend(testApp);
     let id = await backend.saveServiceRequest({
       kind: 'grocery',
-      organization: 'dummy',
+      organization: 'testOrg',
       list: 'bananas, fruit',
     });
 

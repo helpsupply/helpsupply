@@ -1,6 +1,6 @@
 import MANYCMetadata from './manyc';
 import WorkersNeedChildcareMetadata from './workersneedchildcare';
-// import DummyMetadata from './dummy';
+import DummyMetadata from './dummy';
 
 var OrganizationIndex = {
   ByZip: {},
@@ -20,6 +20,6 @@ function RegisterOrganization(metadata) {
 // We should compute this statically beforehand
 RegisterOrganization(MANYCMetadata);
 RegisterOrganization(WorkersNeedChildcareMetadata);
-// RegisterOrganization(DummyMetadata);
+RegisterOrganization(DummyMetadata);
 
 export default OrganizationIndex;

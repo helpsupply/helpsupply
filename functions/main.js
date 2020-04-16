@@ -33,11 +33,38 @@ backend.getWebhookForOrg = getWebhookForOrg;
 const processServiceRequestRaw = async (id, before, after) => {
   if (after && after.status === undefined) {
     let metadata = backend.getMetadataForProvider(after.organization);
+    if (!metadata) {
+      await backend.updateServiceRequest(
+        id,
+        {
+          status: 'error',
+          status_updated: Math.floor(new Date().getTime() / 1000),
+          error: 'unknown provider: ' + after.organization,
+        },
+        true,
+      );
+      console.error(e);
+    }
     try {
       await metadata.DeliverRequest(backend, after);
-      await backend.updateServiceRequest(id, { status: 'distributed' }, true);
+      await backend.updateServiceRequest(
+        id,
+        {
+          status: 'distributed',
+          status_updated: Math.floor(new Date().getTime() / 1000),
+        },
+        true,
+      );
     } catch (e) {
-      await backend.updateServiceRequest(id, { status: 'error' }, true);
+      await backend.updateServiceRequest(
+        id,
+        {
+          status: 'error',
+          status_updated: Math.floor(new Date().getTime() / 1000),
+          error: '' + e,
+        },
+        true,
+      );
       console.error(e);
     }
   }
