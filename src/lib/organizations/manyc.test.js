@@ -1,12 +1,12 @@
 const MANYCMetadata = require('./manyc').default;
 
-test('Request Mapping', () => {
+test('Request Mapping', async () => {
   let payloads = [];
   let mock_backend = {
-    getWebhookForOrg: (org) => {
+    getWebhookForOrg: async (org) => {
       return 'test';
     },
-    postWebhook: (url, data) => {
+    postWebhook: async (url, data) => {
       payloads.push(data);
     },
   };
@@ -33,7 +33,7 @@ test('Request Mapping', () => {
     dietary_restrictions: 'none',
     other_notes: 'i love cookies',
   };
-  MANYCMetadata.DeliverRequest(mock_backend, request);
+  await MANYCMetadata.DeliverRequest(mock_backend, request);
 
   expect(payloads.length).toBe(1);
   for (let key in payloads[0]) {

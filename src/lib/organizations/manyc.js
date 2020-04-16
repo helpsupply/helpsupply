@@ -115,9 +115,9 @@ const MANYCMetadata = {
   ZipCodes: [10001, 10002],
   // Called by the backend when a request is saved with
   // organization = 'manyc'
-  DeliverRequest: (backend, request) => {
+  DeliverRequest: async (backend, request) => {
     // Get the Webhook from the Database
-    let url = backend.getWebhookForOrg('manyc');
+    let url = await backend.getWebhookForOrg('manyc');
 
     let payload = {};
     for (const field in FIELD_MAP) {
@@ -125,7 +125,7 @@ const MANYCMetadata = {
     }
 
     // Send the request
-    backend.postWebhook(url, payload);
+    await backend.postWebhook(url, payload);
   },
   // Called by the backend when MANYC pushes an update
   // about a request to our webhook

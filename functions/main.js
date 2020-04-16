@@ -12,8 +12,12 @@ const postWebhook = async (url, data) => {
   if (url === 'http://test') {
     await backend.firestore.collection('testwebhookpayload').add(data);
   } else {
+    console.log('posting', url, data);
     let response = await fetch(url, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     });
     if (response.status !== 200) {
@@ -31,7 +35,8 @@ backend.postWebhook = postWebhook;
 backend.getWebhookForOrg = getWebhookForOrg;
 
 const processServiceRequestRaw = async (id, before, after) => {
-  if (after && after.status === undefined) {
+  console.log(id, before, after);
+  if (after && (after.status === undefined || after.status === 'open')) {
     let metadata = backend.getMetadataForProvider(after.organization);
     if (!metadata) {
       await backend.updateServiceRequest(
@@ -43,7 +48,8 @@ const processServiceRequestRaw = async (id, before, after) => {
         },
         true,
       );
-      console.error(e);
+      console.error('Unknown provider: ' + after.organization);
+      return;
     }
     try {
       await metadata.DeliverRequest(backend, after);

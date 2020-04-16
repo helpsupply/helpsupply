@@ -96,9 +96,9 @@ const WorkersNeedChildcareMetadata = {
   ZipCodes: [10001, 10002],
   // Called by the backend when a request is saved with
   // organization = 'manyc'
-  DeliverRequest: (backend, request) => {
+  DeliverRequest: async (backend, request) => {
     // Get the Webhook from the Database
-    let url = backend.getWebhookForOrg('workersneedchildcare');
+    let url = await backend.getWebhookForOrg('workersneedchildcare');
 
     // We actually need to send the request multiple times per child
     let payload = {};
@@ -107,7 +107,7 @@ const WorkersNeedChildcareMetadata = {
     }
 
     // Send the request
-    backend.postWebhook(url, payload);
+    await backend.postWebhook(url, payload);
   },
   // Called by the backend when MANYC pushes an update
   // about a request to our webhook

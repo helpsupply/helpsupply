@@ -54,6 +54,7 @@ import StyleGuide from 'components/StyleGuide/index';
 import Box from 'components/Box';
 import InvalidEmail from 'components/Alert/InvalidEmail';
 import Loading from 'components/Loading';
+import DebugRequests from 'components/DebugRequests';
 
 import { styles } from './App.styles';
 
@@ -117,6 +118,11 @@ function App({ backend }) {
       <Router>
         <div className="App">
           <Switch>
+            {/*Debug / Admin Routes*/}
+            <Route exact path={Routes.DEBUG_REQUESTS}>
+              <DebugRequests backend={backend} />
+            </Route>
+
             {/*MVP Routes*/}
             <Route exact path={Routes.HOME}>
               <EntryPortal backend={backend} />

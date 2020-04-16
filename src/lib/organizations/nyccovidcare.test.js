@@ -1,12 +1,12 @@
 const WorkersNeedChildcare = require('./nyccovidcare').default;
 
-test('Request Mapping', () => {
+test('Request Mapping', async () => {
   let payloads = [];
   let mock_backend = {
-    getWebhookForOrg: (org) => {
+    getWebhookForOrg: async (org) => {
       return 'test';
     },
-    postWebhook: (url, data) => {
+    postWebhook: async (url, data) => {
       payloads.push(data);
     },
   };
@@ -31,7 +31,7 @@ test('Request Mapping', () => {
 
     other_notes: 'i love cookies',
   };
-  WorkersNeedChildcare.DeliverRequest(mock_backend, request);
+  await WorkersNeedChildcare.DeliverRequest(mock_backend, request);
 
   expect(payloads.length).toBe(1);
   for (let key in payloads[0]) {

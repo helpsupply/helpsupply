@@ -66,9 +66,9 @@ const NYCCovidCareMetadata = {
   ZipCodes: [10001, 10002],
   // Called by the backend when a request is saved with
   // organization = 'manyc'
-  DeliverRequest: (backend, request) => {
+  DeliverRequest: async (backend, request) => {
     // Get the Webhook from the Database
-    let url = backend.getWebhookForOrg('nyccovidcare');
+    let url = await backend.getWebhookForOrg('nyccovidcare');
 
     // We actually need to send the request multiple times per child
     let payload = {};
@@ -76,8 +76,10 @@ const NYCCovidCareMetadata = {
       payload[field] = FIELD_MAP[field](request);
     }
 
+    payload.sheet = 'Fresh Requests';
+
     // Send the request
-    backend.postWebhook(url, payload);
+    await backend.postWebhook(url, payload);
   },
   // Called by the backend when MANYC pushes an update
   // about a request to our webhook
