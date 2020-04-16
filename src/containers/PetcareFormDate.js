@@ -24,7 +24,7 @@ const dayFields = [
   'varies',
 ];
 
-function ChildcareFormDate() {
+function PetcareFormDate() {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -53,7 +53,7 @@ function ChildcareFormDate() {
   const handleSubmit = () => {
     setIsLoading(true);
     // service todo: wire-up form events
-    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS));
+    history.push(routeWithParams(Routes.SERVICE_PETCARE_DETAILS));
   };
 
   const buildDayFields = () => {
@@ -74,10 +74,10 @@ function ChildcareFormDate() {
     {
       type: formFieldTypes.NODE,
       node: [
-        <div key="childcare-options-title" css={{ paddingTop: Space.S25 }}>
+        <div key="petcare-options-title" css={{ paddingTop: Space.S25 }}>
           <AdditionalFormTitle
-            description={t('service.childcare.when.additional.title')}
-            title={t('service.childcare.when.additional.description')}
+            description={t('service.petcare.when.additional.title')}
+            title={t('service.petcare.when.additional.description')}
           />
         </div>,
       ],
@@ -122,7 +122,7 @@ function ChildcareFormDate() {
       type: formFieldTypes.NODE,
       node: [
         <Note key="note-2" css={{ marginTop: Space.S25, width: '100%' }}>
-          {t('service.childcare.when.note')}
+          {t('service.petcare.when.note')}
         </Note>,
       ],
     },
@@ -132,12 +132,12 @@ function ChildcareFormDate() {
     <FormBuilder
       defaultValues={fields}
       onSubmit={handleSubmit}
-      title={t('service.childcare.when.title')}
-      description={t('service.childcare.when.description')}
+      title={t('service.petcare.when.title')}
+      description={t('service.petcare.when.description')}
       fields={[...buildDayFields(), ...fieldData]}
       isLoading={isLoading}
     />
   );
 }
 
-export default ChildcareFormDate;
+export default PetcareFormDate;

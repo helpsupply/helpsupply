@@ -38,5 +38,8 @@ export const Routes = {
   SERVICE_CHILDCARE_WHEN: '/service/childcare/date',
   SERVICE_CHILDCARE_DETAILS: '/service/childcare/details',
   SERVICE_CHILDCARE_WHAT: '/service/childcare/options',
+  SERVICE_PETCARE_WHERE: '/service/petcare/location',
+  SERVICE_PETCARE_WHEN: '/service/petcare/date',
+  SERVICE_PETCARE_DETAILS: '/service/petcare/details',
   SERVICE_ADDITIONAL_INFO: '/service/additionalinfo/:id',
 };
