@@ -8,8 +8,8 @@ import { ReactComponent as Check } from 'static/icons/check.svg';
 
 import styles from './Checkbox.styles';
 
-function InputCheckbox({ label, customOnChange, ...rest }) {
-  const [checked, setChecked] = useState(false);
+function InputCheckbox({ label, customOnChange, value, ...rest }) {
+  const [checked, setChecked] = useState(value);
 
   const onChange = useCallback(() => {
     if (customOnChange) {

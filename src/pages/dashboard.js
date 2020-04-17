@@ -45,13 +45,19 @@ function AdminDashboard({ backend }) {
         );
         break;
       case RequestKinds.CHILDCARE:
-        // TODO: route to childcare service
+        history.push(
+          routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, { id: request.id }),
+        );
         break;
       case RequestKinds.MENTALHEALTH:
-        // TODO: route to mental health service
+        history.push(
+          routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, { id: request.id }),
+        );
         break;
       case RequestKinds.PETCARE:
-        // TODO: route to petcare service
+        history.push(
+          routeWithParams(Routes.SERVICE_PETCARE_WHERE, { id: request.id }),
+        );
         break;
       default:
         return;
