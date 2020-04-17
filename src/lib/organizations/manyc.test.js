@@ -36,8 +36,8 @@ test('Request Mapping', async () => {
   await MANYCMetadata.DeliverRequest(mock_backend, request);
 
   expect(payloads.length).toBe(1);
-  for (let key in payloads[0]) {
-    let val = payloads[0][key];
+  for (let key in payloads[0].manyc) {
+    let val = payloads[0].manyc[key];
     if (Array.isArray(val)) {
       val.map((v) => {
         expect(v).toBeDefined();
