@@ -19,7 +19,6 @@ function AdminDashboard({ backend }) {
   const [openRequests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [requestToBeDeleted, setRequestToBeDeleted] = useState(undefined);
-  const [isRequestsLoading, setIsRequestsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -100,7 +99,6 @@ function AdminDashboard({ backend }) {
           onEdit={onEditRequest}
           onDelete={openConfirmDeleteRequestModal}
           {...{
-            isRequestsLoading,
             openRequests,
             handleUpdateContact,
             handleRequestService,
@@ -111,7 +109,6 @@ function AdminDashboard({ backend }) {
         isOpen={isModalOpen}
         deleteRequest={deleteRequest}
         onRequestClose={closeConfirmDeleteRequestModal}
-        isLoading={isRequestsLoading}
         request={requestToBeDeleted}
       />
     </Page>

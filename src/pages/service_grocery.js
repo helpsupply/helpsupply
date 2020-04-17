@@ -17,11 +17,13 @@ function ServiceGrocery({ backend, step }) {
   };
 
   useEffect(() => {
-    if (!params.id) return;
+    if (!params.id) {
+      return;
+    }
     backend.getServiceRequest(params.id).then((data) => {
       setRequest(data);
     });
-  }, []);
+  }, [backend, params.id]);
 
   if (params.id && !request) {
     // loading

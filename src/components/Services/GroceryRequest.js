@@ -3,7 +3,6 @@ import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import { formatDate } from 'lib/utils/datetime';
 import { URGENCY_KEYS, URGENCY_TEXT } from 'lib/constants/urgency';
 
 import { SecondaryButton } from 'components/Button';

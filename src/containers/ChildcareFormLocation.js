@@ -28,7 +28,7 @@ const validateEmail = (val) => {
   }
 };
 
-function ChildcareFormLocation({ id, onSave }) {
+function ChildcareFormLocation({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 

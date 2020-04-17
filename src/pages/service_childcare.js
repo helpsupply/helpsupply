@@ -10,18 +10,20 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function ServiceChildcare({ backend, step }) {
-  const [request, setRequest] = useState(request);
+  const [request, setRequest] = useState();
   const params = useParams();
   const updateService = (request) => {
     backend.updateServiceRequest(params.id, request, true);
   };
 
   useEffect(() => {
-    if (!params.id) return;
+    if (!params.id) {
+      return;
+    }
     backend.getServiceRequest(params.id).then((data) => {
       setRequest(data);
     });
-  }, []);
+  }, [backend, params.id]);
 
   if (params.id && !request) {
     // loading

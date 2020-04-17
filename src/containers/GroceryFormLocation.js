@@ -28,7 +28,7 @@ const validateEmail = (val) => {
   }
 };
 
-function GroceryFormLocation({ id, onSave }) {
+function GroceryFormLocation({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
