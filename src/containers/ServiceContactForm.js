@@ -7,34 +7,33 @@ import { useHistory } from 'react-router-dom';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidPhoneNumber } from 'lib/utils/validations';
+import { LANGUAGES } from 'lib/constants/languages';
+import { CONTACT_PREFERENCES } from 'lib/constants/contact';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
 
 const validate = (val) => {
+  if (val === '') {
+    return;
+  }
   if (!isValidPhoneNumber(val)) {
     return 'Please enter a valid phone number';
   }
 };
 
-// service todo: Temp values while we build backend or an enum for this part.
-const LANGUAGES = [
-  { label: 'English', value: 'english' },
-  { label: 'Spanish', value: 'spanish' },
-];
-
-function ServiceContactForm({ backend }) {
+function ServiceContactForm({ backend, serviceUser }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    contactPreference: '',
-    languagePreference: '',
+    firstName: serviceUser?.data?.firstName || '',
+    lastName: serviceUser?.data?.lastName || '',
+    phone: serviceUser?.data?.phone || '',
+    contactPreference: serviceUser?.data?.contactPreference || '',
+    languagePreference: serviceUser?.data?.languagePreference || '',
   });
 
   const handleFieldChange = useCallback(
@@ -51,24 +50,16 @@ function ServiceContactForm({ backend }) {
 
   const handleSubmit = (data) => {
     setIsLoading(true);
-    history.push(routeWithParams(Routes.CONTACT_CONFIRMATION));
-
-    // service todo: wire up new action, something like editUserContact, see rough idea below
-    /*
     backend
-      .editUser({
-        //params
-      })
+      .saveServiceUser(data)
       .then(() => {
-        console.log('ok here');
         setIsLoading(false);
-        // history.push(routeWithParams(Routes.CONTACT_CONFIRMATION));
+        history.push(routeWithParams(Routes.CONTACT_CONFIRMATION));
       })
       .catch((error) => {
         console.error('error', error);
         setIsLoading(false);
       });
-     */
     // service TODO: handle exceptions
   };
 
@@ -96,10 +87,7 @@ function ServiceContactForm({ backend }) {
     {
       customOnChange: handleFieldChange('contactPreference'),
       label: t('service.contactForm.labels.contactPreference'),
-      options: [
-        { label: 'Email', value: 'email' },
-        { label: 'Phone', value: 'phone' },
-      ],
+      options: CONTACT_PREFERENCES,
       name: 'contactPreference',
       type: formFieldTypes.INPUT_DROPDOWN,
     },
@@ -127,7 +115,7 @@ function ServiceContactForm({ backend }) {
       title={t('service.contactForm.title')}
       description={t('service.contactForm.description')}
       disabled={
-        !isValidPhoneNumber(fields.phone) ||
+        (fields.phone !== '' && !isValidPhoneNumber(fields.phone)) ||
         !Object.keys(requiredFields).every((key) => !!fields[key])
       }
       fields={fieldData}

@@ -77,6 +77,10 @@ service cloud.firestore {
       allow read, update, delete: if resource.data.user == request.auth.uid;
       allow create: if request.resource.data.user == request.auth.uid;
     }
+    match /serviceuser/{reqid} {
+      allow read, update, delete: if resource.data.user == request.auth.uid;
+      allow create: if request.resource.data.user == request.auth.uid;
+    }
 
   }
 }

@@ -177,7 +177,8 @@
         "contactLabel": "Email or phone number",
         "sent": {
           "title": "We added the facility contact info",
-          "buttonLabel": "Create new request"
+          "buttonLabel": "Create new request",
+          "preferred": "preferred"
         }
       }
     },

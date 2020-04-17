@@ -5,7 +5,7 @@ export const URGENCY_KEYS = {
 };
 
 export const URGENCY_TEXT = [
-  'In the next few days',
   'Immediate - I am in a crisis',
+  'In the next few days',
   "I'm okay for now, but am worried I won't be soon",
 ];

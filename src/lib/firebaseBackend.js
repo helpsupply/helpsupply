@@ -655,6 +655,75 @@ export default class FirebaseBackend {
     }
   }
 
+  // Saves a serviceuser to the database, extra metadata that isn't supported byt the regular firebase user
+  async saveServiceUser(inputFields) {
+    return this.getServiceUser().then(async (serviceUser) => {
+      const user = this.firebase.auth().currentUser;
+      if (!user) {
+        throw new Error('User invalid');
+      }
+
+      if (inputFields.firstName === undefined) {
+        throw new Error("User needs a 'firstName'");
+      }
+      if (inputFields.lastName === undefined) {
+        throw new Error("User needs a 'lastName'");
+      }
+      if (inputFields.phone === undefined) {
+        throw new Error("User needs a 'phone'");
+      }
+      if (inputFields.contactPreference === undefined) {
+        throw new Error("User needs a 'contactPreference'");
+      }
+      if (inputFields.languagePreference === undefined) {
+        throw new Error("User needs a 'languagePreference'");
+      }
+      inputFields.updatedAt = Firebase.firestore.FieldValue.serverTimestamp();
+      inputFields.uid = user.uid;
+      inputFields.user = user.uid;
+
+      if (serviceUser) {
+        // Update serviceuser
+        return await this.firestore
+          .collection('serviceuser')
+          .doc(serviceUser.id)
+          .set(inputFields, { merge: true });
+      } else {
+        // Create serviceuser
+        return (await this.firestore.collection('serviceuser').add(inputFields))
+          .id;
+      }
+    });
+  }
+
+  async getServiceUser() {
+    const user = this.firebase.auth().currentUser;
+    if (!user) {
+      throw new Error('Service user invalid: firebase user is not logged in');
+    }
+    let result = this.firestore
+      .collection('serviceuser')
+      .where('uid', '==', user.uid)
+      .get()
+      .then(function (querySnapshot) {
+        if (!querySnapshot.empty) {
+          return {
+            id: querySnapshot.docs[0].id,
+            data: querySnapshot.docs[0].data(),
+          };
+        } else {
+          return false;
+        }
+      })
+      .catch(function (err) {
+        if (process.env.NODE_ENV !== 'production') {
+          console.error(err);
+        }
+        throw new Error('Error getting user');
+      });
+    return result;
+  }
+
   // Conversation state
   // Note: only firebase functions have permissions to call these
   async getConversationState(user) {
