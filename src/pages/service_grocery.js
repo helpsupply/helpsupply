@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function ServiceGrocery({ backend, step }) {
-  const [request, setRequest] = useState(request);
+  const [request, setRequest] = useState({});
   const params = useParams();
 
   const updateService = (request) => {

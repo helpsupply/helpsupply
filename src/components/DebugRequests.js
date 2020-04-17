@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { InputGroupAppend } from 'react-bootstrap/InputGroup';
 
 const EXAMPLE_MENTALHEALTH = {
   kind: 'mentalhealth',
@@ -92,7 +91,7 @@ function RequestList({ backend }) {
         });
         setRequests(nextRequests);
       });
-  }, []);
+  }, [backend.firestore]);
 
   return (
     <div>
@@ -104,7 +103,7 @@ function RequestList({ backend }) {
 }
 
 function HookPayload({ backend, initpayload }) {
-  const [payload, setPayload] = useState(initpayload);
+  const [payload] = useState(initpayload);
 
   return <div>{JSON.stringify(payload)}</div>;
 }
@@ -126,7 +125,7 @@ function TestHooks({ backend }) {
         });
         setPayloads(nextPayloads);
       });
-  }, []);
+  }, [backend.firestore]);
 
   return (
     <div>
