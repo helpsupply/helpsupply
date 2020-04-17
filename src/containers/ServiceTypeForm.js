@@ -54,7 +54,11 @@ function ServiceTypeForm({ backend }) {
         );
         break;
       case RequestKinds.PETCARE:
-        history.push(routeWithParams(Routes.SERVICE_PETCARE_WHERE));
+        history.push(
+          routeWithParams(Routes.SERVICE_PETCARE_WHERE, {
+            id: serviceRequestId,
+          }),
+        );
         break;
       case RequestKinds.MENTALHEALTH:
         history.push(routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN));
