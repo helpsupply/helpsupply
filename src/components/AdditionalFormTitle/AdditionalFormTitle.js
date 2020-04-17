@@ -30,7 +30,7 @@ AdditionalFormTitle.BottomRule = () => <div css={styles.bottomRule} />;
 AdditionalFormTitle.propTypes = {
   description: PropTypes.string,
   noBorder: PropTypes.bool,
-  secondaryCta: PropTypes.object,
+  secondaryCta: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   title: PropTypes.string.isRequired,
 };
 
