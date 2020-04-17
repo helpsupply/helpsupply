@@ -12,13 +12,19 @@ import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function ChildcareFormDetails({ id, onSave }) {
+function ChildcareFormDetails({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    childCareCenters: '',
+    childCareCenters: request?.childCareCenters || false,
+    mutualAid: request?.mutualAid || false,
+    enrichmentCenters: request?.enrichmentCenters || false,
+    babySitters: request?.babySitters || false,
+    freeOptions: request?.freeOptions || false,
+    paymentAbility: request?.paymentAbility || '',
+    householdRisk: request?.householdRisk || '',
   });
 
   const handleFieldChange = useCallback(

@@ -19,11 +19,10 @@ function AdminDashboard({ backend }) {
   const [openRequests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [requestToBeDeleted, setRequestToBeDeleted] = useState(undefined);
-  const [isRequestsLoading, setIsRequestsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    backend.getServiceRequests('open').then((data) => {
+    backend.getServiceRequests().then((data) => {
       data && setRequests(data);
       setIsLoading(false);
     });
@@ -45,21 +44,27 @@ function AdminDashboard({ backend }) {
         );
         break;
       case RequestKinds.CHILDCARE:
-        // TODO: route to childcare service
+        history.push(
+          routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, { id: request.id }),
+        );
         break;
       case RequestKinds.MENTALHEALTH:
-        // TODO: route to mental health service
+        history.push(
+          routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, { id: request.id }),
+        );
         break;
       case RequestKinds.PETCARE:
-        // TODO: route to petcare service
+        history.push(
+          routeWithParams(Routes.SERVICE_PETCARE_WHERE, { id: request.id }),
+        );
         break;
       default:
         return;
     }
   };
 
-  const openConfirmDeleteRequestModal = (id) => {
-    const selectedRequest = openRequests.find((request) => request.id === id);
+  const openConfirmDeleteRequestModal = (request) => {
+    const selectedRequest = openRequests.find((req) => req.id === request.id);
 
     setRequestToBeDeleted(selectedRequest);
 
@@ -77,13 +82,12 @@ function AdminDashboard({ backend }) {
       return;
     }
 
-    setIsRequestsLoading(true);
-
-    backend.deleteRequest(requestToBeDeleted.id).then((data) => {
-      setRequests(openRequests.filter((req) => req.id !== data));
+    backend.deleteServiceRequest(requestToBeDeleted.id).then(() => {
+      setRequests(
+        openRequests.filter((req) => req.id !== requestToBeDeleted.id),
+      );
 
       setIsModalOpen(false);
-      setIsRequestsLoading(false);
 
       setRequestToBeDeleted(undefined);
     });
@@ -97,7 +101,6 @@ function AdminDashboard({ backend }) {
           onEdit={onEditRequest}
           onDelete={openConfirmDeleteRequestModal}
           {...{
-            isRequestsLoading,
             openRequests,
             handleUpdateContact,
             handleRequestService,
@@ -108,7 +111,6 @@ function AdminDashboard({ backend }) {
         isOpen={isModalOpen}
         deleteRequest={deleteRequest}
         onRequestClose={closeConfirmDeleteRequestModal}
-        isLoading={isRequestsLoading}
         request={requestToBeDeleted}
       />
     </Page>
