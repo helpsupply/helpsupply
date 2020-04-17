@@ -7,7 +7,6 @@ import {
   useHistory,
 } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Routes } from 'constants/Routes';
 
@@ -55,13 +54,13 @@ import Profile from 'components/Profile';
 import StyleGuide from 'components/StyleGuide/index';
 import Box from 'components/Box';
 import InvalidEmail from 'components/Alert/InvalidEmail';
-import Loading from 'components/Loading';
+import Page from 'components/layouts/Page';
+import PageLoader from 'components/Loader/PageLoader';
 import DebugRequests from 'components/DebugRequests';
 
 import { styles } from './App.styles';
 
 const ProtectedRoute = ({ backend, children, path }) => {
-  const { t } = useTranslation();
   const history = useHistory();
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -95,9 +94,9 @@ const ProtectedRoute = ({ backend, children, path }) => {
   let content = <Route path={path}>{children}</Route>;
   if (loading) {
     content = (
-      <Box>
-        <Loading message={t('login.loading.message')} />
-      </Box>
+      <Page hasBackButton={false}>
+        <PageLoader />
+      </Page>
     );
   }
 
