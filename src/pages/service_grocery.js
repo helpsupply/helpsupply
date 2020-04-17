@@ -1,15 +1,15 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import Page from 'components/layouts/Page';
 import GroceryFormLocation from 'containers/GroceryFormLocation';
 import GroceryFormDate from 'containers/GroceryFormDate';
 import GroceryFormItems from 'containers/GroceryFormItems';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 function ServiceGrocery({ backend, step }) {
-  const [request, setRequest] = useState(request);
+  const [request, setRequest] = useState(null);
   const params = useParams();
 
   const updateService = (request) => {

@@ -20,6 +20,11 @@ export const formFieldTypes = {
 
 export const formFieldPropTypes = {
   customOnChange: PropTypes.func,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.instanceOf(Date),
+  ]),
   isHalfWidth: PropTypes.bool,
   isRequired: PropTypes.bool,
   label: PropTypes.string,

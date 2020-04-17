@@ -66,30 +66,38 @@ function ServiceContactForm({ backend, serviceUser }) {
   const fieldData = [
     {
       customOnChange: handleFieldChange('firstName'),
+      defaultValue: fields.firstName,
       label: t('service.contactForm.labels.firstName'),
       name: 'firstName',
       type: formFieldTypes.INPUT_TEXT,
+      value: fields.firstName,
     },
     {
       customOnChange: handleFieldChange('lastName'),
+      defaultValue: fields.lastName,
       label: t('service.contactForm.labels.lastName'),
       name: 'lastName',
       type: formFieldTypes.INPUT_TEXT,
+      value: fields.lastName,
     },
     {
       customOnChange: handleFieldChange('phone'),
+      defaultValue: fields.phone,
       isRequired: false,
       label: t('service.contactForm.labels.phone'),
       name: 'phone',
       type: formFieldTypes.INPUT_TEXT,
       validation: { validate },
+      value: fields.phone,
     },
     {
       customOnChange: handleFieldChange('contactPreference'),
+      defaultValue: fields.contactPreference,
       label: t('service.contactForm.labels.contactPreference'),
       options: CONTACT_PREFERENCES,
       name: 'contactPreference',
       type: formFieldTypes.INPUT_DROPDOWN,
+      value: fields.contactPreference,
     },
     {
       type: formFieldTypes.NODE,
@@ -101,10 +109,12 @@ function ServiceContactForm({ backend, serviceUser }) {
     },
     {
       customOnChange: handleFieldChange('languagePreference'),
+      defaultValue: fields.languagePreference,
       label: t('service.contactForm.labels.languagePreference'),
       options: LANGUAGES,
       name: 'languagePreference',
       type: formFieldTypes.INPUT_DROPDOWN,
+      value: fields.languagePreference,
     },
   ];
 

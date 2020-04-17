@@ -10,9 +10,9 @@ import { ReactComponent as Chevron } from 'static/icons/chevron.svg';
 
 import { dayPickerStyles, styles } from './InputDate.styles';
 
-function InputDate({ label, customOnChange }) {
+function InputDate({ label, customOnChange, defaultValue }) {
   const [isFocused, setIsFocused] = useState(false);
-  const [initialValue] = useState(new Date());
+  const [initialValue] = useState(defaultValue ? defaultValue : new Date());
   const [value, setValue] = useState(initialValue);
   const dayPicker = useRef(null);
 

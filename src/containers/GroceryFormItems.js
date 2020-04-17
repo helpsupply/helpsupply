@@ -30,6 +30,8 @@ function GroceryFormItems({ id, onSave, request }) {
     [],
   );
 
+  const { dietaryRestrictions, ...requiredFields } = fields;
+
   const handleSubmit = async () => {
     setIsLoading(true);
     await onSave(fields);
@@ -46,6 +48,7 @@ function GroceryFormItems({ id, onSave, request }) {
     },
     {
       customOnChange: handleFieldChange('dietaryRestrictions'),
+      isRequired: false,
       label: t('service.grocery.what.labels.dietaryRestrictions'),
       name: 'dietaryRestrictions',
       type: formFieldTypes.INPUT_TEXT,
@@ -59,7 +62,7 @@ function GroceryFormItems({ id, onSave, request }) {
       onSubmit={handleSubmit}
       title={t('service.grocery.what.title')}
       description={t('service.grocery.what.description')}
-      disabled={!Object.keys(fields).every((key) => !!fields[key])}
+      disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
     />
