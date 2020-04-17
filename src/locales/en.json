@@ -41,11 +41,16 @@
     },
     "learnMore": {
       "faq": {
-        "bullet1": "Who can request help? Our focus is on helping anyone working for a NYC medical facility or EMT service treating people suffering from COVID-19. Support staff, nurses, and doctors are all encouraged to make requests.",
-        "bullet2": "How can I be sure that my request and information stay private? We share your data securely on a per-request basis with only the service organization that will fulfill your request.",
-        "bullet3": "Does Help Supply provide the volunteer services? No. We gather requests and then route them to the most appropriate of our partner organizations to provide volunteers to fulfill them. Our current partners include Mutual Aid NYC, Workers Need Childcare, and NYC COVID Care Network.",
-        "bullet4": "How long will I have to wait for help? Many people are in difficult situations, and the volume of requests is high. Our partners will contact you as soon as they can.",
-        "bullet5": "Will you expand to other cities besides NYC? We're currently working to expand to other cities. If you are a volunteer service organization and would like to work with us, please let us know at"
+        "question1": "Who can request help?",
+        "answer1": "Our focus is on helping anyone working for a NYC medical facility or EMT service treating people suffering from COVID-19. Support staff, nurses, and doctors are all encouraged to make requests.",
+        "question2": "How can I be sure that my request and information stay private?",
+        "answer2": "We share your data securely on a per-request basis with only the service organization that will fulfill your request.",
+        "question3": "Does Help Supply provide the volunteer services?",
+        "answer3": "No. We gather requests and then route them to the most appropriate of our partner organizations to provide volunteers to fulfill them. Our current partners include {{mutualAid}}, {{workersNeedChildcare}}, and {{nycCovidCare}}.",
+        "question4": "How long will I have to wait for help?",
+        "answer4": "Many people are in difficult situations, and the volume of requests is high. Our partners will contact you as soon as they can.",
+        "question5": "Will you expand to other cities besides NYC?",
+        "answer5": "We're currently working to expand to other cities. If you are a volunteer service organization and would like to work with us, please let us know at"
       },
       "about": {
         "title": "What we're doing",
@@ -59,8 +64,22 @@
         "partners": {
           "title": "Our partners",
           "paragraph1": "We're partnering with the following aid organizations:",
-          "paragraph2": "We're partnering with Mutual Aid NYC, Workers Need Childcare, and NYC COVID Care Network.",
-          "paragraph3": "We're looking for more organizations, especially in Detroit and New Orleans. If you're an organization providing aid and want to partner with Help Supply, contact us at"
+          "paragraph2": "We're looking for more organizations, especially in Detroit and New Orleans. If you're an organization providing aid and want to partner with Help Supply, contact us at",
+          "partner1": {
+            "title": "Mutual Aid NYC",
+            "content": "Content",
+            "url": "mutualaid.nyc"
+          },
+          "partner2": {
+            "title": "Workers Need Childcare",
+            "content": "Content",
+            "url": "workersneedchildcare.org"
+          },
+          "partner3": {
+            "title": "NYC COVID Care Network",
+            "content": "Content",
+            "url": "nyccovidcare.org"
+          }
         }
       },
       "contact": {
@@ -108,6 +127,21 @@
         "notSeeing": "Not seeing your facility?",
         "label": "City or healthcare facility",
         "title": "Find your healthcare facility"
+      },
+      "review": {
+        "title": "Review your request",
+        "submit": "Submit request",
+        "serviceType": "Service type",
+        "preferredTime": "Preferred time",
+        "details": "details",
+        "recurring": "Recurring",
+        "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
+        "grocery": {
+          "location": "Delivery location",
+          "time": "Preferred delivery time",
+          "list": "Grocery list",
+          "diet": "Dietary restrictions"
+        }
       },
       "supplyForm": {
         "description": "You’ll be able to add more requests after submitting this first one.",
@@ -158,7 +192,8 @@
         "contactLabel": "Email or phone number",
         "sent": {
           "title": "We added the facility contact info",
-          "buttonLabel": "Create new request"
+          "buttonLabel": "Create new request",
+          "preferred": "preferred"
         }
       }
     },

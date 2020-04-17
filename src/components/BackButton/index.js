@@ -24,7 +24,7 @@ const BackButton = ({ onClick }) => {
   return (
     <div css={styles.root}>
       <IconButton onClick={onClick || goBack({ history })}>
-        <Back />
+        <Back css={styles.backIcon} />
       </IconButton>
     </div>
   );

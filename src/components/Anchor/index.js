@@ -2,7 +2,10 @@
 import { jsx } from '@emotion/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import { ReactComponent as Chevron } from 'static/icons/chevron.svg';
+import { ReactComponent as ExternalLink } from 'static/icons/external-link.svg';
+
 import { styles } from './Anchor.styles';
 
 export const anchorTypes = {
@@ -20,6 +23,7 @@ const Anchor = ({
   children,
   href,
   iconColor,
+  isExternalLink,
   withIcon,
   ...rest
 }) => {
@@ -31,9 +35,13 @@ const Anchor = ({
       to={isLink ? href : null}
       href={!isLink ? href : null}
       css={styles.root}
+      target={isExternalLink ? '_blank' : null}
       {...rest}
     >
       {children}
+      {isExternalLink && (
+        <ExternalLink css={styles.externalLink} fill={iconColor} />
+      )}
       {withIcon && <Chevron css={styles.chevron} fill={iconColor} />}
     </Element>
   );
@@ -43,6 +51,7 @@ Anchor.propTypes = {
   href: PropTypes.string.isRequired,
   iconColor: PropTypes.string,
   withIcon: PropTypes.bool,
+  isExternalLink: PropTypes.bool,
 };
 
 export default Anchor;

@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidPhoneNumber, isValidEmail } from 'lib/utils/validations';
+import { LANGUAGES } from 'lib/constants/languages';
+import { CONTACT_PREFERENCES } from 'lib/constants/contact';
 
 import { AdditionalCta } from 'components/AdditionalCta';
 import FormBuilder from 'components/Form/FormBuilder';
@@ -26,13 +28,7 @@ const validateEmail = (val) => {
   }
 };
 
-// service todo: Temp values while we build backend or an enum for this part.
-const LANGUAGES = [
-  { label: 'English', value: 'english' },
-  { label: 'Spanish', value: 'spanish' },
-];
-
-function ChildcareFormLocation() {
+function ChildcareFormLocation({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -54,10 +50,10 @@ function ChildcareFormLocation() {
     [],
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
-    // service todo: wire-up form events
-    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHEN));
+    await onSave(fields);
+    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHEN, { id }));
   };
 
   const fieldData = [
@@ -140,10 +136,7 @@ function ChildcareFormLocation() {
     {
       customOnChange: handleFieldChange('contactPreference'),
       label: t('service.contactForm.labels.contactPreference'),
-      options: [
-        { label: 'Email', value: 'email' },
-        { label: 'Phone', value: 'phone' },
-      ],
+      options: CONTACT_PREFERENCES,
       name: 'contactPreference',
       type: formFieldTypes.INPUT_DROPDOWN,
     },

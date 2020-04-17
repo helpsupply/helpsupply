@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import RequestKinds from 'lib/organizations/kinds';
+import { buildUrgencyOptions } from 'lib/utils/urgency';
+import { buildServicesOptions } from 'lib/utils/services';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
@@ -47,13 +49,25 @@ function ServiceTypeForm({ backend }) {
         );
         break;
       case RequestKinds.CHILDCARE:
-        history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHERE));
+        history.push(
+          routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, {
+            id: serviceRequestId,
+          }),
+        );
         break;
       case RequestKinds.PETCARE:
-        history.push(routeWithParams(Routes.SERVICE_PETCARE_WHERE));
+        history.push(
+          routeWithParams(Routes.SERVICE_PETCARE_WHERE, {
+            id: serviceRequestId,
+          }),
+        );
         break;
       case RequestKinds.MENTALHEALTH:
-        history.push(routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN));
+        history.push(
+          routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, {
+            id: serviceRequestId,
+          }),
+        );
         break;
       default:
         history.push(routeWithParams(Routes.SERVICE_TYPE));
@@ -67,13 +81,7 @@ function ServiceTypeForm({ backend }) {
     {
       customOnChange: handleFieldChange('kind'),
       label: t('service.selectType.form.serviceTypeLabel'),
-      // todo: move these values to enum
-      options: [
-        { label: 'Groceries', value: RequestKinds.GROCERY },
-        { label: 'Childcare', value: RequestKinds.CHILDCARE },
-        { label: 'Pet care', value: RequestKinds.PETCARE },
-        { label: 'Emotional support', value: RequestKinds.MENTALHEALTH },
-      ],
+      options: buildServicesOptions(),
       name: 'kind',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: fields.kind,
@@ -81,15 +89,7 @@ function ServiceTypeForm({ backend }) {
     {
       customOnChange: handleFieldChange('urgency'),
       label: t('service.selectType.form.urgencyLabel'),
-      // todo: move these values to enum
-      options: [
-        { label: "Immediately - I'm in crisis", value: 'immediate' },
-        { label: 'In the next few days', value: 'soon' },
-        {
-          label: "I'm okay for now but am worried that I won't be soon",
-          value: 'later',
-        },
-      ],
+      options: buildUrgencyOptions(),
       name: 'urgency',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: fields.urgency,

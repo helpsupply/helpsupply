@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
@@ -10,14 +10,23 @@ import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
 import { ContactConfirmation } from 'components/Confirmation';
 
-// service todo: Temp values while we build backend for this part.
-const TEMP_NAME = 'Temp User';
-const TEMP_CONTACT = 'medicalWorker@healthcarefacility.com';
+import { useAuth } from 'hooks/useAuth';
 
-function ContactConfirmationPage() {
+function ContactConfirmationPage({ backend }) {
   const history = useHistory();
+  const { isInitializing, isLoggedIn, user: firebaseUser } = useAuth();
+  const [isLoading, setIsLoading] = useState(isInitializing);
+  const [serviceUser, setServiceUser] = useState(false);
 
-  const [isLoading] = useState(false);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
+    backend.getServiceUser().then((user) => {
+      setServiceUser(user);
+      setIsLoading(false);
+    });
+  }, [backend, isLoggedIn, setIsLoading]);
 
   const handleOnEdit = () => {
     history.push(routeWithParams(Routes.CONTACT_FORM));
@@ -35,8 +44,8 @@ function ContactConfirmationPage() {
       {!isLoading && (
         <ContactConfirmation
           onEdit={handleOnEdit}
-          name={TEMP_NAME}
-          contact={TEMP_CONTACT}
+          email={firebaseUser.email}
+          serviceUser={serviceUser}
         />
       )}
     </Page>

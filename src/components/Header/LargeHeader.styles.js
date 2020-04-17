@@ -1,7 +1,7 @@
 import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
 
-const mobileMinHeight = '276px';
+const mobileMinHeight = '275px';
 
 const styles = {
   root: css({

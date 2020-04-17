@@ -41,6 +41,8 @@ import ServiceEmotional from 'pages/service_emotional';
 import ServiceAdditionalInfo from 'pages/service_additional_info';
 import LearnMore from 'pages/learn_more';
 import Dashboard from 'pages/dashboard';
+import ServiceConfirmation from 'pages/service_confirmation';
+import ServiceReview from 'pages/service_review';
 // End MVP
 
 import HCPSignupFinish from 'components/HCPSignupFinish';
@@ -122,7 +124,6 @@ function App({ backend }) {
             <Route exact path={Routes.DEBUG_REQUESTS}>
               <DebugRequests backend={backend} />
             </Route>
-
             {/*MVP Routes*/}
             <Route exact path={Routes.HOME}>
               <EntryPortal backend={backend} />
@@ -246,6 +247,20 @@ function App({ backend }) {
             >
               <ServiceAdditionalInfo backend={backend} />
             </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_REVIEW}
+            >
+              <ServiceReview backend={backend} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_CONFIRMATION}
+            >
+              <ServiceConfirmation backend={backend} />
+            </ProtectedRoute>
             <Route exact path={Routes.FAQ}>
               <LearnMore backend={backend} />
             </Route>
@@ -258,7 +273,6 @@ function App({ backend }) {
               <NoMatch />
             </Route>
             {/*END MVP Routes*/}
-
             <Route path={Routes.LOGIN}>
               <Login />
             </Route>
