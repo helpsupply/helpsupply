@@ -13,7 +13,7 @@ import Card from 'components/Card';
 
 import { styles } from './ServiceReview.styles';
 
-export const GroceryServiceReview = ({ id, handleSubmit, service }) => {
+export const GroceryServiceReview = ({ id, service }) => {
   const history = useHistory();
   const { t } = useTranslation();
 

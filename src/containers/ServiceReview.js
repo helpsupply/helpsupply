@@ -12,6 +12,9 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { PrimaryButton } from 'components/Button';
 import GroceryServiceReview from 'components/ServiceReview/Grocery';
+import ChildcareServiceReview from 'components/ServiceReview/Childcare';
+import PetcareServiceReview from 'components/ServiceReview/Petcare';
+import MentalHealthServiceReview from 'components/ServiceReview/MentalHealth';
 
 import { styles } from 'components/ServiceReview/ServiceReview.styles';
 
@@ -34,6 +37,27 @@ function ServiceReview({ id, service }) {
       </Text>
       {service.kind === RequestKinds.GROCERY && (
         <GroceryServiceReview
+          id={id}
+          service={service}
+          handleSubmit={handleSubmit}
+        />
+      )}
+      {service.kind === RequestKinds.CHILDCARE && (
+        <ChildcareServiceReview
+          id={id}
+          service={service}
+          handleSubmit={handleSubmit}
+        />
+      )}
+      {service.kind === RequestKinds.PETCARE && (
+        <PetcareServiceReview
+          id={id}
+          service={service}
+          handleSubmit={handleSubmit}
+        />
+      )}
+      {service.kind === RequestKinds.MENTALHEALTH && (
+        <MentalHealthServiceReview
           id={id}
           service={service}
           handleSubmit={handleSubmit}
