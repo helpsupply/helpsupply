@@ -16,28 +16,35 @@ import { formFieldTypes } from 'components/Form/CreateFormFields';
 
 import { neighborhoods } from 'data/neighborhoods';
 
-const validate = (val) => {
+const validatePhone = (val) => {
+  if (val === '') {
+    return;
+  }
   if (!isValidPhoneNumber(val)) {
     return 'Please enter a valid phone number';
   }
 };
 
 const validateEmail = (val) => {
+  if (val === '') {
+    return;
+  }
   if (!isValidEmail(val)) {
     return 'Please enter a valid email address';
   }
 };
 
-function PetcareFormLocation({ id, onSave }) {
+function PetcareFormLocation({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [addAdditionalContact, setAddAdditionalContact] = useState(false);
+  const [addAdditionalContact, setAddAdditionalContact] = useState(
+    !!request?.additionalContactFirstName,
+  );
   const [fields, setFields] = useState({
-    zipCode: '',
-    neighborhood: '',
-    crossStreet: '',
+    neighborhood: request?.neighborhood || '',
+    crossStreet: request?.crossStreet || '',
   });
 
   const handleFieldChange = useCallback(
@@ -50,22 +57,42 @@ function PetcareFormLocation({ id, onSave }) {
     [],
   );
 
+  const [additionalFields, setAdditionalFields] = useState({
+    additionalContactFirstName: request?.additionalContactFirstName || '',
+    additionalContactLastName: request?.additionalContactLastName || '',
+    additionalContactRelationship: request?.additionalContactRelationship || '',
+    additionalContactEmail: request?.additionalContactEmail || '',
+    additionalContactPhone: request?.additionalContactPhone || '',
+    additionalContactContactPreference:
+      request?.additionalContactContactPreference || '',
+    additionalContactLanguagePreference:
+      request?.additionalContactLanguagePreference || '',
+  });
+
+  const handleAdditionalFieldChange = useCallback(
+    (field) => (value) => {
+      setAdditionalFields((fields) => ({
+        ...fields,
+        [field]: value,
+      }));
+    },
+    [],
+  );
+
   const handleSubmit = async () => {
     setIsLoading(true);
-    await onSave(fields);
+    if (addAdditionalContact) {
+      await onSave({ ...fields, ...additionalFields });
+    } else {
+      await onSave(fields);
+    }
     history.push(routeWithParams(Routes.SERVICE_PETCARE_WHEN, { id }));
   };
 
   const fieldData = [
     {
-      customOnChange: handleFieldChange('zipCode'),
-      label: t('service.petcare.where.labels.zip'),
-      name: 'zipCode',
-      type: formFieldTypes.INPUT_TEXT,
-      value: fields.zipCode,
-    },
-    {
       customOnChange: handleFieldChange('neighborhood'),
+      defaultValue: fields.neighborhood,
       label: t('service.petcare.where.labels.neighborhood'),
       // service todo: wire-up neighborhoods data
       options: neighborhoods.Brooklyn,
@@ -75,6 +102,7 @@ function PetcareFormLocation({ id, onSave }) {
     },
     {
       customOnChange: handleFieldChange('crossStreet'),
+      defaultValue: fields.crossStreet,
       label: t('service.petcare.where.labels.crossStreet'),
       name: 'crossStreet',
       type: formFieldTypes.INPUT_TEXT,
@@ -94,60 +122,106 @@ function PetcareFormLocation({ id, onSave }) {
     },
   ];
 
-  const additionalContactFields = [
+  const additionalContactFieldData = [
     {
-      customOnChange: handleFieldChange('firstName'),
+      customOnChange: handleAdditionalFieldChange('additionalContactFirstName'),
+      defaultValue: additionalFields.additionalContactFirstName,
       label: t('service.contactForm.labels.firstName'),
-      name: 'firstName',
+      name: 'additionalContactFirstName',
       type: formFieldTypes.INPUT_TEXT,
+      value: additionalFields.additionalContactFirstName,
     },
     {
-      customOnChange: handleFieldChange('lastName'),
-      label: t('service.additionalContact.labels.lastName'),
-      name: 'lastName',
-      type: formFieldTypes.INPUT_TEXT,
-    },
-    {
-      customOnChange: handleFieldChange('relationship'),
-      label: t('service.additionalContact.labels.relationship'),
-      options: [
-        { label: 'Partner', value: 'partner' },
-        { label: 'Family member', value: 'family-member' },
-        { label: 'Friend', value: 'friend' },
-      ],
-      name: 'relationship',
-      type: formFieldTypes.INPUT_DROPDOWN,
-    },
-    {
-      customOnChange: handleFieldChange('email'),
-      label: t('service.additionalContact.labels.email'),
-      name: 'email',
-      type: formFieldTypes.INPUT_TEXT,
-      validation: { validateEmail },
-    },
-    {
-      customOnChange: handleFieldChange('phone'),
+      customOnChange: handleAdditionalFieldChange('additionalContactLastName'),
+      defaultValue: additionalFields.additionalContactLastName,
       isRequired: false,
-      label: t('service.contactForm.labels.phone'),
-      name: 'phone',
+      label: t('service.additionalContact.labels.lastName'),
+      name: 'additionalContactLastName',
       type: formFieldTypes.INPUT_TEXT,
-      validation: { validate },
+      value: additionalFields.additionalContactLastName,
     },
     {
-      customOnChange: handleFieldChange('contactPreference'),
+      customOnChange: handleAdditionalFieldChange(
+        'additionalContactRelationship',
+      ),
+      defaultValue: additionalFields.additionalContactRelationship,
+      isRequired: false,
+      label: t('service.additionalContact.labels.relationship'),
+      name: 'additionalContactRelationship',
+      type: formFieldTypes.INPUT_TEXT,
+      value: additionalFields.additionalContactRelationship,
+    },
+    {
+      customOnChaonge: handleAdditionalFieldChange('additionalContactEmail'),
+      defaultValue: additionalFields.additionalContactEmail,
+      isRequired: false,
+      label: t('service.additionalContact.labels.email'),
+      name: 'additionalContactEmail',
+      type: formFieldTypes.INPUT_TEXT,
+      validation: { validate: validateEmail },
+      value: additionalFields.additionalContactEmail,
+    },
+    {
+      customOnChange: handleAdditionalFieldChange('additionalContactPhone'),
+      defaultValue: additionalFields.additionalContactPhone,
+      label: t('service.contactForm.labels.phone'),
+      name: 'additionalContactPhone',
+      type: formFieldTypes.INPUT_TEXT,
+      validation: { validate: validatePhone },
+      value: additionalFields.additionalContactPhone,
+    },
+    {
+      customOnChange: handleAdditionalFieldChange(
+        'additionalContactContactPreference',
+      ),
+      defaultValue: additionalFields.additionalContactContactPreference,
       label: t('service.contactForm.labels.contactPreference'),
       options: CONTACT_PREFERENCES,
-      name: 'contactPreference',
+      name: 'additionalContactContactPreference',
       type: formFieldTypes.INPUT_DROPDOWN,
+      value: additionalFields.additionalContactContactPreference,
     },
     {
-      customOnChange: handleFieldChange('languagePreference'),
+      customOnChange: handleAdditionalFieldChange(
+        'additionalContactLanguagePreference',
+      ),
+      defaultValue: additionalFields.additionalContactLanguagePreference,
       label: t('service.contactForm.labels.languagePreference'),
       options: LANGUAGES,
-      name: 'languagePreference',
+      name: 'additionalContactLanguagePreference',
       type: formFieldTypes.INPUT_DROPDOWN,
+      value: additionalFields.additionalContactLanguagePreference,
     },
   ];
+
+  const {
+    additionalContactLastName,
+    additionalContactRelationship,
+    additionalContactEmail,
+    ...additionalRequiredFields
+  } = additionalFields;
+
+  if (addAdditionalContact) {
+    return (
+      <FormBuilder
+        defaultValues={{ ...fields, ...additionalFields }}
+        onSubmit={handleSubmit}
+        title={t('service.petcare.where.title')}
+        description={t('service.petcare.where.description')}
+        disabled={
+          (additionalFields.additionalContactPhone !== '' &&
+            !isValidPhoneNumber(additionalFields.additionalContactPhone)) ||
+          (additionalFields.additionalContactEmail !== '' &&
+            !isValidEmail(additionalFields.additionalContactEmail)) ||
+          !Object.keys({ ...fields, ...additionalRequiredFields }).every(
+            (key) => !!{ ...fields, ...additionalRequiredFields }[key],
+          )
+        }
+        fields={[...fieldData, ...additionalContactFieldData]}
+        isLoading={isLoading}
+      />
+    );
+  }
 
   return (
     <FormBuilder
@@ -156,11 +230,7 @@ function PetcareFormLocation({ id, onSave }) {
       title={t('service.petcare.where.title')}
       description={t('service.petcare.where.description')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
-      fields={
-        addAdditionalContact
-          ? [...fieldData, ...additionalContactFields]
-          : fieldData
-      }
+      fields={fieldData}
       isLoading={isLoading}
     />
   );

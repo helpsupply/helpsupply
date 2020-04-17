@@ -10,14 +10,14 @@ import { routeWithParams } from 'lib/utils/routes';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function EmotionalFormDate({ id, onSave }) {
+function EmotionalFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    type: '',
-    agreement: '',
+    type: request?.type || '',
+    agreement: request?.agreement || '',
   });
 
   const handleFieldChange = useCallback(
@@ -39,6 +39,7 @@ function EmotionalFormDate({ id, onSave }) {
   const fieldData = [
     {
       customOnChange: handleFieldChange('type'),
+      defaultValue: fields.type,
       label: t('service.emotional.what.labels.type'),
       options: [
         { label: 'Licensed Mental Health Professional', value: 'licensed' },

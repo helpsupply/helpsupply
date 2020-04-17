@@ -10,13 +10,13 @@ import { routeWithParams } from 'lib/utils/routes';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function AdditionalInfoForm({ id, onSave }) {
+function AdditionalInfoForm({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    additionalInfo: '',
+    additionalInfo: request?.additionalInfo || '',
   });
 
   const handleFieldChange = useCallback(
@@ -51,7 +51,6 @@ function AdditionalInfoForm({ id, onSave }) {
       onSubmit={handleSubmit}
       title={t('service.additionalInfo.title')}
       description={t('service.additionalInfo.description')}
-      disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
     />
