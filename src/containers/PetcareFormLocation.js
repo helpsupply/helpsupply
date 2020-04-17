@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidPhoneNumber, isValidEmail } from 'lib/utils/validations';
+import { LANGUAGES } from 'lib/constants/languages';
+import { CONTACT_PREFERENCES } from 'lib/constants/contact';
 
 import { AdditionalCta } from 'components/AdditionalCta';
 import FormBuilder from 'components/Form/FormBuilder';
@@ -25,12 +27,6 @@ const validateEmail = (val) => {
     return 'Please enter a valid email address';
   }
 };
-
-// service todo: Temp values while we build backend or an enum for this part.
-const LANGUAGES = [
-  { label: 'English', value: 'english' },
-  { label: 'Spanish', value: 'spanish' },
-];
 
 function PetcareFormLocation({ id, onSave }) {
   const history = useHistory();
@@ -140,10 +136,7 @@ function PetcareFormLocation({ id, onSave }) {
     {
       customOnChange: handleFieldChange('contactPreference'),
       label: t('service.contactForm.labels.contactPreference'),
-      options: [
-        { label: 'Email', value: 'email' },
-        { label: 'Phone', value: 'phone' },
-      ],
+      options: CONTACT_PREFERENCES,
       name: 'contactPreference',
       type: formFieldTypes.INPUT_DROPDOWN,
     },
