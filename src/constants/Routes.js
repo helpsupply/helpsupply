@@ -43,8 +43,8 @@ export const Routes = {
   SERVICE_PETCARE_WHERE: '/service/petcare/location/:id',
   SERVICE_PETCARE_WHEN: '/service/petcare/date/:id',
   SERVICE_PETCARE_DETAILS: '/service/petcare/details/:id',
-  SERVICE_EMOTIONAL_WHEN: '/service/help/date',
-  SERVICE_EMOTIONAL_WHAT: '/service/help/type',
+  SERVICE_EMOTIONAL_WHEN: '/service/help/date/:id',
+  SERVICE_EMOTIONAL_WHAT: '/service/help/type/:id',
   SERVICE_ADDITIONAL_INFO: '/service/additionalinfo/:id',
 
   // Admin and Debugging routes
