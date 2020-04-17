@@ -10,7 +10,7 @@ import { routeWithParams } from 'lib/utils/routes';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function EmotionalFormDate() {
+function EmotionalFormDate({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -30,10 +30,10 @@ function EmotionalFormDate() {
     [],
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
-    // service todo: wire-up form events
-    history.push(routeWithParams(Routes.SERVICE_ADDITIONAL_INFO));
+    await onSave(fields);
+    history.push(routeWithParams(Routes.SERVICE_ADDITIONAL_INFO, { id }));
   };
 
   const fieldData = [

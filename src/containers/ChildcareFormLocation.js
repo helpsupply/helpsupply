@@ -32,7 +32,7 @@ const LANGUAGES = [
   { label: 'Spanish', value: 'spanish' },
 ];
 
-function ChildcareFormLocation() {
+function ChildcareFormLocation({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -54,10 +54,10 @@ function ChildcareFormLocation() {
     [],
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
-    // service todo: wire-up form events
-    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHEN));
+    await onSave(fields);
+    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHEN, { id }));
   };
 
   const fieldData = [

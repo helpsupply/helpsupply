@@ -47,13 +47,25 @@ function ServiceTypeForm({ backend }) {
         );
         break;
       case RequestKinds.CHILDCARE:
-        history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHERE));
+        history.push(
+          routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, {
+            id: serviceRequestId,
+          }),
+        );
         break;
       case RequestKinds.PETCARE:
-        history.push(routeWithParams(Routes.SERVICE_PETCARE_WHERE));
+        history.push(
+          routeWithParams(Routes.SERVICE_PETCARE_WHERE, {
+            id: serviceRequestId,
+          }),
+        );
         break;
       case RequestKinds.MENTALHEALTH:
-        history.push(routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN));
+        history.push(
+          routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, {
+            id: serviceRequestId,
+          }),
+        );
         break;
       default:
         history.push(routeWithParams(Routes.SERVICE_TYPE));

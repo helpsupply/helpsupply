@@ -22,7 +22,7 @@ const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
 };
 
-function ChildcareFormDetails() {
+function ChildcareFormDetails({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -122,10 +122,10 @@ function ChildcareFormDetails() {
     t,
   ]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
-    // service todo: wire-up form events
-    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHAT));
+    await onSave(fields);
+    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHAT, { id }));
   };
 
   const fieldData = [
