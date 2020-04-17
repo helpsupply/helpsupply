@@ -4,6 +4,7 @@ export const TEXT_TYPE = {
   HEADER_3: 'HEADER_3',
   HEADER_4: 'HEADER_4',
   HEADER_5: 'HEADER_5',
+  HEADER_6: 'HEADER_6',
   BODY_1: 'BODY_1',
   BODY_2: 'BODY_2',
   CONTENT: 'CONTENT',

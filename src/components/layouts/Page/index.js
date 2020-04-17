@@ -32,7 +32,9 @@ const PageContent = ({
       ]}
     >
       <div css={styles.pageContent}>
-        {hasBackButton && <BackButton onClick={onBackButtonClick} />}
+        {hasBackButton && !isDesktop && (
+          <BackButton onClick={onBackButtonClick} />
+        )}
         {children}
       </div>
     </div>
@@ -81,8 +83,11 @@ const Page = ({
       {!willUseSmallHeader && (
         <div css={isDesktop && styles.headerContainerDesktop}>
           <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
+            {!isHome && hasBackButton && (
+              <BackButton onClick={onBackButtonClick} />
+            )}
             <LargeHeader />
-            {isDesktop && (
+            {isDesktop && isHome && (
               <Fragment>
                 <Intro />
                 <Text css={styles.copyright}>

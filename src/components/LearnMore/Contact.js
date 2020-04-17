@@ -1,10 +1,13 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
+
 import { Emails } from 'constants/Emails';
+
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Anchor, { anchorTypes } from 'components/Anchor';
+
 import { styles } from './LearnMore.styles';
 
 export const Contact = () => {
@@ -14,7 +17,7 @@ export const Contact = () => {
       <Text css={styles.contactTitle} as="h2" type={TEXT_TYPE.HEADER_4}>
         {t('learnMore.contact.title')}
       </Text>
-      <Text as="p" type={TEXT_TYPE.BODY_2}>
+      <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
         {t('learnMore.contact.subtitle1')}
       </Text>
       <Text as="p" type={TEXT_TYPE.BODY_2}>
@@ -22,7 +25,7 @@ export const Contact = () => {
           {Emails.HELP}
         </Anchor>
       </Text>
-      <Text as="p" type={TEXT_TYPE.BODY_2}>
+      <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
         {t('learnMore.contact.subtitle2')}
       </Text>
       <Text as="p" type={TEXT_TYPE.BODY_2}>
