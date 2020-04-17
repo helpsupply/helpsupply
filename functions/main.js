@@ -85,3 +85,36 @@ exports.processServiceRequest = functions.firestore
       snapshot.after.data(),
     );
   });
+
+exports.testHook = functions.https.onRequest(async (request, response) => {
+  if (request.get('content-type') !== 'application/json') {
+    response.status(400).send("{'error': 'content_type_header_not_json'}");
+    return;
+  }
+
+  // Get the hook name from the URL
+  let hookName = request.path.slice(1);
+
+  if (hookName === undefined || hookName === '') {
+    response.status(404).send('not found');
+  }
+
+  // Janky equality
+  if (JSON.stringify(request.body) === '{}') {
+    response.status(400).send('no body');
+  }
+
+  request.body.receiveTimestamp = Date.now();
+
+  response.send(
+    JSON.stringify({
+      created: (
+        await backend.firestore
+          .collection('testhook')
+          .doc(hookName)
+          .collection('payloads')
+          .add(request.body)
+      ).id,
+    }),
+  );
+});

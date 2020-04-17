@@ -109,6 +109,7 @@ export default class FirebaseBackend {
     const { currentUser } = this.firebase.auth();
     request.domain = currentUser ? currentUser.email.split('@')[1] || '' : '';
     request.user = currentUser ? currentUser.uid || '' : '';
+    request.timeCreated = Date.now();
     return (await this.firestore.collection('servicerequest').add(request)).id;
   }
 
