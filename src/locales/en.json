@@ -157,6 +157,13 @@
           "label": "i.e.: All donated items must be unused and sealed in original packaging."
         }
       },
+      "serviceConfirmation": {
+        "title": "We have your request for {{kind}}",
+        "description": "Your request has been routed to {{organization}}. They will contact you to fulfill your request.",
+        "requestMore": "Request more services",
+        "viewRequests": "View my requests",
+        "fulfilledBy": "To be fulfilled by"
+      },
       "supplyConfirmation": {
         "header": "We just added your new request",
         "message": "Your need will be communicated to the organizations working to deliver supplies to facilities like yours.",
