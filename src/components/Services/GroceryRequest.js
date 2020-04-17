@@ -36,38 +36,57 @@ export const GroceryRequest = ({ id, onDelete, onEdit, request }) => {
           {t('dropsite.openRequests.requestId')} #{request.id}
         </Note>
       </div>
-      <Text as="p" type={TEXT_TYPE.BODY_1} css={styles.title}>
+      <Text as="p" type={TEXT_TYPE.BODY_1} css={styles.capitalize}>
         {request.kind}
       </Text>
+      {request.firstName && (
+        <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
+          {request.firstName} {request.lastName}
+        </Text>
+      )}
+      {request.phone && (
+        <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
+          {request.phone}
+        </Text>
+      )}
+      {request.email && (
+        <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
+          {request.email}
+        </Text>
+      )}
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
         {matchUrgencyToText(request.urgency)}
       </Text>
-      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        {t('dashboard.openRequests.dateNeededLabel')}{' '}
-        {formatDate(moment.unix(request.date.seconds))}
-      </Text>
-      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        {t('dashboard.openRequests.crossStreet')} {request.crossStreet}
-      </Text>
+      {request.date?.seconds && (
+        <Text
+          as="p"
+          type={TEXT_TYPE.NOTE}
+          css={[styles.text, styles.capitalize]}
+        >
+          {moment.unix(request.date?.seconds).format('dddd, MMMM Do')}{' '}
+          {request.time}
+        </Text>
+      )}
       {request.recurring && (
         <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
           Recurring
         </Text>
       )}
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        {t('dashboard.openRequests.dateNeededLabel')}{' '}
-        {request.dietaryRestrictions}
-      </Text>
-      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
         {request.groceryList}
       </Text>
+      <Text as="p" type={TEXT_TYPE.NOTE} css={[styles.text, styles.capitalize]}>
+        {request.dietaryRestrictions}
+      </Text>
       <Note css={styles.date}>{t('global.form.addedLabel')}</Note>
-      <SecondaryButton onClick={onEdit}>
-        <Text type={TEXT_TYPE.NOTE}>{t('global.form.editLabel')}</Text>
-      </SecondaryButton>
-      <SecondaryButton onClick={onDelete}>
-        <Text type={TEXT_TYPE.NOTE}>{t('global.form.deleteLabel')}</Text>
-      </SecondaryButton>
+      <div css={styles.actions}>
+        <SecondaryButton onClick={onEdit}>
+          <Text type={TEXT_TYPE.NOTE}>{t('global.form.editLabel')}</Text>
+        </SecondaryButton>
+        <SecondaryButton onClick={onDelete}>
+          <Text type={TEXT_TYPE.NOTE}>{t('global.form.deleteLabel')}</Text>
+        </SecondaryButton>
+      </div>
     </div>
   );
 };

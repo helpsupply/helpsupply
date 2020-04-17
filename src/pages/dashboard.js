@@ -23,7 +23,7 @@ function AdminDashboard({ backend }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    backend.getServiceRequests('open').then((data) => {
+    backend.getServiceRequests().then((data) => {
       data && setRequests(data);
       setIsLoading(false);
     });
@@ -58,8 +58,8 @@ function AdminDashboard({ backend }) {
     }
   };
 
-  const openConfirmDeleteRequestModal = (id) => {
-    const selectedRequest = openRequests.find((request) => request.id === id);
+  const openConfirmDeleteRequestModal = (request) => {
+    const selectedRequest = openRequests.find((req) => req.id === request.id);
 
     setRequestToBeDeleted(selectedRequest);
 
@@ -77,13 +77,10 @@ function AdminDashboard({ backend }) {
       return;
     }
 
-    setIsRequestsLoading(true);
-
     backend.deleteRequest(requestToBeDeleted.id).then((data) => {
       setRequests(openRequests.filter((req) => req.id !== data));
 
       setIsModalOpen(false);
-      setIsRequestsLoading(false);
 
       setRequestToBeDeleted(undefined);
     });
