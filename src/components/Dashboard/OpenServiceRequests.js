@@ -10,6 +10,7 @@ import { TEXT_TYPE } from 'components/Text/constants';
 
 import { styles } from './UserDashboard.styles';
 import GroceryRequest from 'components/Services/GroceryRequest';
+import ChildCareRequest from 'components/Services/ChildCareRequest';
 
 const groupBy = (arr, key) => {
   return arr.reduce((acc, item) => {
@@ -27,7 +28,9 @@ const mapServiceKindToCard = (request) => ({
   // i'm not sure we will need to list it all or just the common fields
   [RequestKinds.MENTALHEALTH]: null,
   [RequestKinds.PETCARE]: null,
-  [RequestKinds.CHILDCARE]: null,
+  [RequestKinds.CHILDCARE]: (
+    <ChildCareRequest css={styles.request} {...request} />
+  ),
 });
 
 export const OpenServiceRequests = ({ onDelete, onEdit, requests }) => {

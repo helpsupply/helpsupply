@@ -12,21 +12,9 @@ import { TEXT_TYPE } from 'components/Text/constants';
 import Note from 'components/Note';
 
 import { styles } from './Request.styles';
-import moment from 'moment';
+import { Fragment } from 'react';
 
-const matchUrgencyToText = (text) => {
-  let t;
-  Object.entries(URGENCY_KEYS).find(([k, v]) => {
-    if (v === text) {
-      console.log(URGENCY_TEXT[k]);
-      t = URGENCY_TEXT[k];
-    }
-    return null;
-  });
-  return t;
-};
-
-export const ChildCareRequest = ({ id, onDelete, onEdit, request }) => {
+export const ChildCareRequest = ({ onDelete, onEdit, request }) => {
   const { t } = useTranslation();
   return (
     <div css={styles.root}>
@@ -39,24 +27,46 @@ export const ChildCareRequest = ({ id, onDelete, onEdit, request }) => {
       <Text as="p" type={TEXT_TYPE.BODY_1} css={styles.capitalize}>
         {request.kind}
       </Text>
-      {request.firstName && (
-        <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-          // days
-        </Text>
-      )}
-      {request.phone && (
-        <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-          // times
-        </Text>
-      )}
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        Recurring
+        {[
+          request.mondays && 'Mondays',
+          request.tuesdays && 'Tuesdays',
+          request.wednesdays && 'Wednesdays',
+          request.thursdays && 'Thursdays',
+          request.fridays && 'Fridays',
+          request.saturdays && 'Saturdays',
+          request.sundays && 'Sundays',
+          request.varies && 'Days vary',
+        ]
+          .filter((day) => !!day)
+          .join(', ')}
       </Text>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        {request.groceryList}
+        {[
+          request.mornings && 'Mornings',
+          request.afternoons && 'Afternoons',
+          request.evenings && 'Evenings',
+          request.night && 'Night',
+          request.timeVaries && 'Times vary',
+        ]
+          .filter((day) => !!day)
+          .join(', ')}
       </Text>
-      <Text as="p" type={TEXT_TYPE.NOTE} css={[styles.text, styles.capitalize]}>
-        {request.dietaryRestrictions}
+      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
+        {Object.values(request?.children || []).map((child, idx) => (
+          <Fragment>
+            <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
+              Child {idx + 1}: {child.birthMonth} {child.birthYear}
+            </Text>
+            <Text
+              as="p"
+              type={TEXT_TYPE.NOTE}
+              css={[styles.text, styles.capitalize]}
+            >
+              {child.specialNeeds}
+            </Text>
+          </Fragment>
+        ))}
       </Text>
       <Note css={styles.date}>{t('global.form.addedLabel')}</Note>
       <div css={styles.actions}>

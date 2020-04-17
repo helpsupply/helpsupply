@@ -18,7 +18,6 @@ const matchUrgencyToText = (text) => {
   let t;
   Object.entries(URGENCY_KEYS).find(([k, v]) => {
     if (v === text) {
-      console.log(URGENCY_TEXT[k]);
       t = URGENCY_TEXT[k];
     }
     return null;
