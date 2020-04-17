@@ -24,7 +24,7 @@ const dayFields = [
   'varies',
 ];
 
-function ChildcareFormDate() {
+function ChildcareFormDate({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -50,10 +50,10 @@ function ChildcareFormDate() {
     [],
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
-    // service todo: wire-up form events
-    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS));
+    await onSave(fields);
+    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS, { id }));
   };
 
   const buildDayFields = () => {
