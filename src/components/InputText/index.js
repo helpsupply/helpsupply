@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useCallback, useState } from 'react';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Text from 'components/Text';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { required } from 'lib/utils/validations';
 
 import styles from './InputText.styles';
@@ -29,6 +29,7 @@ function InputText({
         customOnChange(event.target.value);
       }
       setValue(event.target.value);
+      return event.target.value;
     },
     [customOnChange],
   );
@@ -45,16 +46,17 @@ function InputText({
             {label}
           </div>
         )}
-        <input
-          ref={methods?.register({
-            ...validation,
-            ...(isRequired && { required }),
-          })}
-          css={styles.input}
+        <Controller
+          as={<input css={styles.input} />}
+          defaultValue={defaultValue}
+          name={name}
           onBlur={toggleFocus}
           onFocus={toggleFocus}
-          onChange={onChange}
-          name={name}
+          onChange={(args) => onChange(args[0].nativeEvent)}
+          rules={{
+            ...validation,
+            ...(isRequired && { required }),
+          }}
         />
       </label>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.error}>

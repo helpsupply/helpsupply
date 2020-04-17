@@ -1,17 +1,18 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import Page from 'components/layouts/Page';
 import ChildcareFormLocation from 'containers/ChildcareFormLocation';
 import ChildcareFormDate from 'containers/ChildcareFormDate';
 import ChildcareFormDetails from 'containers/ChildcareFormDetails';
 import ChildcareFormOptions from 'containers/ChildcareFormOptions';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 function ServiceChildcare({ backend, step }) {
   const [request, setRequest] = useState();
   const params = useParams();
+
   const updateService = (request) => {
     backend.updateServiceRequest(params.id, request, true);
   };

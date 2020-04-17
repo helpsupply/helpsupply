@@ -11,15 +11,15 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
 
-function EmotionalFormDate({ id, onSave }) {
+function EmotionalFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    date: '',
-    time: '',
-    recurring: '',
+    date: request?.date || '',
+    time: request?.time || '',
+    recurring: request?.recurring || '',
   });
 
   const handleFieldChange = useCallback(
@@ -41,6 +41,7 @@ function EmotionalFormDate({ id, onSave }) {
   const fieldData = [
     {
       customOnChange: handleFieldChange('date'),
+      defaultValue: fields.date,
       label: t('service.emotional.when.labels.day'),
       options: [
         { label: 'Monday', value: 'monday' },
@@ -57,6 +58,7 @@ function EmotionalFormDate({ id, onSave }) {
     },
     {
       customOnChange: handleFieldChange('time'),
+      defaultValue: fields.time,
       label: t('service.emotional.when.labels.time'),
       options: [
         { label: 'Morning', value: 'morning' },
@@ -85,13 +87,15 @@ function EmotionalFormDate({ id, onSave }) {
     },
   ];
 
+  const { recurring, ...requiredFields } = fields;
+
   return (
     <FormBuilder
       defaultValues={fields}
       onSubmit={handleSubmit}
       title={t('service.emotional.when.title')}
       description={t('service.emotional.when.description')}
-      disabled={!Object.keys(fields).every((key) => !!fields[key])}
+      disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
     />

@@ -95,6 +95,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
     },
     {
       customOnChange: handleFieldChange('paymentAbility'),
+      isRequired: false,
       label: t('service.childcare.what.labels.paymentAbility'),
       name: 'paymentAbility',
       type: formFieldTypes.INPUT_TEXT,
@@ -129,6 +130,16 @@ function ChildcareFormDetails({ id, onSave, request }) {
     },
   ];
 
+  const {
+    childCareCenters,
+    mutualAid,
+    enrichmentCenters,
+    babySitters,
+    freeOptions,
+    paymentAbility,
+    ...requiredFields
+  } = fields;
+
   return (
     <div>
       <FormBuilder
@@ -136,7 +147,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
         onSubmit={handleSubmit}
         title={t('service.childcare.what.title')}
         description={t('service.childcare.what.description')}
-        disabled={!Object.keys(fields).every((key) => !!fields[key])}
+        disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
         fields={fieldData}
         isLoading={isLoading}
       />

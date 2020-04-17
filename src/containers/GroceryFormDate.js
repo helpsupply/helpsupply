@@ -17,7 +17,7 @@ function GroceryFormDate({ id, onSave, request }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    date: request?.date || '',
+    date: request?.date?.toDate() || '',
     time: request?.time || '',
     recurring: request?.recurring || false,
   });
@@ -32,6 +32,8 @@ function GroceryFormDate({ id, onSave, request }) {
     [],
   );
 
+  const { recurring, ...requiredFields } = fields;
+
   const handleSubmit = async () => {
     setIsLoading(true);
     await onSave(fields);
@@ -41,6 +43,7 @@ function GroceryFormDate({ id, onSave, request }) {
   const fieldData = [
     {
       customOnChange: handleFieldChange('date'),
+      defaultValue: fields.date,
       label: t('service.grocery.when.labels.day'),
       name: 'date',
       type: formFieldTypes.INPUT_DATE,
@@ -48,6 +51,7 @@ function GroceryFormDate({ id, onSave, request }) {
     },
     {
       customOnChange: handleFieldChange('time'),
+      isRequired: false,
       label: t('service.grocery.when.labels.time'),
       options: [
         { label: 'Morning', value: 'morning' },
@@ -82,7 +86,7 @@ function GroceryFormDate({ id, onSave, request }) {
       onSubmit={handleSubmit}
       title={t('service.grocery.when.title')}
       description={t('service.grocery.when.description')}
-      disabled={!Object.keys(fields).every((key) => !!fields[key])}
+      disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
     />
