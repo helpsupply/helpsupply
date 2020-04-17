@@ -128,6 +128,21 @@
         "label": "City or healthcare facility",
         "title": "Find your healthcare facility"
       },
+      "review": {
+        "title": "Review your request",
+        "submit": "Submit request",
+        "serviceType": "Service type",
+        "preferredTime": "Preferred time",
+        "details": "details",
+        "recurring": "Recurring",
+        "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
+        "grocery": {
+          "location": "Delivery location",
+          "time": "Preferred delivery time",
+          "list": "Grocery list",
+          "diet": "Dietary restrictions"
+        }
+      },
       "supplyForm": {
         "description": "You’ll be able to add more requests after submitting this first one.",
         "kindLabel": "Select kind",

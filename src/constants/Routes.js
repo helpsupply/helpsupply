@@ -46,6 +46,8 @@ export const Routes = {
   SERVICE_EMOTIONAL_WHEN: '/service/help/date/:id',
   SERVICE_EMOTIONAL_WHAT: '/service/help/type/:id',
   SERVICE_ADDITIONAL_INFO: '/service/additionalinfo/:id',
+  SERVICE_REVIEW: '/service/review/:id',
+  SERVICE_CONFIRMATION: '/service/confirmation/:id',
 
   // Admin and Debugging routes
   DEBUG_REQUESTS: '/debug/requests',
