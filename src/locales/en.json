@@ -136,6 +136,7 @@
         "details": "details",
         "preferred": "preferred",
         "recurring": "Recurring",
+        "additionalInfo": "Additional Info",
         "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
         "grocery": {
           "location": "Delivery location",
@@ -143,6 +144,9 @@
           "time": "Preferred delivery time",
           "list": "Grocery list",
           "diet": "Dietary restrictions"
+        },
+        "mentalHealth": {
+          "supportDetails": "Support details"
         }
       },
       "supplyForm": {
