@@ -134,10 +134,12 @@
         "serviceType": "Service type",
         "preferredTime": "Preferred time",
         "details": "details",
+        "preferred": "preferred",
         "recurring": "Recurring",
         "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
         "grocery": {
           "location": "Delivery location",
+          "contact": "Delivery contact",
           "time": "Preferred delivery time",
           "list": "Grocery list",
           "diet": "Dietary restrictions"
@@ -154,6 +156,13 @@
           "note": "Include any detailed requirements about the supplies you need.",
           "label": "i.e.: All donated items must be unused and sealed in original packaging."
         }
+      },
+      "serviceConfirmation": {
+        "title": "We have your request for {{kind}}",
+        "description": "Your request has been routed to {{organization}}. They will contact you to fulfill your request.",
+        "requestMore": "Request more services",
+        "viewRequests": "View my requests",
+        "fulfilledBy": "To be fulfilled by"
       },
       "supplyConfirmation": {
         "header": "We just added your new request",

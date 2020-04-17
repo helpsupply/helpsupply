@@ -14,11 +14,13 @@ import { styles } from './LearnMore.styles';
 
 export const FAQ = () => {
   const { t } = useTranslation();
+
   const mutualAid = '[Mutual Aid NYC](https://mutualaid.nyc/)';
   const workersNeedChildcare =
     '[Workers Need Childcare](https://www.workersneedchildcare.org/)';
   const nycCovidCare =
     '[NYC COVID Care Network](https://www.nyccovidcare.org/)';
+
   return (
     <Fragment>
       <Text css={styles.faqSubtitle} as="h3" type={TEXT_TYPE.HEADER_5}>
