@@ -82,8 +82,10 @@ function AdminDashboard({ backend }) {
       return;
     }
 
-    backend.deleteRequest(requestToBeDeleted.id).then((data) => {
-      setRequests(openRequests.filter((req) => req.id !== data));
+    backend.deleteServiceRequest(requestToBeDeleted.id).then(() => {
+      setRequests(
+        openRequests.filter((req) => req.id !== requestToBeDeleted.id),
+      );
 
       setIsModalOpen(false);
 
