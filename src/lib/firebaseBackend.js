@@ -104,6 +104,8 @@ export default class FirebaseBackend {
     if (request.sent !== undefined) {
       throw new Error("'sent' is a reserved property for Requests");
     }
+
+    // TODO: status is saving as error in firebase
     request.status = 'open';
 
     const { currentUser } = this.firebase.auth();

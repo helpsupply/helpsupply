@@ -11,15 +11,15 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
 
-function GroceryFormDate({ id, onSave }) {
+function GroceryFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    date: '',
-    time: '',
-    recurring: '',
+    date: request?.date || '',
+    time: request?.time || '',
+    recurring: request?.recurring || false,
   });
 
   const handleFieldChange = useCallback(

@@ -24,20 +24,25 @@ const dayFields = [
   'varies',
 ];
 
-function ChildcareFormDate({ id, onSave }) {
+function ChildcareFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    mondays: '',
-    tuesdays: '',
-    wednesdays: '',
-    thursdays: '',
-    fridays: '',
-    saturdays: '',
-    sundays: '',
-    varies: '',
+    mondays: request?.mondays || false,
+    tuesdays: request?.tuesdays || false,
+    wednesdays: request?.wednesdays || false,
+    thursdays: request?.thursdays || false,
+    fridays: request?.fridays || false,
+    saturdays: request?.saturdays || false,
+    sundays: request?.sundays || false,
+    varies: request?.varies || false,
+
+    mornings: request?.mornings || false,
+    afternoons: request?.afternoons || false,
+    evenings: request?.evenings || false,
+    nights: request?.nights || false,
+    variesTime: request?.variesTime || false,
   });
 
   const handleFieldChange = useCallback(

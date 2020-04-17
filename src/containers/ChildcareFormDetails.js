@@ -29,16 +29,21 @@ function ChildcareFormDetails({ id, onSave }) {
   const [childCount, setChildCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    birthMonth: '',
-    birthYear: '',
-    specialNeeds: '',
+    1: {
+      birthMonth: '',
+      birthYear: '',
+      specialNeeds: '',
+    },
   });
 
   const handleFieldChange = useCallback(
-    (field) => (value) => {
+    (field, idx) => (value) => {
       setFields((fields) => ({
         ...fields,
-        [field]: value,
+        [idx]: {
+          ...fields[idx],
+          [field]: value,
+        },
       }));
     },
     [],
@@ -58,9 +63,9 @@ function ChildcareFormDetails({ id, onSave }) {
           type: formFieldTypes.NODE,
           node: [
             <AdditionalFormTitle
-              key={`childcare-child-title-${index}`}
+              key={`childcare-child-title-${index + 2}`}
               title={`${t('service.childcare.details.labels.title')} ${
-                index + 1
+                index + 2
               }`}
               secondaryCta={
                 <Text
@@ -79,7 +84,7 @@ function ChildcareFormDetails({ id, onSave }) {
           ],
         },
         {
-          customOnChange: handleFieldChange('birthMonth'),
+          customOnChange: handleFieldChange('birthMonth', index + 2),
           customkey: `${t(
             'service.childcare.details.labels.birthMonth',
           )}-${index}`,
@@ -90,7 +95,7 @@ function ChildcareFormDetails({ id, onSave }) {
           value: fields.birthMonth,
         },
         {
-          customOnChange: handleFieldChange('birthYear'),
+          customOnChange: handleFieldChange('birthYear', index + 2),
           customkey: `${t(
             'service.childcare.details.labels.birthYear',
           )}-${index}`,
@@ -101,7 +106,7 @@ function ChildcareFormDetails({ id, onSave }) {
           value: fields.birthYear,
         },
         {
-          customOnChange: handleFieldChange('specialNeeds'),
+          customOnChange: handleFieldChange('specialNeeds', index + 2),
           customkey: `${t(
             'service.childcare.details.labels.specialNeeds',
           )}-${index}`,
@@ -124,7 +129,7 @@ function ChildcareFormDetails({ id, onSave }) {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    await onSave(fields);
+    await onSave({ children: fields });
     history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHAT, { id }));
   };
 
@@ -135,12 +140,12 @@ function ChildcareFormDetails({ id, onSave }) {
         <AdditionalFormTitle
           key="childcare-child-title"
           noBorder={true}
-          title={t('service.childcare.details.labels.title')}
+          title={t('service.childcare.details.labels.title') + ' 1'}
         />,
       ],
     },
     {
-      customOnChange: handleFieldChange('birthMonth'),
+      customOnChange: handleFieldChange('birthMonth', 1),
       label: t('service.childcare.details.labels.birthMonth'),
       options: months,
       name: 'birthMonth',
@@ -148,7 +153,7 @@ function ChildcareFormDetails({ id, onSave }) {
       value: fields.birthMonth,
     },
     {
-      customOnChange: handleFieldChange('birthYear'),
+      customOnChange: handleFieldChange('birthYear', 1),
       label: t('service.childcare.details.labels.birthYear'),
       options: years,
       name: 'birthYear',
@@ -156,7 +161,7 @@ function ChildcareFormDetails({ id, onSave }) {
       value: fields.birthYear,
     },
     {
-      customOnChange: handleFieldChange('specialNeeds'),
+      customOnChange: handleFieldChange('specialNeeds', 1),
       label: t('service.childcare.details.labels.specialNeeds'),
       name: 'specialNeeds',
       type: formFieldTypes.TEXT_AREA,
@@ -171,7 +176,7 @@ function ChildcareFormDetails({ id, onSave }) {
         <AdditionalCta
           cta={t('service.childcare.where.add')}
           key="additional"
-          onClick={() => setChildCount(childCount + 1)}
+          onClick={() => setChildCount(childCount + 2)}
           title={t('service.additionalContact.title')}
         />,
       ],

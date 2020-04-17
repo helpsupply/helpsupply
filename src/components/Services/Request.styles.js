@@ -2,6 +2,18 @@ import { css } from '@emotion/core';
 import { Color, Space, Radius } from 'lib/theme';
 
 export const styles = {
+  actions: css({
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    '> button': {
+      ':first-of-type': {
+        marginRight: Space.S15,
+      },
+      height: 50,
+      width: '50%',
+    },
+  }),
   amount: css({
     color: Color.PRIMARY,
     fontWeight: 500,
@@ -9,6 +21,7 @@ export const styles = {
   }),
   date: css({
     marginTop: Space.S20,
+    marginBottom: Space.S30,
   }),
   description: css({
     color: Color.GRAY,
@@ -30,7 +43,7 @@ export const styles = {
   text: css({
     marginBottom: 0,
   }),
-  title: css({
+  capitalize: css({
     textTransform: 'capitalize',
   }),
 };

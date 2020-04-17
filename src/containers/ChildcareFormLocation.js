@@ -28,16 +28,16 @@ const validateEmail = (val) => {
   }
 };
 
-function ChildcareFormLocation({ id, onSave }) {
+function ChildcareFormLocation({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [addAdditionalContact, setAddAdditionalContact] = useState(false);
   const [fields, setFields] = useState({
-    zipCode: '',
-    neighborhood: '',
-    crossStreet: '',
+    zipCode: request?.zipCode || '',
+    neighborhood: request?.neighborhood || '',
+    crossStreet: request?.crossStreet || '',
   });
 
   const handleFieldChange = useCallback(

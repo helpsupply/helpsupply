@@ -10,14 +10,14 @@ import { routeWithParams } from 'lib/utils/routes';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function GroceryFormItems({ id, onSave }) {
+function GroceryFormItems({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    dietaryRestrictions: '',
-    groceryList: '',
+    dietaryRestrictions: request?.dietaryRestrictions || '',
+    groceryList: request?.groceryList || '',
   });
 
   const handleFieldChange = useCallback(
