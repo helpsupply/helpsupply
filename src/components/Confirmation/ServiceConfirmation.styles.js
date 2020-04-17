@@ -3,12 +3,17 @@ import { Color, Space, Radius } from 'lib/theme';
 
 export const styles = {
   description: css({
-    color: Color.GRAY,
+    color: Color.GRAY_75,
+  }),
+  link: css({
+    color: Color.PRIMARY,
+    textDecoration: 'none',
   }),
   organization: css({
     background: Color.GRAY_10,
     borderRadius: Radius.ROUNDED,
-    padding: Space.S10,
+    padding: Space.S20,
+    margin: `${Space.S20}px 0`,
   }),
   organizationName: css({
     marginTop: Space.S10,
@@ -17,11 +22,25 @@ export const styles = {
       textTransform: 'capitalize',
     },
   }),
-  button: css({
-    marginTop: ['auto', '', Space.S5],
+  organizationSubtitle: css({
+    color: Color.GRAY_50,
   }),
-  subCta: css({
-    marginTop: Space.S20,
+  primaryButton: css({
+    marginTop: Space.S15,
+  }),
+  secondaryButton: css({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 65,
+
+    span: {
+      marginBottom: 'none',
+    },
+  }),
+  shareLink: css({
+    textAlign: 'center',
+    padding: Space.S20,
   }),
 };
 
