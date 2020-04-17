@@ -134,10 +134,12 @@
         "serviceType": "Service type",
         "preferredTime": "Preferred time",
         "details": "details",
+        "preferred": "preferred",
         "recurring": "Recurring",
         "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
         "grocery": {
           "location": "Delivery location",
+          "contact": "Delivery contact",
           "time": "Preferred delivery time",
           "list": "Grocery list",
           "diet": "Dietary restrictions"

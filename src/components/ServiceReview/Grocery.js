@@ -6,11 +6,10 @@ import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
+import { formatServiceDate } from 'lib/utils/datetime';
 
 import Text from 'components/Text';
-import { TEXT_TYPE } from 'components/Text/constants';
 import Card from 'components/Card';
-import { PrimaryButton } from 'components/Button';
 
 import { styles } from './ServiceReview.styles';
 
@@ -19,13 +18,23 @@ export const GroceryServiceReview = ({ id, handleSubmit, service }) => {
   const { t } = useTranslation();
 
   const {
-    groceryList,
-    recurring,
-    time,
-    neighborhood,
+    contactPreference,
     crossStreet,
+    date,
     dietaryRestrictions,
+    email,
+    firstName,
+    groceryList,
+    languagePreference,
+    lastName,
+    neighborhood,
+    phone,
+    recurring,
+    relationship,
+    time,
   } = service;
+
+  const formattedDate = formatServiceDate(date.toDate());
 
   // service todo: handle return to confirmation screen after editing
   const handleChangeLocation = () => {
@@ -62,8 +71,32 @@ export const GroceryServiceReview = ({ id, handleSubmit, service }) => {
     </Fragment>
   );
 
+  const contactDetails = (
+    <Fragment>
+      <Text as="p" css={styles.capitalize}>
+        {firstName} {lastName}
+      </Text>
+      <Text as="p" css={styles.capitalize}>
+        {relationship}
+      </Text>
+      <Text as="p" css={styles.capitalize}>
+        {phone}
+      </Text>
+      <Text as="p">{email}</Text>
+      <Text as="p" css={styles.capitalize}>
+        {contactPreference} {t('request.review.preferred')}
+      </Text>
+      <Text as="p" css={styles.capitalize}>
+        {languagePreference} {t('request.review.preferred')}
+      </Text>
+    </Fragment>
+  );
+
   const timeDetails = (
     <Fragment>
+      <Text as="p" css={styles.capitalize}>
+        {formattedDate}
+      </Text>
       <Text as="p" css={styles.capitalize}>
         {time}
       </Text>
@@ -84,9 +117,6 @@ export const GroceryServiceReview = ({ id, handleSubmit, service }) => {
 
   return (
     <Fragment>
-      <Text as="h2" type={TEXT_TYPE.HEADER_3} css={styles.title}>
-        {t('request.review.title')}
-      </Text>
       <div css={styles.card}>
         <Card
           label={t('request.review.grocery.location')}
@@ -95,8 +125,14 @@ export const GroceryServiceReview = ({ id, handleSubmit, service }) => {
           onClick={handleChangeLocation}
         />
       </div>
-      {/*  service todo: add delivery contact card */}
-      {/*  service todo: add delivery date - currently an invalid date */}
+      <div css={styles.card}>
+        <Card
+          label={t('request.review.grocery.contact')}
+          details={contactDetails}
+          editLabel={t('global.form.changeLabel')}
+          onClick={handleChangeLocation}
+        />
+      </div>
       <div css={styles.card}>
         <Card
           label={t('request.review.grocery.time')}
@@ -113,12 +149,6 @@ export const GroceryServiceReview = ({ id, handleSubmit, service }) => {
           onClick={handleChangeList}
         />
       </div>
-      <Text css={styles.disclaimer} type={TEXT_TYPE.NOTE}>
-        {t('request.review.disclaimer')}
-      </Text>
-      <PrimaryButton type="submit" onClick={handleSubmit}>
-        <Text>{t('request.review.submit')}</Text>
-      </PrimaryButton>
     </Fragment>
   );
 };

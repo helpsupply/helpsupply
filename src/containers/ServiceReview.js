@@ -2,15 +2,22 @@
 import { jsx } from '@emotion/core';
 import { Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import RequestKinds from 'lib/organizations/kinds';
 
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
+import { PrimaryButton } from 'components/Button';
 import GroceryServiceReview from 'components/ServiceReview/Grocery';
+
+import { styles } from 'components/ServiceReview/ServiceReview.styles';
 
 function ServiceReview({ id, service }) {
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleSubmit = () => {
     history.push(
@@ -22,6 +29,9 @@ function ServiceReview({ id, service }) {
 
   return (
     <Fragment>
+      <Text as="h2" type={TEXT_TYPE.HEADER_3} css={styles.title}>
+        {t('request.review.title')}
+      </Text>
       {service.kind === RequestKinds.GROCERY && (
         <GroceryServiceReview
           id={id}
@@ -29,6 +39,12 @@ function ServiceReview({ id, service }) {
           handleSubmit={handleSubmit}
         />
       )}
+      <Text css={styles.disclaimer} type={TEXT_TYPE.NOTE}>
+        {t('request.review.disclaimer')}
+      </Text>
+      <PrimaryButton type="submit" onClick={handleSubmit}>
+        <Text>{t('request.review.submit')}</Text>
+      </PrimaryButton>
     </Fragment>
   );
 }
