@@ -18,8 +18,6 @@ import MentalHealthServiceReview from 'components/ServiceReview/MentalHealth';
 
 import { styles } from 'components/ServiceReview/ServiceReview.styles';
 
-import { styles } from 'components/ServiceReview/ServiceReview.styles';
-
 function ServiceReview({ id, service }) {
   const history = useHistory();
   const { t } = useTranslation();
@@ -44,7 +42,6 @@ function ServiceReview({ id, service }) {
           handleSubmit={handleSubmit}
         />
       )}
-<<<<<<< HEAD
       {service.kind === RequestKinds.CHILDCARE && (
         <ChildcareServiceReview
           id={id}
@@ -66,8 +63,6 @@ function ServiceReview({ id, service }) {
           handleSubmit={handleSubmit}
         />
       )}
-=======
->>>>>>> feat: finish grocery service review
       <Text css={styles.disclaimer} type={TEXT_TYPE.NOTE}>
         {t('request.review.disclaimer')}
       </Text>
