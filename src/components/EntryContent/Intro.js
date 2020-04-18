@@ -19,7 +19,7 @@ const Intro = () => {
         {t('home.intro')}
       </Text>
       <ListLink href={Routes.SERVICE_LOCATION} label={t('home.needHelp')} />
-      <Anchor withIcon css={styles.link} href={Routes.DASHBOARD}>
+      <Anchor withIcon css={styles.link} href={Routes.LOGIN}>
         {t('home.openRequests')}
       </Anchor>
     </div>
