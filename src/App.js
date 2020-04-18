@@ -28,6 +28,7 @@ import Request from 'pages/request';
 import EntryPortal from 'pages/entry';
 import Facility from 'pages/facility';
 import SignUp from 'pages/signup';
+import Login from 'pages/login';
 import SignUpConfirmation from 'pages/signup_confirmation';
 import SignupComplete from 'pages/signup_approve';
 import Contact from 'pages/contact';
@@ -50,7 +51,6 @@ import HCPSignupFinish from 'components/HCPSignupFinish';
 import DropSite from 'components/DropSite';
 import PendingDomains from 'components/PendingDomains';
 import NoMatch from 'components/NoMatch';
-import Login from 'components/Login';
 import Logout from 'components/Logout';
 import Profile from 'components/Profile';
 import StyleGuide from 'components/StyleGuide/index';
@@ -138,6 +138,9 @@ function App({ backend }) {
               path={Routes.SERVICE_LOCATION_AVAILABLE}
             >
               <ServiceLocationAvailable backend={backend} />
+            </Route>
+            <Route backend={backend} exact path={Routes.LOGIN}>
+              <Login backend={backend} />
             </Route>
             <Route exact path={Routes.FACILITY}>
               <Facility backend={backend} />

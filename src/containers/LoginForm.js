@@ -12,7 +12,7 @@ import Note from 'components/Note';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function EmailForm({ backend }) {
+function LoginForm({ backend }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -55,8 +55,8 @@ function EmailForm({ backend }) {
     <FormBuilder
       defaultValues={{ email: '' }}
       onSubmit={handleSubmit}
-      title={t('request.workEmailForm.title')}
-      description={t('request.workEmailForm.description')}
+      title={t('request.loginForm.title')}
+      description={t('request.loginForm.description')}
       disabled={!isValidEmail(email)}
       isLoading={isLoading}
       fields={fieldData}
@@ -66,4 +66,4 @@ function EmailForm({ backend }) {
   );
 }
 
-export default EmailForm;
+export default LoginForm;

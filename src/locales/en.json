@@ -203,6 +203,10 @@
           "title": "Please enter your email, once more"
         }
       },
+      "loginForm": {
+        "title": "Welcome back!",
+        "description": "Simply enter your email address and we'll send you a link to access your open requests and create new ones."
+      },
       "dropSiteContactForm": {
         "title": "Contact info",
         "description": "Enter the contact information for the person coordinating supplies at your facility.",

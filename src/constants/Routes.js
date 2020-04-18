@@ -8,7 +8,6 @@ export const Routes = {
   FACILITY_EDIT: '/facility/:id/edit',
   FAQ: '/learn-more',
   HOME: '/',
-  LOGIN: '/login',
   LOGOUT: '/logout',
   PENDING_DOMAINS: '/pending-domains',
   PROFILE: '/profile',
@@ -27,6 +26,7 @@ export const Routes = {
   SERVICE_LOCATION_AVAILABLE: '/service-location/available',
   SERVICE_LOCATION_UNAVAILABLE: '/service-location/unavailable',
   FACILITY: `/facility`,
+  LOGIN: '/login',
   EMAIL_SIGNUP_FORM: `/signup`,
   EMAIL_SIGNUP_SENT: `/signup/confirm`,
   // Update firebaseBackend.js if you change this (it can't require this, because
