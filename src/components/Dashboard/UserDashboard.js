@@ -4,15 +4,15 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 
 import { Emails } from 'constants/Emails';
+import { formatPhoneNumber } from 'lib/utils/strings';
 import { TEXT_TYPE } from 'components/Text/constants';
 
 import Text from 'components/Text';
 import Note from 'components/Note';
 import Anchor, { anchorTypes } from 'components/Anchor';
-import Card from 'components/Card';
 import { PrimaryButton } from 'components/Button';
 import Loader from 'components/Loader';
-import { formatPhoneNumber } from 'lib/utils/strings';
+import SubRow from 'components/Confirmation/SubRow';
 
 import OpenServiceRequests from 'components/Dashboard/OpenServiceRequests';
 
@@ -21,7 +21,7 @@ import { styles } from './UserDashboard.styles';
 export const UserDashboard = ({
   contact,
   handleUpdateContact,
-  handleRequestSupplies,
+  handleRequestService,
   isRequestsLoading,
   onDelete,
   onEdit,
@@ -52,13 +52,13 @@ export const UserDashboard = ({
       >
         {t('dashboard.title')}
       </Text>
-      <Card
+      <SubRow
         onClick={handleUpdateContact}
+        editLabel={t('global.form.changeLabel')}
         label={t('dashboard.contact.title')}
         details={contactDetails}
-        editLabel={t('global.form.changeLabel')}
       />
-      <PrimaryButton css={styles.button} onClick={handleRequestSupplies}>
+      <PrimaryButton css={styles.button} onClick={handleRequestService}>
         <Text>{t('dashboard.cta')}</Text>
       </PrimaryButton>
       <Text css={styles.requestsHeader} as="h3" type={TEXT_TYPE.HEADER_4}>

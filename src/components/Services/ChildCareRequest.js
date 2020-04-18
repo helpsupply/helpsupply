@@ -52,9 +52,9 @@ export const ChildCareRequest = ({
           .filter((day) => !!day)
           .join(', ')}
       </Text>
-      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
+      <div>
         {Object.values(request?.children || []).map((child, idx) => (
-          <Fragment>
+          <Fragment key={idx}>
             <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
               Child {idx + 1}: {child.birthMonth} {child.birthYear}
             </Text>
@@ -67,7 +67,7 @@ export const ChildCareRequest = ({
             </Text>
           </Fragment>
         ))}
-      </Text>
+      </div>
       <Note css={styles.date}>
         {t('global.form.addedLabel')}{' '}
         {moment(request.timeCreated).format('MMM DD, h:mma')}

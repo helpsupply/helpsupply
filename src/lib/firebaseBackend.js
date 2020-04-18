@@ -721,6 +721,10 @@ export default class FirebaseBackend {
       .catch(function (err) {
         if (process.env.NODE_ENV !== 'production') {
           console.error(err);
+          console.error(
+            'error selecting serviceuser by firebase user.uid',
+            user.uid,
+          );
         }
         throw new Error('Error getting user');
       });
