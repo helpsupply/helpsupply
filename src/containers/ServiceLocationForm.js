@@ -45,7 +45,7 @@ function ServiceLocationForm({ backend, serviceUser }) {
     // service todo: save zip code field to user
     // service todo: check valid service types
     setIsLoading(true);
-    history.push(routeWithParams(Routes.FACILITY));
+    history.push(routeWithParams(Routes.SERVICE_TYPE));
   };
 
   const fieldData = [
