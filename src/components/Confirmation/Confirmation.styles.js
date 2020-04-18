@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { Space } from 'lib/theme';
+import { Color, Space } from 'lib/theme';
 
 export const styles = {
   check: css({
@@ -9,6 +9,7 @@ export const styles = {
   header: css({
     alignItems: 'center',
     display: 'flex',
+    color: Color.GRAY,
   }),
   title: css({
     marginBottom: 0,

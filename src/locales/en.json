@@ -160,9 +160,10 @@
       "serviceConfirmation": {
         "title": "We have your request for {{kind}}",
         "description": "Your request has been routed to {{organization}}. They will contact you to fulfill your request.",
-        "requestMore": "Request more services",
+        "requestServices": "Request more services",
         "viewRequests": "View my requests",
-        "fulfilledBy": "To be fulfilled by"
+        "fulfilledBy": "To be fulfilled by",
+        "share": "Share Help Supply with a coworker"
       },
       "supplyConfirmation": {
         "header": "We just added your new request",
