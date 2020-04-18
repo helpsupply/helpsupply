@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { jsx, css } from '@emotion/core';
 import { useState } from 'react';
 import ReactJson from 'react-json-view';
