@@ -19,66 +19,89 @@ const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
 };
 
-function PetcareFormDetails({ id, onSave }) {
+function PetcareFormDetails({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const [petCount, setPetCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [fields, setFields] = useState({
-    petType: '',
-    careNeeded: '',
-  });
+  const [fields, setFields] = useState(
+    request?.pets || {
+      1: {
+        petType: '',
+        careNeeded: '',
+      },
+    },
+  );
 
   const handleFieldChange = useCallback(
-    (field) => (value) => {
+    (field, idx) => (value) => {
       setFields((fields) => ({
         ...fields,
-        [field]: value,
+        [idx]: {
+          ...fields[idx],
+          [field]: value,
+        },
       }));
     },
     [],
   );
 
-  const handleRemoveClick = useCallback(() => {
-    if (petCount <= 0) {
-      return;
-    }
-    setPetCount(petCount - 1);
-  }, [petCount]);
+  const handleRemoveClick = useCallback(
+    (targetKey) => {
+      const { [targetKey]: _, ...newFields } = fields;
+      setFields(newFields);
+    },
+    [fields],
+  );
 
-  const additionalPets = useCallback(() => {
-    return [...Array(petCount)].flatMap((_, index) => {
+  const handleAddClick = useCallback(() => {
+    const targetFields = Object.keys(fields);
+    const nextKey = parseInt(targetFields[targetFields.length - 1]) + 1;
+    setFields({
+      ...fields,
+      [nextKey]: {
+        petType: '',
+        careNeeded: '',
+      },
+    });
+  }, [fields]);
+
+  const buildFields = useCallback(() => {
+    return Object.keys(fields).flatMap((fieldKey, index) => {
+      const targetIndex = index + 1;
       return [
         {
           type: formFieldTypes.NODE,
           node: [
             <AdditionalFormTitle
-              key={`petcare-pet-title-${index + 2}`}
-              title={`${t('service.petcare.details.labels.title')} ${
-                index + 2
-              }`}
+              key={`petcare-pet-title-${fieldKey}`}
+              title={`${t(
+                'service.petcare.details.labels.title',
+              )} ${targetIndex}`}
               secondaryCta={
-                <Text
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleRemoveClick();
-                  }}
-                  as="button"
-                  type={TEXT_TYPE.BODY_2}
-                  css={styles.button}
-                >
-                  {t('service.petcare.details.labels.remove')}
-                </Text>
+                targetIndex !== 1 && (
+                  <Text
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleRemoveClick(fieldKey);
+                    }}
+                    as="button"
+                    type={TEXT_TYPE.BODY_2}
+                    css={styles.button}
+                  >
+                    {t('service.petcare.details.labels.remove')}
+                  </Text>
+                )
               }
             />,
           ],
         },
         {
-          customOnChange: handleFieldChange('petType'),
-          customkey: `${t('service.petcare.details.labels.petType')}-${
-            index + 2
-          }`,
+          customOnChange: handleFieldChange('petType', fieldKey),
+          customkey: `${t(
+            'service.petcare.details.labels.petType',
+          )}-${fieldKey}`,
+          defaultValue: fields[fieldKey].petType,
           label: t('service.petcare.details.labels.petType'),
           options: [
             { label: 'Dog', value: 'dog' },
@@ -86,13 +109,14 @@ function PetcareFormDetails({ id, onSave }) {
           ],
           name: 'petType',
           type: formFieldTypes.INPUT_DROPDOWN,
-          value: fields.petType,
+          value: fields[fieldKey].petType,
         },
         {
-          customOnChange: handleFieldChange('careNeeded'),
-          customkey: `${t('service.petcare.details.labels.careNeeded')}-${
-            index + 2
-          }`,
+          customOnChange: handleFieldChange('careNeeded', fieldKey),
+          customkey: `${t(
+            'service.petcare.details.labels.careNeeded',
+          )}-${fieldKey}`,
+          defaultValue: fields[fieldKey].careNeeded,
           label: t('service.petcare.details.labels.careNeeded'),
           options: [
             { label: 'Walking', value: 'walking' },
@@ -101,71 +125,26 @@ function PetcareFormDetails({ id, onSave }) {
           ],
           name: 'careNeeded',
           type: formFieldTypes.INPUT_DROPDOWN,
-          value: fields.careNeeded,
+          value: fields[fieldKey].careNeeded,
         },
       ];
     });
-  }, [
-    petCount,
-    fields.petType,
-    fields.careNeeded,
-    handleFieldChange,
-    handleRemoveClick,
-    t,
-  ]);
+  }, [fields, handleFieldChange, handleRemoveClick, t]);
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    await onSave(fields);
+    await onSave({ pets: fields });
     history.push(routeWithParams(Routes.SERVICE_ADDITIONAL_INFO, { id }));
   };
-
-  const fieldData = [
-    {
-      type: formFieldTypes.NODE,
-      node: [
-        <AdditionalFormTitle
-          key="petcare-pet-title"
-          noBorder={true}
-          title={`${t('service.petcare.details.labels.title')} 1`}
-        />,
-      ],
-    },
-    {
-      customOnChange: handleFieldChange('petType'),
-      customkey: t('service.petcare.details.labels.petType'),
-      label: t('service.petcare.details.labels.petType'),
-      options: [
-        { label: 'Dog', value: 'dog' },
-        { label: 'Cat', value: 'cat' },
-      ],
-      name: 'petType',
-      type: formFieldTypes.INPUT_DROPDOWN,
-      value: fields.petType,
-    },
-    {
-      customOnChange: handleFieldChange('careNeeded'),
-      customkey: t('service.petcare.details.labels.careNeeded'),
-      label: t('service.petcare.details.labels.careNeeded'),
-      options: [
-        { label: 'Walking', value: 'walking' },
-        { label: 'Feeding', value: 'feeding' },
-        { label: 'Medicine', value: 'medicine' },
-      ],
-      name: 'careNeeded',
-      type: formFieldTypes.INPUT_DROPDOWN,
-      value: fields.careNeeded,
-    },
-  ];
 
   const additionalCta = [
     {
       type: formFieldTypes.NODE,
       node: [
         <AdditionalCta
-          cta={t('service.petcare.where.add')}
+          cta={t('service.petcare.details.labels.addAnother')}
           key="additional"
-          onClick={() => setPetCount(petCount + 1)}
+          onClick={handleAddClick}
           title={t('service.additionalContact.title')}
         />,
       ],
@@ -180,7 +159,7 @@ function PetcareFormDetails({ id, onSave }) {
         title={t('service.petcare.details.title')}
         description={t('service.petcare.details.description')}
         disabled={!Object.keys(fields).every((key) => !!fields[key])}
-        fields={fieldData.concat(additionalPets(), additionalCta)}
+        fields={buildFields().concat(additionalCta)}
         isLoading={isLoading}
       />
     </div>
