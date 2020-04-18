@@ -706,7 +706,7 @@ export default class FirebaseBackend {
     }
     let result = this.firestore
       .collection('serviceuser')
-      .where('uid', '==', user.uid)
+      .where('user', '==', user.uid)
       .get()
       .then(function (querySnapshot) {
         if (!querySnapshot.empty) {
