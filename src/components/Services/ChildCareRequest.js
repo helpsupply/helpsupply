@@ -17,7 +17,6 @@ export const ChildCareRequest = ({ onDelete, onEdit, request }) => {
     <div css={styles.root}>
       <div css={styles.section}>
         <Note>
-          {' '}
           {t('dropsite.openRequests.requestId')} #{request.id}
         </Note>
       </div>
