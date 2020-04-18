@@ -23,8 +23,10 @@ export const Routes = {
   SUPPLY_NEW_ADMIN_CONFIRMATION: `/new/admin/supply/:id/confirmation/:requestId`,
 
   // MVP Routes
+  SERVICE_LOCATION: '/service-location',
+  SERVICE_LOCATION_AVAILABLE: '/service-location/available',
+  SERVICE_LOCATION_UNAVAILABLE: '/service-location/unavailable',
   FACILITY: `/facility`,
-  DASHBOARD: '/dashboard',
   EMAIL_SIGNUP_FORM: `/signup`,
   EMAIL_SIGNUP_SENT: `/signup/confirm`,
   // Update firebaseBackend.js if you change this (it can't require this, because
@@ -32,9 +34,6 @@ export const Routes = {
   EMAIL_SIGNUP_COMPLETE: `/signup/complete`,
   CONTACT_FORM: `/contact`,
   CONTACT_CONFIRMATION: `/contact/confirm`,
-  SERVICE_LOCATION: '/service-location',
-  SERVICE_LOCATION_AVAILABLE: '/service-location/available',
-  SERVICE_LOCATION_UNAVAILABLE: '/service-location/unavailable',
   SERVICE_TYPE: '/service',
   SERVICE_GROCERIES_WHERE: '/service/grocery/location/:id',
   SERVICE_GROCERIES_WHEN: '/service/grocery/date/:id',
@@ -51,6 +50,7 @@ export const Routes = {
   SERVICE_ADDITIONAL_INFO: '/service/additionalinfo/:id',
   SERVICE_REVIEW: '/service/review/:id',
   SERVICE_CONFIRMATION: '/service/confirmation/:id',
+  DASHBOARD: '/dashboard',
 
   // Admin and Debugging routes
   DEBUG_REQUESTS: '/requests/debug',
