@@ -28,22 +28,29 @@ function SignupFinish({ backend }) {
   const [submitting, setSubmitting] = useState(false);
 
   const routeToNextPage = useCallback(() => {
-    backend.getServiceUser().then((user) => {
-      if (!user) {
-        history.push(routeWithParams(Routes.CONTACT_FORM));
-        return;
-      }
-
-      backend.getServiceRequests().then((data) => {
-        if (data.length) {
-          history.push(routeWithParams(Routes.DASHBOARD));
+    backend
+      .getServiceUser()
+      .then((user) => {
+        if (!user) {
+          history.push(routeWithParams(Routes.CONTACT_FORM));
           return;
         }
 
-        history.push(routeWithParams(Routes.SERVICE_LOCATION));
-        return;
+        backend.getServiceRequests().then((data) => {
+          if (data.length) {
+            history.push(routeWithParams(Routes.DASHBOARD));
+            return;
+          }
+
+          history.push(routeWithParams(Routes.SERVICE_LOCATION));
+          return;
+        });
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error('get service user error', error);
+        // service todo: handle this error
       });
-    });
   }, [backend, history]);
 
   const handleSubmit = useCallback(
@@ -62,7 +69,7 @@ function SignupFinish({ backend }) {
           setSubmitting(false);
         })
         .catch((error) => {
-          console.error('error', error);
+          console.error('continue signup error', error);
           setSubmitting(false);
           setIsLoading(false);
           // service todo: handle this error
