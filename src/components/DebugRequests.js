@@ -1,5 +1,12 @@
-import React, { useEffect } from 'react';
+/** @jsx jsx */
+import { useEffect } from 'react';
+import { jsx, css } from '@emotion/core';
 import { useState } from 'react';
+import ReactJson from 'react-json-view';
+
+const section = css`
+  margin-bottom: 40px;
+`;
 
 const EXAMPLE_MENTALHEALTH = {
   kind: 'mentalhealth',
@@ -71,7 +78,66 @@ const EXAMPLE_GROCERY = {
 };
 
 function Request({ backend, initrequest }) {
-  return <div>{initrequest.id}</div>;
+  const { id, ...pureRequest } = initrequest;
+
+  const [request, setRequest] = useState(pureRequest);
+  const [expanded, setExpanded] = useState(false);
+  const [edited, setEdited] = useState(false);
+
+  const onEdit = function (body) {
+    setEdited(true);
+    setRequest(body.updated_src);
+  };
+
+  const onSave = async function () {
+    await backend.firestore.collection('servicerequest').doc(id).set(request);
+    setEdited(false);
+  };
+
+  return (
+    <div
+      css={css`
+        width: 100%;
+        min-height: 40px;
+      `}
+    >
+      <span>
+        A <b>{request.kind}</b> reqeust for <b>{request.organization}</b> by{' '}
+        <b>{request.domain}</b> on{' '}
+        <b>{new Date(request.timeCreated).toLocaleString()}</b> with status{' '}
+        <b>{initrequest.status}</b>
+      </span>
+      <button
+        onClick={(e) => setExpanded(!expanded)}
+        css={css`
+          float: right;
+        `}
+      >
+        {expanded ? '-' : '+'}
+      </button>
+      {edited && (
+        <button
+          onClick={onSave}
+          css={css`
+            float: right;
+          `}
+        >
+          save
+        </button>
+      )}
+      {expanded && (
+        <div
+          css={css`
+            padding-top: 20px;
+            padding-bottom: 30px;
+          `}
+        >
+          <b>Request {id}</b>
+          <ReactJson onEdit={onEdit} onAdd={onEdit} src={request} />
+        </div>
+      )}
+    </div>
+  );
 }
 
 function RequestList({ backend }) {
@@ -81,6 +147,7 @@ function RequestList({ backend }) {
     // Returns a
     return backend.firestore
       .collection('servicerequest')
+      .orderBy('timeCreated', 'desc')
       .limit(10)
       .onSnapshot((snapshot) => {
         let nextRequests = [];
@@ -94,7 +161,8 @@ function RequestList({ backend }) {
   }, [backend.firestore]);
 
   return (
-    <div>
+    <div css={section}>
+      <h2>Recent Requests</h2>
       {requests.map((p) => {
         return <Request backend={backend} key={p.id} initrequest={p}></Request>;
       })}
@@ -103,9 +171,38 @@ function RequestList({ backend }) {
 }
 
 function HookPayload({ backend, initpayload }) {
-  const [payload] = useState(initpayload);
+  const [expanded, setExpanded] = useState(false);
 
-  return <div>{JSON.stringify(payload)}</div>;
+  return (
+    <div
+      css={css`
+        min-height: 40px;
+      `}
+    >
+      <span>
+        A test payload for <b>{initpayload.ref.split('/')[1]}</b> on{' '}
+        <b>{new Date(initpayload.receiveTimestamp).toLocaleString()}</b>
+      </span>
+      <button
+        css={css`
+          float: right;
+        `}
+        onClick={(e) => setExpanded(!expanded)}
+      >
+        +
+      </button>
+      {expanded && (
+        <div
+          css={css`
+            padding-top: 20px;
+            padding-bottom: 30px;
+          `}
+        >
+          <ReactJson src={initpayload} />
+        </div>
+      )}
+    </div>
+  );
 }
 
 function TestHooks({ backend }) {
@@ -115,6 +212,7 @@ function TestHooks({ backend }) {
     return backend.firestore
       .collectionGroup('payloads')
       .orderBy('receiveTimestamp', 'desc')
+      .limit(5)
       .onSnapshot((snapshot) => {
         let nextPayloads = [];
         snapshot.forEach((doc) => {
@@ -128,7 +226,7 @@ function TestHooks({ backend }) {
   }, [backend.firestore]);
 
   return (
-    <div>
+    <div css={section}>
       <h2>Test Hook Payloads</h2>
       {payloads.map((p) => {
         return (
@@ -144,35 +242,41 @@ function TestHooks({ backend }) {
 }
 
 function RequestCreator({ backend }) {
-  const [requestBody, setRequestBody] = useState('');
+  const [requestBody, setRequestBody] = useState({});
 
   const submitRequest = async function () {
-    console.log(await backend.saveServiceRequest(JSON.parse(requestBody)));
+    let req = JSON.parse(JSON.stringify(requestBody));
+    req.status = 'open';
+    console.log(await backend.saveServiceRequest(req));
+  };
+
+  const onEdit = function (body) {
+    setRequestBody(body.updated_src);
+    console.log(body);
   };
 
   return (
-    <div>
-      <textarea
-        value={requestBody}
-        onChange={(e) => setRequestBody(e.target.value)}
-      ></textarea>
+    <div css={section}>
+      <h2>Request Creator</h2>
       <div>
-        <button
-          onClick={(e) => setRequestBody(JSON.stringify(EXAMPLE_MENTALHEALTH))}
-        >
+        <button onClick={(e) => setRequestBody(EXAMPLE_MENTALHEALTH)}>
           Load Mental Health
         </button>
-        <button
-          onClick={(e) => setRequestBody(JSON.stringify(EXAMPLE_CHILDCARE))}
-        >
+        <button onClick={(e) => setRequestBody(EXAMPLE_CHILDCARE)}>
           Load Childcare
         </button>
-        <button
-          onClick={(e) => setRequestBody(JSON.stringify(EXAMPLE_GROCERY))}
-        >
+        <button onClick={(e) => setRequestBody(EXAMPLE_GROCERY)}>
           Load Grocery
         </button>
         <button onClick={submitRequest}>Submit</button>
+      </div>
+      <div
+        css={css`
+          padding-top: 20px;
+          padding-bottom: 30px;
+        `}
+      >
+        <ReactJson onEdit={onEdit} onAdd={onEdit} src={requestBody} />
       </div>
     </div>
   );
@@ -180,7 +284,14 @@ function RequestCreator({ backend }) {
 
 function DebugRequests({ backend }) {
   return (
-    <div>
+    <div
+      css={css`
+        width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 40px;
+      `}
+    >
       <RequestCreator backend={backend}></RequestCreator>
       <RequestList backend={backend}></RequestList>
       <TestHooks backend={backend}></TestHooks>

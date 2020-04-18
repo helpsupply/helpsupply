@@ -51,5 +51,5 @@ export const Routes = {
   SERVICE_CONFIRMATION: '/service/confirmation/:id',
 
   // Admin and Debugging routes
-  DEBUG_REQUESTS: '/debug/requests',
+  DEBUG_REQUESTS: '/requests/debug',
 };
