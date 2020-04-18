@@ -236,6 +236,13 @@
       }
     },
     "service": {
+      "locationForm": {
+        "title": "What is your ZIP code?",
+        "description": "We are currently only able to serve people in the NYC area. Mental health support is available to users in and around the city, but other services are only available in certain boroughs and neighborhoods.",
+        "labels": {
+          "zipCode": "ZIP code"
+        }
+      },
       "contactForm": {
         "title": "Contact info",
         "description": "Enter your contact information so we can coordinate the services you request.",
