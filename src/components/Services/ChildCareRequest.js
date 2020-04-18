@@ -3,7 +3,6 @@ import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import { SecondaryButton } from 'components/Button';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Note from 'components/Note';
@@ -11,7 +10,11 @@ import Note from 'components/Note';
 import { styles } from './Request.styles';
 import { Fragment } from 'react';
 
-export const ChildCareRequest = ({ onDelete, onEdit, request }) => {
+export const ChildCareRequest = ({
+  // onDelete,
+  // onEdit,
+  request,
+}) => {
   const { t } = useTranslation();
   return (
     <div css={styles.root}>
@@ -65,14 +68,14 @@ export const ChildCareRequest = ({ onDelete, onEdit, request }) => {
         ))}
       </Text>
       <Note css={styles.date}>{t('global.form.addedLabel')}</Note>
-      <div css={styles.actions}>
+      {/* <div css={styles.actions}>
         <SecondaryButton onClick={onEdit}>
           <Text type={TEXT_TYPE.NOTE}>{t('global.form.editLabel')}</Text>
         </SecondaryButton>
         <SecondaryButton onClick={onDelete}>
           <Text type={TEXT_TYPE.NOTE}>{t('global.form.deleteLabel')}</Text>
         </SecondaryButton>
-      </div>
+      </div> */}
     </div>
   );
 };

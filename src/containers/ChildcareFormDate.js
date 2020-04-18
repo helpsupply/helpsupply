@@ -29,20 +29,20 @@ function ChildcareFormDate({ id, onSave, request }) {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    mondays: request?.mondays || false,
-    tuesdays: request?.tuesdays || false,
-    wednesdays: request?.wednesdays || false,
-    thursdays: request?.thursdays || false,
-    fridays: request?.fridays || false,
-    saturdays: request?.saturdays || false,
-    sundays: request?.sundays || false,
-    varies: request?.varies || false,
+    mondays: false,
+    tuesdays: false,
+    wednesdays: false,
+    thursdays: false,
+    fridays: false,
+    saturdays: false,
+    sundays: false,
+    varies: false,
 
-    mornings: request?.mornings || false,
-    afternoons: request?.afternoons || false,
-    evenings: request?.evenings || false,
-    nights: request?.nights || false,
-    variesTime: request?.variesTime || false,
+    mornings: false,
+    afternoons: false,
+    evenings: false,
+    nights: false,
+    variesTime: false,
   });
 
   const handleFieldChange = useCallback(

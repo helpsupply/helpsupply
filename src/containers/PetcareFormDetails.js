@@ -24,14 +24,12 @@ function PetcareFormDetails({ id, onSave, request }) {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [fields, setFields] = useState(
-    request?.pets || {
-      1: {
-        petType: '',
-        careNeeded: '',
-      },
+  const [fields, setFields] = useState({
+    1: {
+      petType: '',
+      careNeeded: '',
     },
-  );
+  });
 
   const handleFieldChange = useCallback(
     (field, idx) => (value) => {

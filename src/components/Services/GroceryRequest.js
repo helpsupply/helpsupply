@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 import { URGENCY_KEYS, URGENCY_TEXT } from 'lib/constants/urgency';
 
-import { SecondaryButton } from 'components/Button';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Note from 'components/Note';
@@ -24,7 +23,11 @@ const matchUrgencyToText = (text) => {
   return t;
 };
 
-export const GroceryRequest = ({ id, onDelete, onEdit, request }) => {
+export const GroceryRequest = ({
+  // onDelete,
+  // onEdit,
+  request,
+}) => {
   const { t } = useTranslation();
   return (
     <div css={styles.root}>
@@ -77,14 +80,14 @@ export const GroceryRequest = ({ id, onDelete, onEdit, request }) => {
         {request.dietaryRestrictions}
       </Text>
       <Note css={styles.date}>{t('global.form.addedLabel')}</Note>
-      <div css={styles.actions}>
+      {/* <div css={styles.actions}>
         <SecondaryButton onClick={onEdit}>
           <Text type={TEXT_TYPE.NOTE}>{t('global.form.editLabel')}</Text>
         </SecondaryButton>
         <SecondaryButton onClick={onDelete}>
           <Text type={TEXT_TYPE.NOTE}>{t('global.form.deleteLabel')}</Text>
         </SecondaryButton>
-      </div>
+      </div> */}
     </div>
   );
 };

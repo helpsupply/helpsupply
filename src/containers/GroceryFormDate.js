@@ -17,9 +17,9 @@ function GroceryFormDate({ id, onSave, request }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    date: request?.date?.toDate() || '',
-    time: request?.time || '',
-    recurring: request?.recurring || false,
+    date: '',
+    time: '',
+    recurring: false,
   });
 
   const handleFieldChange = useCallback(
