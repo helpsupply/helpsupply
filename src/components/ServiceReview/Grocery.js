@@ -100,7 +100,7 @@ export const GroceryServiceReview = ({ id, service }) => {
       <Text as="p" css={styles.capitalize}>
         {time}
       </Text>
-      {recurring && <Text as="p"> {t('request.review.recurring')}</Text>}
+      {recurring && <Text as="p">{t('request.review.recurring')}</Text>}
     </Fragment>
   );
 
