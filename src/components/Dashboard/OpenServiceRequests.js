@@ -6,11 +6,11 @@ import RequestKinds from 'lib/organizations/kinds';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-// import { Request } from 'components/Request';
 
 import { styles } from './UserDashboard.styles';
 import GroceryRequest from 'components/Services/GroceryRequest';
 import ChildCareRequest from 'components/Services/ChildCareRequest';
+import MentalHealthRequest from 'components/Services/MentalHealthRequest';
 
 const groupBy = (arr, key) => {
   return arr.reduce((acc, item) => {
@@ -26,7 +26,9 @@ const mapServiceKindToCard = (request) => ({
   // TODO: create service request cards
   // we might not need separate requests for this but since they have different info
   // i'm not sure we will need to list it all or just the common fields
-  [RequestKinds.MENTALHEALTH]: null,
+  [RequestKinds.MENTALHEALTH]: (
+    <MentalHealthRequest css={styles.request} {...request} />
+  ),
   [RequestKinds.PETCARE]: null,
   [RequestKinds.CHILDCARE]: (
     <ChildCareRequest css={styles.request} {...request} />

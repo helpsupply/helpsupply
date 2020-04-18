@@ -5,8 +5,15 @@ export const styles = {
   button: css({
     margin: `${Space.S30}px 0`,
   }),
+  contact: css({
+    marginBottom: Space.S20,
+    '> div': {
+      marginBottom: Space.S5,
+    },
+  }),
   kind: css({
     textTransform: 'capitalize',
+    marginBottom: Space.S20,
   }),
   footer: css({
     marginTop: Space.S30,

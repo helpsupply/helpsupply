@@ -12,12 +12,14 @@ import Anchor, { anchorTypes } from 'components/Anchor';
 import Card from 'components/Card';
 import { PrimaryButton } from 'components/Button';
 import Loader from 'components/Loader';
+import { formatPhoneNumber } from 'lib/utils/strings';
 
 import OpenServiceRequests from 'components/Dashboard/OpenServiceRequests';
 
 import { styles } from './UserDashboard.styles';
 
 export const UserDashboard = ({
+  contact,
   handleUpdateContact,
   handleRequestSupplies,
   isRequestsLoading,
@@ -26,12 +28,19 @@ export const UserDashboard = ({
   openRequests = [],
 }) => {
   const { t } = useTranslation();
-  const contactDetails = (
-    <Fragment>
-      name
-      <br />
-      phone
-    </Fragment>
+  const contactDetails = contact && (
+    <div css={styles.contact}>
+      <div>
+        {contact.firstName} {contact.lastName}
+      </div>
+      <div>{formatPhoneNumber(contact.phone)}</div>
+      <div>
+        {contact.languagePreference} {t('dashboard.preferred')}
+      </div>
+      <div>
+        {contact.contactPreference} {t('dashboard.preferred')}
+      </div>
+    </div>
   );
 
   return (

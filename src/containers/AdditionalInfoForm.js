@@ -16,7 +16,7 @@ function AdditionalInfoForm({ id, onSave, request }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    additionalInfo: request?.additionalInfo || '',
+    additionalInfo: '',
   });
 
   const handleFieldChange = useCallback(

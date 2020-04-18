@@ -16,8 +16,8 @@ function GroceryFormItems({ id, onSave, request }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    dietaryRestrictions: request?.dietaryRestrictions || '',
-    groceryList: request?.groceryList || '',
+    dietaryRestrictions: '',
+    groceryList: '',
   });
 
   const handleFieldChange = useCallback(

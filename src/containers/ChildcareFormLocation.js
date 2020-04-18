@@ -39,12 +39,10 @@ function ChildcareFormLocation({ id, onSave, request }) {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [addAdditionalContact, setAddAdditionalContact] = useState(
-    !!request?.additionalContactFirstName,
-  );
+  const [addAdditionalContact, setAddAdditionalContact] = useState();
   const [fields, setFields] = useState({
-    neighborhood: request?.neighborhood || '',
-    crossStreet: request?.crossStreet || '',
+    neighborhood: '',
+    crossStreet: '',
   });
 
   const handleFieldChange = useCallback(
@@ -68,15 +66,13 @@ function ChildcareFormLocation({ id, onSave, request }) {
   );
 
   const [additionalFields, setAdditionalFields] = useState({
-    additionalContactFirstName: request?.additionalContactFirstName || '',
-    additionalContactLastName: request?.additionalContactLastName || '',
-    additionalContactRelationship: request?.additionalContactRelationship || '',
-    additionalContactEmail: request?.additionalContactEmail || '',
-    additionalContactPhone: request?.additionalContactPhone || '',
-    additionalContactContactPreference:
-      request?.additionalContactContactPreference || '',
-    additionalContactLanguagePreference:
-      request?.additionalContactLanguagePreference || '',
+    additionalContactFirstName: '',
+    additionalContactLastName: '',
+    additionalContactRelationship: '',
+    additionalContactEmail: '',
+    additionalContactPhone: '',
+    additionalContactContactPreference: '',
+    additionalContactLanguagePreference: '',
   });
 
   const handleSubmit = async () => {

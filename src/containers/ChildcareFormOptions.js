@@ -18,13 +18,13 @@ function ChildcareFormDetails({ id, onSave, request }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    childCareCenters: request?.childCareCenters || false,
-    mutualAid: request?.mutualAid || false,
-    enrichmentCenters: request?.enrichmentCenters || false,
-    babySitters: request?.babySitters || false,
-    freeOptions: request?.freeOptions || false,
-    paymentAbility: request?.paymentAbility || '',
-    householdRisk: request?.householdRisk || '',
+    childCareCenters: false,
+    mutualAid: false,
+    enrichmentCenters: false,
+    babySitters: false,
+    freeOptions: false,
+    paymentAbility: '',
+    householdRisk: '',
   });
 
   const handleFieldChange = useCallback(
