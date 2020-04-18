@@ -15,17 +15,26 @@ import UserDashboard from 'components/Dashboard/UserDashboard';
 function AdminDashboard({ backend }) {
   const history = useHistory();
 
-  // const [contact, setDropSite] = useState(undefined);
+  const [contact, setContact] = useState(undefined);
   const [openRequests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [requestToBeDeleted, setRequestToBeDeleted] = useState(undefined);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    backend.getServiceRequests().then((data) => {
-      data && setRequests(data);
-      setIsLoading(false);
-    });
+    backend
+      .getServiceRequests()
+      .then((data) => {
+        data && setRequests(data);
+      })
+      .then(() => {
+        backend.getServiceUser().then(({ data }) => {
+          setContact(data);
+        });
+      })
+      .then(() => {
+        setIsLoading(false);
+      });
   }, [backend]);
 
   const handleUpdateContact = () => {
@@ -101,6 +110,7 @@ function AdminDashboard({ backend }) {
           onEdit={onEditRequest}
           onDelete={openConfirmDeleteRequestModal}
           {...{
+            contact,
             openRequests,
             handleUpdateContact,
             handleRequestService,

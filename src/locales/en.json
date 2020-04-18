@@ -20,9 +20,7 @@
       "contact": {
         "title": "Contact info"
       },
-      "time": {
-        "preferred": "preferred"
-      },
+      "preferred": "preferred",
       "openRequests": {
         "title": "Open requests",
         "crossStreet": "Cross street:",

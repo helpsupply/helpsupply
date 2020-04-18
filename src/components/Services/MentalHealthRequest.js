@@ -46,7 +46,7 @@ export const MentalHealthRequest = ({
       </Text>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
         <span css={styles.capitalize}>{request.date}</span> {request.time}{' '}
-        {t('dashboard.time.preferred')}
+        {t('dashboard.preferred')}
       </Text>
       {request.recurring && (
         <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
