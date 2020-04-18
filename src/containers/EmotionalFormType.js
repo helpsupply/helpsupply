@@ -9,6 +9,7 @@ import { routeWithParams } from 'lib/utils/routes';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import { mentalHealthOptions } from 'lib/constants/options';
 
 function EmotionalFormDate({ id, onSave, request }) {
   const history = useHistory();
@@ -16,8 +17,8 @@ function EmotionalFormDate({ id, onSave, request }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    type: request?.type || '',
-    agreement: request?.agreement || '',
+    type: '',
+    agreement: '',
   });
 
   const handleFieldChange = useCallback(
@@ -41,14 +42,7 @@ function EmotionalFormDate({ id, onSave, request }) {
       customOnChange: handleFieldChange('type'),
       defaultValue: fields.type,
       label: t('service.emotional.what.labels.type'),
-      options: [
-        { label: 'Licensed Mental Health Professional', value: 'licensed' },
-        { label: 'Spiritual Care Provider', value: 'spiritual' },
-        { label: 'Personal/Life Coach', value: 'coach' },
-        { label: 'Stress-Reduction Expert', value: 'stress' },
-        { label: 'Healing Arts Practitioner', value: 'healing' },
-        { label: "I don't have a preference", value: 'any' },
-      ],
+      options: mentalHealthOptions,
       name: 'type',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: fields.type,

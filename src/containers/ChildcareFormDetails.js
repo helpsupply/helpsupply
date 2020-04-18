@@ -27,15 +27,13 @@ function ChildcareFormDetails({ id, onSave, request }) {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [fields, setFields] = useState(
-    request?.children || {
-      1: {
-        birthMonth: '',
-        birthYear: '',
-        specialNeeds: '',
-      },
+  const [fields, setFields] = useState({
+    1: {
+      birthMonth: '',
+      birthYear: '',
+      specialNeeds: '',
     },
-  );
+  });
 
   const handleFieldChange = useCallback(
     (field, idx) => (value) => {
