@@ -28,8 +28,23 @@ function SignupFinish({ backend }) {
   const [submitting, setSubmitting] = useState(false);
 
   const routeToNextPage = useCallback(() => {
-    history.push(routeWithParams(Routes.CONTACT_FORM));
-  }, [history]);
+    backend.getServiceUser().then((user) => {
+      if (!user) {
+        history.push(routeWithParams(Routes.CONTACT_FORM));
+        return;
+      }
+
+      backend.getServiceRequests().then((data) => {
+        if (data.length) {
+          history.push(routeWithParams(Routes.DASHBOARD));
+          return;
+        }
+
+        history.push(routeWithParams(Routes.SERVICE_LOCATION));
+        return;
+      });
+    });
+  }, [backend, history]);
 
   const handleSubmit = useCallback(
     ({ email }) => {
