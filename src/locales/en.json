@@ -113,8 +113,8 @@
         "newFacility": "New facility"
       },
       "facilityForm": {
-        "title": "Add a new facility",
-        "description": "Enter some information about your facility.",
+        "title": "What NYC hospital or EMT service do you work for?",
+        "description": "I'm a healthcare professional or support staff member working at:",
         "nameLabel": "Name of the facility",
         "zipLabel": "Zip code",
         "cityLabel": "City",
@@ -126,7 +126,7 @@
         "addNew": "Add a new facility",
         "description": "I'm a healthcare professional working at:",
         "notSeeing": "Not seeing your facility?",
-        "label": "City or healthcare facility",
+        "label": "Hospital or EMS service",
         "title": "Find your healthcare facility"
       },
       "review": {
@@ -186,17 +186,17 @@
         }
       },
       "workEmailForm": {
-        "title": "Enter your work email address",
-        "description": "We need to verify your email before you request services.",
+        "title": "What's your work email address?",
+        "description": "This will be used to validate you when you return to the site. No password required.",
         "learnMore": "Learn more",
         "workEmail": {
           "label": "Work email",
-          "disclaimer": "Note: we will never share your email address with any other parties.",
+          "disclaimer": "We will only share the information you provide with the trusted partner organization that will fulfill your request.",
           "validationLabel": "Please enter a valid email address"
         },
         "sent": {
           "title": "Thank you",
-          "description": "We just sent an email to {{email}}. Please click the link in that email to to start requesting services.",
+          "description": "We just sent an email to {{email}}. Please follow the link in that email to start a new request.",
           "emailDefault": "the email address you provided"
         },
         "finish": {
@@ -245,6 +245,17 @@
         "description": "We are currently only able to serve people in the NYC area. Mental health support is available to users in and around the city, but other services are only available in certain boroughs and neighborhoods.",
         "labels": {
           "zipCode": "ZIP code"
+        }
+      },
+      "available": {
+        "title": "Services we're offering in your location",
+        "groceries": "Groceries",
+        "childCare": "Child care",
+        "emotionalSupport": "Emotional support",
+        "providedBy": {
+          "mutualAid": "Provided by Mutual Aid NYC",
+          "workersNeedChildcare": "Provided by Workers Need Childcare",
+          "nycCovid": "Provided by NYC COVID Care Network"
         }
       },
       "contactForm": {
