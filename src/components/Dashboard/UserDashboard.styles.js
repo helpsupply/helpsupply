@@ -7,6 +7,7 @@ export const styles = {
   }),
   kind: css({
     textTransform: 'capitalize',
+    marginBottom: Space.S20,
   }),
   footer: css({
     marginTop: Space.S30,

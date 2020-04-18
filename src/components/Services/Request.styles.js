@@ -21,7 +21,7 @@ export const styles = {
   }),
   date: css({
     marginTop: Space.S20,
-    marginBottom: Space.S30,
+    marginBottom: Space.S10,
   }),
   description: css({
     color: Color.GRAY,
@@ -36,8 +36,10 @@ export const styles = {
   }),
   root: css({
     background: Color.WHITE,
+    border: Color.GRAY_10,
     borderRadius: Radius.ROUNDED,
-    marginBottom: Space.S20,
+    boxShadow: '0px 2px 2px rgba(72, 72, 72, 0.1)',
+    marginBottom: Space.S30,
     padding: Space.S20,
   }),
   text: css({

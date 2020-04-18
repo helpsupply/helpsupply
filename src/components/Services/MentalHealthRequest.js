@@ -3,15 +3,28 @@ import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
+import { URGENCY_KEYS, URGENCY_TEXT } from 'lib/constants/urgency';
+
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Note from 'components/Note';
 
 import { styles } from './Request.styles';
-import { Fragment } from 'react';
 import moment from 'moment';
+import { mentalHealthOptions } from 'lib/constants/options';
 
-export const ChildCareRequest = ({
+const matchUrgencyToText = (text) => {
+  let t;
+  Object.entries(URGENCY_KEYS).find(([k, v]) => {
+    if (v === text) {
+      t = URGENCY_TEXT[k];
+    }
+    return null;
+  });
+  return t;
+};
+
+export const MentalHealthRequest = ({
   // onDelete,
   // onEdit,
   request,
@@ -21,6 +34,7 @@ export const ChildCareRequest = ({
     <div css={styles.root}>
       <div css={styles.section}>
         <Note>
+          {' '}
           {t('dropsite.openRequests.requestId')} #{request.id}
         </Note>
       </div>
@@ -28,45 +42,22 @@ export const ChildCareRequest = ({
         {request.kind}
       </Text>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        {[
-          request.mondays && 'Mondays',
-          request.tuesdays && 'Tuesdays',
-          request.wednesdays && 'Wednesdays',
-          request.thursdays && 'Thursdays',
-          request.fridays && 'Fridays',
-          request.saturdays && 'Saturdays',
-          request.sundays && 'Sundays',
-          request.varies && 'Days vary',
-        ]
-          .filter((day) => !!day)
-          .join(', ')}
+        {matchUrgencyToText(request.urgency)}
       </Text>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        {[
-          request.mornings && 'Mornings',
-          request.afternoons && 'Afternoons',
-          request.evenings && 'Evenings',
-          request.night && 'Night',
-          request.timeVaries && 'Times vary',
-        ]
-          .filter((day) => !!day)
-          .join(', ')}
+        <span css={styles.capitalize}>{request.date}</span> {request.time}{' '}
+        {t('dashboard.time.preferred')}
+      </Text>
+      {request.recurring && (
+        <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
+          Recurring
+        </Text>
+      )}
+      <Text as="p" type={TEXT_TYPE.NOTE} css={[styles.text, styles.capitalize]}>
+        {mentalHealthOptions.find((o) => o.value === request.type)?.label}
       </Text>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        {Object.values(request?.children || []).map((child, idx) => (
-          <Fragment>
-            <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-              Child {idx + 1}: {child.birthMonth} {child.birthYear}
-            </Text>
-            <Text
-              as="p"
-              type={TEXT_TYPE.NOTE}
-              css={[styles.text, styles.capitalize]}
-            >
-              {child.specialNeeds}
-            </Text>
-          </Fragment>
-        ))}
+        {request.note}
       </Text>
       <Note css={styles.date}>
         {t('global.form.addedLabel')}{' '}
@@ -90,4 +81,4 @@ Request.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export default ChildCareRequest;
+export default MentalHealthRequest;

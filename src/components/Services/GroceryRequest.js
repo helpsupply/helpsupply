@@ -79,7 +79,10 @@ export const GroceryRequest = ({
       <Text as="p" type={TEXT_TYPE.NOTE} css={[styles.text, styles.capitalize]}>
         {request.dietaryRestrictions}
       </Text>
-      <Note css={styles.date}>{t('global.form.addedLabel')}</Note>
+      <Note css={styles.date}>
+        {t('global.form.addedLabel')}{' '}
+        {moment(request.timeCreated).format('MMM DD, h:mma')}
+      </Note>
       {/* <div css={styles.actions}>
         <SecondaryButton onClick={onEdit}>
           <Text type={TEXT_TYPE.NOTE}>{t('global.form.editLabel')}</Text>
