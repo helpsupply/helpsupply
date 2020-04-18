@@ -33,6 +33,7 @@ import SignupComplete from 'pages/signup_approve';
 import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceLocation from 'pages/service_location';
+import ServiceLocationAvailable from 'pages/service_location_available';
 import ServiceType from 'pages/service_type';
 import ServiceGrocery from 'pages/service_grocery';
 import ServiceChildcare from 'pages/service_childcare';
@@ -128,6 +129,16 @@ function App({ backend }) {
             <Route exact path={Routes.HOME}>
               <EntryPortal backend={backend} />
             </Route>
+            <Route backend={backend} exact path={Routes.SERVICE_LOCATION}>
+              <ServiceLocation backend={backend} />
+            </Route>
+            <Route
+              backend={backend}
+              exact
+              path={Routes.SERVICE_LOCATION_AVAILABLE}
+            >
+              <ServiceLocationAvailable backend={backend} />
+            </Route>
             <Route exact path={Routes.FACILITY}>
               <Facility backend={backend} />
             </Route>
@@ -152,13 +163,6 @@ function App({ backend }) {
               path={Routes.CONTACT_CONFIRMATION}
             >
               <ContactConfirmation backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_LOCATION}
-            >
-              <ServiceLocation backend={backend} />
             </ProtectedRoute>
             <ProtectedRoute backend={backend} exact path={Routes.SERVICE_TYPE}>
               <ServiceType backend={backend} />

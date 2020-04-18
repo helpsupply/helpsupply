@@ -63,12 +63,7 @@ function EmailForm({ backend }) {
       isLoading={isLoading}
       fields={fieldData}
     >
-      <Note>
-        {t('request.workEmailForm.workEmail.disclaimer') + ' '}
-        <Anchor href={Routes.HOME} as={anchorTypes.A}>
-          {t('request.workEmailForm.learnMore')}
-        </Anchor>
-      </Note>
+      <Note>{t('request.workEmailForm.workEmail.disclaimer')}</Note>
     </FormBuilder>
   );
 }

@@ -33,6 +33,8 @@ export const Routes = {
   CONTACT_FORM: `/contact`,
   CONTACT_CONFIRMATION: `/contact/confirm`,
   SERVICE_LOCATION: '/service-location',
+  SERVICE_LOCATION_AVAILABLE: '/service-location/available',
+  SERVICE_LOCATION_UNAVAILABLE: '/service-location/unavailable',
   SERVICE_TYPE: '/service',
   SERVICE_GROCERIES_WHERE: '/service/grocery/location/:id',
   SERVICE_GROCERIES_WHEN: '/service/grocery/date/:id',
