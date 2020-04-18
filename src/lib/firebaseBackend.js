@@ -693,8 +693,10 @@ export default class FirebaseBackend {
           .set(inputFields, { merge: true });
       } else {
         // Create serviceuser
-        return (await this.firestore.collection('serviceuser').add(inputFields))
-          .id;
+        return await this.firestore
+          .collection('serviceuser')
+          .doc(user.uid)
+          .set(inputFields);
       }
     });
   }
