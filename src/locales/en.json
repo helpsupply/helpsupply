@@ -147,6 +147,9 @@
         },
         "mentalHealth": {
           "supportDetails": "Support details"
+        },
+        "childcare": {
+          "details": "Childcare details"
         }
       },
       "supplyForm": {
