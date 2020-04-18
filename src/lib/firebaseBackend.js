@@ -98,7 +98,7 @@ export default class FirebaseBackend {
     if (request.domain !== undefined) {
       throw new Error("'domain' is a reserved property for Requests");
     }
-    if (request.status !== undefined) {
+    if (request.status !== undefined && request.status !== 'open') {
       throw new Error("'status' is a reserved property for Requests");
     }
     if (request.sent !== undefined) {

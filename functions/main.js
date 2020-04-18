@@ -36,7 +36,7 @@ backend.getWebhookForOrg = getWebhookForOrg;
 
 const processServiceRequestRaw = async (id, before, after) => {
   console.log(id, before, after);
-  if (after && (after.status === undefined || after.status === 'open')) {
+  if (after && after.status === 'open') {
     let metadata = backend.getMetadataForProvider(after.organization);
     if (!metadata) {
       await backend.updateServiceRequest(
