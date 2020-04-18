@@ -22,19 +22,20 @@ const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
 };
 
-function ChildcareFormDetails({ id, onSave }) {
+function ChildcareFormDetails({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const [childCount, setChildCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [fields, setFields] = useState({
-    1: {
-      birthMonth: '',
-      birthYear: '',
-      specialNeeds: '',
+  const [fields, setFields] = useState(
+    request?.children || {
+      1: {
+        birthMonth: '',
+        birthYear: '',
+        specialNeeds: '',
+      },
     },
-  });
+  );
 
   const handleFieldChange = useCallback(
     (field, idx) => (value) => {
@@ -49,83 +50,94 @@ function ChildcareFormDetails({ id, onSave }) {
     [],
   );
 
-  const handleRemoveClick = useCallback(() => {
-    if (childCount <= 0) {
-      return;
-    }
-    setChildCount(childCount - 1);
-  }, [childCount]);
+  const handleRemoveClick = useCallback(
+    (targetKey) => {
+      const { [targetKey]: _, ...newFields } = fields;
+      setFields(newFields);
+    },
+    [fields],
+  );
 
-  const additionalChildren = useCallback(() => {
-    return [...Array(childCount)].flatMap((_, index) => {
+  const handleAddClick = useCallback(() => {
+    const targetFields = Object.keys(fields);
+    const nextKey = parseInt(targetFields[targetFields.length - 1]) + 1;
+    setFields({
+      ...fields,
+      [nextKey]: {
+        birthMonth: '',
+        birthYear: '',
+        specialNeeds: '',
+      },
+    });
+  }, [fields]);
+
+  const buildFields = useCallback(() => {
+    return Object.keys(fields).flatMap((fieldKey, index) => {
+      const targetIndex = index + 1;
       return [
         {
           type: formFieldTypes.NODE,
           node: [
             <AdditionalFormTitle
-              key={`childcare-child-title-${index + 2}`}
-              title={`${t('service.childcare.details.labels.title')} ${
-                index + 2
-              }`}
+              key={`childcare-child-title-${fieldKey}`}
+              title={`${t(
+                'service.childcare.details.labels.title',
+              )} ${targetIndex}`}
               secondaryCta={
-                <Text
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleRemoveClick();
-                  }}
-                  as="button"
-                  type={TEXT_TYPE.BODY_2}
-                  css={styles.button}
-                >
-                  {t('service.childcare.details.labels.remove')}
-                </Text>
+                targetIndex !== 1 && (
+                  <Text
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleRemoveClick(fieldKey);
+                    }}
+                    as="button"
+                    type={TEXT_TYPE.BODY_2}
+                    css={styles.button}
+                  >
+                    {t('service.childcare.details.labels.remove')}
+                  </Text>
+                )
               }
             />,
           ],
         },
         {
-          customOnChange: handleFieldChange('birthMonth', index + 2),
+          customOnChange: handleFieldChange('birthMonth', fieldKey),
           customkey: `${t(
             'service.childcare.details.labels.birthMonth',
-          )}-${index}`,
+          )}-${fieldKey}`,
+          defaultValue: fields[fieldKey].birthMonth,
           label: t('service.childcare.details.labels.birthMonth'),
           options: months,
           name: 'birthMonth',
           type: formFieldTypes.INPUT_DROPDOWN,
-          value: fields.birthMonth,
+          value: fields[fieldKey].birthMonth,
         },
         {
-          customOnChange: handleFieldChange('birthYear', index + 2),
+          customOnChange: handleFieldChange('birthYear', fieldKey),
           customkey: `${t(
             'service.childcare.details.labels.birthYear',
-          )}-${index}`,
+          )}-${fieldKey}`,
+          defaultValue: fields[fieldKey].birthYear,
           label: t('service.childcare.details.labels.birthYear'),
           options: years,
           name: 'birthYear',
           type: formFieldTypes.INPUT_DROPDOWN,
-          value: fields.birthYear,
+          value: fields[fieldKey].birthYear,
         },
         {
-          customOnChange: handleFieldChange('specialNeeds', index + 2),
+          customOnChange: handleFieldChange('specialNeeds', fieldKey),
           customkey: `${t(
             'service.childcare.details.labels.specialNeeds',
-          )}-${index}`,
+          )}-${fieldKey}`,
           label: t('service.childcare.details.labels.specialNeeds'),
           name: 'specialNeeds',
           type: formFieldTypes.TEXT_AREA,
-          value: fields.specialNeeds,
+          value: fields[fieldKey].specialNeeds,
         },
       ];
     });
-  }, [
-    childCount,
-    fields.birthMonth,
-    fields.birthYear,
-    fields.specialNeeds,
-    handleFieldChange,
-    handleRemoveClick,
-    t,
-  ]);
+  }, [fields, handleFieldChange, handleRemoveClick, t]);
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -133,50 +145,14 @@ function ChildcareFormDetails({ id, onSave }) {
     history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHAT, { id }));
   };
 
-  const fieldData = [
-    {
-      type: formFieldTypes.NODE,
-      node: [
-        <AdditionalFormTitle
-          key="childcare-child-title"
-          noBorder={true}
-          title={t('service.childcare.details.labels.title') + ' 1'}
-        />,
-      ],
-    },
-    {
-      customOnChange: handleFieldChange('birthMonth', 1),
-      label: t('service.childcare.details.labels.birthMonth'),
-      options: months,
-      name: 'birthMonth',
-      type: formFieldTypes.INPUT_DROPDOWN,
-      value: fields.birthMonth,
-    },
-    {
-      customOnChange: handleFieldChange('birthYear', 1),
-      label: t('service.childcare.details.labels.birthYear'),
-      options: years,
-      name: 'birthYear',
-      type: formFieldTypes.INPUT_DROPDOWN,
-      value: fields.birthYear,
-    },
-    {
-      customOnChange: handleFieldChange('specialNeeds', 1),
-      label: t('service.childcare.details.labels.specialNeeds'),
-      name: 'specialNeeds',
-      type: formFieldTypes.TEXT_AREA,
-      value: fields.specialNeeds,
-    },
-  ];
-
   const additionalCta = [
     {
       type: formFieldTypes.NODE,
       node: [
         <AdditionalCta
-          cta={t('service.childcare.where.add')}
+          cta={t('service.childcare.details.labels.addAnother')}
           key="additional"
-          onClick={() => setChildCount(childCount + 2)}
+          onClick={handleAddClick}
           title={t('service.additionalContact.title')}
         />,
       ],
@@ -191,7 +167,7 @@ function ChildcareFormDetails({ id, onSave }) {
         title={t('service.childcare.details.title')}
         description={t('service.childcare.details.description')}
         disabled={!Object.keys(fields).every((key) => !!fields[key])}
-        fields={fieldData.concat(additionalChildren(), additionalCta)}
+        fields={buildFields().concat(additionalCta)}
         isLoading={isLoading}
       />
     </div>

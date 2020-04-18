@@ -134,13 +134,22 @@
         "serviceType": "Service type",
         "preferredTime": "Preferred time",
         "details": "details",
+        "preferred": "preferred",
         "recurring": "Recurring",
+        "additionalInfo": "Additional Info",
         "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
         "grocery": {
           "location": "Delivery location",
+          "contact": "Delivery contact",
           "time": "Preferred delivery time",
           "list": "Grocery list",
           "diet": "Dietary restrictions"
+        },
+        "mentalHealth": {
+          "supportDetails": "Support details"
+        },
+        "childcare": {
+          "details": "Childcare details"
         }
       },
       "supplyForm": {
@@ -154,6 +163,14 @@
           "note": "Include any detailed requirements about the supplies you need.",
           "label": "i.e.: All donated items must be unused and sealed in original packaging."
         }
+      },
+      "serviceConfirmation": {
+        "title": "We have your request for {{kind}}",
+        "description": "Your request has been routed to {{organization}}. They will contact you to fulfill your request.",
+        "requestServices": "Request more services",
+        "viewRequests": "View my requests",
+        "fulfilledBy": "To be fulfilled by",
+        "share": "Share Help Supply with a coworker"
       },
       "supplyConfirmation": {
         "header": "We just added your new request",
@@ -222,6 +239,13 @@
       }
     },
     "service": {
+      "locationForm": {
+        "title": "What is your ZIP code?",
+        "description": "We are currently only able to serve people in the NYC area. Mental health support is available to users in and around the city, but other services are only available in certain boroughs and neighborhoods.",
+        "labels": {
+          "zipCode": "ZIP code"
+        }
+      },
       "contactForm": {
         "title": "Contact info",
         "description": "Enter your contact information so we can coordinate the services you request.",

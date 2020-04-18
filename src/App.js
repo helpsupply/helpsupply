@@ -32,6 +32,7 @@ import SignUpConfirmation from 'pages/signup_confirmation';
 import SignupComplete from 'pages/signup_approve';
 import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
+import ServiceLocation from 'pages/service_location';
 import ServiceType from 'pages/service_type';
 import ServiceGrocery from 'pages/service_grocery';
 import ServiceChildcare from 'pages/service_childcare';
@@ -151,6 +152,13 @@ function App({ backend }) {
               path={Routes.CONTACT_CONFIRMATION}
             >
               <ContactConfirmation backend={backend} />
+            </ProtectedRoute>
+            <ProtectedRoute
+              backend={backend}
+              exact
+              path={Routes.SERVICE_LOCATION}
+            >
+              <ServiceLocation backend={backend} />
             </ProtectedRoute>
             <ProtectedRoute backend={backend} exact path={Routes.SERVICE_TYPE}>
               <ServiceType backend={backend} />

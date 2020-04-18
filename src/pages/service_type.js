@@ -6,7 +6,7 @@ import ServiceTypeForm from 'containers/ServiceTypeForm';
 
 function ServiceType({ backend }) {
   return (
-    <Page currentProgress={3} totalProgress={5}>
+    <Page currentProgress={4} totalProgress={5}>
       <ServiceTypeForm backend={backend} />
     </Page>
   );

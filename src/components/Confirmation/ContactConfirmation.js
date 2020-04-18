@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/utils/routes';
 import { LANGUAGES } from 'lib/constants/languages';
 import { CONTACT_PREFERENCES } from 'lib/constants/contact';
 
@@ -35,7 +34,7 @@ function ContactConfirmation({ email, onEdit, serviceUser }) {
   const { t } = useTranslation();
 
   const handleOnCtaClick = () => {
-    history.push(routeWithParams(Routes.SERVICE_TYPE));
+    history.push(Routes.SERVICE_LOCATION);
   };
 
   const { data } = serviceUser;
