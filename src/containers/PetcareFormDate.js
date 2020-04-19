@@ -24,6 +24,14 @@ const dayFields = [
   'varies',
 ];
 
+const timeFields = [
+  'mornings',
+  'afternoons',
+  'evenings',
+  'nights',
+  'variesTime',
+];
+
 function PetcareFormDate({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
@@ -38,6 +46,12 @@ function PetcareFormDate({ id, onSave }) {
     saturdays: '',
     sundays: '',
     varies: '',
+
+    mornings: false,
+    afternoons: false,
+    evenings: false,
+    nights: false,
+    variesTime: false,
   });
 
   const handleFieldChange = useCallback(
@@ -74,7 +88,25 @@ function PetcareFormDate({ id, onSave }) {
     });
   };
 
+  const buildTimeFields = () => {
+    return timeFields.flatMap((time, index) => {
+      return [
+        {
+          customOnChange: handleFieldChange(time),
+          label:
+            time === 'variesTime'
+              ? `${t('service.when.labels.varies')}-1`
+              : t(`service.when.labels.${time}`),
+          name: time,
+          type: formFieldTypes.INPUT_CHECKBOX,
+          value: fields[time],
+        },
+      ];
+    });
+  };
+
   const fieldData = [
+    ...buildDayFields(),
     {
       type: formFieldTypes.NODE,
       node: [
@@ -86,42 +118,7 @@ function PetcareFormDate({ id, onSave }) {
         </div>,
       ],
     },
-    {
-      customOnChange: handleFieldChange('mornings'),
-      label: t('service.when.labels.mornings'),
-      name: 'mornings',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.mornings,
-    },
-    {
-      customOnChange: handleFieldChange('afternoons'),
-      label: t('service.when.labels.afternoons'),
-      name: 'afternoons',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.afternoons,
-    },
-    {
-      customOnChange: handleFieldChange('evenings'),
-      label: t('service.when.labels.evenings'),
-      name: 'evenings',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.evenings,
-    },
-    {
-      customOnChange: handleFieldChange('nights'),
-      label: t('service.when.labels.nights'),
-      name: 'nights',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.nights,
-    },
-    {
-      customOnChange: handleFieldChange('variesTime'),
-      label: t('service.when.labels.varies'),
-      customkey: `${t('service.when.labels.varies')}-1`,
-      name: 'variesTime',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.variesTime,
-    },
+    ...buildTimeFields(),
     {
       type: formFieldTypes.NODE,
       node: [
@@ -138,7 +135,15 @@ function PetcareFormDate({ id, onSave }) {
       onSubmit={handleSubmit}
       title={t('service.petcare.when.title')}
       description={t('service.petcare.when.description')}
-      fields={[...buildDayFields(), ...fieldData]}
+      disabled={
+        !dayFields.some((dayField) => {
+          return fields[dayField];
+        }) ||
+        !timeFields.some((timeField) => {
+          return fields[timeField];
+        })
+      }
+      fields={fieldData}
       isLoading={isLoading}
     />
   );
