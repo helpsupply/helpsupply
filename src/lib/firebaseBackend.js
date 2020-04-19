@@ -51,6 +51,18 @@ export default class FirebaseBackend {
     }
   }
 
+  setLocalZip(zipCode) {
+    window.localStorage.setItem('zipCode', zipCode);
+  }
+
+  getLocalZip() {
+    return window.localStorage.getItem('zipCode');
+  }
+
+  clearLocalZip() {
+    return window.localStorage.removeItem('zipCode');
+  }
+
   // Returns an array of pairs [RequestKind, OrganizationId]
   getServicesForZip(zipCode) {
     return OrganizationIndex.ByZip[zipCode];
@@ -616,10 +628,10 @@ export default class FirebaseBackend {
     window.localStorage.setItem('emailForSignIn', email);
   }
 
-  async signupServicesWithEmail(email) {
+  async signupServicesWithEmail(email, zip) {
     const actionCodeSettings = {
       // Equal to EMAIL_SIGNUP_COMPLETE
-      url: `${window.location.protocol}//${window.location.host}/signup/complete/`,
+      url: `${window.location.protocol}//${window.location.host}/signup/complete/${zip}/`,
       handleCodeInApp: true,
     };
 
