@@ -4,7 +4,7 @@ import { jsx } from '@emotion/core';
 import Page from 'components/layouts/Page';
 import LoginForm from 'containers/LoginForm';
 
-function SignUp({ backend }) {
+function Login({ backend }) {
   return (
     <Page currentProgress={1} totalProgress={5}>
       <LoginForm backend={backend} />
@@ -12,4 +12,4 @@ function SignUp({ backend }) {
   );
 }
 
-export default SignUp;
+export default Login;

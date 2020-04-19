@@ -136,6 +136,9 @@ function App({ backend }) {
               <Route backend={backend} exact path={Routes.SERVICE_LOCATION}>
                 <ServiceLocation backend={backend} />
               </Route>
+              <Route path={Routes.LOGIN}>
+                <Login />
+              </Route>
               <Route
                 backend={backend}
                 exact
@@ -306,9 +309,6 @@ function App({ backend }) {
                 <NoMatch />
               </Route>
               {/*END MVP Routes*/}
-              <Route path={Routes.LOGIN}>
-                <Login />
-              </Route>
               <Route path={Routes.LOGOUT}>
                 <Logout backend={backend} />
               </Route>
