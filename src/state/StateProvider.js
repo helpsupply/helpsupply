@@ -19,7 +19,11 @@ export const StateProvider = ({ children }) => {
   const prevUrl = useRef(history.location.pathname);
   const prevShouldRedirect = useRef(state.editServiceUrl);
   useEffect(() => {
-    if (history.location.pathname !== prevUrl && prevShouldRedirect.current) {
+    if (
+      history.location.pathname !== prevUrl &&
+      prevShouldRedirect.current &&
+      state.editServiceUrl
+    ) {
       setState({ type: actions.EDIT_SERVICE_REDIRECT, editServiceUrl: '' });
       return;
     }
