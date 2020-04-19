@@ -170,7 +170,7 @@
         }
       },
       "serviceConfirmation": {
-        "title": "We have your request for {{kind}}",
+        "title": "We have your request for {{serviceName}}",
         "description": "Your request has been routed to {{organizationName}}. They will contact you to fulfill your request.",
         "requestServices": "Request more services",
         "viewRequests": "View my requests",

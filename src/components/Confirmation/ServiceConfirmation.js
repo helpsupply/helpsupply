@@ -33,8 +33,16 @@ export const ServiceConfirmation = ({ service }) => {
     [RequestKinds.CHILDCARE]: [OrganizationDetails.WORKERS_NEED_CHILDCARE],
   });
 
+  const mapServiceToName = () => ({
+    [RequestKinds.GROCERY]: 'groceries',
+    [RequestKinds.MENTALHEALTH]: 'emotional support',
+    [RequestKinds.CHILDCARE]: 'childcare',
+  });
+
   const organization = mapServiceToOrganization()[kind][0];
   const organizationName = organization.name;
+
+  const serviceName = mapServiceToName()[kind];
 
   const handleViewRequests = () => {
     history.push(Routes.DASHBOARD);
@@ -68,7 +76,7 @@ export const ServiceConfirmation = ({ service }) => {
 
   return (
     <ConfirmationWrapper
-      title={t('request.serviceConfirmation.title', { kind })}
+      title={t('request.serviceConfirmation.title', { serviceName })}
     >
       <Text as="p" type={TEXT_TYPE.BODY_2} css={styles.description}>
         {t('request.serviceConfirmation.description', { organizationName })}
