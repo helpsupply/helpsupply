@@ -48,7 +48,7 @@ FormBuilder.propTypes = {
   ).isRequired,
   isLoading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   subSection: PropTypes.object,
 };
 

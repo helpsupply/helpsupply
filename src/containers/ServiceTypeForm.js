@@ -3,6 +3,7 @@ import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
@@ -103,7 +104,13 @@ function ServiceTypeForm({ backend, serviceOptions }) {
     <FormBuilder
       defaultValues={fields}
       onSubmit={handleSubmit}
-      title={t('service.selectType.title')}
+      title={
+        <ReactMarkdown
+          source={t('service.selectType.title', {
+            url: Routes.SERVICE_TYPE,
+          })}
+        />
+      }
       description={t('service.selectType.description')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
