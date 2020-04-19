@@ -1,11 +1,5 @@
 const RequestKinds = require('./kinds');
 
-function get_field(name) {
-  return (request) => {
-    return request[name];
-  };
-}
-
 function always(resp) {
   return (request) => {
     return resp;
