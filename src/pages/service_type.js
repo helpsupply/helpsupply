@@ -13,6 +13,7 @@ function ServiceType({ backend }) {
   const { isInitializing } = useAuth();
   const { setError } = useContext(ErrorContext);
   const [serviceOptions, setServiceOptions] = useState();
+  const [zip, setZip] = useState();
 
   useEffect(() => {
     if (isInitializing) {
@@ -21,11 +22,9 @@ function ServiceType({ backend }) {
     backend
       .getServiceUser()
       .then(({ data }) => {
-        const services = backend.getServicesForZip(data.zip).map((svc) => {
-          return svc[0];
-        });
-        const sOpts = buildServicesOptions(services);
+        const sOpts = buildServicesOptions(backend.getServicesForZip(data.zip));
         setServiceOptions(sOpts);
+        setZip(data.zip);
       })
       .catch((e) => {
         setError(e.message);
@@ -34,7 +33,11 @@ function ServiceType({ backend }) {
 
   return (
     <Page currentProgress={4} totalProgress={5}>
-      <ServiceTypeForm backend={backend} serviceOptions={serviceOptions} />
+      <ServiceTypeForm
+        backend={backend}
+        serviceOptions={serviceOptions}
+        zip={zip}
+      />
     </Page>
   );
 }

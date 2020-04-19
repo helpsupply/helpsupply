@@ -307,7 +307,7 @@
         "title": "Thank you for providing your contact info"
       },
       "selectType": {
-        "title": "What kind of help do you need in [11201]({{url}})?",
+        "title": "What kind of help do you need in [{{zip}}]({{url}})?",
         "description": "Please indicate the type of service and urgency of your request below",
         "form": {
           "serviceTypeLabel": "Service type",
