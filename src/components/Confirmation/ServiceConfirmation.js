@@ -3,6 +3,9 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
+import OrganizationDetails from 'lib/organizations/details';
+import RequestKinds from 'lib/organizations/kinds';
+
 import { useMediaQuery } from 'hooks/useMediaQuery';
 import { Routes } from 'constants/Routes';
 import { Breakpoints } from 'constants/Breakpoints';
@@ -22,7 +25,16 @@ export const ServiceConfirmation = ({ service }) => {
   const isDesktop =
     (`(min-width: ${Breakpoints.LARGE}px)`,
     matchesBreakpoint(Breakpoints.LARGE));
-  const { kind, organization } = service;
+  const { kind } = service;
+
+  const mapServiceToOrganization = () => ({
+    [RequestKinds.GROCERY]: [OrganizationDetails.MUTUAL_AID_NYC],
+    [RequestKinds.MENTALHEALTH]: [OrganizationDetails.NYC_COVID_CARE_NETWORK],
+    [RequestKinds.CHILDCARE]: [OrganizationDetails.WORKERS_NEED_CHILDCARE],
+  });
+
+  const organization = mapServiceToOrganization()[kind][0];
+  const organizationName = organization.name;
 
   const handleViewRequests = () => {
     history.push(Routes.DASHBOARD);
@@ -59,9 +71,8 @@ export const ServiceConfirmation = ({ service }) => {
       title={t('request.serviceConfirmation.title', { kind })}
     >
       <Text as="p" type={TEXT_TYPE.BODY_2} css={styles.description}>
-        {t('request.serviceConfirmation.description', { organization })}
+        {t('request.serviceConfirmation.description', { organizationName })}
       </Text>
-      {/* service todo: link up to real organization data */}
       <OrganizationConfirmation organization={organization} />
       {!isDesktop && (
         <div css={styles.shareLink}>
