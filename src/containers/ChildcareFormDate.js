@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
+import { StateContext } from 'state/StateProvider';
 
 const dayFields = [
   'mondays',
@@ -27,6 +28,7 @@ const dayFields = [
 function ChildcareFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
+  const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
     mondays: false,
@@ -62,7 +64,10 @@ function ChildcareFormDate({ id, onSave, request }) {
       setIsLoading(false);
       return;
     }
-    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS, { id }));
+    const url =
+      state.editServiceUrl ||
+      routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS, { id });
+    history.push(url);
   };
 
   const buildDayFields = () => {

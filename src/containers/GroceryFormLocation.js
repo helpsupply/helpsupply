@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -13,6 +13,7 @@ import { CONTACT_PREFERENCES } from 'lib/constants/contact';
 import { AdditionalCta } from 'components/AdditionalCta';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import { StateContext } from 'state/StateProvider';
 
 const validatePhone = (val) => {
   if (val === '') {
@@ -38,6 +39,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [addAdditionalContact, setAddAdditionalContact] = useState();
+  const { state } = useContext(StateContext);
   const [fields, setFields] = useState({
     neighborhood: '',
     crossStreet: '',
@@ -83,7 +85,10 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       setIsLoading(false);
       return;
     }
-    history.push(routeWithParams(Routes.SERVICE_GROCERIES_WHEN, { id }));
+    const url =
+      state.editServiceUrl ||
+      routeWithParams(Routes.SERVICE_GROCERIES_WHEN, { id });
+    history.push(url);
   };
 
   const fieldData = [
