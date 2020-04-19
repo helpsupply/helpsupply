@@ -3,18 +3,17 @@
 export const OrganizationDetails = {
   MUTUAL_AID_NYC: {
     name: 'Mutual Aid NYC',
-    website: 'https://mutualaid.nyc/',
-    email: 'email@mutualaid.com',
+    website: 'mutualaid.nyc',
   },
   WORKERS_NEED_CHILDCARE: {
     name: 'Workers Need Childcare',
-    website: 'https://www.workersneedchildcare.org/',
-    email: 'email@workersneedchildcare.com',
+    website: 'www.workersneedchildcare.org',
+    email: 'hello@workersneedchildcare.org',
   },
   NYC_COVID_CARE_NETWORK: {
     name: 'NYC COVID Care Network',
-    website: 'https://www.nyccovidcare.org/',
-    email: 'email@nyccovidcare.com',
+    website: 'www.nyccovidcare.org',
+    email: 'nyccovidcare@gmail.com',
   },
 };
 

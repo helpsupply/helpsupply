@@ -19,11 +19,13 @@ export const OrganizationConfirmation = ({ organization }) => {
       <Text as="p" css={styles.organizationName}>
         {organization.name}
       </Text>
-      <Text as="p" type={TEXT_TYPE.NOTE}>
-        <Anchor href={`mailto:${organization.email}`} as={anchorTypes.A}>
-          {organization.email}
-        </Anchor>
-      </Text>
+      {organization.email && (
+        <Text as="p" type={TEXT_TYPE.NOTE}>
+          <Anchor href={`mailto:${organization.email}`} as={anchorTypes.A}>
+            {organization.email}
+          </Anchor>
+        </Text>
+      )}
       <Text as="p" type={TEXT_TYPE.NOTE}>
         <Anchor
           href={`http://${organization.website}`}
