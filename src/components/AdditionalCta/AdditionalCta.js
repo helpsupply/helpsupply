@@ -11,9 +11,9 @@ import { ReactComponent as Plus } from 'static/icons/plus-circle.svg';
 
 import styles from './AdditionalCta.styles';
 
-export const AdditionalCta = ({ cta, onClick, open, title }) => (
+export const AdditionalCta = ({ cta, onClick, open, title, secondaryCta }) => (
   <Fragment>
-    {open && <AdditionalFormTitle title={title} />}
+    {open && <AdditionalFormTitle title={title} secondaryCta={secondaryCta} />}
 
     {!open && (
       <Text
@@ -39,6 +39,7 @@ AdditionalCta.propTypes = {
   onClick: PropTypes.func,
   open: PropTypes.bool,
   title: PropTypes.string,
+  secondaryCta: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 export default AdditionalCta;
