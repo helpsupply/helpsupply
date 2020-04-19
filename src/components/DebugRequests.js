@@ -15,7 +15,6 @@ const EXAMPLE_MENTALHEALTH = {
   additionalInfo: 'nope',
   agreement: true,
   date: 'wednesday',
-  domain: 'ariaglassworks.com',
   recurring: true,
   time: 'afternoon',
   type: 'coach',
