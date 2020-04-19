@@ -3,6 +3,8 @@ import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 
+import RequestKinds from 'lib/organizations/kinds';
+
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 
@@ -46,7 +48,7 @@ const EmotionalSupport = () => {
   );
 };
 
-export const ServicesList = () => {
+export const ServicesList = ({ services }) => {
   const { t } = useTranslation();
 
   return (
@@ -54,10 +56,17 @@ export const ServicesList = () => {
       <Text as="h2" type={TEXT_TYPE.HEADER_3} css={styles.title}>
         {t('service.available.title')}
       </Text>
-      {/* service todo: only display services that are available */}
-      <Groceries />
-      <Childcare />
-      <EmotionalSupport />
+      {services?.map((svc) => {
+        if (svc[0] === RequestKinds.GROCERY) {
+          return <Groceries key={RequestKinds.GROCERY} />;
+        }
+        if (svc[0] === RequestKinds.CHILDCARE) {
+          return <Childcare key={RequestKinds.CHILDCARE} />;
+        }
+        if (svc[0] === RequestKinds.MENTALHEALTH) {
+          return <EmotionalSupport key={RequestKinds.MENTALHEALTH} />;
+        }
+      })}
     </Fragment>
   );
 };

@@ -23,7 +23,7 @@ export const Routes = {
 
   // MVP Routes
   SERVICE_LOCATION: '/service-location',
-  SERVICE_LOCATION_AVAILABLE: '/service-location/available',
+  SERVICE_LOCATION_AVAILABLE: '/service-location/available/:zip?',
   SERVICE_LOCATION_UNAVAILABLE: '/service-location/unavailable',
   FACILITY: `/facility`,
   LOGIN: '/login',
@@ -31,7 +31,7 @@ export const Routes = {
   EMAIL_SIGNUP_SENT: `/signup/confirm`,
   // Update firebaseBackend.js if you change this (it can't require this, because
   // this file is outside of the lib package).
-  EMAIL_SIGNUP_COMPLETE: `/signup/complete`,
+  EMAIL_SIGNUP_COMPLETE: `/signup/complete/:zip?`,
   CONTACT_FORM: `/contact`,
   CONTACT_CONFIRMATION: `/contact/confirm`,
   SERVICE_TYPE: '/service',

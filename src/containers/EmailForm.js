@@ -1,12 +1,12 @@
 /** @jsx jsx */
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
-import { isValidEmail } from 'lib/utils/validations';
+import { isValidEmail, isValidZipCode } from 'lib/utils/validations';
 
 import Note from 'components/Note';
 import FormBuilder from 'components/Form/FormBuilder';
@@ -20,6 +20,19 @@ function EmailForm({ backend }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const checkZip = useCallback(() => {
+    if (!backend.getLocalZip() || !isValidZipCode(backend.getLocalZip())) {
+      history.push(Routes.SERVICE_LOCATION);
+      return false;
+    }
+    return true;
+  }, [backend, history]);
+
+  useEffect(() => {
+    // if we don't have a zip from the zip-forms, send them over there
+    checkZip();
+  }, [checkZip]);
+
   const validate = (val) => {
     if (!isValidEmail(val)) {
       return t('request.workEmailForm.workEmail.validationLabel');
@@ -29,8 +42,12 @@ function EmailForm({ backend }) {
   const handleSubmit = () => {
     setIsLoading(true);
 
+    if (!checkZip()) {
+      return;
+    }
+
     backend
-      .signupServicesWithEmail(email)
+      .signupServicesWithEmail(email, backend.getLocalZip())
       .then(() => {
         history.push(routeWithParams(Routes.EMAIL_SIGNUP_SENT));
       })
