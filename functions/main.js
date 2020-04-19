@@ -38,6 +38,7 @@ backend.getWebhookForOrg = getWebhookForOrg;
 const processServiceRequestRaw = async (id, before, after) => {
   console.log(id, before, after);
   if (after && after.status === 'open') {
+    console.log('trying to send', id);
     let metadata = backend.getMetadataForProvider(after.organization);
     if (!metadata) {
       await backend.updateServiceRequest(
@@ -53,6 +54,8 @@ const processServiceRequestRaw = async (id, before, after) => {
       return;
     }
     try {
+      console.log('collecting data', id);
+
       // Fetch the user specific data
       // admin.auth() explodes with emulators :/
       let userRecord = process.env.DEV
@@ -66,7 +69,9 @@ const processServiceRequestRaw = async (id, before, after) => {
       // Drop in the actual ID
       after.id = id;
 
+      console.log('calling org', id);
       await metadata.DeliverRequest(backend, after, userInfo);
+      console.log('called org', id);
       await backend.updateServiceRequest(
         id,
         {
@@ -76,6 +81,7 @@ const processServiceRequestRaw = async (id, before, after) => {
         true,
       );
     } catch (e) {
+      console.log('hmmm error', e);
       await backend.updateServiceRequest(
         id,
         {

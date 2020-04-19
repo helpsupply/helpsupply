@@ -87,7 +87,6 @@ const EXAMPLE_GROCERY = {
   time: 'evening',
   timeCreated: 1587278008948,
   urgency: 'later',
-  user: 'hPoD6UgciHckILrm54wQRnkjtIH3',
   zip: '10002',
 };
 
