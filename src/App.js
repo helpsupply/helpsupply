@@ -48,12 +48,12 @@ import LearnMore from 'pages/learn_more';
 import Dashboard from 'pages/dashboard';
 import ServiceConfirmation from 'pages/service_confirmation';
 import ServiceReview from 'pages/service_review';
+import NoMatch from 'pages/404';
 // End MVP
 
 import HCPSignupFinish from 'components/HCPSignupFinish';
 import DropSite from 'components/DropSite';
 import PendingDomains from 'components/PendingDomains';
-import NoMatch from 'components/NoMatch';
 import Logout from 'components/Logout';
 import Profile from 'components/Profile';
 import StyleGuide from 'components/StyleGuide/index';
