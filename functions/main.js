@@ -64,7 +64,7 @@ const processServiceRequestRaw = async (id, before, after) => {
       userInfo.email = userRecord.email;
 
       // Drop in the actual ID
-      //after.id = id;
+      after.id = id;
 
       await metadata.DeliverRequest(backend, after, userInfo);
       await backend.updateServiceRequest(
