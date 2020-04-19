@@ -16,9 +16,6 @@ export const Partners = () => {
         <Text as="h4" css={styles.faqSubtitle} type={TEXT_TYPE.HEADER_6}>
           {t('learnMore.about.partners.partner1.title')}
         </Text>
-        <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
-          {t('learnMore.about.partners.partner1.content')}
-        </Text>
         <Text as="p" type={TEXT_TYPE.BODY_2}>
           <Anchor
             href={`http://${t('learnMore.about.partners.partner1.url')}`}
@@ -33,9 +30,6 @@ export const Partners = () => {
         <Text as="h4" css={styles.faqSubtitle} type={TEXT_TYPE.HEADER_6}>
           {t('learnMore.about.partners.partner2.title')}
         </Text>
-        <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
-          {t('learnMore.about.partners.partner2.content')}
-        </Text>
         <Text as="p" type={TEXT_TYPE.BODY_2}>
           <Anchor
             href={`http://${t('learnMore.about.partners.partner2.url')}`}
@@ -49,9 +43,6 @@ export const Partners = () => {
       <div css={styles.organization}>
         <Text as="h4" css={styles.faqSubtitle} type={TEXT_TYPE.HEADER_6}>
           {t('learnMore.about.partners.partner3.title')}
-        </Text>
-        <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
-          {t('learnMore.about.partners.partner3.content')}
         </Text>
         <Text as="p" type={TEXT_TYPE.BODY_2}>
           <Anchor
