@@ -1,12 +1,19 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import styles from './LargeHeader.styles';
+
+import Anchor from 'components/Anchor';
+
 import { Color } from 'lib/theme';
+import { Routes } from 'constants/Routes';
 import { ReactComponent as Logo } from 'static/icons/logo.svg';
+
+import styles from './LargeHeader.styles';
 
 const LargeHeader = () => (
   <div css={styles.root}>
-    <Logo fill={Color.WHITE} />
+    <Anchor href={Routes.HOME}>
+      <Logo fill={Color.WHITE} />
+    </Anchor>
   </div>
 );
 

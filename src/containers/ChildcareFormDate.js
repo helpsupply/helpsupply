@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
+import { StateContext } from 'state/StateProvider';
 
 const dayFields = [
   'mondays',
@@ -24,9 +25,18 @@ const dayFields = [
   'varies',
 ];
 
+const timeFields = [
+  'mornings',
+  'afternoons',
+  'evenings',
+  'nights',
+  'variesTime',
+];
+
 function ChildcareFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
+  const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
     mondays: false,
@@ -62,7 +72,10 @@ function ChildcareFormDate({ id, onSave, request }) {
       setIsLoading(false);
       return;
     }
-    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS, { id }));
+    const url =
+      state.editServiceUrl ||
+      routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS, { id });
+    history.push(url);
   };
 
   const buildDayFields = () => {
@@ -79,7 +92,25 @@ function ChildcareFormDate({ id, onSave, request }) {
     });
   };
 
+  const buildTimeFields = () => {
+    return timeFields.flatMap((time, index) => {
+      return [
+        {
+          customOnChange: handleFieldChange(time),
+          label:
+            time === 'variesTime'
+              ? `${t('service.when.labels.varies')}-1`
+              : t(`service.when.labels.${time}`),
+          name: time,
+          type: formFieldTypes.INPUT_CHECKBOX,
+          value: fields[time],
+        },
+      ];
+    });
+  };
+
   const fieldData = [
+    ...buildDayFields(),
     {
       type: formFieldTypes.NODE,
       node: [
@@ -91,42 +122,7 @@ function ChildcareFormDate({ id, onSave, request }) {
         </div>,
       ],
     },
-    {
-      customOnChange: handleFieldChange('mornings'),
-      label: t('service.when.labels.mornings'),
-      name: 'mornings',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.mornings,
-    },
-    {
-      customOnChange: handleFieldChange('afternoons'),
-      label: t('service.when.labels.afternoons'),
-      name: 'afternoons',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.afternoons,
-    },
-    {
-      customOnChange: handleFieldChange('evenings'),
-      label: t('service.when.labels.evenings'),
-      name: 'evenings',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.evenings,
-    },
-    {
-      customOnChange: handleFieldChange('nights'),
-      label: t('service.when.labels.nights'),
-      name: 'nights',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.nights,
-    },
-    {
-      customOnChange: handleFieldChange('variesTime'),
-      label: t('service.when.labels.varies'),
-      customkey: `${t('service.when.labels.varies')}-1`,
-      name: 'variesTime',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.variesTime,
-    },
+    ...buildTimeFields(),
     {
       type: formFieldTypes.NODE,
       node: [
@@ -143,7 +139,15 @@ function ChildcareFormDate({ id, onSave, request }) {
       onSubmit={handleSubmit}
       title={t('service.childcare.when.title')}
       description={t('service.childcare.when.description')}
-      fields={[...buildDayFields(), ...fieldData]}
+      disabled={
+        !dayFields.some((dayField) => {
+          return fields[dayField];
+        }) ||
+        !timeFields.some((timeField) => {
+          return fields[timeField];
+        })
+      }
+      fields={fieldData}
       isLoading={isLoading}
     />
   );
