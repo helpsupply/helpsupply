@@ -721,6 +721,8 @@ export default class FirebaseBackend {
 
   async getServiceUser() {
     const user = this.firebase.auth().currentUser;
+    throw new Error('Service user invalid: firebase user is not logged in');
+
     if (!user) {
       throw new Error('Service user invalid: firebase user is not logged in');
     }
