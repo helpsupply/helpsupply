@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState, useContext } from 'react';
+import { useEffect, useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -14,7 +14,7 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import { ErrorContext } from 'state/ErrorProvider';
 
-function ServiceTypeForm({ backend, serviceOptions }) {
+function ServiceTypeForm({ backend, serviceOptions, zip }) {
   const history = useHistory();
   const { t } = useTranslation();
   const { setError } = useContext(ErrorContext);
@@ -23,16 +23,36 @@ function ServiceTypeForm({ backend, serviceOptions }) {
   const [fields, setFields] = useState({
     kind: '',
     urgency: '',
+    organization: '',
+    zip: '',
   });
+
+  useEffect(() => {
+    setFields((fields) => ({
+      ...fields,
+      zip,
+    }));
+  }, [zip]);
 
   const handleFieldChange = useCallback(
     (field) => (value) => {
-      setFields((fields) => ({
-        ...fields,
-        [field]: value,
-      }));
+      if (field === 'kind') {
+        const organization = serviceOptions.filter(
+          (opt) => opt.value === value,
+        )[0].organization;
+        setFields((fields) => ({
+          ...fields,
+          [field]: value,
+          organization,
+        }));
+      } else {
+        setFields((fields) => ({
+          ...fields,
+          [field]: value,
+        }));
+      }
     },
-    [],
+    [serviceOptions],
   );
 
   const handleSubmit = async () => {
@@ -108,6 +128,7 @@ function ServiceTypeForm({ backend, serviceOptions }) {
         <ReactMarkdown
           source={t('service.selectType.title', {
             url: Routes.SERVICE_TYPE,
+            zip,
           })}
         />
       }

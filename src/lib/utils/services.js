@@ -3,7 +3,8 @@ import { SERVICE_TEXT } from 'lib/constants/services';
 
 export const buildServicesOptions = (services) => {
   const target = Object.entries(RequestKinds).map(([k, v], i) => {
-    return { label: SERVICE_TEXT[i], value: v };
+    const org = services.filter((svc) => svc[0] === v)[0];
+    return { label: SERVICE_TEXT[i], value: v, organization: org && org[1] };
   });
 
   return target.filter((option) => {
@@ -12,6 +13,6 @@ export const buildServicesOptions = (services) => {
       return option.value !== RequestKinds.PETCARE;
     }
 
-    return services.includes(option.value);
+    return services.some((_) => _.includes(option.value));
   });
 };
