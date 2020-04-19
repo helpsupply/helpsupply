@@ -167,7 +167,7 @@
       },
       "serviceConfirmation": {
         "title": "We have your request for {{kind}}",
-        "description": "Your request has been routed to {{organization}}. They will contact you to fulfill your request.",
+        "description": "Your request has been routed to {{organizationName}}. They will contact you to fulfill your request.",
         "requestServices": "Request more services",
         "viewRequests": "View my requests",
         "fulfilledBy": "To be fulfilled by",

@@ -10,8 +10,6 @@ import styles from './ServiceConfirmation.styles';
 
 export const OrganizationConfirmation = ({ organization }) => {
   const { t } = useTranslation();
-  const organizationEmail = 'email@organization.com';
-  const organizationWebsite = 'organizationwebsite.com';
 
   return (
     <div css={styles.organization}>
@@ -19,20 +17,20 @@ export const OrganizationConfirmation = ({ organization }) => {
         {t('request.serviceConfirmation.fulfilledBy')}
       </Text>
       <Text as="p" css={styles.organizationName}>
-        {organization}
+        {organization.name}
       </Text>
       <Text as="p" type={TEXT_TYPE.NOTE}>
-        <Anchor href={`mailto:${organizationEmail}`} as={anchorTypes.A}>
-          {organizationEmail}
+        <Anchor href={`mailto:${organization.email}`} as={anchorTypes.A}>
+          {organization.email}
         </Anchor>
       </Text>
       <Text as="p" type={TEXT_TYPE.NOTE}>
         <Anchor
-          href={`http://${organizationWebsite}`}
+          href={`http://${organization.website}`}
           as={anchorTypes.A}
           isExternalLink
         >
-          {organizationWebsite}
+          {organization.website}
         </Anchor>
       </Text>
     </div>
