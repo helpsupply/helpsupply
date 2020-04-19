@@ -6,6 +6,12 @@ function get_field(name) {
   };
 }
 
+function get_user_field(name) {
+  return (request, user) => {
+    return user[name];
+  };
+}
+
 function always(resp) {
   return (request) => {
     return resp;
@@ -21,57 +27,51 @@ const FIELD_MAP = {
 
   community: always(['Healthcare workers']),
 
-  language: get_field('language_preference'), // TODO: map/validate
+  language: get_user_field('languagePreference'), // TODO: map/validate
   languageOther: always(''),
 
-  neighborhood: (request) => {
-    return [request.borough_name + ': ' + request.neighborhood_name];
-  },
+  neighborhood: get_field('neighborhood'),
 
-  zip: get_field('zip_code'),
-  phone: get_field('phone'),
-  email: get_field('email'),
+  zip: get_field('zip'),
+  phone: get_user_field('phone'),
+  email: get_user_field('email'),
 
-  firstName: get_field('first_name'),
-  lastName: get_field('last_name'),
+  firstName: get_user_field('firstName'),
+  lastName: get_user_field('lastName'),
 
   urgency: (request) => {
     return {
-      IMMEDIATELY: "Immediately, I'm in crisis",
-      FEW_DAYS: 'In the next few days',
-      SOON: "I'm okay for now, but am worried that I won't be soon",
+      immediate: "Immediately, I'm in crisis",
+      soon: 'In the next few days',
+      later: "I'm okay for now, but am worried that I won't be soon",
     }[request.urgency];
   },
 
-  contactMethod: (request) => {
+  contactMethod: (request, user) => {
     return {
-      TEXT: ['Text message'],
-      CALL: ['Phone Call'],
-      EMAIL: ['Email'],
-    }[request.preferred_contact];
+      email: ['Email'], // TODO: Validate
+      phone: ['Phone Call'],
+    }[user.contactPreference];
   },
 
-  crossStreet: get_field('cross_streets'),
-  timestampCreated: (request) => {
-    return '0';
-  },
-
+  crossStreet: get_field('crossStreet'),
+  timestampCreated: get_field('timeCreated'),
   notes: (request) => {
     return `
 This is a request from help.supply.
 
 Delivery Preference:
 - ${request.delivery_day}
-- ${request.delivery_window}
+- ${request.time}
 
 Grocery List:
-${request.grocery_list}
+${request.groceryList}
 
 Dietary Restrictions:
-${request.dietary_restrictions}
+${request.dietaryRestrictions}
 
 Other Info:
-${request.other_notes}
+${request.additionalInfo}
 `;
   },
 };
