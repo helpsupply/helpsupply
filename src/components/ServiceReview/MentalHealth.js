@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
+import { Services } from 'lib/theme/services';
 import { routeWithParams } from 'lib/utils/routes';
 
 import Text from 'components/Text';
@@ -17,15 +18,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const { setState } = useContext(StateContext);
-  const {
-    additionalInfo,
-    type,
-    kind,
-    urgency,
-    date,
-    time,
-    recurring,
-  } = service;
+  const { additionalInfo, type, urgency, date, time, recurring } = service;
 
   const handleRedirectIntent = () => {
     const url = routeWithParams(Routes.SERVICE_REVIEW, { id });
@@ -67,7 +60,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
   const serviceDetails = (
     <Fragment>
       <Text as="p" css={styles.capitalize}>
-        {kind}
+        {Services.EMOTIONAL}
       </Text>
       <Text as="p" css={styles.capitalize}>
         {urgency}
