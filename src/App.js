@@ -118,9 +118,9 @@ const ProtectedRoute = ({ backend, children, path }) => {
 function App({ backend }) {
   return (
     <StateProvider>
-      <ErrorProvider>
-        <Global styles={styles} />
-        <Router>
+      <Global styles={styles} />
+      <Router>
+        <ErrorProvider>
           <div className="App">
             <Switch>
               {/*Debug / Admin Routes*/}
@@ -376,8 +376,8 @@ function App({ backend }) {
               </ProtectedRoute>
             </Switch>
           </div>
-        </Router>
-      </ErrorProvider>
+        </ErrorProvider>
+      </Router>
     </StateProvider>
   );
 }

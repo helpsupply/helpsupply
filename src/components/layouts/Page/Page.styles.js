@@ -9,7 +9,6 @@ const styles = {
   error: css({
     alignSelf: ['', '', 'flex-end'],
     display: 'flex',
-    flex: 1,
     flexDirection: 'column',
     width: ['', '', '50%'],
   }),
