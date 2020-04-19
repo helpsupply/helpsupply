@@ -12,19 +12,15 @@ const EXAMPLE_MENTALHEALTH = {
   kind: 'mentalhealth',
   organization: 'nyccovidcare',
 
-  first_name: 'John',
-  last_name: 'Smith',
-  email: 'test@test.com',
-  phone: '555-555-5555',
-  zip_code: '00000',
-  preferred_contact: 'PHONE',
-  urgency: 'FEW_DAYS',
-  language_preference: 'Spanish',
-  day: 'Monday',
-  time: 'Afternoon',
+  additionalInfo: 'nope',
+  agreement: true,
+  date: 'wednesday',
+  domain: 'ariaglassworks.com',
   recurring: true,
-  volunteer_type: 'Life Coach',
-  other_notes: 'i love cookies',
+  time: 'afternoon',
+  type: 'coach',
+  urgency: 'soon',
+  zip: '10002',
 };
 
 const EXAMPLE_CHILDCARE = {
