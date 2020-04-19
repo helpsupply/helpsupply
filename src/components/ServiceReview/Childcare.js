@@ -100,14 +100,14 @@ export const ChildcareServiceReview = ({ id, service }) => {
   );
 
   const childcareDetails = (
-    <Text as="p">
+    <Text as="div">
       {Object.values(children || []).map((child, idx) => (
-        <Fragment>
-          <Text as="div">
+        <div key={idx}>
+          <Text key={idx} as="div">
             Child {idx + 1}: {capitalize(child.birthMonth)}, {child.birthYear}
           </Text>
           <Text as="p">{child.specialNeeds}</Text>
-        </Fragment>
+        </div>
       ))}
     </Text>
   );

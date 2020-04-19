@@ -76,7 +76,7 @@ export default class FirebaseBackend {
   async getServiceRequests(status) {
     const { currentUser } = this.firebase.auth();
     if (!currentUser.uid) {
-      return Promise.reject('You must be logged in to view your requests.');
+      throw new Error('You must be logged in to view your requests.');
     }
     var queryBuilder = this.firestore
       .collection('servicerequest')
@@ -144,10 +144,16 @@ export default class FirebaseBackend {
       }
     }
 
-    await this.firestore
+    return this.firestore
       .collection('servicerequest')
       .doc(id)
-      .set(request, { merge: true });
+      .set(request, { merge: true })
+      .then(() => {
+        return 'Success';
+      })
+      .catch((e) => {
+        throw new Error(e);
+      });
   }
 
   // Get a specific Service Request

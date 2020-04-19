@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useEffect, useState } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ import DropSiteAdmin from 'components/Dropsite/Admin';
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
 import DeleteRequestModal from 'components/Request/DeleteRequestModal';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function AdminDropSite({ backend }) {
   const history = useHistory();
@@ -22,16 +23,29 @@ function AdminDropSite({ backend }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isRequestsLoading, setIsRequestsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setError } = useContext(ErrorContext);
 
   useEffect(() => {
-    backend.getDropSites(params.id).then((data) => {
-      data && setDropSite({ ...data, dropSiteId: data.location_id });
-      setIsLoading(false);
-    });
-    backend.getRequests(params.id).then((data) => {
-      data && setRequests(data);
-    });
-  }, [backend, params.id]);
+    backend
+      .getDropSites(params.id)
+      .then((data) => {
+        data && setDropSite({ ...data, dropSiteId: data.location_id });
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.message);
+      });
+    backend
+      .getRequests(params.id)
+      .then((data) => {
+        data && setRequests(data);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.message);
+      });
+  }, [setError, backend, params.id]);
 
   const handleUpdateContact = () => {
     history.push(

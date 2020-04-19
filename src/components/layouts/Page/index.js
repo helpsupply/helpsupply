@@ -12,10 +12,13 @@ import LargeHeader from 'components/Header/LargeHeader';
 import Intro from 'components/EntryContent/Intro';
 
 import styles from './Page.styles';
+import { useContext } from 'react';
+import { ErrorContext } from 'state/ErrorProvider';
 
 const PageContent = ({
   contentContainerStyles,
   children,
+  error,
   hasBackButton,
   isDesktop,
   onBackButtonClick,
@@ -31,6 +34,7 @@ const PageContent = ({
         contentContainerStyles,
       ]}
     >
+      {error && error}
       <div css={styles.pageContent}>
         {hasBackButton && !isDesktop && (
           <BackButton onClick={onBackButtonClick} />
@@ -53,6 +57,7 @@ const Page = ({
 }) => {
   const [pageContentTopPadding, setPageContentTopPadding] = useState(0);
   const { matchesBreakpoint } = useMediaQuery();
+  const { errorMsg } = useContext(ErrorContext);
 
   const isDesktop =
     (`(min-width: ${Breakpoints.LARGE}px)`,
@@ -101,6 +106,7 @@ const Page = ({
 
       <PageContent
         children={children}
+        error={errorMsg}
         contentContainerStyles={contentContainerStyles}
         hasBackButton={hasBackButton}
         isDesktop={isDesktop}

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -11,10 +11,12 @@ import { isValidEmail, isValidZipCode } from 'lib/utils/validations';
 import Note from 'components/Note';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function EmailForm({ backend }) {
   const history = useHistory();
   const { t } = useTranslation();
+  const { setError } = useContext(ErrorContext);
 
   const [email, setEmail] = useState('');
 
@@ -52,10 +54,9 @@ function EmailForm({ backend }) {
         history.push(routeWithParams(Routes.EMAIL_SIGNUP_SENT));
       })
       .catch((error) => {
-        console.error('error', error);
+        setError(error.message);
         setIsLoading(false);
       });
-    // service TODO: handle exceptions
   };
 
   const fieldData = [

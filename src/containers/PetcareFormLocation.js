@@ -77,10 +77,13 @@ function PetcareFormLocation({ id, onSave, request }) {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    if (addAdditionalContact) {
-      await onSave({ ...fields, ...additionalFields });
-    } else {
-      await onSave(fields);
+    const res = await onSave({
+      ...fields,
+      ...(addAdditionalContact && additionalFields),
+    });
+    if (!res) {
+      setIsLoading(false);
+      return;
     }
     history.push(routeWithParams(Routes.SERVICE_PETCARE_WHEN, { id }));
   };

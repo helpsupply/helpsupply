@@ -139,7 +139,11 @@ function ChildcareFormDetails({ id, onSave, request }) {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    await onSave({ children: fields });
+    const res = await onSave({ children: fields });
+    if (!res) {
+      setIsLoading(false);
+      return;
+    }
     history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHAT, { id }));
   };
 
