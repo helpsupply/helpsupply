@@ -15,11 +15,15 @@ import { styles } from './LearnMore.styles';
 export const FAQ = () => {
   const { t } = useTranslation();
 
-  const mutualAid = '[Mutual Aid NYC](https://mutualaid.nyc/)';
-  const workersNeedChildcare =
-    '[Workers Need Childcare](https://www.workersneedchildcare.org/)';
-  const nycCovidCare =
-    '[NYC COVID Care Network](https://www.nyccovidcare.org/)';
+  const mutualAid = `[${t(
+    'learnMore.about.partners.partner1.title',
+  )}](http://${t('learnMore.about.partners.partner1.url')})`;
+  const workersNeedChildcare = `[${t(
+    'learnMore.about.partners.partner2.title',
+  )}](http://${t('learnMore.about.partners.partner2.url')})`;
+  const nycCovidCare = `[${t(
+    'learnMore.about.partners.partner3.title',
+  )}](http://${t('learnMore.about.partners.partner1.url')})`;
 
   return (
     <Fragment>
