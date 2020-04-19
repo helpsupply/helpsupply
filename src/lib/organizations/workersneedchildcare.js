@@ -12,12 +12,6 @@ function get_user_field(name) {
   };
 }
 
-function get_field_wrap_array(name) {
-  return (request) => {
-    return [request[name]];
-  };
-}
-
 function get_multi_select(keys, values) {
   return (request) => {
     let out = [];

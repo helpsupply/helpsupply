@@ -51,18 +51,20 @@ describe('Service Request Routing', () => {
 
     // Create a basic request
     let backend = new FirebaseBackend(testApp);
-    let id = await backend.saveServiceRequest({
-      kind: 'grocery',
-      organization: 'testOrg',
-      list: 'bananas, fruit',
-    });
 
+    // Save user specific data
     await backend.saveServiceUser({
       firstName: 'bob',
       lastName: 'vance',
       phone: '5555555555',
       contactPreference: 'phone',
       languagePreference: 'english',
+    });
+
+    let id = await backend.saveServiceRequest({
+      kind: 'grocery',
+      organization: 'testOrg',
+      list: 'bananas, fruit',
     });
 
     // Verify it was written
@@ -83,7 +85,7 @@ describe('Service Request Routing', () => {
 
     // Verify our simple payload was delivered
     let payloads = (
-      await backend.firestore.collection('testwebhookpayload').get()
+      await admin.firestore().collection('testwebhookpayload').get()
     ).docs;
     expect(payloads[0].data()).toStrictEqual({ list: 'bananas, fruit' });
 
@@ -113,6 +115,16 @@ describe('Service Request Routing', () => {
 
     // Create a basic request
     let backend = new FirebaseBackend(testApp);
+
+    // Save user specific data
+    await backend.saveServiceUser({
+      firstName: 'bob',
+      lastName: 'vance',
+      phone: '5555555555',
+      contactPreference: 'phone',
+      languagePreference: 'english',
+    });
+
     let id = await backend.saveServiceRequest({
       kind: 'grocery',
       organization: 'testOrg',

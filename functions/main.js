@@ -54,15 +54,13 @@ const processServiceRequestRaw = async (id, before, after) => {
     }
     try {
       // Fetch the user specific data
-      console.log('WTF');
-
-      let userRecord = { email: 'derp' }; //await admin.auth().getUser(after.user);
-      console.log('BZN', userRecord);
-
+      // admin.auth() explodes with emulators :/
+      let userRecord = process.env.DEV
+        ? { email: 'bob@bob.com' }
+        : await admin.auth().getUser(after.user);
       let userInfo = (
         await backend.firestore.collection('serviceuser').doc(after.user).get()
       ).data();
-      console.log('BZN2', userInfo);
       userInfo.email = userRecord.email;
 
       await metadata.DeliverRequest(backend, after, userInfo);
