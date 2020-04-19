@@ -38,7 +38,7 @@ backend.getWebhookForOrg = getWebhookForOrg;
 const processServiceRequestRaw = async (id, before, after) => {
   console.log(id, before, after);
   if (after && after.status === 'open') {
-    console.log('trying to send', id);
+    console.log('trying to send', id, new Date().getTime() / 1000);
     let metadata = backend.getMetadataForProvider(after.organization);
     if (!metadata) {
       await backend.updateServiceRequest(
@@ -54,7 +54,7 @@ const processServiceRequestRaw = async (id, before, after) => {
       return;
     }
     try {
-      console.log('collecting data', id);
+      console.log('collecting data', id, new Date().getTime() / 1000);
 
       // Fetch the user specific data
       // admin.auth() explodes with emulators :/
@@ -69,9 +69,9 @@ const processServiceRequestRaw = async (id, before, after) => {
       // Drop in the actual ID
       after.id = id;
 
-      console.log('calling org', id);
+      console.log('calling org', id, new Date().getTime() / 1000);
       await metadata.DeliverRequest(backend, after, userInfo);
-      console.log('called org', id);
+      console.log('called org', id, new Date().getTime() / 1000);
       await backend.updateServiceRequest(
         id,
         {
@@ -81,7 +81,7 @@ const processServiceRequestRaw = async (id, before, after) => {
         true,
       );
     } catch (e) {
-      console.log('hmmm error', e);
+      console.log('hmmm error', e, new Date().getTime() / 1000);
       await backend.updateServiceRequest(
         id,
         {
@@ -93,13 +93,15 @@ const processServiceRequestRaw = async (id, before, after) => {
       );
       console.error(e);
     }
+  } else {
+    console.log('not ready to send', id);
   }
 };
 
 exports.processServiceRequest = functions.firestore
   .document('servicerequest/{requestId}')
   .onWrite(async (snapshot) => {
-    processServiceRequestRaw(
+    await processServiceRequestRaw(
       snapshot.before.id,
       snapshot.before.data(),
       snapshot.after.data(),

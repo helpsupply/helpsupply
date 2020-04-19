@@ -50,6 +50,7 @@ function ContactConfirmationPage({ backend }) {
       {isLoading && <PageLoader />}
       {!isLoading && (
         <ContactConfirmation
+          id={serviceUser.id}
           onEdit={handleOnEdit}
           email={firebaseUser.email}
           serviceUser={serviceUser}

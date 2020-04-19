@@ -13,6 +13,7 @@ import styles from './InputDropdown.styles';
 const DEFAULT = 'placeholder';
 
 function InputDropdown({
+  customkey,
   customOnChange,
   defaultValue,
   inputProps,
@@ -66,7 +67,7 @@ function InputDropdown({
           </select>
         }
         defaultValue={defaultValue ? defaultValue : DEFAULT}
-        name={name}
+        name={customkey ? customkey : name}
         onChange={(args) => handleChange(args[0].nativeEvent)}
         rules={{
           ...validation,
