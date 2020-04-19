@@ -6,6 +6,12 @@ const additionalRightPadding = paddingDesktop * 0.2;
 const rightPaddingDesktop = paddingDesktop + additionalRightPadding;
 
 const styles = {
+  error: css({
+    alignSelf: ['', '', 'flex-end'],
+    display: 'flex',
+    flexDirection: 'column',
+    width: ['', '', '50%'],
+  }),
   headerContainerDesktop: css({
     backgroundColor: Color.PRIMARY,
     bottom: 0,

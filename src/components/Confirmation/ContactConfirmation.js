@@ -34,7 +34,7 @@ function ContactConfirmation({ email, onEdit, serviceUser }) {
   const { t } = useTranslation();
 
   const handleOnCtaClick = () => {
-    history.push(Routes.SERVICE_LOCATION);
+    history.push(Routes.SERVICE_TYPE);
   };
 
   const { data } = serviceUser;

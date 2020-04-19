@@ -1,28 +1,36 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Page from 'components/layouts/Page';
 import EmotionalFormDate from 'containers/EmotionalFormDate';
 import EmotionalFormType from 'containers/EmotionalFormType';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function ServiceEmotional({ backend, step }) {
   const [request, setRequest] = useState(null);
   const params = useParams();
+  const { hasError, setError } = useContext(ErrorContext);
 
-  const updateService = (request) => {
-    backend.updateServiceRequest(params.id, request, true);
-  };
+  const updateService = async (request) =>
+    await backend.updateServiceRequest(params.id, request, true).catch((e) => {
+      setError(e.message);
+    });
 
   useEffect(() => {
-    if (!params.id) {
+    if (!params.id || !!hasError) {
       return;
     }
-    backend.getServiceRequest(params.id).then((data) => {
-      setRequest(data);
-    });
-  }, [backend, params.id]);
+    backend
+      .getServiceRequest(params.id)
+      .then((data) => {
+        setRequest(data);
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
+  }, [setError, hasError, backend, params.id]);
 
   if (params.id && !request) {
     // loading

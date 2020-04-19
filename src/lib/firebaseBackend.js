@@ -51,6 +51,18 @@ export default class FirebaseBackend {
     }
   }
 
+  setLocalZip(zipCode) {
+    window.localStorage.setItem('zipCode', zipCode);
+  }
+
+  getLocalZip() {
+    return window.localStorage.getItem('zipCode');
+  }
+
+  clearLocalZip() {
+    return window.localStorage.removeItem('zipCode');
+  }
+
   // Returns an array of pairs [RequestKind, OrganizationId]
   getServicesForZip(zipCode) {
     return OrganizationIndex.ByZip[zipCode];
@@ -64,7 +76,7 @@ export default class FirebaseBackend {
   async getServiceRequests(status) {
     const { currentUser } = this.firebase.auth();
     if (!currentUser.uid) {
-      return Promise.reject('You must be logged in to view your requests.');
+      throw new Error('You must be logged in to view your requests.');
     }
     var queryBuilder = this.firestore
       .collection('servicerequest')
@@ -132,10 +144,16 @@ export default class FirebaseBackend {
       }
     }
 
-    await this.firestore
+    return this.firestore
       .collection('servicerequest')
       .doc(id)
-      .set(request, { merge: true });
+      .set(request, { merge: true })
+      .then(() => {
+        return 'Success';
+      })
+      .catch((e) => {
+        throw new Error(e);
+      });
   }
 
   // Get a specific Service Request
@@ -616,10 +634,10 @@ export default class FirebaseBackend {
     window.localStorage.setItem('emailForSignIn', email);
   }
 
-  async signupServicesWithEmail(email) {
+  async signupServicesWithEmail(email, zip) {
     const actionCodeSettings = {
       // Equal to EMAIL_SIGNUP_COMPLETE
-      url: `${window.location.protocol}//${window.location.host}/signup/complete/`,
+      url: `${window.location.protocol}//${window.location.host}/signup/complete/${zip}/`,
       handleCodeInApp: true,
     };
 
@@ -693,8 +711,10 @@ export default class FirebaseBackend {
           .set(inputFields, { merge: true });
       } else {
         // Create serviceuser
-        return (await this.firestore.collection('serviceuser').add(inputFields))
-          .id;
+        return await this.firestore
+          .collection('serviceuser')
+          .doc(user.uid)
+          .set(inputFields);
       }
     });
   }

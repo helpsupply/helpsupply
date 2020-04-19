@@ -42,10 +42,21 @@ function ServiceLocationForm({ backend, serviceUser }) {
   const { zipCode, ...requiredFields } = fields;
 
   const handleSubmit = () => {
-    // service todo: save zip code field to user
-    // service todo: check valid service types
     setIsLoading(true);
-    history.push(routeWithParams(Routes.SERVICE_TYPE));
+
+    const servicesByZip = backend.getServicesForZip(fields.zipCode);
+
+    if (!servicesByZip?.length) {
+      history.push(routeWithParams(Routes.SERVICE_LOCATION_UNAVAILABLE));
+      return;
+    }
+
+    backend.setLocalZip(fields.zipCode);
+    history.push(
+      routeWithParams(Routes.SERVICE_LOCATION_AVAILABLE, {
+        zip: fields.zipCode,
+      }),
+    );
   };
 
   const fieldData = [

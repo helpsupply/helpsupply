@@ -119,9 +119,6 @@ function FindFacility({ backend }) {
         onSuggestionsClearRequested={() => null}
         onSelect={setSelectedResult}
       />
-      <Text type={TEXT_TYPE.BODY_2}>
-        {t('request.facilitySearch.notSeeing')}
-      </Text>
     </Form>
   );
 }

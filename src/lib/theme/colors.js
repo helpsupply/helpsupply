@@ -14,6 +14,9 @@ export const Color = {
   GREEN: '#3BD089',
   WHITE_25: 'rgba(255, 255, 255, .25)', // 25% opacity of Color.WHITE
   WHITE: '#FFFFFF',
+  ORANGE: '#E03600',
+  ORANGE_75: '#E76136',
+  ORANGE_05: '#FAE1D9',
 };
 
 Color.PRIMARY = Color.BRIGHT_BLUE;

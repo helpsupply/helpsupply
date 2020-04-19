@@ -1,13 +1,13 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
-import { isValidEmail } from 'lib/utils/validations';
+import { isValidEmail, isValidZipCode } from 'lib/utils/validations';
 
 import { useAuth } from 'hooks/useAuth';
 
@@ -16,16 +16,42 @@ import Note from 'components/Note';
 import Anchor, { anchorTypes } from 'components/Anchor';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function SignupFinish({ backend }) {
   const { isLoggedIn } = useAuth();
   const history = useHistory();
+  const params = useParams();
   const { t } = useTranslation();
+  const { errorMsg, setError } = useContext(ErrorContext);
 
   const [email, setEmail] = useState('');
   const [shouldConfirmEmail, setShouldConfirmEmail] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+
+  const { zip: zipRulParam } = params;
+
+  useEffect(() => {
+    const zip = zipRulParam || backend.getLocalZip();
+
+    // if no zip in url and none in localstorage, go to enter your zip form
+    if ((!zipRulParam && !backend.getLocalZip()) || !isValidZipCode(zip)) {
+      history.push(Routes.SERVICE_LOCATION);
+      return;
+    }
+
+    const servicesByZip = backend.getServicesForZip(zip);
+
+    // if they somehow get here and there's not services for their zip, send them to unavailable page
+    if (!servicesByZip?.length) {
+      history.push(Routes.SERVICE_LOCATION_UNAVAILABLE);
+      return;
+    }
+
+    // if results for zip provided via localstorage or via url param, explicitly store the zip that works
+    backend.setLocalZip(zip);
+  }, [backend, history, zipRulParam]);
 
   const routeToNextPage = useCallback(() => {
     backend
@@ -36,22 +62,26 @@ function SignupFinish({ backend }) {
           return;
         }
 
-        backend.getServiceRequests().then((data) => {
-          if (data.length) {
-            history.push(routeWithParams(Routes.DASHBOARD));
-            return;
-          }
+        backend
+          .getServiceRequests()
+          .then((data) => {
+            if (data.length) {
+              history.push(routeWithParams(Routes.DASHBOARD));
+              return;
+            }
 
-          history.push(routeWithParams(Routes.SERVICE_LOCATION));
-          return;
-        });
+            history.push(routeWithParams(Routes.SERVICE_TYPE));
+            return;
+          })
+          .catch((e) => {
+            setError(e.message);
+          });
       })
       .catch((error) => {
         setIsLoading(false);
-        console.error('get service user error', error);
-        // service todo: handle this error
+        setError(error.message);
       });
-  }, [backend, history]);
+  }, [setError, backend, history]);
 
   const handleSubmit = useCallback(
     ({ email }) => {
@@ -69,17 +99,16 @@ function SignupFinish({ backend }) {
           setSubmitting(false);
         })
         .catch((error) => {
-          console.error('continue signup error', error);
           setSubmitting(false);
           setIsLoading(false);
-          // service todo: handle this error
+          setError(error.message);
         });
     },
-    [backend, routeToNextPage, shouldConfirmEmail],
+    [setError, backend, routeToNextPage, shouldConfirmEmail],
   );
 
   useEffect(() => {
-    if (submitting) {
+    if (submitting || !!errorMsg) {
       return;
     }
 
@@ -99,6 +128,7 @@ function SignupFinish({ backend }) {
     }
   }, [
     backend,
+    errorMsg,
     handleSubmit,
     isLoggedIn,
     submitting,

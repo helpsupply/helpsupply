@@ -1,16 +1,19 @@
 /** @jsx jsx */
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useContext, useCallback, useState } from 'react';
 import { css, jsx } from '@emotion/core';
 
 import { useMediaQuery } from 'hooks/useMediaQuery';
 import { Breakpoints } from 'constants/Breakpoints';
+import { ErrorContext } from 'state/ErrorProvider';
 
 import BackButton from 'components/BackButton';
 import Header from 'components/Header';
 import Text from 'components/Text';
 import LargeHeader from 'components/Header/LargeHeader';
 import Intro from 'components/EntryContent/Intro';
+import Error from 'components/Error/Error';
 
+import MetaData from './MetaData';
 import styles from './Page.styles';
 
 const PageContent = ({
@@ -53,6 +56,7 @@ const Page = ({
 }) => {
   const [pageContentTopPadding, setPageContentTopPadding] = useState(0);
   const { matchesBreakpoint } = useMediaQuery();
+  const { errorMsg } = useContext(ErrorContext);
 
   const isDesktop =
     (`(min-width: ${Breakpoints.LARGE}px)`,
@@ -72,42 +76,52 @@ const Page = ({
   const today = new Date();
 
   return (
-    <div css={[styles.root, rootContainerStyles]}>
-      {willUseSmallHeader && (
-        <Header
-          currentProgress={currentProgress}
-          totalProgress={totalProgress}
-        />
-      )}
-
-      {!willUseSmallHeader && (
-        <div css={isDesktop && styles.headerContainerDesktop}>
-          <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
-            {!isHome && hasBackButton && (
-              <BackButton onClick={onBackButtonClick} />
-            )}
-            <LargeHeader />
-            {isDesktop && isHome && (
-              <Fragment>
-                <Intro />
-                <Text css={styles.copyright}>
-                  &copy; {today.getFullYear()} Help Supply, LLC
-                </Text>
-              </Fragment>
-            )}
+    <Fragment>
+      <MetaData />
+      <div css={[styles.root, rootContainerStyles]}>
+        {errorMsg && (
+          <div css={styles.error}>
+            <Error error={errorMsg} />
           </div>
-        </div>
-      )}
+        )}
 
-      <PageContent
-        children={children}
-        contentContainerStyles={contentContainerStyles}
-        hasBackButton={hasBackButton}
-        isDesktop={isDesktop}
-        onBackButtonClick={onBackButtonClick}
-        topPadding={pageContentTopPadding}
-      />
-    </div>
+        {willUseSmallHeader && (
+          <Header
+            currentProgress={currentProgress}
+            totalProgress={totalProgress}
+          />
+        )}
+
+        {!willUseSmallHeader && (
+          <div css={isDesktop && styles.headerContainerDesktop}>
+            <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
+              {!isHome && hasBackButton && (
+                <BackButton onClick={onBackButtonClick} />
+              )}
+              <LargeHeader />
+              {isDesktop && isHome && (
+                <Fragment>
+                  <Intro />
+                  <Text css={styles.copyright}>
+                    &copy; {today.getFullYear()} Help Supply, LLC
+                  </Text>
+                </Fragment>
+              )}
+            </div>
+          </div>
+        )}
+
+        <PageContent
+          children={children}
+          error={errorMsg}
+          contentContainerStyles={contentContainerStyles}
+          hasBackButton={hasBackButton}
+          isDesktop={isDesktop}
+          onBackButtonClick={onBackButtonClick}
+          topPadding={pageContentTopPadding}
+        />
+      </div>
+    </Fragment>
   );
 };
 

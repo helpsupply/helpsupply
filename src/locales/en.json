@@ -1,6 +1,9 @@
 {
   "translations": {
     "global": {
+      "error": {
+        "title": "Internal Server Error"
+      },
       "form": {
         "editLabel": "Edit",
         "submitLabel": "Submit",
@@ -9,6 +12,7 @@
         "deleteLabel": "Delete",
         "submitLabelCta": "Please complete form",
         "submitLabelNext": "Next",
+        "emailAddressLabel": "Email address",
         "daypicker": {
           "placeholder": "Date needed"
         }
@@ -113,8 +117,8 @@
         "newFacility": "New facility"
       },
       "facilityForm": {
-        "title": "Add a new facility",
-        "description": "Enter some information about your facility.",
+        "title": "What NYC hospital or EMT service do you work for?",
+        "description": "I'm a healthcare professional or support staff member working at:",
         "nameLabel": "Name of the facility",
         "zipLabel": "Zip code",
         "cityLabel": "City",
@@ -126,7 +130,7 @@
         "addNew": "Add a new facility",
         "description": "I'm a healthcare professional working at:",
         "notSeeing": "Not seeing your facility?",
-        "label": "City or healthcare facility",
+        "label": "Hospital or EMS service",
         "title": "Find your healthcare facility"
       },
       "review": {
@@ -166,8 +170,8 @@
         }
       },
       "serviceConfirmation": {
-        "title": "We have your request for {{kind}}",
-        "description": "Your request has been routed to {{organization}}. They will contact you to fulfill your request.",
+        "title": "We have your request for {{serviceName}}",
+        "description": "Your request has been routed to {{organizationName}}. They will contact you to fulfill your request.",
         "requestServices": "Request more services",
         "viewRequests": "View my requests",
         "fulfilledBy": "To be fulfilled by",
@@ -186,22 +190,26 @@
         }
       },
       "workEmailForm": {
-        "title": "Enter your work email address",
-        "description": "We need to verify your email before you request services.",
+        "title": "What's your work email address?",
+        "description": "This will be used to validate you when you return to the site. No password required.",
         "learnMore": "Learn more",
         "workEmail": {
           "label": "Work email",
-          "disclaimer": "Note: we will never share your email address with any other parties.",
+          "disclaimer": "We will only share the information you provide with the trusted partner organization that will fulfill your request.",
           "validationLabel": "Please enter a valid email address"
         },
         "sent": {
           "title": "Thank you",
-          "description": "We just sent an email to {{email}}. Please click the link in that email to to start requesting services.",
+          "description": "We just sent an email to {{email}}. Please follow the link in that email to start a new request.",
           "emailDefault": "the email address you provided"
         },
         "finish": {
           "title": "Please enter your email, once more"
         }
+      },
+      "loginForm": {
+        "title": "Welcome back!",
+        "description": "Simply enter your email address and we'll send you a link to access your open requests and create new ones."
       },
       "dropSiteContactForm": {
         "title": "Contact info",
@@ -247,6 +255,30 @@
           "zipCode": "ZIP code"
         }
       },
+      "updateLocationForm": {
+        "title": "Want to update your ZIP code?",
+        "description": "Important: We are currently only able to serve people in the NYC area.",
+        "note": "To receive updates when we expand to more locations, email us at {{email}}."
+      },
+      "available": {
+        "title": "Services we're offering in your location",
+        "groceries": "Groceries",
+        "childCare": "Child care",
+        "emotionalSupport": "Emotional support",
+        "providedBy": {
+          "mutualAid": "Provided by Mutual Aid NYC",
+          "workersNeedChildcare": "Provided by Workers Need Childcare",
+          "nycCovid": "Provided by NYC COVID Care Network"
+        }
+      },
+      "unavailable": {
+        "title": "Sorry, we're not able to offer services in your area yet",
+        "description": "Please enter your email address if you'd like us to reach out when we expand to more locations.",
+        "sent": {
+          "title": "Thank you",
+          "description": "We'll let you know when we expand to more locations."
+        }
+      },
       "contactForm": {
         "title": "Contact info",
         "description": "Enter your contact information so we can coordinate the services you request.",
@@ -275,7 +307,7 @@
         "title": "Thank you for providing your contact info"
       },
       "selectType": {
-        "title": "What type of service are you looking for?",
+        "title": "What kind of help do you need in [11201]({{url}})?",
         "description": "Please indicate the type of service and urgency of your request below",
         "form": {
           "serviceTypeLabel": "Service type",
@@ -307,8 +339,8 @@
       },
       "grocery": {
         "where": {
-          "title": "Where do you want groceries delivered?",
-          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address. Our childcare partner, Workers Need Childcare, only uses licensed childcare",
+          "title": "We need a little more info on the location of your delivery",
+          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address.",
           "add": "Add an additional contact person for this request",
           "labels": {
             "zip": "ZIP code",

@@ -1,26 +1,39 @@
 /** @jsx jsx */
-import { useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
-import { isValidEmail } from 'lib/utils/validations';
+import { isValidEmail, isValidZipCode } from 'lib/utils/validations';
 
 import Note from 'components/Note';
-import Anchor, { anchorTypes } from 'components/Anchor';
-
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function EmailForm({ backend }) {
   const history = useHistory();
   const { t } = useTranslation();
+  const { setError } = useContext(ErrorContext);
 
   const [email, setEmail] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const checkZip = useCallback(() => {
+    if (!backend.getLocalZip() || !isValidZipCode(backend.getLocalZip())) {
+      history.push(Routes.SERVICE_LOCATION);
+      return false;
+    }
+    return true;
+  }, [backend, history]);
+
+  useEffect(() => {
+    // if we don't have a zip from the zip-forms, send them over there
+    checkZip();
+  }, [checkZip]);
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
@@ -31,16 +44,19 @@ function EmailForm({ backend }) {
   const handleSubmit = () => {
     setIsLoading(true);
 
+    if (!checkZip()) {
+      return;
+    }
+
     backend
-      .signupServicesWithEmail(email)
+      .signupServicesWithEmail(email, backend.getLocalZip())
       .then(() => {
         history.push(routeWithParams(Routes.EMAIL_SIGNUP_SENT));
       })
       .catch((error) => {
-        console.error('error', error);
+        setError(error.message);
         setIsLoading(false);
       });
-    // service TODO: handle exceptions
   };
 
   const fieldData = [
@@ -63,12 +79,7 @@ function EmailForm({ backend }) {
       isLoading={isLoading}
       fields={fieldData}
     >
-      <Note>
-        {t('request.workEmailForm.workEmail.disclaimer') + ' '}
-        <Anchor href={Routes.HOME} as={anchorTypes.A}>
-          {t('request.workEmailForm.learnMore')}
-        </Anchor>
-      </Note>
+      <Note>{t('request.workEmailForm.workEmail.disclaimer')}</Note>
     </FormBuilder>
   );
 }

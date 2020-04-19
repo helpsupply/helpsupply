@@ -23,13 +23,9 @@ const groupBy = (arr, key) => {
 
 const mapServiceKindToCard = (request) => ({
   [RequestKinds.GROCERY]: <GroceryRequest css={styles.request} {...request} />,
-  // TODO: create service request cards
-  // we might not need separate requests for this but since they have different info
-  // i'm not sure we will need to list it all or just the common fields
   [RequestKinds.MENTALHEALTH]: (
     <MentalHealthRequest css={styles.request} {...request} />
   ),
-  [RequestKinds.PETCARE]: null,
   [RequestKinds.CHILDCARE]: (
     <ChildCareRequest css={styles.request} {...request} />
   ),

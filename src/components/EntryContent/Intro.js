@@ -18,8 +18,8 @@ const Intro = () => {
       <Text css={styles.introContent} as="h2" type={TEXT_TYPE.HEADER_3}>
         {t('home.intro')}
       </Text>
-      <ListLink href={Routes.FACILITY} label={t('home.needHelp')} />
-      <Anchor withIcon css={styles.link} href={Routes.DASHBOARD}>
+      <ListLink href={Routes.SERVICE_LOCATION} label={t('home.needHelp')} />
+      <Anchor withIcon css={styles.link} href={Routes.LOGIN}>
         {t('home.openRequests')}
       </Anchor>
     </div>

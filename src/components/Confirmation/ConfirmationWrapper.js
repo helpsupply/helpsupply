@@ -7,13 +7,13 @@ import { ReactComponent as Check } from 'static/icons/green-check.svg';
 
 import styles from './Confirmation.styles.js';
 
-function ConfirmationWrapper({ children, title }) {
+function ConfirmationWrapper({ children, title, noIcon }) {
   return (
     <div css={styles.root}>
       <div css={[styles.header, styles.section]}>
         <Text as="h3" type={TEXT_TYPE.HEADER_3} css={styles.title}>
           {title}
-          <Check css={styles.check} />
+          {!noIcon && <Check css={styles.check} />}
         </Text>
       </div>
       {children}

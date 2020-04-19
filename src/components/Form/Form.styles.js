@@ -22,6 +22,11 @@ const styles = {
   }),
   title: css({
     marginBottom: Space.S15,
+
+    a: {
+      color: Color.PRIMARY,
+      textDecoration: 'underline',
+    },
   }),
   button: css({
     minHeight: Height.INPUT,

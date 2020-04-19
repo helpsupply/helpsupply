@@ -18,16 +18,24 @@ import MentalHealthServiceReview from 'components/ServiceReview/MentalHealth';
 
 import { styles } from 'components/ServiceReview/ServiceReview.styles';
 
-function ServiceReview({ id, service }) {
+function ServiceReview({ backend, id, service }) {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleSubmit = () => {
-    history.push(
-      routeWithParams(Routes.SERVICE_CONFIRMATION, {
-        id,
-      }),
-    );
+  const handleSubmit = async () => {
+    await backend
+      .updateServiceRequest(id, { status: 'open' }, true)
+      .then(() => {
+        history.push(
+          routeWithParams(Routes.SERVICE_CONFIRMATION, {
+            id,
+          }),
+        );
+      })
+      .catch((error) => {
+        console.error('error', error);
+      });
+    // service TODO: handle exceptions
   };
 
   return (

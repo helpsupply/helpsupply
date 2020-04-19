@@ -1,21 +1,23 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import RequestKinds from 'lib/organizations/kinds';
 import { buildUrgencyOptions } from 'lib/utils/urgency';
-import { buildServicesOptions } from 'lib/utils/services';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import { ErrorContext } from 'state/ErrorProvider';
 
-function ServiceTypeForm({ backend }) {
+function ServiceTypeForm({ backend, serviceOptions }) {
   const history = useHistory();
   const { t } = useTranslation();
+  const { setError } = useContext(ErrorContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
@@ -36,52 +38,54 @@ function ServiceTypeForm({ backend }) {
   const handleSubmit = async () => {
     const { kind } = fields;
     setIsLoading(true);
-    const serviceRequestId = await backend.saveServiceRequest(fields);
-    if (!serviceRequestId) {
-      return;
-    }
-    switch (kind) {
-      case RequestKinds.GROCERY:
-        history.push(
-          routeWithParams(Routes.SERVICE_GROCERIES_WHERE, {
-            id: serviceRequestId,
-          }),
-        );
-        break;
-      case RequestKinds.CHILDCARE:
-        history.push(
-          routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, {
-            id: serviceRequestId,
-          }),
-        );
-        break;
-      case RequestKinds.PETCARE:
-        history.push(
-          routeWithParams(Routes.SERVICE_PETCARE_WHERE, {
-            id: serviceRequestId,
-          }),
-        );
-        break;
-      case RequestKinds.MENTALHEALTH:
-        history.push(
-          routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, {
-            id: serviceRequestId,
-          }),
-        );
-        break;
-      default:
-        history.push(routeWithParams(Routes.SERVICE_TYPE));
-        console.log(
-          'service todo: route to specific service request form, groceries, childcare, etc.',
-        );
-    }
+    backend
+      .saveServiceRequest(fields)
+      .then((id) => {
+        switch (kind) {
+          case RequestKinds.GROCERY:
+            history.push(
+              routeWithParams(Routes.SERVICE_GROCERIES_WHERE, {
+                id,
+              }),
+            );
+            break;
+          case RequestKinds.CHILDCARE:
+            history.push(
+              routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, {
+                id,
+              }),
+            );
+            break;
+          case RequestKinds.PETCARE:
+            history.push(
+              routeWithParams(Routes.SERVICE_PETCARE_WHERE, {
+                id,
+              }),
+            );
+            break;
+          case RequestKinds.MENTALHEALTH:
+            history.push(
+              routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, {
+                id,
+              }),
+            );
+            break;
+          default:
+            history.push(routeWithParams(Routes.SERVICE_TYPE));
+            break;
+        }
+      })
+      .catch((e) => {
+        setError(e.message);
+        setIsLoading(false);
+      });
   };
 
   const fieldData = [
     {
       customOnChange: handleFieldChange('kind'),
       label: t('service.selectType.form.serviceTypeLabel'),
-      options: buildServicesOptions(),
+      options: serviceOptions,
       name: 'kind',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: fields.kind,
@@ -100,7 +104,13 @@ function ServiceTypeForm({ backend }) {
     <FormBuilder
       defaultValues={fields}
       onSubmit={handleSubmit}
-      title={t('service.selectType.title')}
+      title={
+        <ReactMarkdown
+          source={t('service.selectType.title', {
+            url: Routes.SERVICE_TYPE,
+          })}
+        />
+      }
       description={t('service.selectType.description')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
