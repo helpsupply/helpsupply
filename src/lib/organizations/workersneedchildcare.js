@@ -6,82 +6,138 @@ function get_field(name) {
   };
 }
 
+function get_user_field(name) {
+  return (request, user) => {
+    return user[name];
+  };
+}
+
 function get_field_wrap_array(name) {
   return (request) => {
     return [request[name]];
   };
 }
 
-const FIELD_MAP = {
-  Phone: get_field('phone'),
+function get_multi_select(keys, values) {
+  return (request) => {
+    let out = [];
+    keys.map((k, i) => {
+      if (request[k] === true) out.push(values[i]);
+      return null;
+    });
+    return out;
+  };
+}
 
-  'Parent First Name': get_field('first_name'),
-  'Parent Last Name': get_field('last_name'),
-  'Parent Email': get_field('email'),
-  'Zip Code': get_field('zip_code'),
+function always(resp) {
+  return (request) => {
+    return resp;
+  };
+}
+
+const FIELD_MAP = {
+  Phone: get_user_field('phone'),
+
+  'Parent First Name': get_user_field('firstName'),
+  'Parent Last Name': get_user_field('lastName'),
+  'Parent Email': get_user_field('email'),
+
+  // TODO: These aren't real yet
+  'Zip Code': always('00000'),
   'What neighborhoods are you open to having childcare?': get_field(
     'neighborhoods',
   ),
-  'How do you want us to contact you?': (request) => {
+
+  'How do you want us to contact you?': (request, user) => {
     return {
-      PHONE: ['Phone'],
-      EMAIL: ['Email'],
-      EITHER: ['Either'],
-    }[request.preferred_contact];
+      phone: ['Phone'],
+      email: ['Email'],
+    }[user.contactPreference];
   },
   'How soon do you need assistance?': function (request) {
     return {
-      IMMEDIATELY: "Immediately, I'm in crisis",
-      FEW_DAYS: 'In the next few days',
-      SOON: "I'm okay for now, but am worried I won't be soon",
+      immediate: "Immediately, I'm in crisis",
+      soon: 'In the next few days',
+      later: "I'm okay for now, but am worried I won't be soon",
     }[request.urgency];
   },
 
-  'What days do you need childcare?': get_field_wrap_array('day'),
-  'What times do you need childcare?': get_field_wrap_array('time'),
+  'What days do you need childcare?': get_multi_select(
+    [
+      'mondays',
+      'tuesdays',
+      'wednesdays',
+      'thursdays',
+      'fridays',
+      'saturdays',
+      'sundays',
+      'varies',
+    ],
+    [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+      'It varies week-to-week',
+    ],
+  ),
+  'What times do you need childcare?': get_multi_select(
+    ['mornings', 'afternoons', 'evenings', 'night', 'variesTime'],
+    ['Mornings ', 'Afternoons', 'Evenings', 'Night', 'It varies week to week'],
+  ),
 
-  'Child’s First Name': get_field('child_first_name'),
-  'Child’s Last Name': get_field('child_last_name'),
-  "Child's Birth Year": get_field('child_birth_year'),
-
-  'What childcare options are you interested in?': function (request) {
-    return request.childcare_types.map(
-      (t) =>
-        ({
-          CENTERS: 'Childcare centers - free and paid',
-          DOE: 'DOE Regional Enrichment Centers (for essential workers only)',
-          MUTUALAID: 'Mutual aid networks (free, volunteer childcare)',
-          FREE: 'Only free options',
-          BABYSITTERS: 'Babysitters - free and paid',
-        }[t]),
+  "Child's Birth Year": get_field('birthYear'),
+  'Child’s Birth Month': (request) => {
+    return (
+      request.birthMonth.slice(0, 1).toUpperCase() + request.birthMonth.slice(1)
     );
   },
+
+  'What childcare options are you interested in?': get_multi_select(
+    [
+      'childCareCenters',
+      'enrichmentCenters',
+      'mutualAid',
+      'freeOptions',
+      'babySitters',
+    ],
+    [
+      'Childcare centers - free and paid',
+      'DOE Regional Enrichment Centers (for essential workers only)',
+      'Mutual aid networks (free, volunteer childcare)',
+      'Only free options',
+      'Babysitters - free and paid',
+    ],
+  ),
   "If you're interested in low-cost options, please share how much you're able to pay:": get_field(
-    'payment',
+    'paymentAbility',
   ),
   'Is anyone in your household at higher risk of sever illness due to COVID-19?': function (
     request,
   ) {
     return {
-      YES: 'Yes',
-      NO: 'No',
-      DONTKNOW: "I don't know",
-    }[request.at_risk];
+      yes: 'Yes',
+      no: 'No',
+    }[request.householdRisk];
   },
 
-  'Please share anything else you think we should know!': function (request) {
+  'Please share anything else you think we should know!': function (
+    request,
+    user,
+  ) {
     return `
 This is a request from help.supply.
 
 Special Needs:
-${request.child_special_needs}
+${request.specialNeeds}
 
-Recurring? ${request.recurring ? 'Yes' : 'No'}
-
-Language Preference? ${request.language_preference}
+Language Preference? ${user.languagePreference}
 
 Other Notes:
-${request.other_notes}
+${request.additionalInfo}
 
 Reference ID:
 https://help.supply/r/${request.id}
@@ -96,18 +152,25 @@ const WorkersNeedChildcareMetadata = {
   ZipCodes: [10001, 10002],
   // Called by the backend when a request is saved with
   // organization = 'manyc'
-  DeliverRequest: async (backend, request) => {
+  DeliverRequest: async (backend, request, user) => {
     // Get the Webhook from the Database
     let url = await backend.getWebhookForOrg('workersneedchildcare');
 
     // We actually need to send the request multiple times per child
-    let payload = {};
-    for (const field in FIELD_MAP) {
-      payload[field] = FIELD_MAP[field](request);
-    }
 
-    // Send the request
-    await backend.postWebhook(url, payload);
+    for (var key in request.children) {
+      request.birthMonth = request.children[key].birthMonth;
+      request.birthYear = request.children[key].birthYear;
+      request.specialNeeds = request.children[key].specialNeeds;
+
+      let payload = {};
+      for (const field in FIELD_MAP) {
+        payload[field] = FIELD_MAP[field](request, user);
+      }
+
+      // Send the request
+      await backend.postWebhook(url, payload);
+    }
   },
   // Called by the backend when MANYC pushes an update
   // about a request to our webhook

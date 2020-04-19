@@ -57,6 +57,14 @@ describe('Service Request Routing', () => {
       list: 'bananas, fruit',
     });
 
+    await backend.saveServiceUser({
+      firstName: 'bob',
+      lastName: 'vance',
+      phone: '5555555555',
+      contactPreference: 'phone',
+      languagePreference: 'english',
+    });
+
     // Verify it was written
     expect((await backend.getAllServiceRequests())[0].id).toBe(id);
 

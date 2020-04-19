@@ -3,6 +3,7 @@ const express = require('express');
 
 // This is our local code
 import FirebaseBackend from 'firebase-backend';
+import { ConversationList } from 'twilio/lib/rest/conversations/v1/conversation';
 
 var admin = require('firebase-admin');
 var app = admin.initializeApp();
@@ -52,7 +53,19 @@ const processServiceRequestRaw = async (id, before, after) => {
       return;
     }
     try {
-      await metadata.DeliverRequest(backend, after);
+      // Fetch the user specific data
+      console.log('WTF');
+
+      let userRecord = { email: 'derp' }; //await admin.auth().getUser(after.user);
+      console.log('BZN', userRecord);
+
+      let userInfo = (
+        await backend.firestore.collection('serviceuser').doc(after.user).get()
+      ).data();
+      console.log('BZN2', userInfo);
+      userInfo.email = userRecord.email;
+
+      await metadata.DeliverRequest(backend, after, userInfo);
       await backend.updateServiceRequest(
         id,
         {

@@ -11,46 +11,82 @@ test('Request Mapping', async () => {
     },
   };
 
+  let userInfo = {
+    contactPreference: 'email',
+    firstName: 'Ben',
+    languagePreference: 'english',
+    lastName: 'Newhouse',
+    phone: '6505044040',
+    email: 'test@test.com',
+  };
+
   let request = {
     id: 'ABCDEFG',
 
-    phone: '555-555-5555',
-    email: 'test@test.com',
-    first_name: 'John',
-    last_name: 'Smith',
+    additionalInfo: 'nothing',
+    afternoons: true,
+    babySitters: true,
+    childCareCenters: true,
+    children: {
+      '1': {
+        birthMonth: 'march',
+        birthYear: '2016',
+        specialNeeds: 'hi',
+      },
+      '2': {
+        birthMonth: 'may',
+        birthYear: '2014',
+        specialNeeds: 'nope',
+      },
+    },
+    crossStreet: 'a b',
+    domain: 'ariaglassworks.com',
+    enrichmentCenters: true,
+    error: 'unknown provider: placeholder',
+    evenings: true,
+    freeOptions: true,
+    fridays: true,
+    householdRisk: 'no',
+    kind: 'childcare',
+    mondays: true,
+    mornings: true,
+    mutualAid: true,
+    neighborhood: 'brighton-beach',
+    nights: true,
+    organization: 'placeholder',
+    paymentAbility: '333',
+    saturdays: true,
+    status: 'error',
+    status_updated: 1587261026,
+    sundays: true,
+    thursdays: true,
+    timeCreated: 1587260966110,
+    tuesdays: true,
+    urgency: 'soon',
+    user: 'hPoD6UgciHckILrm54wQRnkjtIH3',
+    varies: true,
+    variesTime: true,
+    wednesdays: true,
+
+    // Not integrated yet
     zip_code: '00000',
     neighborhoods: ['Manhattan: Central Harlem'],
-    preferred_contact: 'PHONE',
-    urgency: 'FEW_DAYS',
-    language_preference: 'Spanish', // not standard
-
-    // Childcare Specific
-    day: 'Monday',
-    time: 'Afternoon',
-    recurring: true, // not standard
-
-    child_first_name: 'Mini',
-    child_last_name: 'Me',
-    child_birth_year: '2000',
-    child_special_needs: 'none', // not standard
-
-    childcare_types: ['BABYSITTERS'],
-    payment: '$0',
-    at_risk: 'DONTKNOW',
-
-    other_notes: 'i love cookies',
   };
-  await WorkersNeedChildcare.DeliverRequest(mock_backend, request);
 
-  expect(payloads.length).toBe(1);
-  for (let key in payloads[0]) {
-    let val = payloads[0][key];
-    if (Array.isArray(val)) {
-      val.map((v) => {
-        expect(v).toBeDefined();
-        return null;
-      });
+  await WorkersNeedChildcare.DeliverRequest(mock_backend, request, userInfo);
+
+  console.log(JSON.stringify(payloads[0], null, 2));
+  expect(payloads.length).toBe(2);
+  for (var i = 0; i < 2; i++) {
+    for (let key in payloads[i]) {
+      let val = payloads[i][key];
+      if (Array.isArray(val)) {
+        val.map((v) => {
+          expect(v).toBeDefined();
+          return null;
+        });
+      }
+      expect(val).toBeDefined();
     }
-    expect(val).toBeDefined();
   }
 });
