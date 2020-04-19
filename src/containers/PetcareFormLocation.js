@@ -14,6 +14,8 @@ import { AdditionalCta } from 'components/AdditionalCta';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
+import { neighborhoods } from 'data/neighborhoods';
+
 const validatePhone = (val) => {
   if (val === '') {
     return;
@@ -32,7 +34,7 @@ const validateEmail = (val) => {
   }
 };
 
-function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
+function PetcareFormLocation({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -91,7 +93,8 @@ function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
       customOnChange: handleFieldChange('neighborhood'),
       defaultValue: fields.neighborhood,
       label: t('service.petcare.where.labels.neighborhood'),
-      options: neighborhoodOptions,
+      // service todo: wire-up neighborhoods data
+      options: neighborhoods.Brooklyn,
       name: 'neighborhood',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: fields.neighborhood,
