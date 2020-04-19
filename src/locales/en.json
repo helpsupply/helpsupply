@@ -1,5 +1,10 @@
 {
   "translations": {
+    "404": {
+      "title": "We can’t find the page you’re looking for.",
+      "description": "Please refresh this page or return home and try again.",
+      "cta": "Return home"
+    },
     "global": {
       "error": {
         "title": "Internal Server Error"
