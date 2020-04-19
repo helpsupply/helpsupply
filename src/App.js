@@ -34,6 +34,7 @@ import SignupComplete from 'pages/signup_approve';
 import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceLocation from 'pages/service_location';
+import ServiceLocationUpdate from 'pages/service_location_update';
 import ServiceLocationAvailable from 'pages/service_location_available';
 import ServiceLocationUnavailable from 'pages/service_location_unavailable';
 import EmailListConfirmation from 'pages/email_list_confirmation';
@@ -138,6 +139,13 @@ function App({ backend }) {
               </Route>
               <Route path={Routes.LOGIN}>
                 <Login />
+              </Route>
+              <Route
+                backend={backend}
+                exact
+                path={Routes.SERVICE_LOCATION_UPDATE}
+              >
+                <ServiceLocationUpdate backend={backend} />
               </Route>
               <Route
                 backend={backend}
