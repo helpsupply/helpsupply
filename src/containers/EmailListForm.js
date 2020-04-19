@@ -1,18 +1,20 @@
 /** @jsx jsx */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { isValidEmail } from 'lib/utils/validations';
+import { ErrorContext } from 'state/ErrorProvider';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function EmailListForm() {
+function EmailListForm({ backend }) {
   const history = useHistory();
   const { t } = useTranslation();
+  const { setError } = useContext(ErrorContext);
 
   const [email, setEmail] = useState('');
 
@@ -23,7 +25,14 @@ function EmailListForm() {
   };
 
   const handleSubmit = () => {
-    history.push(Routes.EMAIL_LIST_SENT);
+    backend
+      .saveToEmailList(email)
+      .then(() => {
+        history.push(Routes.EMAIL_LIST_SENT);
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
   };
 
   const fieldData = [
