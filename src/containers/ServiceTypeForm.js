@@ -8,13 +8,12 @@ import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import RequestKinds from 'lib/organizations/kinds';
 import { buildUrgencyOptions } from 'lib/utils/urgency';
-import { buildServicesOptions } from 'lib/utils/services';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import { ErrorContext } from 'state/ErrorProvider';
 
-function ServiceTypeForm({ backend }) {
+function ServiceTypeForm({ backend, serviceOptions }) {
   const history = useHistory();
   const { t } = useTranslation();
   const { setError } = useContext(ErrorContext);
@@ -85,7 +84,7 @@ function ServiceTypeForm({ backend }) {
     {
       customOnChange: handleFieldChange('kind'),
       label: t('service.selectType.form.serviceTypeLabel'),
-      options: buildServicesOptions(),
+      options: serviceOptions,
       name: 'kind',
       type: formFieldTypes.INPUT_DROPDOWN,
       value: fields.kind,
