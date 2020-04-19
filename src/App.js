@@ -35,6 +35,8 @@ import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceLocation from 'pages/service_location';
 import ServiceLocationAvailable from 'pages/service_location_available';
+import ServiceLocationUnavailable from 'pages/service_location_unavailable';
+import EmailListConfirmation from 'pages/email_list_confirmation';
 import ServiceType from 'pages/service_type';
 import ServiceGrocery from 'pages/service_grocery';
 import ServiceChildcare from 'pages/service_childcare';
@@ -140,6 +142,16 @@ function App({ backend }) {
                 path={Routes.SERVICE_LOCATION_AVAILABLE}
               >
                 <ServiceLocationAvailable backend={backend} />
+              </Route>
+              <Route
+                backend={backend}
+                exact
+                path={Routes.SERVICE_LOCATION_UNAVAILABLE}
+              >
+                <ServiceLocationUnavailable backend={backend} />
+              </Route>
+              <Route backend={backend} exact path={Routes.EMAIL_LIST_SENT}>
+                <EmailListConfirmation backend={backend} />
               </Route>
               <Route exact path={Routes.FACILITY}>
                 <Facility backend={backend} />

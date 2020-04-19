@@ -12,6 +12,7 @@
         "deleteLabel": "Delete",
         "submitLabelCta": "Please complete form",
         "submitLabelNext": "Next",
+        "emailAddressLabel": "Email address",
         "daypicker": {
           "placeholder": "Date needed"
         }
@@ -263,6 +264,14 @@
           "mutualAid": "Provided by Mutual Aid NYC",
           "workersNeedChildcare": "Provided by Workers Need Childcare",
           "nycCovid": "Provided by NYC COVID Care Network"
+        }
+      },
+      "unavailable": {
+        "title": "Sorry, we're not able to offer services in your area yet",
+        "description": "Please enter your email address if you'd like us to reach out when we expand to more locations.",
+        "sent": {
+          "title": "Thank you",
+          "description": "We'll let you know when we expand to more locations."
         }
       },
       "contactForm": {

@@ -25,6 +25,7 @@ export const Routes = {
   SERVICE_LOCATION: '/service-location',
   SERVICE_LOCATION_AVAILABLE: '/service-location/available/:zip?',
   SERVICE_LOCATION_UNAVAILABLE: '/service-location/unavailable',
+  EMAIL_LIST_SENT: '/service-location/unavailable/confirm',
   FACILITY: `/facility`,
   LOGIN: '/login',
   EMAIL_SIGNUP_FORM: `/signup`,
