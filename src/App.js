@@ -139,7 +139,7 @@ function App({ backend }) {
                   <ServiceLocation backend={backend} />
                 </Route>
                 <Route path={Routes.LOGIN}>
-                  <Login />
+                  <Login backend={backend} />
                 </Route>
                 <Route
                   backend={backend}
