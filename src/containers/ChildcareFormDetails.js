@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -17,6 +17,7 @@ import { TEXT_TYPE } from 'components/Text/constants';
 
 import { months } from 'data/months';
 import { years } from 'data/years';
+import { StateContext } from 'state/StateProvider';
 
 const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
@@ -26,6 +27,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
+  const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
     1: {
@@ -144,7 +146,11 @@ function ChildcareFormDetails({ id, onSave, request }) {
       setIsLoading(false);
       return;
     }
-    history.push(routeWithParams(Routes.SERVICE_CHILDCARE_WHAT, { id }));
+
+    const url =
+      state.editServiceUrl ||
+      routeWithParams(Routes.SERVICE_CHILDCARE_WHAT, { id });
+    history.push(url);
   };
 
   const additionalCta = [
