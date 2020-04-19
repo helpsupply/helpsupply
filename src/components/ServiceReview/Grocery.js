@@ -35,7 +35,7 @@ export const GroceryServiceReview = ({ id, service }) => {
     time,
   } = service;
 
-  const formattedDate = formatServiceDate(date.toDate());
+  const formattedDate = formatServiceDate(new Date(date));
 
   const handleRedirectIntent = () => {
     const url = routeWithParams(Routes.SERVICE_REVIEW, { id });
