@@ -30,7 +30,7 @@ function InfoHeader({
 
 InfoHeader.propTypes = {
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 export default InfoHeader;
