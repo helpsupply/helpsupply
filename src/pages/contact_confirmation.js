@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
@@ -11,22 +11,29 @@ import PageLoader from 'components/Loader/PageLoader';
 import { ContactConfirmation } from 'components/Confirmation';
 
 import { useAuth } from 'hooks/useAuth';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function ContactConfirmationPage({ backend }) {
   const history = useHistory();
   const { isInitializing, isLoggedIn, user: firebaseUser } = useAuth();
   const [isLoading, setIsLoading] = useState(isInitializing);
   const [serviceUser, setServiceUser] = useState(false);
-
+  const { setError } = useContext(ErrorContext);
   useEffect(() => {
     if (!isLoggedIn) {
       return;
     }
-    backend.getServiceUser().then((user) => {
-      setServiceUser(user);
-      setIsLoading(false);
-    });
-  }, [backend, isLoggedIn, setIsLoading]);
+    backend
+      .getServiceUser()
+      .then((user) => {
+        setServiceUser(user);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.message);
+      });
+  }, [setError, backend, isLoggedIn, setIsLoading]);
 
   const handleOnEdit = () => {
     history.push(routeWithParams(Routes.CONTACT_FORM));

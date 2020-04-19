@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useEffect, useState } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
@@ -12,22 +12,29 @@ import PageLoader from 'components/Loader/PageLoader';
 import ServiceContactForm from 'containers/ServiceContactForm';
 
 import { useAuth } from 'hooks/useAuth';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function Contact({ backend }) {
   const history = useHistory();
   const { isInitializing, isLoggedIn } = useAuth();
   const [isLoading, setIsLoading] = useState(isInitializing);
   const [serviceUser, setServiceUser] = useState(false);
-
+  const { setError } = useContext(ErrorContext);
   useEffect(() => {
     if (!isLoggedIn) {
       return;
     }
-    backend.getServiceUser().then((user) => {
-      setServiceUser(user);
-      setIsLoading(false);
-    });
-  }, [backend, isLoggedIn, setIsLoading]);
+    backend
+      .getServiceUser()
+      .then((user) => {
+        setServiceUser(user);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.message);
+      });
+  }, [setError, backend, isLoggedIn, setIsLoading]);
 
   return (
     <Page

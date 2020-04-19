@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { jsx } from '@emotion/core';
 import { useHistory /*useParams*/ } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
 import DeleteRequestModal from 'components/Request/DeleteRequestModal';
 import UserDashboard from 'components/Dashboard/UserDashboard';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function AdminDashboard({ backend }) {
   const history = useHistory();
@@ -20,6 +21,7 @@ function AdminDashboard({ backend }) {
   const [isLoading, setIsLoading] = useState(false);
   const [requestToBeDeleted, setRequestToBeDeleted] = useState(undefined);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setError } = useContext(ErrorContext);
 
   useEffect(() => {
     backend
@@ -28,14 +30,24 @@ function AdminDashboard({ backend }) {
         data && setRequests(data);
       })
       .then(() => {
-        backend.getServiceUser().then(({ data }) => {
-          setContact(data);
-        });
+        backend
+          .getServiceUser()
+          .then(({ data }) => {
+            setContact(data);
+          })
+          .catch((e) => {
+            setIsLoading(false);
+            setError(e.message);
+          });
       })
       .then(() => {
         setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.message);
       });
-  }, [backend]);
+  }, [setError, backend]);
 
   const handleUpdateContact = () => {
     history.push(routeWithParams(Routes.CONTACT_FORM));

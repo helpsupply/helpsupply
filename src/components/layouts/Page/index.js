@@ -12,6 +12,9 @@ import LargeHeader from 'components/Header/LargeHeader';
 import Intro from 'components/EntryContent/Intro';
 
 import styles from './Page.styles';
+import { useContext } from 'react';
+import { ErrorContext } from 'state/ErrorProvider';
+import Error from 'components/Error/Error';
 
 const PageContent = ({
   contentContainerStyles,
@@ -53,6 +56,7 @@ const Page = ({
 }) => {
   const [pageContentTopPadding, setPageContentTopPadding] = useState(0);
   const { matchesBreakpoint } = useMediaQuery();
+  const { errorMsg } = useContext(ErrorContext);
 
   const isDesktop =
     (`(min-width: ${Breakpoints.LARGE}px)`,
@@ -73,6 +77,12 @@ const Page = ({
 
   return (
     <div css={[styles.root, rootContainerStyles]}>
+      {errorMsg && (
+        <div css={styles.error}>
+          <Error error={errorMsg} />
+        </div>
+      )}
+
       {willUseSmallHeader && (
         <Header
           currentProgress={currentProgress}
@@ -101,6 +111,7 @@ const Page = ({
 
       <PageContent
         children={children}
+        error={errorMsg}
         contentContainerStyles={contentContainerStyles}
         hasBackButton={hasBackButton}
         isDesktop={isDesktop}

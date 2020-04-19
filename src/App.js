@@ -61,6 +61,7 @@ import PageLoader from 'components/Loader/PageLoader';
 import DebugRequests from 'components/DebugRequests';
 
 import { styles } from './App.styles';
+import ErrorProvider from 'state/ErrorProvider';
 
 const ProtectedRoute = ({ backend, children, path }) => {
   const history = useHistory();
@@ -119,249 +120,263 @@ function App({ backend }) {
     <StateProvider>
       <Global styles={styles} />
       <Router>
-        <div className="App">
-          <Switch>
-            {/*Debug / Admin Routes*/}
-            <Route exact path={Routes.DEBUG_REQUESTS}>
-              <DebugRequests backend={backend} />
-            </Route>
-            {/*MVP Routes*/}
-            <Route exact path={Routes.HOME}>
-              <EntryPortal backend={backend} />
-            </Route>
-            <Route backend={backend} exact path={Routes.SERVICE_LOCATION}>
-              <ServiceLocation backend={backend} />
-            </Route>
-            <Route
-              backend={backend}
-              exact
-              path={Routes.SERVICE_LOCATION_AVAILABLE}
-            >
-              <ServiceLocationAvailable backend={backend} />
-            </Route>
-            <Route backend={backend} exact path={Routes.LOGIN}>
-              <Login backend={backend} />
-            </Route>
-            <Route exact path={Routes.FACILITY}>
-              <Facility backend={backend} />
-            </Route>
-            <Route exact path={Routes.EMAIL_SIGNUP_FORM}>
-              <SignUp backend={backend} />
-            </Route>
-            <Route exact path={Routes.EMAIL_SIGNUP_SENT}>
-              <SignUpConfirmation backend={backend} />
-            </Route>
-            <Route exact path={Routes.EMAIL_SIGNUP_COMPLETE}>
-              <SignupComplete backend={backend} />
-            </Route>
-            <ProtectedRoute backend={backend} exact path={Routes.DASHBOARD}>
-              <Dashboard backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute backend={backend} exact path={Routes.CONTACT_FORM}>
-              <Contact backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.CONTACT_CONFIRMATION}
-            >
-              <ContactConfirmation backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute backend={backend} exact path={Routes.SERVICE_TYPE}>
-              <ServiceType backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_GROCERIES_WHERE}
-            >
-              <ServiceGrocery backend={backend} step={1} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_GROCERIES_WHEN}
-            >
-              <ServiceGrocery backend={backend} step={2} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_GROCERIES_WHAT}
-            >
-              <ServiceGrocery backend={backend} step={3} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_CHILDCARE_WHERE}
-            >
-              <ServiceChildcare backend={backend} step={1} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_CHILDCARE_WHEN}
-            >
-              <ServiceChildcare backend={backend} step={2} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_CHILDCARE_DETAILS}
-            >
-              <ServiceChildcare backend={backend} step={3} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_CHILDCARE_WHAT}
-            >
-              <ServiceChildcare backend={backend} step={4} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_PETCARE_WHERE}
-            >
-              <ServicePetcare backend={backend} step={1} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_PETCARE_WHEN}
-            >
-              <ServicePetcare backend={backend} step={2} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_PETCARE_DETAILS}
-            >
-              <ServicePetcare backend={backend} step={3} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_EMOTIONAL_WHEN}
-            >
-              <ServiceEmotional backend={backend} step={1} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_EMOTIONAL_WHAT}
-            >
-              <ServiceEmotional backend={backend} step={2} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_ADDITIONAL_INFO}
-            >
-              <ServiceAdditionalInfo backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_REVIEW}
-            >
-              <ServiceReview backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.SERVICE_CONFIRMATION}
-            >
-              <ServiceConfirmation backend={backend} />
-            </ProtectedRoute>
-            <Route exact path={Routes.FAQ}>
-              <LearnMore backend={backend} />
-            </Route>
-            {process.env.NODE_ENV !== 'production' && (
-              <Route exact path={Routes.STYLE_GUIDE}>
-                <StyleGuide backend={backend} />
+        <ErrorProvider>
+          <div className="App">
+            <Switch>
+              {/*Debug / Admin Routes*/}
+              <Route exact path={Routes.DEBUG_REQUESTS}>
+                <DebugRequests backend={backend} />
               </Route>
-            )}
-            <Route path="*">
-              <NoMatch />
-            </Route>
-            {/*END MVP Routes*/}
-            <Route path={Routes.LOGIN}>
-              <Login />
-            </Route>
-            <Route path={Routes.LOGOUT}>
-              <Logout backend={backend} />
-            </Route>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.DROPSITE_CONTACT}
-            >
-              <ContactDropSite backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              backend={backend}
-              exact
-              path={Routes.DROPSITE_CONTACT_CONFIRMATION}
-            >
-              <ContactDropSiteConfirmation backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute backend={backend} path={Routes.DROPSITE_NEW_ADMIN}>
-              <NewDropSite backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              exact
-              backend={backend}
-              path={Routes.SUPPLY_NEW_ADMIN}
-            >
-              <NewSupplyRequest backend={backend} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              exact
-              backend={backend}
-              path={Routes.SUPPLY_NEW_ADMIN_CONFIRMATION}
-            >
-              <NewSupplyRequestConfirmation backend={backend} />
-            </ProtectedRoute>
-            <Route path={Routes.SIGNUP_FINISH_DROPSITE}>
-              <HCPSignupFinish backend={backend} />
-            </Route>
-            <ProtectedRoute backend={backend} path={Routes.DROPSITE_ADMIN}>
-              <AdminDropSite backend={backend} />
-            </ProtectedRoute>
-            <Route path={Routes.DROPSITE_DETAIL}>
-              <DropSite backend={backend} />
-            </Route>
-            <Route path={Routes.PROFILE}>
-              <Profile backend={backend} />
-            </Route>
-            <Route path={Routes.PENDING_DOMAINS}>
-              <PendingDomains backend={backend} />
-            </Route>
-            <Route exact path={Routes.HOME}>
-              <EntryPortal backend={backend} />
-            </Route>
-            <Route path={Routes.REQUEST_SUPPLIES}>
-              <Request backend={backend} />
-            </Route>
-            <Route exact path={Routes.SIGNUP_DROPSITE}>
-              <SignUp backend={backend} />
-            </Route>
-            <Route exact path={Routes.SIGNUP_DROPSITE_CONFIRMATION}>
-              <SignUpConfirmation backend={backend} />
-            </Route>
-            <Route exact path={Routes.NEW_FACILITY}>
-              <NewFacility backend={backend} />
-            </Route>
-            <Route exact path={Routes.FACILITY_CONFIRMATION}>
-              <FacilityConfirmation backend={backend} />
-            </Route>
-            <ProtectedRoute exact path={Routes.FACILITY_EDIT} backend={backend}>
-              <FacilityEdit backend={backend} />
-            </ProtectedRoute>
-          </Switch>
-        </div>
+              {/*MVP Routes*/}
+              <Route exact path={Routes.HOME}>
+                <EntryPortal backend={backend} />
+              </Route>
+              <Route backend={backend} exact path={Routes.SERVICE_LOCATION}>
+                <ServiceLocation backend={backend} />
+              </Route>
+              <Route
+                backend={backend}
+                exact
+                path={Routes.SERVICE_LOCATION_AVAILABLE}
+              >
+                <ServiceLocationAvailable backend={backend} />
+              </Route>
+              <Route exact path={Routes.FACILITY}>
+                <Facility backend={backend} />
+              </Route>
+              <Route exact path={Routes.EMAIL_SIGNUP_FORM}>
+                <SignUp backend={backend} />
+              </Route>
+              <Route exact path={Routes.EMAIL_SIGNUP_SENT}>
+                <SignUpConfirmation backend={backend} />
+              </Route>
+              <Route exact path={Routes.EMAIL_SIGNUP_COMPLETE}>
+                <SignupComplete backend={backend} />
+              </Route>
+              <ProtectedRoute backend={backend} exact path={Routes.DASHBOARD}>
+                <Dashboard backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.CONTACT_FORM}
+              >
+                <Contact backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.CONTACT_CONFIRMATION}
+              >
+                <ContactConfirmation backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_TYPE}
+              >
+                <ServiceType backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_GROCERIES_WHERE}
+              >
+                <ServiceGrocery backend={backend} step={1} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_GROCERIES_WHEN}
+              >
+                <ServiceGrocery backend={backend} step={2} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_GROCERIES_WHAT}
+              >
+                <ServiceGrocery backend={backend} step={3} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_CHILDCARE_WHERE}
+              >
+                <ServiceChildcare backend={backend} step={1} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_CHILDCARE_WHEN}
+              >
+                <ServiceChildcare backend={backend} step={2} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_CHILDCARE_DETAILS}
+              >
+                <ServiceChildcare backend={backend} step={3} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_CHILDCARE_WHAT}
+              >
+                <ServiceChildcare backend={backend} step={4} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_PETCARE_WHERE}
+              >
+                <ServicePetcare backend={backend} step={1} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_PETCARE_WHEN}
+              >
+                <ServicePetcare backend={backend} step={2} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_PETCARE_DETAILS}
+              >
+                <ServicePetcare backend={backend} step={3} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_EMOTIONAL_WHEN}
+              >
+                <ServiceEmotional backend={backend} step={1} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_EMOTIONAL_WHAT}
+              >
+                <ServiceEmotional backend={backend} step={2} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_ADDITIONAL_INFO}
+              >
+                <ServiceAdditionalInfo backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_REVIEW}
+              >
+                <ServiceReview backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.SERVICE_CONFIRMATION}
+              >
+                <ServiceConfirmation backend={backend} />
+              </ProtectedRoute>
+              <Route exact path={Routes.FAQ}>
+                <LearnMore backend={backend} />
+              </Route>
+              {process.env.NODE_ENV !== 'production' && (
+                <Route exact path={Routes.STYLE_GUIDE}>
+                  <StyleGuide backend={backend} />
+                </Route>
+              )}
+              <Route path="*">
+                <NoMatch />
+              </Route>
+              {/*END MVP Routes*/}
+              <Route path={Routes.LOGIN}>
+                <Login />
+              </Route>
+              <Route path={Routes.LOGOUT}>
+                <Logout backend={backend} />
+              </Route>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.DROPSITE_CONTACT}
+              >
+                <ContactDropSite backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                exact
+                path={Routes.DROPSITE_CONTACT_CONFIRMATION}
+              >
+                <ContactDropSiteConfirmation backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                backend={backend}
+                path={Routes.DROPSITE_NEW_ADMIN}
+              >
+                <NewDropSite backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                exact
+                backend={backend}
+                path={Routes.SUPPLY_NEW_ADMIN}
+              >
+                <NewSupplyRequest backend={backend} />
+              </ProtectedRoute>
+              <ProtectedRoute
+                exact
+                backend={backend}
+                path={Routes.SUPPLY_NEW_ADMIN_CONFIRMATION}
+              >
+                <NewSupplyRequestConfirmation backend={backend} />
+              </ProtectedRoute>
+              <Route path={Routes.SIGNUP_FINISH_DROPSITE}>
+                <HCPSignupFinish backend={backend} />
+              </Route>
+              <ProtectedRoute backend={backend} path={Routes.DROPSITE_ADMIN}>
+                <AdminDropSite backend={backend} />
+              </ProtectedRoute>
+              <Route path={Routes.DROPSITE_DETAIL}>
+                <DropSite backend={backend} />
+              </Route>
+              <Route path={Routes.PROFILE}>
+                <Profile backend={backend} />
+              </Route>
+              <Route path={Routes.PENDING_DOMAINS}>
+                <PendingDomains backend={backend} />
+              </Route>
+              <Route exact path={Routes.HOME}>
+                <EntryPortal backend={backend} />
+              </Route>
+              <Route path={Routes.REQUEST_SUPPLIES}>
+                <Request backend={backend} />
+              </Route>
+              <Route exact path={Routes.SIGNUP_DROPSITE}>
+                <SignUp backend={backend} />
+              </Route>
+              <Route exact path={Routes.SIGNUP_DROPSITE_CONFIRMATION}>
+                <SignUpConfirmation backend={backend} />
+              </Route>
+              <Route exact path={Routes.NEW_FACILITY}>
+                <NewFacility backend={backend} />
+              </Route>
+              <Route exact path={Routes.FACILITY_CONFIRMATION}>
+                <FacilityConfirmation backend={backend} />
+              </Route>
+              <ProtectedRoute
+                exact
+                path={Routes.FACILITY_EDIT}
+                backend={backend}
+              >
+                <FacilityEdit backend={backend} />
+              </ProtectedRoute>
+            </Switch>
+          </div>
+        </ErrorProvider>
       </Router>
     </StateProvider>
   );

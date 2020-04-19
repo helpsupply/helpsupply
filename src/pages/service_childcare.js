@@ -1,30 +1,38 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Page from 'components/layouts/Page';
 import ChildcareFormLocation from 'containers/ChildcareFormLocation';
 import ChildcareFormDate from 'containers/ChildcareFormDate';
 import ChildcareFormDetails from 'containers/ChildcareFormDetails';
 import ChildcareFormOptions from 'containers/ChildcareFormOptions';
+import { ErrorContext } from 'state/ErrorProvider';
 
 function ServiceChildcare({ backend, step }) {
   const [request, setRequest] = useState();
   const params = useParams();
+  const { hasError, setError } = useContext(ErrorContext);
 
-  const updateService = (request) => {
-    backend.updateServiceRequest(params.id, request, true);
-  };
+  const updateService = async (request) =>
+    await backend.updateServiceRequest(params.id, request, true).catch((e) => {
+      setError(e.message);
+    });
 
   useEffect(() => {
-    if (!params.id) {
+    if (!params.id || !!hasError) {
       return;
     }
-    backend.getServiceRequest(params.id).then((data) => {
-      setRequest(data);
-    });
-  }, [backend, params.id]);
+    backend
+      .getServiceRequest(params.id)
+      .then((data) => {
+        setRequest(data);
+      })
+      .catch((e) => {
+        setError(e.mesage);
+      });
+  }, [setError, hasError, backend, params.id]);
 
   if (params.id && !request) {
     // loading

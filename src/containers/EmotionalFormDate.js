@@ -34,7 +34,11 @@ function EmotionalFormDate({ id, onSave, request }) {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    await onSave(fields);
+    const res = await onSave(fields);
+    if (!res) {
+      setIsLoading(false);
+      return;
+    }
     history.push(routeWithParams(Routes.SERVICE_EMOTIONAL_WHAT, { id }));
   };
 
