@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const express = require('express');
+const sendEmail = require('./sendmail').sendEmail;
 
 // This is our local code
 import FirebaseBackend from 'firebase-backend';
@@ -107,6 +108,53 @@ exports.processServiceRequest = functions.firestore
       snapshot.after.data(),
     );
   });
+
+exports.sendSigninEmail = functions.https.onRequest(
+  async (request, response) => {
+    // TODO: lock this down
+    response.set('Access-Control-Allow-Origin', '*');
+
+    let userEmail = request.query.email;
+    const actionCodeSettings = {
+      // Equal to EMAIL_SIGNUP_COMPLETE
+      url: request.query.url,
+      handleCodeInApp: true,
+    };
+    // Use this to pick a template
+    // let newUser = request.query.new === 'true';
+
+    let link = await admin
+      .auth()
+      .generateSignInWithEmailLink(userEmail, actionCodeSettings);
+    await sendEmail(userEmail, 'Sign In', link, link);
+    response.send('ok');
+  },
+);
+
+exports.sendRequestConfirmation = functions.https.onRequest(
+  async (request, response) => {
+    // TODO: lock this down
+    response.set('Access-Control-Allow-Origin', '*');
+
+    // Get a request ID
+    let requestId = request.query.request;
+
+    // Get the relevant user
+    let uid = (
+      await backend.firestore.collection('servicerequest').doc(requestId).get()
+    ).data().user;
+
+    // Get the relevant email
+    let email = (process.env.DEV
+      ? { email: 'bob@bob.com' }
+      : await admin.auth().getUser(uid)
+    ).email;
+
+    // Send away!
+    await sendEmail(email, 'Request Confirmation', requestId, requestId);
+    response.send('ok');
+  },
+);
 
 exports.testHook = functions.https.onRequest(async (request, response) => {
   if (request.get('content-type') !== 'application/json') {

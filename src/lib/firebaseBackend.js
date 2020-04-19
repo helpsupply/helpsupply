@@ -1,6 +1,7 @@
 import OrganizationIndex from './organizations/index';
 
 const Firebase = require('firebase');
+const axios = require('axios').default;
 
 let config = null;
 if (process.env.REACT_APP_HOST_ENV === 'production') {
@@ -634,14 +635,18 @@ export default class FirebaseBackend {
   }
 
   async signupServicesWithEmail(email, zip) {
-    const actionCodeSettings = {
-      // Equal to EMAIL_SIGNUP_COMPLETE
-      url: `${window.location.protocol}//${window.location.host}/signup/complete/${zip}/`,
-      handleCodeInApp: true,
-    };
-
-    await this.firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings);
     window.localStorage.setItem('emailForSignIn', email);
+    await axios({
+      method: 'POST',
+      // Equal to EMAIL_SIGNUP_COMPLETE
+      // TODO: Configure staging vs production somewhere
+      url:
+        'https://us-central1-help-supply-staging.cloudfunctions.net/sendSigninEmail',
+      params: {
+        email: email,
+        url: `${window.location.protocol}//${window.location.host}/signup/complete/${zip}/`,
+      },
+    });
   }
 
   getEmailForSignIn() {
