@@ -11,7 +11,6 @@ const ErrorProvider = ({ children }) => {
 
   return (
     <ErrorContext.Provider value={{ errorMsg, setError }}>
-      {errorMsg && errorMsg}
       {children}
     </ErrorContext.Provider>
   );

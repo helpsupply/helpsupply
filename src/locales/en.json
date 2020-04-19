@@ -1,6 +1,9 @@
 {
   "translations": {
     "global": {
+      "error": {
+        "title": "Internal Server Error"
+      },
       "form": {
         "editLabel": "Edit",
         "submitLabel": "Submit",

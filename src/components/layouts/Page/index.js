@@ -14,11 +14,11 @@ import Intro from 'components/EntryContent/Intro';
 import styles from './Page.styles';
 import { useContext } from 'react';
 import { ErrorContext } from 'state/ErrorProvider';
+import Error from 'components/Error/Error';
 
 const PageContent = ({
   contentContainerStyles,
   children,
-  error,
   hasBackButton,
   isDesktop,
   onBackButtonClick,
@@ -34,7 +34,6 @@ const PageContent = ({
         contentContainerStyles,
       ]}
     >
-      {error && error}
       <div css={styles.pageContent}>
         {hasBackButton && !isDesktop && (
           <BackButton onClick={onBackButtonClick} />
@@ -78,6 +77,12 @@ const Page = ({
 
   return (
     <div css={[styles.root, rootContainerStyles]}>
+      {errorMsg && (
+        <div css={styles.error}>
+          <Error error={errorMsg} />
+        </div>
+      )}
+
       {willUseSmallHeader && (
         <Header
           currentProgress={currentProgress}
