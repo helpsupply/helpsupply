@@ -255,6 +255,11 @@
           "zipCode": "ZIP code"
         }
       },
+      "updateLocationForm": {
+        "title": "Want to update your ZIP code?",
+        "description": "Important: We are currently only able to serve people in the NYC area.",
+        "note": "To receive updates when we expand to more locations, email us at {{email}}."
+      },
       "available": {
         "title": "Services we're offering in your location",
         "groceries": "Groceries",

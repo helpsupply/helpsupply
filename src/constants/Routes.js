@@ -23,6 +23,7 @@ export const Routes = {
 
   // MVP Routes
   SERVICE_LOCATION: '/service-location',
+  SERVICE_LOCATION_UPDATE: '/service-location/update',
   SERVICE_LOCATION_AVAILABLE: '/service-location/available/:zip?',
   SERVICE_LOCATION_UNAVAILABLE: '/service-location/unavailable',
   EMAIL_LIST_SENT: '/service-location/unavailable/confirm',
