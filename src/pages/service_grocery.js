@@ -3,14 +3,21 @@ import { jsx } from '@emotion/core';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 
+import { buildNeighborhoodOptions } from 'lib/utils/zip';
+import { useAuth } from 'hooks/useAuth';
+
 import Page from 'components/layouts/Page';
 import GroceryFormLocation from 'containers/GroceryFormLocation';
 import GroceryFormDate from 'containers/GroceryFormDate';
 import GroceryFormItems from 'containers/GroceryFormItems';
 import { ErrorContext } from 'state/ErrorProvider';
 
+import { nyczipmap } from 'data/nyczipmap';
+
 function ServiceGrocery({ backend, step }) {
   const [request, setRequest] = useState(null);
+  const [neighborhoodOptions, setNeighborhoodOptions] = useState();
+  const { isInitializing } = useAuth();
   const params = useParams();
   const { hasError, setError } = useContext(ErrorContext);
 
@@ -28,6 +35,20 @@ function ServiceGrocery({ backend, step }) {
     });
   }, [hasError, backend, params.id]);
 
+  useEffect(() => {
+    if (isInitializing) {
+      return;
+    }
+    backend
+      .getServiceUser()
+      .then(({ data }) => {
+        setNeighborhoodOptions(buildNeighborhoodOptions(nyczipmap[data.zip]));
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
+  }, [backend, isInitializing, setError]);
+
   if (params.id && !request) {
     // loading
     return null;
@@ -40,6 +61,7 @@ function ServiceGrocery({ backend, step }) {
           request={request}
           onSave={updateService}
           id={params.id}
+          neighborhoodOptions={neighborhoodOptions}
         />
       )}
       {step === 2 && (
