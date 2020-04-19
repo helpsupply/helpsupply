@@ -755,6 +755,16 @@ export default class FirebaseBackend {
     return result;
   }
 
+  // Saves an email to the database
+  async saveToEmailList(email) {
+    return (
+      await this.firestore.collection('emaillist').add({
+        createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
+        email: email,
+      })
+    ).id;
+  }
+
   // Conversation state
   // Note: only firebase functions have permissions to call these
   async getConversationState(user) {

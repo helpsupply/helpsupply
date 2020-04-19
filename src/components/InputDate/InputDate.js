@@ -22,15 +22,16 @@ function InputDate({ label, customOnChange, defaultValue }) {
 
   const handleDayChange = useCallback(
     (selectedDay) => {
+      const day = moment(selectedDay).format('MMMM D, YYYY');
       if (customOnChange) {
-        customOnChange(selectedDay);
+        customOnChange(day);
       }
 
-      if (!selectedDay) {
+      if (!day) {
         setValue('');
         return;
       }
-      setValue(selectedDay);
+      setValue(day);
     },
     [customOnChange],
   );
@@ -50,6 +51,7 @@ function InputDate({ label, customOnChange, defaultValue }) {
       )}
 
       <DayPickerInput
+        inputProps={{ readOnly: true }}
         ref={dayPicker}
         format="MMMM Do, YYYY"
         formatDate={formatDate}

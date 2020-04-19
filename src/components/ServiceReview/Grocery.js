@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
@@ -12,11 +12,12 @@ import Text from 'components/Text';
 import Card from 'components/Card';
 
 import { styles } from './ServiceReview.styles';
+import { StateContext, actions } from 'state/StateProvider';
 
 export const GroceryServiceReview = ({ id, service }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
+  const { setState } = useContext(StateContext);
   const {
     contactPreference,
     crossStreet,
@@ -34,10 +35,15 @@ export const GroceryServiceReview = ({ id, service }) => {
     time,
   } = service;
 
-  const formattedDate = formatServiceDate(date.toDate());
+  const formattedDate = formatServiceDate(new Date(date));
 
-  // service todo: handle return to confirmation screen after editing
+  const handleRedirectIntent = () => {
+    const url = routeWithParams(Routes.SERVICE_REVIEW, { id });
+    setState({ type: actions.EDIT_SERVICE_REDIRECT, editServiceUrl: url });
+  };
+
   const handleChangeLocation = () => {
+    handleRedirectIntent();
     history.push(
       routeWithParams(Routes.SERVICE_GROCERIES_WHERE, {
         id,
@@ -45,6 +51,7 @@ export const GroceryServiceReview = ({ id, service }) => {
     );
   };
   const handleChangeTime = () => {
+    handleRedirectIntent();
     history.push(
       routeWithParams(Routes.SERVICE_GROCERIES_WHEN, {
         id,
@@ -52,6 +59,7 @@ export const GroceryServiceReview = ({ id, service }) => {
     );
   };
   const handleChangeList = () => {
+    handleRedirectIntent();
     history.push(
       routeWithParams(Routes.SERVICE_GROCERIES_WHAT, {
         id,

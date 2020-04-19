@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -10,11 +10,13 @@ import { routeWithParams } from 'lib/utils/routes';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
+import { StateContext } from 'state/StateProvider';
 
 function GroceryFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
-
+  const { state } = useContext(StateContext);
+  console.log(state);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
     date: '',
@@ -41,7 +43,10 @@ function GroceryFormDate({ id, onSave, request }) {
       setIsLoading(false);
       return;
     }
-    history.push(routeWithParams(Routes.SERVICE_GROCERIES_WHAT, { id }));
+    const url =
+      state.editServiceUrl ||
+      routeWithParams(Routes.SERVICE_GROCERIES_WHAT, { id });
+    history.push(url);
   };
 
   const fieldData = [

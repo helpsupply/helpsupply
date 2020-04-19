@@ -58,14 +58,13 @@ export const GroceryRequest = ({
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
         {matchUrgencyToText(request.urgency)}
       </Text>
-      {request.date?.seconds && (
+      {request.date && (
         <Text
           as="p"
           type={TEXT_TYPE.NOTE}
           css={[styles.text, styles.capitalize]}
         >
-          {moment.unix(request.date?.seconds).format('dddd, MMMM Do')}{' '}
-          {request.time}
+          {moment(request.date).format('dddd, MMMM Do')} {request.time}
         </Text>
       )}
       {request.recurring && (

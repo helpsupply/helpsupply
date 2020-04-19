@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
@@ -9,10 +9,18 @@ import { routeWithParams } from 'lib/utils/routes';
 import { isValidPhoneNumber, isValidEmail } from 'lib/utils/validations';
 import { LANGUAGES } from 'lib/constants/languages';
 import { CONTACT_PREFERENCES } from 'lib/constants/contact';
+import { buttonReset, Color } from 'lib/theme';
 
 import { AdditionalCta } from 'components/AdditionalCta';
 import FormBuilder from 'components/Form/FormBuilder';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import { StateContext } from 'state/StateProvider';
+
+const styles = {
+  button: css(buttonReset, { color: Color.PRIMARY }),
+};
 
 const validatePhone = (val) => {
   if (val === '') {
@@ -32,12 +40,23 @@ const validateEmail = (val) => {
   }
 };
 
+const initialAdditionalFields = {
+  additionalContactFirstName: '',
+  additionalContactLastName: '',
+  additionalContactRelationship: '',
+  additionalContactEmail: '',
+  additionalContactPhone: '',
+  additionalContactContactPreference: '',
+  additionalContactLanguagePreference: '',
+};
+
 function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [addAdditionalContact, setAddAdditionalContact] = useState();
+  const [addAdditionalContact, setAddAdditionalContact] = useState(false);
+  const { state } = useContext(StateContext);
   const [fields, setFields] = useState({
     neighborhood: '',
     crossStreet: '',
@@ -53,15 +72,9 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     [],
   );
 
-  const [additionalFields, setAdditionalFields] = useState({
-    additionalContactFirstName: '',
-    additionalContactLastName: '',
-    additionalContactRelationship: '',
-    additionalContactEmail: '',
-    additionalContactPhone: '',
-    additionalContactContactPreference: '',
-    additionalContactLanguagePreference: '',
-  });
+  const [additionalFields, setAdditionalFields] = useState(
+    initialAdditionalFields,
+  );
 
   const handleAdditionalFieldChange = useCallback(
     (field) => (value) => {
@@ -73,6 +86,11 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     [],
   );
 
+  const handleRemoveClick = useCallback(() => {
+    setAddAdditionalContact(false);
+    setAdditionalFields(initialAdditionalFields);
+  }, []);
+
   const handleSubmit = async () => {
     setIsLoading(true);
     const res = await onSave({
@@ -83,7 +101,10 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       setIsLoading(false);
       return;
     }
-    history.push(routeWithParams(Routes.SERVICE_GROCERIES_WHEN, { id }));
+    const url =
+      state.editServiceUrl ||
+      routeWithParams(Routes.SERVICE_GROCERIES_WHEN, { id });
+    history.push(url);
   };
 
   const fieldData = [
@@ -113,6 +134,19 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
           onClick={() => setAddAdditionalContact(true)}
           open={addAdditionalContact}
           title={t('service.additionalContact.title')}
+          secondaryCta={
+            <Text
+              onClick={(e) => {
+                e.preventDefault();
+                handleRemoveClick();
+              }}
+              as="button"
+              type={TEXT_TYPE.BODY_2}
+              css={styles.button}
+            >
+              {t('service.grocery.where.labels.remove')}
+            </Text>
+          }
         />,
       ],
     },

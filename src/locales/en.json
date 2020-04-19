@@ -301,7 +301,7 @@
         }
       },
       "additionalContact": {
-        "title": "Additional contact info",
+        "title": "Additional contact",
         "labels": {
           "email": "Email address (optional)",
           "lastName": "Last name (optional)",
@@ -350,7 +350,8 @@
           "labels": {
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
-            "crossStreet": "Cross Street"
+            "crossStreet": "Cross Street",
+            "remove": "Remove"
           }
         },
         "when": {

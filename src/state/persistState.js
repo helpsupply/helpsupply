@@ -4,9 +4,9 @@ export const persistState = (state, action) => {
   const actionDataKey = Object.keys(action).find((key) => key !== 'type');
   const actionData = action[actionDataKey];
 
-  const newState = { ...state, [actionDataKey]: { ...actionData } };
+  const newState = { ...state, [actionDataKey]: actionData };
   const stringifiedState = JSON.stringify(newState);
-
+  console.log(stateKey, stringifiedState);
   localStorage.setItem(stateKey, stringifiedState);
 };
 

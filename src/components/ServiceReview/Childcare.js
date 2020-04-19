@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
@@ -12,10 +12,12 @@ import Text from 'components/Text';
 import Card from 'components/Card';
 
 import { styles } from './ServiceReview.styles';
+import { StateContext, actions } from 'state/StateProvider';
 
 export const ChildcareServiceReview = ({ id, service }) => {
   const history = useHistory();
   const { t } = useTranslation();
+  const { setState } = useContext(StateContext);
 
   const {
     afternoons,
@@ -37,11 +39,18 @@ export const ChildcareServiceReview = ({ id, service }) => {
     wednesdays,
   } = service;
 
+  const handleRedirectIntent = () => {
+    const url = routeWithParams(Routes.SERVICE_REVIEW, { id });
+    setState({ type: actions.EDIT_SERVICE_REDIRECT, editServiceUrl: url });
+  };
+
   const handleChangeService = () => {
+    handleRedirectIntent();
     history.push(Routes.SERVICE_TYPE);
   };
 
   const handleChangeTime = () => {
+    handleRedirectIntent();
     history.push(
       routeWithParams(Routes.SERVICE_CHILDCARE_WHEN, {
         id,
@@ -50,6 +59,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
   };
 
   const handleChangeDetails = () => {
+    handleRedirectIntent();
     history.push(
       routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS, {
         id,
