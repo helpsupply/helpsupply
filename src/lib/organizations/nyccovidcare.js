@@ -12,43 +12,58 @@ function always(resp) {
   };
 }
 
+function get_user_field(name) {
+  return (request, user) => {
+    return user[name];
+  };
+}
+
 const FIELD_MAP = {
   'Submitted On': (request) => '' + new Date(),
-  Name: (request) => {
-    return request.first_name + ' ' + request.last_name;
+  Name: (request, user) => {
+    return user.firstName + ' ' + user.lastName;
   },
-  Email: get_field('email'),
-  Phone: get_field('phone'),
-  'Whats your preferred form of contact': (request) => {
+  Email: get_user_field('email'),
+  Phone: get_user_field('phone'),
+  'Whats your preferred form of contact': (request, user) => {
     return {
-      PHONE: ['Phone'],
-      EMAIL: ['Email'],
-      EITHER: ['Either'],
-    }[request.preferred_contact];
+      phone: ['Phone'],
+      email: ['Email'],
+    }[user.contactPreference];
   },
   'When is a good time to reach you Check all that apply': (request) =>
-    request.day + ' ' + request.time,
-  'What kind of volunteer would you be most interested in speaking with': get_field(
-    'volunteer_type',
-  ),
+    request.date + ' ' + request.time,
+  'What kind of volunteer would you be most interested in speaking with': (
+    request,
+  ) => {
+    return {
+      licensed: 'Licensed Mental Health Professional',
+      spiritual: 'Spiritual Care Provider',
+      coach: 'Personal/Life Coach',
+      stress: 'Stress-Reduction Expert',
+      healing: 'Healing Arts Practitioner',
+      any: "I don't have a preference",
+    }[request.type];
+  },
   'Anything else about your identity or situation that you would like us to know': (
     request,
+    user,
   ) => {
     return `
 This is a request from Help Supply
 
 Recurring? ${request.recurring ? 'Yes' : 'No'}
-Language Preference? ${request.language_preference}
+Language Preference? ${user.languagePreference}
 Urgency? ${
       {
-        IMMEDIATELY: "Immediately, I'm in crisis",
-        FEW_DAYS: 'In the next few days',
-        SOON: "I'm okay for now, but am worried I won't be soon",
+        immediate: "Immediately, I'm in crisis",
+        soon: 'In the next few days',
+        later: "I'm okay for now, but am worried I won't be soon",
       }[request.urgency]
     }
 
 Other Notes:
-${request.other_notes}
+${request.additionalInfo}
 
 Reference ID:
 https://help.supply/r/${request.id}

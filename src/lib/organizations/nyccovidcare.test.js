@@ -11,28 +11,36 @@ test('Request Mapping', async () => {
     },
   };
 
+  let userInfo = {
+    contactPreference: 'email',
+    firstName: 'Ben',
+    languagePreference: 'english',
+    lastName: 'Newhouse',
+    phone: '5555555555',
+    email: 'test@test.com',
+  };
+
   let request = {
     id: 'ABCDEFG',
 
-    first_name: 'John',
-    last_name: 'Smith',
-    email: 'test@test.com',
-    phone: '555-555-5555',
-    zip_code: '00000',
-    preferred_contact: 'PHONE',
-    urgency: 'FEW_DAYS',
-    language_preference: 'Spanish',
-
-    day: 'Monday',
-    time: 'Afternoon',
+    additionalInfo: 'nope',
+    agreement: true,
+    date: 'wednesday',
+    domain: 'ariaglassworks.com',
+    kind: 'mentalhealth',
+    organization: 'nyccovidcare',
     recurring: true,
-
-    volunteer_type: 'Life Coach',
-
-    other_notes: 'i love cookies',
+    status: 'open',
+    time: 'afternoon',
+    timeCreated: 1587276683414,
+    type: 'coach',
+    urgency: 'soon',
+    user: 'hPoD6UgciHckILrm54wQRnkjtIH3',
+    zip: '10002',
   };
-  await WorkersNeedChildcare.DeliverRequest(mock_backend, request);
+  await WorkersNeedChildcare.DeliverRequest(mock_backend, request, userInfo);
 
+  console.log(payloads);
   expect(payloads.length).toBe(1);
   for (let key in payloads[0]) {
     let val = payloads[0][key];

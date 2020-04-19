@@ -16,7 +16,7 @@ test('Request Mapping', async () => {
     firstName: 'Ben',
     languagePreference: 'english',
     lastName: 'Newhouse',
-    phone: '6505044040',
+    phone: '5555555555',
     email: 'test@test.com',
   };
 
@@ -75,7 +75,6 @@ test('Request Mapping', async () => {
 
   await WorkersNeedChildcare.DeliverRequest(mock_backend, request, userInfo);
 
-  console.log(JSON.stringify(payloads[0], null, 2));
   expect(payloads.length).toBe(2);
   for (var i = 0; i < 2; i++) {
     for (let key in payloads[i]) {
