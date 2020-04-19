@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -14,6 +14,7 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import { ErrorContext } from 'state/ErrorProvider';
 
 const validate = (val) => {
   if (val === '') {
@@ -26,13 +27,14 @@ const validate = (val) => {
 
 function ServiceLocationUpdateForm({ backend, serviceUser }) {
   const history = useHistory();
+  const { setError } = useContext(ErrorContext);
   const { t } = useTranslation();
 
   const email = `[${Emails.UPDATE}](mailto:${Emails.UPDATE})`;
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    zipCode: serviceUser?.data?.zipCode || '',
+    zipCode: serviceUser?.data?.zip || '',
   });
 
   const handleFieldChange = useCallback(
@@ -57,12 +59,19 @@ function ServiceLocationUpdateForm({ backend, serviceUser }) {
       return;
     }
 
-    backend.setLocalZip(fields.zipCode);
-    history.push(
-      routeWithParams(Routes.SERVICE_LOCATION_AVAILABLE, {
-        zip: fields.zipCode,
-      }),
-    );
+    backend
+      .saveServiceUser({ ...serviceUser.data, zip: fields.zipCode })
+      .then(() => {
+        backend.setLocalZip(fields.zipCode);
+        history.push(
+          routeWithParams(Routes.SERVICE_TYPE, {
+            zip: fields.zipCode,
+          }),
+        );
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
   };
 
   const fieldData = [
@@ -91,7 +100,7 @@ function ServiceLocationUpdateForm({ backend, serviceUser }) {
       isLoading={isLoading}
       buttonLabel={t('global.form.submitLabelNext')}
     >
-      <Text as="p" type={TEXT_TYPE.NOTE}>
+      <Text as="div" type={TEXT_TYPE.NOTE}>
         <ReactMarkdown
           source={t('service.updateLocationForm.note', { email })}
         />

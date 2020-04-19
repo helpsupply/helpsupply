@@ -26,7 +26,7 @@ function ServiceLocationForm({ backend, serviceUser }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    zipCode: serviceUser?.data?.zipCode || '',
+    zipCode: serviceUser?.data?.zip || '',
   });
 
   const handleFieldChange = useCallback(

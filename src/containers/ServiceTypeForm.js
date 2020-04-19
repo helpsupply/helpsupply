@@ -127,7 +127,7 @@ function ServiceTypeForm({ backend, serviceOptions, zip }) {
       title={
         <ReactMarkdown
           source={t('service.selectType.title', {
-            url: Routes.SERVICE_TYPE,
+            url: Routes.SERVICE_LOCATION_UPDATE,
             zip,
           })}
         />
