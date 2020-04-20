@@ -31,7 +31,8 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
       .then(() =>
         backend.sendRequestConfirmation({
           id,
-          organization: service.organization,
+          organization: backend.getMetadataForProvider(service.organization)
+            .Organization,
           type: mapServiceKindToTitle()[service.kind],
           date: service.date,
           details,
