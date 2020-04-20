@@ -121,13 +121,38 @@ exports.sendSigninEmail = functions.https.onRequest(
       url: request.query.url,
       handleCodeInApp: true,
     };
+    console.log(actionCodeSettings);
     // Use this to pick a template
     // let newUser = request.query.new === 'true';
-
     let link = await admin
       .auth()
       .generateSignInWithEmailLink(userEmail, actionCodeSettings);
-    await sendEmail(userEmail, 'Sign In', link, link);
+
+    // Get the template
+    function getData(fileName, type) {
+      return new Promise(function (resolve, reject) {
+        fs.readFile(fileName, type, (err, data) => {
+          err ? reject(err) : resolve(data);
+        });
+      });
+    }
+
+    // Get the relevant email
+    let user = await admin.auth().getUserByEmail(userEmail);
+    let returning = user && user.emailVerified;
+
+    let template = await getData(
+      returning ? 'assets/emails/sign-in.html' : 'assets/emails/welcome.html',
+      'utf8',
+    );
+    template = template.replace('{{link}}', link);
+
+    await sendEmail(
+      userEmail,
+      'Welcome to Help Supply',
+      'Please click here to verify your account',
+      template,
+    );
     response.send('ok');
   },
 );
@@ -159,7 +184,38 @@ exports.sendRequestConfirmation = functions.https.onRequest(
         });
       });
     }
-    let template = await getData('assets/test.html', 'utf8');
+    let template = await getData('assets/emails/confirmation.html', 'utf8');
+
+    function escapeHTML(unsafe) {
+      return unsafe
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    let formattedDetails = '';
+    for (var key in request.query.details) {
+      formattedDetails +=
+        '<b>' +
+        escapeHTML(key) +
+        ':</b> ' +
+        escapeHTML(request.query.details[key]) +
+        '<br />';
+    }
+
+    let mapping = {
+      '{{organization}}': escapeHTML(request.query.organization),
+      '{{id}}': escapeHTML(request.query.request),
+      '{{type}}': escapeHTML(request.query.type),
+      '{{details}}': formattedDetails,
+      '{{date}}': escapeHTML(request.query.date),
+    };
+
+    for (var key in mapping) {
+      template = template.replace(key, mapping[key]);
+    }
 
     // Send away!
     await sendEmail(email, 'Request Confirmation', requestId, template);
