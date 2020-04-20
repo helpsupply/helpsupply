@@ -101,7 +101,7 @@ const OUR_FIELD_MAP = {
 This is a request from help.supply.
 
 Delivery Preference:
-- ${request.delivery_day}
+- ${request.date}
 - ${request.time}
 
 Grocery List:
@@ -161,7 +161,7 @@ const FIELD_MAP = {
 This is a request from help.supply.
 
 Delivery Preference:
-- ${request.delivery_day}
+- ${request.date}
 - ${request.time}
 
 Grocery List:
