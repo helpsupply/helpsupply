@@ -768,6 +768,20 @@ export default class FirebaseBackend {
   async sendRequestConfirmation(data) {
     console.log('service todo: sendRequestConfirmation');
     console.log(data);
+
+    await axios({
+      method: 'POST',
+      // TODO: Configure staging vs production somewhere
+      url:
+        'https://us-central1-help-supply-staging.cloudfunctions.net/sendRequestConfirmation',
+      params: {
+        organization: data.organization,
+        request: data.id,
+        type: data.type,
+        date: data.date,
+        details: JSON.stringify({ foo: 'bar', baz: 'bat' }),
+      },
+    });
     return true;
   }
 

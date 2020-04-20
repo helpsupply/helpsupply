@@ -196,12 +196,13 @@ exports.sendRequestConfirmation = functions.https.onRequest(
     }
 
     let formattedDetails = '';
-    for (var key in request.query.details) {
+    let rawDetails = JSON.parse(request.query.details);
+    for (var key in rawDetails) {
       formattedDetails +=
         '<b>' +
         escapeHTML(key) +
         ':</b> ' +
-        escapeHTML(request.query.details[key]) +
+        escapeHTML(rawDetails[key]) +
         '<br />';
     }
 
