@@ -23,12 +23,6 @@ function get_multi_select(keys, values) {
   };
 }
 
-function always(resp) {
-  return (request) => {
-    return resp;
-  };
-}
-
 const FIELD_MAP = {
   Phone: get_user_field('phone'),
 
