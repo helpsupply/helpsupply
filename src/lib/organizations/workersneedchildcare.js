@@ -36,11 +36,10 @@ const FIELD_MAP = {
   'Parent Last Name': get_user_field('lastName'),
   'Parent Email': get_user_field('email'),
 
-  // TODO: These aren't real yet
-  'Zip Code': always('00000'),
-  'What neighborhoods are you open to having childcare?': get_field(
-    'neighborhoods',
-  ),
+  'Zip Code': get_field('zip'),
+  'What neighborhoods are you open to having childcare?': (request) => {
+    return [request.neighborhood];
+  },
 
   'How do you want us to contact you?': (request, user) => {
     return {
