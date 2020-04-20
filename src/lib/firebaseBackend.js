@@ -765,6 +765,12 @@ export default class FirebaseBackend {
     ).id;
   }
 
+  async sendRequestConfirmation(data) {
+    console.log('service todo: sendRequestConfirmation');
+    console.log(data);
+    return true;
+  }
+
   // Conversation state
   // Note: only firebase functions have permissions to call these
   async getConversationState(user) {

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import RequestKinds from 'lib/organizations/kinds';
+import { mapServiceKindToTitle } from 'lib/theme/services';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -25,6 +26,15 @@ function ServiceReview({ backend, id, service }) {
   const handleSubmit = async () => {
     await backend
       .updateServiceRequest(id, { status: 'open' }, true)
+      .then(() =>
+        backend.sendRequestConfirmation({
+          id,
+          organization: service.organization,
+          type: mapServiceKindToTitle()[service.kind],
+          date: service.status_updated,
+          details: service.additionalInfo,
+        }),
+      )
       .then(() => {
         history.push(
           routeWithParams(Routes.SERVICE_CONFIRMATION, {
