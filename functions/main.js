@@ -138,7 +138,12 @@ exports.sendSigninEmail = functions.https.onRequest(
     }
 
     // Get the relevant email
-    let user = await admin.auth().getUserByEmail(userEmail);
+    let user = null;
+    try {
+      await admin.auth().getUserByEmail(userEmail);
+    } catch (e) {
+      console.log('new user');
+    }
     let returning = user && user.emailVerified;
 
     let template = await getData(
