@@ -69,12 +69,13 @@ test('Request Mapping', async () => {
     wednesdays: true,
 
     // Not integrated yet
-    zip_code: '00000',
+    zip: '00000',
     neighborhoods: ['Manhattan: Central Harlem'],
   };
 
   await WorkersNeedChildcare.DeliverRequest(mock_backend, request, userInfo);
 
+  console.log(payloads);
   expect(payloads.length).toBe(2);
   for (var i = 0; i < 2; i++) {
     for (let key in payloads[i]) {

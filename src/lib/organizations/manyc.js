@@ -18,6 +18,106 @@ function always(resp) {
   };
 }
 
+const OUR_FIELD_MAP = {
+  'First Name': get_user_field('firstName'),
+  'Last Name': get_user_field('lastName'),
+
+  'How soon do you need support?': (request) => {
+    return {
+      immediate: "Immediately, I'm in crisis",
+      soon: 'In the next few days',
+      later: "I'm okay for now, but am worried that I won't be soon",
+    }[request.urgency];
+  },
+
+  Cell: get_user_field('phone'),
+  Email: get_user_field('email'),
+
+  'Which of these ways are best to get in touch with you?': (request, user) => {
+    return {
+      email: ['Email'], // TODO: Validate
+      phone: ['Phone call'],
+    }[user.contactPreference];
+  },
+
+  "Language Access: is your primary language something other than English, for which you'd need translation & interpretation support to connect to volunteers?": (
+    request,
+    user,
+  ) => {
+    switch (user.languagePreference) {
+      case 'english':
+        return null;
+      case 'mandarin':
+        return 'Chinese: Mandarin';
+      case 'cantonese':
+        return 'Chinese: Cantonese';
+      case 'russian':
+        return 'Russian';
+      case 'haitian-creole':
+        return 'Haitian Kreyol';
+      case 'bengali':
+        return 'Bengali';
+      case 'yiddish':
+        return 'Yiddish';
+      case 'french':
+        return 'French';
+      case 'italian':
+        return 'Italian';
+      case 'korean':
+        return 'Korean';
+      case 'arabic':
+        return 'Arabic';
+      case 'polish':
+        return 'Polish';
+      case 'tagalog':
+        return 'Tagalog';
+      case 'asl':
+        return 'ASL';
+      default:
+        return null;
+    }
+  },
+
+  'What type(s) of support are you seeking?': always([
+    'Deliver groceries or supplies to me',
+  ]),
+  'Zip Code': (request) => {
+    return parseInt(request.zip);
+  },
+  'Cross Streets': get_field('crossStreet'),
+  'What borough/region are you in?': (request) => {
+    return request.neighborhood.split(':')[0];
+  },
+  'What neighborhood?': (request) => {
+    return [request.neighborhood];
+  },
+  'Are you, or anyone in your household in one or more of these hardest-hit groups? Please select all that apply.': always(
+    ['Healthcare workers'],
+  ),
+  'Anything else you want to share about your situation at this time?': (
+    request,
+  ) => {
+    return `
+This is a request from help.supply.
+
+Delivery Preference:
+- ${request.delivery_day}
+- ${request.time}
+
+Grocery List:
+${request.groceryList}
+
+Dietary Restrictions:
+${request.dietaryRestrictions}
+
+Other Info:
+${request.additionalInfo}
+
+Request ID: https://help.supply/r/${request.id}
+`;
+  },
+};
+
 const FIELD_MAP = {
   source: always('help.supply'),
   sourceID: get_field('id'),
@@ -72,9 +172,13 @@ ${request.dietaryRestrictions}
 
 Other Info:
 ${request.additionalInfo}
+
+Request ID: https://help.supply/r/${request.id}
 `;
   },
 };
+
+FIELD_MAP.unused = true;
 
 const MANYCMetadata = {
   id: 'manyc',
@@ -337,12 +441,13 @@ const MANYCMetadata = {
     let url = await backend.getWebhookForOrg('manyc');
 
     let payload = {};
-    for (const field in FIELD_MAP) {
-      payload[field] = FIELD_MAP[field](request, user);
+    for (const field in OUR_FIELD_MAP) {
+      payload[field] = OUR_FIELD_MAP[field](request, user);
     }
 
     // Send the request
-    await backend.postWebhook(url, { manyc: payload });
+    //await backend.postWebhook(url, { manyc: payload });
+    await backend.postWebhook(url, payload);
   },
   // Called by the backend when MANYC pushes an update
   // about a request to our webhook
