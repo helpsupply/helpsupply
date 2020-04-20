@@ -16,7 +16,7 @@
     <meta name="format-detection" content="email=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="x-apple-disable-message-reformatting" />
-    <title>Welcome to Help Supply</title>
+    <title>Service Request Confirmation</title>
     <style type="text/css">
       @import url("https://fonts.googleapis.com/css?family=Inter&display=swap");
       /* Reset */
@@ -558,7 +558,7 @@
                                       word-break: break-word;
                                     "
                                     ><img
-                                      src="logo.png"
+                                      src="https://help-supply-staging.web.app/logo.png"
                                       width="120"
                                       height="auto"
                                       alt="Help Supply"
@@ -640,7 +640,7 @@
                                   letter-spacing: -0.04em;
                                 "
                               >
-                                Welcome to Help Supply,
+                                We received your service request.
                               </h2>
                               <p
                                 class="text_lead text_secondary"
@@ -649,23 +649,6 @@
                                   font-family: 'Inter', Arial, Helvetica,
                                     sans-serif;
                                   margin-top: 20px;
-                                  margin-bottom: 20px;
-                                  word-break: break-word;
-                                  font-size: 14px;
-                                  line-height: 22px;
-                                  letter-spacing: -0.01em;
-                                "
-                              >
-                                Please tap the button below to verify your email
-                                address and start your request.
-                              </p>
-                              <p
-                                class="text_lead text_secondary"
-                                style="
-                                  color: #737373;
-                                  font-family: 'Inter', Arial, Helvetica,
-                                    sans-serif;
-                                  margin-top: 0px;
                                   margin-bottom: 40px;
                                   word-break: break-word;
                                   font-size: 14px;
@@ -673,69 +656,86 @@
                                   letter-spacing: -0.01em;
                                 "
                               >
-                                +Help Supply
+                                Your request has been routed to
+                                {{organization}}. They will contact you to
+                                fulfill your request.
+                              </p>
+                              <p
+                                style="
+                                  color: #9f9f9f;
+                                  font-family: 'Inter', Arial, Helvetica,
+                                    sans-serif;
+                                  margin-top: 0px;
+                                  margin-bottom: 20px;
+                                  word-break: break-word;
+                                  font-size: 12px;
+                                  line-height: 18px;
+                                  letter-spacing: -0.01em;
+                                "
+                              >
+                                Request ID #{{id}}
+                              </p>
+                              <p
+                                style="
+                                  color: #484848;
+                                  font-family: 'Inter', Arial, Helvetica,
+                                    sans-serif;
+                                  margin-top: 0px;
+                                  margin-bottom: 20px;
+                                  word-break: break-word;
+                                  font-size: 16px;
+                                  line-height: 22px;
+                                  letter-spacing: -0.02em;
+                                "
+                              >
+                                {{type}}
+                              </p>
+                              <p
+                                style="
+                                  color: #737373;
+                                  font-family: 'Inter', Arial, Helvetica,
+                                    sans-serif;
+                                  margin-top: 0px;
+                                  margin-bottom: 20px;
+                                  word-break: break-word;
+                                  font-size: 12px;
+                                  line-height: 22px;
+                                  letter-spacing: -0.01em;
+                                "
+                              >
+                                {{details}}
+                              </p>
+                              <p
+                                style="
+                                  color: #9f9f9f;
+                                  font-family: 'Inter', Arial, Helvetica,
+                                    sans-serif;
+                                  margin-top: 0px;
+                                  margin-bottom: 20px;
+                                  word-break: break-word;
+                                  font-size: 12px;
+                                  line-height: 18px;
+                                  letter-spacing: -0.01em;
+                                "
+                              >
+                                Added {{date}}
                               </p>
                               <a
                                 href="#"
                                 style="
-                                  -webkit-text-size-adjust: 100%;
-                                  -ms-text-size-adjust: 100%;
-                                  text-decoration: none;
-                                  color: #ffffff;
+                                  color: #1C56F4;
                                   font-family: 'Inter', Arial, Helvetica,
                                     sans-serif;
-                                  margin-top: 20px;
+                                  margin-top: 0px;
                                   margin-bottom: 20px;
                                   word-break: break-word;
+                                  font-size: 14px;
+                                  line-height: 22px;
+                                  letter-spacing: -0.01em;
                                 "
                               >
-                                <table
-                                  role="presentation"
-                                  class="ebutton"
-                                  align="center"
-                                  border="0"
-                                  cellspacing="0"
-                                  cellpadding="0"
-                                  style="
-                                    -webkit-text-size-adjust: 100%;
-                                    -ms-text-size-adjust: 100%;
-                                    mso-table-lspace: 0pt;
-                                    mso-table-rspace: 0pt;
-                                    margin: 0 auto 40px;
-                                    width: 100%;
-                                  "
-                                >
-                                  <tbody>
-                                    <tr>
-                                      <td
-                                        class="bg_primary"
-                                        style="
-                                          width: 100%;
-                                          background-color: #1c56f4;
-                                          -webkit-text-size-adjust: 100%;
-                                          -ms-text-size-adjust: 100%;
-                                          mso-table-lspace: 0pt;
-                                          mso-table-rspace: 0pt;
-                                          font-size: 16px;
-                                          border-radius: 10px;
-                                          line-height: normal;
-                                          text-align: center;
-                                          padding-top: 20px;
-                                          padding-bottom: 20px;
-                                        "
-                                      >
-                                        <span
-                                          style="
-                                            color: #ffffff;
-                                            text-decoration: none;
-                                          "
-                                          >Get started</span
-                                        >
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </a>
+                                View request
+                                <a>
                             </td>
                           </tr>
                         </tbody>
