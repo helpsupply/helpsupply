@@ -8,10 +8,14 @@ import ServiceReview from 'containers/ServiceReview';
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
 
+import { useAuth } from 'hooks/useAuth';
+
 function Review({ backend }) {
   const params = useParams();
+  const { isInitializing, isLoggedIn, user } = useAuth();
   const [service, setService] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [serviceUser, setServiceUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(isInitializing);
   const { setError } = useContext(ErrorContext);
 
   useEffect(() => {
@@ -26,11 +30,33 @@ function Review({ backend }) {
       });
   }, [setError, params.id, backend]);
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
+    backend
+      .getServiceUser()
+      .then((user) => {
+        setServiceUser(user);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.message);
+      });
+  }, [setError, backend, isLoggedIn, setIsLoading]);
+
   return (
     <Page currentProgress={5} totalProgress={5}>
       {isLoading && <PageLoader />}
       {!isLoading && (
-        <ServiceReview backend={backend} id={params.id} service={service} />
+        <ServiceReview
+          backend={backend}
+          id={params.id}
+          service={service}
+          serviceUser={serviceUser?.data}
+          user={user}
+        />
       )}
     </Page>
   );

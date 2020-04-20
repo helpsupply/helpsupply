@@ -1,10 +1,11 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { Routes } from 'constants/Routes';
+import { mentalHealthOptions } from 'lib/constants/options';
 import { routeWithParams } from 'lib/utils/routes';
 import RequestKinds from 'lib/organizations/kinds';
 import { mapServiceKindToTitle } from 'lib/theme/services';
@@ -19,9 +20,10 @@ import MentalHealthServiceReview from 'components/ServiceReview/MentalHealth';
 
 import { styles } from 'components/ServiceReview/ServiceReview.styles';
 
-function ServiceReview({ backend, id, service }) {
+function ServiceReview({ backend, id, service, serviceUser, user }) {
   const history = useHistory();
   const { t } = useTranslation();
+  const [details, setDetails] = useState();
 
   const handleSubmit = async () => {
     await backend
@@ -31,8 +33,8 @@ function ServiceReview({ backend, id, service }) {
           id,
           organization: service.organization,
           type: mapServiceKindToTitle()[service.kind],
-          date: service.status_updated,
-          details: service.additionalInfo,
+          date: service.date,
+          details,
         }),
       )
       .then(() => {
@@ -48,6 +50,69 @@ function ServiceReview({ backend, id, service }) {
     // service TODO: handle exceptions
   };
 
+  useEffect(() => {
+    if (!service || !serviceUser || !user) {
+      return;
+    }
+
+    let contact = {
+      Contact: `${serviceUser.firstName} ${serviceUser.lastName}`,
+      'Contact Preference': serviceUser.contactPreference,
+      [`${serviceUser.contactPreference === 'phone' ? 'Phone' : 'Email'}`]: `${
+        serviceUser.contactPreference === 'phone'
+          ? serviceUser.phone
+          : user.email
+      }`,
+    };
+
+    if (
+      service.additionalContactContactPreference &&
+      service.additionalContactFirstName &&
+      service.additionalContactLastName
+    ) {
+      contact = {
+        Contact: `${service.additionalContactFirstName} ${service.additionalContactLastName}`,
+        'Contact Preference': service.additionalContactContactPreference,
+        [`${
+          service.additionalContactContactPreference === 'phone'
+            ? 'Phone'
+            : 'Email'
+        }`]: `${
+          service.additionalContactContactPreference === 'phone'
+            ? service.additionalContactPhone
+            : service.additionalContactEmail
+        }`,
+      };
+    }
+
+    setDetails({
+      ...contact,
+      ...(service.date && { Date: `${service.date}, ${service.time}` }),
+
+      // groceries
+      ...(service.groceryList && { 'Grocery List': service.groceryList }),
+      ...(service.dietaryRestrictions && {
+        'Dietary Restrictions': service.dietaryRestrictions,
+      }),
+
+      // mental health
+      ...(service.kind === RequestKinds.MENTALHEALTH &&
+        service.type && {
+          'Help Type': mentalHealthOptions.find((o) => o.value === service.type)
+            ?.label,
+        }),
+
+      // childcare
+      ...(service.children && {
+        Children: Object.keys(service.children).length,
+      }),
+
+      ...(service.additionalInfo && {
+        'Additional Information': service.additionalInfo,
+      }),
+    });
+  }, [service, serviceUser, user]);
+
   return (
     <Fragment>
       <Text as="h2" type={TEXT_TYPE.HEADER_3} css={styles.title}>
@@ -57,6 +122,7 @@ function ServiceReview({ backend, id, service }) {
         <GroceryServiceReview
           id={id}
           service={service}
+          serviceUser={serviceUser}
           handleSubmit={handleSubmit}
         />
       )}
@@ -64,6 +130,7 @@ function ServiceReview({ backend, id, service }) {
         <ChildcareServiceReview
           id={id}
           service={service}
+          serviceUser={serviceUser}
           handleSubmit={handleSubmit}
         />
       )}
@@ -71,6 +138,7 @@ function ServiceReview({ backend, id, service }) {
         <PetcareServiceReview
           id={id}
           service={service}
+          serviceUser={serviceUser}
           handleSubmit={handleSubmit}
         />
       )}
@@ -78,6 +146,7 @@ function ServiceReview({ backend, id, service }) {
         <MentalHealthServiceReview
           id={id}
           service={service}
+          serviceUser={serviceUser}
           handleSubmit={handleSubmit}
         />
       )}

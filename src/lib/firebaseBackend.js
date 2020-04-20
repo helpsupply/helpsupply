@@ -771,9 +771,6 @@ export default class FirebaseBackend {
   }
 
   async sendRequestConfirmation(data) {
-    console.log('service todo: sendRequestConfirmation');
-    console.log(data);
-
     await axios({
       method: 'POST',
       // TODO: Configure staging vs production somewhere
@@ -783,7 +780,7 @@ export default class FirebaseBackend {
         request: data.id,
         type: data.type,
         date: data.date,
-        details: JSON.stringify({ foo: 'bar', baz: 'bat' }),
+        details: JSON.stringify(data.details),
       },
     });
     return true;
