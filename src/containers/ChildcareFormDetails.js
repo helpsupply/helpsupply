@@ -174,7 +174,11 @@ function ChildcareFormDetails({ id, onSave, request }) {
         onSubmit={handleSubmit}
         title={t('service.childcare.details.title')}
         description={t('service.childcare.details.description')}
-        disabled={!Object.keys(fields).every((key) => !!fields[key])}
+        disabled={
+          !Object.keys(fields).every(
+            (key) => !!fields[key].birthMonth && !!fields[key].birthYear,
+          )
+        }
         fields={buildFields().concat(additionalCta)}
         isLoading={isLoading}
       />
