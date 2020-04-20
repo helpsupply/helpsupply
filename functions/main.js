@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const express = require('express');
 const sendEmail = require('./sendmail').sendEmail;
+const fs = require('fs');
 
 // This is our local code
 import FirebaseBackend from 'firebase-backend';
@@ -150,8 +151,18 @@ exports.sendRequestConfirmation = functions.https.onRequest(
       : await admin.auth().getUser(uid)
     ).email;
 
+    // Get the template
+    function getData(fileName, type) {
+      return new Promise(function (resolve, reject) {
+        fs.readFile(fileName, type, (err, data) => {
+          err ? reject(err) : resolve(data);
+        });
+      });
+    }
+    let template = await getData('assets/test.html', 'utf8');
+
     // Send away!
-    await sendEmail(email, 'Request Confirmation', requestId, requestId);
+    await sendEmail(email, 'Request Confirmation', requestId, template);
     response.send('ok');
   },
 );

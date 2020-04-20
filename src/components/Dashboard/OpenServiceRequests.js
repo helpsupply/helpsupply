@@ -3,14 +3,15 @@ import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 
 import RequestKinds from 'lib/organizations/kinds';
+import { mapServiceKindToTitle } from 'lib/theme/services';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-
-import { styles } from './UserDashboard.styles';
 import GroceryRequest from 'components/Services/GroceryRequest';
 import ChildCareRequest from 'components/Services/ChildCareRequest';
 import MentalHealthRequest from 'components/Services/MentalHealthRequest';
+
+import { styles } from './UserDashboard.styles';
 
 const groupBy = (arr, key) => {
   return arr.reduce((acc, item) => {
@@ -38,7 +39,7 @@ export const OpenServiceRequests = ({ onDelete, onEdit, requests }) => {
       {Object.entries(groupedRequests).map(([k, v]) => (
         <Fragment key={k}>
           <Text as="h4" type={TEXT_TYPE.HEADER_4} css={styles.kind}>
-            {k}
+            {mapServiceKindToTitle()[k]}
           </Text>
           {v.map(
             (request) =>

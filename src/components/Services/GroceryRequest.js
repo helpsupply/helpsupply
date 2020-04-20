@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import { URGENCY_KEYS, URGENCY_TEXT } from 'lib/constants/urgency';
+import { mapServiceKindToTitle } from 'lib/theme/services';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -38,7 +39,7 @@ export const GroceryRequest = ({
         </Note>
       </div>
       <Text as="p" type={TEXT_TYPE.BODY_1} css={styles.capitalize}>
-        {request.kind}
+        {mapServiceKindToTitle()[request.kind]}
       </Text>
       {request.firstName && (
         <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>

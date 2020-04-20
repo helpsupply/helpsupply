@@ -3,6 +3,8 @@ import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
+import { mapServiceKindToTitle } from 'lib/theme/services';
+
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Note from 'components/Note';
@@ -25,7 +27,7 @@ export const ChildCareRequest = ({
         </Note>
       </div>
       <Text as="p" type={TEXT_TYPE.BODY_1} css={styles.capitalize}>
-        {request.kind}
+        {mapServiceKindToTitle()[request.kind]}
       </Text>
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
         {[
