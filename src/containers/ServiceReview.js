@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Routes } from 'constants/Routes';
 import { mentalHealthOptions } from 'lib/constants/options';
 import { routeWithParams } from 'lib/utils/routes';
+import { formatDate } from 'lib/utils/datetime';
 import RequestKinds from 'lib/organizations/kinds';
 import { mapServiceKindToTitle } from 'lib/theme/services';
 
@@ -19,6 +20,19 @@ import PetcareServiceReview from 'components/ServiceReview/Petcare';
 import MentalHealthServiceReview from 'components/ServiceReview/MentalHealth';
 
 import { styles } from 'components/ServiceReview/ServiceReview.styles';
+
+const buildChildcareDate = (service) => {
+  return [
+    service.mondays && 'Mondays',
+    service.tuesdays && 'Tuesdays',
+    service.wednesdays && 'Wednesdays',
+    service.thursdays && 'Thursdays',
+    service.fridays && 'Fridays',
+    service.saturdays && 'Saturdays',
+    service.sundays && 'Sundays',
+    service.varies && 'Days vary',
+  ].filter((day) => !!day);
+};
 
 function ServiceReview({ backend, id, service, serviceUser, user }) {
   const history = useHistory();
@@ -34,7 +48,7 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
           organization: backend.getMetadataForProvider(service.organization)
             .Organization,
           type: mapServiceKindToTitle()[service.kind],
-          date: service.date,
+          date: service.date ? service.date : formatDate(service.timeCreated),
           details,
         }),
       )
@@ -88,7 +102,6 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
 
     setDetails({
       ...contact,
-      ...(service.date && { Date: `${service.date}, ${service.time}` }),
 
       // groceries
       ...(service.groceryList && { 'Grocery List': service.groceryList }),
@@ -104,8 +117,11 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
         }),
 
       // childcare
+      ...(buildChildcareDate(service)[0] && {
+        'Preferred Day': buildChildcareDate(service)[0],
+      }),
       ...(service.children && {
-        Children: Object.keys(service.children).length,
+        Children: Object.keys(service.children).length.toString(),
       }),
 
       ...(service.additionalInfo && {
