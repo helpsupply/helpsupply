@@ -28,6 +28,7 @@ import Request from 'pages/request';
 import EntryPortal from 'pages/entry';
 import Facility from 'pages/facility';
 import SignUp from 'pages/signup';
+import SignUpWelcome from 'pages/signup_welcome';
 import Login from 'pages/login';
 import SignUpConfirmation from 'pages/signup_confirmation';
 import SignupComplete from 'pages/signup_approve';
@@ -162,11 +163,18 @@ function App({ backend }) {
                 >
                   <ServiceLocationUnavailable backend={backend} />
                 </Route>
-                <Route backend={backend} exact path={Routes.EMAIL_LIST_SENT}>
+                <Route
+                  backend={backend}
+                  exact
+                  path={Routes.SERVICE_LOCATION_UNAVAILABLE_SIGNUP_COMPLETE}
+                >
                   <EmailListConfirmation backend={backend} />
                 </Route>
                 <Route exact path={Routes.FACILITY}>
                   <Facility backend={backend} />
+                </Route>
+                <Route exact path={Routes.EMAIL_SIGNUP_WELCOME}>
+                  <SignUpWelcome backend={backend} />
                 </Route>
                 <Route exact path={Routes.EMAIL_SIGNUP_FORM}>
                   <SignUp backend={backend} />

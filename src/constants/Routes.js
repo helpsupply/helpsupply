@@ -26,9 +26,11 @@ export const Routes = {
   SERVICE_LOCATION_UPDATE: '/service-location/update',
   SERVICE_LOCATION_AVAILABLE: '/service-location/available/:zip?',
   SERVICE_LOCATION_UNAVAILABLE: '/service-location/unavailable',
-  EMAIL_LIST_SENT: '/service-location/unavailable/confirm',
+  SERVICE_LOCATION_UNAVAILABLE_SIGNUP_COMPLETE:
+    '/service-location/unavailable/confirm',
   FACILITY: `/facility`,
   LOGIN: '/login',
+  LOGIN_WELCOME: `/login/welcome`,
   EMAIL_SIGNUP_FORM: `/signup`,
   EMAIL_SIGNUP_SENT: `/signup/confirm`,
   // Update firebaseBackend.js if you change this (it can't require this, because

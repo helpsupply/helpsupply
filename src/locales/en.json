@@ -23,6 +23,12 @@
         }
       }
     },
+    "welcome": {
+      "signup": {
+        "title": "Welcome back, thank you for confirming your email address.",
+        "description": "You'll use this email address if you ever need to log back in."
+      }
+    },
     "dashboard": {
       "title": "Your Requests",
       "cta": "Request more services",
