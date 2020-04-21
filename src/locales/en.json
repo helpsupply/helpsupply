@@ -342,6 +342,7 @@
           "saturdays": "Saturdays",
           "sundays": "Sundays",
           "varies": "It varies week-to-week",
+          "variesTime": "It varies week-to-week ",
           "mornings": "Mornings",
           "afternoons": "Afternoons",
           "evenings": "Evenings",
@@ -392,10 +393,10 @@
         },
         "when": {
           "title": "What days will you need childcare?",
-          "description": "Our service partners will work directly with you to accommodate your preferences.",
+          "description": "Our service partners will work directly with you to accommodate your preferences. \n\n Select all that apply:",
           "additional": {
-            "title": "What times do you need childcare?",
-            "description": "Select all that apply:"
+            "description": "What times do you need childcare?",
+            "title": "Select all that apply:"
           },
           "note": "Please bear in mind that many people need help and we cannot guarantee a quick response to your request."
         },

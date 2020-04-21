@@ -97,10 +97,7 @@ function ChildcareFormDate({ id, onSave, request }) {
       return [
         {
           customOnChange: handleFieldChange(time),
-          label:
-            time === 'variesTime'
-              ? `${t('service.when.labels.varies')}-1`
-              : t(`service.when.labels.${time}`),
+          label: t(`service.when.labels.${time}`),
           name: time,
           type: formFieldTypes.INPUT_CHECKBOX,
           value: fields[time],
@@ -135,10 +132,15 @@ function ChildcareFormDate({ id, onSave, request }) {
 
   return (
     <FormBuilder
+      buttonLabel={t('global.form.submitLabelNext')}
       defaultValues={fields}
       onSubmit={handleSubmit}
       title={t('service.childcare.when.title')}
-      description={t('service.childcare.when.description')}
+      description={t('service.childcare.when.description')
+        .split('\n')
+        .map((item, i) => (
+          <p key={i}>{item}</p>
+        ))}
       disabled={
         !dayFields.some((dayField) => {
           return fields[dayField];
