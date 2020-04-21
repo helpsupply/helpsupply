@@ -673,6 +673,7 @@ export default class FirebaseBackend {
       url: functionurl + '/sendSigninEmail',
       params: {
         email: email,
+        login: 'true',
         url: `${window.location.protocol}//${window.location.host}/login/complete/`,
       },
     });

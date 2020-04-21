@@ -121,8 +121,7 @@ exports.sendSigninEmail = functions.https.onRequest(
       handleCodeInApp: true,
     };
     console.log(actionCodeSettings);
-    // Use this to pick a template
-    // let newUser = request.query.new === 'true';
+
     let link = await admin
       .auth()
       .generateSignInWithEmailLink(userEmail, actionCodeSettings);
@@ -139,11 +138,17 @@ exports.sendSigninEmail = functions.https.onRequest(
     // Get the relevant email
     let user = null;
     try {
-      await admin.auth().getUserByEmail(userEmail);
+      user = await admin.auth().getUserByEmail(userEmail);
     } catch (e) {
       console.log('new user');
     }
     let returning = user && user.emailVerified;
+
+    if (request.query.login && !returning) {
+      console.log('not sending login link to', userEmail, user);
+      response.send('ok');
+      return;
+    }
 
     let template = await getData(
       returning ? 'assets/emails/sign-in.html' : 'assets/emails/welcome.html',
