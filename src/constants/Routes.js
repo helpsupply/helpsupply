@@ -30,12 +30,13 @@ export const Routes = {
     '/service-location/unavailable/confirm',
   FACILITY: `/facility`,
   LOGIN: '/login',
+  LOGIN_COMPLETE: '/login/complete',
   WELCOME: `/welcome`,
   EMAIL_SIGNUP_FORM: `/signup`,
   EMAIL_SIGNUP_SENT: `/signup/confirm`,
   // Update firebaseBackend.js if you change this (it can't require this, because
   // this file is outside of the lib package).
-  EMAIL_SIGNUP_COMPLETE: `/signup/complete/:zip?`,
+  EMAIL_SIGNUP_COMPLETE: `/signup/complete/:zip?/:facility?`,
   CONTACT_FORM: `/contact`,
   CONTACT_CONFIRMATION: `/contact/confirm`,
   SERVICE_TYPE: '/service',

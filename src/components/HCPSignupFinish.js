@@ -81,7 +81,7 @@ function HCPSignupFinish({ backend }) {
       let url = window.location.href;
 
       backend
-        .continueSignup(url, shouldConfirmEmail ? email : null)
+        .continueSignin(url, shouldConfirmEmail ? email : null)
         .then(() => {
           routeToNextPage();
           setSubmitting(false);

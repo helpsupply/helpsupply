@@ -30,8 +30,9 @@ import Facility from 'pages/facility';
 import SignUp from 'pages/signup';
 import SignUpWelcome from 'pages/signup_welcome';
 import Login from 'pages/login';
+import LoginApprove from 'pages/login_approve';
 import SignUpConfirmation from 'pages/signup_confirmation';
-import SignupComplete from 'pages/signup_approve';
+import SignupApprove from 'pages/signup_approve';
 import Contact from 'pages/contact';
 import ContactConfirmation from 'pages/contact_confirmation';
 import ServiceLocation from 'pages/service_location';
@@ -139,6 +140,9 @@ function App({ backend }) {
                 <Route backend={backend} exact path={Routes.SERVICE_LOCATION}>
                   <ServiceLocation backend={backend} />
                 </Route>
+                <Route exact path={Routes.LOGIN_COMPLETE}>
+                  <LoginApprove backend={backend} />
+                </Route>
                 <Route path={Routes.LOGIN}>
                   <Login backend={backend} />
                 </Route>
@@ -177,7 +181,7 @@ function App({ backend }) {
                   <SignUpConfirmation backend={backend} />
                 </Route>
                 <Route exact path={Routes.EMAIL_SIGNUP_COMPLETE}>
-                  <SignupComplete backend={backend} />
+                  <SignupApprove backend={backend} />
                 </Route>
                 <Route exact path={Routes.WELCOME}>
                   <SignUpWelcome backend={backend} />

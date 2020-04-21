@@ -70,6 +70,14 @@ export default class FirebaseBackend {
     return window.localStorage.removeItem('zipCode');
   }
 
+  setLocalFacility(facility) {
+    window.localStorage.setItem('facility', facility);
+  }
+
+  getLocalFacility(facility) {
+    return window.localStorage.getItem('facility');
+  }
+
   // Returns an array of pairs [RequestKind, OrganizationId]
   getServicesForZip(zipCode) {
     return OrganizationIndex.ByZip[zipCode];
@@ -644,7 +652,7 @@ export default class FirebaseBackend {
     window.localStorage.setItem('emailForSignIn', email);
   }
 
-  async signupServicesWithEmail(email, zip) {
+  async signupServicesWithEmail(email, zip, facility) {
     window.localStorage.setItem('emailForSignIn', email);
     await axios({
       method: 'POST',
@@ -652,7 +660,7 @@ export default class FirebaseBackend {
       url: functionurl + '/sendSigninEmail',
       params: {
         email: email,
-        url: `${window.location.protocol}//${window.location.host}/signup/complete/${zip}/`,
+        url: `${window.location.protocol}//${window.location.host}/signup/complete/${zip}/${facility}`,
       },
     });
   }
@@ -665,7 +673,7 @@ export default class FirebaseBackend {
       url: functionurl + '/sendSigninEmail',
       params: {
         email: email,
-        url: `${window.location.protocol}//${window.location.host}/dashboard/`,
+        url: `${window.location.protocol}//${window.location.host}/login/complete/`,
       },
     });
   }
@@ -674,7 +682,7 @@ export default class FirebaseBackend {
     return window.localStorage.getItem('emailForSignIn');
   }
 
-  async continueSignup(url, email) {
+  async continueSignin(url, email) {
     if (this.firebase.auth().isSignInWithEmailLink(url)) {
       const emailOrStoredEmail =
         email || window.localStorage.getItem('emailForSignIn');

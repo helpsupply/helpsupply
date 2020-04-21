@@ -97,10 +97,13 @@ function FindFacility({ backend }) {
 
     setIsLoading(true);
 
+    // Stash this for later
+    backend.setLocalFacility(selectedResult);
+
     // service todo: incorporate facility data below, and decide what validation or state management happens here
     // const facility = hospital_index.index.id_index[selectedResult];
     history.push(routeWithParams(Routes.EMAIL_SIGNUP_FORM));
-  }, [history, selectedResult]);
+  }, [backend, history, selectedResult]);
 
   return (
     <Form

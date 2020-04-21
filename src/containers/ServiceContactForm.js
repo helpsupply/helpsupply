@@ -49,11 +49,12 @@ function ServiceContactForm({ backend, serviceUser }) {
   const { phone, ...requiredFields } = fields;
 
   const handleSubmit = (data) => {
-    const zip = serviceUser?.data?.zip || backend.getLocalZip();
+    const zip = backend.getLocalZip();
+    const facility = backend.getLocalFacility();
     setIsLoading(true);
 
     backend
-      .saveServiceUser({ ...data, zip })
+      .saveServiceUser({ ...data, zip, facility })
       .then(() => {
         setIsLoading(false);
         history.push(routeWithParams(Routes.CONTACT_CONFIRMATION));
