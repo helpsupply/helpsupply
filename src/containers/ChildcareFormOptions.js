@@ -3,11 +3,15 @@ import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
+import { Color } from 'lib/theme';
 
-import Note from 'components/Note';
+import Anchor, { anchorTypes } from 'components/Anchor';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
 import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
@@ -98,9 +102,14 @@ function ChildcareFormDetails({ id, onSave, request }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <Note key="childcare-options-note-1">
+        <Text
+          as="p"
+          type={TEXT_TYPE.NOTE}
+          css={{ color: Color.GRAY_75 }}
+          key="childcare-options-note-1"
+        >
           {t('service.childcare.what.labels.noteLowCost')}
-        </Note>,
+        </Text>,
       ],
     },
     {
@@ -114,9 +123,33 @@ function ChildcareFormDetails({ id, onSave, request }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <Note key="childcare-options-note-1">
-          {t('service.childcare.what.labels.noteRisk')}
-        </Note>,
+        <Text
+          as="div"
+          type={TEXT_TYPE.NOTE}
+          css={{ color: Color.GRAY_75 }}
+          key="childcare-options-note-1"
+        >
+          <ReactMarkdown
+            renderers={{
+              root: ({ children }) => {
+                return <div>{children[0].props.children}</div>;
+              },
+              link: ({ href, children }) => {
+                return (
+                  <div>
+                    <Anchor href={href} as={anchorTypes.A} isExternalLink>
+                      {children}
+                    </Anchor>
+                  </div>
+                );
+              },
+            }}
+            source={t('service.childcare.what.labels.noteRisk', {
+              url:
+                'https://www.cdc.gov/coronavirus/2019-ncov/need-extra-precautions/groups-at-higher-risk.html',
+            })}
+          />
+        </Text>,
       ],
     },
     {
@@ -133,9 +166,14 @@ function ChildcareFormDetails({ id, onSave, request }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <Note key="childcare-options-note-1">
+        <Text
+          as="p"
+          type={TEXT_TYPE.NOTE}
+          css={{ color: Color.GRAY_75 }}
+          key="childcare-options-note-1"
+        >
           {t('service.childcare.what.labels.noteShare')}
-        </Note>,
+        </Text>,
       ],
     },
   ];
@@ -153,6 +191,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
   return (
     <div>
       <FormBuilder
+        buttonLabel={t('global.form.submitLabelNext')}
         defaultValues={fields}
         onSubmit={handleSubmit}
         title={t('service.childcare.what.title')}

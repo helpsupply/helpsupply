@@ -170,6 +170,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
   return (
     <div>
       <FormBuilder
+        buttonLabel={t('global.form.submitLabelNext')}
         defaultValues={fields}
         onSubmit={handleSubmit}
         title={t('service.childcare.details.title')}

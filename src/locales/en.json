@@ -422,8 +422,8 @@
             "babySitters": "Babysitters - free and paid",
             "freeOptions": "Only free options",
             "noteLowCost": "If you’re interested in low-cost options, how much would you be able to pay? Could be daily, weekly, or monthly. No amount is too small.",
-            "paymentAbility": "Payment ability",
-            "noteRisk": "Is anyone in your household at higher risk of severe illness due to COVID-19? Learn more",
+            "paymentAbility": "Payment ability (optional)",
+            "noteRisk": "Is anyone in your household at higher risk of severe illness due to COVID-19? [Learn more]({{url}})",
             "householdRisk": "Household risk",
             "noteShare": "We will share this information with our childcare partner organization, Workers Need Childcare, which will connect you with a licensed childcare professional."
           }
