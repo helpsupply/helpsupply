@@ -5,7 +5,9 @@ import HeaderInfo from 'components/Form/HeaderInfo';
 import InputCheckbox from 'components/Checkbox';
 import InputDate from 'components/InputDate';
 import InputDropdown from 'components/InputDropdown';
-import InputText from 'components/InputText';
+import InputText from 'components/InputText/InputText';
+import InputPhone from 'components/InputText/InputPhone';
+import InputEmail from 'components/InputText/InputEmail';
 import TextArea from 'components/TextArea';
 
 export const formFieldTypes = {
@@ -14,6 +16,8 @@ export const formFieldTypes = {
   INPUT_DATE: 'INPUT_DATE',
   INPUT_DROPDOWN: 'INPUT_DROPDOWN',
   INPUT_TEXT: 'INPUT_TEXT',
+  INPUT_PHONE: 'INPUT_PHONE',
+  INPUT_EMAIL: 'INPUT_EMAIL',
   NODE: 'NODE',
   TEXT_AREA: 'TEXT_AREA',
 };
@@ -46,6 +50,8 @@ const inputMap = {
   [formFieldTypes.INPUT_DATE]: InputDate,
   [formFieldTypes.INPUT_DROPDOWN]: InputDropdown,
   [formFieldTypes.INPUT_TEXT]: InputText,
+  [formFieldTypes.INPUT_PHONE]: InputPhone,
+  [formFieldTypes.INPUT_EMAIL]: InputEmail,
   [formFieldTypes.TEXT_AREA]: TextArea,
 };
 

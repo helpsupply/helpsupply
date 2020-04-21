@@ -64,7 +64,7 @@ function EmailForm({ backend }) {
       customOnChange: setEmail,
       label: t('request.workEmailForm.workEmail.label'),
       name: 'email',
-      type: formFieldTypes.INPUT_TEXT,
+      type: formFieldTypes.INPUT_EMAIL,
       validation: { validate },
     },
   ];

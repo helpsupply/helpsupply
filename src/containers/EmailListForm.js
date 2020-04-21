@@ -40,7 +40,7 @@ function EmailListForm({ backend }) {
       customOnChange: setEmail,
       label: t('global.form.emailAddressLabel'),
       name: 'email',
-      type: formFieldTypes.INPUT_TEXT,
+      type: formFieldTypes.INPUT_EMAIL,
       validation: { validate },
     },
   ];
