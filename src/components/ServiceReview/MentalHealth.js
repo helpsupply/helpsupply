@@ -27,7 +27,11 @@ export const MentalHealthServiceReview = ({ id, service }) => {
 
   const handleChangeService = () => {
     handleRedirectIntent();
-    history.push(Routes.SERVICE_TYPE);
+    history.push(
+      routeWithParams(Routes.SERVICE_TYPE, {
+        id,
+      }),
+    );
   };
 
   const handleChangeTime = () => {

@@ -37,9 +37,11 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
     date,
     dietaryRestrictions,
     groceryList,
+    kind,
     neighborhood,
     recurring,
     time,
+    urgency,
   } = service;
 
   useEffect(() => {
@@ -91,6 +93,15 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
     setState({ type: actions.EDIT_SERVICE_REDIRECT, editServiceUrl: url });
   };
 
+  const handleChangeService = () => {
+    handleRedirectIntent();
+    history.push(
+      routeWithParams(Routes.SERVICE_TYPE, {
+        id,
+      }),
+    );
+  };
+
   const handleChangeLocation = () => {
     handleRedirectIntent();
     history.push(
@@ -115,6 +126,17 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       }),
     );
   };
+
+  const serviceDetails = (
+    <Fragment>
+      <Text as="p" css={styles.capitalize}>
+        {kind}
+      </Text>
+      <Text as="p" css={styles.capitalize}>
+        {urgency}
+      </Text>
+    </Fragment>
+  );
 
   const locationDetails = (
     <Fragment>
@@ -171,6 +193,14 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
 
   return (
     <Fragment>
+      <div css={styles.card}>
+        <Card
+          label={t('request.review.serviceType')}
+          details={serviceDetails}
+          editLabel={t('global.form.changeLabel')}
+          onClick={handleChangeService}
+        />
+      </div>
       <div css={styles.card}>
         <Card
           label={t('request.review.grocery.location')}
