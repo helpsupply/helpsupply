@@ -58,7 +58,11 @@ export default Form;
 
 Form.propTypes = {
   buttonLabel: PropTypes.string,
-  description: PropTypes.string,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]),
   disabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,

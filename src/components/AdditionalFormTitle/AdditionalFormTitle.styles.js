@@ -9,7 +9,7 @@ const styles = {
     width: '100%',
   }),
   description: css({
-    color: Color.GRAY,
+    color: Color.GRAY_75,
     display: 'block',
     marginTop: Space.S25,
   }),
@@ -23,6 +23,7 @@ const styles = {
     width: '100%',
   }),
   titleHolder: css({
+    color: Color.GRAY,
     display: 'flex',
     justifyContent: 'space-between',
   }),

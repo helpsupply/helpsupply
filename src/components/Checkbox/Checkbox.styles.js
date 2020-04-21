@@ -10,6 +10,7 @@ const styles = {
   }),
   label: css({
     alignItems: 'flex-start',
+    color: Color.GRAY_75,
     cursor: 'pointer',
     display: 'flex',
     userSelect: 'none',

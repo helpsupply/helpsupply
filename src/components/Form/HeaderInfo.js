@@ -29,7 +29,11 @@ function InfoHeader({
 }
 
 InfoHeader.propTypes = {
-  description: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 

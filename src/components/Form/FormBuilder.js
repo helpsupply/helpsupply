@@ -39,7 +39,11 @@ FormBuilder.propTypes = {
   buttonLabel: PropTypes.string,
   children: PropTypes.object,
   defaultValues: PropTypes.object,
-  description: PropTypes.string,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]),
   disabled: PropTypes.bool,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
