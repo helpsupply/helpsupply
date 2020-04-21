@@ -64,7 +64,7 @@ const styles = {
     border: Borders.GRAY,
     borderRadius: Radius.ROUNDED,
     height: '100%',
-    padding: `${Space.S10}px ${Space.S20}px 0`,
+    padding: `${Space.S10}px ${Space.S50}px 0 ${Space.S20}px`,
   }),
   selectDefaultState: css({
     color: 'transparent',
