@@ -54,6 +54,7 @@ function ServiceTypeForm({
           [field]: value,
           organization,
         }));
+        console.log(fields);
       } else {
         setFields((fields) => ({
           ...fields,
