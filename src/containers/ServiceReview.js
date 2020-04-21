@@ -140,6 +140,7 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
           id={id}
           service={service}
           serviceUser={serviceUser}
+          user={user}
           handleSubmit={handleSubmit}
         />
       )}
