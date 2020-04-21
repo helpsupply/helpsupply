@@ -49,7 +49,11 @@ function EmailForm({ backend }) {
     }
 
     backend
-      .signupServicesWithEmail(email, backend.getLocalZip())
+      .signupServicesWithEmail(
+        email,
+        backend.getLocalZip(),
+        backend.getLocalFacility(),
+      )
       .then(() => {
         history.push(routeWithParams(Routes.EMAIL_SIGNUP_SENT));
       })

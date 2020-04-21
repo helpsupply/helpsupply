@@ -17,6 +17,7 @@ import Anchor, { anchorTypes } from 'components/Anchor';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import { ErrorContext } from 'state/ErrorProvider';
+import Facility from 'pages/facility';
 
 function SignupFinish({ backend }) {
   const { isLoggedIn } = useAuth();
@@ -30,10 +31,11 @@ function SignupFinish({ backend }) {
   const [isLoading, setIsLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  const { zip: zipRulParam } = params;
+  const { zip: zipRulParam, facility: facilityParam } = params;
 
   useEffect(() => {
     const zip = zipRulParam || backend.getLocalZip();
+    const facility = facilityParam || backend.getLocalFacility();
 
     // if no zip in url and none in localstorage, go to enter your zip form
     if ((!zipRulParam && !backend.getLocalZip()) || !isValidZipCode(zip)) {
@@ -51,31 +53,40 @@ function SignupFinish({ backend }) {
 
     // if results for zip provided via localstorage or via url param, explicitly store the zip that works
     backend.setLocalZip(zip);
+    backend.setLocalFacility(facility);
   }, [backend, history, zipRulParam]);
 
   const routeToNextPage = useCallback(() => {
     backend
       .getServiceUser()
       .then((user) => {
+        // Redirect to the welcome page, which redirect to contact form
         if (!user) {
-          history.push(routeWithParams(Routes.CONTACT_FORM));
+          history.push(routeWithParams(Routes.WELCOME));
           return;
         }
 
-        backend
-          .getServiceRequests()
-          .then((data) => {
-            if (data.length) {
-              history.push(routeWithParams(Routes.DASHBOARD));
-              return;
-            }
+        // Save zip and facility (in case it was changed)
+        let zip = backend.getLocalZip(zip);
+        let facility = backend.getLocalFacility(facility);
+        backend.saveServiceUser({ ...user.data, zip, facility }).then(() => {
+          backend
+            .getServiceRequests()
+            .then((data) => {
+              // If there are active request then route to the dashboard
+              if (data.length) {
+                history.push(routeWithParams(Routes.DASHBOARD));
+                return;
+              }
 
-            history.push(routeWithParams(Routes.SERVICE_TYPE));
-            return;
-          })
-          .catch((e) => {
-            setError(e.message);
-          });
+              // Otherwise go to create new request flow
+              history.push(routeWithParams(Routes.SERVICE_TYPE));
+              return;
+            })
+            .catch((e) => {
+              setError(e.message);
+            });
+        });
       })
       .catch((error) => {
         setIsLoading(false);
