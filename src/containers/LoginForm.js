@@ -29,7 +29,7 @@ function LoginForm({ backend }) {
     setIsLoading(true);
 
     backend
-      .signupServicesWithEmail(email)
+      .loginServicesWithEmail(email)
       .then(() => {
         history.push(routeWithParams(Routes.EMAIL_SIGNUP_SENT));
       })

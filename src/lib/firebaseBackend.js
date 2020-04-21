@@ -649,7 +649,6 @@ export default class FirebaseBackend {
     await axios({
       method: 'POST',
       // Equal to EMAIL_SIGNUP_COMPLETE
-      // TODO: Configure staging vs production somewhere
       url: functionurl + '/sendSigninEmail',
       params: {
         email: email,
@@ -663,11 +662,10 @@ export default class FirebaseBackend {
     await axios({
       method: 'POST',
       // Login complete url
-      // TODO: Configure staging vs production somewhere
       url: functionurl + '/sendSigninEmail',
       params: {
         email: email,
-        url: `${window.location.protocol}//${window.location.host}/login/complete/`,
+        url: `${window.location.protocol}//${window.location.host}/dashboard/`,
       },
     });
   }
