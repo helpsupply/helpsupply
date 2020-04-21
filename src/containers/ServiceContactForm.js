@@ -88,7 +88,7 @@ function ServiceContactForm({ backend, serviceUser }) {
       isRequired: false,
       label: t('service.contactForm.labels.phone'),
       name: 'phone',
-      type: formFieldTypes.INPUT_TEXT,
+      type: formFieldTypes.INPUT_PHONE,
       validation: { validate },
       value: fields.phone,
     },
