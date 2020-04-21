@@ -3,6 +3,8 @@ const express = require('express');
 const sendEmail = require('./sendmail').sendEmail;
 const fs = require('fs');
 
+Promise.allSettled = require('promise.allsettled'); // Firebase runs an ancient Node with no Promise.allSettled
+
 // This is our local code
 import FirebaseBackend from 'firebase-backend';
 
@@ -111,6 +113,11 @@ exports.processServiceRequest = functions.firestore
 
 exports.sendSigninEmail = functions.https.onRequest(
   async (request, response) => {
+    if (request.query.heater) {
+      response.send('warm');
+      return;
+    }
+
     // TODO: lock this down
     response.set('Access-Control-Allow-Origin', '*');
 
@@ -168,6 +175,11 @@ exports.sendSigninEmail = functions.https.onRequest(
 
 exports.sendRequestConfirmation = functions.https.onRequest(
   async (request, response) => {
+    if (request.query.heater) {
+      response.send('warm');
+      return;
+    }
+
     // TODO: lock this down
     response.set('Access-Control-Allow-Origin', '*');
 
@@ -244,6 +256,11 @@ exports.sendRequestConfirmation = functions.https.onRequest(
 );
 
 exports.testHook = functions.https.onRequest(async (request, response) => {
+  if (request.query.heater) {
+    response.send('warm');
+    return;
+  }
+
   if (request.get('content-type') !== 'application/json') {
     response.status(400).send("{'error': 'content_type_header_not_json'}");
     return;
@@ -277,16 +294,23 @@ exports.testHook = functions.https.onRequest(async (request, response) => {
 });
 
 exports.hook = functions.https.onRequest(async (request, response) => {
+  if (request.query.heater) {
+    response.send('warm');
+    return;
+  }
+
   // Get the hook name from the URL
   let hookName = request.path.slice(1);
 
   if (hookName === undefined || hookName === '') {
     response.status(404).send('not found');
+    return;
   }
 
   // Janky equality
   if (JSON.stringify(request.body) === '{}') {
     response.status(400).send('no body');
+    return;
   }
 
   request.body.receiveTimestamp = Date.now();
@@ -303,3 +327,20 @@ exports.hook = functions.https.onRequest(async (request, response) => {
     }),
   );
 });
+
+exports.heater = functions.pubsub
+  .schedule('every 1 minutes')
+  .onRun(async (context) => {
+    const host = functions.config().heater.host;
+    const paths = [
+      'hook',
+      'sendRequestConfirmation',
+      'sendSigninEmail',
+      'testHook',
+    ];
+    await Promise.allSettled(
+      paths.map(async (path) => {
+        await fetch(host + path + '?heater=true');
+      }),
+    );
+  });
