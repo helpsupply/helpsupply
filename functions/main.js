@@ -5,7 +5,6 @@ const fs = require('fs');
 
 // This is our local code
 import FirebaseBackend from 'firebase-backend';
-import { ConversationList } from 'twilio/lib/rest/conversations/v1/conversation';
 
 var admin = require('firebase-admin');
 var app = admin.initializeApp();
@@ -170,6 +169,12 @@ exports.sendRequestConfirmation = functions.https.onRequest(
     // Get a request ID
     let requestId = request.query.request;
 
+    console.log(
+      'starting confirmation',
+      requestId,
+      new Date().getTime() / 1000,
+    );
+
     // Get the relevant user
     let uid = (
       await backend.firestore.collection('servicerequest').doc(requestId).get()
@@ -223,8 +228,12 @@ exports.sendRequestConfirmation = functions.https.onRequest(
       template = template.replace(key, mapping[key]);
     }
 
+    console.log('sending email', requestId, new Date().getTime() / 1000);
+
     // Send away!
     await sendEmail(email, 'Request Confirmation', requestId, template);
+
+    console.log('sent email', requestId, new Date().getTime() / 1000);
     response.send('ok');
   },
 );
@@ -254,6 +263,34 @@ exports.testHook = functions.https.onRequest(async (request, response) => {
       created: (
         await backend.firestore
           .collection('testhook')
+          .doc(hookName)
+          .collection('payloads')
+          .add(request.body)
+      ).id,
+    }),
+  );
+});
+
+exports.hook = functions.https.onRequest(async (request, response) => {
+  // Get the hook name from the URL
+  let hookName = request.path.slice(1);
+
+  if (hookName === undefined || hookName === '') {
+    response.status(404).send('not found');
+  }
+
+  // Janky equality
+  if (JSON.stringify(request.body) === '{}') {
+    response.status(400).send('no body');
+  }
+
+  request.body.receiveTimestamp = Date.now();
+
+  response.send(
+    JSON.stringify({
+      created: (
+        await backend.firestore
+          .collection('hook')
           .doc(hookName)
           .collection('payloads')
           .add(request.body)

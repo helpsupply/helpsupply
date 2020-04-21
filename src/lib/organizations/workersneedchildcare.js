@@ -45,7 +45,7 @@ const FIELD_MAP = {
     return {
       immediate: "Immediately, I'm in crisis",
       soon: 'In the next few days',
-      later: "I'm okay for now, but am worried I won't be soon",
+      later: "I'm okay for now, but am worried that I won't be soon",
     }[request.urgency];
   },
 
