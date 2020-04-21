@@ -11,6 +11,7 @@ const styles = {
     justifyContent: 'space-between',
   }),
   description: css({
+    color: Color.GRAY_75,
     '& strong': {
       color: Color.PRIMARY,
     },
