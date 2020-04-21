@@ -58,9 +58,11 @@ export const UserDashboard = ({
         label={t('dashboard.contact.title')}
         details={contactDetails}
       />
-      <PrimaryButton css={styles.button} onClick={handleRequestService}>
-        <Text>{t('dashboard.cta')}</Text>
-      </PrimaryButton>
+      <div>
+        <PrimaryButton css={styles.button} onClick={handleRequestService}>
+          <Text>{t('dashboard.cta')}</Text>
+        </PrimaryButton>
+      </div>
       <Text css={styles.requestsHeader} as="h3" type={TEXT_TYPE.HEADER_4}>
         {t('dashboard.openRequests.title')}
         <span css={styles.number}>{openRequests.length}</span>

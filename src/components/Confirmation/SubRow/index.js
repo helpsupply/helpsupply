@@ -10,11 +10,15 @@ import { styles } from './SubRow.styles';
 
 export const SubRow = ({ details, editLabel, onClick, label }) => (
   <Fragment>
-    <div css={styles.subRow}>
-      <Note>{label}</Note>
-      <SecondaryButton onClick={onClick}>
-        <Text type={TEXT_TYPE.NOTE}>{editLabel}</Text>
-      </SecondaryButton>
+    <div>
+      <div css={styles.subRow}>
+        <Note>{label}</Note>
+        <div>
+          <SecondaryButton onClick={onClick}>
+            <Text type={TEXT_TYPE.NOTE}>{editLabel}</Text>
+          </SecondaryButton>
+        </div>
+      </div>
     </div>
     {details}
   </Fragment>
