@@ -1,6 +1,7 @@
 /** @jsx jsx */
-import { Fragment, useContext, useCallback, useState } from 'react';
+import { Fragment, useContext, useCallback, useEffect, useState } from 'react';
 import { css, jsx } from '@emotion/core';
+import { useLocation } from 'react-router-dom';
 
 import { useMediaQuery } from 'hooks/useMediaQuery';
 import { Breakpoints } from 'constants/Breakpoints';
@@ -24,7 +25,17 @@ const PageContent = ({
   onBackButtonClick,
   topPadding,
 }) => {
+  const location = useLocation();
   const paddingStyles = topPadding > 0 && css({ paddingTop: topPadding });
+
+  useEffect(() => {
+    // This prevents the page from scrolling down to where it was previously.
+    if (window && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    // This is needed if the user scrolls down during page load and you want to make sure the page is scrolled to the top once it's fully loaded. This has Cross-browser support.
+    window && window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <div
