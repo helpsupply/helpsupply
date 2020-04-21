@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useEffect, useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { jsx } from '@emotion/core';
+import { jsx, css } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
@@ -12,8 +12,20 @@ import { buildUrgencyOptions } from 'lib/utils/urgency';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
 import { ErrorContext } from 'state/ErrorProvider';
 import { StateContext } from 'state/StateProvider';
+
+
+const styles = {
+  hideNote: css({
+    display: 'none',
+  }),
+  showNote: css({
+    display: 'block',
+  }),
+};
 
 function ServiceTypeForm({
   backend,
@@ -29,6 +41,7 @@ function ServiceTypeForm({
   const { state } = useContext(StateContext);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const [fields, setFields] = useState({
     kind: '',
     urgency: '',
@@ -43,6 +56,27 @@ function ServiceTypeForm({
     }));
   }, [zip]);
 
+  const handleShowContent = (value) => {
+    setShowContent(true);
+    switch (value) {
+      case RequestKinds.GROCERY:
+        console.log('grocery note');
+        break;
+      case RequestKinds.CHILDCARE:
+        console.log('childcare note');
+        break;
+      case RequestKinds.PETCARE:
+        console.log('petcare note');
+        break;
+      case RequestKinds.MENTALHEALTH:
+        console.log('mental health note');
+        break;
+      default:
+        setShowContent(false);
+        break;
+    }
+  };
+
   const handleFieldChange = useCallback(
     (field) => (value) => {
       if (field === 'kind') {
@@ -54,7 +88,7 @@ function ServiceTypeForm({
           [field]: value,
           organization,
         }));
-        console.log(fields);
+        handleShowContent(value);
       } else {
         setFields((fields) => ({
           ...fields,
@@ -162,7 +196,15 @@ function ServiceTypeForm({
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
-    />
+    >
+      <Text
+        as="div"
+        type={TEXT_TYPE.NOTE}
+        css={[showContent && styles.showNote, !showContent && styles.hideNote]}
+      >
+        Note
+      </Text>
+    </FormBuilder>
   );
 }
 
