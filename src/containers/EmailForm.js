@@ -75,6 +75,7 @@ function EmailForm({ backend }) {
       onSubmit={handleSubmit}
       title={t('request.workEmailForm.title')}
       description={t('request.workEmailForm.description')}
+      buttonLabel={t('global.form.submitLabel')}
       disabled={!isValidEmail(email)}
       isLoading={isLoading}
       fields={fieldData}
