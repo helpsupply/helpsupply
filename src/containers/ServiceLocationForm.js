@@ -77,6 +77,7 @@ function ServiceLocationForm({ backend, serviceUser }) {
       onSubmit={handleSubmit}
       title={t('service.locationForm.title')}
       description={t('service.locationForm.description')}
+      buttonLabel={t('global.form.submitLabelNext')}
       disabled={
         (fields.phone !== '' && !isValidZipCode(fields.zipCode)) ||
         !Object.keys(requiredFields).every((key) => !!fields[key])
