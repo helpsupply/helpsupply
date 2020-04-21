@@ -109,6 +109,7 @@ function FindFacility({ backend }) {
       description={t('request.facilityForm.description')}
       disabled={!selectedResult}
       isLoading={isLoading}
+      buttonLabel={t('global.form.submitLabelNext')}
     >
       <Autosuggest
         label={t('request.facilitySearch.label')}

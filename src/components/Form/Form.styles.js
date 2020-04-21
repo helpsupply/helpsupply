@@ -22,6 +22,7 @@ const styles = {
     },
   }),
   title: css({
+    color: Color.GRAY,
     marginBottom: Space.S15,
 
     a: {

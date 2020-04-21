@@ -179,7 +179,7 @@ function App({ backend }) {
                 <Route exact path={Routes.EMAIL_SIGNUP_COMPLETE}>
                   <SignupComplete backend={backend} />
                 </Route>
-                <Route exact path={Routes.EMAIL_SIGNUP_WELCOME}>
+                <Route exact path={Routes.WELCOME}>
                   <SignUpWelcome backend={backend} />
                 </Route>
                 <Route exact path={Routes.EMAIL_SIGNUP_FORM}>
