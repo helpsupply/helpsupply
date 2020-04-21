@@ -205,6 +205,7 @@ function ChildcareFormLocation({ id, onSave, neighborhoodOptions }) {
   if (addAdditionalContact) {
     return (
       <FormBuilder
+        buttonLabel={t('global.form.submitLabelNext')}
         defaultValues={{ ...fields, ...additionalFields }}
         onSubmit={handleSubmit}
         title={t('service.childcare.where.title')}
@@ -226,6 +227,7 @@ function ChildcareFormLocation({ id, onSave, neighborhoodOptions }) {
 
   return (
     <FormBuilder
+      buttonLabel={t('global.form.submitLabelNext')}
       defaultValues={fields}
       onSubmit={handleSubmit}
       title={t('service.childcare.where.title')}

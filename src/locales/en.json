@@ -382,8 +382,8 @@
       },
       "childcare": {
         "where": {
-          "title": "Where do you need childcare?",
-          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address. Our childcare partner, Workers Need Childcare, only uses licensed childcare",
+          "title": "We need a little more info on where you need childcare",
+          "description": "This allows us to connect you with support close to home. The volunteer providing the service will reach out to get your exact address.",
           "add": "Add an additional contact person for this request",
           "labels": {
             "zip": "ZIP code",
