@@ -3,6 +3,9 @@ export const routeWithParams = (route, params) => {
 
   const newRouteArray = routeSections.map((routeSection) => {
     if (routeSection.startsWith(':')) {
+      if (!params) {
+        return undefined;
+      }
       const routeParam = routeSection.split(':')[1].replace('?', '');
       const matchedParam = params[routeParam];
 

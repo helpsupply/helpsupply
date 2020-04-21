@@ -1,21 +1,23 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
+import { mentalHealthOptions } from 'lib/constants/options';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
-import { mentalHealthOptions } from 'lib/constants/options';
+import { StateContext } from 'state/StateProvider';
 
 function EmotionalFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
+  const { state } = useContext(StateContext);
   const [fields, setFields] = useState({
     type: '',
     agreement: '',
@@ -38,7 +40,10 @@ function EmotionalFormDate({ id, onSave, request }) {
       setIsLoading(false);
       return;
     }
-    history.push(routeWithParams(Routes.SERVICE_ADDITIONAL_INFO, { id }));
+    const url =
+      state.editServiceUrl ||
+      routeWithParams(Routes.SERVICE_ADDITIONAL_INFO, { id });
+    history.push(url);
   };
 
   const fieldData = [
