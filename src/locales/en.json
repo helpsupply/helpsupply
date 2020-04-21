@@ -425,7 +425,7 @@
             "paymentAbility": "Payment ability (optional)",
             "noteRisk": "Is anyone in your household at higher risk of severe illness due to COVID-19? [Learn more]({{url}})",
             "householdRisk": "Household risk",
-            "noteShare": "We will share this information with our childcare partner organization, Workers Need Childcare, which will connect you with a licensed childcare professional."
+            "noteShare": "We will share this information with our childcare partner organization, Workers Need Childcare, which will connect you with a childcare resource."
           }
         }
       },
