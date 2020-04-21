@@ -30,30 +30,22 @@ function LoginFinish({ backend }) {
   const [submitting, setSubmitting] = useState(false);
 
   const routeToNextPage = useCallback(() => {
-    console.log('woo routing');
     backend
-      .getServiceUser()
-      .then(() => {
-        backend
-          .getServiceRequests()
-          .then((data) => {
-            // If there are active request then route to the dashboard
-            if (data.length) {
-              history.push(routeWithParams(Routes.DASHBOARD));
-              return;
-            }
+      .getServiceRequests()
+      .then((data) => {
+        // If there are active request then route to the dashboard
+        if (data.length) {
+          history.push(routeWithParams(Routes.DASHBOARD));
+          return;
+        }
 
-            // Otherwise go to create new request flow
-            history.push(routeWithParams(Routes.SERVICE_TYPE));
-            return;
-          })
-          .catch((e) => {
-            setError(e.message);
-          });
+        // Otherwise go to create new request flow
+        history.push(routeWithParams(Routes.SERVICE_TYPE));
+        return;
       })
-      .catch((error) => {
+      .catch((e) => {
         setIsLoading(false);
-        setError(error.message);
+        setError(e.message);
       });
   }, [setError, backend, history]);
 
