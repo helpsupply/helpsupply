@@ -682,7 +682,7 @@ export default class FirebaseBackend {
     return window.localStorage.getItem('emailForSignIn');
   }
 
-  async continueSignup(url, email) {
+  async continueSignin(url, email) {
     if (this.firebase.auth().isSignInWithEmailLink(url)) {
       const emailOrStoredEmail =
         email || window.localStorage.getItem('emailForSignIn');

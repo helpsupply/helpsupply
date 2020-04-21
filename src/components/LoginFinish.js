@@ -3,11 +3,11 @@ import { jsx } from '@emotion/core';
 import { Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
-import { isValidEmail, isValidZipCode } from 'lib/utils/validations';
+import { isValidEmail } from 'lib/utils/validations';
 
 import { useAuth } from 'hooks/useAuth';
 
@@ -18,10 +18,9 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import { ErrorContext } from 'state/ErrorProvider';
 
-function SignupFinish({ backend }) {
+function LoginFinish({ backend }) {
   const { isLoggedIn } = useAuth();
   const history = useHistory();
-  const params = useParams();
   const { t } = useTranslation();
   const { errorMsg, setError } = useContext(ErrorContext);
 
@@ -30,68 +29,33 @@ function SignupFinish({ backend }) {
   const [isLoading, setIsLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  const { zip: zipRulParam, facility: facilityParam } = params;
-
-  useEffect(() => {
-    const zip = zipRulParam || backend.getLocalZip();
-    const facility = facilityParam || backend.getLocalFacility();
-
-    // if no zip in url and none in localstorage, go to enter your zip form
-    if ((!zipRulParam && !backend.getLocalZip()) || !isValidZipCode(zip)) {
-      history.push(Routes.SERVICE_LOCATION);
-      return;
-    }
-
-    const servicesByZip = backend.getServicesForZip(zip);
-
-    // if they somehow get here and there's not services for their zip, send them to unavailable page
-    if (!servicesByZip?.length) {
-      history.push(Routes.SERVICE_LOCATION_UNAVAILABLE);
-      return;
-    }
-
-    // if results for zip provided via localstorage or via url param, explicitly store the zip that works
-    backend.setLocalZip(zip);
-    backend.setLocalFacility(facility);
-  }, [backend, facilityParam, history, zipRulParam]);
-
   const routeToNextPage = useCallback(() => {
+    console.log('woo routing');
     backend
       .getServiceUser()
-      .then((user) => {
-        // Redirect to the welcome page, which redirect to contact form
-        if (!user) {
-          history.push(routeWithParams(Routes.WELCOME));
-          return;
-        }
-
-        // Save zip and facility (in case it was changed)
-        const zip = zipRulParam || backend.getLocalZip();
-        const facility = facilityParam || backend.getLocalFacility();
-        backend.saveServiceUser({ ...user.data, zip, facility }).then(() => {
-          backend
-            .getServiceRequests()
-            .then((data) => {
-              // If there are active request then route to the dashboard
-              if (data.length) {
-                history.push(routeWithParams(Routes.DASHBOARD));
-                return;
-              }
-
-              // Otherwise go to create new request flow
-              history.push(routeWithParams(Routes.SERVICE_TYPE));
+      .then(() => {
+        backend
+          .getServiceRequests()
+          .then((data) => {
+            // If there are active request then route to the dashboard
+            if (data.length) {
+              history.push(routeWithParams(Routes.DASHBOARD));
               return;
-            })
-            .catch((e) => {
-              setError(e.message);
-            });
-        });
+            }
+
+            // Otherwise go to create new request flow
+            history.push(routeWithParams(Routes.SERVICE_TYPE));
+            return;
+          })
+          .catch((e) => {
+            setError(e.message);
+          });
       })
       .catch((error) => {
         setIsLoading(false);
         setError(error.message);
       });
-  }, [setError, backend, facilityParam, history, zipRulParam]);
+  }, [setError, backend, history]);
 
   const handleSubmit = useCallback(
     ({ email }) => {
@@ -187,4 +151,4 @@ function SignupFinish({ backend }) {
   );
 }
 
-export default SignupFinish;
+export default LoginFinish;

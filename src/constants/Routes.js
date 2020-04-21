@@ -30,6 +30,7 @@ export const Routes = {
     '/service-location/unavailable/confirm',
   FACILITY: `/facility`,
   LOGIN: '/login',
+  LOGIN_COMPLETE: '/login/complete',
   WELCOME: `/welcome`,
   EMAIL_SIGNUP_FORM: `/signup`,
   EMAIL_SIGNUP_SENT: `/signup/confirm`,
