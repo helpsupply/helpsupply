@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -24,6 +24,14 @@ function LoginForm({ backend }) {
       return t('request.workEmailForm.workEmail.validationLabel');
     }
   };
+
+  useEffect(() => {
+    return backend.firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        history.push(routeWithParams(Routes.DASHBOARD));
+      }
+    });
+  });
 
   const handleSubmit = () => {
     setIsLoading(true);
