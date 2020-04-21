@@ -64,7 +64,7 @@ function EmailForm({ backend }) {
       customOnChange: setEmail,
       label: t('request.workEmailForm.workEmail.label'),
       name: 'email',
-      type: formFieldTypes.INPUT_TEXT,
+      type: formFieldTypes.INPUT_EMAIL,
       validation: { validate },
     },
   ];
@@ -75,6 +75,7 @@ function EmailForm({ backend }) {
       onSubmit={handleSubmit}
       title={t('request.workEmailForm.title')}
       description={t('request.workEmailForm.description')}
+      buttonLabel={t('global.form.submitLabel')}
       disabled={!isValidEmail(email)}
       isLoading={isLoading}
       fields={fieldData}

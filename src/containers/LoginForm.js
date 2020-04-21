@@ -17,7 +17,6 @@ function LoginForm({ backend }) {
   const { t } = useTranslation();
 
   const [email, setEmail] = useState('');
-
   const [isLoading, setIsLoading] = useState(false);
 
   const validate = (val) => {
@@ -46,7 +45,7 @@ function LoginForm({ backend }) {
       customOnChange: setEmail,
       label: t('request.workEmailForm.workEmail.label'),
       name: 'email',
-      type: formFieldTypes.INPUT_TEXT,
+      type: formFieldTypes.INPUT_EMAIL,
       validation: { validate },
     },
   ];

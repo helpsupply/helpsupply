@@ -28,7 +28,7 @@ function EmailListForm({ backend }) {
     backend
       .saveToEmailList(email)
       .then(() => {
-        history.push(Routes.EMAIL_LIST_SENT);
+        history.push(Routes.SERVICE_LOCATION_UNAVAILABLE_SIGNUP_COMPLETE);
       })
       .catch((e) => {
         setError(e.message);
@@ -40,7 +40,7 @@ function EmailListForm({ backend }) {
       customOnChange: setEmail,
       label: t('global.form.emailAddressLabel'),
       name: 'email',
-      type: formFieldTypes.INPUT_TEXT,
+      type: formFieldTypes.INPUT_EMAIL,
       validation: { validate },
     },
   ];

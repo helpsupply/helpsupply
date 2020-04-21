@@ -10,7 +10,7 @@ import { PrimaryButton, SecondaryButton } from '../Button';
 import Card from '../Card';
 import InputDate from '../InputDate';
 import InputDropdown from '../InputDropdown';
-import InputText from '../InputText';
+import InputText from '../InputText/InputText';
 import Request from '../Request';
 import Text from '../Text';
 import { TEXT_TYPE } from '../Text/constants';

@@ -23,6 +23,12 @@
         }
       }
     },
+    "welcome": {
+      "signup": {
+        "title": "Welcome back, thank you for confirming your email address.",
+        "description": "You'll use this email address if you ever need to log back in."
+      }
+    },
     "dashboard": {
       "title": "Your Requests",
       "cta": "Request more services",
@@ -38,12 +44,12 @@
       }
     },
     "home": {
-      "intro": "Healthcare workers caring for those with the virus need support. We connect them to service organizations providing childcare, pet care, groceries, and emotional support.",
+      "intro": "We connect healthcare workers to volunteer-powered grocery shopping, childcare and mental health services.",
       "needHelp": "I need help",
       "openRequests": "I already have open requests",
       "howItWorks": {
         "title": "How it works",
-        "bullet1": "You make a request",
+        "bullet1": "You make a request for support.",
         "bullet2": "We share your request with one of our trusted partner organizations.",
         "bullet3": "A volunteer will connect with you to fulfill your request.",
         "learnMore": "Learn more"
@@ -135,7 +141,7 @@
         "addNew": "Add a new facility",
         "description": "I'm a healthcare professional working at:",
         "notSeeing": "Not seeing your facility?",
-        "label": "Hospital or EMS service",
+        "label": "Hospital or EMT service",
         "title": "Find your healthcare facility"
       },
       "review": {

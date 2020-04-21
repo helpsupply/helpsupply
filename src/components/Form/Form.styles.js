@@ -11,6 +11,7 @@ const styles = {
     justifyContent: 'space-between',
   }),
   description: css({
+    color: Color.GRAY_75,
     '& strong': {
       color: Color.PRIMARY,
     },
@@ -21,6 +22,7 @@ const styles = {
     },
   }),
   title: css({
+    color: Color.GRAY,
     marginBottom: Space.S15,
 
     a: {

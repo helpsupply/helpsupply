@@ -9,5 +9,5 @@ export const formatDate = (date) => {
 // Format service date
 export const formatServiceDate = (date) => {
   const momentDate = date ? moment(new Date(date)) : moment();
-  return momentDate.format('dddd MMMM wo');
+  return momentDate.format('dddd MMMM Do');
 };
