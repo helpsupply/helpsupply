@@ -92,7 +92,13 @@ function ServiceTypeForm({
         );
         break;
       case RequestKinds.CHILDCARE:
-        setNoteContent(null);
+        setNoteContent(
+          <Note>
+            We cannot guarantee a quick response. If you are in immediate
+            crisis, please explore these other options in addition to making a
+            Help Supply request.
+          </Note>,
+        );
         break;
       case RequestKinds.PETCARE:
         setNoteContent(null);
