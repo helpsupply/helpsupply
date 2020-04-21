@@ -654,6 +654,20 @@ export default class FirebaseBackend {
     });
   }
 
+  async loginServicesWithEmail(email) {
+    window.localStorage.setItem('emailForSignIn', email);
+    await axios({
+      method: 'POST',
+      // Login complete url
+      // TODO: Configure staging vs production somewhere
+      url: functionurl + '/sendSigninEmail',
+      params: {
+        email: email,
+        url: `${window.location.protocol}//${window.location.host}/login/complete/`,
+      },
+    });
+  }
+
   getEmailForSignIn() {
     return window.localStorage.getItem('emailForSignIn');
   }
