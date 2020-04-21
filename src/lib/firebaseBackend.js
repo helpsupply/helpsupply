@@ -585,6 +585,10 @@ export default class FirebaseBackend {
     }
 
     let email = this.firebase.auth().currentUser.email;
+    if (email) {
+      return true;
+    }
+
     var existing = (
       await this.firestore.collection('domain').doc(email.split('@')[1]).get()
     ).data();
