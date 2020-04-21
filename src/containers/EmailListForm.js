@@ -28,7 +28,7 @@ function EmailListForm({ backend }) {
     backend
       .saveToEmailList(email)
       .then(() => {
-        history.push(Routes.EMAIL_LIST_SENT);
+        history.push(Routes.SERVICE_LOCATION_UNAVAILABLE_SIGNUP_COMPLETE);
       })
       .catch((e) => {
         setError(e.message);
