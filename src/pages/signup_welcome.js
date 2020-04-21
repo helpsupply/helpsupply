@@ -16,7 +16,7 @@ function LoginWelcome() {
   const { t } = useTranslation();
 
   const handleSubmit = () => {
-    history.push(Routes.SERVICE_TYPE);
+    history.push(Routes.CONTACT_FORM);
   };
 
   return (
