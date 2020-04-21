@@ -17,4 +17,7 @@ export const styles = {
       textTransform: 'capitalize',
     },
   }),
+  reviewButton: css({
+    marginBottom: Space.S70,
+  }),
 };

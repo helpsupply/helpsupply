@@ -171,9 +171,15 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
       <Text css={styles.disclaimer} type={TEXT_TYPE.NOTE}>
         {t('request.review.disclaimer')}
       </Text>
-      <PrimaryButton type="submit" onClick={handleSubmit}>
-        <Text>{t('request.review.submit')}</Text>
-      </PrimaryButton>
+      <div>
+        <PrimaryButton
+          type="submit"
+          onClick={handleSubmit}
+          css={styles.reviewButton}
+        >
+          <Text>{t('request.review.submit')}</Text>
+        </PrimaryButton>
+      </div>
     </Fragment>
   );
 }
