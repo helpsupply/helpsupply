@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
+import { routeWithParams } from 'lib/utils/routes';
 
 import Text from 'components/Text';
 import Card from 'components/Card';
@@ -18,7 +19,11 @@ export const PetcareServiceReview = ({ id, service }) => {
   const { kind, urgency } = service;
 
   const handleChangeService = () => {
-    history.push(Routes.SERVICE_TYPE);
+    history.push(
+      routeWithParams(Routes.SERVICE_TYPE, {
+        id,
+      }),
+    );
   };
 
   const serviceDetails = (

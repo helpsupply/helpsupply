@@ -20,6 +20,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
   const { setState } = useContext(StateContext);
 
   const {
+    additionalInfo,
     afternoons,
     children,
     evenings,
@@ -46,7 +47,11 @@ export const ChildcareServiceReview = ({ id, service }) => {
 
   const handleChangeService = () => {
     handleRedirectIntent();
-    history.push(Routes.SERVICE_TYPE);
+    history.push(
+      routeWithParams(Routes.SERVICE_TYPE, {
+        id,
+      }),
+    );
   };
 
   const handleChangeTime = () => {
@@ -62,6 +67,15 @@ export const ChildcareServiceReview = ({ id, service }) => {
     handleRedirectIntent();
     history.push(
       routeWithParams(Routes.SERVICE_CHILDCARE_DETAILS, {
+        id,
+      }),
+    );
+  };
+
+  const handleChangeAdditionalInfo = () => {
+    handleRedirectIntent();
+    history.push(
+      routeWithParams(Routes.SERVICE_ADDITIONAL_INFO, {
         id,
       }),
     );
@@ -122,6 +136,14 @@ export const ChildcareServiceReview = ({ id, service }) => {
     </Text>
   );
 
+  const additionalDetails = (
+    <Fragment>
+      <Text as="p" css={styles.capitalize}>
+        {additionalInfo}
+      </Text>
+    </Fragment>
+  );
+
   return (
     <Fragment>
       <div css={styles.card}>
@@ -146,6 +168,14 @@ export const ChildcareServiceReview = ({ id, service }) => {
           details={childcareDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeDetails}
+        />
+      </div>
+      <div css={styles.card}>
+        <Card
+          label={t('request.review.additionalInfo')}
+          details={additionalDetails}
+          editLabel={t('global.form.changeLabel')}
+          onClick={handleChangeAdditionalInfo}
         />
       </div>
     </Fragment>

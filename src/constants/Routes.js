@@ -39,7 +39,7 @@ export const Routes = {
   EMAIL_SIGNUP_COMPLETE: `/signup/complete/:zip?/:facility?`,
   CONTACT_FORM: `/contact`,
   CONTACT_CONFIRMATION: `/contact/confirm`,
-  SERVICE_TYPE: '/service',
+  SERVICE_TYPE: '/service/:id?',
   SERVICE_GROCERIES_WHERE: '/service/grocery/location/:id',
   SERVICE_GROCERIES_WHEN: '/service/grocery/date/:id',
   SERVICE_GROCERIES_WHAT: '/service/grocery/items/:id',

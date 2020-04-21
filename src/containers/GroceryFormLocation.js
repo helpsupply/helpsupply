@@ -95,7 +95,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     setIsLoading(true);
     const res = await onSave({
       ...fields,
-      ...(addAdditionalContact && additionalFields),
+      ...additionalFields,
     });
     if (!res) {
       setIsLoading(false);
@@ -182,7 +182,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       value: additionalFields.additionalContactRelationship,
     },
     {
-      customOnChaonge: handleAdditionalFieldChange('additionalContactEmail'),
+      customOnChange: handleAdditionalFieldChange('additionalContactEmail'),
       defaultValue: additionalFields.additionalContactEmail,
       isRequired: false,
       label: t('service.additionalContact.labels.email'),
