@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { formatServiceDate } from 'lib/utils/datetime';
+import { LANGUAGES } from 'lib/constants/languages';
 
 import Text from 'components/Text';
 import Card from 'components/Card';
@@ -14,26 +15,74 @@ import Card from 'components/Card';
 import { styles } from './ServiceReview.styles';
 import { StateContext, actions } from 'state/StateProvider';
 
-export const GroceryServiceReview = ({ id, service }) => {
+const getPretty = (constant, slug) => {
+  const target = constant.filter((lang) => {
+    return lang.value === slug;
+  })[0];
+
+  if (!target) {
+    return false;
+  }
+
+  return target.label;
+};
+
+export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const { setState } = useContext(StateContext);
+  const [contact, setContact] = useState();
   const {
-    contactPreference,
     crossStreet,
     date,
     dietaryRestrictions,
-    email,
-    firstName,
     groceryList,
-    languagePreference,
-    lastName,
     neighborhood,
-    phone,
     recurring,
-    relationship,
     time,
   } = service;
+
+  useEffect(() => {
+    if (!service || !serviceUser || !user) {
+      return;
+    }
+    let contact = {
+      fullname: `${serviceUser.firstName} ${serviceUser.lastName}`,
+      email: user.email,
+      phone: serviceUser.phone,
+      contactPreference: `${
+        serviceUser.contactPreference === 'phone' ? 'Phone' : 'Email'
+      } ${t('request.review.preferred')}`,
+      languagePreference: `${getPretty(
+        LANGUAGES,
+        serviceUser.languagePreference,
+      )} ${t('request.review.preferred')}`,
+    };
+
+    if (
+      service.additionalContactContactPreference &&
+      service.additionalContactFirstName &&
+      service.additionalContactLastName
+    ) {
+      contact = {
+        fullname: `${service.additionalContactFirstName} ${service.additionalContactLastName}`,
+        relationship: service.additionalContactRelationship,
+        email: service.additionalContactEmail,
+        phone: service.additionalContactPhone,
+        contactPreference: `${
+          service.additionalContactContactPreference === 'phone'
+            ? 'Phone'
+            : 'Email'
+        } ${t('request.review.preferred')}`,
+        languagePreference: `${getPretty(
+          LANGUAGES,
+          service.additionalContactLanguagePreference,
+        )} ${t('request.review.preferred')}`,
+      };
+    }
+
+    setContact(contact);
+  }, [setContact, service, serviceUser, t, user]);
 
   const formattedDate = formatServiceDate(date);
 
@@ -70,7 +119,6 @@ export const GroceryServiceReview = ({ id, service }) => {
   const locationDetails = (
     <Fragment>
       <Text as="p" css={styles.capitalize}>
-        {/* service todo: map value to neighborhood name + location */}
         {neighborhood}
       </Text>
       <Text as="p" css={styles.capitalize}>
@@ -82,20 +130,18 @@ export const GroceryServiceReview = ({ id, service }) => {
   const contactDetails = (
     <Fragment>
       <Text as="p" css={styles.capitalize}>
-        {firstName} {lastName}
+        {contact?.fullname}
       </Text>
       <Text as="p" css={styles.capitalize}>
-        {relationship}
+        {contact?.relationship}
+      </Text>
+      <Text as="p">{contact?.phone}</Text>
+      <Text as="p">{contact?.email}</Text>
+      <Text as="p" css={styles.capitalize}>
+        {contact?.contactPreference}
       </Text>
       <Text as="p" css={styles.capitalize}>
-        {phone}
-      </Text>
-      <Text as="p">{email}</Text>
-      <Text as="p" css={styles.capitalize}>
-        {contactPreference} {t('request.review.preferred')}
-      </Text>
-      <Text as="p" css={styles.capitalize}>
-        {languagePreference} {t('request.review.preferred')}
+        {contact?.languagePreference}
       </Text>
     </Fragment>
   );
