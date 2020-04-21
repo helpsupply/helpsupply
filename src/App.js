@@ -173,17 +173,17 @@ function App({ backend }) {
                 <Route exact path={Routes.FACILITY}>
                   <Facility backend={backend} />
                 </Route>
-                <Route exact path={Routes.EMAIL_SIGNUP_WELCOME}>
-                  <SignUpWelcome backend={backend} />
-                </Route>
-                <Route exact path={Routes.EMAIL_SIGNUP_FORM}>
-                  <SignUp backend={backend} />
-                </Route>
                 <Route exact path={Routes.EMAIL_SIGNUP_SENT}>
                   <SignUpConfirmation backend={backend} />
                 </Route>
                 <Route exact path={Routes.EMAIL_SIGNUP_COMPLETE}>
                   <SignupComplete backend={backend} />
+                </Route>
+                <Route exact path={Routes.EMAIL_SIGNUP_WELCOME}>
+                  <SignUpWelcome backend={backend} />
+                </Route>
+                <Route exact path={Routes.EMAIL_SIGNUP_FORM}>
+                  <SignUp backend={backend} />
                 </Route>
                 <ProtectedRoute backend={backend} exact path={Routes.DASHBOARD}>
                   <Dashboard backend={backend} />

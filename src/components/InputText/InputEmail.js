@@ -7,7 +7,7 @@ import Text from 'components/Text';
 import { Controller, useFormContext } from 'react-hook-form';
 import { required } from 'lib/utils/validations';
 
-import styles from './InputPhone.styles';
+import styles from './InputText.styles';
 
 function InputPhone({
   customOnChange,
