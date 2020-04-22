@@ -3,6 +3,7 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 
 import { Emails } from 'constants/Emails';
+import { Links } from 'constants/Links';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -31,6 +32,14 @@ export const Contact = () => {
       <Text as="p" type={TEXT_TYPE.BODY_2}>
         <Anchor href={`mailto:${Emails.PRESS}`} as={anchorTypes.A}>
           {Emails.PRESS}
+        </Anchor>
+      </Text>
+      <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
+        {t('learnMore.contact.mediaResources')}
+      </Text>
+      <Text as="p" type={TEXT_TYPE.BODY_2}>
+        <Anchor href={Links.PRESSKIT} as={anchorTypes.A} isExternalLink>
+          {t('learnMore.contact.pressKit')}
         </Anchor>
       </Text>
     </div>

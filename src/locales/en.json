@@ -99,6 +99,8 @@
         }
       },
       "contact": {
+        "mediaResources": "Media resources:",
+        "pressKit": "Press kit",
         "title": "Contact",
         "subtitle1": "Questions and comments:",
         "subtitle2": "Media inquiries:"
