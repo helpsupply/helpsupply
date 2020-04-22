@@ -291,8 +291,8 @@
         }
       },
       "contactForm": {
-        "title": "Contact info",
-        "description": "Enter your contact information so we can coordinate the services you request.",
+        "title": "What's your contact information?",
+        "description": "This will allow us to coordinate the services you request.",
         "labels": {
           "firstName": "First name",
           "languagePreference": "Preferred language",
