@@ -319,7 +319,7 @@
       },
       "selectType": {
         "title": "What kind of help do you need in [{{zip}}]({{url}})?",
-        "description": "Please indicate the type of service and urgency of your request below",
+        "description": "Select the type of service and urgency of your request below.",
         "form": {
           "serviceTypeLabel": "Service type",
           "urgencyLabel": "Urgency"
