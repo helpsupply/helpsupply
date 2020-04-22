@@ -405,11 +405,12 @@
         "details": {
           "title": "Child details",
           "description": "Share the age and any special needs for each child in need of care.",
+          "note": "A separate request will be sent to our childcare service partner for each child listed.",
           "labels": {
             "title": "Child",
             "birthMonth": "Birth Month",
             "birthYear": "Birth Year",
-            "specialNeeds": "Special Needs",
+            "specialNeeds": "Special Needs (Optional)",
             "addAnother": "Add another child",
             "remove": "Remove"
           }
