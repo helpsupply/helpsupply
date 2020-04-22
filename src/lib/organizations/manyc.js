@@ -118,6 +118,8 @@ Request ID: https://help.supply/r/${request.id}
   },
 };
 
+OUR_FIELD_MAP.unused = true;
+
 const FIELD_MAP = {
   source: always('help.supply'),
   sourceID: get_field('id'),
@@ -127,7 +129,40 @@ const FIELD_MAP = {
 
   community: always(['Healthcare workers']),
 
-  language: get_user_field('languagePreference'), // TODO: map/validate
+  language: (request, user) => {
+    switch (user.languagePreference) {
+      case 'english':
+        return null;
+      case 'mandarin':
+        return 'Chinese: Mandarin';
+      case 'cantonese':
+        return 'Chinese: Cantonese';
+      case 'russian':
+        return 'Russian';
+      case 'haitian-creole':
+        return 'Haitian Kreyol';
+      case 'bengali':
+        return 'Bengali';
+      case 'yiddish':
+        return 'Yiddish';
+      case 'french':
+        return 'French';
+      case 'italian':
+        return 'Italian';
+      case 'korean':
+        return 'Korean';
+      case 'arabic':
+        return 'Arabic';
+      case 'polish':
+        return 'Polish';
+      case 'tagalog':
+        return 'Tagalog';
+      case 'asl':
+        return 'ASL';
+      default:
+        return null;
+    }
+  },
   languageOther: always(''),
 
   neighborhood: get_field('neighborhood'),
@@ -149,8 +184,8 @@ const FIELD_MAP = {
 
   contactMethod: (request, user) => {
     return {
-      email: ['Email'], // TODO: Validate
-      phone: ['Phone Call'],
+      email: ['Email'],
+      phone: ['Phone call'],
     }[user.contactPreference];
   },
 
@@ -177,8 +212,6 @@ Request ID: https://help.supply/r/${request.id}
 `;
   },
 };
-
-FIELD_MAP.unused = true;
 
 const MANYCMetadata = {
   id: 'manyc',
@@ -441,13 +474,13 @@ const MANYCMetadata = {
     let url = await backend.getWebhookForOrg('manyc');
 
     let payload = {};
-    for (const field in OUR_FIELD_MAP) {
-      payload[field] = OUR_FIELD_MAP[field](request, user);
+    for (const field in FIELD_MAP) {
+      payload[field] = FIELD_MAP[field](request, user);
     }
 
     // Send the request
-    //await backend.postWebhook(url, { manyc: payload });
-    await backend.postWebhook(url, payload);
+    await backend.postWebhook(url, { manyc: payload });
+    //await backend.postWebhook(url, payload);
   },
   // Called by the backend when MANYC pushes an update
   // about a request to our webhook

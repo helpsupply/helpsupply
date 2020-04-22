@@ -37,7 +37,7 @@ const FIELD_MAP = {
 
   'How do you want us to contact you?': (request, user) => {
     return {
-      phone: ['Phone'],
+      phone: ['Phone call'],
       email: ['Email'],
     }[user.contactPreference];
   },
