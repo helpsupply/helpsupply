@@ -261,6 +261,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
+      buttonLabel={t('global.form.submitLabelNext')}
     />
   );
 }
