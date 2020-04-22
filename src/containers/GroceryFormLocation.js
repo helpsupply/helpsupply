@@ -182,6 +182,15 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       value: additionalFields.additionalContactRelationship,
     },
     {
+      customOnChange: handleAdditionalFieldChange('additionalContactPhone'),
+      defaultValue: additionalFields.additionalContactPhone,
+      label: t('service.contactForm.labels.phone'),
+      name: 'additionalContactPhone',
+      type: formFieldTypes.INPUT_PHONE,
+      validation: { validate: validatePhone },
+      value: additionalFields.additionalContactPhone,
+    },
+    {
       customOnChange: handleAdditionalFieldChange('additionalContactEmail'),
       defaultValue: additionalFields.additionalContactEmail,
       isRequired: false,
@@ -190,15 +199,6 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       type: formFieldTypes.INPUT_EMAIL,
       validation: { validate: validateEmail },
       value: additionalFields.additionalContactEmail,
-    },
-    {
-      customOnChange: handleAdditionalFieldChange('additionalContactPhone'),
-      defaultValue: additionalFields.additionalContactPhone,
-      label: t('service.contactForm.labels.phone'),
-      name: 'additionalContactPhone',
-      type: formFieldTypes.INPUT_PHONE,
-      validation: { validate: validatePhone },
-      value: additionalFields.additionalContactPhone,
     },
     {
       customOnChange: handleAdditionalFieldChange(
@@ -249,6 +249,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
         }
         fields={[...fieldData, ...additionalContactFieldData]}
         isLoading={isLoading}
+        buttonLabel={t('global.form.submitLabelNext')}
       />
     );
   }
@@ -261,6 +262,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
+      buttonLabel={t('global.form.submitLabelNext')}
     />
   );
 }

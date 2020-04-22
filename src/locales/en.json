@@ -291,8 +291,8 @@
         }
       },
       "contactForm": {
-        "title": "Contact info",
-        "description": "Enter your contact information so we can coordinate the services you request.",
+        "title": "What's your contact information?",
+        "description": "This will allow us to coordinate the services you request.",
         "labels": {
           "firstName": "First name",
           "languagePreference": "Preferred language",
@@ -319,7 +319,7 @@
       },
       "selectType": {
         "title": "What kind of help do you need in [{{zip}}]({{url}})?",
-        "description": "Please indicate the type of service and urgency of your request below",
+        "description": "Select the type of service and urgency of your request below.",
         "form": {
           "serviceTypeLabel": "Service type",
           "urgencyLabel": "Urgency"

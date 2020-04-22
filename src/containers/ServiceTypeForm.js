@@ -248,6 +248,7 @@ function ServiceTypeForm({
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
+      buttonLabel={t('global.form.submitLabelNext')}
     >
       <Text
         as="div"
