@@ -29,9 +29,7 @@ const Form = ({
     mode: ['onChange'],
   });
 
-  const localButtonLabel = disabled
-    ? t('global.form.submitLabelCta')
-    : t('global.form.submitLabelNext');
+  const localButtonLabel = t('global.form.submitLabelNext');
 
   return (
     <FormContext {...methods}>
