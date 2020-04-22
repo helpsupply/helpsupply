@@ -45,7 +45,12 @@ const PageContent = ({
         contentContainerStyles,
       ]}
     >
-      <div css={styles.pageContent}>
+      <div
+        css={[
+          styles.pageContent,
+          !hasBackButton && styles.pageContentExtraPadding,
+        ]}
+      >
         {hasBackButton && !isDesktop && (
           <BackButton onClick={onBackButtonClick} />
         )}

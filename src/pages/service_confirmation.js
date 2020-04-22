@@ -28,7 +28,7 @@ function Confirmation({ backend }) {
   }, [setError, params.id, backend]);
 
   return (
-    <Page currentProgress={5} totalProgress={5}>
+    <Page currentProgress={5} totalProgress={5} hasBackButton={false}>
       {isLoading && <PageLoader />}
       {!isLoading && <ServiceConfirmation service={service} />}
     </Page>
