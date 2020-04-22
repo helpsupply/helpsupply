@@ -80,7 +80,7 @@ function ServiceLocationUpdateForm({ backend, serviceUser }) {
       defaultValue: fields.zipCode,
       label: t('service.locationForm.labels.zipCode'),
       name: 'zipCode',
-      type: formFieldTypes.INPUT_TEXT,
+      type: formFieldTypes.INPUT_ZIP,
       value: fields.zipCode,
       validation: { validate },
     },
