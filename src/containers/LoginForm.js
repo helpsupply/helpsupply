@@ -67,6 +67,7 @@ function LoginForm({ backend }) {
       disabled={!isValidEmail(email)}
       isLoading={isLoading}
       fields={fieldData}
+      buttonLabel={t('global.form.submitLabel')}
     >
       <Note>{t('request.workEmailForm.workEmail.disclaimer')}</Note>
     </FormBuilder>
