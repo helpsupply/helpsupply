@@ -8,6 +8,7 @@ import InputDropdown from 'components/InputDropdown';
 import InputText from 'components/InputText/InputText';
 import InputPhone from 'components/InputText/InputPhone';
 import InputEmail from 'components/InputText/InputEmail';
+import InputZip from 'components/InputText/InputZip';
 import TextArea from 'components/TextArea';
 
 export const formFieldTypes = {
@@ -18,6 +19,7 @@ export const formFieldTypes = {
   INPUT_TEXT: 'INPUT_TEXT',
   INPUT_PHONE: 'INPUT_PHONE',
   INPUT_EMAIL: 'INPUT_EMAIL',
+  INPUT_ZIP: 'INPUT_ZIP',
   NODE: 'NODE',
   TEXT_AREA: 'TEXT_AREA',
 };
@@ -52,6 +54,7 @@ const inputMap = {
   [formFieldTypes.INPUT_TEXT]: InputText,
   [formFieldTypes.INPUT_PHONE]: InputPhone,
   [formFieldTypes.INPUT_EMAIL]: InputEmail,
+  [formFieldTypes.INPUT_ZIP]: InputZip,
   [formFieldTypes.TEXT_AREA]: TextArea,
 };
 
