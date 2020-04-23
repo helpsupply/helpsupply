@@ -56,7 +56,7 @@ function Autosuggest({
 
   return (
     <div css={[styles.root, isFocused && styles.active]}>
-      <label css={styles.container}>
+      <label css={[styles.container, isFocused && styles.activeContainer]}>
         {label && (
           <div
             css={[styles.label, (isFocused || userInput) && styles.activeLabel]}

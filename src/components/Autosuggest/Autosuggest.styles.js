@@ -1,9 +1,20 @@
 import { css } from '@emotion/core';
-import { Borders, Color, Radius, Space, Height } from 'lib/theme';
+import {
+  Borders,
+  Color,
+  InputPaddingLeft,
+  InputPaddingVariant,
+  Radius,
+  Space,
+  Height,
+} from 'lib/theme';
 
 const styles = {
   active: css({
     borderColor: Color.SECONDARY,
+  }),
+  activeContainer: css({
+    borderColor: Color.TERTIARY,
   }),
   activeLabel: css({
     fontSize: 12,
@@ -16,7 +27,7 @@ const styles = {
     color: Color.GRAY_50,
     fontSize: 16,
     height: Height.INPUT,
-    paddingLeft: Space.S20,
+    paddingLeft: InputPaddingLeft,
     pointerEvents: 'none',
     position: 'absolute',
     transition: '0.2s all ease-in-out',
@@ -49,10 +60,11 @@ const styles = {
       display: 'block',
       fontSize: 16,
       height: '100%',
-      padding: `${Space.S10}px ${Space.S20}px 0 ${Space.S20}px`,
+      padding: InputPaddingVariant,
       width: '100%',
 
       ':focus': {
+        // borderColor: Color.TERTIARY,
         outline: 'none',
       },
     },
