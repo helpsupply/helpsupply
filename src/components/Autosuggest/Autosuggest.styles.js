@@ -57,6 +57,7 @@ const styles = {
       appearance: 'none',
       background: 'transparent',
       border: 0,
+      color: Color.GRAY,
       display: 'block',
       fontSize: 16,
       height: '100%',
