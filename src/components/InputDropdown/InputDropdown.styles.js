@@ -65,6 +65,10 @@ const styles = {
     borderRadius: Radius.ROUNDED,
     height: '100%',
     padding: `${Space.S10}px ${Space.S50}px 0 ${Space.S20}px`,
+
+    '&:focus': {
+      borderColor: Color.TERTIARY,
+    },
   }),
   selectDefaultState: css({
     color: 'transparent',

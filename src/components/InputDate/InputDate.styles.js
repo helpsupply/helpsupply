@@ -93,6 +93,7 @@ const dayPickerStyles = {
 
     ':focus': {
       outline: 'none',
+      borderColor: Color.TERTIARY,
     },
 
     '::placeholder': {

@@ -36,6 +36,7 @@ const styles = {
 
     ':focus': {
       outline: 'none',
+      borderColor: Color.TERTIARY,
     },
 
     '::placeholder': {
