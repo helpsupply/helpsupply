@@ -466,7 +466,7 @@
       },
       "emotional": {
         "when": {
-          "title": "Who do you want to speak with?",
+          "title": "When would you like to speak with someone?",
           "description": "Our service partners will work directly with you to accommodate your preferences.",
           "labels": {
             "day": "Preferred day",
@@ -476,7 +476,7 @@
           "note": "We cannot guarantee a quick response. If you are in crisis, or feel likely to hurt yourself or others, please call 1.888.692.9355 to talk to someone now, or text “WELL” to 65713."
         },
         "what": {
-          "title": "What type of support are you most interested in?",
+          "title": "Who do you want to speak with?",
           "description": "Select the type of volunteer expertise that will be most helpful to you.",
           "labels": {
             "type": "Preferred support",
