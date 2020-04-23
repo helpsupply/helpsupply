@@ -42,7 +42,7 @@ export const FAQ = () => {
       <Text css={styles.faqSubtitle} as="h3" type={TEXT_TYPE.HEADER_5}>
         {t('learnMore.faq.question3')}
       </Text>
-      <Text as="p" css={styles.answer} type={TEXT_TYPE.BODY_2}>
+      <Text as="div" css={styles.answer} type={TEXT_TYPE.BODY_2}>
         <ReactMarkdown
           source={t('learnMore.faq.answer3', {
             mutualAid,

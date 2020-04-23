@@ -1,5 +1,13 @@
 import { css } from '@emotion/core';
-import { Borders, Color, Radius, Space, Height } from 'lib/theme';
+import {
+  Borders,
+  Color,
+  InputLabelLeft,
+  InputPadding,
+  Radius,
+  Space,
+  Height,
+} from 'lib/theme';
 
 const styles = {
   active: css({
@@ -28,14 +36,16 @@ const styles = {
     background: 'transparent',
     border: Borders.GRAY2,
     borderRadius: Radius.ROUNDED,
+    color: Color.GRAY,
     display: 'block',
     height: '100%',
     fontSize: 16,
-    padding: `${Space.S10}px ${Space.S20}px 0 ${Space.S20}px`,
+    padding: InputPadding,
     width: '100%',
 
     ':focus': {
       outline: 'none',
+      borderColor: Color.TERTIARY,
     },
 
     '::placeholder': {
@@ -56,7 +66,7 @@ const styles = {
     position: 'absolute',
     height: '100%',
     paddingTop: Space.S20,
-    left: Space.S20,
+    left: InputLabelLeft,
     pointerEvents: 'none',
     transition: '0.2s all ease-in-out',
   }),

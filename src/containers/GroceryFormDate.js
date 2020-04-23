@@ -16,7 +16,6 @@ function GroceryFormDate({ id, onSave, request }) {
   const history = useHistory();
   const { t } = useTranslation();
   const { state } = useContext(StateContext);
-  console.log(state);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
     date: '',
