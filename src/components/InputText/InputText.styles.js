@@ -44,8 +44,8 @@ const styles = {
     width: '100%',
 
     ':focus': {
-      outline: 'none',
       borderColor: Color.TERTIARY,
+      outline: 'none',
     },
 
     '::placeholder': {
