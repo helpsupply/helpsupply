@@ -18,7 +18,7 @@ export const styles = {
     right: 0,
   }),
   container: css({
-    borderBottom: Borders.GRAY,
+    borderBottom: Borders.GRAY1,
     padding: `${Space.S25}px 0`,
   }),
   content: css({
