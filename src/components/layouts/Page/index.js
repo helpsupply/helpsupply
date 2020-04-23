@@ -114,7 +114,7 @@ const Page = ({
               {!isHome && hasBackButton && (
                 <BackButton onClick={onBackButtonClick} />
               )}
-              <LargeHeader isHome={isHome} />
+              <LargeHeader isHome={isHome} hasBackButton={hasBackButton} />
               {isDesktop && isHome && (
                 <Fragment>
                   <Intro />
