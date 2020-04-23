@@ -36,6 +36,7 @@ const styles = {
     background: 'transparent',
     border: Borders.GRAY2,
     borderRadius: Radius.ROUNDED,
+    color: Color.GRAY,
     display: 'block',
     height: '100%',
     fontSize: 16,
