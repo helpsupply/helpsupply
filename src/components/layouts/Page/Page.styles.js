@@ -26,6 +26,7 @@ const styles = {
   }),
   headerContentDesktop: css({
     overflow: 'auto',
+    position: 'relative',
     padding: `${Space.S40}px ${rightPaddingDesktop}% ${Space.S40}px ${paddingDesktop}%`,
   }),
   pageContent: css({
