@@ -47,12 +47,14 @@ export const textStyles = {
   [TEXT_TYPE.BODY_1]: css({
     fontFamily: Font,
     fontSize: 16,
+    fontWeight: 500,
     lineHeight: '24px',
     letterSpacing: '-0.03em',
   }),
   [TEXT_TYPE.BODY_2]: css({
     fontFamily: Font,
     fontSize: 14,
+    fontWeight: 500,
     lineHeight: '22px',
     letterSpacing: '-0.01em',
   }),
