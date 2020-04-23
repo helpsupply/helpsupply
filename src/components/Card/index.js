@@ -12,7 +12,7 @@ export const Card = ({ details, editLabel, onClick, label }) => (
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.label}>
         {label}
       </Text>
-      <Text>{details}</Text>
+      <Text css={styles.details}>{details}</Text>
     </div>
     <SecondaryButton onClick={onClick}>
       <Text type={TEXT_TYPE.NOTE}>{editLabel}</Text>

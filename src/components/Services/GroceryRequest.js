@@ -1,17 +1,18 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
 import { URGENCY_KEYS, URGENCY_TEXT } from 'lib/constants/urgency';
 import { mapServiceKindToTitle } from 'lib/theme/services';
+import { capitalize } from 'lib/utils/strings';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Note from 'components/Note';
 
 import { styles } from './Request.styles';
-import moment from 'moment';
 
 const matchUrgencyToText = (text) => {
   let t;
@@ -24,17 +25,12 @@ const matchUrgencyToText = (text) => {
   return t;
 };
 
-export const GroceryRequest = ({
-  // onDelete,
-  // onEdit,
-  request,
-}) => {
+export const GroceryRequest = ({ request }) => {
   const { t } = useTranslation();
   return (
     <div css={styles.root}>
       <div css={styles.section}>
         <Note>
-          {' '}
           {t('dropsite.openRequests.requestId')} #{request.id}
         </Note>
       </div>
@@ -74,23 +70,15 @@ export const GroceryRequest = ({
         </Text>
       )}
       <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-        {request.groceryList}
+        {capitalize(request.groceryList)}
       </Text>
-      <Text as="p" type={TEXT_TYPE.NOTE} css={[styles.text, styles.capitalize]}>
-        {request.dietaryRestrictions}
+      <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
+        {capitalize(request.dietaryRestrictions)}
       </Text>
       <Note css={styles.date}>
-        {t('global.form.addedLabel')}{' '}
+        {t('global.form.addedLabel')}
         {moment(request.timeCreated).format('MMM DD, h:mma')}
       </Note>
-      {/* <div css={styles.actions}>
-        <SecondaryButton onClick={onEdit}>
-          <Text type={TEXT_TYPE.NOTE}>{t('global.form.editLabel')}</Text>
-        </SecondaryButton>
-        <SecondaryButton onClick={onDelete}>
-          <Text type={TEXT_TYPE.NOTE}>{t('global.form.deleteLabel')}</Text>
-        </SecondaryButton>
-      </div> */}
     </div>
   );
 };

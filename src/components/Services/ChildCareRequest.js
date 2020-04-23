@@ -1,23 +1,20 @@
 /** @jsx jsx */
+import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import moment from 'moment';
 
 import { mapServiceKindToTitle } from 'lib/theme/services';
+import { capitalize } from 'lib/utils/strings';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Note from 'components/Note';
 
 import { styles } from './Request.styles';
-import { Fragment } from 'react';
-import moment from 'moment';
 
-export const ChildCareRequest = ({
-  // onDelete,
-  // onEdit,
-  request,
-}) => {
+export const ChildCareRequest = ({ request }) => {
   const { t } = useTranslation();
   return (
     <div css={styles.root}>
@@ -58,7 +55,7 @@ export const ChildCareRequest = ({
         {Object.values(request?.children || []).map((child, idx) => (
           <Fragment key={idx}>
             <Text as="p" type={TEXT_TYPE.NOTE} css={styles.text}>
-              Child {idx + 1}: {child.birthMonth} {child.birthYear}
+              Child {idx + 1}: {capitalize(child.birthMonth)} {child.birthYear}
             </Text>
             <Text
               as="p"
@@ -74,14 +71,6 @@ export const ChildCareRequest = ({
         {t('global.form.addedLabel')}{' '}
         {moment(request.timeCreated).format('MMM DD, h:mma')}
       </Note>
-      {/* <div css={styles.actions}>
-        <SecondaryButton onClick={onEdit}>
-          <Text type={TEXT_TYPE.NOTE}>{t('global.form.editLabel')}</Text>
-        </SecondaryButton>
-        <SecondaryButton onClick={onDelete}>
-          <Text type={TEXT_TYPE.NOTE}>{t('global.form.deleteLabel')}</Text>
-        </SecondaryButton>
-      </div> */}
     </div>
   );
 };
