@@ -47,7 +47,14 @@ function InputZip({
           </div>
         )}
         <Controller
-          as={<input type="text" pattern="[0-9]*" css={styles.input} />}
+          as={
+            <input
+              type="text"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              css={styles.input}
+            />
+          }
           defaultValue={defaultValue}
           name={name}
           onBlur={toggleFocus}
