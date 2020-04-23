@@ -10,4 +10,7 @@ export const styles = {
     color: Color.GRAY_75,
     fontWeight: 500,
   }),
+  details: css({
+    color: Color.GRAY,
+  }),
 };
