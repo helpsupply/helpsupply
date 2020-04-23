@@ -41,7 +41,6 @@ export const ServiceConfirmation = ({ service }) => {
 
   const organization = mapServiceToOrganization()[kind][0];
   const organizationName = organization.name;
-
   const serviceName = mapServiceToName()[kind];
 
   const handleViewRequests = () => {
@@ -53,16 +52,18 @@ export const ServiceConfirmation = ({ service }) => {
   };
 
   const handleShare = () => {
+    const url = 'https://help.supply/';
     if (navigator.share) {
       navigator
         .share({
+          text: 'Help Supply',
           title: 'Help Supply',
-          url: 'https://help.supply/',
+          url: url,
         })
         .then(() => {
           console.warn('Thanks for sharing!');
         })
-        .catch(console.error);
+        .catch((error) => console.log('Error sharing:', error));
     } else {
       const url = 'https://help.supply/';
       navigator.clipboard
@@ -70,7 +71,7 @@ export const ServiceConfirmation = ({ service }) => {
         .then(() => {
           console.warn('Link copied to clipboard');
         })
-        .catch(console.error);
+        .catch((error) => console.log('Error copying link:', error));
     }
   };
 
@@ -79,7 +80,11 @@ export const ServiceConfirmation = ({ service }) => {
       title={t('request.serviceConfirmation.title', { serviceName })}
     >
       <Text as="p" type={TEXT_TYPE.BODY_2} css={styles.description}>
-        {t('request.serviceConfirmation.description', { organizationName })}
+        {kind !== RequestKinds.CHILDCARE
+          ? t('request.serviceConfirmation.description', { organizationName })
+          : t('request.serviceConfirmation.childcareDescription', {
+              organizationName,
+            })}
       </Text>
       <OrganizationConfirmation organization={organization} />
       {!isDesktop && (
