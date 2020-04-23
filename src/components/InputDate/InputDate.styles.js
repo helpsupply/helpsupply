@@ -92,6 +92,7 @@ const dayPickerStyles = {
     border: Borders.GRAY2,
     borderRadius: Radius.ROUNDED,
     cursor: 'pointer',
+    color: Color.GRAY,
     display: 'block',
     fontSize: 16,
     height: '100%',

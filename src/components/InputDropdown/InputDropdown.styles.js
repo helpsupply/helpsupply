@@ -72,6 +72,7 @@ const styles = {
     ...selectReset,
     border: Borders.GRAY,
     borderRadius: Radius.ROUNDED,
+    color: Color.GRAY,
     height: '100%',
     padding: `${Space.S10}px ${Space.S50}px 0 ${InputPaddingLeft}px`,
 
