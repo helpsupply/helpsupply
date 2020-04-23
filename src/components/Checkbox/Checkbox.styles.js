@@ -13,6 +13,7 @@ const styles = {
     color: Color.GRAY_75,
     cursor: 'pointer',
     display: 'flex',
+    marginBottom: Space.S25,
     userSelect: 'none',
     width: '100%',
   }),
