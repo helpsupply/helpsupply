@@ -34,7 +34,7 @@ const styles = {
   input: css({
     appearance: 'none',
     background: 'transparent',
-    border: Borders.GRAY2,
+    border: Borders.GRAY,
     borderRadius: Radius.ROUNDED,
     color: Color.GRAY,
     display: 'block',
