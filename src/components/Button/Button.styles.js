@@ -31,7 +31,8 @@ const styles = {
     color: Color.PRIMARY,
     height: 30,
     padding: `0 ${Space.S10}px`,
-    border: `2px solid ${Color.PRIMARY}`,
+    border: `1.4px solid ${Color.PRIMARY}`,
+    borderRadius: Radius.ROUNDED_6,
     ':disabled': {
       color: Color.GRAY_20,
       borderColor: Color.GRAY_20,
