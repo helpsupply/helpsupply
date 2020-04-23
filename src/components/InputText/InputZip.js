@@ -51,7 +51,7 @@ function InputZip({
             <input
               type="text"
               pattern="[0-9]*"
-              inputmode="numeric"
+              inputMode="numeric"
               css={styles.input}
             />
           }

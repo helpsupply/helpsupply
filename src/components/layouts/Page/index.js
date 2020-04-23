@@ -14,6 +14,8 @@ import LargeHeader from 'components/Header/LargeHeader';
 import Intro from 'components/EntryContent/Intro';
 import Error from 'components/Error/Error';
 
+import { Routes } from 'constants/Routes';
+
 import MetaData from './MetaData';
 import styles from './Page.styles';
 
@@ -70,6 +72,7 @@ const Page = ({
   rootContainerStyles,
   totalProgress,
 }) => {
+  const location = useLocation();
   const [pageContentTopPadding, setPageContentTopPadding] = useState(0);
   const { matchesBreakpoint } = useMediaQuery();
   const { errorMsg } = useContext(ErrorContext);
@@ -79,15 +82,24 @@ const Page = ({
     matchesBreakpoint(Breakpoints.LARGE));
   const willUseSmallHeader = !isHome && !isDesktop;
 
-  const headerRef = useCallback((node) => {
-    if (node) {
-      setPageContentTopPadding(node.getBoundingClientRect().top);
+  const headerRef = useCallback(
+    (node) => {
+      if (location.pathname !== Routes.HOME) {
+        setPageContentTopPadding(0);
+        // window.removeEventListener('resize');
+        return;
+      }
 
-      window.addEventListener('resize', () =>
-        setPageContentTopPadding(node.getBoundingClientRect().top),
-      );
-    }
-  }, []);
+      if (node) {
+        setPageContentTopPadding(node.getBoundingClientRect().top);
+
+        window.addEventListener('resize', () =>
+          setPageContentTopPadding(node.getBoundingClientRect().top),
+        );
+      }
+    },
+    [location.pathname],
+  );
 
   const today = new Date();
 
@@ -109,7 +121,12 @@ const Page = ({
         )}
 
         {!willUseSmallHeader && (
-          <div css={isDesktop && styles.headerContainerDesktop}>
+          <div
+            css={[
+              isDesktop && styles.headerContainerDesktop,
+              !isHome && styles.headerContainerDesktopInnerPage,
+            ]}
+          >
             <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
               {!isHome && hasBackButton && (
                 <BackButton onClick={onBackButtonClick} />

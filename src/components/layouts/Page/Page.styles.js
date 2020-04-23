@@ -24,6 +24,10 @@ const styles = {
     right: '50%',
     top: 0,
   }),
+  headerContainerDesktopInnerPage: css({
+    justifyContent: 'flex-start',
+    paddingTop: Space.S110,
+  }),
   headerContentDesktop: css({
     overflow: 'auto',
     position: 'relative',
@@ -36,7 +40,7 @@ const styles = {
     padding: [
       `0 ${Space.S40}px ${Space.S40}px`,
       '',
-      `${Space.S40}px ${paddingDesktop}% ${Space.S40}px `,
+      `0 ${paddingDesktop}% ${Space.S40}px `,
     ],
   }),
   pageContentContainer: css({
@@ -44,6 +48,7 @@ const styles = {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
+    marginTop: [0, 0, Space.S145],
     width: ['', '', '50%'],
   }),
   pageContentExtraPadding: css({
