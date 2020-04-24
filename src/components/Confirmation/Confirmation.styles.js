@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
 
 export const styles = {
@@ -12,16 +12,14 @@ export const styles = {
     color: Color.GRAY,
   }),
   title: css({
-    marginBottom: 0,
+    marginBottom: Space.S15,
   }),
   root: css({
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
+    paddingTop: [Space.S30, 0, 0],
     width: '100%',
-  }),
-  section: css({
-    marginBottom: Space.S30,
   }),
   subtext: css({
     marginBottom: Space.S15,

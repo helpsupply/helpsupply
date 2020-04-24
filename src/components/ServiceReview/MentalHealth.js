@@ -94,7 +94,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
   const additionalDetails = (
     <Fragment>
       <Text as="p" css={styles.capitalize}>
-        {additionalInfo}
+        {additionalInfo || 'None'}
       </Text>
     </Fragment>
   );

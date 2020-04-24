@@ -33,6 +33,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
   const { setState } = useContext(StateContext);
   const [contact, setContact] = useState();
   const {
+    additionalInfo,
     crossStreet,
     date,
     dietaryRestrictions,
@@ -127,6 +128,15 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
     );
   };
 
+  const handleChangeAdditionalInfo = () => {
+    handleRedirectIntent();
+    history.push(
+      routeWithParams(Routes.SERVICE_ADDITIONAL_INFO, {
+        id,
+      }),
+    );
+  };
+
   const serviceDetails = (
     <Fragment>
       <Text as="p" css={styles.capitalize}>
@@ -191,6 +201,14 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
     </Fragment>
   );
 
+  const additionalDetails = (
+    <Fragment>
+      <Text as="p" css={styles.capitalize}>
+        {additionalInfo || 'None'}
+      </Text>
+    </Fragment>
+  );
+
   return (
     <Fragment>
       <div css={styles.card}>
@@ -231,6 +249,14 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
           details={listDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeList}
+        />
+      </div>
+      <div css={styles.card}>
+        <Card
+          label={t('request.review.additionalInfo')}
+          details={additionalDetails}
+          editLabel={t('global.form.changeLabel')}
+          onClick={handleChangeAdditionalInfo}
         />
       </div>
     </Fragment>
