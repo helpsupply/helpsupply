@@ -27,6 +27,10 @@ const styles = {
   showNote: css({
     display: 'block',
   }),
+  link: css({
+    alignItems: 'baseline',
+    display: 'flex',
+  }),
 };
 
 function ServiceTypeForm({
@@ -75,8 +79,9 @@ function ServiceTypeForm({
                 href={`https://www.cityharvest.org/`}
                 as={anchorTypes.A}
                 isExternalLink
+                css={styles.link}
               >
-                City Harvest
+                <Text type={TEXT_TYPE.NOTE}>City Harvest</Text>
               </Anchor>
             </div>
             <div>
@@ -84,8 +89,9 @@ function ServiceTypeForm({
                 href={`https://www.foodbanknyc.org/`}
                 as={anchorTypes.A}
                 isExternalLink
+                css={styles.link}
               >
-                Food Bank NYC
+                <Text type={TEXT_TYPE.NOTE}>Food Bank NYC</Text>
               </Anchor>
             </div>
           </Fragment>,
@@ -116,8 +122,9 @@ function ServiceTypeForm({
                 href={`https://nycwell.cityofnewyork.us/`}
                 as={anchorTypes.A}
                 isExternalLink
+                css={styles.link}
               >
-                NYC Well
+                <Text type={TEXT_TYPE.NOTE}>NYC Well</Text>
               </Anchor>
             </div>
           </Fragment>,
