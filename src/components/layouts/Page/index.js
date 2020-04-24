@@ -48,12 +48,7 @@ const PageContent = ({
         contentContainerStyles,
       ]}
     >
-      <div
-        css={[
-          styles.pageContent,
-          !hasBackButton && !isHome && styles.pageContentExtraPadding,
-        ]}
-      >
+      <div css={[styles.pageContent]}>
         {hasBackButton && !isDesktop && (
           <BackButton onClick={onBackButtonClick} />
         )}
@@ -87,7 +82,6 @@ const Page = ({
     (node) => {
       if (location.pathname !== Routes.HOME) {
         setPageContentTopPadding(0);
-        // window.removeEventListener('resize');
         return;
       }
 
