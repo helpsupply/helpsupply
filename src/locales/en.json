@@ -58,7 +58,7 @@
     "learnMore": {
       "faq": {
         "question1": "Who can request help?",
-        "answer1": "Our focus is on helping anyone working for a NYC medical facility or EMT service treating people suffering from COVID-19. Support staff, nurses, and doctors are all encouraged to make requests.",
+        "answer1": "Our focus is on helping anyone working for a NYC medical facility or EMS service treating people suffering from COVID-19. Support staff, nurses, and doctors are all encouraged to make requests.",
         "question2": "How can I be sure that my request and information stay private?",
         "answer2": "We share your data securely on a per-request basis with only the service organization that will fulfill your request.",
         "question3": "Does Help Supply provide the volunteer services?",
@@ -130,7 +130,7 @@
         "newFacility": "New facility"
       },
       "facilityForm": {
-        "title": "What NYC hospital or EMT service do you work for?",
+        "title": "What NYC hospital or EMS service do you work for?",
         "description": "I'm a healthcare professional or support staff member working at:",
         "nameLabel": "Name of the facility",
         "zipLabel": "Zip code",
@@ -143,7 +143,7 @@
         "addNew": "Add a new facility",
         "description": "I'm a healthcare professional working at:",
         "notSeeing": "Not seeing your facility?",
-        "label": "Hospital or EMT service",
+        "label": "Hospital or EMS service",
         "title": "Find your healthcare facility"
       },
       "review": {
