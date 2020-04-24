@@ -4,16 +4,19 @@ import { Color, Space, Radius } from 'lib/theme';
 export const styles = {
   description: css({
     color: Color.GRAY_75,
+    marginBottom: Space.S30,
   }),
   link: css({
     color: Color.PRIMARY,
     textDecoration: 'none',
+    whiteSpace: 'nowrap',
+    padding: 0,
   }),
   organization: css({
     background: Color.GRAY_10,
     borderRadius: Radius.ROUNDED,
-    padding: Space.S20,
-    margin: `${Space.S20}px 0`,
+    padding: Space.S25,
+    marginBottom: Space.S40,
   }),
   organizationName: css({
     marginTop: Space.S10,
@@ -24,6 +27,7 @@ export const styles = {
   }),
   organizationSubtitle: css({
     color: Color.GRAY_50,
+    marginBottom: Space.S15,
   }),
   primaryButton: css({
     marginTop: Space.S15,
@@ -40,7 +44,7 @@ export const styles = {
   }),
   shareLink: css({
     textAlign: 'center',
-    padding: Space.S20,
+    marginBottom: Space.S30,
   }),
 };
 

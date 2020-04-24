@@ -1,4 +1,4 @@
-export const LANGUAGES = [
+const availableLanguages = [
   { label: 'English', value: 'english' },
   { label: 'Spanish', value: 'spanish' },
   { label: 'Chinese: Mandarin', value: 'mandarin' },
@@ -15,3 +15,13 @@ export const LANGUAGES = [
   { label: 'Tagalog', value: 'tagalog' },
   { label: 'ASL', value: 'asl' },
 ];
+
+export const LANGUAGES = availableLanguages.sort((a, b) => {
+  if (a.value < b.value) {
+    return -1;
+  }
+  if (a.value > b.value) {
+    return 1;
+  }
+  return 0;
+});
