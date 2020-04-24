@@ -5,7 +5,7 @@ const styles = {
   root: css({
     position: ['', '', 'absolute'],
     top: ['', '', '40px'],
-    padding: ['', `${Space.S30}px 0`, '0px'],
+    padding: [`0 0 ${Space.S30}px`, null, '0px'],
   }),
   backIcon: css({
     circle: {

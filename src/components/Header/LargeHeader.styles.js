@@ -1,15 +1,14 @@
 import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
 
-const mobileMinHeight = '275px';
+const mobileMinHeight = '170px';
 
 const styles = {
   root: css({
     alignItems: 'flex-end',
     backgroundColor: `${Color.PRIMARY}`,
-    display: 'flex',
-    minHeight: [mobileMinHeight, '', 'auto'],
-    padding: [`${Space.S20}px`, '', 0],
+    display: ['block', null, 'flex'],
+    padding: [`${mobileMinHeight} ${Space.S40}px ${Space.S40}px`, '', 0],
     width: '100%',
   }),
   marginTop: css({
