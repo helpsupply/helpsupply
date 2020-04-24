@@ -6,6 +6,9 @@ const additionalRightPadding = paddingDesktop * 0.2;
 const rightPaddingDesktop = paddingDesktop + additionalRightPadding;
 
 const styles = {
+  desktopHomePage: css({
+    marginTop: [0, 0, 0],
+  }),
   error: css({
     alignSelf: ['', '', 'flex-end'],
     display: 'flex',

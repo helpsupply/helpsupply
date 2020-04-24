@@ -46,6 +46,7 @@ const PageContent = ({
         styles.pageContentContainer,
         isDesktop && paddingStyles,
         contentContainerStyles,
+        isDesktop && isHome && styles.desktopHomePage,
       ]}
     >
       <div css={[styles.pageContent]}>
