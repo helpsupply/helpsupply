@@ -24,6 +24,6 @@ export const Space = {
 // nested borders means we have to use these one-off px values for left alignment
 export const InputPaddingLeft = 17;
 export const InputLabelLeft = Space.S20;
-export const InputLableLeftVariant = 18;
+export const InputLabelLeftVariant = 18;
 export const InputPadding = `${Space.S10}px ${Space.S20}px 0 ${InputPaddingLeft}px`;
-export const InputPaddingVariant = `${Space.S10}px ${Space.S20}px 0 ${InputLableLeftVariant}px`;
+export const InputPaddingVariant = `${Space.S10}px ${Space.S20}px 0 ${InputLabelLeftVariant}px`;

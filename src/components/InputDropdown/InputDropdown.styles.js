@@ -2,7 +2,7 @@ import { css } from '@emotion/core';
 import {
   Borders,
   Color,
-  InputLableLeftVariant,
+  InputLabelLeftVariant,
   InputPaddingLeft,
   selectReset,
   Radius,
@@ -30,7 +30,7 @@ const styles = {
     position: 'absolute',
     height: '100%',
     paddingTop: Space.S20,
-    left: InputLableLeftVariant,
+    left: InputLabelLeftVariant,
     pointerEvents: 'none',
     transition: '0.2s all ease-in-out',
   }),
