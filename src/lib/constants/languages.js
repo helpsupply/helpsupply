@@ -17,10 +17,10 @@ const availableLanguages = [
 ];
 
 export const LANGUAGES = availableLanguages.sort((a, b) => {
-  if (a.value < b.value) {
+  if (a.label.toLowerCase() < b.label.toLowerCase()) {
     return -1;
   }
-  if (a.value > b.value) {
+  if (a.label.toLowerCase() > b.label.toLowerCase()) {
     return 1;
   }
   return 0;
