@@ -90,7 +90,9 @@ export const ServiceConfirmation = ({ service }) => {
       {!isDesktop && (
         <div css={styles.shareLink}>
           <LinkButton css={styles.link} onClick={handleShare}>
-            {t('request.serviceConfirmation.share')}
+            <Text type={TEXT_TYPE.BODY_1}>
+              {t('request.serviceConfirmation.share')}
+            </Text>
           </LinkButton>
         </div>
       )}
@@ -99,7 +101,9 @@ export const ServiceConfirmation = ({ service }) => {
         onClick={handleViewRequests}
         css={styles.secondaryButton}
       >
-        {t('request.serviceConfirmation.viewRequests')}
+        <Text type={TEXT_TYPE.BODY_1}>
+          {t('request.serviceConfirmation.viewRequests')}
+        </Text>
       </SecondaryButton>
       <PrimaryButton
         type="submit"
