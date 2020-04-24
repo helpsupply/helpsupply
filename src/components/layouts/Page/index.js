@@ -30,6 +30,7 @@ const PageContent = ({
 }) => {
   const location = useLocation();
   const paddingStyles = topPadding > 0 && css({ paddingTop: topPadding });
+  const isDashboard = location.pathname === Routes.DASHBOARD;
 
   useEffect(() => {
     // This prevents the page from scrolling down to where it was previously.
@@ -49,7 +50,12 @@ const PageContent = ({
         isDesktop && isHome && styles.desktopHomePage,
       ]}
     >
-      <div css={[styles.pageContent]}>
+      <div
+        css={[
+          !isDashboard && styles.pageContent,
+          isDashboard && styles.dashboardPageContent,
+        ]}
+      >
         {hasBackButton && !isDesktop && (
           <BackButton onClick={onBackButtonClick} />
         )}

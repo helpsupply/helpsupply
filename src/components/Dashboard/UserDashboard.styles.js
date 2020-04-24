@@ -37,8 +37,14 @@ export const styles = {
   }),
   requestsContainer: css({
     background: Color.GRAY_10,
-    margin: `${Space.S30}px -${Space.S40}px 0`,
-    padding: `${Space.S30}px ${Space.S40}px`,
+    padding: [
+      `${Space.S30}px ${Space.S30}px ${Space.S30}px`,
+      '',
+      `${Space.S30}px 22% ${Space.S30}px `,
+    ],
+  }),
+  contentContainer: css({
+    padding: [`0 ${Space.S30}px ${Space.S30}px`, '', `0 22% ${Space.S30}px `],
   }),
   section: css({
     marginBottom: Space.S30,

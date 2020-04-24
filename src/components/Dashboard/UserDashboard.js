@@ -45,28 +45,30 @@ export const UserDashboard = ({
 
   return (
     <Fragment>
-      <Text
-        css={[styles.name, styles.section]}
-        as="h2"
-        type={TEXT_TYPE.HEADER_3}
-      >
-        {t('dashboard.title')}
-      </Text>
-      <SubRow
-        onClick={handleUpdateContact}
-        editLabel={t('global.form.changeLabel')}
-        label={t('dashboard.contact.title')}
-        details={contactDetails}
-      />
-      <div>
-        <PrimaryButton css={styles.button} onClick={handleRequestService}>
-          <Text>{t('dashboard.cta')}</Text>
-        </PrimaryButton>
+      <div css={styles.contentContainer}>
+        <Text
+          css={[styles.name, styles.section]}
+          as="h2"
+          type={TEXT_TYPE.HEADER_3}
+        >
+          {t('dashboard.title')}
+        </Text>
+        <SubRow
+          onClick={handleUpdateContact}
+          editLabel={t('global.form.changeLabel')}
+          label={t('dashboard.contact.title')}
+          details={contactDetails}
+        />
+        <div>
+          <PrimaryButton css={styles.button} onClick={handleRequestService}>
+            <Text>{t('dashboard.cta')}</Text>
+          </PrimaryButton>
+        </div>
+        <Text css={styles.requestsHeader} as="h3" type={TEXT_TYPE.HEADER_4}>
+          {t('dashboard.openRequests.title')}
+          <span css={styles.number}>{openRequests.length}</span>
+        </Text>
       </div>
-      <Text css={styles.requestsHeader} as="h3" type={TEXT_TYPE.HEADER_4}>
-        {t('dashboard.openRequests.title')}
-        <span css={styles.number}>{openRequests.length}</span>
-      </Text>
       <div css={styles.requestsContainer}>
         {isRequestsLoading && <Loader passedStyles={styles.loader} />}
         {!isRequestsLoading && (
