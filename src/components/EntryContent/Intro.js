@@ -20,7 +20,7 @@ const Intro = () => {
       </Text>
       <ListLink href={Routes.SERVICE_LOCATION} label={t('home.needHelp')} />
       <Anchor withIcon css={styles.link} href={Routes.LOGIN}>
-        {t('home.openRequests')}
+        <Text type={TEXT_TYPE.BODY_2}>{t('home.openRequests')}</Text>
       </Anchor>
     </div>
   );

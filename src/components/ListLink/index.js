@@ -11,7 +11,9 @@ import styles from './ListLink.styles';
 const ListLink = ({ href, label }) => (
   <Anchor css={styles.root} href={href}>
     <div css={styles.content}>
-      <Text type={TEXT_TYPE.HEADER_4}>{label}</Text>
+      <Text type={TEXT_TYPE.HEADER_4} css={{ lineHeight: '32px' }}>
+        {label}
+      </Text>
       <Arrow />
     </div>
   </Anchor>

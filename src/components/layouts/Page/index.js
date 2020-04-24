@@ -10,6 +10,7 @@ import { ErrorContext } from 'state/ErrorProvider';
 import BackButton from 'components/BackButton';
 import Header from 'components/Header';
 import Text from 'components/Text';
+import { TEXT_TYPE } from 'components/Text/constants';
 import LargeHeader from 'components/Header/LargeHeader';
 import Intro from 'components/EntryContent/Intro';
 import Error from 'components/Error/Error';
@@ -18,6 +19,15 @@ import { Routes } from 'constants/Routes';
 
 import MetaData from './MetaData';
 import styles from './Page.styles';
+
+const CopyRight = () => {
+  const today = new Date();
+  return (
+    <Text css={styles.copyright} type={TEXT_TYPE.BODY_2}>
+      &copy; {today.getFullYear()} Help Supply, LLC
+    </Text>
+  );
+};
 
 const PageContent = ({
   contentContainerStyles,
@@ -97,8 +107,6 @@ const Page = ({
     [location.pathname],
   );
 
-  const today = new Date();
-
   return (
     <Fragment>
       <MetaData />
@@ -131,9 +139,7 @@ const Page = ({
               {isDesktop && isHome && (
                 <Fragment>
                   <Intro />
-                  <Text css={styles.copyright}>
-                    &copy; {today.getFullYear()} Help Supply, LLC
-                  </Text>
+                  <CopyRight />
                 </Fragment>
               )}
             </div>
@@ -144,11 +150,7 @@ const Page = ({
           children={[
             <Fragment key="children">{children}</Fragment>,
             <Fragment key="copyright">
-              {!isDesktop && isHome && (
-                <Text css={styles.copyright}>
-                  &copy; {today.getFullYear()} Help Supply, LLC
-                </Text>
-              )}
+              {!isDesktop && isHome && <CopyRight />}
             </Fragment>,
           ]}
           error={errorMsg}
