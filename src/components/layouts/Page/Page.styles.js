@@ -51,9 +51,6 @@ const styles = {
     marginTop: [Space.S30, null, Space.S145],
     width: ['', '', '50%'],
   }),
-  pageContentExtraPadding: css({
-    marginTop: [Space.S90, null, 0],
-  }),
   root: css({
     display: 'flex',
     flexDirection: 'column',
