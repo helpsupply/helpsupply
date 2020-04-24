@@ -25,7 +25,7 @@ const styles = {
     margin: [`0 0 ${Space.S40}px`, null, `${Space.S40}px 0`],
   }),
   intro: css({
-    borderBottom: Borders.WHITE,
+    borderBottom: [Borders.WHITE, null, 'none'],
     marginBottom: Space.S40,
   }),
   listItem: css({

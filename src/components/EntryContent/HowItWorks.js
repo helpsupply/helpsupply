@@ -22,7 +22,7 @@ const HowItWorks = () => {
           <Text type={TEXT_TYPE.BODY_2}>1</Text>
         </div>
         <div css={styles.content}>
-          <Text>{t('home.howItWorks.bullet1')}</Text>
+          <Text type={TEXT_TYPE.BODY_2}>{t('home.howItWorks.bullet1')}</Text>
         </div>
       </div>
       <div css={styles.listItem}>
@@ -30,7 +30,7 @@ const HowItWorks = () => {
           <Text type={TEXT_TYPE.BODY_2}>2</Text>
         </div>
         <div css={styles.content}>
-          <Text>{t('home.howItWorks.bullet2')}</Text>
+          <Text type={TEXT_TYPE.BODY_2}>{t('home.howItWorks.bullet2')}</Text>
         </div>
       </div>
       <div css={styles.listItem}>
@@ -38,11 +38,11 @@ const HowItWorks = () => {
           <Text type={TEXT_TYPE.BODY_2}>3</Text>
         </div>
         <div css={styles.content}>
-          <Text>{t('home.howItWorks.bullet3')}</Text>
+          <Text type={TEXT_TYPE.BODY_2}>{t('home.howItWorks.bullet3')}</Text>
         </div>
       </div>
       <Anchor withIcon css={styles.link} href={Routes.FAQ}>
-        {t('home.howItWorks.learnMore')}
+        <Text type={TEXT_TYPE.BODY_2}>{t('home.howItWorks.learnMore')}</Text>
       </Anchor>
     </Fragment>
   );
