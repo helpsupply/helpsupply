@@ -5,7 +5,6 @@ import { useHistory /*useParams*/ } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
-import { Color } from 'lib/theme';
 
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
