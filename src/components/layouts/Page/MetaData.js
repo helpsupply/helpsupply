@@ -10,8 +10,6 @@ const MetaData = () => (
     />
     <meta property="og:url" content="http://help.supply" />
     <meta property="og:site_name" content="Help Supply" />
-    <meta property="og:image" content="http://" />
-    <meta name="twitter:card" content="" />
     <meta name="twitter:site" content="@HelpSupply" />
     <meta name="twitter:image:alt" content="Help Supply Logo" />
     <meta name="twitter:image:alt" content="Help Supply Logo" />
