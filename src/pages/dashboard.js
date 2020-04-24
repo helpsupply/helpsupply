@@ -5,16 +5,11 @@ import { useHistory /*useParams*/ } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
-import { Color } from 'lib/theme';
 
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
 import UserDashboard from 'components/Dashboard/UserDashboard';
 import { ErrorContext } from 'state/ErrorProvider';
-
-const containerStyles = {
-  background: Color.GRAY,
-};
 
 function AdminDashboard({ backend }) {
   const history = useHistory();
