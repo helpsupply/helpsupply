@@ -31,7 +31,7 @@ const styles = {
   headerContentDesktop: css({
     overflow: 'auto',
     position: 'relative',
-    padding: `${Space.S40}px ${rightPaddingDesktop}% ${Space.S40}px ${paddingDesktop}%`,
+    padding: `${Space.S40}px ${rightPaddingDesktop}% ${Space.S40}px ${Space.S150}px`,
   }),
   pageContent: css({
     display: 'flex',
@@ -48,7 +48,7 @@ const styles = {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
-    marginTop: [0, 0, Space.S145],
+    marginTop: [Space.S30, null, Space.S145],
     width: ['', '', '50%'],
   }),
   pageContentExtraPadding: css({

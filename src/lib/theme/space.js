@@ -18,6 +18,7 @@ export const Space = {
   S90: 90,
   S110: 110,
   S145: 145,
+  S150: 150,
 };
 
 // nested borders means we have to use these one-off px values for left alignment

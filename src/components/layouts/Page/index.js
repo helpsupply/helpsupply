@@ -24,6 +24,7 @@ const PageContent = ({
   children,
   hasBackButton,
   isDesktop,
+  isHome,
   onBackButtonClick,
   topPadding,
 }) => {
@@ -50,7 +51,7 @@ const PageContent = ({
       <div
         css={[
           styles.pageContent,
-          !hasBackButton && styles.pageContentExtraPadding,
+          !hasBackButton && !isHome && styles.pageContentExtraPadding,
         ]}
       >
         {hasBackButton && !isDesktop && (
@@ -145,11 +146,21 @@ const Page = ({
         )}
 
         <PageContent
-          children={children}
+          children={[
+            <Fragment key="children">{children}</Fragment>,
+            <Fragment key="copyright">
+              {!isDesktop && isHome && (
+                <Text css={styles.copyright}>
+                  &copy; {today.getFullYear()} Help Supply, LLC
+                </Text>
+              )}
+            </Fragment>,
+          ]}
           error={errorMsg}
           contentContainerStyles={contentContainerStyles}
           hasBackButton={hasBackButton}
           isDesktop={isDesktop}
+          isHome={isHome}
           onBackButtonClick={onBackButtonClick}
           topPadding={pageContentTopPadding}
         />
