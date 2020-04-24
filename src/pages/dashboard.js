@@ -27,7 +27,8 @@ function AdminDashboard({ backend }) {
     backend
       .getServiceRequests()
       .then((data) => {
-        data && setRequests(data);
+        const filteredRequests = data?.filter((r) => r.status !== 'inprogress');
+        data && setRequests(filteredRequests);
       })
       .then(() => {
         backend
