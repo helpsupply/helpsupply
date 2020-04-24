@@ -46,6 +46,11 @@ const styles = {
       `0 ${paddingDesktop}% ${Space.S40}px `,
     ],
   }),
+  dashboardPageContent: css({
+    display: 'flex',
+    flexDirection: 'column',
+    height: ['100%', '', 'auto'],
+  }),
   pageContentContainer: css({
     alignSelf: ['', '', 'flex-end'],
     display: 'flex',
