@@ -139,7 +139,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
   const additionalDetails = (
     <Fragment>
       <Text as="p" css={styles.capitalize}>
-        {additionalInfo}
+        {additionalInfo || 'None'}
       </Text>
     </Fragment>
   );
