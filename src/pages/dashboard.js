@@ -12,10 +12,6 @@ import PageLoader from 'components/Loader/PageLoader';
 import UserDashboard from 'components/Dashboard/UserDashboard';
 import { ErrorContext } from 'state/ErrorProvider';
 
-const containerStyles = {
-  background: Color.GRAY,
-};
-
 function AdminDashboard({ backend }) {
   const history = useHistory();
 
