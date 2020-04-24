@@ -6,6 +6,9 @@ const additionalRightPadding = paddingDesktop * 0.2;
 const rightPaddingDesktop = paddingDesktop + additionalRightPadding;
 
 const styles = {
+  desktopHomePage: css({
+    marginTop: [0, 0, 0],
+  }),
   error: css({
     alignSelf: ['', '', 'flex-end'],
     display: 'flex',
@@ -24,9 +27,14 @@ const styles = {
     right: '50%',
     top: 0,
   }),
+  headerContainerDesktopInnerPage: css({
+    justifyContent: 'flex-start',
+    paddingTop: Space.S110,
+  }),
   headerContentDesktop: css({
     overflow: 'auto',
-    padding: `${Space.S40}px ${rightPaddingDesktop}% ${Space.S40}px ${paddingDesktop}%`,
+    position: 'relative',
+    padding: `${Space.S40}px ${rightPaddingDesktop}% ${Space.S40}px ${Space.S150}px`,
   }),
   pageContent: css({
     display: 'flex',
@@ -35,7 +43,7 @@ const styles = {
     padding: [
       `0 ${Space.S40}px ${Space.S40}px`,
       '',
-      `${Space.S40}px ${paddingDesktop}% ${Space.S40}px `,
+      `0 ${paddingDesktop}% ${Space.S40}px `,
     ],
   }),
   pageContentContainer: css({
@@ -43,6 +51,7 @@ const styles = {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
+    marginTop: [Space.S30, null, Space.S145],
     width: ['', '', '50%'],
   }),
   root: css({

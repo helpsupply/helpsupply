@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
-import { buttonReset, Color } from 'lib/theme';
+import { buttonReset, Color, Space } from 'lib/theme';
 
 import { AdditionalCta } from 'components/AdditionalCta';
 import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
@@ -21,6 +21,10 @@ import { StateContext } from 'state/StateProvider';
 
 const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
+  note: css({
+    marginTop: Space.S30,
+    color: Color.GRAY_50,
+  }),
 };
 
 function ChildcareFormDetails({ id, onSave, request }) {
@@ -79,6 +83,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
           type: formFieldTypes.NODE,
           node: [
             <AdditionalFormTitle
+              noBorder={targetIndex === 1 ? true : false}
               key={`childcare-child-title-${fieldKey}`}
               title={`${t(
                 'service.childcare.details.labels.title',
@@ -168,22 +173,24 @@ function ChildcareFormDetails({ id, onSave, request }) {
   ];
 
   return (
-    <div>
-      <FormBuilder
-        buttonLabel={t('global.form.submitLabelNext')}
-        defaultValues={fields}
-        onSubmit={handleSubmit}
-        title={t('service.childcare.details.title')}
-        description={t('service.childcare.details.description')}
-        disabled={
-          !Object.keys(fields).every(
-            (key) => !!fields[key].birthMonth && !!fields[key].birthYear,
-          )
-        }
-        fields={buildFields().concat(additionalCta)}
-        isLoading={isLoading}
-      />
-    </div>
+    <FormBuilder
+      buttonLabel={t('global.form.submitLabelNext')}
+      defaultValues={fields}
+      onSubmit={handleSubmit}
+      title={t('service.childcare.details.title')}
+      description={t('service.childcare.details.description')}
+      disabled={
+        !Object.keys(fields).every(
+          (key) => !!fields[key].birthMonth && !!fields[key].birthYear,
+        )
+      }
+      fields={buildFields().concat(additionalCta)}
+      isLoading={isLoading}
+    >
+      <Text css={styles.note} type={TEXT_TYPE.NOTE}>
+        {t('service.childcare.details.note')}
+      </Text>
+    </FormBuilder>
   );
 }
 

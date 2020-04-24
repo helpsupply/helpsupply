@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { Routes } from 'constants/Routes';
 import { Services } from 'lib/theme/services';
 import { routeWithParams } from 'lib/utils/routes';
+import { getPretty } from 'lib/utils/strings';
+import { mentalHealthOptions } from 'lib/constants/options';
 
 import Text from 'components/Text';
 import Card from 'components/Card';
@@ -84,7 +86,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
   const supportDetails = (
     <Fragment>
       <Text as="p" css={styles.capitalize}>
-        {type}
+        {getPretty(mentalHealthOptions, type)}
       </Text>
     </Fragment>
   );

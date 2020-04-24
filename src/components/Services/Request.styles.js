@@ -35,6 +35,7 @@ export const styles = {
     marginBottom: Space.S20,
   }),
   root: css({
+    color: Color.GRAY,
     background: Color.WHITE,
     border: Color.GRAY_10,
     borderRadius: Radius.ROUNDED,

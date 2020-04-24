@@ -4,7 +4,7 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 
 import { Emails } from 'constants/Emails';
-import { formatPhoneNumber } from 'lib/utils/strings';
+import { formatPhoneNumber, capitalize } from 'lib/utils/strings';
 import { TEXT_TYPE } from 'components/Text/constants';
 
 import Text from 'components/Text';
@@ -35,10 +35,10 @@ export const UserDashboard = ({
       </div>
       <div>{formatPhoneNumber(contact.phone)}</div>
       <div>
-        {contact.languagePreference} {t('dashboard.preferred')}
+        {capitalize(contact.contactPreference)} {t('dashboard.preferred')}
       </div>
       <div>
-        {contact.contactPreference} {t('dashboard.preferred')}
+        {capitalize(contact.languagePreference)} {t('dashboard.preferred')}
       </div>
     </div>
   );

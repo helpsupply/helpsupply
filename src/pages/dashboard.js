@@ -115,7 +115,7 @@ function AdminDashboard({ backend }) {
   };
 
   return (
-    <Page currentProgress={4} totalProgress={5}>
+    <Page currentProgress={0} totalProgress={5} hasBackButton={false}>
       {isLoading && <PageLoader />}
       {!isLoading && (
         <UserDashboard

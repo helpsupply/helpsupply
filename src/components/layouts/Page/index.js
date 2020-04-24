@@ -14,6 +14,8 @@ import LargeHeader from 'components/Header/LargeHeader';
 import Intro from 'components/EntryContent/Intro';
 import Error from 'components/Error/Error';
 
+import { Routes } from 'constants/Routes';
+
 import MetaData from './MetaData';
 import styles from './Page.styles';
 
@@ -22,6 +24,7 @@ const PageContent = ({
   children,
   hasBackButton,
   isDesktop,
+  isHome,
   onBackButtonClick,
   topPadding,
 }) => {
@@ -43,9 +46,10 @@ const PageContent = ({
         styles.pageContentContainer,
         isDesktop && paddingStyles,
         contentContainerStyles,
+        isDesktop && isHome && styles.desktopHomePage,
       ]}
     >
-      <div css={styles.pageContent}>
+      <div css={[styles.pageContent]}>
         {hasBackButton && !isDesktop && (
           <BackButton onClick={onBackButtonClick} />
         )}
@@ -65,6 +69,7 @@ const Page = ({
   rootContainerStyles,
   totalProgress,
 }) => {
+  const location = useLocation();
   const [pageContentTopPadding, setPageContentTopPadding] = useState(0);
   const { matchesBreakpoint } = useMediaQuery();
   const { errorMsg } = useContext(ErrorContext);
@@ -74,15 +79,23 @@ const Page = ({
     matchesBreakpoint(Breakpoints.LARGE));
   const willUseSmallHeader = !isHome && !isDesktop;
 
-  const headerRef = useCallback((node) => {
-    if (node) {
-      setPageContentTopPadding(node.getBoundingClientRect().top);
+  const headerRef = useCallback(
+    (node) => {
+      if (location.pathname !== Routes.HOME) {
+        setPageContentTopPadding(0);
+        return;
+      }
 
-      window.addEventListener('resize', () =>
-        setPageContentTopPadding(node.getBoundingClientRect().top),
-      );
-    }
-  }, []);
+      if (node) {
+        setPageContentTopPadding(node.getBoundingClientRect().top);
+
+        window.addEventListener('resize', () =>
+          setPageContentTopPadding(node.getBoundingClientRect().top),
+        );
+      }
+    },
+    [location.pathname],
+  );
 
   const today = new Date();
 
@@ -104,12 +117,17 @@ const Page = ({
         )}
 
         {!willUseSmallHeader && (
-          <div css={isDesktop && styles.headerContainerDesktop}>
+          <div
+            css={[
+              isDesktop && styles.headerContainerDesktop,
+              !isHome && styles.headerContainerDesktopInnerPage,
+            ]}
+          >
             <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
               {!isHome && hasBackButton && (
                 <BackButton onClick={onBackButtonClick} />
               )}
-              <LargeHeader />
+              <LargeHeader isHome={isHome} hasBackButton={hasBackButton} />
               {isDesktop && isHome && (
                 <Fragment>
                   <Intro />
@@ -123,11 +141,21 @@ const Page = ({
         )}
 
         <PageContent
-          children={children}
+          children={[
+            <Fragment key="children">{children}</Fragment>,
+            <Fragment key="copyright">
+              {!isDesktop && isHome && (
+                <Text css={styles.copyright}>
+                  &copy; {today.getFullYear()} Help Supply, LLC
+                </Text>
+              )}
+            </Fragment>,
+          ]}
           error={errorMsg}
           contentContainerStyles={contentContainerStyles}
           hasBackButton={hasBackButton}
           isDesktop={isDesktop}
+          isHome={isHome}
           onBackButtonClick={onBackButtonClick}
           topPadding={pageContentTopPadding}
         />

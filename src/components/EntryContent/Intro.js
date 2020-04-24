@@ -15,7 +15,7 @@ const Intro = () => {
   const { t } = useTranslation();
   return (
     <div css={styles.intro}>
-      <Text css={styles.introContent} as="h2" type={TEXT_TYPE.HEADER_3}>
+      <Text css={styles.introContent} as="h2" type={TEXT_TYPE.HEADER_4}>
         {t('home.intro')}
       </Text>
       <ListLink href={Routes.SERVICE_LOCATION} label={t('home.needHelp')} />

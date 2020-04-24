@@ -21,7 +21,8 @@ const styles = {
   }),
   introContent: css({
     color: Color.WHITE,
-    margin: `${Space.S40}px 0`,
+    lineHeight: '26px',
+    margin: [`0 0 ${Space.S40}px`, null, `${Space.S40}px 0`],
   }),
   intro: css({
     borderBottom: Borders.WHITE,

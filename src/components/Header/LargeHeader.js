@@ -9,8 +9,8 @@ import { ReactComponent as Logo } from 'static/icons/logo.svg';
 
 import styles from './LargeHeader.styles';
 
-const LargeHeader = () => (
-  <div css={styles.root}>
+const LargeHeader = ({ isHome, hasBackButton }) => (
+  <div css={[styles.root, !isHome && hasBackButton && styles.marginTop]}>
     <Anchor href={Routes.HOME}>
       <Logo fill={Color.WHITE} />
     </Anchor>

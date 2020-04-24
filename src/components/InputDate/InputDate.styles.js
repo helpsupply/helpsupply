@@ -1,5 +1,13 @@
 import { css } from '@emotion/core';
-import { Borders, Color, Height, Radius, Space } from 'lib/theme';
+import {
+  Borders,
+  Color,
+  Height,
+  InputLabelLeftVariant,
+  InputPadding,
+  Radius,
+  Space,
+} from 'lib/theme';
 
 const dayPickerStyles = {
   '.DayPicker-wrapper': {
@@ -84,15 +92,17 @@ const dayPickerStyles = {
     border: Borders.GRAY2,
     borderRadius: Radius.ROUNDED,
     cursor: 'pointer',
+    color: Color.GRAY,
     display: 'block',
     fontSize: 16,
     height: '100%',
-    padding: `${Space.S10}px ${Space.S20}px 0`,
+    padding: InputPadding,
     userSelect: 'none',
     width: '100%',
 
     ':focus': {
       outline: 'none',
+      borderColor: Color.TERTIARY,
     },
 
     '::placeholder': {
@@ -211,7 +221,7 @@ const styles = {
     position: 'absolute',
     height: '100%',
     paddingTop: Space.S20,
-    left: Space.S20,
+    left: InputLabelLeftVariant,
     pointerEvents: 'none',
     transition: '0.2s all ease-in-out',
   }),

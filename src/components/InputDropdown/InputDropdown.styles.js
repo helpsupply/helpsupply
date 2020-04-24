@@ -1,5 +1,14 @@
 import { css } from '@emotion/core';
-import { Borders, Color, selectReset, Radius, Space, Height } from 'lib/theme';
+import {
+  Borders,
+  Color,
+  InputLabelLeftVariant,
+  InputPaddingLeft,
+  selectReset,
+  Radius,
+  Space,
+  Height,
+} from 'lib/theme';
 
 const activeLabel = {
   fontSize: 12,
@@ -21,7 +30,7 @@ const styles = {
     position: 'absolute',
     height: '100%',
     paddingTop: Space.S20,
-    left: Space.S20,
+    left: InputLabelLeftVariant,
     pointerEvents: 'none',
     transition: '0.2s all ease-in-out',
   }),
@@ -63,8 +72,13 @@ const styles = {
     ...selectReset,
     border: Borders.GRAY,
     borderRadius: Radius.ROUNDED,
+    color: Color.GRAY,
     height: '100%',
-    padding: `${Space.S10}px ${Space.S50}px 0 ${Space.S20}px`,
+    padding: `${Space.S10}px ${Space.S50}px 0 ${InputPaddingLeft}px`,
+
+    '&:focus': {
+      borderColor: Color.TERTIARY,
+    },
   }),
   selectDefaultState: css({
     color: 'transparent',

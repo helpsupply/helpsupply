@@ -73,6 +73,7 @@ function GroceryFormItems({ id, onSave, request }) {
       disabled={!Object.keys(requiredFields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
+      buttonLabel={t('global.form.submitLabelNext')}
     />
   );
 }

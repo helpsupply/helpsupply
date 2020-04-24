@@ -52,15 +52,15 @@ function ContactConfirmation({ email, onEdit, serviceUser }) {
             </Text>
             <Text as="p">{email}</Text>
             {data.phone && <Text as="p">{data.phone}</Text>}
-            {getPretty(LANGUAGES, data.languagePreference) && (
-              <Text as="p">
-                {getPretty(LANGUAGES, data.languagePreference)}{' '}
-                {t('request.dropSiteContactForm.sent.preferred')}
-              </Text>
-            )}
             {getPretty(CONTACT_PREFERENCES, data.contactPreference) && (
               <Text as="p">
                 {getPretty(CONTACT_PREFERENCES, data.contactPreference)}{' '}
+                {t('request.dropSiteContactForm.sent.preferred')}
+              </Text>
+            )}
+            {getPretty(LANGUAGES, data.languagePreference) && (
+              <Text as="p">
+                {getPretty(LANGUAGES, data.languagePreference)}{' '}
                 {t('request.dropSiteContactForm.sent.preferred')}
               </Text>
             )}
