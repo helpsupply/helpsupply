@@ -8,7 +8,7 @@ const styles = {
     alignItems: 'flex-end',
     backgroundColor: `${Color.PRIMARY}`,
     display: ['block', null, 'flex'],
-    padding: [`${mobileMinHeight} ${Space.S40}px ${Space.S40}px`, '', 0],
+    padding: [`${mobileMinHeight} ${Space.S40}px 0`, '', 0],
     width: '100%',
   }),
   marginTop: css({
