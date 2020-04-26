@@ -134,31 +134,31 @@ const FIELD_MAP = {
       case 'english':
         return null;
       case 'mandarin':
-        return 'Chinese: Mandarin';
+        return 'Chinese (Mandarin): 简体中文 / 繁體中文';
       case 'cantonese':
-        return 'Chinese: Cantonese';
+        return 'Cantonese: 廣東話';
       case 'russian':
-        return 'Russian';
+        return 'Russian: русский';
       case 'haitian-creole':
-        return 'Haitian Kreyol';
+        return 'Haitian Creole: kreyòl ayisyen';
       case 'bengali':
-        return 'Bengali';
+        return 'Bengali: বাঙালি';
       case 'yiddish':
-        return 'Yiddish';
+        return 'Yiddish: אידיש';
       case 'french':
-        return 'French';
+        return 'French: français';
       case 'italian':
-        return 'Italian';
+        return 'Italian: italiano';
       case 'korean':
-        return 'Korean';
+        return 'Korean: 한국어';
       case 'arabic':
-        return 'Arabic';
+        return 'Arabic: اللغة العربية';
       case 'polish':
-        return 'Polish';
+        return 'Polish: polski';
       case 'tagalog':
         return 'Tagalog';
       case 'asl':
-        return 'ASL';
+        return 'American Sign Language';
       default:
         return null;
     }
@@ -172,13 +172,15 @@ const FIELD_MAP = {
   email: get_user_field('email'),
 
   firstName: get_user_field('firstName'),
-  lastName: get_user_field('lastName'),
+  lastName: (request) => {
+    return request.lastName ? request.lastName.slice(0, 1) : '';
+  },
 
   urgency: (request) => {
     return {
-      immediate: "Immediately, I'm in crisis",
-      soon: 'In the next few days',
-      later: "I'm okay for now, but am worried that I won't be soon",
+      immediate: 'As soon as possible (1 - 3 Days)',
+      soon: 'In the next few days (3 - 5 Days)',
+      later: 'Soon (5 - 7+ Days)',
     }[request.urgency];
   },
 
