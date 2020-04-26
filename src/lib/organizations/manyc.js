@@ -205,8 +205,18 @@ ${request.groceryList}
 Dietary Restrictions:
 ${request.dietaryRestrictions}
 
+Additional Contact (if provided):
+${request.additionalContactFirstName || ''} ${
+      request.additionalContactLastName || ''
+    }
+${request.additionalContactRelationship || ''}
+${request.additionalContactEmail || ''}
+${request.additionalContactPhone || ''}
+${request.additionalContactLanguagePreference || ''}
+
 Other Info:
 ${request.additionalInfo}
+
 
 Request ID: https://help.supply/r/${request.id}
 `;

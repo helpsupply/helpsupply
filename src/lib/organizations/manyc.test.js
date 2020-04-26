@@ -24,11 +24,16 @@ test('Request Mapping', async () => {
     id: 'ABCDEFG',
 
     additionalInfo: 'nothing',
+
+    additionalContactEmail: 'bob@bob.com',
+    additionalContactFirstName: 'Bob',
+    additionalContactLanguagePreference: 'Spanish',
+    additionalContactLastName: 'Bobberson',
+    additionalContactPhone: '111',
+    additionalContactRelationship: 'Uncle Bob',
+
     crossStreet: 'a b',
-    date: {
-      seconds: 1588262400,
-      nanoseconds: 0,
-    },
+    date: 'April 27, 2020',
     dietaryRestrictions: 'none',
     domain: 'ariaglassworks.com',
     groceryList: 'one two three',

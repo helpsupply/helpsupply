@@ -126,6 +126,15 @@ Language Preference? ${user.languagePreference}
 Other Notes:
 ${request.additionalInfo}
 
+Additional Contact (if provided):
+${request.additionalContactFirstName || ''} ${
+      request.additionalContactLastName || ''
+    }
+${request.additionalContactRelationship || ''}
+${request.additionalContactEmail || ''}
+${request.additionalContactPhone || ''}
+${request.additionalContactLanguagePreference || ''}
+
 Reference ID:
 https://help.supply/r/${request.id}
 `;
