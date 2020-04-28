@@ -317,6 +317,7 @@
         "title": "Additional contact",
         "labels": {
           "email": "Email address (optional)",
+          "emailRequired": "Email address",
           "lastName": "Last name (optional)",
           "relationship": "Relationship (optional)"
         }
