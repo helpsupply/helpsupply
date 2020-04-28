@@ -9,6 +9,7 @@ import { ErrorContext } from 'state/ErrorProvider';
 
 import BackButton from 'components/BackButton';
 import Header from 'components/Header';
+import HomePage from 'components/HomePage';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import LargeHeader from 'components/Header/LargeHeader';
@@ -20,12 +21,25 @@ import { Routes } from 'constants/Routes';
 import MetaData from './MetaData';
 import styles from './Page.styles';
 
-const CopyRight = () => {
+export const CopyRight = () => {
   const today = new Date();
   return (
     <Text css={styles.copyright} type={TEXT_TYPE.BODY_2}>
       &copy; {today.getFullYear()} Help Supply, LLC
     </Text>
+  );
+};
+
+export const ErrorMessage = () => {
+  const { errorMsg } = useContext(ErrorContext);
+  if (!errorMsg) {
+    return null;
+  }
+
+  return (
+    <div css={styles.error}>
+      <Error error={errorMsg} />
+    </div>
   );
 };
 
@@ -113,15 +127,20 @@ const Page = ({
     [location.pathname],
   );
 
+  if (isHome && isDesktop) {
+    return (
+      <Fragment>
+        <MetaData />
+        <HomePage rootContainerStyles={rootContainerStyles} />
+      </Fragment>
+    );
+  }
+
   return (
     <Fragment>
       <MetaData />
       <div css={[styles.root, rootContainerStyles]}>
-        {errorMsg && (
-          <div css={styles.error}>
-            <Error error={errorMsg} />
-          </div>
-        )}
+        <ErrorMessage />
 
         {willUseSmallHeader && (
           <Header
