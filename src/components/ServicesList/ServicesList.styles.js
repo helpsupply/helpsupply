@@ -9,5 +9,9 @@ export const styles = {
     borderBottom: Borders.GRAY1,
     color: Color.GRAY,
     padding: `${Space.S20}px 0`,
+
+    '&:last-of-type': {
+      border: 'none',
+    },
   }),
 };

@@ -53,7 +53,7 @@ export const ServicesList = ({ services }) => {
 
   return (
     <Fragment>
-      <Text as="h2" type={TEXT_TYPE.HEADER_3} css={styles.title}>
+      <Text as="h2" type={TEXT_TYPE.CONTENT_HEADER} css={styles.title}>
         {t('service.available.title')}
       </Text>
       {services?.map((svc) => {
