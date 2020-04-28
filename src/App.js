@@ -47,6 +47,7 @@ import ServicePetcare from 'pages/service_petcare';
 import ServiceEmotional from 'pages/service_emotional';
 import ServiceAdditionalInfo from 'pages/service_additional_info';
 import LearnMore from 'pages/learn_more';
+import Privacy from 'pages/privacy';
 import Dashboard from 'pages/dashboard';
 import ServiceConfirmation from 'pages/service_confirmation';
 import ServiceReview from 'pages/service_review';
@@ -136,6 +137,9 @@ function App({ backend }) {
                 {/*MVP Routes*/}
                 <Route exact path={Routes.HOME}>
                   <EntryPortal backend={backend} />
+                </Route>
+                <Route path={Routes.PRIVACY}>
+                  <Privacy backend={backend} />
                 </Route>
                 <Route backend={backend} exact path={Routes.SERVICE_LOCATION}>
                   <ServiceLocation backend={backend} />
