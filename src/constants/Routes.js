@@ -6,8 +6,6 @@ export const Routes = {
   DROPSITE_NEW_ADMIN: `/dropsite/new/admin/:id`,
   FACILITY_CONFIRMATION: '/facility/confirmation',
   FACILITY_EDIT: '/facility/:id/edit',
-  FAQ: '/learn-more',
-  HOME: '/',
   LOGOUT: '/logout',
   PENDING_DOMAINS: '/pending-domains',
   PROFILE: '/profile',
@@ -22,6 +20,9 @@ export const Routes = {
   SUPPLY_NEW_ADMIN_CONFIRMATION: `/new/admin/supply/:id/confirmation/:requestId`,
 
   // MVP Routes
+  HOME: '/',
+  FAQ: '/learn-more',
+  PRIVACY: '/privacy',
   SERVICE_LOCATION: '/service-location',
   SERVICE_LOCATION_UPDATE: '/service-location/update',
   SERVICE_LOCATION_AVAILABLE: '/service-location/available/:zip?',

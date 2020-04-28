@@ -2,11 +2,13 @@
 import { Fragment, useContext, useCallback, useEffect, useState } from 'react';
 import { css, jsx } from '@emotion/core';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { useMediaQuery } from 'hooks/useMediaQuery';
 import { Breakpoints } from 'constants/Breakpoints';
 import { ErrorContext } from 'state/ErrorProvider';
 
+import Anchor, { anchorTypes } from 'components/Anchor';
 import BackButton from 'components/BackButton';
 import Header from 'components/Header';
 import HomePage from 'components/HomePage';
@@ -23,9 +25,19 @@ import styles from './Page.styles';
 
 export const CopyRight = () => {
   const today = new Date();
+  const { t } = useTranslation();
+
   return (
     <Text css={styles.copyright} type={TEXT_TYPE.BODY_2}>
-      &copy; {today.getFullYear()} Help Supply, LLC
+      &copy; {today.getFullYear()} Help Supply, LLC |{' '}
+      <Anchor
+        forceBlank={true}
+        href={Routes.PRIVACY}
+        as={anchorTypes.A}
+        css={{ color: 'inherit', '&:hover': { color: 'inherit' } }}
+      >
+        {t('global.privacy.link')}
+      </Anchor>
     </Text>
   );
 };

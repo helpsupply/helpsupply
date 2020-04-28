@@ -21,6 +21,7 @@ const anchorTypesMap = {
 const Anchor = ({
   as = anchorTypes.LINK,
   children,
+  forceBlank,
   href,
   iconColor,
   isExternalLink,
@@ -35,7 +36,7 @@ const Anchor = ({
       to={isLink ? href : null}
       href={!isLink ? href : null}
       css={styles.root}
-      target={isExternalLink ? '_blank' : null}
+      target={isExternalLink || forceBlank ? '_blank' : null}
       {...rest}
     >
       {children}
@@ -52,6 +53,7 @@ Anchor.propTypes = {
   iconColor: PropTypes.string,
   withIcon: PropTypes.bool,
   isExternalLink: PropTypes.bool,
+  forceBlank: PropTypes.bool,
 };
 
 export default Anchor;
