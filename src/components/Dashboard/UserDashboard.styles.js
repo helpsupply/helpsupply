@@ -15,9 +15,6 @@ export const styles = {
     textTransform: 'capitalize',
     marginBottom: Space.S20,
   }),
-  footer: css({
-    marginTop: Space.S30,
-  }),
   loader: css({
     margin: 'auto',
   }),
