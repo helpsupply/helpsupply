@@ -32,9 +32,12 @@ const styles = {
     paddingTop: Space.S110,
   }),
   headerContentDesktop: css({
+    alignItems: 'flex-end',
+    display: ['block', null, 'flex'],
+    height: '100%',
     overflow: 'auto',
     position: 'relative',
-    padding: `${Space.S40}px ${rightPaddingDesktop}% ${Space.S40}px ${Space.S150}px`,
+    padding: `${Space.S40}px ${rightPaddingDesktop}% ${Space.S150}px ${Space.S150}px`,
   }),
   pageContent: css({
     display: 'flex',
