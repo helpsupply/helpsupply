@@ -109,6 +109,64 @@
         "subtitle2": "Media inquiries:"
       }
     },
+    "privacy": {
+      "title": "Privacy policy",
+      "lastUpdated": "Last updated April 28, 2020",
+      "description": "Our privacy policy is designed to help you understand what information we collect from people submitting requests on our site, why we collect it, and how we use it, as well as how it is protected and transmitted.",
+      "generalInformation": {
+        "title": "General information",
+        "description": "We request some general information from all people submitting requests. We only share this information with the volunteer service organization that is matched with you depending on your need. No other party will have access to this information.",
+        "zipCode": {
+          "title": "ZIP code:",
+          "description": "This allows us to confirm that you live or work in an area where our partner organizations can provide service."
+        },
+        "workFacility": {
+          "title": "Work facility:",
+          "description": "This allows us to identify the healthcare facilities where people know about our service and are using it, so we can focus our communication efforts on facilities where workers might not yet know about Help Supply."
+        },
+        "emailAddress": {
+          "title": "Email address:",
+          "description": "Email validation allows us to verify your identity when you return to the site to submit a new request or edit or delete a previous request. This saves you the time of having to re-enter all of your contact information with each visit."
+        },
+        "contactInformation": {
+          "title": "Contact information:",
+          "description": "This allows someone from our partner service organization to contact you, confirm they are fulfilling your request, and arrange any needed details."
+        },
+        "anythingElse": {
+          "title": "Anything else we should know:",
+          "description": "Each service request includes a field asking for other relevant information you would like passed on to the volunteer service organization. This is just to provide more relevant and meaningful care based on your individual need."
+        }
+      },
+      "grocery": {
+        "title": "Grocery-specific information",
+        "description": "We request additional information from people submitting requests for groceries.",
+        "neighborhood": {
+          "title": "Neighborhood and cross streets:",
+          "description": "This allows our partner service organization to connect you with a volunteer who can deliver to your location."
+        },
+        "additionalContact": {
+          "title": "Additional contact details:",
+          "description": "This allows you to put us in touch with someone else in your home to coordinate delivery."
+        }
+      },
+      "childcare": {
+        "title": "Childcare-specific information",
+        "description": "We request additional information from people submitting requests for childcare.",
+        "neighborhood": {
+          "title": "Neighborhood and cross streets:",
+          "description": "This allows our partner service organization to connect you with a volunteer who can provide care to children at your location."
+        },
+        "details": {
+          "title": "Child details:",
+          "description": "This allows our partner service organization to confirm they can provide age-appropriate care for all children needing care, meet any special needs, and match them to the right childcare provider."
+        }
+      },
+      "informationSecurity": {
+        "title": "Information security",
+        "paragraph1": "All information submitted to our site is encrypted and transmitted to our servers and partners over the industry-standard HTTPS protocol. The information we collect is stored securely and privately in Google Cloud, where it is only accessible by you and Help Supply when we are forwarding requests to partners.",
+        "paragraph2": "Once transmitted to our partners, we are no longer in control of your information and refer you to their own privacy policies for more information."
+      }
+    },
     "login": {
       "alert": {
         "preLink": "Your email doesn't look like it's from a healthcare provider. Please ",

@@ -2,9 +2,14 @@
 import { jsx } from '@emotion/core';
 
 import Page from 'components/layouts/Page';
+import PrivacyPolicy from 'components/PrivacyPolicy';
 
-function Privacy({ backend }) {
-  return <Page>Privacy policy.</Page>;
+function Privacy() {
+  return (
+    <Page hasBackButton={false}>
+      <PrivacyPolicy />
+    </Page>
+  );
 }
 
 export default Privacy;
