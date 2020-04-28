@@ -9,6 +9,9 @@
       "error": {
         "title": "Internal Server Error"
       },
+      "privacy": {
+        "link": "Privacy policy"
+      },
       "form": {
         "editLabel": "Edit",
         "submitLabel": "Submit",

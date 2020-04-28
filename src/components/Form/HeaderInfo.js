@@ -9,7 +9,7 @@ import styles from './Form.styles.js';
 function InfoHeader({
   as = 'h3',
   description,
-  textType = TEXT_TYPE.HEADER_3,
+  textType = TEXT_TYPE.CONTENT_HEADER,
   title,
 }) {
   return (

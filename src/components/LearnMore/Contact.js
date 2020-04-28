@@ -14,7 +14,7 @@ import { styles } from './LearnMore.styles';
 export const Contact = () => {
   const { t } = useTranslation();
   return (
-    <div css={styles.contact}>
+    <div css={[styles.container, styles.contact]}>
       <Text css={styles.contactTitle} as="h2" type={TEXT_TYPE.HEADER_4}>
         {t('learnMore.contact.title')}
       </Text>
