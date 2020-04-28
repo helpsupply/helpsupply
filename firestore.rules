@@ -90,5 +90,9 @@ service cloud.firestore {
       }
       allow read, write: if isAdmin();
     }
+    match /emaillist/{reqid} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
   }
 }
