@@ -46,7 +46,7 @@ export const UserDashboard = ({
         <Text
           css={[styles.name, styles.section]}
           as="h2"
-          type={TEXT_TYPE.HEADER_3}
+          type={TEXT_TYPE.CONTENT_HEADER}
         >
           {t('dashboard.title')}
         </Text>
