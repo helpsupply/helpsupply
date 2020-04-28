@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
@@ -26,7 +25,7 @@ export const FAQ = () => {
   )}](http://${t('learnMore.about.partners.partner1.url')})`;
 
   return (
-    <Fragment>
+    <div css={styles.container}>
       <Text css={styles.faqSubtitle} as="h3" type={TEXT_TYPE.HEADER_5}>
         {t('learnMore.faq.question1')}
       </Text>
@@ -67,7 +66,7 @@ export const FAQ = () => {
         </Anchor>
         .
       </Text>
-    </Fragment>
+    </div>
   );
 };
 
