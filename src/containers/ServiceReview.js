@@ -132,7 +132,7 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
 
   return (
     <Fragment>
-      <Text as="h2" type={TEXT_TYPE.HEADER_3} css={styles.title}>
+      <Text as="h2" type={TEXT_TYPE.CONTENT_HEADER} css={styles.title}>
         {t('request.review.title')}
       </Text>
       {service.kind === RequestKinds.GROCERY && (

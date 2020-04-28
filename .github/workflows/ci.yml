@@ -33,6 +33,7 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: build
+          path: build
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
