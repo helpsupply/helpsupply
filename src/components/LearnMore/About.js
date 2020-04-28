@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 
@@ -8,14 +7,14 @@ import { Emails } from 'constants/Emails';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Anchor, { anchorTypes } from 'components/Anchor';
-import Partners from './Partners';
 
+import Partners from './Partners';
 import { styles } from './LearnMore.styles';
 
 export const About = () => {
   const { t } = useTranslation();
   return (
-    <Fragment>
+    <div css={styles.container}>
       <Text as="h3" css={styles.faqSubtitle} type={TEXT_TYPE.HEADER_5}>
         {t('learnMore.about.title')}
       </Text>
@@ -48,7 +47,7 @@ export const About = () => {
         </Anchor>
         .
       </Text>
-    </Fragment>
+    </div>
   );
 };
 
