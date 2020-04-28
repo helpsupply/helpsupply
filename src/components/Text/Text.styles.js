@@ -44,6 +44,13 @@ export const textStyles = {
     lineHeight: '12px',
     letterSpacing: '-0.01em',
   }),
+  [TEXT_TYPE.CONTENT_HEADER]: css({
+    fontFamily: Font,
+    fontSize: 32,
+    fontWeight: 600,
+    lineHeight: '36px',
+    letterSpacing: '-0.04em',
+  }),
   [TEXT_TYPE.BODY_1]: css({
     fontFamily: Font,
     fontSize: 16,
