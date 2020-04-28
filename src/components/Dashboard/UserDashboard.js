@@ -3,13 +3,10 @@ import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 
-import { Emails } from 'constants/Emails';
 import { formatPhoneNumber, capitalize } from 'lib/utils/strings';
 import { TEXT_TYPE } from 'components/Text/constants';
 
 import Text from 'components/Text';
-import Note from 'components/Note';
-import Anchor, { anchorTypes } from 'components/Anchor';
 import { PrimaryButton } from 'components/Button';
 import Loader from 'components/Loader';
 import SubRow from 'components/Confirmation/SubRow';
@@ -78,15 +75,6 @@ export const UserDashboard = ({
             requests={openRequests}
           />
         )}
-        <div css={styles.footer}>
-          <Note>
-            {t('dropsite.footer.content')}{' '}
-            <Anchor href={`mailto:${Emails.HELP}`} as={anchorTypes.A}>
-              {Emails.HELP}
-            </Anchor>
-            .
-          </Note>
-        </div>
       </div>
     </Fragment>
   );
