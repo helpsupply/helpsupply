@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useCallback, useState, useContext } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
@@ -58,7 +58,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
   const [addAdditionalContact, setAddAdditionalContact] = useState(false);
   const { state } = useContext(StateContext);
   const [fields, setFields] = useState({
-    neighborhood: '',
+    neighborhood: undefined,
     crossStreet: '',
   });
 
@@ -75,6 +75,20 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
   const [additionalFields, setAdditionalFields] = useState(
     initialAdditionalFields,
   );
+  const [additionalRequiredFields, setAdditionalRequiredFields] = useState(
+    null,
+  );
+
+  const [emailRequired, setEmailRequired] = useState(false);
+  useEffect(() => {
+    if (
+      additionalRequiredFields?.additionalContactContactPreference === 'email'
+    ) {
+      setEmailRequired(true);
+      return;
+    }
+    setEmailRequired(false);
+  }, [additionalRequiredFields]);
 
   const handleAdditionalFieldChange = useCallback(
     (field) => (value) => {
@@ -193,8 +207,10 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     {
       customOnChange: handleAdditionalFieldChange('additionalContactEmail'),
       defaultValue: additionalFields.additionalContactEmail,
-      isRequired: false,
-      label: t('service.additionalContact.labels.email'),
+      isRequired: emailRequired,
+      label: emailRequired
+        ? t('service.additionalContact.labels.emailRequired')
+        : t('service.additionalContact.labels.email'),
       name: 'additionalContactEmail',
       type: formFieldTypes.INPUT_EMAIL,
       validation: { validate: validateEmail },
@@ -224,12 +240,21 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     },
   ];
 
-  const {
-    additionalContactLastName,
-    additionalContactRelationship,
-    additionalContactEmail,
-    ...additionalRequiredFields
-  } = additionalFields;
+  // console.log(additionalFields.additionalContactContactPreference);
+  useEffect(() => {
+    let {
+      additionalContactLastName,
+      additionalContactRelationship,
+      additionalContactEmail,
+      ...localRequiredFields
+    } = additionalFields;
+
+    if (additionalFields.additionalContactContactPreference === 'email') {
+      localRequiredFields.additionalContactEmail = additionalContactEmail;
+    }
+
+    setAdditionalRequiredFields(localRequiredFields);
+  }, [additionalFields]);
 
   if (addAdditionalContact) {
     return (
