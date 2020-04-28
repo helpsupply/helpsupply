@@ -6,7 +6,8 @@ const styles = {
     background: Color.WHITE,
     borderRadius: Radius.ROUNDED,
     display: 'block',
-    padding: Space.S30,
+    maxWidth: '295px',
+    padding: Space.S20,
     textDecoration: 'none',
     width: '100%',
 

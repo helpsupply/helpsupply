@@ -11,17 +11,28 @@ import ListLink from 'components/ListLink';
 
 import styles from './EntryContent.styles';
 
-const Intro = () => {
+export const OpenRequests = () => {
+  const { t } = useTranslation();
+  return (
+    <Anchor withIcon css={styles.link} href={Routes.LOGIN}>
+      <Text type={TEXT_TYPE.BODY_2}>{t('home.openRequests')}</Text>
+    </Anchor>
+  );
+};
+
+const Intro = ({ headerMargin, openRequests = true }) => {
   const { t } = useTranslation();
   return (
     <div css={styles.intro}>
-      <Text css={styles.introContent} as="h2" type={TEXT_TYPE.HEADER_4}>
+      <Text
+        css={[styles.introContent, headerMargin]}
+        as="h2"
+        type={TEXT_TYPE.HEADER_4}
+      >
         {t('home.intro')}
       </Text>
       <ListLink href={Routes.SERVICE_LOCATION} label={t('home.needHelp')} />
-      <Anchor withIcon css={styles.link} href={Routes.LOGIN}>
-        <Text type={TEXT_TYPE.BODY_2}>{t('home.openRequests')}</Text>
-      </Anchor>
+      {openRequests && <OpenRequests />}
     </div>
   );
 };

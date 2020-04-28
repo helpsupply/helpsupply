@@ -10,13 +10,19 @@ import { TEXT_TYPE } from 'components/Text/constants';
 
 import styles from './EntryContent.styles';
 
-const HowItWorks = () => {
+export const HowTitle = ({ ...rest }) => {
   const { t } = useTranslation();
   return (
-    <Fragment>
-      <Text css={styles.introContent} as="h3" type={TEXT_TYPE.HEADER_4}>
-        {t('home.howItWorks.title')}
-      </Text>
+    <Text css={styles.introContent} as="h3" type={TEXT_TYPE.HEADER_4} {...rest}>
+      {t('home.howItWorks.title')}
+    </Text>
+  );
+};
+
+export const HowList = ({ howFaq = true, ...rest }) => {
+  const { t } = useTranslation();
+  return (
+    <div {...rest}>
       <div css={styles.listItem}>
         <div css={styles.number}>
           <Text type={TEXT_TYPE.BODY_2}>1</Text>
@@ -41,9 +47,25 @@ const HowItWorks = () => {
           <Text type={TEXT_TYPE.BODY_2}>{t('home.howItWorks.bullet3')}</Text>
         </div>
       </div>
-      <Anchor withIcon css={styles.link} href={Routes.FAQ}>
-        <Text type={TEXT_TYPE.BODY_2}>{t('home.howItWorks.learnMore')}</Text>
-      </Anchor>
+      {howFaq && <HowFaq />}
+    </div>
+  );
+};
+
+export const HowFaq = () => {
+  const { t } = useTranslation();
+  return (
+    <Anchor withIcon css={styles.link} href={Routes.FAQ}>
+      <Text type={TEXT_TYPE.BODY_2}>{t('home.howItWorks.learnMore')}</Text>
+    </Anchor>
+  );
+};
+
+const HowItWorks = () => {
+  return (
+    <Fragment>
+      <HowTitle />
+      <HowList />
     </Fragment>
   );
 };
