@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
-import { Color } from 'lib/theme';
+import { Color, Space } from 'lib/theme';
 
 import Anchor, { anchorTypes } from 'components/Anchor';
 import Text from 'components/Text';
@@ -16,6 +16,8 @@ import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import { StateContext } from 'state/StateProvider';
+
+const nodeContainerStyles = { color: Color.GRAY_75, marginBottom: Space.S30 };
 
 function ChildcareFormDetails({ id, onSave, request }) {
   const history = useHistory();
@@ -126,7 +128,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
         <Text
           as="div"
           type={TEXT_TYPE.NOTE}
-          css={{ color: Color.GRAY_75 }}
+          css={nodeContainerStyles}
           key="childcare-options-note-1"
         >
           <ReactMarkdown
