@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
 
 export const styles = {
