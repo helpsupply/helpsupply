@@ -11,7 +11,7 @@ function ConfirmationWrapper({ children, title, noIcon }) {
   return (
     <div css={styles.root}>
       <div css={styles.header}>
-        <Text as="h3" type={TEXT_TYPE.HEADER_3} css={styles.title}>
+        <Text as="h3" type={TEXT_TYPE.CONTENT_HEADER} css={styles.title}>
           {title}
           {!noIcon && <Check css={styles.check} />}
         </Text>
