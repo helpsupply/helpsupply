@@ -10,6 +10,7 @@ import { isValidZipCode } from 'lib/utils/validations';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import FormPrivacyNode from 'components/FormPrivacyNode';
 
 const validate = (val) => {
   if (val === '') {
@@ -68,6 +69,10 @@ function ServiceLocationForm({ backend, serviceUser }) {
       type: formFieldTypes.INPUT_ZIP,
       value: fields.zipCode,
       validation: { validate },
+    },
+    {
+      type: formFieldTypes.NODE,
+      node: <FormPrivacyNode key="privacy-policy" />,
     },
   ];
 

@@ -8,9 +8,9 @@ import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidEmail } from 'lib/utils/validations';
 
-import Note from 'components/Note';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
+import FormPrivacyNode from 'components/FormPrivacyNode';
 
 function LoginForm({ backend }) {
   const history = useHistory();
@@ -56,6 +56,10 @@ function LoginForm({ backend }) {
       type: formFieldTypes.INPUT_EMAIL,
       validation: { validate },
     },
+    {
+      type: formFieldTypes.NODE,
+      node: <FormPrivacyNode key="privacy-policy" />,
+    },
   ];
 
   return (
@@ -68,9 +72,7 @@ function LoginForm({ backend }) {
       isLoading={isLoading}
       fields={fieldData}
       buttonLabel={t('global.form.submitLabel')}
-    >
-      <Note>{t('request.workEmailForm.workEmail.disclaimer')}</Note>
-    </FormBuilder>
+    />
   );
 }
 

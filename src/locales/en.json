@@ -10,7 +10,8 @@
         "title": "Internal Server Error"
       },
       "privacy": {
-        "link": "Privacy policy"
+        "link": "Privacy policy",
+        "formNode": "We only share this information with the volunteer service organization that is matched with you depending on your need. [Privacy policy]({{url}})"
       },
       "form": {
         "editLabel": "Edit",
@@ -63,7 +64,7 @@
         "question1": "Who can request help?",
         "answer1": "Our focus is on helping anyone working for a NYC medical facility or EMS treating people suffering from COVID-19. Support staff, nurses, and doctors are all encouraged to make requests.",
         "question2": "How can I be sure that my request and information stay private?",
-        "answer2": "We share your data securely on a per-request basis with only the service organization that will fulfill your request.",
+        "answer2": "We share your data securely on a per-request basis with only the service organization that will fulfill your request. [Privacy policy]({{url}})",
         "question3": "Does Help Supply provide the volunteer services?",
         "answer3": "No. We gather requests and then route them to the most appropriate of our partner organizations to provide volunteers to fulfill them. Our current partners include {{mutualAid}}, {{workersNeedChildcare}}, and {{nycCovidCare}}.",
         "question4": "How long will I have to wait for help?",

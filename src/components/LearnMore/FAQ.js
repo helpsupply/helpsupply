@@ -3,6 +3,7 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
+import { Routes } from 'constants/Routes';
 import { Emails } from 'constants/Emails';
 
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -35,8 +36,24 @@ export const FAQ = () => {
       <Text css={styles.faqSubtitle} as="h3" type={TEXT_TYPE.HEADER_5}>
         {t('learnMore.faq.question2')}
       </Text>
-      <Text as="p" css={styles.answer} type={TEXT_TYPE.BODY_2}>
-        {t('learnMore.faq.answer2')}
+      <Text as="div" css={styles.answer} type={TEXT_TYPE.BODY_2}>
+        <ReactMarkdown
+          renderers={{
+            root: ({ children }) => {
+              return <div>{children[0].props.children}</div>;
+            },
+            link: ({ href, children }) => {
+              return (
+                <Anchor href={href} as={anchorTypes.A} forceBlank={true}>
+                  {children}
+                </Anchor>
+              );
+            },
+          }}
+          source={t('learnMore.faq.answer2', {
+            url: Routes.PRIVACY,
+          })}
+        />
       </Text>
       <Text css={styles.faqSubtitle} as="h3" type={TEXT_TYPE.HEADER_5}>
         {t('learnMore.faq.question3')}
