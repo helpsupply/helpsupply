@@ -1,5 +1,5 @@
 import { css } from 'lib/utils/media-queries';
-import { Color, Space } from 'lib/theme';
+import { Borders, Color, Space } from 'lib/theme';
 
 const styles = {
   homePageContainer: css({
@@ -18,6 +18,7 @@ const styles = {
     flexDirection: 'column',
   }),
   homePageContentLeft: css({
+    borderRight: Borders.WHITE,
     flexBasis: '50%',
     paddingRight: '14%',
   }),
