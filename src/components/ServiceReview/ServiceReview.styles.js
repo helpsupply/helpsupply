@@ -3,6 +3,7 @@ import { Space, Color } from 'lib/theme';
 
 export const styles = {
   title: css({
+    color: Color.GRAY,
     marginBottom: `${Space.S40}px`,
   }),
   card: css({
