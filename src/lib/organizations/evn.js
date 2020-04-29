@@ -103,7 +103,7 @@ const EastVillageNeighborsMetadata = {
       payload[field] = FIELD_MAP[field](request, user);
     }
 
-    payload.sheet = 'Fresh Requests';
+    payload.sheet = 'Form Responses 1';
     await backend.postWebhook(url, payload);
   },
   // Called by the backend when MANYC pushes an update
