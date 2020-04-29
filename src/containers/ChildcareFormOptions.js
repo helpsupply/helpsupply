@@ -36,7 +36,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
     babySitters: false,
     freeOptions: false,
     paymentAbility: '',
-    householdRisk: '',
+    householdRisk: undefined,
   });
 
   const handleFieldChange = useCallback(
@@ -160,6 +160,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
     },
     {
       customOnChange: handleFieldChange('householdRisk'),
+      defaultValue: fields.householdRisk,
       label: t('service.childcare.what.labels.householdRisk'),
       options: [
         { label: 'Yes', value: 'yes' },
