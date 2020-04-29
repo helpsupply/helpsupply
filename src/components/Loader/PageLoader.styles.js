@@ -6,6 +6,7 @@ const styles = {
     position: 'fixed',
     top: '50%',
     transform: 'translate3d(-50%, -50%, 0)',
+    width: ['82px', null, '130px'],
   }),
 };
 

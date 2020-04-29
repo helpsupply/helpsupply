@@ -6,6 +6,7 @@ export const styles = {
     margin: `${Space.S30}px 0`,
   }),
   contact: css({
+    color: Color.GRAY,
     marginBottom: Space.S20,
     '> div': {
       marginBottom: Space.S5,
