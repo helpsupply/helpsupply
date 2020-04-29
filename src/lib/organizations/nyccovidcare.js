@@ -71,6 +71,8 @@ https://help.supply/r/${request.id}
 const NYCCovidCareMetadata = {
   id: 'nyccovidcare',
   Organization: 'NYC Covid Care',
+  Website: 'www.nyccovidcare.org',
+  Email: 'nyccovidcare@gmail.com',
   Kind: RequestKinds.MENTALHEALTH,
   ZipCodes: [
     '10097',

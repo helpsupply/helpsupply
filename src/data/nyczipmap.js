@@ -1,4 +1,5 @@
 exports.nyczipmap = {
+  '11111': [['0', 'OZ01', 'Oz', 'Emerald City']],
   '11436': [
     ['4', 'QN01', 'Queens', 'South Jamaica'],
     ['4', 'QN55', 'Queens', 'South Ozone Park'],

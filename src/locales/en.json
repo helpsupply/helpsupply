@@ -341,11 +341,7 @@
         "groceries": "Groceries",
         "childCare": "Child care",
         "emotionalSupport": "Emotional support",
-        "providedBy": {
-          "mutualAid": "Provided by Mutual Aid NYC",
-          "workersNeedChildcare": "Provided by Workers Need Childcare",
-          "nycCovid": "Provided by NYC COVID Care Network"
-        }
+        "providedBy": "Provided by"
       },
       "unavailable": {
         "title": "Sorry, we're not able to offer services in your area yet",

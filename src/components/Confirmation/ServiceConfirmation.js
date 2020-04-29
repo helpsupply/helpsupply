@@ -3,7 +3,7 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
-import OrganizationDetails from 'lib/organizations/details';
+import OrganizationIndex from 'lib/organizations/index';
 import RequestKinds from 'lib/organizations/kinds';
 
 import { useMediaQuery } from 'hooks/useMediaQuery';
@@ -27,19 +27,21 @@ export const ServiceConfirmation = ({ service }) => {
     matchesBreakpoint(Breakpoints.LARGE));
   const { kind } = service;
 
-  const mapServiceToOrganization = () => ({
-    [RequestKinds.GROCERY]: [OrganizationDetails.MUTUAL_AID_NYC],
-    [RequestKinds.MENTALHEALTH]: [OrganizationDetails.NYC_COVID_CARE_NETWORK],
-    [RequestKinds.CHILDCARE]: [OrganizationDetails.WORKERS_NEED_CHILDCARE],
-  });
-
   const mapServiceToName = () => ({
     [RequestKinds.GROCERY]: 'groceries',
     [RequestKinds.MENTALHEALTH]: 'emotional support',
     [RequestKinds.CHILDCARE]: 'childcare',
   });
 
-  const organization = mapServiceToOrganization()[kind][0];
+  const metadata = OrganizationIndex.Metadata[service.organization];
+  const organization = { name: metadata.Organization };
+  if (metadata.Email) {
+    organization.email = metadata.Email;
+  }
+  if (metadata.Website) {
+    organization.website = metadata.Website;
+  }
+
   const organizationName = organization.name;
   const serviceName = mapServiceToName()[kind];
 

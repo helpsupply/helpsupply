@@ -88,8 +88,13 @@ https://help.supply/r/${request.id}
 const EastVillageNeighborsMetadata = {
   id: 'evn',
   Organization: 'East Village Neighbors',
+  Website: 'https://www.facebook.com/groups/eastvillageneighbors/',
+  Email: 'EastVillageNeighbors@gmail.com',
   Kind: RequestKinds.GROCERY,
-  ZipCodes: ['10009', '10003', '10002'],
+  ZipCodes: [
+    11111,
+    /*'10009', '10003', '10002'*/
+  ],
   DeliverRequest: async (backend, request, user) => {
     let url = await backend.getWebhookForOrg('evn');
 
@@ -98,7 +103,7 @@ const EastVillageNeighborsMetadata = {
       payload[field] = FIELD_MAP[field](request, user);
     }
 
-    payload.sheet = 'Fresh Requests';
+    payload.sheet = 'Form Responses 1';
     await backend.postWebhook(url, payload);
   },
   // Called by the backend when MANYC pushes an update

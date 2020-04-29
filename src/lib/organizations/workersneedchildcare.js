@@ -144,6 +144,8 @@ https://help.supply/r/${request.id}
 const WorkersNeedChildcareMetadata = {
   id: 'workersneedchildcare',
   Organization: 'Workers Need Childcare NYC',
+  Website: 'www.workersneedchildcare.org',
+  Email: 'hello@workersneedchildcare.org',
   Kind: RequestKinds.CHILDCARE,
   ZipCodes: [
     '11697',

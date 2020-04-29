@@ -228,6 +228,7 @@ Request ID: https://help.supply/r/${request.id}
 const MANYCMetadata = {
   id: 'manyc',
   Organization: 'Mutual Aid NYC',
+  Website: 'mutualaid.nyc',
   Kind: RequestKinds.GROCERY,
   ZipCodes: [
     '11697',
@@ -469,13 +470,13 @@ const MANYCMetadata = {
     '10012',
     '10011',
     '10010',
-    //'10009', Handled by EVN
+    '10009', // Handled by EVN
     '10007',
     '10006',
     '10005',
     '10004',
-    //'10003', Handled by EVN
-    //'10002', handled by EVN
+    '10003', // Handled by EVN
+    '10002', // handled by EVN
     '10001',
     '00083',
   ],
