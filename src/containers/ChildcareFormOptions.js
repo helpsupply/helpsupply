@@ -17,7 +17,11 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import { StateContext } from 'state/StateProvider';
 
-const nodeContainerStyles = { color: Color.GRAY_75, marginBottom: Space.S30 };
+const nodeContainerStyles = {
+  color: Color.GRAY_75,
+  marginBottom: Space.S30,
+  marginTop: Space.S10,
+};
 
 function ChildcareFormDetails({ id, onSave, request }) {
   const history = useHistory();
@@ -107,7 +111,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
         <Text
           as="p"
           type={TEXT_TYPE.NOTE}
-          css={{ color: Color.GRAY_75 }}
+          css={{ ...nodeContainerStyles, marginTop: 0 }}
           key="childcare-options-note-1"
         >
           {t('service.childcare.what.labels.noteLowCost')}
@@ -171,7 +175,7 @@ function ChildcareFormDetails({ id, onSave, request }) {
         <Text
           as="p"
           type={TEXT_TYPE.NOTE}
-          css={{ color: Color.GRAY_75 }}
+          css={{ ...nodeContainerStyles, marginBottom: Space.S10 }}
           key="childcare-options-note-1"
         >
           {t('service.childcare.what.labels.noteShare')}
