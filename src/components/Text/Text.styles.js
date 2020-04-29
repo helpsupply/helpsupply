@@ -65,6 +65,13 @@ export const textStyles = {
     lineHeight: '22px',
     letterSpacing: '-0.01em',
   }),
+  [TEXT_TYPE.BODY_3]: css({
+    fontFamily: Font,
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: '20px',
+    letterSpacing: '-0.02em',
+  }),
   [TEXT_TYPE.NOTE]: css({
     fontFamily: Font,
     fontSize: 12,

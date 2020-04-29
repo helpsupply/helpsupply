@@ -8,6 +8,7 @@ export const TEXT_TYPE = {
   CONTENT_HEADER: 'CONTENT_HEADER',
   BODY_1: 'BODY_1',
   BODY_2: 'BODY_2',
+  BODY_3: 'BODY_3',
   CONTENT: 'CONTENT',
   NOTE: 'NOTE',
   BOLD: 'BOLD',
