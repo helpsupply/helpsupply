@@ -13,6 +13,9 @@ export const styles = {
     color: Color.GRAY,
   }),
   faqContent: css({
+    paddingBottom: Space.S20,
+  }),
+  contactContent: css({
     marginBottom: 0,
   }),
   faqSubtitle: css({

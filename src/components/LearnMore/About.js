@@ -18,21 +18,25 @@ export const About = () => {
       <Text as="h3" css={styles.faqSubtitle} type={TEXT_TYPE.HEADER_5}>
         {t('learnMore.about.title')}
       </Text>
-      <Text as="p" type={TEXT_TYPE.BODY_2}>
-        {t('learnMore.about.paragraph1')}
-      </Text>
-      <Text as="p" type={TEXT_TYPE.BODY_2}>
-        {t('learnMore.about.paragraph2')}
-      </Text>
+      <div css={styles.faqContent}>
+        <Text as="p" type={TEXT_TYPE.BODY_2}>
+          {t('learnMore.about.paragraph1')}
+        </Text>
+        <Text as="p" type={TEXT_TYPE.BODY_2}>
+          {t('learnMore.about.paragraph2')}
+        </Text>
+      </div>
       <Text as="h3" css={styles.faqSubtitle} type={TEXT_TYPE.HEADER_5}>
         {t('learnMore.about.who.title')}
       </Text>
-      <Text as="p" type={TEXT_TYPE.BODY_2}>
-        {t('learnMore.about.who.paragraph1')}
-      </Text>
-      <Text as="p" type={TEXT_TYPE.BODY_2}>
-        {t('learnMore.about.who.paragraph2')}
-      </Text>
+      <div css={styles.faqContent}>
+        <Text as="p" type={TEXT_TYPE.BODY_2}>
+          {t('learnMore.about.who.paragraph1')}
+        </Text>
+        <Text as="p" type={TEXT_TYPE.BODY_2}>
+          {t('learnMore.about.who.paragraph2')}
+        </Text>
+      </div>
       <Text as="h3" css={styles.faqSubtitle} type={TEXT_TYPE.HEADER_5}>
         {t('learnMore.about.partners.title')}
       </Text>
