@@ -228,6 +228,7 @@ Request ID: https://help.supply/r/${request.id}
 const MANYCMetadata = {
   id: 'manyc',
   Organization: 'Mutual Aid NYC',
+  Website: 'mutualaid.nyc',
   Kind: RequestKinds.GROCERY,
   ZipCodes: [
     '11697',

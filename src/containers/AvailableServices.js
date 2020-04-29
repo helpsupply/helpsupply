@@ -47,7 +47,7 @@ function AvailableServices({ backend }) {
 
   return (
     <Fragment>
-      <ServicesList services={services} />
+      <ServicesList services={services} backend={backend} />
       <PrimaryButton type="submit" onClick={handleSubmit}>
         <Text>{t('global.form.submitLabelNext')}</Text>
       </PrimaryButton>

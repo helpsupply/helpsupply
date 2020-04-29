@@ -88,8 +88,11 @@ https://help.supply/r/${request.id}
 const EastVillageNeighborsMetadata = {
   id: 'evn',
   Organization: 'East Village Neighbors',
+  Website: 'https://www.facebook.com/groups/eastvillageneighbors/',
+  Email: 'EastVillageNeighbors@gmail.com',
   Kind: RequestKinds.GROCERY,
   ZipCodes: [
+    11111,
     /*'10009', '10003', '10002'*/
   ],
   DeliverRequest: async (backend, request, user) => {
