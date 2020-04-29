@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from 'lib/utils/media-queries';
 import { TEXT_TYPE } from './constants';
 
 export const Font = `"Inter", Helvetica, Arial, sans-serif`;
@@ -46,10 +46,10 @@ export const textStyles = {
   }),
   [TEXT_TYPE.CONTENT_HEADER]: css({
     fontFamily: Font,
-    fontSize: 32,
+    fontSize: [26, null, 32],
     fontWeight: 600,
-    lineHeight: '36px',
-    letterSpacing: '-0.04em',
+    lineHeight: ['32px', null, '36px'],
+    letterSpacing: ['-0.02em', null, '-0.04em'],
   }),
   [TEXT_TYPE.BODY_1]: css({
     fontFamily: Font,
