@@ -17,7 +17,7 @@ const Groceries = ({ organization }) => {
       <Text as="h3" type={TEXT_TYPE.HEADER_4}>
         {t('service.available.groceries')}
       </Text>
-      <Text as="p">
+      <Text as="p" css={styles.serviceOrganization}>
         {t('service.available.providedBy')} {organization}
       </Text>
     </div>
@@ -31,7 +31,7 @@ const Childcare = ({ organization }) => {
       <Text as="h3" type={TEXT_TYPE.HEADER_4}>
         {t('service.available.childCare')}
       </Text>
-      <Text as="p">
+      <Text as="p" css={styles.serviceOrganization}>
         {t('service.available.providedBy')} {organization}
       </Text>
     </div>
@@ -45,7 +45,7 @@ const EmotionalSupport = ({ organization }) => {
       <Text as="h3" type={TEXT_TYPE.HEADER_4}>
         {t('service.available.emotionalSupport')}
       </Text>
-      <Text as="p">
+      <Text as="p" css={styles.serviceOrganization}>
         {t('service.available.providedBy')} {organization}
       </Text>
     </div>
