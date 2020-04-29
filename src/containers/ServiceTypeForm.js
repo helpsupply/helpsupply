@@ -50,8 +50,8 @@ function ServiceTypeForm({
   const [showContent, setShowContent] = useState(false);
   const [noteContent, setNoteContent] = useState();
   const [fields, setFields] = useState({
-    kind: '',
-    urgency: '',
+    kind: undefined,
+    urgency: undefined,
     organization: '',
     zip: '',
   });
@@ -223,6 +223,7 @@ function ServiceTypeForm({
   const fieldData = [
     {
       customOnChange: handleFieldChange('kind'),
+      defaultValue: fields.kind,
       label: t('service.selectType.form.serviceTypeLabel'),
       options: serviceOptions,
       name: 'kind',
@@ -231,6 +232,7 @@ function ServiceTypeForm({
     },
     {
       customOnChange: handleFieldChange('urgency'),
+      defaultValue: fields.urgency,
       label: t('service.selectType.form.urgencyLabel'),
       options: buildUrgencyOptions(),
       name: 'urgency',

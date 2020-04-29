@@ -22,7 +22,7 @@ export const Routes = {
   // MVP Routes
   HOME: '/',
   FAQ: '/learn-more',
-  PRIVACY: '/privacy',
+  PRIVACY: '/privacy-policy',
   SERVICE_LOCATION: '/service-location',
   SERVICE_LOCATION_UPDATE: '/service-location/update',
   SERVICE_LOCATION_AVAILABLE: '/service-location/available/:zip?',
