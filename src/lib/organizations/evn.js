@@ -89,7 +89,9 @@ const EastVillageNeighborsMetadata = {
   id: 'evn',
   Organization: 'East Village Neighbors',
   Kind: RequestKinds.GROCERY,
-  ZipCodes: ['10009', '10003', '10002'],
+  ZipCodes: [
+    /*'10009', '10003', '10002'*/
+  ],
   DeliverRequest: async (backend, request, user) => {
     let url = await backend.getWebhookForOrg('evn');
 
