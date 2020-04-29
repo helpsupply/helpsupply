@@ -35,8 +35,12 @@ export const ServiceConfirmation = ({ service }) => {
 
   const metadata = OrganizationIndex.Metadata[service.organization];
   const organization = { name: metadata.Organization };
-  if (metadata.Email) organization.email = metadata.Email;
-  if (metadata.Website) organization.website = metadata.Website;
+  if (metadata.Email) {
+    organization.email = metadata.Email;
+  }
+  if (metadata.Website) {
+    organization.website = metadata.Website;
+  }
 
   const organizationName = organization.name;
   const serviceName = mapServiceToName()[kind];
