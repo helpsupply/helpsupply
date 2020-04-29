@@ -76,8 +76,10 @@ export const GroceryRequest = ({ request }) => {
         {capitalize(request.dietaryRestrictions)}
       </Text>
       <Note css={styles.date}>
-        {t('global.form.addedLabel')}{' '}
-        {moment(request.timeCreated).format('MMM DD, h:mma')}
+        {request.timeCreated &&
+          t('global.form.addedLabel') +
+            ' ' +
+            moment(request.timeCreated).format('MMM DD, h:mma')}
       </Note>
     </div>
   );
