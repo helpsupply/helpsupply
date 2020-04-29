@@ -89,7 +89,7 @@ const dayPickerStyles = {
   '.DayPickerInput input': {
     appearance: 'none',
     background: 'transparent',
-    border: Borders.GRAY2,
+    border: Borders.GRAY,
     borderRadius: Radius.ROUNDED,
     cursor: 'pointer',
     color: Color.GRAY,
