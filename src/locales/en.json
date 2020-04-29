@@ -277,7 +277,8 @@
         "sent": {
           "title": "Thank you",
           "description": "We just sent an email to {{email}}. Please follow the link in that email to start a new request.",
-          "emailDefault": "the email address you provided"
+          "emailDefault": "the email address you provided",
+          "note": "If you don’t receive this email, please check your spam/junk folder or submit your email again."
         },
         "finish": {
           "title": "Please enter your email, once more"

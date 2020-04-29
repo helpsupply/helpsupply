@@ -15,6 +15,7 @@ export const styles = {
   organization: css({
     background: Color.GRAY_10,
     borderRadius: Radius.ROUNDED,
+    overflowWrap: 'break-word',
     padding: Space.S25,
     marginBottom: Space.S40,
   }),
