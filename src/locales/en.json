@@ -419,7 +419,7 @@
           "labels": {
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
-            "crossStreet": "Cross Street",
+            "crossStreet": "Cross Streets",
             "remove": "Remove"
           }
         },
@@ -450,7 +450,7 @@
           "labels": {
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
-            "crossStreet": "Cross Street"
+            "crossStreet": "Cross Streets"
           }
         },
         "when": {
@@ -500,7 +500,7 @@
           "labels": {
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
-            "crossStreet": "Cross Street"
+            "crossStreet": "Cross Streets"
           }
         },
         "when": {

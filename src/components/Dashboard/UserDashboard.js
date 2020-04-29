@@ -26,7 +26,7 @@ export const UserDashboard = ({
 }) => {
   const { t } = useTranslation();
   const contactDetails = contact && (
-    <div css={styles.contact}>
+    <Text as="div" type={TEXT_TYPE.BODY_3} css={styles.contact}>
       <div>
         {contact.firstName} {contact.lastName}
       </div>
@@ -37,7 +37,7 @@ export const UserDashboard = ({
       <div>
         {capitalize(contact.languagePreference)} {t('dashboard.preferred')}
       </div>
-    </div>
+    </Text>
   );
 
   return (
