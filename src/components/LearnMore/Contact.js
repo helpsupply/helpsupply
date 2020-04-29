@@ -18,7 +18,7 @@ export const Contact = () => {
       <Text css={styles.contactTitle} as="h2" type={TEXT_TYPE.HEADER_4}>
         {t('learnMore.contact.title')}
       </Text>
-      <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
+      <Text as="p" css={styles.contactContent} type={TEXT_TYPE.BODY_2}>
         {t('learnMore.contact.subtitle1')}
       </Text>
       <Text as="p" type={TEXT_TYPE.BODY_2}>
@@ -26,7 +26,7 @@ export const Contact = () => {
           {Emails.HELP}
         </Anchor>
       </Text>
-      <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
+      <Text as="p" css={styles.contactContent} type={TEXT_TYPE.BODY_2}>
         {t('learnMore.contact.subtitle2')}
       </Text>
       <Text as="p" type={TEXT_TYPE.BODY_2}>
@@ -34,7 +34,7 @@ export const Contact = () => {
           {Emails.PRESS}
         </Anchor>
       </Text>
-      <Text as="p" css={styles.faqContent} type={TEXT_TYPE.BODY_2}>
+      <Text as="p" css={styles.contactContent} type={TEXT_TYPE.BODY_2}>
         {t('learnMore.contact.mediaResources')}
       </Text>
       <Text as="p" type={TEXT_TYPE.BODY_2}>
