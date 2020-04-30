@@ -8,6 +8,7 @@ export const Color = {
   GRAY_25: '#D1D1D1', // 25% opacity
   GRAY_30: '#C8C8C8', // 30% opacity
   GRAY_50: '#9F9F9F', // 50% opacity
+  GRAY_60: '#939393', // 60% opacity
   GRAY_75: '#737373', // 75% opacity
   GRAY_LIGHT: '#DBDBDB',
   GRAY_MEDIUM: '#C4C4C4',
