@@ -4,16 +4,17 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
+import { StateContext, actions } from 'state/StateProvider';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { formatServiceDate } from 'lib/utils/datetime';
 import { LANGUAGES } from 'lib/constants/languages';
 
 import Text from 'components/Text';
-import Card from 'components/Card';
+import SubRow from 'components/Confirmation/SubRow';
+import { TEXT_TYPE } from 'components/Text/constants';
 
 import { styles } from './ServiceReview.styles';
-import { StateContext, actions } from 'state/StateProvider';
 
 const getPretty = (constant, slug) => {
   const target = constant.filter((lang) => {
@@ -180,22 +181,26 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
 
   const timeDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {formattedDate}
       </Text>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {time}
       </Text>
-      {recurring && <Text as="p">{t('request.review.recurring')}</Text>}
+      {recurring && (
+        <Text type={TEXT_TYPE.BODY_3} as="p">
+          {t('request.review.recurring')}
+        </Text>
+      )}
     </Fragment>
   );
 
   const listDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {groceryList}
       </Text>
-      <Text as="p">
+      <Text type={TEXT_TYPE.BODY_3} as="p">
         {t('request.review.grocery.diet')}: {dietaryRestrictions}
       </Text>
     </Fragment>
@@ -203,7 +208,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
 
   const additionalDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {additionalInfo || 'None'}
       </Text>
     </Fragment>
@@ -212,7 +217,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
   return (
     <Fragment>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.serviceType')}
           details={serviceDetails}
           editLabel={t('global.form.changeLabel')}
@@ -220,7 +225,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.grocery.location')}
           details={locationDetails}
           editLabel={t('global.form.changeLabel')}
@@ -228,7 +233,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.grocery.contact')}
           details={contactDetails}
           editLabel={t('global.form.changeLabel')}
@@ -236,7 +241,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.grocery.time')}
           details={timeDetails}
           editLabel={t('global.form.changeLabel')}
@@ -244,7 +249,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.grocery.list')}
           details={listDetails}
           editLabel={t('global.form.changeLabel')}
@@ -252,7 +257,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.additionalInfo')}
           details={additionalDetails}
           editLabel={t('global.form.changeLabel')}

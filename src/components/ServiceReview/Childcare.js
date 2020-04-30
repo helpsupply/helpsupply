@@ -4,15 +4,16 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
+import { StateContext, actions } from 'state/StateProvider';
 import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { capitalize } from 'lib/utils/strings';
 
 import Text from 'components/Text';
-import Card from 'components/Card';
+import { TEXT_TYPE } from 'components/Text/constants';
+import SubRow from 'components/Confirmation/SubRow';
 
 import { styles } from './ServiceReview.styles';
-import { StateContext, actions } from 'state/StateProvider';
 
 export const ChildcareServiceReview = ({ id, service }) => {
   const history = useHistory();
@@ -83,10 +84,10 @@ export const ChildcareServiceReview = ({ id, service }) => {
 
   const serviceDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {kind}
       </Text>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {urgency}
       </Text>
     </Fragment>
@@ -138,7 +139,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
 
   const additionalDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {additionalInfo || 'None'}
       </Text>
     </Fragment>
@@ -147,7 +148,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
   return (
     <Fragment>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.serviceType')}
           details={serviceDetails}
           editLabel={t('global.form.changeLabel')}
@@ -155,7 +156,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.preferredTime')}
           details={timeDetails}
           editLabel={t('global.form.changeLabel')}
@@ -163,7 +164,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.childcare.details')}
           details={childcareDetails}
           editLabel={t('global.form.changeLabel')}
@@ -171,7 +172,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.additionalInfo')}
           details={additionalDetails}
           editLabel={t('global.form.changeLabel')}
