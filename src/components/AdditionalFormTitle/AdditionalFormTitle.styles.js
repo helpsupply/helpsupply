@@ -19,7 +19,8 @@ const styles = {
   }),
   root: css({
     borderTop: Borders.GRAY1,
-    padding: `${Space.S30}px 0`,
+    paddingTop: Space.S40,
+    paddingBottom: Space.S30,
     width: '100%',
   }),
   titleHolder: css({
