@@ -8,7 +8,8 @@ import { Routes } from 'constants/Routes';
 import { routeWithParams } from 'lib/utils/routes';
 
 import Text from 'components/Text';
-import Card from 'components/Card';
+import SubRow from 'components/Confirmation/SubRow';
+import { TEXT_TYPE } from 'components/Text/constants';
 
 import { styles } from './ServiceReview.styles';
 
@@ -28,10 +29,10 @@ export const PetcareServiceReview = ({ id, service }) => {
 
   const serviceDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {kind}
       </Text>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {urgency}
       </Text>
     </Fragment>
@@ -40,7 +41,7 @@ export const PetcareServiceReview = ({ id, service }) => {
   return (
     <Fragment>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.serviceType')}
           details={serviceDetails}
           editLabel={t('global.form.changeLabel')}

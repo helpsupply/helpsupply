@@ -7,6 +7,7 @@ export const styles = {
     marginBottom: `${Space.S40}px`,
   }),
   card: css({
+    color: Color.GRAY,
     marginBottom: `${Space.S20}px`,
   }),
   disclaimer: css({
