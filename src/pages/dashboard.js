@@ -55,7 +55,12 @@ function AdminDashboard({ backend }) {
   };
 
   return (
-    <Page currentProgress={0} totalProgress={5} hasBackButton={false}>
+    <Page
+      currentProgress={0}
+      totalProgress={5}
+      hasBackButton={false}
+      noGutter={true}
+    >
       {isLoading && <PageLoader />}
       {!isLoading && (
         <UserDashboard
