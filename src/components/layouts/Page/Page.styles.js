@@ -68,7 +68,7 @@ const styles = {
     height: '100%',
   }),
   copyright: css({
-    color: Color.WHITE_25,
+    color: Color.GRAY_60,
   }),
 };
 
