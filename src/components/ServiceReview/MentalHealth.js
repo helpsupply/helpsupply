@@ -4,17 +4,18 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
+import { StateContext, actions } from 'state/StateProvider';
 import { Routes } from 'constants/Routes';
 import { Services } from 'lib/theme/services';
 import { routeWithParams } from 'lib/utils/routes';
 import { getPretty } from 'lib/utils/strings';
 import { mentalHealthOptions } from 'lib/constants/options';
 
+import SubRow from 'components/Confirmation/SubRow';
 import Text from 'components/Text';
-import Card from 'components/Card';
+import { TEXT_TYPE } from 'components/Text/constants';
 
 import { styles } from './ServiceReview.styles';
-import { StateContext, actions } from 'state/StateProvider';
 
 export const MentalHealthServiceReview = ({ id, service }) => {
   const history = useHistory();
@@ -65,10 +66,10 @@ export const MentalHealthServiceReview = ({ id, service }) => {
 
   const serviceDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {Services.EMOTIONAL}
       </Text>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {urgency}
       </Text>
     </Fragment>
@@ -76,16 +77,20 @@ export const MentalHealthServiceReview = ({ id, service }) => {
 
   const timeDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {date} {time}
       </Text>
-      {recurring && <Text as="p">{t('request.review.recurring')}</Text>}
+      {recurring && (
+        <Text type={TEXT_TYPE.BODY_3} as="p">
+          {t('request.review.recurring')}
+        </Text>
+      )}
     </Fragment>
   );
 
   const supportDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {getPretty(mentalHealthOptions, type)}
       </Text>
     </Fragment>
@@ -93,7 +98,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
 
   const additionalDetails = (
     <Fragment>
-      <Text as="p" css={styles.capitalize}>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
         {additionalInfo || 'None'}
       </Text>
     </Fragment>
@@ -102,7 +107,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
   return (
     <Fragment>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.serviceType')}
           details={serviceDetails}
           editLabel={t('global.form.changeLabel')}
@@ -110,7 +115,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.preferredTime')}
           details={timeDetails}
           editLabel={t('global.form.changeLabel')}
@@ -118,7 +123,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.mentalHealth.supportDetails')}
           details={supportDetails}
           editLabel={t('global.form.changeLabel')}
@@ -126,7 +131,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
         />
       </div>
       <div css={styles.card}>
-        <Card
+        <SubRow
           label={t('request.review.additionalInfo')}
           details={additionalDetails}
           editLabel={t('global.form.changeLabel')}

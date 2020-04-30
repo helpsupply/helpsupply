@@ -3,6 +3,7 @@ import { Color } from 'lib/theme';
 
 export const styles = {
   root: css({
+    alignContent: 'baseline',
     display: 'flex',
     justifyContent: 'space-between',
   }),

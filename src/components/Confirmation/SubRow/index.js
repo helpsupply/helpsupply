@@ -2,10 +2,12 @@
 import { jsx } from '@emotion/core';
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
+
 import { SecondaryButton } from 'components/Button';
 import Note from 'components/Note';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
+
 import { styles } from './SubRow.styles';
 
 export const SubRow = ({ details, editLabel, onClick, label }) => (
