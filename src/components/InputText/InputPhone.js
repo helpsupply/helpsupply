@@ -5,7 +5,9 @@ import { useCallback, useState } from 'react';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Text from 'components/Text';
 import { Controller, useFormContext } from 'react-hook-form';
+
 import { required } from 'lib/utils/validations';
+import { formatPhoneNumber } from 'lib/utils/strings';
 
 import styles from './InputText.styles';
 
@@ -29,7 +31,7 @@ function InputPhone({
         customOnChange(event.target.value);
       }
       setValue(event.target.value);
-      return event.target.value;
+      return formatPhoneNumber(event.target.value);
     },
     [customOnChange],
   );
