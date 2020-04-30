@@ -16,6 +16,10 @@ const styles = {
     marginBottom: Space.S25,
     userSelect: 'none',
     width: '100%',
+
+    '&:last-of-type': {
+      marginBottom: 0,
+    },
   }),
   input: css({
     display: 'none',
