@@ -4,8 +4,8 @@ import { Borders, Color, Space } from 'lib/theme';
 const styles = {
   bottomRule: css({
     borderTop: Borders.GRAY1,
-    marginBottom: Space.S25,
-    marginTop: Space.S25,
+    marginBottom: Space.S40,
+    marginTop: Space.S40,
     width: '100%',
   }),
   description: css({
