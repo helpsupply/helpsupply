@@ -44,6 +44,7 @@ export const styles = {
     padding: Space.S20,
   }),
   text: css({
+    color: Color.GRAY_75,
     marginBottom: 0,
   }),
   capitalize: css({
