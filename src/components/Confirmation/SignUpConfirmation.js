@@ -21,6 +21,9 @@ export const SignUpConfirmation = ({ email }) => {
           })}
         />
       </Text>
+      <Text as="div" type={TEXT_TYPE.BODY_2} css={styles.description}>
+        {t('request.workEmailForm.sent.note')}
+      </Text>
     </ConfirmationWrapper>
   );
 };
