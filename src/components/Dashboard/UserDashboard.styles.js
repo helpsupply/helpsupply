@@ -3,10 +3,10 @@ import { Color, Space } from 'lib/theme';
 
 export const styles = {
   button: css({
-    margin: `${Space.S30}px 0`,
+    margin: `${Space.S30}px 0 ${Space.S60}px`,
   }),
   contact: css({
-    color: Color.GRAY,
+    color: Color.GRAY_75,
     marginBottom: Space.S20,
     '> div': {
       marginBottom: Space.S5,
@@ -42,7 +42,7 @@ export const styles = {
     ],
   }),
   contentContainer: css({
-    padding: [`0 ${Space.S40}px ${Space.S30}px`, '', `0 22% ${Space.S30}px `],
+    padding: [`0 ${Space.S40}px ${Space.S10}px`, '', `0 22% ${Space.S10}px `],
   }),
   section: css({
     marginBottom: Space.S30,
