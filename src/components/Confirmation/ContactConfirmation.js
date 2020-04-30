@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { Routes } from 'constants/Routes';
 import { LANGUAGES } from 'lib/constants/languages';
 import { CONTACT_PREFERENCES } from 'lib/constants/contact';
+import { routeWithParams } from 'lib/utils/routes';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -34,7 +35,7 @@ function ContactConfirmation({ email, onEdit, serviceUser }) {
   const { t } = useTranslation();
 
   const handleOnCtaClick = () => {
-    history.push(Routes.SERVICE_TYPE);
+    history.push(routeWithParams(Routes.SERVICE_TYPE));
   };
 
   const { data } = serviceUser;
