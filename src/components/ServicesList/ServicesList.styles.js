@@ -5,6 +5,9 @@ export const styles = {
   title: css({
     color: Color.GRAY,
   }),
+  serviceOrganization: css({
+    color: Color.GRAY_75,
+  }),
   serviceItem: css({
     borderBottom: Borders.GRAY1,
     color: Color.GRAY,

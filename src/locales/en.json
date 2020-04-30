@@ -334,8 +334,7 @@
       },
       "updateLocationForm": {
         "title": "Want to update your ZIP code?",
-        "description": "Important: We are currently only able to serve people in the NYC area.",
-        "note": "To receive updates when we expand to more locations, email us at {{email}}."
+        "description": "Important: We are currently only able to serve people in the NYC area."
       },
       "available": {
         "title": "Services we're offering in your location",
@@ -420,7 +419,7 @@
           "labels": {
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
-            "crossStreet": "Cross Street",
+            "crossStreet": "Cross Streets",
             "remove": "Remove"
           }
         },
@@ -451,7 +450,7 @@
           "labels": {
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
-            "crossStreet": "Cross Street"
+            "crossStreet": "Cross Streets"
           }
         },
         "when": {
@@ -501,7 +500,7 @@
           "labels": {
             "zip": "ZIP code",
             "neighborhood": "Neighborhood",
-            "crossStreet": "Cross Street"
+            "crossStreet": "Cross Streets"
           }
         },
         "when": {

@@ -3,15 +3,11 @@ import { useCallback, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 
 import { Routes } from 'constants/Routes';
-import { Emails } from 'constants/Emails';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidZipCode } from 'lib/utils/validations';
 
-import Text from 'components/Text';
-import { TEXT_TYPE } from 'components/Text/constants';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import { ErrorContext } from 'state/ErrorProvider';
@@ -29,8 +25,6 @@ function ServiceLocationUpdateForm({ backend, serviceUser }) {
   const history = useHistory();
   const { setError } = useContext(ErrorContext);
   const { t } = useTranslation();
-
-  const email = `[${Emails.UPDATE}](mailto:${Emails.UPDATE})`;
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
@@ -99,13 +93,7 @@ function ServiceLocationUpdateForm({ backend, serviceUser }) {
       fields={fieldData}
       isLoading={isLoading}
       buttonLabel={t('global.form.submitLabelNext')}
-    >
-      <Text as="div" type={TEXT_TYPE.NOTE}>
-        <ReactMarkdown
-          source={t('service.updateLocationForm.note', { email })}
-        />
-      </Text>
-    </FormBuilder>
+    />
   );
 }
 
