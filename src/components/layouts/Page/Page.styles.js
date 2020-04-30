@@ -49,6 +49,9 @@ const styles = {
       `0 ${paddingDesktop}% ${Space.S40}px `,
     ],
   }),
+  noGutter: css({
+    padding: [`0 0 ${Space.S40}px`, '', `0 0 ${Space.S40}px `],
+  }),
   dashboardPageContent: css({
     display: 'flex',
     flexDirection: 'column',

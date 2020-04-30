@@ -61,6 +61,7 @@ const PageContent = ({
   hasBackButton,
   isDesktop,
   isHome,
+  noGutter,
   onBackButtonClick,
   topPadding,
 }) => {
@@ -90,6 +91,7 @@ const PageContent = ({
         css={[
           !isDashboard && styles.pageContent,
           isDashboard && styles.dashboardPageContent,
+          noGutter && styles.noGutter,
         ]}
       >
         {hasBackButton && !isDesktop && (
@@ -106,6 +108,7 @@ const Page = ({
   contentContainerStyles,
   hasBackButton = true,
   isHome,
+  noGutter,
   onBackButtonClick,
   currentProgress,
   rootContainerStyles,
@@ -195,6 +198,7 @@ const Page = ({
           hasBackButton={hasBackButton}
           isDesktop={isDesktop}
           isHome={isHome}
+          noGutter={noGutter}
           onBackButtonClick={onBackButtonClick}
           topPadding={pageContentTopPadding}
         />
