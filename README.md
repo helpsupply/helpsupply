@@ -1,10 +1,6 @@
 # help.supply
 
-Amidst COVID-19 our hospitals and the people who staff them face unbelievable pressure. Equipments such as masks and gowns are in short supply and healthcare workers need people to shop for them and provide healthcare.
-
-Currently, both the needs and availability of these items and services are spread across thousands of disparate spreadsheets and Facebook Groups.
-
-This project aims to collect and map this data to hospitals and geographies. As we progress, it can faciliate the actual exchange of goods and services.
+Amidst COVID-19 our hospitals and the people who staff them face unbelievable pressure. We connect healthcare workers to volunteer-powered grocery shopping, childcare and mental health services.
 
 ## Contributing
 
