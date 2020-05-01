@@ -41,7 +41,7 @@ function ChildcareFormLocation({ id, onSave, neighborhoodOptions }) {
   const [isLoading, setIsLoading] = useState(false);
   const [addAdditionalContact, setAddAdditionalContact] = useState();
   const [fields, setFields] = useState({
-    neighborhood: '',
+    neighborhood: undefined,
     crossStreet: '',
   });
 
