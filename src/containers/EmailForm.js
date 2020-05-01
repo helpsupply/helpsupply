@@ -66,7 +66,7 @@ function EmailForm({ backend }) {
   const fieldData = [
     {
       customOnChange: setEmail,
-      label: t('request.workEmailForm.workEmail.label'),
+      label: t('workEmailForm.workEmail.label'),
       name: 'email',
       type: formFieldTypes.INPUT_EMAIL,
       validation: { validate },
@@ -77,14 +77,14 @@ function EmailForm({ backend }) {
     <FormBuilder
       defaultValues={{ email: '' }}
       onSubmit={handleSubmit}
-      title={t('request.workEmailForm.title')}
-      description={t('request.workEmailForm.description')}
+      title={t('workEmailForm.title')}
+      description={t('workEmailForm.description')}
       buttonLabel={t('global.form.submitLabel')}
       disabled={!isValidEmail(email)}
       isLoading={isLoading}
       fields={fieldData}
     >
-      <Note>{t('request.workEmailForm.workEmail.disclaimer')}</Note>
+      <Note>{t('workEmailForm.workEmail.disclaimer')}</Note>
     </FormBuilder>
   );
 }

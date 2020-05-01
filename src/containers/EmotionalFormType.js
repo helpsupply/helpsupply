@@ -19,8 +19,8 @@ function EmotionalFormDate({ id, onSave, request }) {
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useContext(StateContext);
   const [fields, setFields] = useState({
-    type: '',
-    agreement: '',
+    type: undefined,
+    agreement: false,
   });
 
   const handleFieldChange = useCallback(

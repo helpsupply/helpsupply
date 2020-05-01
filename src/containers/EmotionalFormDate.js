@@ -19,9 +19,9 @@ function EmotionalFormDate({ id, onSave, request }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
-    date: '',
-    time: '',
-    recurring: '',
+    date: undefined,
+    time: undefined,
+    recurring: false,
   });
 
   const handleFieldChange = useCallback(
