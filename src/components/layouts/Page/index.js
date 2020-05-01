@@ -23,7 +23,7 @@ import { Routes } from 'constants/Routes';
 import MetaData from './MetaData';
 import styles from './Page.styles';
 
-export const CopyRight = () => {
+export const Copyright = () => {
   const today = new Date();
   const { t } = useTranslation();
 
@@ -179,7 +179,7 @@ const Page = ({
               {isDesktop && isHome && (
                 <Fragment>
                   <Intro />
-                  <CopyRight />
+                  <Copyright />
                 </Fragment>
               )}
             </div>
@@ -190,7 +190,7 @@ const Page = ({
           children={[
             <Fragment key="children">{children}</Fragment>,
             <Fragment key="copyright">
-              {!isDesktop && isHome && <CopyRight />}
+              {!isDesktop && isHome && <Copyright />}
             </Fragment>,
           ]}
           error={errorMsg}

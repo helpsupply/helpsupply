@@ -11,7 +11,7 @@ const styles = {
   description: css({
     color: Color.GRAY_75,
     display: 'block',
-    marginTop: Space.S25,
+    marginTop: Space.S15,
   }),
   noBorder: css({
     borderTop: 'none',

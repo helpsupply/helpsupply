@@ -40,7 +40,7 @@ const styles = {
   }),
   note: css({
     marginBottom: Space.S10,
-    marginTop: Space.S5,
+    marginTop: Space.S30,
   }),
 };
 
