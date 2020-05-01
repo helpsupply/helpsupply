@@ -4,7 +4,7 @@ import { jsx } from '@emotion/core';
 import LargeHeader from 'components/Header/LargeHeader';
 import Intro, { OpenRequests } from 'components/EntryContent/Intro';
 import { HowFaq, HowList, HowTitle } from 'components/EntryContent/HowItWorks';
-import { CopyRight, ErrorMessage } from 'components/layouts/Page';
+import { Copyright, ErrorMessage } from 'components/layouts/Page';
 
 import styles from './HomePage.styles';
 
@@ -26,7 +26,7 @@ const HomePage = ({ rootContainerStyles }) => {
               <OpenRequests />
             </div>
             <div css={styles.homePageContentRow4}>
-              <CopyRight />
+              <Copyright />
             </div>
           </div>
 

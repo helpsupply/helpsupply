@@ -15,6 +15,7 @@ export const Color = {
   GRAY: '#484848',
   GREEN: '#3BD089',
   WHITE_25: 'rgba(255, 255, 255, .25)', // 25% opacity of Color.WHITE
+  WHITE_75: 'rgba(255, 255, 255, .75)', // 25% opacity of Color.WHITE
   WHITE: '#FFFFFF',
   ORANGE: '#E03600',
   ORANGE_75: '#E76136',
