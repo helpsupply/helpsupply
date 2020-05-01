@@ -79,12 +79,12 @@ export const ServiceConfirmation = ({ service }) => {
 
   return (
     <ConfirmationWrapper
-      title={t('request.serviceConfirmation.title', { serviceName })}
+      title={t('service.confirmation.title', { serviceName })}
     >
       <Text as="p" type={TEXT_TYPE.BODY_2} css={styles.description}>
         {kind !== RequestKinds.CHILDCARE
-          ? t('request.serviceConfirmation.description', { organizationName })
-          : t('request.serviceConfirmation.childcareDescription', {
+          ? t('service.confirmation.description', { organizationName })
+          : t('service.confirmation.childcareDescription', {
               organizationName,
             })}
       </Text>
@@ -93,7 +93,7 @@ export const ServiceConfirmation = ({ service }) => {
         <div css={styles.shareLink}>
           <LinkButton css={styles.link} onClick={handleShare}>
             <Text type={TEXT_TYPE.BODY_1}>
-              {t('request.serviceConfirmation.share')}
+              {t('service.confirmation.share')}
             </Text>
           </LinkButton>
         </div>
@@ -104,7 +104,7 @@ export const ServiceConfirmation = ({ service }) => {
         css={styles.secondaryButton}
       >
         <Text type={TEXT_TYPE.BODY_1}>
-          {t('request.serviceConfirmation.viewRequests')}
+          {t('service.confirmation.viewRequests')}
         </Text>
       </SecondaryButton>
       <PrimaryButton
@@ -113,7 +113,7 @@ export const ServiceConfirmation = ({ service }) => {
         css={styles.primaryButton}
       >
         <Text type={TEXT_TYPE.BODY_1}>
-          {t('request.serviceConfirmation.requestServices')}
+          {t('service.confirmation.requestServices')}
         </Text>
       </PrimaryButton>
     </ConfirmationWrapper>

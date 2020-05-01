@@ -29,7 +29,7 @@ export const Request = ({
       <div css={styles.section}>
         <Note>
           {' '}
-          {t('dropsite.openRequests.requestId')} #{id}
+          {t('dashboard.openRequests.requestId')} #{id}
         </Note>
       </div>
       <div css={styles.requestTitle}>

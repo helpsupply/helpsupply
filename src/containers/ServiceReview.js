@@ -133,7 +133,7 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
   return (
     <Fragment>
       <Text as="h2" type={TEXT_TYPE.CONTENT_HEADER} css={styles.title}>
-        {t('request.review.title')}
+        {t('review.title')}
       </Text>
       {service.kind === RequestKinds.GROCERY && (
         <GroceryServiceReview
@@ -169,7 +169,7 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
         />
       )}
       <Text css={styles.disclaimer} type={TEXT_TYPE.NOTE}>
-        {t('request.review.disclaimer')}
+        {t('review.disclaimer')}
       </Text>
       <div>
         <PrimaryButton
@@ -177,7 +177,7 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
           onClick={handleSubmit}
           css={styles.reviewButton}
         >
-          <Text>{t('request.review.submit')}</Text>
+          <Text>{t('review.submit')}</Text>
         </PrimaryButton>
       </div>
     </Fragment>

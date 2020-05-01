@@ -14,7 +14,7 @@ export const OrganizationConfirmation = ({ organization }) => {
   return (
     <div css={styles.organization}>
       <Text css={styles.organizationSubtitle} type={TEXT_TYPE.NOTE}>
-        {t('request.serviceConfirmation.fulfilledBy')}
+        {t('service.confirmation.fulfilledBy')}
       </Text>
       <Text as="p" css={styles.organizationName}>
         {organization.name}
