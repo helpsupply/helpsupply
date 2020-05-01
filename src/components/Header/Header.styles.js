@@ -29,6 +29,13 @@ const styles = {
     left: 0,
     position: 'absolute',
   }),
+
+  progressBarDesktop: css({
+    bottom: 'unset',
+    left: '50%',
+    position: 'fixed',
+    top: 0,
+  }),
 };
 
 export default styles;
