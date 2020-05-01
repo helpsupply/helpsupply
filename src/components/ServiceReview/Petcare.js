@@ -42,7 +42,7 @@ export const PetcareServiceReview = ({ id, service }) => {
     <Fragment>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.serviceType')}
+          label={t('review.serviceType')}
           details={serviceDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeService}

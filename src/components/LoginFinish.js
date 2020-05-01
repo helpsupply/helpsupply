@@ -104,14 +104,14 @@ function LoginFinish({ backend }) {
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
-      return t('request.workEmailForm.workEmail.validationLabel');
+      return t('workEmailForm.workEmail.validationLabel');
     }
   };
 
   const fieldData = [
     {
       customOnChange: setEmail,
-      label: t('request.workEmailForm.workEmail.label'),
+      label: t('workEmailForm.workEmail.label'),
       name: 'email',
       type: formFieldTypes.INPUT_TEXT,
       validation: { validate },
@@ -125,16 +125,16 @@ function LoginFinish({ backend }) {
         <FormBuilder
           defaultValues={{ email: '' }}
           onSubmit={handleSubmit}
-          title={t('request.workEmailForm.finish.title')}
-          description={t('request.workEmailForm.description')}
+          title={t('workEmailForm.finish.title')}
+          description={t('workEmailForm.description')}
           disabled={!isValidEmail(email)}
           isLoading={isLoading}
           fields={fieldData}
         >
           <Note>
-            {t('request.workEmailForm.workEmail.disclaimer') + ' '}
+            {t('workEmailForm.workEmail.disclaimer') + ' '}
             <Anchor href={Routes.HOME} as={anchorTypes.A}>
-              {t('request.workEmailForm.learnMore')}
+              {t('workEmailForm.learnMore')}
             </Anchor>
           </Note>
         </FormBuilder>

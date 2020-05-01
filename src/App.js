@@ -13,17 +13,6 @@ import { Routes } from 'constants/Routes';
 import { StateProvider } from 'state/StateProvider';
 import { useAuth } from 'hooks/useAuth';
 
-import NewSupplyRequest from 'pages/supplies_new';
-import NewSupplyRequestConfirmation from 'pages/supplies_new_confirmation';
-import AdminDropSite from 'pages/dropsite_admin';
-import ContactDropSite from 'pages/dropsite_contact';
-import ContactDropSiteConfirmation from 'pages/dropsite_contact_confirmation';
-import NewFacility from 'pages/facility_new';
-import FacilityConfirmation from 'pages/facility_confirmation';
-import FacilityEdit from 'pages/facility_edit';
-import NewDropSite from 'pages/dropsite_new';
-import Request from 'pages/request';
-
 // MVP
 import EntryPortal from 'pages/entry';
 import Facility from 'pages/facility';
@@ -31,6 +20,7 @@ import SignUp from 'pages/signup';
 import SignUpWelcome from 'pages/signup_welcome';
 import Login from 'pages/login';
 import LoginApprove from 'pages/login_approve';
+import Logout from 'components/Logout';
 import SignUpConfirmation from 'pages/signup_confirmation';
 import SignupApprove from 'pages/signup_approve';
 import Contact from 'pages/contact';
@@ -54,11 +44,6 @@ import ServiceReview from 'pages/service_review';
 import NoMatch from 'pages/404';
 // End MVP
 
-import HCPSignupFinish from 'components/HCPSignupFinish';
-import DropSite from 'components/DropSite';
-import PendingDomains from 'components/PendingDomains';
-import Logout from 'components/Logout';
-import Profile from 'components/Profile';
 import StyleGuide from 'components/StyleGuide/index';
 import Box from 'components/Box';
 import InvalidEmail from 'components/Alert/InvalidEmail';
@@ -149,6 +134,9 @@ function App({ backend }) {
                 </Route>
                 <Route path={Routes.LOGIN}>
                   <Login backend={backend} />
+                </Route>
+                <Route path={Routes.LOGOUT}>
+                  <Logout backend={backend} />
                 </Route>
                 <Route
                   backend={backend}
@@ -334,83 +322,6 @@ function App({ backend }) {
                   <NoMatch />
                 </Route>
                 {/*END MVP Routes*/}
-                <Route path={Routes.LOGOUT}>
-                  <Logout backend={backend} />
-                </Route>
-                <ProtectedRoute
-                  backend={backend}
-                  exact
-                  path={Routes.DROPSITE_CONTACT}
-                >
-                  <ContactDropSite backend={backend} />
-                </ProtectedRoute>
-                <ProtectedRoute
-                  backend={backend}
-                  exact
-                  path={Routes.DROPSITE_CONTACT_CONFIRMATION}
-                >
-                  <ContactDropSiteConfirmation backend={backend} />
-                </ProtectedRoute>
-                <ProtectedRoute
-                  backend={backend}
-                  path={Routes.DROPSITE_NEW_ADMIN}
-                >
-                  <NewDropSite backend={backend} />
-                </ProtectedRoute>
-                <ProtectedRoute
-                  exact
-                  backend={backend}
-                  path={Routes.SUPPLY_NEW_ADMIN}
-                >
-                  <NewSupplyRequest backend={backend} />
-                </ProtectedRoute>
-                <ProtectedRoute
-                  exact
-                  backend={backend}
-                  path={Routes.SUPPLY_NEW_ADMIN_CONFIRMATION}
-                >
-                  <NewSupplyRequestConfirmation backend={backend} />
-                </ProtectedRoute>
-                <Route path={Routes.SIGNUP_FINISH_DROPSITE}>
-                  <HCPSignupFinish backend={backend} />
-                </Route>
-                <ProtectedRoute backend={backend} path={Routes.DROPSITE_ADMIN}>
-                  <AdminDropSite backend={backend} />
-                </ProtectedRoute>
-                <Route path={Routes.DROPSITE_DETAIL}>
-                  <DropSite backend={backend} />
-                </Route>
-                <Route path={Routes.PROFILE}>
-                  <Profile backend={backend} />
-                </Route>
-                <Route path={Routes.PENDING_DOMAINS}>
-                  <PendingDomains backend={backend} />
-                </Route>
-                <Route exact path={Routes.HOME}>
-                  <EntryPortal backend={backend} />
-                </Route>
-                <Route path={Routes.REQUEST_SUPPLIES}>
-                  <Request backend={backend} />
-                </Route>
-                <Route exact path={Routes.SIGNUP_DROPSITE}>
-                  <SignUp backend={backend} />
-                </Route>
-                <Route exact path={Routes.SIGNUP_DROPSITE_CONFIRMATION}>
-                  <SignUpConfirmation backend={backend} />
-                </Route>
-                <Route exact path={Routes.NEW_FACILITY}>
-                  <NewFacility backend={backend} />
-                </Route>
-                <Route exact path={Routes.FACILITY_CONFIRMATION}>
-                  <FacilityConfirmation backend={backend} />
-                </Route>
-                <ProtectedRoute
-                  exact
-                  path={Routes.FACILITY_EDIT}
-                  backend={backend}
-                >
-                  <FacilityEdit backend={backend} />
-                </ProtectedRoute>
               </Switch>
             </div>
           </ErrorProvider>

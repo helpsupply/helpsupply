@@ -45,7 +45,8 @@
         "title": "Open requests",
         "crossStreet": "Cross street:",
         "dietaryRestrictions": "Dietary restrictions:",
-        "dateNeededLabel": "Needed by"
+        "dateNeededLabel": "Needed by",
+        "requestId": "Request ID"
       }
     },
     "home": {
@@ -179,73 +180,66 @@
         "message": "Verifying your credentials (should be a few minutes). You'll be able to edit/add once verified."
       }
     },
-    "request": {
-      "dropSiteForm": {
-        "title": "Set a drop-off location",
-        "description": "This is where donors can drop off supplies. It should be an easily identifiable location including a street address.",
-        "addressLabel": "Street address",
-        "detailsLabel": "Additional location details",
-        "notesLabel": "Notes (e.g. All donated items must be unused and sealed in original packaging)",
-        "willingToPayLabel": "My facility will pay for large volumes of high-quality supplies."
+    "workEmailForm": {
+      "title": "What's your work email address?",
+      "description": "This will be used to validate you when you return to the site. No password required.",
+      "learnMore": "Learn more",
+      "workEmail": {
+        "label": "Work email",
+        "disclaimer": "We will only share the information you provide with the trusted partner organization that will fulfill your request.",
+        "validationLabel": "Please enter a valid email address"
       },
-      "facilityAdded": {
-        "title": "Your facility has been added",
-        "newFacility": "New facility"
+      "sent": {
+        "title": "Thank you",
+        "description": "We just sent an email to {{email}}. Please follow the link in that email to start a new request.",
+        "emailDefault": "the email address you provided",
+        "note": "If you don’t receive this email, please check your spam/junk folder or submit your email again."
       },
-      "facilityForm": {
-        "title": "What NYC hospital or EMS do you work for?",
-        "description": "I'm a healthcare professional or support staff member working at:",
-        "nameLabel": "Name of the facility",
-        "zipLabel": "Zip code",
-        "cityLabel": "City",
-        "stateLabel": "State",
-        "urlLabel": "Website URL (optional)",
-        "emailAt": "If you’re working from a temporary facility, email us at"
+      "finish": {
+        "title": "Please enter your email, once more"
+      }
+    },
+    "facilityForm": {
+      "title": "What NYC hospital or EMS do you work for?",
+      "description": "I'm a healthcare professional or support staff member working at:",
+      "nameLabel": "Name of the facility",
+      "zipLabel": "Zip code",
+      "cityLabel": "City",
+      "stateLabel": "State",
+      "urlLabel": "Website URL (optional)",
+      "emailAt": "If you’re working from a temporary facility, email us at",
+      "label": "Hospital or EMS"
+    },
+    "loginForm": {
+      "title": "Welcome back!",
+      "description": "Simply enter your email address and we'll send you a link to access your open requests and create new ones."
+    },
+    "review": {
+      "title": "Review your request",
+      "submit": "Submit request",
+      "serviceType": "Service type",
+      "preferredTime": "Preferred time",
+      "details": "details",
+      "preferred": "preferred",
+      "recurring": "Recurring",
+      "additionalInfo": "Additional Info",
+      "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
+      "grocery": {
+        "location": "Delivery location",
+        "contact": "Delivery contact",
+        "time": "Preferred delivery time",
+        "list": "Grocery list",
+        "diet": "Dietary restrictions"
       },
-      "facilitySearch": {
-        "addNew": "Add a new facility",
-        "description": "I'm a healthcare professional working at:",
-        "notSeeing": "Not seeing your facility?",
-        "label": "Hospital or EMS",
-        "title": "Find your healthcare facility"
+      "mentalHealth": {
+        "supportDetails": "Support details"
       },
-      "review": {
-        "title": "Review your request",
-        "submit": "Submit request",
-        "serviceType": "Service type",
-        "preferredTime": "Preferred time",
-        "details": "details",
-        "preferred": "preferred",
-        "recurring": "Recurring",
-        "additionalInfo": "Additional Info",
-        "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
-        "grocery": {
-          "location": "Delivery location",
-          "contact": "Delivery contact",
-          "time": "Preferred delivery time",
-          "list": "Grocery list",
-          "diet": "Dietary restrictions"
-        },
-        "mentalHealth": {
-          "supportDetails": "Support details"
-        },
-        "childcare": {
-          "details": "Childcare details"
-        }
-      },
-      "supplyForm": {
-        "description": "You’ll be able to add more requests after submitting this first one.",
-        "kindLabel": "Select kind",
-        "quantityLabel": "Quantity",
-        "title": "What supplies do you need most?",
-        "typeLabel": "Select type",
-        "disclaimer": "Note: By submitting this request you acknowledge that Help Supply assumes no liability for any supplies delivered by donors.",
-        "requestDescription": {
-          "note": "Include any detailed requirements about the supplies you need.",
-          "label": "i.e.: All donated items must be unused and sealed in original packaging."
-        }
-      },
-      "serviceConfirmation": {
+      "childcare": {
+        "details": "Childcare details"
+      }
+    },
+    "service": {
+      "confirmation": {
         "title": "We have your request for {{serviceName}}",
         "description": "Your request has been routed to {{organizationName}}. They will contact you to fulfill your request.",
         "childcareDescription": "Your request has been routed to {{organizationName}}. They will contact you to fulfill your request and typically respond within 24 hours.",
@@ -254,78 +248,6 @@
         "fulfilledBy": "To be fulfilled by",
         "share": "Share Help Supply with a coworker"
       },
-      "supplyConfirmation": {
-        "header": "We just added your new request",
-        "message": "Your need will be communicated to the organizations working to deliver supplies to facilities like yours.",
-        "submitLabel": "Request other supplies",
-        "subText": {
-          "note": "Request ID",
-          "cta": "Change"
-        },
-        "subSection": {
-          "cta": "View all open requests"
-        }
-      },
-      "workEmailForm": {
-        "title": "What's your work email address?",
-        "description": "This will be used to validate you when you return to the site. No password required.",
-        "learnMore": "Learn more",
-        "workEmail": {
-          "label": "Work email",
-          "disclaimer": "We will only share the information you provide with the trusted partner organization that will fulfill your request.",
-          "validationLabel": "Please enter a valid email address"
-        },
-        "sent": {
-          "title": "Thank you",
-          "description": "We just sent an email to {{email}}. Please follow the link in that email to start a new request.",
-          "emailDefault": "the email address you provided",
-          "note": "If you don’t receive this email, please check your spam/junk folder or submit your email again."
-        },
-        "finish": {
-          "title": "Please enter your email, once more"
-        }
-      },
-      "loginForm": {
-        "title": "Welcome back!",
-        "description": "Simply enter your email address and we'll send you a link to access your open requests and create new ones."
-      },
-      "dropSiteContactForm": {
-        "title": "Contact info",
-        "description": "Enter the contact information for the person coordinating supplies at your facility.",
-        "nameLabel": "Name",
-        "contactLabel": "Email or phone number",
-        "sent": {
-          "title": "We added the facility contact info",
-          "buttonLabel": "Create new request",
-          "preferred": "preferred"
-        }
-      }
-    },
-    "dropsite": {
-      "requestSuppliesButton": "Request supplies",
-      "openRequests": {
-        "title": "Open requests",
-        "requestId": "Request ID"
-      },
-      "footer": {
-        "content": "If you have recommendations for improving this tool, please email us at"
-      },
-      "details": {
-        "title": "Drop-off location"
-      },
-      "contact": {
-        "title": "Contact info"
-      },
-      "deleteRequest": {
-        "modal": {
-          "title": "Are you sure you want to delete this request for",
-          "description": "Your action can’t be undone, but you can always create a new request.",
-          "cancelBtn": "No, cancel",
-          "deleteBtn": "Yes, delete"
-        }
-      }
-    },
-    "service": {
       "locationForm": {
         "title": "What is your ZIP code?",
         "description": "We are currently only able to serve people in the NYC area. Mental health support is available to users in and around the city, but other services are only available in certain boroughs and neighborhoods.",

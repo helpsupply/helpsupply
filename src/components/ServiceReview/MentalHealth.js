@@ -82,7 +82,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
       </Text>
       {recurring && (
         <Text type={TEXT_TYPE.BODY_3} as="p">
-          {t('request.review.recurring')}
+          {t('review.recurring')}
         </Text>
       )}
     </Fragment>
@@ -108,7 +108,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
     <Fragment>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.serviceType')}
+          label={t('review.serviceType')}
           details={serviceDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeService}
@@ -116,7 +116,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.preferredTime')}
+          label={t('review.preferredTime')}
           details={timeDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeTime}
@@ -124,7 +124,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.mentalHealth.supportDetails')}
+          label={t('review.mentalHealth.supportDetails')}
           details={supportDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeSupport}
@@ -132,7 +132,7 @@ export const MentalHealthServiceReview = ({ id, service }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.additionalInfo')}
+          label={t('review.additionalInfo')}
           details={additionalDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeAdditionalInfo}

@@ -20,7 +20,7 @@ export const ChildCareRequest = ({ request }) => {
     <div css={styles.root}>
       <div css={styles.section}>
         <Note>
-          {t('dropsite.openRequests.requestId')} #{request.id}
+          {t('dashboard.openRequests.requestId')} #{request.id}
         </Note>
       </div>
       <Text as="p" type={TEXT_TYPE.BODY_1} css={styles.capitalize}>

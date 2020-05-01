@@ -13,16 +13,16 @@ export const SignUpConfirmation = ({ email }) => {
   const { t } = useTranslation();
 
   return (
-    <ConfirmationWrapper noIcon title={t('request.workEmailForm.sent.title')}>
+    <ConfirmationWrapper noIcon title={t('workEmailForm.sent.title')}>
       <Text as="div" type={TEXT_TYPE.BODY_2} css={styles.description}>
         <ReactMarkdown
-          source={t('request.workEmailForm.sent.description', {
+          source={t('workEmailForm.sent.description', {
             email,
           })}
         />
       </Text>
       <Text as="div" type={TEXT_TYPE.BODY_2} css={styles.description}>
-        {t('request.workEmailForm.sent.note')}
+        {t('workEmailForm.sent.note')}
       </Text>
     </ConfirmationWrapper>
   );

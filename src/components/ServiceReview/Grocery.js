@@ -56,11 +56,11 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       phone: serviceUser.phone,
       contactPreference: `${
         serviceUser.contactPreference === 'phone' ? 'Phone' : 'Email'
-      } ${t('request.review.preferred')}`,
+      } ${t('review.preferred')}`,
       languagePreference: `${getPretty(
         LANGUAGES,
         serviceUser.languagePreference,
-      )} ${t('request.review.preferred')}`,
+      )} ${t('review.preferred')}`,
     };
 
     if (
@@ -77,11 +77,11 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
           service.additionalContactContactPreference === 'phone'
             ? 'Phone'
             : 'Email'
-        } ${t('request.review.preferred')}`,
+        } ${t('review.preferred')}`,
         languagePreference: `${getPretty(
           LANGUAGES,
           service.additionalContactLanguagePreference,
-        )} ${t('request.review.preferred')}`,
+        )} ${t('review.preferred')}`,
       };
     }
 
@@ -189,7 +189,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       </Text>
       {recurring && (
         <Text type={TEXT_TYPE.BODY_3} as="p">
-          {t('request.review.recurring')}
+          {t('review.recurring')}
         </Text>
       )}
     </Fragment>
@@ -201,7 +201,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
         {groceryList}
       </Text>
       <Text type={TEXT_TYPE.BODY_3} as="p">
-        {t('request.review.grocery.diet')}: {dietaryRestrictions}
+        {t('review.grocery.diet')}: {dietaryRestrictions}
       </Text>
     </Fragment>
   );
@@ -218,7 +218,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
     <Fragment>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.serviceType')}
+          label={t('review.serviceType')}
           details={serviceDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeService}
@@ -226,7 +226,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.grocery.location')}
+          label={t('review.grocery.location')}
           details={locationDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeLocation}
@@ -234,7 +234,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.grocery.contact')}
+          label={t('review.grocery.contact')}
           details={contactDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeLocation}
@@ -242,7 +242,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.grocery.time')}
+          label={t('review.grocery.time')}
           details={timeDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeTime}
@@ -250,7 +250,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.grocery.list')}
+          label={t('review.grocery.list')}
           details={listDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeList}
@@ -258,7 +258,7 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.additionalInfo')}
+          label={t('review.additionalInfo')}
           details={additionalDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeAdditionalInfo}
