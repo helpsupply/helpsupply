@@ -2,15 +2,16 @@
 import { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 import { formatPhoneNumber, capitalize } from 'lib/utils/strings';
-import { TEXT_TYPE } from 'components/Text/constants';
 
+import { TEXT_TYPE } from 'components/Text/constants';
 import Text from 'components/Text';
-import { PrimaryButton } from 'components/Button';
+import { PrimaryButton, SecondaryButton } from 'components/Button';
 import Loader from 'components/Loader';
 import SubRow from 'components/Confirmation/SubRow';
-
 import OpenServiceRequests from 'components/Dashboard/OpenServiceRequests';
 
 import { styles } from './UserDashboard.styles';
@@ -40,6 +41,10 @@ export const UserDashboard = ({
     </Text>
   );
 
+  const handleSignout = () => {
+    firebase.auth().signOut();
+  };
+
   return (
     <Fragment>
       <div css={styles.contentContainer}>
@@ -57,7 +62,12 @@ export const UserDashboard = ({
           details={contactDetails}
         />
         <div>
-          <PrimaryButton css={styles.button} onClick={handleRequestService}>
+          <SecondaryButton css={styles.signoutBtn} onClick={handleSignout}>
+            <Text>{t('dashboard.signout')}</Text>
+          </SecondaryButton>
+        </div>
+        <div>
+          <PrimaryButton css={styles.requestBtn} onClick={handleRequestService}>
             <Text>{t('dashboard.cta')}</Text>
           </PrimaryButton>
         </div>
