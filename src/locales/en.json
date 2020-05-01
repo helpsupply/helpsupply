@@ -300,7 +300,12 @@
         }
       },
       "contactConfirm": {
-        "title": "Thank you for providing your contact info"
+        "title": "Thank you for providing your contact info",
+        "sent": {
+          "title": "We added the facility contact info",
+          "buttonLabel": "Create new request",
+          "preferred": "preferred"
+        }
       },
       "selectType": {
         "title": "What kind of help do you need in [{{zip}}]({{url}})?",
