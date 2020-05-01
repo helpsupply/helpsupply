@@ -1,4 +1,4 @@
-# help.supply
+# [help.supply](https://help.supply)
 
 Amidst COVID-19 our hospitals and the people who staff them face unbelievable pressure. We connect healthcare workers to volunteer-powered grocery shopping, childcare and mental health services.
 
