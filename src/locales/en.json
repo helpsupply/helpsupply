@@ -36,6 +36,7 @@
     "dashboard": {
       "title": "Your requests",
       "cta": "Request more services",
+      "signout": "Sign out",
       "contact": {
         "title": "Contact info"
       },

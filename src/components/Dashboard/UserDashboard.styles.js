@@ -2,7 +2,12 @@ import { css } from 'lib/utils/media-queries';
 import { Color, Space } from 'lib/theme';
 
 export const styles = {
-  button: css({
+  signoutBtn: css({
+    marginTop: Space.S30,
+    height: 65,
+    width: '100%',
+  }),
+  requestBtn: css({
     margin: `${Space.S30}px 0 ${Space.S60}px`,
   }),
   contact: css({
