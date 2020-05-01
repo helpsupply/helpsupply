@@ -120,7 +120,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
           .filter((day) => !!day)
           .join(', ')}
       </Text>
-      {recurring && <Text as="p">{t('request.review.recurring')}</Text>}
+      {recurring && <Text as="p">{t('review.recurring')}</Text>}
     </Fragment>
   );
 
@@ -149,7 +149,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
     <Fragment>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.serviceType')}
+          label={t('review.serviceType')}
           details={serviceDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeService}
@@ -157,7 +157,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.preferredTime')}
+          label={t('review.preferredTime')}
           details={timeDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeTime}
@@ -165,7 +165,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.childcare.details')}
+          label={t('review.childcare.details')}
           details={childcareDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeDetails}
@@ -173,7 +173,7 @@ export const ChildcareServiceReview = ({ id, service }) => {
       </div>
       <div css={styles.card}>
         <SubRow
-          label={t('request.review.additionalInfo')}
+          label={t('review.additionalInfo')}
           details={additionalDetails}
           editLabel={t('global.form.changeLabel')}
           onClick={handleChangeAdditionalInfo}

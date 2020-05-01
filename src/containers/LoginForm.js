@@ -21,7 +21,7 @@ function LoginForm({ backend }) {
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
-      return t('request.workEmailForm.workEmail.validationLabel');
+      return t('workEmailForm.workEmail.validationLabel');
     }
   };
 
@@ -51,7 +51,7 @@ function LoginForm({ backend }) {
   const fieldData = [
     {
       customOnChange: setEmail,
-      label: t('request.workEmailForm.workEmail.label'),
+      label: t('workEmailForm.workEmail.label'),
       name: 'email',
       type: formFieldTypes.INPUT_EMAIL,
       validation: { validate },
@@ -66,8 +66,8 @@ function LoginForm({ backend }) {
     <FormBuilder
       defaultValues={{ email: '' }}
       onSubmit={handleSubmit}
-      title={t('request.loginForm.title')}
-      description={t('request.loginForm.description')}
+      title={t('loginForm.title')}
+      description={t('loginForm.description')}
       disabled={!isValidEmail(email)}
       isLoading={isLoading}
       fields={fieldData}

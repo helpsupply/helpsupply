@@ -15,7 +15,6 @@ import Form from 'components/Form';
 import Autosuggest from 'components/Autosuggest';
 
 import * as tools from '../functions';
-// service todo: update this list with service organizations instead of list of hospitals
 import * as hospital_index from '../data/hospital_index';
 
 const renderSuggestion = ({ hospital }, { query }) => {
@@ -100,22 +99,20 @@ function FindFacility({ backend }) {
     // Stash this for later
     backend.setLocalFacility(selectedResult);
 
-    // service todo: incorporate facility data below, and decide what validation or state management happens here
-    // const facility = hospital_index.index.id_index[selectedResult];
     history.push(routeWithParams(Routes.EMAIL_SIGNUP_FORM));
   }, [backend, history, selectedResult]);
 
   return (
     <Form
       onSubmit={handleRedirect}
-      title={t('request.facilityForm.title')}
-      description={t('request.facilityForm.description')}
+      title={t('facilityForm.title')}
+      description={t('facilityForm.description')}
       disabled={!selectedResult}
       isLoading={isLoading}
       buttonLabel={t('global.form.submitLabelNext')}
     >
       <Autosuggest
-        label={t('request.facilitySearch.label')}
+        label={t('facilityForm.label')}
         suggestions={results}
         onSearch={handleChange}
         getSuggestionValue={getHospitalName}
