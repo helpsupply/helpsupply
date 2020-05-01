@@ -10,7 +10,7 @@ import { ErrorContext } from 'state/ErrorProvider';
 
 import Anchor, { anchorTypes } from 'components/Anchor';
 import BackButton from 'components/BackButton';
-import Header from 'components/Header';
+import Header, { ProgressBar } from 'components/Header';
 import HomePage from 'components/HomePage';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -171,6 +171,11 @@ const Page = ({
               !isHome && styles.headerContainerDesktopInnerPage,
             ]}
           >
+            <ProgressBar
+              currentProgress={currentProgress}
+              isDesktop={isDesktop}
+              totalProgress={totalProgress}
+            />
             <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
               {!isHome && hasBackButton && (
                 <BackButton onClick={onBackButtonClick} />

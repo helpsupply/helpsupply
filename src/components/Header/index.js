@@ -8,16 +8,42 @@ import { ReactComponent as LogoInline } from 'static/icons/logo-inline.svg';
 
 import styles from './Header.styles';
 
-const Header = ({ currentProgress, totalProgress }) => {
-  const progressBarWidth = (currentProgress / totalProgress) * 100;
-  const progressBarWidthStyle = css({ width: `${progressBarWidth}%` });
+const getProgressBarWidth = (
+  currentProgress,
+  totalProgress,
+  isDesktop = false,
+) => {
+  return (currentProgress / totalProgress) * (isDesktop ? 50 : 100);
+};
 
+const getProgressBarWidthStyle = (progressBarWidth) => {
+  return css({ width: `${progressBarWidth}%` });
+};
+
+export const ProgressBar = ({ currentProgress, isDesktop, totalProgress }) => {
+  return (
+    <span
+      css={[
+        styles.progressBar,
+        getProgressBarWidthStyle(
+          getProgressBarWidth(currentProgress, totalProgress, isDesktop),
+        ),
+        isDesktop && styles.progressBarDesktop,
+      ]}
+    />
+  );
+};
+
+const Header = ({ currentProgress, totalProgress }) => {
   return (
     <div css={styles.root}>
       <Anchor href={Routes.HOME} css={styles.link}>
         <LogoInline />
       </Anchor>
-      <span css={[styles.progressBar, progressBarWidthStyle]} />
+      <ProgressBar
+        currentProgress={currentProgress}
+        totalProgress={totalProgress}
+      />
     </div>
   );
 };
