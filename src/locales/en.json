@@ -305,6 +305,7 @@
         "title": "What kind of help do you need in [{{zip}}]({{url}})?",
         "description": "Select the type of service and urgency of your request below.",
         "form": {
+          "needsFinances": "I will need financial help to pay for this service",
           "serviceTypeLabel": "Service type",
           "urgencyLabel": "Urgency"
         }
