@@ -32,8 +32,8 @@ function ServiceContactForm({ backend, serviceUser }) {
     firstName: serviceUser?.data?.firstName || '',
     lastName: serviceUser?.data?.lastName || '',
     phone: serviceUser?.data?.phone || '',
-    contactPreference: serviceUser?.data?.contactPreference || '',
-    languagePreference: serviceUser?.data?.languagePreference || '',
+    contactPreference: serviceUser?.data?.contactPreference || undefined,
+    languagePreference: serviceUser?.data?.languagePreference || undefined,
   });
 
   const handleFieldChange = useCallback(
