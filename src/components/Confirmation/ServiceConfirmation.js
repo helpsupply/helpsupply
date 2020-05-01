@@ -89,7 +89,7 @@ export const ServiceConfirmation = ({ service }) => {
             })}
       </Text>
       <OrganizationConfirmation organization={organization} />
-      {!isDesktop && (
+      {!isDesktop && (navigator.share || navigator.clipboard) && (
         <div css={styles.shareLink}>
           <LinkButton css={styles.link} onClick={handleShare}>
             <Text type={TEXT_TYPE.BODY_1}>
