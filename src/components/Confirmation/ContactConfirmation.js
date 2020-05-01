@@ -56,13 +56,13 @@ function ContactConfirmation({ email, onEdit, serviceUser }) {
             {getPretty(CONTACT_PREFERENCES, data.contactPreference) && (
               <Text as="p">
                 {getPretty(CONTACT_PREFERENCES, data.contactPreference)}{' '}
-                {t('request.dropSiteContactForm.sent.preferred')}
+                {t('service.contactConfirm.sent.preferred')}
               </Text>
             )}
             {getPretty(LANGUAGES, data.languagePreference) && (
               <Text as="p">
                 {getPretty(LANGUAGES, data.languagePreference)}{' '}
-                {t('request.dropSiteContactForm.sent.preferred')}
+                {t('service.contactConfirm.sent.preferred')}
               </Text>
             )}
           </Fragment>
@@ -75,7 +75,7 @@ function ContactConfirmation({ email, onEdit, serviceUser }) {
         onClick={handleOnCtaClick}
       >
         <Text type={TEXT_TYPE.BODY_1}>
-          {t('request.dropSiteContactForm.sent.buttonLabel')}
+          {t('service.contactConfirm.sent.buttonLabel')}
         </Text>
       </PrimaryButton>
     </ConfirmationWrapper>
