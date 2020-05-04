@@ -11,6 +11,7 @@ import {
 
 const dayPickerStyles = {
   '.DayPicker-wrapper': {
+    color: Color.GRAY,
     fontSize: 12,
     margin: Space.S20,
     position: 'relative',
