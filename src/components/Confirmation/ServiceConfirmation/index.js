@@ -14,8 +14,8 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { LinkButton, PrimaryButton, SecondaryButton } from 'components/Button';
 
-import ConfirmationWrapper from './ConfirmationWrapper';
-import OrganizationConfirmation from './OrganizationConfirmation';
+import ConfirmationWrapper from '../ConfirmationWrapper';
+import OrganizationConfirmation from '../OrganizationConfirmation';
 import styles from './ServiceConfirmation.styles';
 
 export const ServiceConfirmation = ({ service }) => {

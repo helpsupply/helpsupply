@@ -12,10 +12,9 @@ import { routeWithParams } from 'lib/utils/routes';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { PrimaryButton } from 'components/Button';
+import SubRow from 'components/SubRow';
 
-import SubRow from './SubRow';
-import ConfirmationWrapper from './ConfirmationWrapper';
-
+import ConfirmationWrapper from '../ConfirmationWrapper';
 import styles from './ContactConfirmation.styles';
 
 const getPretty = (constant, slug) => {

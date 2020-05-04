@@ -11,7 +11,7 @@ import { formatServiceDate } from 'lib/utils/datetime';
 import { LANGUAGES } from 'lib/constants/languages';
 
 import Text from 'components/Text';
-import SubRow from 'components/Confirmation/SubRow';
+import SubRow from 'components/SubRow';
 import { TEXT_TYPE } from 'components/Text/constants';
 
 import { styles } from './ServiceReview.styles';

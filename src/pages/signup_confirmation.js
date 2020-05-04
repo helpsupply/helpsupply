@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 
 import Page from 'components/layouts/Page';
-import { SignUpConfirmation as SignUpConfirmationComponent } from 'components/Confirmation/SignUpConfirmation';
+import { SignUpConfirmation as SignUpConfirmationComponent } from 'components/Confirmation';
 
 function SignUpConfirmation({ backend }) {
   const email = `**${backend.getEmailForSignIn()}**`;
