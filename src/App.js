@@ -6,7 +6,7 @@ import {
   Route,
   useHistory,
 } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Routes } from 'constants/Routes';
 
@@ -45,8 +45,6 @@ import NoMatch from 'pages/404';
 // End MVP
 
 import StyleGuide from 'components/StyleGuide/index';
-import Box from 'components/Box';
-import InvalidEmail from 'components/Alert/InvalidEmail';
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
 import DebugRequests from 'components/DebugRequests';
@@ -54,23 +52,9 @@ import DebugRequests from 'components/DebugRequests';
 import { styles } from './App.styles';
 import ErrorProvider from 'state/ErrorProvider';
 
-const ProtectedRoute = ({ backend, children, path }) => {
+const ProtectedRoute = ({ children, path }) => {
   const history = useHistory();
-  const [verified, setVerified] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [badDomain, setBadDomain] = useState(false);
   const { isInitializing, isLoggedIn } = useAuth();
-
-  const checkValid = useCallback(() => {
-    backend.isValidHealthcareWorker().then((verified) => {
-      setLoading(false);
-      setVerified(verified);
-
-      if (!verified) {
-        setBadDomain(backend.badDomain);
-      }
-    });
-  }, [backend]);
 
   useEffect(() => {
     if (isInitializing) {
@@ -79,27 +63,15 @@ const ProtectedRoute = ({ backend, children, path }) => {
 
     if (!isInitializing && !isLoggedIn) {
       history.push(Routes.HOME);
-      return;
     }
-
-    checkValid();
-  }, [isInitializing, isLoggedIn, checkValid, history]);
+  }, [isInitializing, isLoggedIn, history]);
 
   let content = <Route path={path}>{children}</Route>;
-  if (loading) {
+  if (isInitializing) {
     content = (
       <Page hasBackButton={false}>
         <PageLoader />
       </Page>
-    );
-  }
-
-  // service/supply TODO: check if this accounts for mismatched validation, ie email does not match facility
-  if (!verified && badDomain) {
-    content = (
-      <Box>
-        <InvalidEmail />
-      </Box>
     );
   }
 
