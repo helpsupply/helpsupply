@@ -1,9 +1,78 @@
 import { css } from '@emotion/core';
 
 export const styles = css`
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba('#000 !default', 0);
+  }
+  article,
+  aside,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  main,
+  nav,
+  section {
+    display: block;
+  }
   body {
     background: #fcfcfc;
     font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    margin: 0;
+
+    @include font-size('1rem');
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba('#000', 0);
+  }
+  svg {
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Inter', sans-serif;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  dl,
+  ol,
+  ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
   }
   .entryportal {
     background-color: white;
@@ -92,11 +161,6 @@ export const styles = css`
     font-weight: bold;
   }
 
-  h1,
-  h2,
-  h3 {
-    font-family: 'Inter', sans-serif;
-  }
   .logored {
     color: #333 !important;
   }
