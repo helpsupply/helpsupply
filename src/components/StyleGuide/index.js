@@ -6,6 +6,8 @@ import { useForm, FormContext } from 'react-hook-form';
 
 import { Routes } from 'lib/constants/routes';
 
+import { Space } from 'lib/theme';
+
 import Anchor from '../Anchor';
 import { PrimaryButton, SecondaryButton } from '../Button';
 import InputDate from '../InputDate';
@@ -93,39 +95,69 @@ function StyleGuide() {
         </div>
       </div>
 
-      <hr />
-
-      <div css={{ '> div': { marginBottom: 15 } }}>
-        <div>
-          <InputText label="Label" name="example" />
-        </div>
-
-        <div>
-          <InputDropdown
-            name="example"
-            label="Select supply type"
-            options={[
-              { label: 'Foo', value: 'foo' },
-              { label: 'Bar', value: 'bar' },
-            ]}
-          />
-        </div>
-
-        <div>
+      <div>
+        <div css={{ padding: `${Space.S40}px 0` }}>
           <hr />
+          <Text as="h3" type={TEXT_TYPE.HEADER_3}>
+            InputText
+          </Text>
+          <FormContext {...methods}>
+            <form onSubmit={methods.handleSubmit(handleSubmit)}>
+              <InputText label="Label" name="example" />
+              <SecondaryButton type="submit">
+                <Text>Test Submit</Text>
+              </SecondaryButton>
+            </form>
+          </FormContext>
+          <hr />
+        </div>
+
+        <div css={{ padding: `${Space.S40}px 0` }}>
+          <hr />
+          <Text as="h3" type={TEXT_TYPE.HEADER_3}>
+            Input Dropdown
+          </Text>
+          <FormContext {...methods}>
+            <form onSubmit={methods.handleSubmit(handleSubmit)}>
+              <InputDropdown
+                name="example"
+                label="Select supply type"
+                options={[
+                  { label: 'Foo', value: 'foo' },
+                  { label: 'Bar', value: 'bar' },
+                ]}
+              />
+              <SecondaryButton type="submit">
+                <Text>Test Submit</Text>
+              </SecondaryButton>
+            </form>
+          </FormContext>
+          <hr />
+        </div>
+
+        <div css={{ padding: `${Space.S40}px 0` }}>
+          <hr />
+          <Text as="h3" type={TEXT_TYPE.HEADER_3}>
+            Input Date
+          </Text>
           <FormContext {...methods}>
             <form onSubmit={methods.handleSubmit(handleSubmit)}>
               <InputDate
                 name="example date"
                 label={t('global.form.daypicker.placeholder')}
               />
-              <button type="submit">test submit</button>
+              <PrimaryButton type="submit">
+                <Text>Test Submit</Text>
+              </PrimaryButton>
             </form>
           </FormContext>
           <hr />
         </div>
 
         <div>
+          <Text as="h3" type={TEXT_TYPE.HEADER_3}>
+            Text Area
+          </Text>
           <TextArea label="i.e.: All donated items must be unused and sealed in original packaging." />
         </div>
       </div>
