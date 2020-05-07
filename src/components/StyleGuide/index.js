@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm, FormContext } from 'react-hook-form';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 
 import Anchor from '../Anchor';
 import { PrimaryButton, SecondaryButton } from '../Button';

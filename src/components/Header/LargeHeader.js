@@ -4,7 +4,7 @@ import { jsx } from '@emotion/core';
 import Anchor from 'components/Anchor';
 
 import { Color } from 'lib/theme';
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { ReactComponent as Logo } from 'static/icons/logo.svg';
 
 import styles from './LargeHeader.styles';

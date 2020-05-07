@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 
 import Page from 'components/layouts/Page';

@@ -2,8 +2,8 @@
 import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 
-import { Emails } from 'constants/Emails';
-import { Links } from 'constants/Links';
+import { Emails } from 'lib/constants/emails';
+import { Links } from 'lib/constants/links';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';

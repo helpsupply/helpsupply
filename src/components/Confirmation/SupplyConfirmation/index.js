@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 
 import Text from 'components/Text';

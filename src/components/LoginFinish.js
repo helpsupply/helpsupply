@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidEmail } from 'lib/utils/validations';
 

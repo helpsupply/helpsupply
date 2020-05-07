@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { StateContext } from 'state/StateProvider';
 import { routeWithParams } from 'lib/utils/routes';
 import { Space } from 'lib/theme';

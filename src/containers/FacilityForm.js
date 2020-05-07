@@ -6,7 +6,7 @@ import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 
 import Text from 'components/Text';

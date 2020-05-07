@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { LANGUAGES } from 'lib/constants/languages';
 import { CONTACT_PREFERENCES } from 'lib/constants/contact';
 import { routeWithParams } from 'lib/utils/routes';

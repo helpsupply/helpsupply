@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { useTranslation } from 'react-i18next';
 
 import { Color } from 'lib/theme';
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 
 import Anchor, { anchorTypes } from 'components/Anchor';
 import Text from 'components/Text';

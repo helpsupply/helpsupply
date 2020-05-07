@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
-import { Breakpoints } from 'constants/Breakpoints';
+import { Breakpoints } from 'lib/constants/breakpoints';
 import { useMediaQuery } from 'hooks/useMediaQuery';
 
 import HowItWorks from './HowItWorks';

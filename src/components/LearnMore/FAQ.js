@@ -3,8 +3,8 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
-import { Routes } from 'constants/Routes';
-import { Emails } from 'constants/Emails';
+import { Routes } from 'lib/constants/routes';
+import { Emails } from 'lib/constants/emails';
 
 import { TEXT_TYPE } from 'components/Text/constants';
 import Text from 'components/Text';

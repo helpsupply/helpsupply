@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { mentalHealthOptions } from 'lib/constants/options';
 import { routeWithParams } from 'lib/utils/routes';
 import { formatDate } from 'lib/utils/datetime';
