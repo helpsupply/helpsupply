@@ -8,7 +8,7 @@ import { routeWithParams } from 'lib/utils/routes';
 
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
-import { ContactConfirmation } from 'components/Confirmation';
+import ContactConfirmation from 'components/Confirmation/ContactConfirmation';
 
 import { useAuth } from 'hooks/useAuth';
 import { ErrorContext } from 'state/ErrorProvider';

@@ -10,11 +10,10 @@ import { routeWithParams } from 'lib/utils/routes';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { PrimaryButton } from 'components/Button';
+import SubCta from 'components/SubCta';
+import SubRow from 'components/SubRow';
 
-import SubCta from './SubCta';
-import SubRow from './SubRow';
-import ConfirmationWrapper from './ConfirmationWrapper';
-
+import ConfirmationWrapper from '../ConfirmationWrapper';
 import styles from './SupplyConfirmation.styles';
 
 function SupplyConfirmation() {

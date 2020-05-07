@@ -11,7 +11,7 @@ import { capitalize } from 'lib/utils/strings';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-import SubRow from 'components/Confirmation/SubRow';
+import SubRow from 'components/SubRow';
 
 import { styles } from './ServiceReview.styles';
 

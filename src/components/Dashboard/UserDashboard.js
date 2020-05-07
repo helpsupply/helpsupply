@@ -11,7 +11,7 @@ import { TEXT_TYPE } from 'components/Text/constants';
 import Text from 'components/Text';
 import { PrimaryButton, SecondaryButton } from 'components/Button';
 import Loader from 'components/Loader';
-import SubRow from 'components/Confirmation/SubRow';
+import SubRow from 'components/SubRow';
 import OpenServiceRequests from 'components/Dashboard/OpenServiceRequests';
 
 import { styles } from './UserDashboard.styles';

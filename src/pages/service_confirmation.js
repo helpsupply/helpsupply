@@ -3,10 +3,11 @@ import { useState, useContext, useEffect } from 'react';
 import { jsx } from '@emotion/core';
 import { useParams } from 'react-router-dom';
 
+import { ErrorContext } from 'state/ErrorProvider';
+
 import ServiceConfirmation from 'containers/ServiceConfirmation';
 import Page from 'components/layouts/Page';
 import PageLoader from 'components/Loader/PageLoader';
-import { ErrorContext } from 'state/ErrorProvider';
 
 function Confirmation({ backend }) {
   const params = useParams();

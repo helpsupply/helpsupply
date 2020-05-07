@@ -6,7 +6,7 @@ import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import Anchor, { anchorTypes } from 'components/Anchor';
 
-import styles from './ServiceConfirmation.styles';
+import styles from '../ServiceConfirmation/ServiceConfirmation.styles';
 
 export const OrganizationConfirmation = ({ organization }) => {
   const { t } = useTranslation();

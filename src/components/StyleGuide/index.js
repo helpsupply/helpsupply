@@ -1,13 +1,13 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useCallback } from 'react';
-import { Routes } from 'constants/Routes';
 import { useTranslation } from 'react-i18next';
 import { useForm, FormContext } from 'react-hook-form';
 
+import { Routes } from 'constants/Routes';
+
 import Anchor from '../Anchor';
 import { PrimaryButton, SecondaryButton } from '../Button';
-import Card from '../Card';
 import InputDate from '../InputDate';
 import InputDropdown from '../InputDropdown';
 import InputText from '../InputText/InputText';
@@ -131,13 +131,6 @@ function StyleGuide() {
       </div>
 
       <hr />
-
-      <Card
-        onClick={() => false}
-        editLabel="Edit"
-        label="Donation requirements"
-        details="Unused, in original packaging"
-      />
 
       <div
         css={{

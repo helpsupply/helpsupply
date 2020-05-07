@@ -11,7 +11,7 @@ import { routeWithParams } from 'lib/utils/routes';
 import { getPretty } from 'lib/utils/strings';
 import { mentalHealthOptions } from 'lib/constants/options';
 
-import SubRow from 'components/Confirmation/SubRow';
+import SubRow from 'components/SubRow';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 
