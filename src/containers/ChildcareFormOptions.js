@@ -5,7 +5,7 @@ import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { Color, Space } from 'lib/theme';
 

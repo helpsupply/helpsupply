@@ -3,7 +3,7 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 
 import Page from 'components/layouts/Page';
 import ConfirmationWrapper from 'components/Confirmation/ConfirmationWrapper';

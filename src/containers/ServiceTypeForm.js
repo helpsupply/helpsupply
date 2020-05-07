@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import RequestKinds from 'lib/organizations/kinds';
 import { buildUrgencyOptions } from 'lib/utils/urgency';

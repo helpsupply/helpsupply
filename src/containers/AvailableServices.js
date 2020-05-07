@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { isValidZipCode } from 'lib/utils/validations';
 
 import Text from 'components/Text';

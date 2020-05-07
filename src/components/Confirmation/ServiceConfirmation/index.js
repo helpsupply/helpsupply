@@ -3,12 +3,12 @@ import { jsx } from '@emotion/core';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
+import { Breakpoints } from 'lib/constants/breakpoints';
 import OrganizationIndex from 'lib/organizations/index';
 import RequestKinds from 'lib/organizations/kinds';
+import { Routes } from 'lib/constants/routes';
 
 import { useMediaQuery } from 'hooks/useMediaQuery';
-import { Routes } from 'constants/Routes';
-import { Breakpoints } from 'constants/Breakpoints';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';

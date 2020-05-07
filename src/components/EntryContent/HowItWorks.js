@@ -2,7 +2,8 @@
 import { jsx } from '@emotion/core';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Routes } from 'constants/Routes';
+
+import { Routes } from 'lib/constants/routes';
 
 import Text from 'components/Text';
 import Anchor from 'components/Anchor';

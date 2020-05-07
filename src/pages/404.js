@@ -1,14 +1,15 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import { Routes } from 'lib/constants/routes';
+import { Space } from 'lib/theme';
 
 import Page from 'components/layouts/Page';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-import { Space } from 'lib/theme';
 import { PrimaryButton } from 'components/Button';
-import { useHistory } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Routes } from 'constants/Routes';
 
 const PADDING_TOP = 110;
 

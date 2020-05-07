@@ -3,7 +3,7 @@ import { css, jsx } from '@emotion/core';
 
 import Anchor from 'components/Anchor';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { ReactComponent as LogoInline } from 'static/icons/logo-inline.svg';
 
 import styles from './Header.styles';

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { isValidEmail } from 'lib/utils/validations';
 import { ErrorContext } from 'state/ErrorProvider';
 

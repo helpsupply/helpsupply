@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 
 import { StateProvider } from 'state/StateProvider';
 import { useAuth } from 'hooks/useAuth';

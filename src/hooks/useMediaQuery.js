@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { BreakpointsAll } from 'constants/Breakpoints';
+import { BreakpointsAll } from 'lib/constants/breakpoints';
 
 export function useMediaQuery() {
   const mediaQueryLists = useRef(

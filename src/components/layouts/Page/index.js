@@ -4,8 +4,9 @@ import { css, jsx } from '@emotion/core';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { Breakpoints } from 'lib/constants/breakpoints';
+import { Routes } from 'lib/constants/routes';
 import { useMediaQuery } from 'hooks/useMediaQuery';
-import { Breakpoints } from 'constants/Breakpoints';
 import { ErrorContext } from 'state/ErrorProvider';
 
 import Anchor, { anchorTypes } from 'components/Anchor';
@@ -17,8 +18,6 @@ import { TEXT_TYPE } from 'components/Text/constants';
 import LargeHeader from 'components/Header/LargeHeader';
 import Intro from 'components/EntryContent/Intro';
 import Error from 'components/Error/Error';
-
-import { Routes } from 'constants/Routes';
 
 import MetaData from './MetaData';
 import styles from './Page.styles';

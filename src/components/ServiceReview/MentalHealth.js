@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { StateContext, actions } from 'state/StateProvider';
-import { Routes } from 'constants/Routes';
+import { Routes } from 'lib/constants/routes';
 import { Services } from 'lib/theme/services';
 import { routeWithParams } from 'lib/utils/routes';
 import { getPretty } from 'lib/utils/strings';

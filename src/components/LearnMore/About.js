@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 
-import { Emails } from 'constants/Emails';
+import { Emails } from 'lib/constants/emails';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
