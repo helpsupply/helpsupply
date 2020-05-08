@@ -5,6 +5,7 @@ import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'lib/constants/routes';
+import { Errors } from 'lib/constants/errors';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidZipCode } from 'lib/utils/validations';
 
@@ -17,7 +18,7 @@ const validate = (val) => {
     return;
   }
   if (!isValidZipCode(val)) {
-    return 'Please enter a valid ZIP code';
+    return Errors.ZIP;
   }
 };
 

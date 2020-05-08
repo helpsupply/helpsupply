@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { Errors } from 'lib/constants/errors';
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidEmail } from 'lib/utils/validations';
@@ -21,7 +22,7 @@ function LoginForm({ backend }) {
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
-      return t('workEmailForm.workEmail.validationLabel');
+      return Errors.EMAIL;
     }
   };
 

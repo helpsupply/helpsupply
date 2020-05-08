@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { StateContext } from 'state/StateProvider';
+
+import { Errors } from 'lib/constants/errors';
 import { isValidPhoneNumber, isValidEmail } from 'lib/utils/validations';
 import { LANGUAGES } from 'lib/constants/languages';
 import { CONTACT_PREFERENCES } from 'lib/constants/contact';
@@ -14,7 +17,6 @@ import FormBuilder from 'components/Form/FormBuilder';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
-import { StateContext } from 'state/StateProvider';
 
 const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
@@ -25,7 +27,7 @@ const validatePhone = (val) => {
     return;
   }
   if (!isValidPhoneNumber(val)) {
-    return 'Please enter a valid phone number';
+    return Errors.PHONE;
   }
 };
 
@@ -34,7 +36,7 @@ const validateEmail = (val) => {
     return;
   }
   if (!isValidEmail(val)) {
-    return 'Please enter a valid email address';
+    return Errors.EMAIL;
   }
 };
 

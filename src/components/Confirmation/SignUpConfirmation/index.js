@@ -5,8 +5,8 @@ import ReactMarkdown from 'react-markdown';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-import ConfirmationWrapper from '../ConfirmationWrapper';
 
+import ConfirmationWrapper from '../ConfirmationWrapper';
 import { styles } from './SignUpConfirmation.styles';
 
 export const SignUpConfirmation = ({ email }) => {

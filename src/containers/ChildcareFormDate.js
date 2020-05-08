@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import { useCallback, useState, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 import { css, jsx } from '@emotion/core';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'lib/constants/routes';
 import { StateContext } from 'state/StateProvider';
+import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { Space } from 'lib/theme';
 
@@ -44,9 +44,9 @@ const styles = {
   }),
 };
 
-function ChildcareFormDate({ id, onSave }) {
-  const history = useHistory();
+export const ChildcareFormDate = ({ id, onSave }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -91,7 +91,7 @@ function ChildcareFormDate({ id, onSave }) {
   };
 
   const buildDayFields = () => {
-    return dayFields.flatMap((day, index) => {
+    return dayFields.flatMap((day) => {
       return [
         {
           customOnChange: handleFieldChange(day),
@@ -165,6 +165,6 @@ function ChildcareFormDate({ id, onSave }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
 export default ChildcareFormDate;

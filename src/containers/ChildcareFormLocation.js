@@ -1,8 +1,10 @@
 /** @jsx jsx */
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
+
+import { StateContext } from 'state/StateProvider';
 
 import { Errors } from 'lib/constants/errors';
 import { Routes } from 'lib/constants/routes';
@@ -33,20 +35,30 @@ const validateEmail = (val) => {
   }
 };
 
-function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
+export const ChildcareFormLocation = ({ id, onSave, neighborhoodOptions }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
+  const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
   const [addAdditionalContact, setAddAdditionalContact] = useState();
   const [fields, setFields] = useState({
-    neighborhood: '',
+    neighborhood: undefined,
     crossStreet: '',
   });
 
   const handleFieldChange = useCallback(
     (field) => (value) => {
       setFields((fields) => ({
+        ...fields,
+        [field]: value,
+      }));
+    },
+    [],
+  );
+
+  const handleAdditionalFieldChange = useCallback(
+    (field) => (value) => {
+      setAdditionalFields((fields) => ({
         ...fields,
         [field]: value,
       }));
@@ -64,16 +76,6 @@ function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
     additionalContactLanguagePreference: '',
   });
 
-  const handleAdditionalFieldChange = useCallback(
-    (field) => (value) => {
-      setAdditionalFields((fields) => ({
-        ...fields,
-        [field]: value,
-      }));
-    },
-    [],
-  );
-
   const handleSubmit = async () => {
     setIsLoading(true);
     const res = await onSave({
@@ -84,14 +86,17 @@ function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
       setIsLoading(false);
       return;
     }
-    history.push(routeWithParams(Routes.SERVICE_PETCARE_WHEN, { id }));
+    const url =
+      state.editServiceUrl ||
+      routeWithParams(Routes.SERVICE_CHILDCARE_WHEN, { id });
+    history.push(url);
   };
 
   const fieldData = [
     {
       customOnChange: handleFieldChange('neighborhood'),
       defaultValue: fields.neighborhood,
-      label: t('service.petcare.where.labels.neighborhood'),
+      label: t('service.childcare.where.labels.neighborhood'),
       options: neighborhoodOptions,
       name: 'neighborhood',
       type: formFieldTypes.INPUT_DROPDOWN,
@@ -100,7 +105,7 @@ function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
     {
       customOnChange: handleFieldChange('crossStreet'),
       defaultValue: fields.crossStreet,
-      label: t('service.petcare.where.labels.crossStreet'),
+      label: t('service.childcare.where.labels.crossStreet'),
       name: 'crossStreet',
       type: formFieldTypes.INPUT_TEXT,
       value: fields.crossStreet,
@@ -109,7 +114,7 @@ function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
       type: formFieldTypes.NODE,
       node: [
         <AdditionalCta
-          cta={t('service.petcare.where.add')}
+          cta={t('service.childcare.where.add')}
           key="additional"
           onClick={() => setAddAdditionalContact(true)}
           open={addAdditionalContact}
@@ -201,10 +206,11 @@ function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
   if (addAdditionalContact) {
     return (
       <FormBuilder
+        buttonLabel={t('global.form.submitLabelNext')}
         defaultValues={{ ...fields, ...additionalFields }}
         onSubmit={handleSubmit}
-        title={t('service.petcare.where.title')}
-        description={t('service.petcare.where.description')}
+        title={t('service.childcare.where.title')}
+        description={t('service.childcare.where.description')}
         disabled={
           (additionalFields.additionalContactPhone !== '' &&
             !isValidPhoneNumber(additionalFields.additionalContactPhone)) ||
@@ -222,15 +228,16 @@ function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
 
   return (
     <FormBuilder
+      buttonLabel={t('global.form.submitLabelNext')}
       defaultValues={fields}
       onSubmit={handleSubmit}
-      title={t('service.petcare.where.title')}
-      description={t('service.petcare.where.description')}
+      title={t('service.childcare.where.title')}
+      description={t('service.childcare.where.description')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
     />
   );
-}
+};
 
-export default PetcareFormLocation;
+export default ChildcareFormLocation;

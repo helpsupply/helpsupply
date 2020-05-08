@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { StateContext } from 'state/StateProvider';
+
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { Space } from 'lib/theme';
@@ -11,9 +13,8 @@ import { Space } from 'lib/theme';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
-import { StateContext } from 'state/StateProvider';
 
-function GroceryFormDate({ id, onSave, request }) {
+function GroceryFormDate({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
   const { state } = useContext(StateContext);

@@ -19,7 +19,7 @@ const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
 };
 
-function PetcareFormDetails({ id, onSave, request }) {
+function PetcareFormDetails({ id, onSave }) {
   const history = useHistory();
   const { t } = useTranslation();
 
