@@ -48,7 +48,7 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
           organization: backend.getMetadataForProvider(service.organization)
             .Organization,
           type: mapServiceKindToTitle()[service.kind],
-          date: service.date ? service.date : formatDate(service.timeCreated),
+          date: formatDate(service.timeCreated),
           details,
         }),
       )
