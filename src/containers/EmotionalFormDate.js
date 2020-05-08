@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
+import { Space } from 'lib/theme';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
@@ -89,7 +90,7 @@ function EmotionalFormDate({ id, onSave, request }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <Note key="note-2" css={{ width: '100%' }}>
+        <Note key="note-2" css={{ marginTop: Space.S30, width: '100%' }}>
           {t('service.emotional.when.note')}
         </Note>,
       ],
