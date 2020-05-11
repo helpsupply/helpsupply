@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
-import { Routes } from 'lib/constants/routes';
-import { routeWithParams } from 'lib/utils/routes';
 import { isValidPhoneNumber, isValidEmail } from 'lib/utils/validations';
 import { LANGUAGES } from 'lib/constants/languages';
 import { CONTACT_PREFERENCES } from 'lib/constants/contact';
@@ -50,7 +48,7 @@ const initialAdditionalFields = {
   additionalContactLanguagePreference: '',
 };
 
-function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
+function ServiceFormLocation({ onSave, neighborhoodOptions, nextUrl, title }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -115,9 +113,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       setIsLoading(false);
       return;
     }
-    const url =
-      state.editServiceUrl ||
-      routeWithParams(Routes.SERVICE_GROCERIES_WHEN, { id });
+    const url = state.editServiceUrl || nextUrl;
     history.push(url);
   };
 
@@ -125,7 +121,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     {
       customOnChange: handleFieldChange('neighborhood'),
       defaultValue: fields.neighborhood,
-      label: t('service.grocery.where.labels.neighborhood'),
+      label: t('locationForm.labels.neighborhood'),
       options: neighborhoodOptions,
       name: 'neighborhood',
       type: formFieldTypes.INPUT_DROPDOWN,
@@ -134,7 +130,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     {
       customOnChange: handleFieldChange('crossStreet'),
       defaultValue: fields.crossStreet,
-      label: t('service.grocery.where.labels.crossStreet'),
+      label: t('locationForm.labels.crossStreet'),
       name: 'crossStreet',
       type: formFieldTypes.INPUT_TEXT,
       value: fields.crossStreet,
@@ -143,7 +139,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       type: formFieldTypes.NODE,
       node: [
         <AdditionalCta
-          cta={t('service.grocery.where.add')}
+          cta={t('locationForm.add')}
           key="additional"
           onClick={() => setAddAdditionalContact(true)}
           open={addAdditionalContact}
@@ -158,7 +154,7 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
               type={TEXT_TYPE.BODY_2}
               css={styles.button}
             >
-              {t('service.grocery.where.labels.remove')}
+              {t('locationForm.labels.remove')}
             </Text>
           }
         />,
@@ -240,7 +236,6 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     },
   ];
 
-  // console.log(additionalFields.additionalContactContactPreference);
   useEffect(() => {
     let {
       additionalContactLastName,
@@ -261,8 +256,8 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
       <FormBuilder
         defaultValues={{ ...fields, ...additionalFields }}
         onSubmit={handleSubmit}
-        title={t('service.grocery.where.title')}
-        description={t('service.grocery.where.description')}
+        title={title}
+        description={t('locationForm.labels.description')}
         disabled={
           (additionalFields.additionalContactPhone !== '' &&
             !isValidPhoneNumber(additionalFields.additionalContactPhone)) ||
@@ -282,8 +277,8 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
     <FormBuilder
       defaultValues={fields}
       onSubmit={handleSubmit}
-      title={t('service.grocery.where.title')}
-      description={t('service.grocery.where.description')}
+      title={title}
+      description={t('locationForm.labels.description')}
       disabled={!Object.keys(fields).every((key) => !!fields[key])}
       fields={fieldData}
       isLoading={isLoading}
@@ -292,4 +287,4 @@ function GroceryFormLocation({ id, onSave, neighborhoodOptions }) {
   );
 }
 
-export default GroceryFormLocation;
+export default ServiceFormLocation;
