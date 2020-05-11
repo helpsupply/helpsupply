@@ -20,6 +20,7 @@ import * as hospital_index from '../data/hospital_index';
 const renderSuggestion = ({ hospital }, { query }) => {
   const nameMatches = AutosuggestHighlightMatch(hospital.name, query);
   const nameParts = AutosuggestHighlightParse(hospital.name, nameMatches);
+
   const nameMatch = (
     <span>
       {nameParts.map((part, index) => {
@@ -38,6 +39,7 @@ const renderSuggestion = ({ hospital }, { query }) => {
 
   const cityMatches = AutosuggestHighlightMatch(hospital.name, query);
   const cityParts = AutosuggestHighlightParse(hospital.city, cityMatches);
+
   const cityMatch = (
     <span>
       {cityParts.map((part, index) => {
@@ -71,7 +73,7 @@ const getHospitalName = ({ hospital, id }) => ({
   value: id,
 });
 
-function FindFacility({ backend }) {
+export const FindFacility = ({ backend }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const [results, setResults] = useState([]);
@@ -95,8 +97,6 @@ function FindFacility({ backend }) {
     }
 
     setIsLoading(true);
-
-    // Stash this for later
     backend.setLocalFacility(selectedResult);
 
     history.push(routeWithParams(Routes.EMAIL_SIGNUP_FORM));
@@ -122,6 +122,6 @@ function FindFacility({ backend }) {
       />
     </Form>
   );
-}
+};
 
 export default FindFacility;

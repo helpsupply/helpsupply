@@ -19,11 +19,11 @@ const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
 };
 
-function PetcareFormDetails({ id, onSave }) {
+export const PetcareFormDetails = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     1: {
       petType: '',
@@ -166,6 +166,6 @@ function PetcareFormDetails({ id, onSave }) {
       />
     </div>
   );
-}
+};
 
 export default PetcareFormDetails;

@@ -50,13 +50,18 @@ const initialAdditionalFields = {
   additionalContactLanguagePreference: '',
 };
 
-function ServiceFormLocation({ onSave, neighborhoodOptions, nextUrl, title }) {
+export const ServiceFormLocation = ({
+  onSave,
+  neighborhoodOptions,
+  nextUrl,
+  title,
+}) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
   const [addAdditionalContact, setAddAdditionalContact] = useState(false);
   const { state } = useContext(StateContext);
+
   const [fields, setFields] = useState({
     neighborhood: undefined,
     crossStreet: '',
@@ -287,6 +292,6 @@ function ServiceFormLocation({ onSave, neighborhoodOptions, nextUrl, title }) {
       buttonLabel={t('global.form.submitLabelNext')}
     />
   );
-}
+};
 
 export default ServiceFormLocation;

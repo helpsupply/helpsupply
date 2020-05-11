@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { ErrorContext } from 'state/ErrorProvider';
+
 import { Routes } from 'lib/constants/routes';
 import { Errors } from 'lib/constants/errors';
 import { routeWithParams } from 'lib/utils/routes';
@@ -11,7 +13,6 @@ import { isValidZipCode } from 'lib/utils/validations';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
-import { ErrorContext } from 'state/ErrorProvider';
 
 const validate = (val) => {
   if (val === '') {
@@ -22,12 +23,12 @@ const validate = (val) => {
   }
 };
 
-function ServiceLocationUpdateForm({ backend, serviceUser }) {
+export const ServiceLocationUpdateForm = ({ backend, serviceUser }) => {
   const history = useHistory();
   const { setError } = useContext(ErrorContext);
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     zipCode: serviceUser?.data?.zip || '',
   });
@@ -96,6 +97,6 @@ function ServiceLocationUpdateForm({ backend, serviceUser }) {
       buttonLabel={t('global.form.submitLabelNext')}
     />
   );
-}
+};
 
 export default ServiceLocationUpdateForm;

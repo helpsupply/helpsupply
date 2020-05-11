@@ -1,8 +1,10 @@
 /** @jsx jsx */
 import { useCallback, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
+
+import { StateContext } from 'state/StateProvider';
 
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
@@ -11,14 +13,20 @@ import { Space } from 'lib/theme';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
-import { StateContext } from 'state/StateProvider';
 
-function EmotionalFormDate({ id, onSave, request }) {
+const styles = {
+  note: css({
+    marginTop: Space.S30,
+    width: '100%',
+  }),
+};
+
+export const EmotionalFormDate = ({ id, onSave }) => {
   const history = useHistory();
   const { state } = useContext(StateContext);
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     date: undefined,
     time: undefined,
@@ -90,7 +98,7 @@ function EmotionalFormDate({ id, onSave, request }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <Note key="note-2" css={{ marginTop: Space.S30, width: '100%' }}>
+        <Note key="note-2" css={styles.note}>
           {t('service.emotional.when.note')}
         </Note>,
       ],
@@ -110,6 +118,6 @@ function EmotionalFormDate({ id, onSave, request }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
 export default EmotionalFormDate;

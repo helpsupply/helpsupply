@@ -33,12 +33,12 @@ const validateEmail = (val) => {
   }
 };
 
-function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
+export const PetcareFormLocation = ({ id, onSave, neighborhoodOptions }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
   const [addAdditionalContact, setAddAdditionalContact] = useState();
+
   const [fields, setFields] = useState({
     neighborhood: '',
     crossStreet: '',
@@ -231,6 +231,6 @@ function PetcareFormLocation({ id, onSave, neighborhoodOptions }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
 export default PetcareFormLocation;

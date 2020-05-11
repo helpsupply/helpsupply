@@ -4,23 +4,24 @@ import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { ErrorContext } from 'state/ErrorProvider';
+
+import { Errors } from 'lib/constants/errors';
 import { Routes } from 'lib/constants/routes';
 import { isValidEmail } from 'lib/utils/validations';
-import { ErrorContext } from 'state/ErrorProvider';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function EmailListForm({ backend }) {
+export const EmailListForm = ({ backend }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const { setError } = useContext(ErrorContext);
-
   const [email, setEmail] = useState('');
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
-      return t('workEmailForm.workEmail.validationLabel');
+      return Errors.EMAIL;
     }
   };
 
@@ -56,6 +57,6 @@ function EmailListForm({ backend }) {
       buttonLabel={t('global.form.submitLabel')}
     />
   );
-}
+};
 
 export default EmailListForm;

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { StateContext } from 'state/StateProvider';
@@ -14,11 +14,19 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
 
-function GroceryFormDate({ id, onSave }) {
+const styles = {
+  note: css({
+    marginTop: Space.S30,
+    width: '100%',
+  }),
+};
+
+export const GroceryFormDate = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     date: '',
     time: undefined,
@@ -84,7 +92,7 @@ function GroceryFormDate({ id, onSave }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <Note key="note-2" css={{ marginTop: Space.S30, width: '100%' }}>
+        <Note key="note-2" css={styles.note}>
           {t('service.grocery.when.note')}
         </Note>,
       ],
@@ -102,6 +110,6 @@ function GroceryFormDate({ id, onSave }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
 export default GroceryFormDate;

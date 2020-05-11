@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { ErrorContext } from 'state/ErrorProvider';
+
+import { Errors } from 'lib/constants/errors';
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { isValidEmail, isValidZipCode } from 'lib/utils/validations';
@@ -11,15 +14,12 @@ import { isValidEmail, isValidZipCode } from 'lib/utils/validations';
 import Note from 'components/Note';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
-import { ErrorContext } from 'state/ErrorProvider';
 
-function EmailForm({ backend }) {
+export const EmailForm = ({ backend }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const { setError } = useContext(ErrorContext);
-
   const [email, setEmail] = useState('');
-
   const [isLoading, setIsLoading] = useState(false);
 
   const checkZip = useCallback(() => {
@@ -31,13 +31,13 @@ function EmailForm({ backend }) {
   }, [backend, history]);
 
   useEffect(() => {
-    // if we don't have a zip from the zip-forms, send them over there
+    // if we don't have a zip code, send user to add a zip code
     checkZip();
   }, [checkZip]);
 
   const validate = (val) => {
     if (!isValidEmail(val)) {
-      return t('workEmailForm.workEmail.validationLabel');
+      return Errors.EMAIL;
     }
   };
 
@@ -87,6 +87,6 @@ function EmailForm({ backend }) {
       <Note>{t('workEmailForm.workEmail.disclaimer')}</Note>
     </FormBuilder>
   );
-}
+};
 
 export default EmailForm;

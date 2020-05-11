@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'lib/constants/routes';
@@ -12,6 +12,16 @@ import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
+
+const styles = {
+  optionsTitle: css({
+    paddingTop: Space.S25,
+  }),
+  note: css({
+    marginTop: Space.S25,
+    width: '100%',
+  }),
+};
 
 const dayFields = [
   'mondays',
@@ -32,11 +42,11 @@ const timeFields = [
   'variesTime',
 ];
 
-function PetcareFormDate({ id, onSave }) {
+export const PetcareFormDate = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     mondays: '',
     tuesdays: '',
@@ -110,7 +120,7 @@ function PetcareFormDate({ id, onSave }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <div key="petcare-options-title" css={{ paddingTop: Space.S25 }}>
+        <div key="petcare-options-title" css={styles.optionsTitle}>
           <AdditionalFormTitle
             description={t('service.petcare.when.additional.title')}
             title={t('service.petcare.when.additional.description')}
@@ -122,7 +132,7 @@ function PetcareFormDate({ id, onSave }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <Note key="note-2" css={{ marginTop: Space.S25, width: '100%' }}>
+        <Note key="note-2" css={styles.note}>
           {t('service.petcare.when.note')}
         </Note>,
       ],
@@ -147,6 +157,6 @@ function PetcareFormDate({ id, onSave }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
 export default PetcareFormDate;

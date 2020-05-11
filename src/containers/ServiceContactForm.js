@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
 import { Errors } from 'lib/constants/errors';
@@ -15,6 +15,10 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import Note from 'components/Note';
 
+const styles = {
+  note: css({ width: '100%' }),
+};
+
 const validate = (val) => {
   if (val === '') {
     return;
@@ -24,11 +28,11 @@ const validate = (val) => {
   }
 };
 
-function ServiceContactForm({ backend, serviceUser }) {
+export const ServiceContactForm = ({ backend, serviceUser }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     firstName: serviceUser?.data?.firstName || '',
     lastName: serviceUser?.data?.lastName || '',
@@ -64,7 +68,7 @@ function ServiceContactForm({ backend, serviceUser }) {
         console.error('error', error);
         setIsLoading(false);
       });
-    // service TODO: handle exceptions
+    // todo: handle exceptions
   };
 
   const fieldData = [
@@ -106,7 +110,7 @@ function ServiceContactForm({ backend, serviceUser }) {
     {
       type: formFieldTypes.NODE,
       node: [
-        <Note key="note-2" css={{ width: '100%' }}>
+        <Note key="note-2" css={styles.note}>
           {t('service.contactForm.note')}
         </Note>,
       ],
@@ -136,6 +140,6 @@ function ServiceContactForm({ backend, serviceUser }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
 export default ServiceContactForm;

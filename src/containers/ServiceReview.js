@@ -61,7 +61,7 @@ export const ServiceReview = ({ backend, id, service, serviceUser, user }) => {
       .catch((error) => {
         console.error('error', error);
       });
-    // service todo: handle exceptions
+    // todo: handle exceptions
   };
 
   useEffect(() => {

@@ -14,6 +14,7 @@ export const AdditionalInfoForm = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     additionalInfo: '',
   });
