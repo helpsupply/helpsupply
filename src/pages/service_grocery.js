@@ -1,13 +1,16 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 
+import { Routes } from 'lib/constants/routes';
+import { routeWithParams } from 'lib/utils/routes';
 import { buildNeighborhoodOptions } from 'lib/utils/zip';
 import { useAuth } from 'hooks/useAuth';
 
 import Page from 'components/layouts/Page';
-import GroceryFormLocation from 'containers/GroceryFormLocation';
+import ServiceFormLocation from 'containers/ServiceFormLocation';
 import GroceryFormDate from 'containers/GroceryFormDate';
 import GroceryFormItems from 'containers/GroceryFormItems';
 import { ErrorContext } from 'state/ErrorProvider';
@@ -15,6 +18,7 @@ import { ErrorContext } from 'state/ErrorProvider';
 import { nyczipmap } from 'data/nyczipmap';
 
 function ServiceGrocery({ backend, step }) {
+  const { t } = useTranslation();
   const [request, setRequest] = useState(null);
   const [neighborhoodOptions, setNeighborhoodOptions] = useState();
   const { isInitializing } = useAuth();
@@ -57,11 +61,14 @@ function ServiceGrocery({ backend, step }) {
   return (
     <Page currentProgress={4} totalProgress={5}>
       {step === 1 && (
-        <GroceryFormLocation
+        <ServiceFormLocation
           request={request}
           onSave={updateService}
-          id={params.id}
           neighborhoodOptions={neighborhoodOptions}
+          nextUrl={routeWithParams(Routes.SERVICE_GROCERIES_WHEN, {
+            id: params.id,
+          })}
+          title={t('service.grocery.where.title')}
         />
       )}
       {step === 2 && (
