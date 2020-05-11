@@ -1,4 +1,5 @@
 import { css } from '@emotion/core';
+import { Breakpoints } from 'lib/constants/breakpoints';
 
 export const styles = css`
   *,
@@ -29,12 +30,18 @@ export const styles = css`
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     margin: 0;
+    overflow: visible;
 
     @include font-size('1rem');
     font-weight: 400;
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba('#000', 0);
+  }
+  @media only screen and (min-width: ${Breakpoints.LARGE}px) {
+    body {
+      overflow: hidden;
+    }
   }
   svg {
     overflow: hidden;

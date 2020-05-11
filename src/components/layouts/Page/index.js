@@ -170,11 +170,6 @@ const Page = ({
               !isHome && styles.headerContainerDesktopInnerPage,
             ]}
           >
-            <ProgressBar
-              currentProgress={currentProgress}
-              isDesktop={isDesktop}
-              totalProgress={totalProgress}
-            />
             <div css={isDesktop && styles.headerContentDesktop} ref={headerRef}>
               {!isHome && hasBackButton && (
                 <BackButton onClick={onBackButtonClick} />
@@ -206,6 +201,13 @@ const Page = ({
           onBackButtonClick={onBackButtonClick}
           topPadding={pageContentTopPadding}
         />
+        {!willUseSmallHeader && (
+          <ProgressBar
+            currentProgress={currentProgress}
+            isDesktop={isDesktop}
+            totalProgress={totalProgress}
+          />
+        )}
       </div>
     </Fragment>
   );
