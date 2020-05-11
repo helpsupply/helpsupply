@@ -23,7 +23,6 @@ const styles = {
   progressBar: css({
     background: Color.PRIMARY,
     bottom: `-${bottomBorderSize}px`,
-    content: '""',
     display: 'block',
     height: `${bottomBorderSize}px`,
     left: 0,

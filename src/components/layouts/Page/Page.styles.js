@@ -69,6 +69,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
+    overflow: [null, null, 'scroll'],
   }),
   copyright: css({
     color: Color.WHITE_75,
