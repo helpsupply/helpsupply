@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useCallback, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
@@ -18,10 +18,18 @@ import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-const nodeContainerStyles = {
-  color: Color.GRAY_75,
-  marginBottom: Space.S30,
-  marginTop: Space.S10,
+const styles = {
+  container: css({
+    color: Color.GRAY_75,
+    marginBottom: Space.S30,
+    marginTop: Space.S10,
+  }),
+  lowCost: css({
+    marginTop: 0,
+  }),
+  note: css({
+    marginBottom: Space.S10,
+  }),
 };
 
 export const ChildcareFormDetails = ({ id, onSave }) => {
@@ -29,6 +37,7 @@ export const ChildcareFormDetails = ({ id, onSave }) => {
   const { t } = useTranslation();
   const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     childCareCenters: false,
     mutualAid: false,
@@ -111,7 +120,7 @@ export const ChildcareFormDetails = ({ id, onSave }) => {
         <Text
           as="p"
           type={TEXT_TYPE.NOTE}
-          css={{ ...nodeContainerStyles, marginTop: 0 }}
+          css={(styles.container, styles.lowCost)}
           key="childcare-options-note-1"
         >
           {t('service.childcare.what.labels.noteLowCost')}
@@ -132,7 +141,7 @@ export const ChildcareFormDetails = ({ id, onSave }) => {
         <Text
           as="div"
           type={TEXT_TYPE.NOTE}
-          css={nodeContainerStyles}
+          css={styles.container}
           key="childcare-options-note-1"
         >
           <ReactMarkdown
@@ -176,7 +185,7 @@ export const ChildcareFormDetails = ({ id, onSave }) => {
         <Text
           as="p"
           type={TEXT_TYPE.NOTE}
-          css={{ ...nodeContainerStyles, marginBottom: Space.S10 }}
+          css={(styles.container, styles.note)}
           key="childcare-options-note-1"
         >
           {t('service.childcare.what.labels.noteShare')}

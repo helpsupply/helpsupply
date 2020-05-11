@@ -4,20 +4,21 @@ import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { StateContext } from 'state/StateProvider';
+
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { mentalHealthOptions } from 'lib/constants/options';
 
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
-import { StateContext } from 'state/StateProvider';
 
-function EmotionalFormDate({ id, onSave, request }) {
+export const EmotionalFormType = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useContext(StateContext);
+
   const [fields, setFields] = useState({
     type: undefined,
     agreement: false,
@@ -76,6 +77,6 @@ function EmotionalFormDate({ id, onSave, request }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
-export default EmotionalFormDate;
+export default EmotionalFormType;

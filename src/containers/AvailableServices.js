@@ -15,26 +15,22 @@ export const AvailableServices = ({ backend }) => {
   const history = useHistory();
   const params = useParams();
   const { t } = useTranslation();
-  const [services, setServices] = useState();
   const { zip: zipRulParam } = params;
+  const [services, setServices] = useState();
 
   useEffect(() => {
     const zip = zipRulParam || backend.getLocalZip();
-
     // if no zip in url and none in local storage, go to enter your zip form
     if ((!zipRulParam && !backend.getLocalZip()) || !isValidZipCode(zip)) {
       history.push(Routes.SERVICE_LOCATION);
       return;
     }
-
     const servicesByZip = backend.getServicesForZip(zip);
-
     // if there are no services for zip, send them to unavailable page
     if (!servicesByZip?.length) {
       history.push(Routes.SERVICE_LOCATION_UNAVAILABLE);
       return;
     }
-
     // if results for zip provided via localstorage or via url param, explicitly store the zip that works
     backend.setLocalZip(zip);
     setServices(servicesByZip);

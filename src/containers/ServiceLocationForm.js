@@ -22,11 +22,11 @@ const validate = (val) => {
   }
 };
 
-function ServiceLocationForm({ backend, serviceUser }) {
+export const ServiceLocationForm = ({ backend, serviceUser }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     zipCode: serviceUser?.data?.zip || '',
   });
@@ -92,6 +92,6 @@ function ServiceLocationForm({ backend, serviceUser }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
 export default ServiceLocationForm;

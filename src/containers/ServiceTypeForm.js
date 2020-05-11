@@ -50,10 +50,10 @@ export const ServiceTypeForm = ({
   const { t } = useTranslation();
   const { setError } = useContext(ErrorContext);
   const { state } = useContext(StateContext);
-
   const [isLoading, setIsLoading] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [noteContent, setNoteContent] = useState();
+
   const [fields, setFields] = useState({
     kind: undefined,
     urgency: undefined,
@@ -62,88 +62,97 @@ export const ServiceTypeForm = ({
     zip: '',
   });
 
+  const handleShowContent = useCallback(
+    (value) => {
+      setShowContent(true);
+      switch (value) {
+        case RequestKinds.GROCERY:
+          setNoteContent(
+            <Fragment>
+              <Note>{t('service.selectType.form.note.grocery.content')}</Note>
+              <div css={styles.linkContainer}>
+                <Anchor
+                  href={`${t(
+                    'service.selectType.form.note.grocery.cityHarvest.url',
+                  )}`}
+                  as={anchorTypes.A}
+                  isExternalLink
+                  css={styles.link}
+                >
+                  <Text type={TEXT_TYPE.NOTE}>
+                    {t(
+                      'service.selectType.form.note.grocery.cityHarvest.title',
+                    )}
+                  </Text>
+                </Anchor>
+              </div>
+              <div>
+                <Anchor
+                  href={`${t(
+                    'service.selectType.form.note.grocery.foodBankNyc.url',
+                  )}`}
+                  as={anchorTypes.A}
+                  isExternalLink
+                  css={styles.link}
+                >
+                  <Text type={TEXT_TYPE.NOTE}>
+                    {t(
+                      'service.selectType.form.note.grocery.foodBankNyc.title',
+                    )}
+                  </Text>
+                </Anchor>
+              </div>
+            </Fragment>,
+          );
+          break;
+        case RequestKinds.CHILDCARE:
+          setNoteContent(
+            <Note>{t('service.selectType.form.note.childcare.content')}</Note>,
+          );
+          break;
+        case RequestKinds.PETCARE:
+          // todo: add petcare note
+          setNoteContent(null);
+          break;
+        case RequestKinds.MENTALHEALTH:
+          setNoteContent(
+            <Fragment>
+              <Note>
+                {t('service.selectType.form.note.mentalHealth.content')}
+              </Note>
+              <div css={styles.linkContainer}>
+                <Anchor
+                  href={`${t(
+                    'service.selectType.form.note.mentalHealth.nycWell.url',
+                  )}`}
+                  as={anchorTypes.A}
+                  isExternalLink
+                  css={styles.link}
+                >
+                  <Text type={TEXT_TYPE.NOTE}>
+                    {t(
+                      'service.selectType.form.note.mentalHealth.nycWell.title',
+                    )}
+                  </Text>
+                </Anchor>
+              </div>
+            </Fragment>,
+          );
+          break;
+        default:
+          setShowContent(false);
+          break;
+      }
+    },
+    [t],
+  );
+
   useEffect(() => {
     setFields((fields) => ({
       ...fields,
       zip,
     }));
   }, [zip]);
-
-  const handleShowContent = (value) => {
-    setShowContent(true);
-    switch (value) {
-      case RequestKinds.GROCERY:
-        setNoteContent(
-          <Fragment>
-            <Note>{t('service.selectType.form.note.grocery.content')}</Note>
-            <div css={styles.linkContainer}>
-              <Anchor
-                href={`${t(
-                  'service.selectType.form.note.grocery.cityHarvest.url',
-                )}`}
-                as={anchorTypes.A}
-                isExternalLink
-                css={styles.link}
-              >
-                <Text type={TEXT_TYPE.NOTE}>
-                  {t('service.selectType.form.note.grocery.cityHarvest.title')}
-                </Text>
-              </Anchor>
-            </div>
-            <div>
-              <Anchor
-                href={`${t(
-                  'service.selectType.form.note.grocery.foodBankNyc.url',
-                )}`}
-                as={anchorTypes.A}
-                isExternalLink
-                css={styles.link}
-              >
-                <Text type={TEXT_TYPE.NOTE}>
-                  {t('service.selectType.form.note.grocery.foodBankNyc.title')}
-                </Text>
-              </Anchor>
-            </div>
-          </Fragment>,
-        );
-        break;
-      case RequestKinds.CHILDCARE:
-        setNoteContent(
-          <Note>{t('service.selectType.form.note.childcare.content')}</Note>,
-        );
-        break;
-      case RequestKinds.PETCARE:
-        // service todo: add petcare note
-        setNoteContent(null);
-        break;
-      case RequestKinds.MENTALHEALTH:
-        setNoteContent(
-          <Fragment>
-            <Note>
-              {t('service.selectType.form.note.mentalHealth.content')}
-            </Note>
-            <div css={styles.linkContainer}>
-              <Anchor
-                href={`${t(
-                  'service.selectType.form.note.mentalHealth.nycWell.url',
-                )}`}
-                as={anchorTypes.A}
-                isExternalLink
-                css={styles.link}
-              >
-                <Text type={TEXT_TYPE.NOTE}>
-                  {t('service.selectType.form.note.mentalHealth.nycWell.title')}
-                </Text>
-              </Anchor>
-            </div>
-          </Fragment>,
-        );
-        break;
-      default:
-        setShowContent(false);
-        break;
-    }
-  };
 
   const handleFieldChange = useCallback(
     (field) => (value) => {
@@ -164,7 +173,7 @@ export const ServiceTypeForm = ({
         }));
       }
     },
-    [serviceOptions],
+    [serviceOptions, handleShowContent],
   );
 
   const handleSubmit = async () => {

@@ -13,10 +13,9 @@ import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 import FormPrivacyNode from 'components/FormPrivacyNode';
 
-function LoginForm({ backend }) {
+export const LoginForm = ({ backend }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,7 +45,7 @@ function LoginForm({ backend }) {
         console.error('error', error);
         setIsLoading(false);
       });
-    // service TODO: handle exceptions
+    // todo: handle exceptions
   };
 
   const fieldData = [
@@ -75,6 +74,6 @@ function LoginForm({ backend }) {
       buttonLabel={t('global.form.submitLabel')}
     />
   );
-}
+};
 
 export default LoginForm;

@@ -33,6 +33,7 @@ export const ChildcareFormDetails = ({ id, onSave }) => {
   const { t } = useTranslation();
   const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     1: {
       birthMonth: '',

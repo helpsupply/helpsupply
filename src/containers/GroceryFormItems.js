@@ -12,16 +12,17 @@ import { routeWithParams } from 'lib/utils/routes';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function GroceryFormItems({ id, onSave }) {
+export const GroceryFormItems = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
+
   const [fields, setFields] = useState({
     dietaryRestrictions: '',
     groceryList: '',
   });
+
   const handleFieldChange = useCallback(
     (field) => (value) => {
       setFields((fields) => ({
@@ -77,6 +78,6 @@ function GroceryFormItems({ id, onSave }) {
       buttonLabel={t('global.form.submitLabelNext')}
     />
   );
-}
+};
 
 export default GroceryFormItems;
