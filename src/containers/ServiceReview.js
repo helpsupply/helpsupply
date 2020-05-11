@@ -18,7 +18,6 @@ import GroceryServiceReview from 'components/ServiceReview/Grocery';
 import ChildcareServiceReview from 'components/ServiceReview/Childcare';
 import PetcareServiceReview from 'components/ServiceReview/Petcare';
 import MentalHealthServiceReview from 'components/ServiceReview/MentalHealth';
-
 import { styles } from 'components/ServiceReview/ServiceReview.styles';
 
 const buildChildcareDate = (service) => {
@@ -34,7 +33,7 @@ const buildChildcareDate = (service) => {
   ].filter((day) => !!day);
 };
 
-function ServiceReview({ backend, id, service, serviceUser, user }) {
+export const ServiceReview = ({ backend, id, service, serviceUser, user }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const [details, setDetails] = useState();
@@ -62,7 +61,7 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
       .catch((error) => {
         console.error('error', error);
       });
-    // service TODO: handle exceptions
+    // service todo: handle exceptions
   };
 
   useEffect(() => {
@@ -182,6 +181,6 @@ function ServiceReview({ backend, id, service, serviceUser, user }) {
       </div>
     </Fragment>
   );
-}
+};
 
 export default ServiceReview;

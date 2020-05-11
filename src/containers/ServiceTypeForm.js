@@ -1,9 +1,12 @@
 /** @jsx jsx */
 import { Fragment, useEffect, useCallback, useState, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 import { jsx, css } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import { useTranslation } from 'react-i18next';
+
+import { ErrorContext } from 'state/ErrorProvider';
+import { StateContext } from 'state/StateProvider';
 
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
@@ -17,8 +20,6 @@ import Anchor, { anchorTypes } from 'components/Anchor';
 import Note from 'components/Note';
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
-import { ErrorContext } from 'state/ErrorProvider';
-import { StateContext } from 'state/StateProvider';
 
 const styles = {
   hideNote: css({
@@ -32,16 +33,19 @@ const styles = {
     alignItems: 'baseline',
     display: 'flex',
   }),
+  linkContainer: css({
+    marginBottom: Space.S20,
+  }),
 };
 
-function ServiceTypeForm({
+export const ServiceTypeForm = ({
   backend,
   id,
   onSave,
   request,
   serviceOptions,
   zip,
-}) {
+}) => {
   const history = useHistory();
   const { t } = useTranslation();
   const { setError } = useContext(ErrorContext);
@@ -71,29 +75,33 @@ function ServiceTypeForm({
       case RequestKinds.GROCERY:
         setNoteContent(
           <Fragment>
-            <Note>
-              We cannot guarantee a quick response. If you are in immediate
-              crisis, please explore these other options in addition to making a
-              Help Supply request.
-            </Note>
-            <div css={{ marginBottom: Space.S20 }}>
+            <Note>{t('service.selectType.form.note.grocery.content')}</Note>
+            <div css={styles.linkContainer}>
               <Anchor
-                href={`https://www.cityharvest.org/`}
+                href={`${t(
+                  'service.selectType.form.note.grocery.cityHarvest.url',
+                )}`}
                 as={anchorTypes.A}
                 isExternalLink
                 css={styles.link}
               >
-                <Text type={TEXT_TYPE.NOTE}>City Harvest</Text>
+                <Text type={TEXT_TYPE.NOTE}>
+                  {t('service.selectType.form.note.grocery.cityHarvest.title')}
+                </Text>
               </Anchor>
             </div>
             <div>
               <Anchor
-                href={`https://www.foodbanknyc.org/`}
+                href={`${t(
+                  'service.selectType.form.note.grocery.foodBankNyc.url',
+                )}`}
                 as={anchorTypes.A}
                 isExternalLink
                 css={styles.link}
               >
-                <Text type={TEXT_TYPE.NOTE}>Food Bank NYC</Text>
+                <Text type={TEXT_TYPE.NOTE}>
+                  {t('service.selectType.form.note.grocery.foodBankNyc.title')}
+                </Text>
               </Anchor>
             </div>
           </Fragment>,
@@ -101,32 +109,31 @@ function ServiceTypeForm({
         break;
       case RequestKinds.CHILDCARE:
         setNoteContent(
-          <Note>
-            We cannot guarantee a quick response. If you are in immediate
-            crisis, please explore these other options in addition to making a
-            Help Supply request.
-          </Note>,
+          <Note>{t('service.selectType.form.note.childcare.content')}</Note>,
         );
         break;
       case RequestKinds.PETCARE:
+        // service todo: add petcare note
         setNoteContent(null);
         break;
       case RequestKinds.MENTALHEALTH:
         setNoteContent(
           <Fragment>
             <Note>
-              We cannot guarantee a quick response. If you are in crisis, or
-              feel likely to hurt yourself or others, please call 1.888.692.9355
-              to talk to someone now, or text “WELL” to 65713.
+              {t('service.selectType.form.note.mentalHealth.content')}
             </Note>
-            <div css={{ marginBottom: Space.S20 }}>
+            <div css={styles.linkContainer}>
               <Anchor
-                href={`https://nycwell.cityofnewyork.us/`}
+                href={`${t(
+                  'service.selectType.form.note.mentalHealth.nycWell.url',
+                )}`}
                 as={anchorTypes.A}
                 isExternalLink
                 css={styles.link}
               >
-                <Text type={TEXT_TYPE.NOTE}>NYC Well</Text>
+                <Text type={TEXT_TYPE.NOTE}>
+                  {t('service.selectType.form.note.mentalHealth.nycWell.title')}
+                </Text>
               </Anchor>
             </div>
           </Fragment>,
@@ -279,6 +286,6 @@ function ServiceTypeForm({
       </Text>
     </FormBuilder>
   );
-}
+};
 
 export default ServiceTypeForm;

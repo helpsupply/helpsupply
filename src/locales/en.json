@@ -186,8 +186,7 @@
       "learnMore": "Learn more",
       "workEmail": {
         "label": "Work email",
-        "disclaimer": "We will only share the information you provide with the trusted partner organization that will fulfill your request.",
-        "validationLabel": "Please enter a valid email address"
+        "disclaimer": "We will only share the information you provide with the trusted partner organization that will fulfill your request."
       },
       "sent": {
         "title": "Thank you",
@@ -323,7 +322,30 @@
         "form": {
           "needsFinances": "I will need financial help to pay for this service",
           "serviceTypeLabel": "Service type",
-          "urgencyLabel": "Urgency"
+          "urgencyLabel": "Urgency",
+          "note": {
+            "grocery": {
+              "content": "We cannot guarantee a quick response. If you are in immediate crisis, please explore these other options in addition to making a Help Supply request.",
+              "cityHarvest": {
+                "title": "City Harvest",
+                "url": "https://www.cityharvest.org/"
+              },
+              "foodBankNyc": {
+                "title": "Food Bank NYC",
+                "url": "https://www.foodbanknyc.org/"
+              }
+            },
+            "childcare": {
+              "content": "We cannot guarantee a quick response. If you are in immediate crisis, please explore these other options in addition to making a Help Supply request."
+            },
+            "mentalHealth": {
+              "content": "We cannot guarantee a quick response. If you are in crisis, or feel likely to hurt yourself or others, please call 1.888.692.9355 to talk to someone now, or text 'WELL' to 65713.",
+              "nycWell": {
+                "title": "NYC Well",
+                "url": "https://nycwell.cityofnewyork.us/"
+              }
+            }
+          }
         }
       },
       "additionalInfo": {

@@ -75,7 +75,7 @@ function PetcareFormDate({ id, onSave }) {
   };
 
   const buildDayFields = () => {
-    return dayFields.flatMap((day, index) => {
+    return dayFields.flatMap((day) => {
       return [
         {
           customOnChange: handleFieldChange(day),

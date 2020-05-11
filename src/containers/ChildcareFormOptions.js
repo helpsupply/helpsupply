@@ -5,6 +5,8 @@ import { jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
+import { StateContext } from 'state/StateProvider';
+
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { Color, Space } from 'lib/theme';
@@ -15,7 +17,6 @@ import { TEXT_TYPE } from 'components/Text/constants';
 import { AdditionalFormTitle } from 'components/AdditionalFormTitle';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
-import { StateContext } from 'state/StateProvider';
 
 const nodeContainerStyles = {
   color: Color.GRAY_75,
@@ -23,10 +24,9 @@ const nodeContainerStyles = {
   marginTop: Space.S10,
 };
 
-function ChildcareFormDetails({ id, onSave, request }) {
+export const ChildcareFormDetails = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
@@ -209,6 +209,6 @@ function ChildcareFormDetails({ id, onSave, request }) {
       />
     </div>
   );
-}
+};
 
 export default ChildcareFormDetails;

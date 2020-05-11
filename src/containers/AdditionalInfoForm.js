@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { jsx } from '@emotion/core';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { Routes } from 'lib/constants/routes';
@@ -10,10 +10,9 @@ import { routeWithParams } from 'lib/utils/routes';
 import FormBuilder from 'components/Form/FormBuilder';
 import { formFieldTypes } from 'components/Form/CreateFormFields';
 
-function AdditionalInfoForm({ id, onSave, request }) {
+export const AdditionalInfoForm = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
     additionalInfo: '',
@@ -59,6 +58,6 @@ function AdditionalInfoForm({ id, onSave, request }) {
       isLoading={isLoading}
     />
   );
-}
+};
 
 export default AdditionalInfoForm;

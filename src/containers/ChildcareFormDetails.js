@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 
+import { StateContext } from 'state/StateProvider';
+
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
 import { buttonReset, Color, Space } from 'lib/theme';
@@ -17,7 +19,6 @@ import { TEXT_TYPE } from 'components/Text/constants';
 
 import { months } from 'data/months';
 import { years } from 'data/years';
-import { StateContext } from 'state/StateProvider';
 
 const styles = {
   button: css(buttonReset, { color: Color.PRIMARY }),
@@ -27,10 +28,9 @@ const styles = {
   }),
 };
 
-function ChildcareFormDetails({ id, onSave, request }) {
+export const ChildcareFormDetails = ({ id, onSave }) => {
   const history = useHistory();
   const { t } = useTranslation();
-
   const { state } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(false);
   const [fields, setFields] = useState({
@@ -192,6 +192,6 @@ function ChildcareFormDetails({ id, onSave, request }) {
       </Text>
     </FormBuilder>
   );
-}
+};
 
 export default ChildcareFormDetails;
