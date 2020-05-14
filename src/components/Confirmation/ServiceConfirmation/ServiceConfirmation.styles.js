@@ -34,6 +34,7 @@ export const styles = {
     marginTop: Space.S15,
   }),
   secondaryButton: css({
+    borderRadius: Radius.ROUNDED,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
