@@ -1,5 +1,4 @@
 export const Routes = {
-  // MVP Routes
   HOME: '/',
   FAQ: '/learn-more',
   PRIVACY: '/privacy-policy',
@@ -41,4 +40,5 @@ export const Routes = {
 
   // Admin and Debugging routes
   DEBUG_REQUESTS: '/requests/debug',
+  STYLE_GUIDE: '/style-guide',
 };

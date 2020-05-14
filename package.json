@@ -41,6 +41,8 @@
     "lint": "eslint \"./src/**/*.{js,jsx}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:app": "(firebase emulators:exec --only firestore \"yarn test --watchAll=false\") && yarn lint",
+    "test:emulator": "firebase emulators:start --only firestore",
     "eject": "react-scripts eject",
     "deploy-staging": "./scripts/deploy-staging.sh",
     "deploy-production": "./scripts/deploy-production.sh"

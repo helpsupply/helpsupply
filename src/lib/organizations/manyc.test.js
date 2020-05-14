@@ -51,7 +51,7 @@ test('Request Mapping', async () => {
   };
   await MANYCMetadata.DeliverRequest(mock_backend, request, userInfo);
 
-  console.log(JSON.stringify(payloads, null, 2));
+  // console.log(JSON.stringify(payloads, null, 2));
   expect(payloads.length).toBe(1);
   for (let key in payloads[0]) {
     let val = payloads[0][key];

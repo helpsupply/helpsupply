@@ -55,7 +55,7 @@ test('Request Mapping', async () => {
     userInfo,
   );
 
-  console.log(payloads);
+  //console.log(payloads);
   expect(payloads.length).toBe(1);
   for (let key in payloads[0]) {
     let val = payloads[0][key];

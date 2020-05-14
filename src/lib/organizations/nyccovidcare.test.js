@@ -40,7 +40,7 @@ test('Request Mapping', async () => {
   };
   await WorkersNeedChildcare.DeliverRequest(mock_backend, request, userInfo);
 
-  console.log(payloads);
+  // console.log(payloads);
   expect(payloads.length).toBe(1);
   for (let key in payloads[0]) {
     let val = payloads[0][key];

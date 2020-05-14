@@ -13,7 +13,6 @@ import { Routes } from 'lib/constants/routes';
 import { StateProvider } from 'state/StateProvider';
 import { useAuth } from 'hooks/useAuth';
 
-// MVP
 import EntryPortal from 'pages/entry';
 import Facility from 'pages/facility';
 import SignUp from 'pages/signup';
@@ -42,7 +41,6 @@ import Dashboard from 'pages/dashboard';
 import ServiceConfirmation from 'pages/service_confirmation';
 import ServiceReview from 'pages/service_review';
 import NoMatch from 'pages/404';
-// End MVP
 
 import StyleGuide from 'components/StyleGuide/index';
 import Page from 'components/layouts/Page';
@@ -91,7 +89,13 @@ function App({ backend }) {
                 <Route exact path={Routes.DEBUG_REQUESTS}>
                   <DebugRequests backend={backend} />
                 </Route>
-                {/*MVP Routes*/}
+                {process.env.NODE_ENV !== 'production' && (
+                  <Route exact path={Routes.STYLE_GUIDE}>
+                    <StyleGuide backend={backend} />
+                  </Route>
+                )}
+                {/*End Debug*/}
+
                 <Route exact path={Routes.HOME}>
                   <EntryPortal backend={backend} />
                 </Route>
@@ -285,15 +289,9 @@ function App({ backend }) {
                 <Route exact path={Routes.FAQ}>
                   <LearnMore backend={backend} />
                 </Route>
-                {process.env.NODE_ENV !== 'production' && (
-                  <Route exact path={Routes.STYLE_GUIDE}>
-                    <StyleGuide backend={backend} />
-                  </Route>
-                )}
                 <Route path="*">
                   <NoMatch />
                 </Route>
-                {/*END MVP Routes*/}
               </Switch>
             </div>
           </ErrorProvider>

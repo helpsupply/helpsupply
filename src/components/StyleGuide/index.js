@@ -31,9 +31,11 @@ function StyleGuide() {
   return (
     <div
       css={{
+        height: '100%',
         maxWidth: '1200px',
         width: '100%',
         margin: '0 auto',
+        overflow: 'scroll',
         padding: '1em',
       }}
     >
