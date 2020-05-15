@@ -4,7 +4,17 @@ const fs = require('fs');
 
 const projectId = 'test-project';
 
-const rules = fs.readFileSync('../../firestore.rules', 'utf8');
+jest.setTimeout(10000);
+
+beforeEach(async () => {
+  await firebase.clearFirestoreData({ projectId });
+});
+
+afterAll(async () => {
+  await Promise.all(firebase.apps().map((app) => app.delete()));
+});
+
+const rules = fs.readFileSync('firestore.rules', 'utf8');
 
 function setupTestApp(auth) {
   let testApp = firebase.initializeTestApp({ projectId, auth });
@@ -25,7 +35,6 @@ function setupTestApp(auth) {
 }
 
 test('Test Service Requests', async () => {
-  await firebase.clearFirestoreData({ projectId });
   await firebase.loadFirestoreRules({ projectId, rules });
 
   let auth = { uid: 'user1', email: 'user@users.com' };
