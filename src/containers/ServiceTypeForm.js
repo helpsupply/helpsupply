@@ -27,7 +27,6 @@ const styles = {
   }),
   showNote: css({
     display: 'block',
-    marginTop: Space.S30,
   }),
   link: css({
     alignItems: 'baseline',
@@ -57,7 +56,6 @@ export const ServiceTypeForm = ({
   const [fields, setFields] = useState({
     kind: undefined,
     urgency: undefined,
-    needsFinances: false,
     organization: '',
     zip: '',
   });
@@ -257,16 +255,9 @@ export const ServiceTypeForm = ({
       type: formFieldTypes.INPUT_DROPDOWN,
       value: fields.urgency,
     },
-    {
-      customOnChange: handleFieldChange('needsFinances'),
-      label: t('service.selectType.form.needsFinances'),
-      name: 'needsFinances',
-      type: formFieldTypes.INPUT_CHECKBOX,
-      value: fields.needsFinances,
-    },
   ];
 
-  const { needsFinances, ...requiredFields } = fields;
+  const { ...requiredFields } = fields;
 
   return (
     <FormBuilder
