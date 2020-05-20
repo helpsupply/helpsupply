@@ -24,6 +24,9 @@ export const FAQ = () => {
   const nycCovidCare = `[${t(
     'learnMore.about.partners.partner3.title',
   )}](http://${t('learnMore.about.partners.partner1.url')})`;
+  const invisibleHands = `[${t(
+    'learnMore.about.partners.partner4.title',
+  )}](http://${t('learnMore.about.partners.partner4.url')})`;
 
   return (
     <div css={styles.container}>
@@ -64,6 +67,7 @@ export const FAQ = () => {
             mutualAid,
             workersNeedChildcare,
             nycCovidCare,
+            invisibleHands,
           })}
         />
       </Text>

@@ -6,7 +6,7 @@ import { LearnMore as LearnMoreComponent } from 'components/LearnMore';
 
 function LearnMore() {
   return (
-    <Page hasBackButton={true}>
+    <Page hasBackButton={false}>
       <LearnMoreComponent />
     </Page>
   );
