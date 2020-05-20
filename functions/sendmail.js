@@ -1,6 +1,9 @@
 const functions = require('firebase-functions');
 const mailgun = require('mailgun-js');
-const DOMAIN = 'help.supply';
+const DOMAIN =
+  process.env.MAILGUN_DOMAIN ||
+  functions.config().mailgun_domain.key ||
+  'help.supply';
 const api_key = process.env.MAILGUN_API_KEY || functions.config().mailgun.key;
 const mg = mailgun({ apiKey: api_key, domain: DOMAIN });
 

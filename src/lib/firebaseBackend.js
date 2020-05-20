@@ -6,7 +6,10 @@ const axios = require('axios').default;
 let config = null;
 let functionurl = null;
 
-if (typeof window !== 'undefined') {
+if (process.env.REACT_APP_FIREBASE_CONFIG && process.env.REACT_APP_API_URL) {
+  functionurl = process.env.REACT_APP_API_URL;
+  config = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
+} else if (typeof window !== 'undefined') {
   if (window.location.hostname === 'help.supply') {
     functionurl = 'https://us-central1-hospitalcommunity.cloudfunctions.net';
     config = {
@@ -202,10 +205,10 @@ export default class FirebaseBackend {
     window.localStorage.setItem('emailForSignIn', email);
     await axios({
       method: 'POST',
-      // Equal to EMAIL_SIGNUP_COMPLETE
       url: functionurl + '/sendSigninEmail',
       params: {
         email: email,
+        // Equal to EMAIL_SIGNUP_COMPLETE
         url: `${window.location.protocol}//${window.location.host}/signup/complete/${zip}/${facility}`,
       },
     });
@@ -215,11 +218,11 @@ export default class FirebaseBackend {
     window.localStorage.setItem('emailForSignIn', email);
     await axios({
       method: 'POST',
-      // Login complete url
       url: functionurl + '/sendSigninEmail',
       params: {
         email: email,
         login: 'true',
+        // Login complete url
         url: `${window.location.protocol}//${window.location.host}/login/complete/`,
       },
     });
