@@ -20,6 +20,9 @@ jobs:
           yarn build
           cd functions
           npm install
+        env:
+          REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_CONFIG }}
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
       - uses: actions/upload-artifact@master
         with:
           name: build
