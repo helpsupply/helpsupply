@@ -27,6 +27,7 @@ export const styles = {
 
     a: {
       color: Color.PRIMARY,
+      textDecoration: 'none',
     },
   }),
   organization: css({

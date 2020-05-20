@@ -66,9 +66,9 @@
         "question1": "Who can request help?",
         "answer1": "Our focus is on helping anyone working for a NYC medical facility or EMS treating people suffering from COVID-19. Support staff, nurses, and doctors are all encouraged to make requests.",
         "question2": "How can I be sure that my request and information stay private?",
-        "answer2": "We share your data securely on a per-request basis with only the service organization that will fulfill your request. [Privacy policy]({{url}})",
+        "answer2": "We share your data securely on a per-request basis with only the service organization that will fulfill your request. For more details, please see our [Privacy policy]({{url}})",
         "question3": "Does Help Supply provide the volunteer services?",
-        "answer3": "No. We gather requests and then route them to the most appropriate of our partner organizations to provide volunteers to fulfill them. Our current partners include {{mutualAid}}, {{workersNeedChildcare}}, and {{nycCovidCare}}.",
+        "answer3": "No. We gather requests and then route them to the most appropriate of our partner organizations to provide volunteers to fulfill them. Our current partners include {{mutualAid}}, {{workersNeedChildcare}}, {{nycCovidCare}}, and {{invisibleHands}}.",
         "question4": "How long will I have to wait for help?",
         "answer4": "Many people are in difficult situations, and the volume of requests is high. Our partners will contact you as soon as they can.",
         "question5": "Will you expand to other cities besides NYC?",
@@ -101,6 +101,11 @@
             "title": "NYC COVID Care Network",
             "content": "Content",
             "url": "nyccovidcare.org"
+          },
+          "partner4": {
+            "title": "Invisible Hands",
+            "content": "Content",
+            "url": "invisiblehandsdeliver.org/"
           }
         }
       },

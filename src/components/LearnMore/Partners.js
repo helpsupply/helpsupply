@@ -54,6 +54,20 @@ export const Partners = () => {
           </Anchor>
         </Text>
       </div>
+      <div css={styles.organization}>
+        <Text as="h4" css={styles.faqSubtitle} type={TEXT_TYPE.HEADER_6}>
+          {t('learnMore.about.partners.partner4.title')}
+        </Text>
+        <Text as="p" type={TEXT_TYPE.BODY_2}>
+          <Anchor
+            href={`http://${t('learnMore.about.partners.partner4.url')}`}
+            as={anchorTypes.A}
+            isExternalLink
+          >
+            {t('learnMore.about.partners.partner4.url')}
+          </Anchor>
+        </Text>
+      </div>
     </div>
   );
 };
