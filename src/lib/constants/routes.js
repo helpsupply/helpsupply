@@ -21,6 +21,7 @@ export const Routes = {
   CONTACT_FORM: `/contact`,
   CONTACT_CONFIRMATION: `/contact/confirm`,
   SERVICE_TYPE: '/service/:id?',
+  SERVICE_PAYMENT: '/service/payment/:id?',
   SERVICE_GROCERIES_WHERE: '/service/grocery/location/:id',
   SERVICE_GROCERIES_WHEN: '/service/grocery/date/:id',
   SERVICE_GROCERIES_WHAT: '/service/grocery/items/:id',
