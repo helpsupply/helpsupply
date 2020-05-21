@@ -11,8 +11,13 @@ export const styles = {
     marginBottom: `${Space.S20}px`,
   }),
   disclaimer: css({
-    color: Color.GRAY_75,
-    marginBottom: `${Space.S40}px`,
+    color: Color.GRAY_50,
+    marginBottom: Space.S40,
+
+    a: {
+      color: Color.PRIMARY,
+      textDecoration: 'none',
+    },
   }),
   capitalize: css({
     ':first-letter': {

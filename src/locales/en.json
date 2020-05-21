@@ -231,6 +231,7 @@
     "review": {
       "title": "Review your request",
       "submit": "Submit request",
+      "paymentMethod": "Payment method",
       "serviceType": "Service type",
       "preferredTime": "Preferred time",
       "details": "details",
@@ -238,6 +239,8 @@
       "recurring": "Recurring",
       "additionalInfo": "Additional Info",
       "disclaimer": "By submitting this request you acknowledge that Help Supply assumes no liability for any services provided by volunteers.",
+      "financialHelpNeeded": "Financial help needed",
+      "financialHelpNotNeeded": "Financial help not needed",
       "grocery": {
         "location": "Delivery location",
         "contact": "Delivery contact",

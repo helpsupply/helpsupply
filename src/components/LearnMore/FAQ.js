@@ -41,18 +41,7 @@ export const FAQ = () => {
       </Text>
       <Text as="div" css={styles.answer} type={TEXT_TYPE.BODY_2}>
         <ReactMarkdown
-          renderers={{
-            root: ({ children }) => {
-              return <div>{children[0].props.children}</div>;
-            },
-            link: ({ href, children }) => {
-              return (
-                <Anchor href={href} as={anchorTypes.A} forceBlank={true}>
-                  {children}
-                </Anchor>
-              );
-            },
-          }}
+          linkTarget={'_blank'}
           source={t('learnMore.faq.answer2', {
             url: Routes.PRIVACY,
           })}

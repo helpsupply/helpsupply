@@ -6,7 +6,6 @@ export const persistState = (state, action) => {
 
   const newState = { ...state, [actionDataKey]: actionData };
   const stringifiedState = JSON.stringify(newState);
-  console.log(stateKey, stringifiedState);
   localStorage.setItem(stateKey, stringifiedState);
 };
 

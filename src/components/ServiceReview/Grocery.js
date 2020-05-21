@@ -41,6 +41,8 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
     groceryList,
     kind,
     neighborhood,
+    needsFinances,
+    payment,
     recurring,
     time,
     urgency,
@@ -95,6 +97,15 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
     setState({ type: actions.EDIT_SERVICE_REDIRECT, editServiceUrl: url });
   };
 
+  const handleChangePayment = () => {
+    handleRedirectIntent();
+    history.push(
+      routeWithParams(Routes.SERVICE_PAYMENT, {
+        id,
+      }),
+    );
+  };
+
   const handleChangeService = () => {
     handleRedirectIntent();
     history.push(
@@ -137,6 +148,19 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
       }),
     );
   };
+
+  const paymentDetails = (
+    <Fragment>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
+        {payment}
+      </Text>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
+        {needsFinances
+          ? t('review.financialHelpNeeded')
+          : t('review.financialHelpNotNeeded')}
+      </Text>
+    </Fragment>
+  );
 
   const serviceDetails = (
     <Fragment>
@@ -216,6 +240,14 @@ export const GroceryServiceReview = ({ id, service, serviceUser, user }) => {
 
   return (
     <Fragment>
+      <div css={styles.card}>
+        <SubRow
+          label={t('review.paymentMethod')}
+          details={paymentDetails}
+          editLabel={t('global.form.changeLabel')}
+          onClick={handleChangePayment}
+        />
+      </div>
       <div css={styles.card}>
         <SubRow
           label={t('review.serviceType')}

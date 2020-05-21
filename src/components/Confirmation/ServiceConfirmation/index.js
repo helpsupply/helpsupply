@@ -27,11 +27,11 @@ export const ServiceConfirmation = ({ service }) => {
     matchesBreakpoint(Breakpoints.LARGE));
   const { kind } = service;
 
-  const mapServiceToName = () => ({
+  const serviceToNameMap = {
     [RequestKinds.GROCERY]: 'groceries',
     [RequestKinds.MENTALHEALTH]: 'emotional support',
     [RequestKinds.CHILDCARE]: 'childcare',
-  });
+  };
 
   const metadata = OrganizationIndex.Metadata[service.organization];
   const organization = { name: metadata.Organization };
@@ -43,7 +43,7 @@ export const ServiceConfirmation = ({ service }) => {
   }
 
   const organizationName = organization.name;
-  const serviceName = mapServiceToName()[kind];
+  const serviceName = serviceToNameMap[kind];
 
   const handleViewRequests = () => {
     history.push(Routes.DASHBOARD);

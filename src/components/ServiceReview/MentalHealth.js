@@ -21,11 +21,29 @@ export const MentalHealthServiceReview = ({ id, service }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const { setState } = useContext(StateContext);
-  const { additionalInfo, type, urgency, date, time, recurring } = service;
+  const {
+    additionalInfo,
+    needsFinances,
+    payment,
+    type,
+    urgency,
+    date,
+    time,
+    recurring,
+  } = service;
 
   const handleRedirectIntent = () => {
     const url = routeWithParams(Routes.SERVICE_REVIEW, { id });
     setState({ type: actions.EDIT_SERVICE_REDIRECT, editServiceUrl: url });
+  };
+
+  const handleChangePayment = () => {
+    handleRedirectIntent();
+    history.push(
+      routeWithParams(Routes.SERVICE_PAYMENT, {
+        id,
+      }),
+    );
   };
 
   const handleChangeService = () => {
@@ -63,6 +81,19 @@ export const MentalHealthServiceReview = ({ id, service }) => {
       }),
     );
   };
+
+  const paymentDetails = (
+    <Fragment>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
+        {payment}
+      </Text>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
+        {needsFinances
+          ? t('review.financialHelpNeeded')
+          : t('review.financialHelpNotNeeded')}
+      </Text>
+    </Fragment>
+  );
 
   const serviceDetails = (
     <Fragment>
@@ -106,6 +137,14 @@ export const MentalHealthServiceReview = ({ id, service }) => {
 
   return (
     <Fragment>
+      <div css={styles.card}>
+        <SubRow
+          label={t('review.paymentMethod')}
+          details={paymentDetails}
+          editLabel={t('global.form.changeLabel')}
+          onClick={handleChangePayment}
+        />
+      </div>
       <div css={styles.card}>
         <SubRow
           label={t('review.serviceType')}

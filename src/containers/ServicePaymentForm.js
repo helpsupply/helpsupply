@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { ErrorContext } from 'state/ErrorProvider';
+import { StateContext } from 'state/StateProvider';
 
 import { Routes } from 'lib/constants/routes';
 import { routeWithParams } from 'lib/utils/routes';
@@ -26,6 +27,7 @@ export const ServicePaymentForm = ({ request, onSave }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const { setError } = useContext(ErrorContext);
+  const { state } = useContext(StateContext);
 
   const [fields, setFields] = useState({
     payment: undefined,
@@ -50,30 +52,34 @@ export const ServicePaymentForm = ({ request, onSave }) => {
         switch (kind) {
           case RequestKinds.GROCERY:
             history.push(
-              routeWithParams(Routes.SERVICE_GROCERIES_WHERE, {
-                id,
-              }),
+              state.editServiceUrl ||
+                routeWithParams(Routes.SERVICE_GROCERIES_WHERE, {
+                  id,
+                }),
             );
             break;
           case RequestKinds.CHILDCARE:
             history.push(
-              routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, {
-                id,
-              }),
+              state.editServiceUrl ||
+                routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, {
+                  id,
+                }),
             );
             break;
           case RequestKinds.PETCARE:
             history.push(
-              routeWithParams(Routes.SERVICE_PETCARE_WHERE, {
-                id,
-              }),
+              state.editServiceUrl ||
+                routeWithParams(Routes.SERVICE_PETCARE_WHERE, {
+                  id,
+                }),
             );
             break;
           case RequestKinds.MENTALHEALTH:
             history.push(
-              routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, {
-                id,
-              }),
+              state.editServiceUrl ||
+                routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, {
+                  id,
+                }),
             );
             break;
           default:

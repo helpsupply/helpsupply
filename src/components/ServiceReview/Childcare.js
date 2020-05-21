@@ -30,6 +30,8 @@ export const ChildcareServiceReview = ({ id, service }) => {
     mondays,
     mornings,
     night,
+    needsFinances,
+    payment,
     recurring,
     saturdays,
     sundays,
@@ -44,6 +46,15 @@ export const ChildcareServiceReview = ({ id, service }) => {
   const handleRedirectIntent = () => {
     const url = routeWithParams(Routes.SERVICE_REVIEW, { id });
     setState({ type: actions.EDIT_SERVICE_REDIRECT, editServiceUrl: url });
+  };
+
+  const handleChangePayment = () => {
+    handleRedirectIntent();
+    history.push(
+      routeWithParams(Routes.SERVICE_PAYMENT, {
+        id,
+      }),
+    );
   };
 
   const handleChangeService = () => {
@@ -81,6 +92,19 @@ export const ChildcareServiceReview = ({ id, service }) => {
       }),
     );
   };
+
+  const paymentDetails = (
+    <Fragment>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
+        {payment}
+      </Text>
+      <Text type={TEXT_TYPE.BODY_3} as="p" css={styles.capitalize}>
+        {needsFinances
+          ? t('review.financialHelpNeeded')
+          : t('review.financialHelpNotNeeded')}
+      </Text>
+    </Fragment>
+  );
 
   const serviceDetails = (
     <Fragment>
@@ -147,6 +171,14 @@ export const ChildcareServiceReview = ({ id, service }) => {
 
   return (
     <Fragment>
+      <div css={styles.card}>
+        <SubRow
+          label={t('review.paymentMethod')}
+          details={paymentDetails}
+          editLabel={t('global.form.changeLabel')}
+          onClick={handleChangePayment}
+        />
+      </div>
       <div css={styles.card}>
         <SubRow
           label={t('review.serviceType')}
