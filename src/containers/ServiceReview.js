@@ -1,8 +1,10 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
+import { ErrorContext } from 'state/ErrorProvider';
 
 import { Routes } from 'lib/constants/routes';
 import { mentalHealthOptions } from 'lib/constants/options';
@@ -10,6 +12,7 @@ import { routeWithParams } from 'lib/utils/routes';
 import { formatDate } from 'lib/utils/datetime';
 import RequestKinds from 'lib/organizations/kinds';
 import { mapServiceKindToTitle } from 'lib/theme/services';
+import OrganizationIndex from 'lib/organizations/index';
 
 import Text from 'components/Text';
 import { TEXT_TYPE } from 'components/Text/constants';
@@ -37,6 +40,8 @@ export const ServiceReview = ({ backend, id, service, serviceUser, user }) => {
   const history = useHistory();
   const { t } = useTranslation();
   const [details, setDetails] = useState();
+  const [metadata, setMetaData] = useState();
+  const { setError } = useContext(ErrorContext);
 
   const handleSubmit = async () => {
     await backend
@@ -58,16 +63,17 @@ export const ServiceReview = ({ backend, id, service, serviceUser, user }) => {
           }),
         );
       })
-      .catch((error) => {
-        console.error('error', error);
+      .catch((e) => {
+        setError(e.message);
       });
-    // todo: handle exceptions
   };
 
   useEffect(() => {
     if (!service || !serviceUser || !user) {
       return;
     }
+
+    setMetaData(OrganizationIndex.Metadata[service.organization]);
 
     let contact = {
       Contact: `${serviceUser.firstName} ${serviceUser.lastName}`,
@@ -168,7 +174,10 @@ export const ServiceReview = ({ backend, id, service, serviceUser, user }) => {
         />
       )}
       <Text css={styles.disclaimer} type={TEXT_TYPE.NOTE}>
-        {t('review.disclaimer')}
+        {!metadata?.Disclaimer && t('review.disclaimer')}
+        {metadata?.Disclaimer && (
+          <div dangerouslySetInnerHTML={{ __html: metadata?.Disclaimer }} />
+        )}
       </Text>
       <div>
         <PrimaryButton
