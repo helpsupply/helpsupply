@@ -30,6 +30,7 @@ import ServiceLocationAvailable from 'pages/service_location_available';
 import ServiceLocationUnavailable from 'pages/service_location_unavailable';
 import EmailListConfirmation from 'pages/email_list_confirmation';
 import ServiceType from 'pages/service_type';
+import ServicePayment from 'pages/service_payment';
 import ServiceGrocery from 'pages/service_grocery';
 import ServiceChildcare from 'pages/service_childcare';
 import ServicePetcare from 'pages/service_petcare';
@@ -180,6 +181,13 @@ function App({ backend }) {
                   path={Routes.SERVICE_TYPE}
                 >
                   <ServiceType backend={backend} />
+                </ProtectedRoute>
+                <ProtectedRoute
+                  backend={backend}
+                  exact
+                  path={Routes.SERVICE_PAYMENT}
+                >
+                  <ServicePayment backend={backend} />
                 </ProtectedRoute>
                 <ProtectedRoute
                   backend={backend}

@@ -304,6 +304,14 @@
           "buttonLabel": "Create new request"
         }
       },
+      "paymentForm": {
+        "title": "Select your preferred method of payment",
+        "description": "If your request requires payment (i.e., for groceries), this helps us match you with a volunteer who accepts your preferred payment method.",
+        "note": "NOTE: If you are experiencing symptoms of COVID-19, please do not pay your volunteer in cash.",
+        "labels": {
+          "payment": "Method of payment"
+        }
+      },
       "additionalContact": {
         "title": "Additional contact",
         "labels": {

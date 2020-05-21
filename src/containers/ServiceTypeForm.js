@@ -175,7 +175,6 @@ export const ServiceTypeForm = ({
   );
 
   const handleSubmit = async () => {
-    const { kind } = fields;
     setIsLoading(true);
 
     if (
@@ -195,39 +194,11 @@ export const ServiceTypeForm = ({
       backend
         .saveServiceRequest(fields)
         .then((id) => {
-          switch (kind) {
-            case RequestKinds.GROCERY:
-              history.push(
-                routeWithParams(Routes.SERVICE_GROCERIES_WHERE, {
-                  id,
-                }),
-              );
-              break;
-            case RequestKinds.CHILDCARE:
-              history.push(
-                routeWithParams(Routes.SERVICE_CHILDCARE_WHERE, {
-                  id,
-                }),
-              );
-              break;
-            case RequestKinds.PETCARE:
-              history.push(
-                routeWithParams(Routes.SERVICE_PETCARE_WHERE, {
-                  id,
-                }),
-              );
-              break;
-            case RequestKinds.MENTALHEALTH:
-              history.push(
-                routeWithParams(Routes.SERVICE_EMOTIONAL_WHEN, {
-                  id,
-                }),
-              );
-              break;
-            default:
-              history.push(routeWithParams(Routes.SERVICE_TYPE));
-              break;
-          }
+          history.push(
+            routeWithParams(Routes.SERVICE_PAYMENT, {
+              id,
+            }),
+          );
         })
         .catch((e) => {
           setError(e.message);
